@@ -16,6 +16,11 @@ public class PlayerMovement : MonoBehaviour
     public float groundDistance = 0.4f;
     public LayerMask groundMask;
 
+    public Transform shootingPoint;
+    public GameObject arrow;
+
+    public float projectileForce;
+
     Vector3 velocity;
     bool isGrounded;
 
@@ -53,5 +58,17 @@ public class PlayerMovement : MonoBehaviour
         velocity.y += gravity * Time.deltaTime;
 
         controller.Move(velocity * Time.deltaTime);
+
+        if (Input.GetButtonDown("Fire1"))
+        {
+            FireProjectile();
+        }
+    }
+
+    void FireProjectile()
+    {
+        GameObject projectile = Instantiate(arrow, shootingPoint.position, shootingPoint.rotation);
+        Rigidbody rb = projectile.GetComponent<Rigidbody>();
+        rb.AddForce(transform.forward * projectileForce, ForceMode.Impulse);
     }
 }

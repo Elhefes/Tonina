@@ -1134,6 +1134,37 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &728468811
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 728468812}
+  m_Layer: 0
+  m_Name: ShootingPoint
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &728468812
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 728468811}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0.318, z: 0.792}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1343264813}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &774152140 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 8709701640459352522, guid: c1f934ce17352e747965f7ca02bc6b9f, type: 3}
@@ -1514,6 +1545,7 @@ Transform:
   - {fileID: 1802449094}
   - {fileID: 172475790}
   - {fileID: 807584793}
+  - {fileID: 728468812}
   m_Father: {fileID: 131830516}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -1546,12 +1578,14 @@ MonoBehaviour:
   jumpHeight: 1
   walkingSpeed: 5
   runningSpeed: 10
-  playerTransform: {fileID: 131830516}
   groundCheck: {fileID: 1802449094}
   groundDistance: 0.4
   groundMask:
     serializedVersion: 2
     m_Bits: 64
+  shootingPoint: {fileID: 728468812}
+  arrow: {fileID: 8199635559494506987, guid: c593b831eb13c784aa09668a36790fed, type: 3}
+  projectileForce: 25
   cam: {fileID: 0}
 --- !u!1 &1368140281 stripped
 GameObject:
