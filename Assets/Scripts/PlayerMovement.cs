@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 
 public class PlayerMovement : MonoBehaviour
 {
@@ -10,11 +11,16 @@ public class PlayerMovement : MonoBehaviour
     public float walkingSpeed;
     public float runningSpeed;
     private float speed;
+    public float rotationSpeed;
     private float gravity = -9.81f;
-
+    private bool isMoving;
+    private Vector3 targetPosition;
+    private Vector3 moveDirection;
     public Transform groundCheck;
     public float groundDistance = 0.4f;
     public LayerMask groundMask;
+
+    public NavMeshAgent agent;
 
     public Transform shootingPoint;
     public GameObject arrow;
@@ -28,10 +34,21 @@ public class PlayerMovement : MonoBehaviour
 
     void Update()
     {
-        isGrounded = Physics.CheckSphere(groundCheck.position, groundDistance, groundMask);
-        if (isGrounded && velocity.y < 0)
+        if (Input.GetMouseButtonDown(0))
         {
-            velocity.y = -2f;
+            // Get the location of the mouse click
+            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+            RaycastHit hit;
+            if (Physics.Raycast(ray, out hit))
+            {
+                isMoving = true;
+                agent.destination = hit.point;
+            }
+        }
+
+        if (!isMoving && agent.remainingDistance <= agent.stoppingDistance)
+        {
+            isMoving = false;
         }
 
         if (Input.GetKey("left shift") && isGrounded)
@@ -42,23 +59,6 @@ public class PlayerMovement : MonoBehaviour
         {
             speed = walkingSpeed;
         }
-
-        float x = Input.GetAxis("Horizontal");
-        float z = Input.GetAxis("Vertical");
-
-        Vector3 move = transform.right * x + transform.forward * z;
-
-        controller.Move(move * speed * Time.deltaTime);
-
-        if (Input.GetButtonDown("Jump") && isGrounded)
-        {
-            velocity.y = Mathf.Sqrt(jumpHeight * -2f * gravity);
-        }
-
-        velocity.y += gravity * Time.deltaTime;
-
-        controller.Move(velocity * Time.deltaTime);
-
         if (Input.GetButtonDown("Fire1"))
         {
             FireProjectile();

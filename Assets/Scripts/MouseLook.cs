@@ -2,16 +2,39 @@ using UnityEngine;
 
 public class MouseLook : MonoBehaviour
 {
-    public float mouseSensitivity = 100f;
+    public float moveSpeed;
+    public float sensitivity;
+    public LayerMask layerMask;
+    private Vector3 moveDirection;
+    public float distanceFromObject;
+    private float currentDistance;
+    public float smoothSpeed;
 
-    void Start()
-    {
-        Cursor.lockState = CursorLockMode.Locked;
-    }
-
+    // Update is called once per frame
     void Update()
     {
-        float mouseX = Input.GetAxis("Mouse X") * mouseSensitivity * Time.deltaTime;
-        transform.Rotate(Vector3.up * mouseX);
+        moveDirection = new Vector3(Input.GetAxis("Horizontal"), 0f, Input.GetAxis("Vertical"));
+        transform.position += moveDirection * moveSpeed * Time.deltaTime;
+
+        // Cast a ray downwards from the camera's position
+        Ray ray = new Ray(transform.position, transform.forward);
+        RaycastHit hit;
+
+        if (Physics.Raycast(ray, out hit, Mathf.Infinity, layerMask))
+        {
+            currentDistance = Vector3.Distance(transform.position, hit.point);
+            if (currentDistance < distanceFromObject)
+            {
+                // If the camera is too close to the object, move it backwards smoothly
+                Vector3 targetPosition = hit.point + (transform.position - hit.point).normalized * distanceFromObject;
+                transform.position = Vector3.Lerp(transform.position, targetPosition, smoothSpeed);
+            }
+            else if (currentDistance > distanceFromObject)
+            {
+                // If the camera is too far from the object, move it forwards smoothly
+                Vector3 targetPosition = hit.point + (transform.position - hit.point).normalized * distanceFromObject;
+                transform.position = Vector3.Lerp(transform.position, targetPosition, smoothSpeed);
+            }
+        }
     }
 }
