@@ -27,10 +27,17 @@ public class PlayerMovement : MonoBehaviour
 
     public float projectileForce;
 
+    private Animator playerAnimator;
+
     Vector3 velocity;
     bool isGrounded;
 
     public Camera cam;
+
+    void Start()
+    {
+        playerAnimator = GetComponent<Animator>();
+    }
 
     void Update()
     {
@@ -42,6 +49,7 @@ public class PlayerMovement : MonoBehaviour
             if (Physics.Raycast(ray, out hit))
             {
                 isMoving = true;
+                playerAnimator.SetBool("IsMoving", true);
                 agent.destination = hit.point;
             }
         }
@@ -49,6 +57,7 @@ public class PlayerMovement : MonoBehaviour
         if (!isMoving && agent.remainingDistance <= agent.stoppingDistance)
         {
             isMoving = false;
+            playerAnimator.SetBool("IsMoving", false);
         }
 
         if (Input.GetKey("left shift") && isGrounded)
