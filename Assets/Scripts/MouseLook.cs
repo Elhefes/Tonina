@@ -9,12 +9,19 @@ public class MouseLook : MonoBehaviour
     public float distanceFromObject;
     private float currentDistance;
     public float smoothSpeed;
+    public float minCameraZoom;
+    public float maxCameraZoom;
 
     // Update is called once per frame
     void Update()
     {
         moveDirection = new Vector3(Input.GetAxis("Horizontal"), 0f, Input.GetAxis("Vertical"));
         transform.position += moveDirection * moveSpeed * Time.deltaTime;
+
+        // Use scroll wheel to zoom in or out
+        float scrollWheel = Input.GetAxis("Mouse ScrollWheel");
+        distanceFromObject = Mathf.Clamp(distanceFromObject - scrollWheel * sensitivity, minCameraZoom, maxCameraZoom);
+
 
         // Cast a ray downwards from the camera's position
         Ray ray = new Ray(transform.position, transform.forward);
