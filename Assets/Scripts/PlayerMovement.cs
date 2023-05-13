@@ -8,14 +8,8 @@ public class PlayerMovement : MonoBehaviour
     public CharacterController controller;
 
     public float jumpHeight;
-    public float walkingSpeed;
-    public float runningSpeed;
-    private float speed;
     public float rotationSpeed;
-    private float gravity = -9.81f;
     private bool isMoving;
-    private Vector3 targetPosition;
-    private Vector3 moveDirection;
     public Transform groundCheck;
     public float groundDistance = 0.4f;
     public LayerMask groundMask;
@@ -29,10 +23,13 @@ public class PlayerMovement : MonoBehaviour
 
     private Animator playerAnimator;
 
-    Vector3 velocity;
-    bool isGrounded;
-
     public Camera cam;
+
+    private Transform movingTarget;
+
+    public float attackDistance;
+
+    private Coroutine attackCoroutine;
 
     void Start()
     {
@@ -41,13 +38,32 @@ public class PlayerMovement : MonoBehaviour
 
     void Update()
     {
+        if (movingTarget)
+        {
+            agent.destination = movingTarget.position;
+            if (Vector3.Distance(transform.position, movingTarget.position) <= attackDistance) 
+            {
+                if (attackCoroutine == null) attackCoroutine = StartCoroutine(Attack());
+            } 
+            else
+            {
+                if (attackCoroutine != null) StopCoroutine(attackCoroutine);
+                attackCoroutine = null;
+            }
+        } 
         if (Input.GetMouseButtonDown(0))
         {
-            // Get the location of the mouse click
-            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+            if (attackCoroutine != null) StopCoroutine(attackCoroutine);
+            attackCoroutine = null;
+            movingTarget = null;
             RaycastHit hit;
-            if (Physics.Raycast(ray, out hit))
+            if (Physics.Raycast(Camera.main.ScreenPointToRay(Input.mousePosition), out hit))
             {
+                GameObject target = hit.collider.gameObject;
+                if (target.CompareTag("Enemy"))
+                {
+                    movingTarget = target.transform;
+                }
                 isMoving = true;
                 playerAnimator.SetBool("IsMoving", true);
                 agent.destination = hit.point;
@@ -59,17 +75,14 @@ public class PlayerMovement : MonoBehaviour
             isMoving = false;
             playerAnimator.SetBool("IsMoving", false);
         }
+    }
 
-        if (Input.GetKey("left shift") && isGrounded)
+    IEnumerator Attack()
+    {
+        while (true)
         {
-            speed = runningSpeed;
-        }
-        else
-        {
-            speed = walkingSpeed;
-        }
-        if (Input.GetButtonDown("Fire1"))
-        {
+            yield return new WaitForSeconds(1);
+            print("attack!!");
             FireProjectile();
         }
     }
