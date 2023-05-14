@@ -21,7 +21,8 @@ public class PlayerMovement : MonoBehaviour
 
     public float projectileForce;
 
-    private Animator playerAnimator;
+    public Animator playerAnimator;
+    public Animator playerLegsAnimator;
 
     public Camera cam;
 
@@ -30,11 +31,6 @@ public class PlayerMovement : MonoBehaviour
     public float attackDistance;
 
     private Coroutine attackCoroutine;
-
-    void Start()
-    {
-        playerAnimator = GetComponent<Animator>();
-    }
 
     void Update()
     {
@@ -66,6 +62,7 @@ public class PlayerMovement : MonoBehaviour
                 }
                 isMoving = true;
                 playerAnimator.SetBool("IsMoving", true);
+                playerLegsAnimator.SetBool("IsMoving", true);
                 agent.destination = hit.point;
             }
         }
@@ -74,6 +71,7 @@ public class PlayerMovement : MonoBehaviour
         {
             isMoving = false;
             playerAnimator.SetBool("IsMoving", false);
+            playerLegsAnimator.SetBool("IsMoving", false);
         }
     }
 
