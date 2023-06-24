@@ -752,6 +752,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1429372112717159153}
   - component: {fileID: 4972602764324961991}
+  - component: {fileID: 5654445324501186501}
   m_Layer: 0
   m_Name: mayan_king
   m_TagString: Untagged
@@ -815,6 +816,19 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
+--- !u!114 &5654445324501186501
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1773845345834057803}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 19359612f56d1b04981f48a945fcde25, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  melee: {fileID: 4779934850068798647}
 --- !u!1 &1878005309116889677
 GameObject:
   m_ObjectHideFlags: 0
@@ -4338,6 +4352,17 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 3570245252696662713, guid: 9c4259bcd553ee04db631027467ae960, type: 3}
   m_PrefabInstance: {fileID: 3468068636600920064}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &4779934850068798647 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8247414073232798903, guid: 9c4259bcd553ee04db631027467ae960, type: 3}
+  m_PrefabInstance: {fileID: 3468068636600920064}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6c8e32a37f9fcc544bb01c1f7e37a94b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &4138906069227015863
 PrefabInstance:
   m_ObjectHideFlags: 0
