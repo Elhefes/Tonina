@@ -1,27 +1,29 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 public class Melee : MonoBehaviour
 {
     public int damage;
     public bool canHit;
-    private bool hitted;
+    private List<GameObject> hitEnemies = new List<GameObject>();
 
     private void OnCollisionEnter(Collision collision)
     {
         if (!canHit) return;
         var obj = collision.gameObject;
-        if (obj.CompareTag("Enemy") && !hitted)
+        if (obj.CompareTag("Enemy") && !hitEnemies.Contains(obj))
         {
-            hitted = true;
+            hitEnemies.Add(obj);
             obj.GetComponent<EnemyAI>()?.TakeDamage(damage);
         }
     }
 
     private void OnCollisionExit(Collision collision)
     {
-        if (collision.gameObject.CompareTag("Enemy") && hitted)
+        var obj = collision.gameObject;
+        if (hitEnemies.Contains(obj))
         {
-            hitted = false;
+            hitEnemies.Remove(obj);
         }
     }
 }
