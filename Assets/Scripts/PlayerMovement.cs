@@ -81,7 +81,7 @@ public class PlayerMovement : MonoBehaviour
         {
             yield return new WaitForSeconds(1);
             print("attack!!");
-            FireProjectile();
+            MeleeAttack();
         }
     }
 
@@ -90,5 +90,10 @@ public class PlayerMovement : MonoBehaviour
         GameObject projectile = Instantiate(arrow, shootingPoint.position, shootingPoint.rotation);
         Rigidbody rb = projectile.GetComponent<Rigidbody>();
         rb.AddForce(transform.forward * projectileForce, ForceMode.Impulse);
+    }
+
+    void MeleeAttack()
+    {
+        playerAnimator.SetTrigger("ClubAttack");
     }
 }
