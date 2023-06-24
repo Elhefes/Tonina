@@ -32,6 +32,8 @@ public class PlayerMovement : MonoBehaviour
 
     private Coroutine attackCoroutine;
 
+    private EnemyAI enemy;
+
     void Update()
     {
         if (movingTarget)
@@ -58,6 +60,7 @@ public class PlayerMovement : MonoBehaviour
                 GameObject target = hit.collider.gameObject;
                 if (target.CompareTag("Enemy"))
                 {
+                    enemy = target.GetComponent<EnemyAI>();
                     movingTarget = target.transform;
                 }
                 isMoving = true;
@@ -77,11 +80,10 @@ public class PlayerMovement : MonoBehaviour
 
     IEnumerator Attack()
     {
-        while (true)
+        while (enemy)
         {
-            yield return new WaitForSeconds(1);
-            print("attack!!");
             MeleeAttack();
+            yield return new WaitForSeconds(1);
         }
     }
 
