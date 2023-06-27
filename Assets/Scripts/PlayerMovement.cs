@@ -98,4 +98,9 @@ public class PlayerMovement : MonoBehaviour
     {
         playerAnimator.SetTrigger("ClubAttack");
     }
+
+    void ResetTrigger(string trigger)
+    {
+        playerAnimator.ResetTrigger(trigger);
+    }
 }
