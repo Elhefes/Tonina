@@ -21,7 +21,6 @@ public class PlayerMovement : MonoBehaviour
     public float projectileForce;
 
     public Animator playerAnimator;
-    public Animator playerLegsAnimator;
 
     public Camera cam;
 
@@ -69,13 +68,11 @@ public class PlayerMovement : MonoBehaviour
         if (agent.velocity != Vector3.zero)
         {
             playerAnimator.SetBool("IsMoving", true);
-            playerLegsAnimator.SetBool("IsMoving", true);
         }
 
         if (agent.velocity == Vector3.zero || (agent.remainingDistance <= agent.stoppingDistance))
         {
             playerAnimator.SetBool("IsMoving", false);
-            playerLegsAnimator.SetBool("IsMoving", false);
         }
     }
 
@@ -98,6 +95,11 @@ public class PlayerMovement : MonoBehaviour
     void MeleeAttack()
     {
         playerAnimator.SetTrigger("ClubAttack");
+    }
+
+    void LegsTimingTrigger()
+    {
+        playerAnimator.SetTrigger("LegsTiming");
     }
 
     void ResetTrigger(string trigger)
