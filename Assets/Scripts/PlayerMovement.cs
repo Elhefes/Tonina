@@ -9,7 +9,6 @@ public class PlayerMovement : MonoBehaviour
 
     public float jumpHeight;
     public float rotationSpeed;
-    private bool isMoving;
     public Transform groundCheck;
     public float groundDistance = 0.4f;
     public LayerMask groundMask;
@@ -22,7 +21,6 @@ public class PlayerMovement : MonoBehaviour
     public float projectileForce;
 
     public Animator playerAnimator;
-    public Animator playerLegsAnimator;
 
     public Camera cam;
 
@@ -63,18 +61,18 @@ public class PlayerMovement : MonoBehaviour
                     enemy = target.GetComponent<EnemyAI>();
                     movingTarget = target.transform;
                 }
-                isMoving = true;
-                playerAnimator.SetBool("IsMoving", true);
-                playerLegsAnimator.SetBool("IsMoving", true);
-                agent.destination = hit.point;
+                agent.SetDestination(hit.point);
             }
         }
 
-        if (!isMoving && agent.remainingDistance <= agent.stoppingDistance)
+        if (agent.velocity != Vector3.zero)
         {
-            isMoving = false;
+            playerAnimator.SetBool("IsMoving", true);
+        }
+
+        if (agent.velocity == Vector3.zero || (agent.remainingDistance <= agent.stoppingDistance))
+        {
             playerAnimator.SetBool("IsMoving", false);
-            playerLegsAnimator.SetBool("IsMoving", false);
         }
     }
 
@@ -97,5 +95,15 @@ public class PlayerMovement : MonoBehaviour
     void MeleeAttack()
     {
         playerAnimator.SetTrigger("ClubAttack");
+    }
+
+    void LegsTimingTrigger()
+    {
+        playerAnimator.SetTrigger("LegsTiming");
+    }
+
+    void ResetTrigger(string trigger)
+    {
+        playerAnimator.ResetTrigger(trigger);
     }
 }
