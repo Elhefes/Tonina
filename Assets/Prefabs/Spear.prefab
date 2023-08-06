@@ -259,6 +259,8 @@ GameObject:
   m_Component:
   - component: {fileID: 34095844399905652}
   - component: {fileID: 2475250979300008127}
+  - component: {fileID: -1276104304151896790}
+  - component: {fileID: -5799781750665920330}
   m_Layer: 0
   m_Name: Spear
   m_TagString: Untagged
@@ -273,7 +275,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 806972617733284302}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0.7071068, w: 0.7071068}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 0.3937008, y: 0.3937008, z: 0.3937008}
   m_ConstrainProportionsScale: 0
@@ -284,7 +286,7 @@ Transform:
   - {fileID: 913249227189566058}
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 90}
 --- !u!114 &2475250979300008127
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -301,6 +303,37 @@ MonoBehaviour:
   type: 2
   damage: 5467
   uiSprite: {fileID: 21300000, guid: 9f03a6d9ead109d499a705e995930b80, type: 3}
+  shootingPoint: {fileID: 0}
+  projectileForce: 2
+--- !u!54 &-1276104304151896790
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 806972617733284302}
+  serializedVersion: 2
+  m_Mass: 10
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 0
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
+--- !u!65 &-5799781750665920330
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 806972617733284302}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 0
+  serializedVersion: 2
+  m_Size: {x: 0.12784448, y: 4.9768124, z: 0.15280288}
+  m_Center: {x: -0.010810431, y: 1.9884045, z: 0.026835576}
 --- !u!1 &1482675639573742324
 GameObject:
   m_ObjectHideFlags: 0

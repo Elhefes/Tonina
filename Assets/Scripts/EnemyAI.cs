@@ -10,6 +10,7 @@ public class EnemyAI : MonoBehaviour
 
     void Update()
     {
+        if (player == null) return;
         agent.destination = player.position;
     }
 

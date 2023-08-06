@@ -1,15 +1,61 @@
+using System.Collections;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 public class Player : MonoBehaviour
 {
     public int health;
 
-    public WeaponType weaponOnHand;
+    public Weapon weaponOnHand;
     public GameObject[] weaponObjects;
+    private Coroutine attackCoroutine;
 
-    private void Start()
+    public PlayerMovement playerMovement;
+
+    public float attackDistance;
+
+    void Update()
     {
-        weaponOnHand = WeaponType.Club;
+        if (playerMovement.target)
+        {
+            playerMovement.agent.destination = playerMovement.target.position;
+            if (Vector3.Distance(transform.position, playerMovement.target.position) <= attackDistance)
+            {
+                if (attackCoroutine == null) attackCoroutine = StartCoroutine(Attack());
+            }
+            else
+            {
+                if (attackCoroutine != null) StopCoroutine(attackCoroutine);
+                attackCoroutine = null;
+            }
+        }
+        if (Input.GetMouseButtonDown(0))
+        {
+            if (EventSystem.current.IsPointerOverGameObject()) return;
+            if (attackCoroutine != null) StopCoroutine(attackCoroutine);
+            attackCoroutine = null;
+            playerMovement.target = null;
+            RaycastHit hit;
+            if (Physics.Raycast(Camera.main.ScreenPointToRay(Input.mousePosition), out hit))
+            {
+                GameObject target = hit.collider.gameObject;
+                if (target.CompareTag("Enemy"))
+                {
+                    playerMovement.enemy = target.GetComponent<EnemyAI>();
+                    playerMovement.target = target.transform;
+                }
+                playerMovement.agent.SetDestination(hit.point);
+            }
+        }
+    }
+
+    IEnumerator Attack()
+    {
+        while (playerMovement.enemy)
+        {
+            weaponOnHand.Attack(playerMovement.playerAnimator);
+            yield return new WaitForSeconds(1);
+        }
     }
 
     public void SwitchWeapon(WeaponType weaponType)
@@ -18,8 +64,10 @@ public class Player : MonoBehaviour
         {
             obj.SetActive(false);
         }
-        if (weaponType == WeaponType.Club) weaponObjects[0].SetActive(true);
-        if (weaponType == WeaponType.Small_stone) weaponObjects[1].SetActive(true);
-        if (weaponType == WeaponType.Spear) weaponObjects[2].SetActive(true);
+        int weaponIndex = 0;
+        if (weaponType == WeaponType.Small_stone) weaponIndex = 1;
+        if (weaponType == WeaponType.Spear) weaponIndex = 2;
+        weaponOnHand = weaponObjects[weaponIndex].GetComponent<Weapon>();
+        weaponObjects[weaponIndex].SetActive(true);
     }
 }

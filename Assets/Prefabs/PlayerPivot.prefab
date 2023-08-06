@@ -23,14 +23,14 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5021349066330608780}
-  m_LocalRotation: {x: 0, y: 0.7071068, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: 0, y: 2.58, z: 1.5}
+  m_LocalRotation: {x: -0, y: -0.65268135, z: -0, w: 0.75763255}
+  m_LocalPosition: {x: 0, y: 8.42, z: 1.5}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 6231095132041852984}
   m_RootOrder: 22
-  m_LocalEulerAnglesHint: {x: 0, y: 90, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: -81.488, z: 0}
 --- !u!1 &5021349066847927866
 GameObject:
   m_ObjectHideFlags: 0
@@ -132,11 +132,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   health: 100
-  weaponOnHand: 0
+  weaponOnHand: {fileID: 2432149024520317171}
   weaponObjects:
   - {fileID: 5713304151747293898}
   - {fileID: 7326626361591764869}
   - {fileID: 8641776748403854768}
+  playerMovement: {fileID: 5021349066959626957}
+  attackDistance: 1.8
 --- !u!1 &5021349067717839906
 GameObject:
   m_ObjectHideFlags: 0
@@ -223,6 +225,42 @@ PrefabInstance:
       propertyPath: m_Name
       value: mayan_king
       objectReference: {fileID: 0}
+    - target: {fileID: 1957239010776673800, guid: 6772d7938a4f7ce469d55b1306d9f189, type: 3}
+      propertyPath: shootingPoint
+      value: 
+      objectReference: {fileID: 5021349066330608783}
+    - target: {fileID: 2621653704176358477, guid: 6772d7938a4f7ce469d55b1306d9f189, type: 3}
+      propertyPath: shootingPoint
+      value: 
+      objectReference: {fileID: 5021349066330608783}
+    - target: {fileID: 2621653704176358477, guid: 6772d7938a4f7ce469d55b1306d9f189, type: 3}
+      propertyPath: projectileForce
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 4024466154110092668, guid: 6772d7938a4f7ce469d55b1306d9f189, type: 3}
+      propertyPath: m_AABB.m_Center.x
+      value: -0.015766189
+      objectReference: {fileID: 0}
+    - target: {fileID: 4024466154110092668, guid: 6772d7938a4f7ce469d55b1306d9f189, type: 3}
+      propertyPath: m_AABB.m_Center.y
+      value: -0.14446399
+      objectReference: {fileID: 0}
+    - target: {fileID: 4024466154110092668, guid: 6772d7938a4f7ce469d55b1306d9f189, type: 3}
+      propertyPath: m_AABB.m_Center.z
+      value: -0.06589515
+      objectReference: {fileID: 0}
+    - target: {fileID: 4024466154110092668, guid: 6772d7938a4f7ce469d55b1306d9f189, type: 3}
+      propertyPath: m_AABB.m_Extent.x
+      value: 0.17353462
+      objectReference: {fileID: 0}
+    - target: {fileID: 4024466154110092668, guid: 6772d7938a4f7ce469d55b1306d9f189, type: 3}
+      propertyPath: m_AABB.m_Extent.y
+      value: 0.27186292
+      objectReference: {fileID: 0}
+    - target: {fileID: 4024466154110092668, guid: 6772d7938a4f7ce469d55b1306d9f189, type: 3}
+      propertyPath: m_AABB.m_Extent.z
+      value: 0.2110377
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6772d7938a4f7ce469d55b1306d9f189, type: 3}
 --- !u!95 &48784785562721294 stripped
@@ -230,6 +268,17 @@ Animator:
   m_CorrespondingSourceObject: {fileID: 4972602764324961991, guid: 6772d7938a4f7ce469d55b1306d9f189, type: 3}
   m_PrefabInstance: {fileID: 5021349066959626953}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &2432149024520317171 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7237232896523012666, guid: 6772d7938a4f7ce469d55b1306d9f189, type: 3}
+  m_PrefabInstance: {fileID: 5021349066959626953}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5713304151747293898}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5cfcb8c4f43aa13409a4693a914d0ecd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &5713304151747293898 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 785545551230226435, guid: 6772d7938a4f7ce469d55b1306d9f189, type: 3}
@@ -296,12 +345,10 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 64
   agent: {fileID: 5021349066847927871}
-  shootingPoint: {fileID: 5021349066330608783}
-  arrow: {fileID: 1970050889735758001, guid: c593b831eb13c784aa09668a36790fed, type: 3}
-  projectileForce: 25
   playerAnimator: {fileID: 48784785562721294}
   cam: {fileID: 0}
-  attackDistance: 3
+  target: {fileID: 0}
+  enemy: {fileID: 0}
 --- !u!1 &7326626361591764869 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 2306420823276041548, guid: 6772d7938a4f7ce469d55b1306d9f189, type: 3}
