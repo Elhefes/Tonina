@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.18028378, g: 0.22571412, b: 0.30692285, a: 1}
+  m_IndirectSpecularColor: {r: 0.18028352, g: 0.22571376, b: 0.30692244, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -17799,7 +17799,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 857873127}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 2106841064}
+        m_TargetAssemblyTypeName: WeaponWheel, Assembly-CSharp
+        m_MethodName: NextWeapon
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!64 &858386300
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -20643,7 +20655,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1007299802}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 2106841064}
+        m_TargetAssemblyTypeName: WeaponWheel, Assembly-CSharp
+        m_MethodName: PreviousWeapon
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!64 &1008447295
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -38116,7 +38140,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 2046786555}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 2106841064}
+        m_TargetAssemblyTypeName: WeaponWheel, Assembly-CSharp
+        m_MethodName: PreviousWeapon
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &2046786555
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -39659,9 +39695,15 @@ MonoBehaviour:
   nextWeaponImage: {fileID: 1992171960}
   previousWeaponImage: {fileID: 242925712}
   weaponSprites:
-  - {fileID: 21300000, guid: 8bd564907fa11a040bc068a94acdce8f, type: 3}
-  - {fileID: 21300000, guid: 9f03a6d9ead109d499a705e995930b80, type: 3}
-  - {fileID: 21300000, guid: 07c704b29e8def74aa2d3f874a535444, type: 3}
+  - {fileID: 7525047}
+  - {fileID: 1992171960}
+  - {fileID: 157715547}
+  - {fileID: 540056}
+  - {fileID: 242925712}
+  weapons:
+  - {fileID: 6075038093218669114, guid: 9c4259bcd553ee04db631027467ae960, type: 3}
+  - {fileID: -3091167720287405587, guid: ce38a49735e12024a9912149bd0dab7e, type: 3}
+  - {fileID: 2475250979300008127, guid: 76c4d946ec97ca9439cd65f2245599a4, type: 3}
 --- !u!64 &2109902108
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -39758,7 +39800,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 2110085310}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 2106841064}
+        m_TargetAssemblyTypeName: WeaponWheel, Assembly-CSharp
+        m_MethodName: NextWeapon
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &2110085310
 MonoBehaviour:
   m_ObjectHideFlags: 0

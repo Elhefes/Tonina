@@ -1,6 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
-using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -16,39 +13,41 @@ public class WeaponWheel : MonoBehaviour
     public Image currentWeaponImage;
     public Image nextWeaponImage;
     public Image previousWeaponImage;
-    public Sprite[] weaponSprites;
-    private int currentWeaponInt = 0;
+    public Image[] weaponSprites;
+    private int currentIndex;
+    private int weaponIndex;
+    private int slices = 5;
+    public Weapon[] weapons;
 
-    void Start()
+    public void NextWeapon()
     {
-
-    }
-
-    void Awake()
-    {
-        nextWeaponArrowButton.onClick.AddListener(NextWeapon);
-        nextWeaponButton.onClick.AddListener(NextWeapon);
-        previousWeaponArrowButton.onClick.AddListener(PreviousWeapon);
-        previousWeaponButton.onClick.AddListener(PreviousWeapon);
-    }
-
-    void Update()
-    {
-
-    }
-
-    void NextWeapon()
-    {
+        currentIndex++;
+        weaponIndex++;
+        if (currentIndex > slices - 1)
+        {
+            currentIndex = 0;
+        }
+        if (weaponIndex > weapons.Length - 1)
+        {
+            weaponIndex = 0;
+        }
+        weaponSprites[currentIndex].sprite = weapons[weaponIndex].uiSprite;
         weaponWheelAnimator.SetTrigger("NextWeapon");
     }
 
-    void PreviousWeapon()
+    public void PreviousWeapon()
     {
+        currentIndex--;
+        weaponIndex--;
+        if (currentIndex < 0)
+        {
+            currentIndex = slices - 1;
+        }
+        if (weaponIndex < 0)
+        {
+            weaponIndex = weapons.Length - 1;
+        }
+        weaponSprites[currentIndex].sprite = weapons[weaponIndex].uiSprite;
         weaponWheelAnimator.SetTrigger("PreviousWeapon");
-    }
-
-    void UpdateWeaponWheelDisplay()
-    {
-
     }
 }

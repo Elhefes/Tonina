@@ -178,6 +178,7 @@ GameObject:
   - component: {fileID: 1748826792029426963}
   - component: {fileID: 8247414073232798903}
   - component: {fileID: 8861470018394219423}
+  - component: {fileID: 6075038093218669114}
   m_Layer: 0
   m_Name: Club 1
   m_TagString: Untagged
@@ -236,8 +237,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6c8e32a37f9fcc544bb01c1f7e37a94b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  collider: {fileID: 1748826792029426963}
   damage: 35
+  canHit: 0
 --- !u!54 &8861470018394219423
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -254,6 +255,22 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 126
   m_CollisionDetection: 0
+--- !u!114 &6075038093218669114
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4235599752637593603}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5cfcb8c4f43aa13409a4693a914d0ecd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  weaponName: Club
+  type: 0
+  damage: 1
+  uiSprite: {fileID: 21300000, guid: 8bd564907fa11a040bc068a94acdce8f, type: 3}
 --- !u!1 &4427210048514578023
 GameObject:
   m_ObjectHideFlags: 0
