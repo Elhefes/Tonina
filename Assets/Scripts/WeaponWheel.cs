@@ -19,6 +19,13 @@ public class WeaponWheel : MonoBehaviour
     private int slices = 5;
     public Weapon[] weapons;
 
+    private Player player;
+
+    private void Start()
+    {
+        player = GameObject.FindGameObjectsWithTag("Player")[0].GetComponent<Player>();
+    }
+
     public void NextWeapon()
     {
         currentIndex++;
@@ -31,7 +38,9 @@ public class WeaponWheel : MonoBehaviour
         {
             weaponIndex = 0;
         }
-        weaponSprites[currentIndex].sprite = weapons[weaponIndex].uiSprite;
+        var wep = weapons[weaponIndex];
+        weaponSprites[currentIndex].sprite = wep.uiSprite;
+        player.SwitchWeapon(wep.type);
         weaponWheelAnimator.SetTrigger("NextWeapon");
     }
 
@@ -47,7 +56,9 @@ public class WeaponWheel : MonoBehaviour
         {
             weaponIndex = weapons.Length - 1;
         }
-        weaponSprites[currentIndex].sprite = weapons[weaponIndex].uiSprite;
+        var wep = weapons[weaponIndex];
+        weaponSprites[currentIndex].sprite = wep.uiSprite;
+        player.SwitchWeapon(wep.type);
         weaponWheelAnimator.SetTrigger("PreviousWeapon");
     }
 }
