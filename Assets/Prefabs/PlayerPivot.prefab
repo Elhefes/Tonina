@@ -138,7 +138,6 @@ MonoBehaviour:
   - {fileID: 7326626361591764869}
   - {fileID: 7920082927639332344}
   playerMovement: {fileID: 5021349066959626957}
-  attackDistance: 5
 --- !u!1 &5021349067717839906
 GameObject:
   m_ObjectHideFlags: 0
@@ -277,7 +276,8 @@ PrefabInstance:
       propertyPath: shootingPoint
       value: 
       objectReference: {fileID: 5021349066330608783}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 5654445324501186501, guid: 6772d7938a4f7ce469d55b1306d9f189, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 6772d7938a4f7ce469d55b1306d9f189, type: 3}
 --- !u!95 &48784785562721294 stripped
 Animator:
@@ -365,6 +365,19 @@ MonoBehaviour:
   cam: {fileID: 0}
   target: {fileID: 0}
   enemy: {fileID: 0}
+--- !u!114 &3656845300542861881
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6715602269153616514}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 19359612f56d1b04981f48a945fcde25, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  player: {fileID: 5412454603876469069}
 --- !u!1 &7326626361591764869 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 2306420823276041548, guid: 6772d7938a4f7ce469d55b1306d9f189, type: 3}

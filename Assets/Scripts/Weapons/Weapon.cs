@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 public class Weapon : MonoBehaviour
@@ -6,29 +7,51 @@ public class Weapon : MonoBehaviour
     public WeaponType type;
     public int damage;
     public Sprite uiSprite;
+    public float attackCooldown = 1.0f; // Time between attacks
+    public float attackDistance;
+    public float attackAngleThreshold;
+    public bool canHit;
+
+    private List<GameObject> hitEnemies = new List<GameObject>();
 
     public virtual void Attack(Animator animator)
     {
-
+            
     }
 
-    void Update()
+    public bool ShouldAttack(float distanceToTarget, float angle)
     {
-        /*
-        if (playerMovement.target)
+        // Move the attack condition logic here
+        return distanceToTarget <= attackDistance && angle < attackAngleThreshold;
+    }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        HandleCollision(collision.gameObject);
+    }
+
+    private void OnCollisionExit(Collision collision)
+    {
+        var obj = collision.gameObject;
+        if (hitEnemies.Contains(obj))
         {
-            playerMovement.agent.destination = playerMovement.target.position;
-            if (Vector3.Distance(transform.position, playerMovement.target.position) <= attackDistance)
-            {
-                if (attackCoroutine == null) attackCoroutine = StartCoroutine(Attack());
-            }
-            else
-            {
-                if (attackCoroutine != null) StopCoroutine(attackCoroutine);
-                attackCoroutine = null;
-            }
+            hitEnemies.Remove(obj);
         }
-        */
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        HandleCollision(other.gameObject);
+    }
+
+    private void HandleCollision(GameObject obj)
+    {
+        if (!canHit) return;
+        if (obj.CompareTag("Enemy") && !hitEnemies.Contains(obj))
+        {
+            hitEnemies.Add(obj);
+            obj.GetComponent<EnemyAI>()?.TakeDamage(damage);
+        }
     }
 }
 

@@ -2,15 +2,15 @@ using UnityEngine;
 
 public class AttackManager : MonoBehaviour
 {
-    public Melee melee;
+    public Player player;
 
     public void IniateDamage()
     {
-        melee.canHit = true;
+        player.weaponOnHand.canHit = true;
     }
 
     public void FinishDamage()
     {
-        melee.canHit = false;
+        player.weaponOnHand.canHit = false;
     }
 }

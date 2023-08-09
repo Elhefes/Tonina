@@ -176,7 +176,6 @@ GameObject:
   m_Component:
   - component: {fileID: 3570245252696662713}
   - component: {fileID: 1748826792029426963}
-  - component: {fileID: 8247414073232798903}
   - component: {fileID: 8861470018394219423}
   - component: {fileID: 6075038093218669114}
   m_Layer: 0
@@ -225,20 +224,6 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 0.21790911, y: 2.4555068, z: 0.54056597}
   m_Center: {x: 0.0060716528, y: 1.9329791, z: -0.0038431538}
---- !u!114 &8247414073232798903
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4235599752637593603}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6c8e32a37f9fcc544bb01c1f7e37a94b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  damage: 35
-  canHit: 0
 --- !u!54 &8861470018394219423
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -269,8 +254,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   weaponName: Club
   type: 0
-  damage: 1
+  damage: 35
   uiSprite: {fileID: 21300000, guid: 8bd564907fa11a040bc068a94acdce8f, type: 3}
+  attackCooldown: 1
+  attackDistance: 2
+  attackAngleThreshold: 15
+  canHit: 0
 --- !u!1 &4427210048514578023
 GameObject:
   m_ObjectHideFlags: 0
