@@ -11,9 +11,7 @@ public class Projectile : Weapon
 
         GameObject projectile = Instantiate(gameObject, shootingPoint.position, shootingPoint.rotation);
         Rigidbody rb = projectile.GetComponent<Rigidbody>();
-        rb.AddForce(transform.forward * projectileForce, ForceMode.Impulse);
-        print("niin");
-
+        rb.AddForce(projectile.transform.right * projectileForce, ForceMode.Impulse);
         gameObject.SetActive(false);
     }
 }

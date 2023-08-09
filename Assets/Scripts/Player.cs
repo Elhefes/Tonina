@@ -14,12 +14,21 @@ public class Player : MonoBehaviour
 
     public float attackDistance;
 
+    private float attackAngleThreshold = 10f;
+
     void Update()
     {
+        Debug.DrawLine(transform.position, transform.position + transform.forward * 114f, Color.red);
         if (playerMovement.target)
         {
             playerMovement.agent.destination = playerMovement.target.position;
-            if (Vector3.Distance(transform.position, playerMovement.target.position) <= attackDistance)
+
+            var directionToTarget = playerMovement.target.position - transform.position;
+            directionToTarget.y = 0;
+            var angle = Vector3.Angle(transform.forward, directionToTarget);
+            Debug.DrawLine(transform.position, transform.position + directionToTarget * 114f, Color.red);
+            print(angle);
+            if (Vector3.Distance(transform.position, playerMovement.target.position) <= attackDistance && angle < attackAngleThreshold)
             {
                 if (attackCoroutine == null) attackCoroutine = StartCoroutine(Attack());
             }
@@ -41,6 +50,7 @@ public class Player : MonoBehaviour
                 GameObject target = hit.collider.gameObject;
                 if (target.CompareTag("Enemy"))
                 {
+                    playerMovement.agent.stoppingDistance = 1.5f;
                     playerMovement.enemy = target.GetComponent<EnemyAI>();
                     playerMovement.target = target.transform;
                 }
