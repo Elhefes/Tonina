@@ -136,7 +136,7 @@ MonoBehaviour:
   weaponObjects:
   - {fileID: 5713304151747293898}
   - {fileID: 7326626361591764869}
-  - {fileID: 8641776748403854768}
+  - {fileID: 7920082927639332344}
   playerMovement: {fileID: 5021349066959626957}
   attackDistance: 1.8
 --- !u!1 &5021349067717839906
@@ -237,6 +237,14 @@ PrefabInstance:
       propertyPath: projectileForce
       value: 10
       objectReference: {fileID: 0}
+    - target: {fileID: 3621642274607837049, guid: 6772d7938a4f7ce469d55b1306d9f189, type: 3}
+      propertyPath: m_Name
+      value: Spear2
+      objectReference: {fileID: 0}
+    - target: {fileID: 3621642274607837049, guid: 6772d7938a4f7ce469d55b1306d9f189, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4024466154110092668, guid: 6772d7938a4f7ce469d55b1306d9f189, type: 3}
       propertyPath: m_AABB.m_Center.x
       value: -0.015766189
@@ -261,6 +269,14 @@ PrefabInstance:
       propertyPath: m_AABB.m_Extent.z
       value: 0.2110377
       objectReference: {fileID: 0}
+    - target: {fileID: 6129686199050499030, guid: 6772d7938a4f7ce469d55b1306d9f189, type: 3}
+      propertyPath: m_Constraints
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8750865781760949286, guid: 6772d7938a4f7ce469d55b1306d9f189, type: 3}
+      propertyPath: shootingPoint
+      value: 
+      objectReference: {fileID: 5021349066330608783}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6772d7938a4f7ce469d55b1306d9f189, type: 3}
 --- !u!95 &48784785562721294 stripped
@@ -354,8 +370,8 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 2306420823276041548, guid: 6772d7938a4f7ce469d55b1306d9f189, type: 3}
   m_PrefabInstance: {fileID: 5021349066959626953}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &8641776748403854768 stripped
+--- !u!1 &7920082927639332344 stripped
 GameObject:
-  m_CorrespondingSourceObject: {fileID: 3621642274607837049, guid: 6772d7938a4f7ce469d55b1306d9f189, type: 3}
+  m_CorrespondingSourceObject: {fileID: 2902186413099984689, guid: 6772d7938a4f7ce469d55b1306d9f189, type: 3}
   m_PrefabInstance: {fileID: 5021349066959626953}
   m_PrefabAsset: {fileID: 0}
