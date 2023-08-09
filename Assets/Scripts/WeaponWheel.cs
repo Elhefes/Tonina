@@ -10,6 +10,9 @@ public class WeaponWheel : MonoBehaviour
 
     public Animator weaponWheelAnimator;
 
+    private bool weaponWheelCooldown;
+    public float coolDownTime;
+
     public Image currentWeaponImage;
     public Image nextWeaponImage;
     public Image previousWeaponImage;
@@ -28,6 +31,8 @@ public class WeaponWheel : MonoBehaviour
 
     public void NextWeapon()
     {
+        if (weaponWheelCooldown) return;
+        StartWeaponWheelCooldown();
         currentIndex++;
         weaponIndex++;
         if (currentIndex > slices - 1)
@@ -46,6 +51,8 @@ public class WeaponWheel : MonoBehaviour
 
     public void PreviousWeapon()
     {
+        if (weaponWheelCooldown) return;
+        StartWeaponWheelCooldown();
         currentIndex--;
         weaponIndex--;
         if (currentIndex < 0)
@@ -60,5 +67,16 @@ public class WeaponWheel : MonoBehaviour
         weaponSprites[currentIndex].sprite = wep.uiSprite;
         player.SwitchWeapon(wep.type);
         weaponWheelAnimator.SetTrigger("PreviousWeapon");
+    }
+
+    void StartWeaponWheelCooldown()
+    {
+        Invoke("ResetWeaponWheelCooldown", coolDownTime);
+        weaponWheelCooldown = true;
+    }
+
+    void ResetWeaponWheelCooldown()
+    {
+        weaponWheelCooldown = false;
     }
 }
