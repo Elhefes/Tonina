@@ -95,7 +95,7 @@ NavMeshAgent:
   m_Enabled: 1
   m_AgentTypeID: 0
   m_Radius: 0.5
-  m_Speed: 3.5
+  m_Speed: 3.7
   m_Acceleration: 20
   avoidancePriority: 50
   m_AngularSpeed: 2000
@@ -340,6 +340,19 @@ CapsuleCollider:
   m_Height: 6.8
   m_Direction: 1
   m_Center: {x: 0, y: 2.72, z: -0.28}
+--- !u!114 &3656845300542861881
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6715602269153616514}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 19359612f56d1b04981f48a945fcde25, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  player: {fileID: 5412454603876469069}
 --- !u!114 &5021349066959626957
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -365,19 +378,6 @@ MonoBehaviour:
   cam: {fileID: 0}
   target: {fileID: 0}
   enemy: {fileID: 0}
---- !u!114 &3656845300542861881
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6715602269153616514}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 19359612f56d1b04981f48a945fcde25, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  player: {fileID: 5412454603876469069}
 --- !u!1 &7326626361591764869 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 2306420823276041548, guid: 6772d7938a4f7ce469d55b1306d9f189, type: 3}
