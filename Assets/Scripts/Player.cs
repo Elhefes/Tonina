@@ -54,6 +54,7 @@ public class Player : MonoBehaviour
                     playerMovement.enemy = target.GetComponent<EnemyAI>();
                     playerMovement.target = target.transform;
                 }
+                else playerMovement.agent.stoppingDistance = 0.1f;
                 playerMovement.agent.SetDestination(hit.point);
             }
         }
