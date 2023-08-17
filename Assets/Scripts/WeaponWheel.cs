@@ -29,6 +29,12 @@ public class WeaponWheel : MonoBehaviour
         player = GameObject.FindGameObjectsWithTag("Player")[0].GetComponent<Player>();
     }
 
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.E)) NextWeapon();
+        if (Input.GetKeyDown(KeyCode.Q)) PreviousWeapon();
+    }
+
     public void NextWeapon()
     {
         if (weaponWheelCooldown) return;
