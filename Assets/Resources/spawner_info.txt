@@ -8,6 +8,10 @@ Another special bit is the one that starts with X. If the bit starts with X, the
 
 A: warrior
 
-Example:
-2) 5A20-4 P30 10A100-7
+Example 1:
+2)  5A20-4 P30 10A100-7
 Round 2 would spawn five warriors to spawn point 4 in a time span of two seconds. After spawning them, it would have a delay of three seconds before spawning ten warriors to spawn point 7 in a time span of ten seconds.
+
+Example 2:
+3)  X1A10-0 2A40-1
+Round 3 would simultaneously spawn one warrior to spawn point 0 and two warriors in four seconds to spawn point 1.
