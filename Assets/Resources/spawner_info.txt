@@ -1,0 +1,13 @@
+Waves text files info
+
+In waves.txt each rows represent different round in the game. The first number of each row tells the number of the round. After that comes an array of bits which are used to control enemy spawn rates. 
+The first number of each bit (that doesnt start with P) tells how many enemies will spawn. The following letter means which enemy will spawn. The second number of these bits is the time it takes in 1/10th seconds to spawn all the enemies of said bit.
+The number after the dash (-) represents the spawn point where the enemies spawn.
+One special bit is the one that starts with P. This bit creates a delay so that enemies will not spawn for a set amount of time. The number that follows P is the time of delay in 1/10th seconds.
+Another special bit is the one that starts with X. If the bit starts with X, the spawner will start to spawn the current bit's and the next bit's enemies simultaneously.
+
+A: warrior
+
+Example:
+2) 5A20-4 P30 10A100-7
+Round 2 would spawn five warriors to spawn point 4 in a time span of two seconds. After spawning them, it would have a delay of three seconds before spawning ten warriors to spawn point 7 in a time span of ten seconds.
