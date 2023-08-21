@@ -1744,6 +1744,37 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: 4489585187976841524, guid: 2189896f28ea9c142918731d538470de, type: 3}
+--- !u!1 &55883260
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 55883261}
+  m_Layer: 0
+  m_Name: EnemyTarget
+  m_TagString: Target
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &55883261
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 55883260}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -0.82, y: 15.636, z: -78.46}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1393370855}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!64 &62074410
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -10542,6 +10573,10 @@ PrefabInstance:
     - target: {fileID: 6997209882553159276, guid: 14927951af5ca514a91d94b0ed308af5, type: 3}
       propertyPath: m_Name
       value: Enemy (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 6997209882553159279, guid: 14927951af5ca514a91d94b0ed308af5, type: 3}
+      propertyPath: moveTowardsTarget
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 14927951af5ca514a91d94b0ed308af5, type: 3}
@@ -23716,6 +23751,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Enemy
       objectReference: {fileID: 0}
+    - target: {fileID: 6997209882553159279, guid: 14927951af5ca514a91d94b0ed308af5, type: 3}
+      propertyPath: moveTowardsTarget
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 14927951af5ca514a91d94b0ed308af5, type: 3}
 --- !u!1001 &1176943828
@@ -28097,11 +28136,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 727737f9db0818e41ae08173c74679a4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  txt: {fileID: 4900000, guid: 9ea0fb5607d05e84da7728d798040958, type: 3}
   roundNumber: 1
   spawnPoints:
   - {fileID: 1103779032}
   - {fileID: 1187524252}
-  enemy: {fileID: 6997209882553159276, guid: 14927951af5ca514a91d94b0ed308af5, type: 3}
+  enemyPrefab: {fileID: 6997209882553159276, guid: 14927951af5ca514a91d94b0ed308af5, type: 3}
 --- !u!4 &1393370855
 Transform:
   m_ObjectHideFlags: 0
@@ -28115,6 +28155,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1841777524}
+  - {fileID: 55883261}
   m_Father: {fileID: 0}
   m_RootOrder: 28
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
