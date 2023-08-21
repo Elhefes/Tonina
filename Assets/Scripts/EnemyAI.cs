@@ -9,9 +9,11 @@ public class EnemyAI : MonoBehaviour
     public Slider healthBar;
     public int startingHealth;
     private int health;
+    public bool moveTowardsTarget;
 
     void Awake()
     {
+        if (moveTowardsTarget) agent.destination = GameObject.FindGameObjectsWithTag("Target")[0].transform.position;
         health = startingHealth;
     }
 
