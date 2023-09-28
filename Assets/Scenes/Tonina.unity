@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.18028352, g: 0.22571376, b: 0.30692244, a: 1}
+  m_IndirectSpecularColor: {r: 0.18028378, g: 0.22571412, b: 0.30692285, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -18565,6 +18565,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5170609943649492788, guid: f1110e22860f9844396abf95985246eb, type: 3}
+      propertyPath: playerAnimator
+      value: 
+      objectReference: {fileID: 2089831671}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f1110e22860f9844396abf95985246eb, type: 3}
 --- !u!64 &912492375
@@ -39067,6 +39071,11 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: 5270879433523947816, guid: 0b449f119c5381443b7e223e850a86d9, type: 3}
+--- !u!95 &2089831671 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 4812472427520323797, guid: f1110e22860f9844396abf95985246eb, type: 3}
+  m_PrefabInstance: {fileID: 910515677}
+  m_PrefabAsset: {fileID: 0}
 --- !u!64 &2091782900
 MeshCollider:
   m_ObjectHideFlags: 0

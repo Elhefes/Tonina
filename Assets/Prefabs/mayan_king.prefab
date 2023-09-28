@@ -828,7 +828,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 19359612f56d1b04981f48a945fcde25, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  melee: {fileID: 4779934850068798647}
+  player: {fileID: 0}
 --- !u!1 &1878005309116889677
 GameObject:
   m_ObjectHideFlags: 0
@@ -1743,7 +1743,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3755232589269919246}
-  m_LocalRotation: {x: -0.000003705213, y: 0.00000069199575, z: -0.000398159, w: 0.99999994}
+  m_LocalRotation: {x: -0.0000038273024, y: 0.0000007147975, z: -0.00041127863, w: 0.99999994}
   m_LocalPosition: {x: -0.103276744, y: -0.0001239109, z: 0.00000014379881}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -3120,8 +3120,8 @@ SkinnedMeshRenderer:
   m_BlendShapeWeights: []
   m_RootBone: {fileID: 0}
   m_AABB:
-    m_Center: {x: -0.015764177, y: -0.14447805, z: -0.06589926}
-    m_Extent: {x: 0.17353383, y: 0.2718785, z: 0.21104181}
+    m_Center: {x: -0.0198711, y: -0.14778632, z: -0.06591894}
+    m_Extent: {x: 0.16957961, y: 0.27984053, z: 0.21106146}
   m_DirtyAABB: 0
 --- !u!183 &5605169600590175635
 Cloth:
@@ -4331,17 +4331,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 3570245252696662713, guid: 9c4259bcd553ee04db631027467ae960, type: 3}
   m_PrefabInstance: {fileID: 3468068636600920064}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &4779934850068798647 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 8247414073232798903, guid: 9c4259bcd553ee04db631027467ae960, type: 3}
-  m_PrefabInstance: {fileID: 3468068636600920064}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6c8e32a37f9fcc544bb01c1f7e37a94b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1001 &6647004999961122391
 PrefabInstance:
   m_ObjectHideFlags: 0

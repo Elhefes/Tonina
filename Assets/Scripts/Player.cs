@@ -82,5 +82,6 @@ public class Player : MonoBehaviour
 
         weaponOnHand = weaponObjects[weaponIndex].GetComponent<Weapon>();
         weaponObjects[weaponIndex].SetActive(true);
+        playerMovement.playerAnimator.SetInteger("WeaponIndex", weaponIndex);
     }
 }
