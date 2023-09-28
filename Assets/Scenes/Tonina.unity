@@ -18569,6 +18569,10 @@ PrefabInstance:
       propertyPath: playerAnimator
       value: 
       objectReference: {fileID: 2089831671}
+    - target: {fileID: 8828437210349209437, guid: f1110e22860f9844396abf95985246eb, type: 3}
+      propertyPath: player
+      value: 
+      objectReference: {fileID: 1904667352}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f1110e22860f9844396abf95985246eb, type: 3}
 --- !u!64 &912492375
@@ -35876,6 +35880,17 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1.1811023, y: 7.332858, z: 4.737755}
   m_Center: {x: 0, y: 0.0025233414, z: 2.3688776}
+--- !u!114 &1904667352 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 5412454603876469069, guid: f1110e22860f9844396abf95985246eb, type: 3}
+  m_PrefabInstance: {fileID: 910515677}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f790da50e6ef0d4469092112e7f8e618, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1905289331
 GameObject:
   m_ObjectHideFlags: 0
