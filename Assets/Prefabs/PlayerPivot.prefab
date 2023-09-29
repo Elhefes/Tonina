@@ -1,5 +1,36 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &1477760207180890440
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 9100174395643030370}
+  m_Layer: 0
+  m_Name: ShootingPoint
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &9100174395643030370
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1477760207180890440}
+  m_LocalRotation: {x: 0, y: -0.7071068, z: 0, w: 0.7071068}
+  m_LocalPosition: {x: 0, y: 3.3, z: 0.07}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 7822313721903264955}
+  m_RootOrder: 20
+  m_LocalEulerAnglesHint: {x: 0, y: -90, z: 0}
 --- !u!1 &5021349066847927866
 GameObject:
   m_ObjectHideFlags: 0
@@ -108,6 +139,37 @@ MonoBehaviour:
   - {fileID: 482384435570632228}
   - {fileID: 3231447827573151896}
   playerMovement: {fileID: 4129278258679320684}
+--- !u!1 &5296286306352095051
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1462489299169087040}
+  m_Layer: 0
+  m_Name: GroundCheck
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1462489299169087040
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5296286306352095051}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 7822313721903264955}
+  m_RootOrder: 19
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &5021349066959626953
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -312,10 +374,22 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 5021349066847927869}
     m_Modifications:
+    - target: {fileID: 88004054273697940, guid: 2a62ad8bdf5a4ee428036edb7057ce04, type: 3}
+      propertyPath: m_Constraints
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 233434457505502145, guid: 2a62ad8bdf5a4ee428036edb7057ce04, type: 3}
       propertyPath: player
       value: 
       objectReference: {fileID: 5412454603876469069}
+    - target: {fileID: 2537462154092368551, guid: 2a62ad8bdf5a4ee428036edb7057ce04, type: 3}
+      propertyPath: m_Constraints
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3267625652835624804, guid: 2a62ad8bdf5a4ee428036edb7057ce04, type: 3}
+      propertyPath: shootingPoint
+      value: 
+      objectReference: {fileID: 9100174395643030370}
     - target: {fileID: 3995477846015871722, guid: 2a62ad8bdf5a4ee428036edb7057ce04, type: 3}
       propertyPath: m_Name
       value: Akuxa
@@ -380,6 +454,10 @@ PrefabInstance:
       propertyPath: m_LocalRotation.y
       value: 0.00024127292
       objectReference: {fileID: 0}
+    - target: {fileID: 5937255130621174734, guid: 2a62ad8bdf5a4ee428036edb7057ce04, type: 3}
+      propertyPath: shootingPoint
+      value: 
+      objectReference: {fileID: 9100174395643030370}
     - target: {fileID: 6949450453946220239, guid: 2a62ad8bdf5a4ee428036edb7057ce04, type: 3}
       propertyPath: m_LocalRotation.x
       value: 0.0003947527
@@ -469,7 +547,7 @@ MonoBehaviour:
   controller: {fileID: 5021349066847927868}
   jumpHeight: 1
   rotationSpeed: 2
-  groundCheck: {fileID: 0}
+  groundCheck: {fileID: 1462489299169087040}
   groundDistance: 0.4
   groundMask:
     serializedVersion: 2
