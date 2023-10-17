@@ -15,11 +15,26 @@ public class MouseLook : MonoBehaviour
     public GameObject playerToFollow;
     public bool cameraOnPlayer = true;
 
+    public CameraOnPlayerButton cameraOnPlayerButton;
+
+    public void ToggleCameraOnPlayer()
+    {
+        cameraOnPlayer = !cameraOnPlayer;
+        cameraOnPlayerButton.ChangeIconSprite(cameraOnPlayer);
+    }
+
+    void CameraOnPlayerOff()
+    {
+        cameraOnPlayer = false;
+        cameraOnPlayerButton.ChangeIconSprite(cameraOnPlayer);
+    }
+
     // Update is called once per frame
     void Update()
     {
-        if (!cameraOnPlayer)
+        if (Input.GetAxis("Horizontal") != 0 || Input.GetAxis("Vertical") != 0)
         {
+            CameraOnPlayerOff();
             moveDirection = new Vector3(Input.GetAxis("Horizontal"), 0f, Input.GetAxis("Vertical"));
             transform.position += moveDirection * moveSpeed * Time.deltaTime;
         }
