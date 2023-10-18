@@ -1,14 +1,24 @@
 using System.Collections;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.UI;
 
 public class Player : MonoBehaviour
 {
-    public int health;
+    private int health;
+    public int startingHealth;
     public Weapon weaponOnHand;
     public GameObject[] weaponObjects;
     private Coroutine attackCoroutine;
     public PlayerMovement playerMovement;
+    public Slider healthBar;
+
+    public PlayerHealthIndicator playerHealthIndicator;
+
+    private void Awake()
+    {
+        health = startingHealth;
+    }
 
     private void Update()
     {
@@ -83,5 +93,16 @@ public class Player : MonoBehaviour
         weaponOnHand = weaponObjects[weaponIndex].GetComponent<Weapon>();
         weaponObjects[weaponIndex].SetActive(true);
         playerMovement.playerAnimator.SetInteger("WeaponIndex", weaponIndex);
+    }
+    public void TakeDamage(int damage)
+    {
+        healthBar.value -= (float)damage / startingHealth;
+        health -= damage;
+        if (health <= 0)
+        {
+            Destroy(gameObject);
+        }
+        playerHealthIndicator.UpdateHealthIndicator(health);
+        print(health);
     }
 }
