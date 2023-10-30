@@ -15,6 +15,8 @@ public class Player : MonoBehaviour
 
     public PlayerHealthIndicator playerHealthIndicator;
 
+    public Light weaponRangeIndicatorLight;
+
     private void Awake()
     {
         health = startingHealth;
@@ -68,6 +70,11 @@ public class Player : MonoBehaviour
                 playerMovement.agent.SetDestination(hit.point);
             }
         }
+
+        if (weaponRangeIndicatorLight.intensity > 0)
+        {
+            weaponRangeIndicatorLight.intensity -= 0.007f;
+        }
     }
 
     private IEnumerator Attack()
@@ -93,7 +100,15 @@ public class Player : MonoBehaviour
         weaponOnHand = weaponObjects[weaponIndex].GetComponent<Weapon>();
         weaponObjects[weaponIndex].SetActive(true);
         playerMovement.playerAnimator.SetInteger("WeaponIndex", weaponIndex);
+        UpdateWeaponRangeIndicator();
     }
+
+    private void UpdateWeaponRangeIndicator()
+    {
+        weaponRangeIndicatorLight.spotAngle = Mathf.Asin((weaponOnHand.attackDistance / 25f)) * 180 / Mathf.PI;
+        weaponRangeIndicatorLight.intensity = 1.75f;
+    }
+
     public void TakeDamage(int damage)
     {
         healthBar.value -= (float)damage / startingHealth;
