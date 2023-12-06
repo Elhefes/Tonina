@@ -19,6 +19,8 @@ public class MouseLook : MonoBehaviour
     public Camera minimapCamera;
 
     public CameraOnPlayerButton cameraOnPlayerButton;
+    public MinimapInput minimapInput;
+    public float minimapInputSensitivity;
 
     public void ToggleCameraOnPlayer()
     {
@@ -49,10 +51,10 @@ public class MouseLook : MonoBehaviour
     {
         if (Input.GetKeyDown("c")) ToggleCameraOnPlayer();
 
-        if (Input.GetAxis("Horizontal") != 0 || Input.GetAxis("Vertical") != 0)
+        if (Input.GetAxis("Horizontal") != 0 || Input.GetAxis("Vertical") != 0 || minimapInput.GetMinimapInput().x != 0 || minimapInput.GetMinimapInput().y != 0)
         {
             CameraOnPlayerOff();
-            moveDirection = new Vector3(Input.GetAxis("Horizontal"), 0f, Input.GetAxis("Vertical"));
+            moveDirection = new Vector3(Input.GetAxis("Horizontal") + minimapInput.GetMinimapInput().x * minimapInputSensitivity, 0f, Input.GetAxis("Vertical") + minimapInput.GetMinimapInput().y * minimapInputSensitivity);
             transform.position += moveDirection * moveSpeed * Time.deltaTime;
         }
 
