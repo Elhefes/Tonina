@@ -11,6 +11,8 @@ public class MinimapInput : MonoBehaviour, IPointerDownHandler, IPointerUpHandle
 
     Vector3 distanceFromMinimapCenter;
 
+    public GameObject minimapIndicators;
+
     void Update()
     {
         if (buttonPressed)
@@ -37,11 +39,13 @@ public class MinimapInput : MonoBehaviour, IPointerDownHandler, IPointerUpHandle
     void IPointerDownHandler.OnPointerDown(PointerEventData eventData)
     {
         buttonPressed = true;
+        minimapIndicators.SetActive(false);
     }
 
     void IPointerUpHandler.OnPointerUp(PointerEventData eventData)
     {
         buttonPressed = false;
+        minimapIndicators.SetActive(true);
     }
 
 }
