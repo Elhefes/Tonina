@@ -6,7 +6,9 @@ public class MouseLook : MonoBehaviour
     public float sensitivity;
     public LayerMask layerMask;
     private Vector3 moveDirection;
+    private Vector3 playerToFollowAngledDirection;
     private Vector3 playerToFollowDirection;
+    private Vector3 freeMinimapCameraDirection;
     public float distanceFromObject;
     private float currentDistance;
     public float smoothSpeed;
@@ -14,6 +16,7 @@ public class MouseLook : MonoBehaviour
     public float maxCameraZoom;
     public GameObject playerToFollow;
     public bool cameraOnPlayer = true;
+    public Camera minimapCamera;
 
     public CameraOnPlayerButton cameraOnPlayerButton;
 
@@ -29,10 +32,22 @@ public class MouseLook : MonoBehaviour
         cameraOnPlayerButton.ChangeIconSprite(cameraOnPlayer);
     }
 
+    public void ZoomCameraInOrOut(bool zoom_in)
+    {
+        if (zoom_in)
+        {
+            distanceFromObject = Mathf.Clamp(distanceFromObject - 5f, minCameraZoom, maxCameraZoom);
+        }
+        else
+        {
+            distanceFromObject = Mathf.Clamp(distanceFromObject + 5f, minCameraZoom, maxCameraZoom);
+        }
+    }
+
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown("f")) ToggleCameraOnPlayer();
+        if (Input.GetKeyDown("c")) ToggleCameraOnPlayer();
 
         if (Input.GetAxis("Horizontal") != 0 || Input.GetAxis("Vertical") != 0)
         {
@@ -44,14 +59,20 @@ public class MouseLook : MonoBehaviour
         // Use scroll wheel to zoom in or out
         float scrollWheel = Input.GetAxis("Mouse ScrollWheel");
         distanceFromObject = Mathf.Clamp(distanceFromObject - scrollWheel * sensitivity, minCameraZoom, maxCameraZoom);
+        minimapCamera.orthographicSize = distanceFromObject / 2 + 20f;
 
         if (cameraOnPlayer)
         {
-            playerToFollowDirection = new Vector3(playerToFollow.transform.position.x, playerToFollow.transform.position.y + distanceFromObject, playerToFollow.transform.position.z - (distanceFromObject / Mathf.Tan(60 * Mathf.PI / 180)) + 0.66f);
-            transform.position = Vector3.Lerp(transform.position, playerToFollowDirection, smoothSpeed);
+            playerToFollowAngledDirection = new Vector3(playerToFollow.transform.position.x, playerToFollow.transform.position.y + distanceFromObject, playerToFollow.transform.position.z - (distanceFromObject / Mathf.Tan(60 * Mathf.PI / 180)) + 0.66f);
+            transform.position = Vector3.Lerp(transform.position, playerToFollowAngledDirection, smoothSpeed);
+            playerToFollowDirection = new Vector3(playerToFollow.transform.position.x, playerToFollow.transform.position.y + 100f, playerToFollow.transform.position.z);
+            minimapCamera.transform.position = Vector3.Lerp(minimapCamera.transform.position, playerToFollowDirection, smoothSpeed);
+
         }
         else
         {
+            freeMinimapCameraDirection = new Vector3(transform.position.x, transform.position.y + 100f, transform.position.z);
+            minimapCamera.transform.position = Vector3.Lerp(minimapCamera.transform.position, freeMinimapCameraDirection, smoothSpeed);
             // Cast a ray downwards from the camera's position
             Ray ray = new Ray(transform.position, transform.forward);
             RaycastHit hit;
