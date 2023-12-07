@@ -6,10 +6,10 @@ using UnityEngine.EventSystems;
 public class MinimapInput : MonoBehaviour, IPointerDownHandler, IPointerUpHandler
 {
     bool buttonPressed;
-    int minimapWidth = 324;
-    int minimapHeight = 243;
 
-    Vector3 distanceFromMinimapCenter;
+    private Vector3 distanceFromClick;
+    private Vector3 initialClickPosition;
+    public float distanceForMaxSpeed;
 
     public GameObject minimapIndicators;
 
@@ -17,21 +17,20 @@ public class MinimapInput : MonoBehaviour, IPointerDownHandler, IPointerUpHandle
     {
         if (buttonPressed)
         {
-            float dx = Mathf.Clamp(Input.mousePosition.x - minimapWidth / 2, -minimapWidth / 2, minimapWidth / 2) / (minimapWidth / 2);
-            float dy = Mathf.Clamp(Screen.height - Input.mousePosition.y - minimapHeight / 2, -minimapHeight / 2, minimapHeight / 2) / -(minimapHeight / 2);
-            distanceFromMinimapCenter = new Vector3(dx, dy, 0f);
+            distanceFromClick = new Vector3(Mathf.Clamp(Input.mousePosition.x - initialClickPosition.x, -distanceForMaxSpeed, distanceForMaxSpeed) / distanceForMaxSpeed,
+            Mathf.Clamp(Input.mousePosition.y - initialClickPosition.y, -distanceForMaxSpeed, distanceForMaxSpeed) / distanceForMaxSpeed, 0f);
         }
         else
         {
-            distanceFromMinimapCenter = new Vector3(0, 0, 0);
+            distanceFromClick = new Vector3(0, 0, 0);
         }
     }
 
     public Vector3 GetMinimapInput()
     {
-        if (distanceFromMinimapCenter.x != 0 && distanceFromMinimapCenter.y != 0)
+        if (distanceFromClick.x != 0 || distanceFromClick.y != 0)
         {
-            return distanceFromMinimapCenter;
+            return distanceFromClick;
         }
         return new Vector3(0, 0, 0);
     }
@@ -39,6 +38,7 @@ public class MinimapInput : MonoBehaviour, IPointerDownHandler, IPointerUpHandle
     void IPointerDownHandler.OnPointerDown(PointerEventData eventData)
     {
         buttonPressed = true;
+        initialClickPosition = Input.mousePosition;
         minimapIndicators.SetActive(false);
     }
 
