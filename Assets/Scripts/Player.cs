@@ -6,6 +6,7 @@ using UnityEngine.UI;
 public class Player : MonoBehaviour
 {
     private int health;
+    public int maxHealth;
     public int startingHealth;
     public Weapon weaponOnHand;
     public GameObject[] weaponObjects;
@@ -14,6 +15,7 @@ public class Player : MonoBehaviour
     public Slider healthBar;
 
     public PlayerHealthIndicator playerHealthIndicator;
+    public OverHealBar overHealBar;
 
     public Light weaponRangeIndicatorLight;
 
@@ -121,12 +123,29 @@ public class Player : MonoBehaviour
 
     public void TakeDamage(int damage)
     {
-        healthBar.value -= (float)damage / startingHealth;
+        if (health <= startingHealth)
+        {
+            healthBar.value -= (float)damage / startingHealth;
+        }
         health -= damage;
         if (health <= 0)
         {
             Destroy(gameObject);
         }
+        if (health + damage >= startingHealth) overHealBar.UpdateOverHealBar(health, startingHealth);
+        playerHealthIndicator.UpdateHealthIndicator(health);
+        print(health);
+    }
+
+    public void RestoreHealth(int amount)
+    {
+        healthBar.value += (float)amount / startingHealth;
+        if (health + amount > maxHealth)
+        {
+            health += maxHealth - health;
+        }
+        else health += amount;
+        if (health > startingHealth) overHealBar.UpdateOverHealBar(health, startingHealth);
         playerHealthIndicator.UpdateHealthIndicator(health);
         print(health);
     }
