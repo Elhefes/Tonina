@@ -16,6 +16,9 @@ public class Player : MonoBehaviour
 
     public PlayerHealthIndicator playerHealthIndicator;
     public OverHealBar overHealBar;
+    public float secondsBeforeOverHealDecay;
+    public float secondsBetweenOverHealDecayTicks;
+    private bool overHealDecay;
 
     public Light weaponRangeIndicatorLight;
 
@@ -145,8 +148,25 @@ public class Player : MonoBehaviour
             health += maxHealth - health;
         }
         else health += amount;
-        if (health > startingHealth) overHealBar.UpdateOverHealBar(health, startingHealth);
+        if (health > startingHealth)
+        {
+            overHealBar.UpdateOverHealBar(health, startingHealth);
+            if (!overHealDecay) StartCoroutine(OverHealDecay());
+        }
         playerHealthIndicator.UpdateHealthIndicator(health);
         print(health);
+    }
+
+    private IEnumerator OverHealDecay()
+    {
+        overHealDecay = true;
+        yield return new WaitForSeconds(secondsBeforeOverHealDecay);
+
+        while (health > startingHealth)
+        {
+            TakeDamage(1);
+            if (health > startingHealth) yield return new WaitForSeconds(secondsBetweenOverHealDecayTicks);
+        }
+        overHealDecay = false;
     }
 }
