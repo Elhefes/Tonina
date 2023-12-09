@@ -53,6 +53,16 @@ public class Player : MonoBehaviour
         if (Input.GetMouseButtonDown(0))
         {
             if (EventSystem.current.IsPointerOverGameObject()) return;
+
+            // Check if there is a touch
+            if (Input.touchCount > 0 && Input.GetTouch(0).phase == TouchPhase.Began)
+            {
+                // Check if finger is over a UI element
+                if (EventSystem.current.IsPointerOverGameObject(Input.GetTouch(0).fingerId))
+                {
+                    return;
+                }
+            }
             if (attackCoroutine != null) StopCoroutine(attackCoroutine);
             attackCoroutine = null;
             playerMovement.target = null;
