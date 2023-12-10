@@ -2,6 +2,7 @@ using System.Collections;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
+using TMPro;
 
 public class Player : MonoBehaviour
 {
@@ -20,15 +21,27 @@ public class Player : MonoBehaviour
     public float secondsBetweenOverHealDecayTicks;
     private bool overHealDecay;
 
+    public int startingMaize;
+    public int maxMaize;
+    public int maizeHealAmount;
+    public GameObject maizeInventory;
+    public TMP_Text maizeAmountTMP;
+    private int maizeAmount;
+
     public Light weaponRangeIndicatorLight;
 
     private void Awake()
     {
         health = startingHealth;
+        maizeAmount = startingMaize;
+        maizeAmountTMP.text = startingMaize.ToString();
+        print(startingMaize);
+        if (startingMaize < 1) maizeInventory.SetActive(false);
     }
 
     private void Update()
     {
+        if (Input.GetKeyDown("m") && maizeAmount > 0) EatMaize();
         Debug.DrawLine(transform.position, transform.position + transform.forward * 114f, Color.red);
 
         if (playerMovement.target)
@@ -138,6 +151,15 @@ public class Player : MonoBehaviour
         if (health + damage >= startingHealth) overHealBar.UpdateOverHealBar(health, startingHealth);
         playerHealthIndicator.UpdateHealthIndicator(health);
         print(health);
+    }
+
+    public void EatMaize()
+    {
+        if (health == maxHealth) return;
+        RestoreHealth(maizeHealAmount);
+        maizeAmount--;
+        maizeAmountTMP.text = maizeAmount.ToString();
+        if (maizeAmount < 1) maizeInventory.SetActive(false);
     }
 
     public void RestoreHealth(int amount)
