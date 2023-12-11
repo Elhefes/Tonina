@@ -22,6 +22,7 @@ public class PlayerMovement : MonoBehaviour
 
     public Transform target;
 
+    public Player player;
 
     public EnemyAI enemy;
 
@@ -50,5 +51,22 @@ public class PlayerMovement : MonoBehaviour
     void ResetTrigger(string trigger)
     {
         playerAnimator.ResetTrigger(trigger);
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.CompareTag("MaizePlace"))
+        {
+            player.maizePlace = other.GetComponentInParent<MaizePlace>();
+            player.EnterMaizePlace();
+        }
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.CompareTag("MaizePlace"))
+        {
+            player.ExitMaizePlace();
+        }
     }
 }

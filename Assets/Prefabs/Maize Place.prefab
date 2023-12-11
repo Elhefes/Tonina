@@ -205,9 +205,11 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3159750002028127630}
+  - component: {fileID: 7845136758548589739}
+  - component: {fileID: 1002431552744195371}
   m_Layer: 6
   m_Name: Maize Place
-  m_TagString: Untagged
+  m_TagString: MaizePlace
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 8
@@ -238,6 +240,32 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!65 &7845136758548589739
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2347078330330480436}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 4.6090064, y: 0.25980026, z: 2.6048727}
+  m_Center: {x: -0.0021903515, y: 0.17065549, z: -0.00077962875}
+--- !u!114 &1002431552744195371
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2347078330330480436}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d4741305575130d419ad93a60ce19ab2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maizeInPlace: 4
 --- !u!1 &2560963597545162313
 GameObject:
   m_ObjectHideFlags: 0

@@ -21,11 +21,14 @@ public class Player : MonoBehaviour
     public float secondsBetweenOverHealDecayTicks;
     private bool overHealDecay;
 
+    public MaizePlace maizePlace;
     public int startingMaize;
     public int maxMaize;
     public int maizeHealAmount;
     public GameObject maizeInventory;
+    public GameObject maizePickUp;
     public TMP_Text maizeAmountTMP;
+    public TMP_Text maizeInPlaceTMP;
     private int maizeAmount;
 
     public Light weaponRangeIndicatorLight;
@@ -155,7 +158,8 @@ public class Player : MonoBehaviour
 
     public void EatMaize()
     {
-        if (health == maxHealth) return;
+        // Eat 1 maize and remove it from maizeInventory
+        if (health == maxHealth || maizeAmount < 1) return;
         RestoreHealth(maizeHealAmount);
         maizeAmount--;
         maizeAmountTMP.text = maizeAmount.ToString();
@@ -187,8 +191,35 @@ public class Player : MonoBehaviour
         while (health > startingHealth)
         {
             TakeDamage(1);
+            // Waiting not needed when going from startingHealth + 1 -> startingHealth
             if (health > startingHealth) yield return new WaitForSeconds(secondsBetweenOverHealDecayTicks);
         }
         overHealDecay = false;
+    }
+
+    public void EnterMaizePlace()
+    {
+        maizeInventory.SetActive(true);
+        if (maizePlace.maizeInPlace < 1) return;
+        maizePickUp.SetActive(true);
+        maizeInPlaceTMP.text = maizePlace.maizeInPlace.ToString();
+    }
+
+    public void ExitMaizePlace()
+    {
+        if (maizeAmount < 1) maizeInventory.SetActive(false);
+        maizePickUp.SetActive(false);
+    }
+
+    public void PickupMaize()
+    {
+        // Moves 1 maize from MaizePlace to player's inventory
+        if (maizeAmount >= maxMaize) return;
+        maizePlace.GetMaizeFromPlace();
+        maizeInPlaceTMP.text = maizePlace.maizeInPlace.ToString();
+        maizeInventory.SetActive(true);
+        maizeAmount += 1;
+        maizeAmountTMP.text = maizeAmount.ToString();
+        if (maizePlace.maizeInPlace < 1) maizePickUp.SetActive(false);
     }
 }
