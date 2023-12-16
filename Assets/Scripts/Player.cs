@@ -13,6 +13,7 @@ public class Player : MonoBehaviour
     public GameObject[] weaponObjects;
     private Coroutine attackCoroutine;
     public PlayerMovement playerMovement;
+    public float defaultAttackStoppingDistance;
     public Slider healthBar;
 
     public PlayerHealthIndicator playerHealthIndicator;
@@ -38,7 +39,6 @@ public class Player : MonoBehaviour
         health = startingHealth;
         maizeAmount = startingMaize;
         maizeAmountTMP.text = startingMaize.ToString();
-        print(startingMaize);
         if (startingMaize < 1) maizeInventory.SetActive(false);
     }
 
@@ -55,7 +55,6 @@ public class Player : MonoBehaviour
             directionToTarget.y = 0;
             var angle = Vector3.Angle(transform.forward, directionToTarget);
             Debug.DrawLine(transform.position, transform.position + directionToTarget * 114f, Color.red);
-            //print(angle);
 
             // Move the attack condition logic to the Weapon class
             bool shouldAttack = weaponOnHand.ShouldAttack(Vector3.Distance(transform.position, playerMovement.target.position), angle);
@@ -66,6 +65,21 @@ public class Player : MonoBehaviour
             }
             else
             {
+                if (Vector3.Distance(transform.position, playerMovement.target.position) <= playerMovement.agent.stoppingDistance + 1f)
+                {
+                    // Calculate the direction to the destination
+                    Vector3 direction = (playerMovement.agent.destination - transform.position).normalized;
+
+                    // Ignore the y-axis to prevent tilting
+                    direction.y = 0f;
+
+                    // Rotate towards the destination
+                    if (direction != Vector3.zero)
+                    {
+                        Quaternion toRotation = Quaternion.LookRotation(direction);
+                        transform.rotation = Quaternion.RotateTowards(transform.rotation, toRotation, Time.deltaTime * playerMovement.agent.angularSpeed * 0.25f);
+                    }
+                }
                 if (attackCoroutine != null) StopCoroutine(attackCoroutine);
                 attackCoroutine = null;
             }
@@ -93,7 +107,7 @@ public class Player : MonoBehaviour
                 GameObject target = hit.collider.gameObject;
                 if (target.CompareTag("Enemy"))
                 {
-                    playerMovement.agent.stoppingDistance = 1.5f;
+                    playerMovement.agent.stoppingDistance = defaultAttackStoppingDistance;
                     playerMovement.enemy = target.GetComponent<EnemyAI>();
                     playerMovement.target = target.transform;
                 }

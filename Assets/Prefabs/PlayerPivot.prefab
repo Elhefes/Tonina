@@ -425,6 +425,7 @@ MonoBehaviour:
   - {fileID: 482384435570632228}
   - {fileID: 3231447827573151896}
   playerMovement: {fileID: 4129278258679320684}
+  defaultAttackStoppingDistance: 1.5
   healthBar: {fileID: 3872663564488066035}
   playerHealthIndicator: {fileID: 0}
   overHealBar: {fileID: 825657633798101330}
@@ -435,7 +436,9 @@ MonoBehaviour:
   maxMaize: 4
   maizeHealAmount: 25
   maizeInventory: {fileID: 0}
+  maizePickUp: {fileID: 0}
   maizeAmountTMP: {fileID: 0}
+  maizeInPlaceTMP: {fileID: 0}
   weaponRangeIndicatorLight: {fileID: 7063041251900934834}
 --- !u!1 &5296286306352095051
 GameObject:
