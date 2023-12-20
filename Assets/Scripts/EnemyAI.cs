@@ -7,6 +7,7 @@ public class EnemyAI : MonoBehaviour
     public Transform player;
     public NavMeshAgent agent;
     public Slider healthBar;
+    public Animator enemyAnimator;
     public int startingHealth;
     private int health;
     public bool moveTowardsTarget;
@@ -32,5 +33,15 @@ public class EnemyAI : MonoBehaviour
             Destroy(gameObject);
         }
         print(health);
+    }
+
+    void LegsTimingTrigger()
+    {
+        enemyAnimator.SetTrigger("LegsTiming");
+    }
+
+    void ResetTrigger(string trigger)
+    {
+        enemyAnimator.ResetTrigger(trigger);
     }
 }
