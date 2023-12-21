@@ -22,6 +22,11 @@ public class MouseLook : MonoBehaviour
     public MinimapInput minimapInput;
     public float minimapInputSensitivity;
 
+    float minX = -29f;
+    float maxX = 29f;
+    float minZ = -142f;
+    float maxZ = -80f;
+
     public void ToggleCameraOnPlayer()
     {
         cameraOnPlayer = !cameraOnPlayer;
@@ -55,7 +60,13 @@ public class MouseLook : MonoBehaviour
         {
             CameraOnPlayerOff();
             moveDirection = new Vector3(Input.GetAxis("Horizontal") + minimapInput.GetMinimapInput().x * minimapInputSensitivity, 0f, Input.GetAxis("Vertical") + minimapInput.GetMinimapInput().y * minimapInputSensitivity);
-            transform.position += moveDirection * moveSpeed * Time.deltaTime;
+
+            // Update the position with clamping
+            Vector3 newPosition = transform.position + moveDirection * moveSpeed * Time.deltaTime;
+            newPosition.x = Mathf.Clamp(newPosition.x, minX, maxX); // Adjust minX and maxX as needed
+            newPosition.z = Mathf.Clamp(newPosition.z, minZ, maxZ); // Adjust minZ and maxZ as needed
+            if (transform.position.z < minZ - 0.5f || transform.position.z > maxZ + 0.5f) transform.position = Vector3.Lerp(transform.position, newPosition, smoothSpeed);
+            else transform.position = newPosition;
         }
 
         // Use scroll wheel to zoom in or out

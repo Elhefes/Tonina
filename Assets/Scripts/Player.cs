@@ -105,6 +105,10 @@ public class Player : MonoBehaviour
             if (Physics.Raycast(Camera.main.ScreenPointToRay(Input.mousePosition), out hit))
             {
                 GameObject target = hit.collider.gameObject;
+                if (target.CompareTag("ClickBlocker"))
+                {
+                    return;
+                }
                 if (target.CompareTag("Enemy"))
                 {
                     playerMovement.agent.stoppingDistance = defaultAttackStoppingDistance;
