@@ -4,15 +4,12 @@ using UnityEngine.EventSystems;
 using UnityEngine.UI;
 using TMPro;
 
-public class Player : MonoBehaviour
+public class Player : Creature
 {
     private int health;
     public int maxHealth;
     public int startingHealth;
-    public Weapon weaponOnHand;
     public GameObject[] weaponObjects;
-    private Coroutine attackCoroutine;
-    public PlayerMovement playerMovement;
     public float defaultAttackStoppingDistance;
     public Slider healthBar;
 
@@ -47,43 +44,7 @@ public class Player : MonoBehaviour
         if (Input.GetKeyDown("m") && maizeAmount > 0) EatMaize();
         Debug.DrawLine(transform.position, transform.position + transform.forward * 114f, Color.red);
 
-        if (playerMovement.target)
-        {
-            playerMovement.agent.destination = playerMovement.target.position;
-
-            var directionToTarget = playerMovement.target.position - transform.position;
-            directionToTarget.y = 0;
-            var angle = Vector3.Angle(transform.forward, directionToTarget);
-            Debug.DrawLine(transform.position, transform.position + directionToTarget * 114f, Color.red);
-
-            // Move the attack condition logic to the Weapon class
-            bool shouldAttack = weaponOnHand.ShouldAttack(Vector3.Distance(transform.position, playerMovement.target.position), angle);
-
-            if (shouldAttack)
-            {
-                if (attackCoroutine == null) attackCoroutine = StartCoroutine(Attack());
-            }
-            else
-            {
-                if (Vector3.Distance(transform.position, playerMovement.target.position) <= playerMovement.agent.stoppingDistance + 1f)
-                {
-                    // Calculate the direction to the destination
-                    Vector3 direction = (playerMovement.agent.destination - transform.position).normalized;
-
-                    // Ignore the y-axis to prevent tilting
-                    direction.y = 0f;
-
-                    // Rotate towards the destination
-                    if (direction != Vector3.zero)
-                    {
-                        Quaternion toRotation = Quaternion.LookRotation(direction);
-                        transform.rotation = Quaternion.RotateTowards(transform.rotation, toRotation, Time.deltaTime * playerMovement.agent.angularSpeed * 0.25f);
-                    }
-                }
-                if (attackCoroutine != null) StopCoroutine(attackCoroutine);
-                attackCoroutine = null;
-            }
-        }
+        
 
         if (Input.GetMouseButtonDown(0))
         {
@@ -98,9 +59,7 @@ public class Player : MonoBehaviour
                     return;
                 }
             }
-            if (attackCoroutine != null) StopCoroutine(attackCoroutine);
-            attackCoroutine = null;
-            playerMovement.target = null;
+            creatureMovement.target = null;
             RaycastHit hit;
             if (Physics.Raycast(Camera.main.ScreenPointToRay(Input.mousePosition), out hit))
             {
@@ -111,27 +70,18 @@ public class Player : MonoBehaviour
                 }
                 if (target.CompareTag("Enemy"))
                 {
-                    playerMovement.agent.stoppingDistance = defaultAttackStoppingDistance;
-                    playerMovement.enemy = target.GetComponent<EnemyAI>();
-                    playerMovement.target = target.transform;
+                    creatureMovement.agent.stoppingDistance = defaultAttackStoppingDistance;
+                    creatureMovement.enemy = target.GetComponent<Enemy>();
+                    creatureMovement.target = target.transform;
                 }
-                else playerMovement.agent.stoppingDistance = 0.1f;
-                playerMovement.agent.SetDestination(hit.point);
+                else creatureMovement.agent.stoppingDistance = 0.1f;
+                creatureMovement.agent.SetDestination(hit.point);
             }
         }
 
         if (weaponRangeIndicatorLight.intensity > 0)
         {
             weaponRangeIndicatorLight.intensity -= 0.007f;
-        }
-    }
-
-    private IEnumerator Attack()
-    {
-        while (playerMovement.enemy)
-        {
-            weaponOnHand.Attack(playerMovement.playerAnimator);
-            yield return new WaitForSeconds(weaponOnHand.attackCooldown);
         }
     }
 
@@ -148,7 +98,7 @@ public class Player : MonoBehaviour
 
         weaponOnHand = weaponObjects[weaponIndex].GetComponent<Weapon>();
         weaponObjects[weaponIndex].SetActive(true);
-        playerMovement.playerAnimator.SetInteger("WeaponIndex", weaponIndex);
+        creatureMovement.animator.SetInteger("WeaponIndex", weaponIndex);
         UpdateWeaponRangeIndicator();
     }
 
