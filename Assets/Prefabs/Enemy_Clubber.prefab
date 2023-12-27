@@ -5036,6 +5036,7 @@ GameObject:
   - component: {fileID: 9219508310030586489}
   - component: {fileID: 3058803469084327513}
   - component: {fileID: 7812979347286968457}
+  - component: {fileID: 8149474888653598790}
   m_Layer: 0
   m_Name: Enemy_Clubber
   m_TagString: Enemy
@@ -5100,6 +5101,7 @@ MonoBehaviour:
   enemyAnimator: {fileID: 9219508310030586489}
   startingHealth: 100
   moveTowardsTarget: 1
+  attackExtraCooldown: 0.25
 --- !u!143 &3064382434425509416
 CharacterController:
   m_ObjectHideFlags: 0
@@ -5230,6 +5232,21 @@ MonoBehaviour:
   target: {fileID: 0}
   player: {fileID: 0}
   enemy: {fileID: 0}
+--- !u!114 &8149474888653598790
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7187010017827347340}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 19359612f56d1b04981f48a945fcde25, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  weaponOnHand: {fileID: 7941702870772292884}
+  creatureMovement: {fileID: 7812979347286968457}
+  creature: {fileID: 6343346848353158166}
 --- !u!1 &7294657681952451732
 GameObject:
   m_ObjectHideFlags: 0

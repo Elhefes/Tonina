@@ -13,6 +13,7 @@ public class Enemy : Creature
     public int startingHealth;
     private int health;
     public bool moveTowardsTarget;
+    public float attackExtraCooldown;
 
     void Awake()
     {
@@ -67,7 +68,8 @@ public class Enemy : Creature
         while (player != null)
         {
             weaponOnHand.Attack(enemyAnimator);
-            yield return new WaitForSeconds(weaponOnHand.attackCooldown);
+            print("ATTACK!");
+            yield return new WaitForSeconds(weaponOnHand.attackCooldown + attackExtraCooldown);
         }
     }
 

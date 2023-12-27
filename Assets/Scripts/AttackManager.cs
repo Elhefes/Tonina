@@ -1,16 +1,16 @@
 using UnityEngine;
 
-public class AttackManager : MonoBehaviour
+public class AttackManager : Creature
 {
-    public Player player;
+    public Creature creature;
 
-    public void IniateDamage()
+    public void InitiateDamage()
     {
-        player.weaponOnHand.canHit = true;
+        creature.weaponOnHand.canHit = true;
     }
 
     public void FinishDamage()
     {
-        player.weaponOnHand.canHit = false;
+        creature.weaponOnHand.canHit = false;
     }
 }

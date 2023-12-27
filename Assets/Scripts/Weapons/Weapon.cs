@@ -50,7 +50,7 @@ public class Weapon : MonoBehaviour
         if (obj.CompareTag("Enemy") && !hitEnemies.Contains(obj))
         {
             hitEnemies.Add(obj);
-            obj.GetComponent<EnemyAI>()?.TakeDamage(damage);
+            obj.GetComponent<Enemy>()?.TakeDamage(damage);
         }
     }
 }
