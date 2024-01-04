@@ -18,8 +18,6 @@ public class Creature : MonoBehaviour
         if (creatureMovement.target)
         {
             creatureMovement.agent.destination = creatureMovement.target.position;
-            //print(playerMovement.target.position);
-            //print("niin");
 
             var directionToTarget = creatureMovement.target.position - transform.position;
             directionToTarget.y = 0;
@@ -58,7 +56,7 @@ public class Creature : MonoBehaviour
     }
     private IEnumerator Attack()
     {
-        while (creatureMovement.enemy)
+        while (creatureMovement.target)
         {
             weaponOnHand.Attack(creatureMovement.animator);
             yield return new WaitForSeconds(weaponOnHand.attackCooldown);

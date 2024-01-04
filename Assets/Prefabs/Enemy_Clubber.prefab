@@ -5029,13 +5029,13 @@ GameObject:
   m_Component:
   - component: {fileID: 7563429595701412150}
   - component: {fileID: 6343346848353158166}
+  - component: {fileID: 7812979347286968457}
+  - component: {fileID: 8149474888653598790}
   - component: {fileID: 3064382434425509416}
   - component: {fileID: 3105274350733072314}
   - component: {fileID: 9139819231286459539}
   - component: {fileID: 9083564973586373463}
   - component: {fileID: 9219508310030586489}
-  - component: {fileID: 7812979347286968457}
-  - component: {fileID: 8149474888653598790}
   m_Layer: 0
   m_Name: Enemy_Clubber
   m_TagString: Enemy
@@ -5094,13 +5094,47 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   weaponOnHand: {fileID: 7941702870772292884}
   creatureMovement: {fileID: 7812979347286968457}
-  player: {fileID: 0}
   agent: {fileID: 3105274350733072314}
   healthBar: {fileID: 972549612466187003}
-  enemyAnimator: {fileID: 9219508310030586489}
   startingHealth: 100
   moveTowardsTarget: 1
   attackExtraCooldown: 0.25
+--- !u!114 &7812979347286968457
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7187010017827347340}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 87486f2e5b1751641b7fa053049305f2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  controller: {fileID: 3064382434425509416}
+  jumpHeight: 1
+  rotationSpeed: 2
+  groundCheck: {fileID: 3401078364037457146}
+  groundDistance: 0.4
+  groundMask:
+    serializedVersion: 2
+    m_Bits: 64
+  agent: {fileID: 3105274350733072314}
+  animator: {fileID: 9219508310030586489}
+  target: {fileID: 0}
+--- !u!114 &8149474888653598790
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7187010017827347340}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 19359612f56d1b04981f48a945fcde25, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  creature: {fileID: 6343346848353158166}
 --- !u!143 &3064382434425509416
 CharacterController:
   m_ObjectHideFlags: 0
@@ -5149,7 +5183,7 @@ CapsuleCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7187010017827347340}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Enabled: 1
   m_Radius: 1
   m_Height: 5
@@ -5191,44 +5225,6 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
---- !u!114 &7812979347286968457
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7187010017827347340}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 87486f2e5b1751641b7fa053049305f2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  controller: {fileID: 3064382434425509416}
-  jumpHeight: 1
-  rotationSpeed: 2
-  groundCheck: {fileID: 3401078364037457146}
-  groundDistance: 0.4
-  groundMask:
-    serializedVersion: 2
-    m_Bits: 64
-  agent: {fileID: 3105274350733072314}
-  animator: {fileID: 9219508310030586489}
-  cam: {fileID: 0}
-  target: {fileID: 0}
-  enemy: {fileID: 0}
---- !u!114 &8149474888653598790
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7187010017827347340}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 19359612f56d1b04981f48a945fcde25, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  creature: {fileID: 6343346848353158166}
 --- !u!1 &7294657681952451732
 GameObject:
   m_ObjectHideFlags: 0

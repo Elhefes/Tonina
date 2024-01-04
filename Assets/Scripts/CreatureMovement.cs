@@ -15,14 +15,8 @@ public class CreatureMovement : MonoBehaviour
     public LayerMask groundMask;
 
     public NavMeshAgent agent;
-
     public Animator animator;
-
-    public Camera cam;
-
     public Transform target;
-
-    public Enemy enemy;
 
     void Update()
     {

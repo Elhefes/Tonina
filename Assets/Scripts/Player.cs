@@ -72,7 +72,7 @@ public class Player : Creature
                 if (target.CompareTag("Enemy"))
                 {
                     creatureMovement.agent.stoppingDistance = defaultAttackStoppingDistance;
-                    creatureMovement.enemy = target.GetComponent<Enemy>();
+                    //creatureMovement.enemy = target.GetComponent<Enemy>();
                     creatureMovement.target = target.transform;
                 }
                 else creatureMovement.agent.stoppingDistance = 0.1f;

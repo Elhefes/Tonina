@@ -52,6 +52,11 @@ public class Weapon : MonoBehaviour
             hitEnemies.Add(obj);
             obj.GetComponent<Enemy>()?.TakeDamage(damage);
         }
+        if (obj.CompareTag("Player") && !hitEnemies.Contains(obj))
+        {
+            hitEnemies.Add(obj);
+            obj.GetComponent<Player>()?.TakeDamage(damage);
+        }
     }
 }
 
