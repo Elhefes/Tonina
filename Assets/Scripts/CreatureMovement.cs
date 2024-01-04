@@ -22,8 +22,6 @@ public class CreatureMovement : MonoBehaviour
 
     public Transform target;
 
-    public Player player;
-
     public Enemy enemy;
 
     void Update()
@@ -51,22 +49,5 @@ public class CreatureMovement : MonoBehaviour
     void ResetTrigger(string trigger)
     {
         animator.ResetTrigger(trigger);
-    }
-
-    private void OnTriggerEnter(Collider other)
-    {
-        if (other.CompareTag("MaizePlace"))
-        {
-            player.maizePlace = other.GetComponentInParent<MaizePlace>();
-            player.EnterMaizePlace();
-        }
-    }
-
-    private void OnTriggerExit(Collider other)
-    {
-        if (other.CompareTag("MaizePlace"))
-        {
-            player.ExitMaizePlace();
-        }
     }
 }

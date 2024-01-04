@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class AttackManager : Creature
+public class AttackManager : MonoBehaviour
 {
     public Creature creature;
 

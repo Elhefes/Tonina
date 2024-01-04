@@ -23,6 +23,7 @@ public class Enemy : Creature
 
     void Update()
     {
+        base.Update();
         if (player == null) return;
         agent.destination = player.position;
 
@@ -68,7 +69,6 @@ public class Enemy : Creature
         while (player != null)
         {
             weaponOnHand.Attack(enemyAnimator);
-            print("ATTACK!");
             yield return new WaitForSeconds(weaponOnHand.attackCooldown + attackExtraCooldown);
         }
     }

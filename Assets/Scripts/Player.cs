@@ -41,6 +41,7 @@ public class Player : Creature
 
     private void Update()
     {
+        base.Update();
         if (Input.GetKeyDown("m") && maizeAmount > 0) EatMaize();
         Debug.DrawLine(transform.position, transform.position + transform.forward * 114f, Color.red);
 
@@ -163,6 +164,23 @@ public class Player : Creature
             if (health > startingHealth) yield return new WaitForSeconds(secondsBetweenOverHealDecayTicks);
         }
         overHealDecay = false;
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.CompareTag("MaizePlace"))
+        {
+            maizePlace = other.GetComponentInParent<MaizePlace>();
+            EnterMaizePlace();
+        }
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.CompareTag("MaizePlace"))
+        {
+            ExitMaizePlace();
+        }
     }
 
     public void EnterMaizePlace()

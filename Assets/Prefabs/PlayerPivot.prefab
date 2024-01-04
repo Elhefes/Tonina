@@ -327,7 +327,6 @@ GameObject:
   - component: {fileID: 5021349066847927871}
   - component: {fileID: 577319696662315431}
   - component: {fileID: 5412454603876469069}
-  - component: {fileID: 1371358487350196656}
   m_Layer: 0
   m_Name: PlayerPivot
   m_TagString: Player
@@ -440,20 +439,6 @@ MonoBehaviour:
   maizeAmountTMP: {fileID: 0}
   maizeInPlaceTMP: {fileID: 0}
   weaponRangeIndicatorLight: {fileID: 7063041251900934834}
---- !u!114 &1371358487350196656
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5021349066847927866}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 680b93acc98da244f80778842eebc4c1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  weaponOnHand: {fileID: 2132955804924996249}
-  creatureMovement: {fileID: 4129278258679320684}
 --- !u!1 &5296286306352095051
 GameObject:
   m_ObjectHideFlags: 0
@@ -874,6 +859,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 5412454603876469069}
     - target: {fileID: 233434457505502145, guid: 2a62ad8bdf5a4ee428036edb7057ce04, type: 3}
+      propertyPath: creature
+      value: 
+      objectReference: {fileID: 5412454603876469069}
+    - target: {fileID: 233434457505502145, guid: 2a62ad8bdf5a4ee428036edb7057ce04, type: 3}
       propertyPath: creatureMovement
       value: 
       objectReference: {fileID: 4129278258679320684}
@@ -1075,7 +1064,6 @@ MonoBehaviour:
   animator: {fileID: 8864846670441355917}
   cam: {fileID: 0}
   target: {fileID: 0}
-  player: {fileID: 5412454603876469069}
   enemy: {fileID: 0}
 --- !u!4 &7822313721903264955 stripped
 Transform:
