@@ -5,6 +5,7 @@ public class Weapon : MonoBehaviour
 {
     public string weaponName;
     public WeaponType type;
+    public WeaponUser user;
     public int damage;
     public Sprite uiSprite;
     public float attackCooldown = 1.0f; // Time between attacks
@@ -47,12 +48,12 @@ public class Weapon : MonoBehaviour
     private void HandleCollision(GameObject obj)
     {
         if (!canHit) return;
-        if (obj.CompareTag("Enemy") && !hitEnemies.Contains(obj))
+        if (user == WeaponUser.Defender && obj.CompareTag("Enemy") && !hitEnemies.Contains(obj))
         {
             hitEnemies.Add(obj);
             obj.GetComponent<Enemy>()?.TakeDamage(damage);
         }
-        if (obj.CompareTag("Player") && !hitEnemies.Contains(obj))
+        if (user == WeaponUser.Attacker && obj.CompareTag("Player") && !hitEnemies.Contains(obj))
         {
             hitEnemies.Add(obj);
             obj.GetComponent<Player>()?.TakeDamage(damage);
@@ -65,4 +66,10 @@ public enum WeaponType
     Club,
     Small_stone,
     Spear
+}
+
+public enum WeaponUser
+{
+    Attacker,
+    Defender
 }
