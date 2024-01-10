@@ -36,7 +36,7 @@ public class Player : Creature
         health = startingHealth;
         maizeAmount = startingMaize;
         maizeAmountTMP.text = startingMaize.ToString();
-        if (startingMaize < 1) maizeInventory.SetActive(false);
+        if (startingMaize > 0) maizeInventory.SetActive(true);
     }
 
     private void Update()
