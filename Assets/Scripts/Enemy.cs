@@ -11,6 +11,10 @@ public class Enemy : Creature
     private int health;
     public bool moveTowardsTarget;
     public float attackExtraCooldown;
+    private Coroutine slowDownCoroutine;
+    private bool slowedDown;
+    public float slowDownTimeFromStone;
+    public float speedDropFromStone;
 
     void Awake()
     {
@@ -27,5 +31,23 @@ public class Enemy : Creature
             Destroy(gameObject);
         }
         print(health);
+    }
+
+    public void SlowDownEnemy()
+    {
+        if (slowedDown)  return;
+        slowDownCoroutine = StartCoroutine(SlowDownCoroutine());
+    }
+
+    private IEnumerator SlowDownCoroutine()
+    {
+        float originalSpeed = agent.speed;
+        slowedDown = true;
+        agent.speed -= speedDropFromStone;
+        yield return new WaitForSeconds(slowDownTimeFromStone / 2);
+        agent.speed += speedDropFromStone / 2;
+        yield return new WaitForSeconds(slowDownTimeFromStone / 2);
+        agent.speed = originalSpeed;
+        slowedDown = false;
     }
 }

@@ -544,8 +544,8 @@ SkinnedMeshRenderer:
   m_BlendShapeWeights: []
   m_RootBone: {fileID: 8575472510572478560}
   m_AABB:
-    m_Center: {x: 0.11276605, y: -0.005575061, z: 0.0000005066395}
-    m_Extent: {x: 0.19478014, y: 0.20990947, z: 0.2865903}
+    m_Center: {x: 0.113406345, y: -0.005467102, z: -0.0039604306}
+    m_Extent: {x: 0.19508643, y: 0.20955957, z: 0.2981936}
   m_DirtyAABB: 0
 --- !u!183 &3746430899913160619
 Cloth:
@@ -5099,7 +5099,8 @@ MonoBehaviour:
   startingHealth: 100
   moveTowardsTarget: 1
   attackExtraCooldown: 0.25
-  kancho: {fileID: 1858768564329165603, guid: de11e80c55f59ee469f105c3ed1f18a5, type: 3}
+  slowDownTimeFromStone: 6
+  speedDropFromStone: 1
 --- !u!114 &7812979347286968457
 MonoBehaviour:
   m_ObjectHideFlags: 0

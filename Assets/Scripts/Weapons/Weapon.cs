@@ -45,7 +45,7 @@ public class Weapon : MonoBehaviour
         HandleCollision(other.gameObject);
     }
 
-    private void HandleCollision(GameObject obj)
+    public void HandleCollision(GameObject obj)
     {
         if (!canHit) return;
         if (user == WeaponUser.Defender && obj.CompareTag("Enemy") && !hitEnemies.Contains(obj))
