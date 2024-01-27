@@ -16,6 +16,11 @@ public class Villager : CreatureMovement
         freeMovementCoroutine = StartCoroutine(MoveRandomly());
     }
 
+    private void Update()
+    {
+        base.Update();
+    }
+
     private IEnumerator MoveRandomly()
     {
         while (true)

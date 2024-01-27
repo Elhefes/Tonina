@@ -18,7 +18,7 @@ public class CreatureMovement : MonoBehaviour
     public Animator animator;
     public Transform target;
 
-    void Update()
+    public void Update()
     {
         if (target)
         {
