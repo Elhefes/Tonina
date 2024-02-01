@@ -1172,6 +1172,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3654907776195162039}
+  - component: {fileID: 7670469088322453469}
   m_Layer: 0
   m_Name: okil_house
   m_TagString: Untagged
@@ -1224,6 +1225,20 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &7670469088322453469
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4175690000909513997}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 455986890f4093f4d86cf7a9893b25b3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  roofMeshRenderers:
+  - {fileID: 692098198277531397}
 --- !u!1 &4592550246611404940
 GameObject:
   m_ObjectHideFlags: 0
@@ -2171,7 +2186,6 @@ GameObject:
   - component: {fileID: 7658060701787312343}
   - component: {fileID: 1766317340819809032}
   - component: {fileID: 692098198277531397}
-  - component: {fileID: 6387908168268002815}
   m_Layer: 0
   m_Name: Roof
   m_TagString: Untagged
@@ -2244,19 +2258,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &6387908168268002815
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5954534932023743491}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 2.7559052, y: 4.7244105, z: 0.15081936}
-  m_Center: {x: 0, y: -3.7728224e-17, z: 0.07540968}
 --- !u!1 &6659043485936240619
 GameObject:
   m_ObjectHideFlags: 0
@@ -2434,9 +2435,10 @@ GameObject:
   - component: {fileID: 5608418966447689940}
   - component: {fileID: 8060887015508279060}
   - component: {fileID: 4745171590144333805}
+  - component: {fileID: 1530105632100458004}
   m_Layer: 6
   m_Name: Box001
-  m_TagString: Untagged
+  m_TagString: Building
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 2147483647
@@ -2506,6 +2508,19 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!65 &1530105632100458004
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6791863858157583312}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 2.7559054, y: 4.7244105, z: 0.03937009}
+  m_Center: {x: 0, y: 2.7974123e-16, z: 0.019685045}
 --- !u!1 &6937178450503541956
 GameObject:
   m_ObjectHideFlags: 0

@@ -370,6 +370,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6840450054303070691}
+  - component: {fileID: 8754892646955130998}
   m_Layer: 0
   m_Name: mayan_house_smallest
   m_TagString: Untagged
@@ -402,6 +403,21 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &8754892646955130998
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6171613439966405465}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 455986890f4093f4d86cf7a9893b25b3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  roofMeshRenderers:
+  - {fileID: 7335288418980655441}
+  - {fileID: 1899861445339133059}
 --- !u!1 &6413602884987221610
 GameObject:
   m_ObjectHideFlags: 0
@@ -774,9 +790,10 @@ GameObject:
   - component: {fileID: 8930591302730918832}
   - component: {fileID: 2898790633666695893}
   - component: {fileID: 3103634697242517740}
-  m_Layer: 0
+  - component: {fileID: 7452751362718979084}
+  m_Layer: 6
   m_Name: Floor
-  m_TagString: Untagged
+  m_TagString: Building
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 2147483647
@@ -846,6 +863,20 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!64 &7452751362718979084
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8791450159450350251}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 4
+  m_Convex: 0
+  m_CookingOptions: 30
+  m_Mesh: {fileID: -629719859055844128, guid: 46a3e8f45ba676640a75b6fcf7e4071b, type: 3}
 --- !u!1001 &2887512853115738180
 PrefabInstance:
   m_ObjectHideFlags: 0

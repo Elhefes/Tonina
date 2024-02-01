@@ -20,6 +20,7 @@ public class Player : Creature
     private bool overHealDecay;
 
     public MaizePlace maizePlace;
+    public BuildingRoof buildingRoof;
     public int startingMaize;
     public int maxMaize;
     public int maizeHealAmount;
@@ -173,6 +174,11 @@ public class Player : Creature
             maizePlace = other.GetComponentInParent<MaizePlace>();
             EnterMaizePlace();
         }
+        if (other.CompareTag("Building"))
+        {
+            buildingRoof = other.GetComponentInParent<BuildingRoof>();
+            buildingRoof.MakeRoofInvisible();
+        }
     }
 
     private void OnTriggerExit(Collider other)
@@ -180,6 +186,11 @@ public class Player : Creature
         if (other.CompareTag("MaizePlace"))
         {
             ExitMaizePlace();
+        }
+        if (other.CompareTag("Building"))
+        {
+            buildingRoof = other.GetComponentInParent<BuildingRoof>();
+            buildingRoof.MakeRoofVisible();
         }
     }
 

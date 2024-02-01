@@ -1092,9 +1092,10 @@ GameObject:
   - component: {fileID: 6537637479437964597}
   - component: {fileID: 679794394369944656}
   - component: {fileID: 740803171821133417}
-  m_Layer: 0
+  - component: {fileID: 4279483778067682836}
+  m_Layer: 6
   m_Name: Floor
-  m_TagString: Untagged
+  m_TagString: Building
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 2147483647
@@ -1164,6 +1165,20 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!64 &4279483778067682836
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6580900933574646830}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 4
+  m_Convex: 0
+  m_CookingOptions: 30
+  m_Mesh: {fileID: -629719859055844128, guid: 131bf088458767246b3db6ee4001d268, type: 3}
 --- !u!1 &7057010256662890767
 GameObject:
   m_ObjectHideFlags: 0
@@ -1450,6 +1465,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 9204133651852232550}
+  - component: {fileID: 784667907302877039}
   m_Layer: 0
   m_Name: mayan_house_biggest
   m_TagString: Untagged
@@ -1494,6 +1510,21 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &784667907302877039
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8426365087386656220}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 455986890f4093f4d86cf7a9893b25b3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  roofMeshRenderers:
+  - {fileID: 4943160378347933652}
+  - {fileID: 4253691853950421510}
 --- !u!1 &8508275454057084120
 GameObject:
   m_ObjectHideFlags: 0
