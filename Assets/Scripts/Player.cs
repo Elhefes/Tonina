@@ -95,8 +95,9 @@ public class Player : Creature
         }
 
         int weaponIndex = 0;
-        if (weaponType == WeaponType.Small_stone) weaponIndex = 1;
-        if (weaponType == WeaponType.Spear) weaponIndex = 2;
+        if (weaponType == WeaponType.Axe) weaponIndex = 1;
+        if (weaponType == WeaponType.Small_stone) weaponIndex = 2;
+        if (weaponType == WeaponType.Spear) weaponIndex = 3;
 
         weaponOnHand = weaponObjects[weaponIndex].GetComponent<Weapon>();
         weaponObjects[weaponIndex].SetActive(true);

@@ -424,6 +424,7 @@ MonoBehaviour:
   startingHealth: 100
   weaponObjects:
   - {fileID: 8291348453499908256}
+  - {fileID: 6440043927369519843}
   - {fileID: 482384435570632228}
   - {fileID: 3231447827573151896}
   defaultAttackStoppingDistance: 1.5
@@ -433,6 +434,7 @@ MonoBehaviour:
   secondsBeforeOverHealDecay: 8
   secondsBetweenOverHealDecayTicks: 1.5
   maizePlace: {fileID: 1002431552744195371, guid: adebe25711332d549bfc3c168e6175c5, type: 3}
+  buildingRoof: {fileID: 0}
   startingMaize: 0
   maxMaize: 4
   maizeHealAmount: 25
@@ -1035,6 +1037,11 @@ MonoBehaviour:
 --- !u!1 &3231447827573151896 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 8966386538833902707, guid: 2a62ad8bdf5a4ee428036edb7057ce04, type: 3}
+  m_PrefabInstance: {fileID: 5816233582753834219}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &6440043927369519843 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 714040943400515080, guid: 2a62ad8bdf5a4ee428036edb7057ce04, type: 3}
   m_PrefabInstance: {fileID: 5816233582753834219}
   m_PrefabAsset: {fileID: 0}
 --- !u!1 &7477559013740473857 stripped
