@@ -83,10 +83,21 @@ public class Player : Creature
                     villager = target.GetComponent<Villager>();
                     textBox.gameObject.SetActive(true);
                     SetTextLines(villager);
+                    villager.talking = true;
+                    villager.TalkToPlayer(gameObject);
                     textLineIndex = 0;
                     UpdateTextBox();
+                    creatureMovement.agent.SetDestination(target.transform.position);
+                    //creatureMovement.target = target.transform;
+                    //player doesn't rotate completely towards the villager
+                    creatureMovement.agent.stoppingDistance = 1.2f;
+                    return;
                 }
-                else textBox.gameObject.SetActive(false);
+                else
+                {
+                    textBox.gameObject.SetActive(false);
+                    FreeVillagerFromTalking();
+                }
 
                 if (target.CompareTag("Enemy"))
                 {
@@ -117,13 +128,26 @@ public class Player : Creature
         {
             textBoxText.text = linesToRead[textLineIndex];
         }
-        else textBox.gameObject.SetActive(false);
+        else
+        {
+            textBox.gameObject.SetActive(false);
+            FreeVillagerFromTalking();
+        }
     }
 
     public void ReadNextLine()
     {
         textLineIndex++;
         UpdateTextBox();
+    }
+
+    void FreeVillagerFromTalking()
+    {
+        if (villager != null)
+        {
+            villager.talking = false;
+            villager = null;
+        }
     }
 
     public void SwitchWeapon(WeaponType weaponType)

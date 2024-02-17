@@ -13,6 +13,8 @@ public class Villager : CreatureMovement
     public bool talking;
     public string[] textLines;
 
+    private GameObject player;
+
     void Awake()
     {
         startingPosition = transform.position;
@@ -22,6 +24,27 @@ public class Villager : CreatureMovement
     private void Update()
     {
         base.Update();
+        if (talking && player != null)
+        {
+            // Calculate the direction to the destination
+            Vector3 direction = (player.transform.position - transform.position).normalized;
+
+            // Ignore the y-axis to prevent tilting
+            direction.y = 0f;
+
+            // Rotate towards the destination
+            if (direction != Vector3.zero)
+            {
+                Quaternion toRotation = Quaternion.LookRotation(direction);
+                transform.rotation = Quaternion.RotateTowards(transform.rotation, toRotation, Time.deltaTime * agent.angularSpeed * 0.25f);
+            }
+        }
+    }
+
+    public void TalkToPlayer(GameObject p)
+    {
+        player = p;
+        agent.destination = transform.position;
     }
 
     private IEnumerator MoveRandomly()
