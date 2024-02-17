@@ -1823,7 +1823,7 @@ GameObject:
   - component: {fileID: 5348621810551193983}
   m_Layer: 0
   m_Name: Villager1
-  m_TagString: Untagged
+  m_TagString: TalkPrompt
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1896,6 +1896,10 @@ MonoBehaviour:
   freeSpaceZ: 3
   minWaitTime: 4
   maxWaitTime: 10
+  talking: 0
+  textLines:
+  - This is my first line.
+  - My 2nd line is much cooler than the 1st one!
 --- !u!143 &5446998419158490782
 CharacterController:
   m_ObjectHideFlags: 0

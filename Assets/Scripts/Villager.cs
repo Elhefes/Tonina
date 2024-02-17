@@ -10,6 +10,9 @@ public class Villager : CreatureMovement
     public float minWaitTime;
     public float maxWaitTime;
 
+    public bool talking;
+    public string[] textLines;
+
     void Awake()
     {
         startingPosition = transform.position;
@@ -26,7 +29,7 @@ public class Villager : CreatureMovement
         while (true)
         {
             yield return new WaitForSeconds(Random.Range(minWaitTime, maxWaitTime));
-            agent.destination = new Vector3(startingPosition.x + Random.Range(-freeSpaceX, freeSpaceX), startingPosition.y, startingPosition.z + Random.Range(-freeSpaceZ, freeSpaceZ));
+            if (!talking) agent.destination = new Vector3(startingPosition.x + Random.Range(-freeSpaceX, freeSpaceX), startingPosition.y, startingPosition.z + Random.Range(-freeSpaceZ, freeSpaceZ));
         }
     }
 }

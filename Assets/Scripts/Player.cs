@@ -20,7 +20,8 @@ public class Player : Creature
     private bool overHealDecay;
 
     public MaizePlace maizePlace;
-    public BuildingRoof buildingRoof;
+    private BuildingRoof buildingRoof;
+    private Villager villager;
     public int startingMaize;
     public int maxMaize;
     public int maizeHealAmount;
@@ -29,6 +30,11 @@ public class Player : Creature
     public TMP_Text maizeAmountTMP;
     public TMP_Text maizeInPlaceTMP;
     private int maizeAmount;
+
+    public Button textBox;
+    public TMP_Text textBoxText;
+    private string[] linesToRead;
+    public int textLineIndex;
 
     public Light weaponRangeIndicatorLight;
 
@@ -66,10 +72,22 @@ public class Player : Creature
             if (Physics.Raycast(Camera.main.ScreenPointToRay(Input.mousePosition), out hit))
             {
                 GameObject target = hit.collider.gameObject;
+
                 if (target.CompareTag("ClickBlocker"))
                 {
                     return;
                 }
+
+                if (target.CompareTag("TalkPrompt") && Vector3.Distance(transform.position, target.transform.position) < 2.5f)
+                {
+                    villager = target.GetComponent<Villager>();
+                    textBox.gameObject.SetActive(true);
+                    SetTextLines(villager);
+                    textLineIndex = 0;
+                    UpdateTextBox();
+                }
+                else textBox.gameObject.SetActive(false);
+
                 if (target.CompareTag("Enemy"))
                 {
                     creatureMovement.agent.stoppingDistance = defaultAttackStoppingDistance;
@@ -77,6 +95,7 @@ public class Player : Creature
                     creatureMovement.target = target.transform;
                 }
                 else creatureMovement.agent.stoppingDistance = 0.1f;
+
                 creatureMovement.agent.SetDestination(hit.point);
             }
         }
@@ -85,6 +104,26 @@ public class Player : Creature
         {
             weaponRangeIndicatorLight.intensity -= 0.007f;
         }
+    }
+
+    void SetTextLines(Villager villager)
+    {
+        linesToRead = villager.textLines;
+    }
+
+    void UpdateTextBox()
+    {
+        if (textLineIndex < linesToRead.Length)
+        {
+            textBoxText.text = linesToRead[textLineIndex];
+        }
+        else textBox.gameObject.SetActive(false);
+    }
+
+    public void ReadNextLine()
+    {
+        textLineIndex++;
+        UpdateTextBox();
     }
 
     public void SwitchWeapon(WeaponType weaponType)
