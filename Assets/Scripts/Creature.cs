@@ -31,21 +31,7 @@ public class Creature : MonoBehaviour
             }
             else
             {
-                if (Vector3.Distance(transform.position, creatureMovement.target.position) <= creatureMovement.agent.stoppingDistance + 1f)
-                {
-                    // Calculate the direction to the destination
-                    Vector3 direction = (creatureMovement.agent.destination - transform.position).normalized;
-
-                    // Ignore the y-axis to prevent tilting
-                    direction.y = 0f;
-
-                    // Rotate towards the destination
-                    if (direction != Vector3.zero)
-                    {
-                        Quaternion toRotation = Quaternion.LookRotation(direction);
-                        transform.rotation = Quaternion.RotateTowards(transform.rotation, toRotation, Time.deltaTime * creatureMovement.agent.angularSpeed * 0.25f);
-                    }
-                }
+                LookAt(creatureMovement.target);
                 if (attackCoroutine != null) StopCoroutine(attackCoroutine);
                 attackCoroutine = null;
             }
@@ -54,6 +40,26 @@ public class Creature : MonoBehaviour
         if (attackCoroutine != null) StopCoroutine(attackCoroutine);
         attackCoroutine = null;
     }
+
+    public void LookAt(Transform objToLookAt)
+    {
+        if (Vector3.Distance(transform.position, objToLookAt.position) <= creatureMovement.agent.stoppingDistance + 1f)
+        {
+            // Calculate the direction to the destination
+            Vector3 direction = (creatureMovement.agent.destination - transform.position).normalized;
+
+            // Ignore the y-axis to prevent tilting
+            direction.y = 0f;
+
+            // Rotate towards the destination
+            if (direction != Vector3.zero)
+            {
+                Quaternion toRotation = Quaternion.LookRotation(direction);
+                transform.rotation = Quaternion.RotateTowards(transform.rotation, toRotation, Time.deltaTime * creatureMovement.agent.angularSpeed * 0.25f);
+            }
+        }
+    }
+
     private IEnumerator Attack()
     {
         while (creatureMovement.target)

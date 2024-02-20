@@ -78,7 +78,7 @@ public class Player : Creature
                     return;
                 }
 
-                if (target.CompareTag("TalkPrompt") && Vector3.Distance(transform.position, target.transform.position) < 2.5f)
+                if (target.CompareTag("TalkPrompt") && Vector3.Distance(transform.position, target.transform.position) < 2.7f)
                 {
                     villager = target.GetComponent<Villager>();
                     textBox.gameObject.SetActive(true);
@@ -88,9 +88,8 @@ public class Player : Creature
                     textLineIndex = 0;
                     UpdateTextBox();
                     creatureMovement.agent.SetDestination(target.transform.position);
-                    //creatureMovement.target = target.transform;
-                    //player doesn't rotate completely towards the villager
-                    creatureMovement.agent.stoppingDistance = 1.2f;
+                    LookAt(target.transform);
+                    creatureMovement.agent.stoppingDistance = 1.6f;
                     return;
                 }
                 else
@@ -110,6 +109,9 @@ public class Player : Creature
                 creatureMovement.agent.SetDestination(hit.point);
             }
         }
+
+        //rotate towards villager when talking up close
+        if (villager != null && villager.talking) LookAt(villager.gameObject.transform);
 
         if (weaponRangeIndicatorLight.intensity > 0)
         {
