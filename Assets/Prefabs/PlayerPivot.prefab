@@ -434,7 +434,6 @@ MonoBehaviour:
   secondsBeforeOverHealDecay: 8
   secondsBetweenOverHealDecayTicks: 1.5
   maizePlace: {fileID: 1002431552744195371, guid: adebe25711332d549bfc3c168e6175c5, type: 3}
-  buildingRoof: {fileID: 0}
   startingMaize: 0
   maxMaize: 4
   maizeHealAmount: 25
@@ -442,6 +441,9 @@ MonoBehaviour:
   maizePickUp: {fileID: 0}
   maizeAmountTMP: {fileID: 0}
   maizeInPlaceTMP: {fileID: 0}
+  textBox: {fileID: 0}
+  textBoxText: {fileID: 0}
+  textLineIndex: 0
   weaponRangeIndicatorLight: {fileID: 7063041251900934834}
 --- !u!54 &8457402616446038429
 Rigidbody:
@@ -470,9 +472,9 @@ CapsuleCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   m_Radius: 0.6
-  m_Height: 3
+  m_Height: 2.2
   m_Direction: 1
-  m_Center: {x: 0, y: 1, z: 0}
+  m_Center: {x: 0, y: 0.92, z: 0}
 --- !u!1 &5296286306352095051
 GameObject:
   m_ObjectHideFlags: 0
