@@ -1821,6 +1821,7 @@ GameObject:
   - component: {fileID: 7309495381040981001}
   - component: {fileID: 5599770899752902341}
   - component: {fileID: 5348621810551193983}
+  - component: {fileID: 6942311005927204141}
   m_Layer: 0
   m_Name: Villager1
   m_TagString: TalkPrompt
@@ -1900,6 +1901,14 @@ MonoBehaviour:
   textLines:
   - This is my first line.
   - My 2nd line is much cooler than the 1st one!
+  currentIndex: 0
+  voiceLines:
+  - {fileID: 8300000, guid: 7b803c5f33bccc6499259b731e5f8a89, type: 3}
+  - {fileID: 8300000, guid: 3fe2051b0b7dfb94d8ef747d251e47dc, type: 3}
+  - {fileID: 8300000, guid: be6f08b77dd1fad4e982707375a1188f, type: 3}
+  - {fileID: 8300000, guid: 8d4c9dd8db786804986f43c8d351e3ec, type: 3}
+  - {fileID: 8300000, guid: e9c0d69ce1d4fe14ca882a0f94a992c8, type: 3}
+  soundPlayer: {fileID: 6942311005927204141}
 --- !u!143 &5446998419158490782
 CharacterController:
   m_ObjectHideFlags: 0
@@ -1990,6 +1999,102 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
+--- !u!82 &6942311005927204141
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4185848242794227913}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 0}
+  m_audioClip: {fileID: 8300000, guid: 3fe2051b0b7dfb94d8ef747d251e47dc, type: 3}
+  m_PlayOnAwake: 0
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
 --- !u!1 &4268138740691374666
 GameObject:
   m_ObjectHideFlags: 0

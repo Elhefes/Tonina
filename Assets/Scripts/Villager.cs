@@ -15,6 +15,11 @@ public class Villager : CreatureMovement
     public string[] textLines;
     public int currentIndex;
 
+    public AudioClip[] voiceLines;
+    public AudioSource soundPlayer;
+    public bool playingVoiceLines;
+    private Coroutine voiceCoroutine;
+
     private GameObject player;
 
     void Awake()
@@ -58,28 +63,33 @@ public class Villager : CreatureMovement
         }
     }
 
-    public void ProcessNextString()
+    public void ProcessNextLines()
     {
         if (currentIndex < textLines.Length)
         {
+            //stop potential previous speech
+            soundPlayer.Stop();
+            if (voiceCoroutine != null) StopCoroutine(voiceCoroutine);
+
             string str = textLines[currentIndex];
             int wordCount = CountWords(str);
-            //Debug.Log($"String {currentIndex + 1}: \"{str}\", Word Count: {wordCount}");
-
-            int[] randomNumbers = GenerateRandomNumbers(wordCount);
-            //Debug.Log("Random Numbers:");
-            //foreach (var num in randomNumbers)
-            //{
-            //    Debug.Log(num + " ");
-            //}
-            //Debug.Log("\n");
-
+            voiceCoroutine = StartCoroutine(PlayRandomVoiceLines(wordCount));
             currentIndex++;
         }
-        else
+    }
+
+    private IEnumerator PlayRandomVoiceLines(int wordCount)
+    {
+        playingVoiceLines = true;
+        for (int i = 0; i < wordCount; i++)
         {
-            //Debug.Log("No more strings to process.");
+            if (!playingVoiceLines) break;
+            int r = Random.Range(0, voiceLines.Length);
+            soundPlayer.PlayOneShot(voiceLines[r]);
+            yield return new WaitForSeconds(voiceLines[r].length * 0.75f);
         }
+        soundPlayer.Stop();
+        playingVoiceLines = false;
     }
 
     int CountWords(string str)
@@ -88,28 +98,5 @@ public class Villager : CreatureMovement
         string[] words = str.Split(' ');
         // Return the number of words
         return words.Length;
-    }
-
-    int[] GenerateRandomNumbers(int max)
-    {
-        System.Random rand = new System.Random();
-        // Create an array to store the numbers
-        List<int> numbers = new List<int>();
-        // Add numbers from 0 to max-1
-        for (int i = 0; i < max; i++)
-        {
-            numbers.Add(i);
-        }
-
-        int[] randomNumbers = new int[max];
-        // Shuffle the numbers
-        for (int i = 0; i < max; i++)
-        {
-            int index = rand.Next(0, numbers.Count);
-            randomNumbers[i] = numbers[index];
-            numbers.RemoveAt(index);
-        }
-
-        return randomNumbers;
     }
 }
