@@ -22,6 +22,7 @@ public class Player : Creature
     public MaizePlace maizePlace;
     private BuildingRoof buildingRoof;
     private Villager villager;
+    private GameObject currentTalkingSubject;
     public int startingMaize;
     public int maxMaize;
     public int maizeHealAmount;
@@ -80,12 +81,23 @@ public class Player : Creature
 
                 if (target.CompareTag("TalkPrompt") && Vector3.Distance(transform.position, target.transform.position) < 2.7f)
                 {
+                    if (target != currentTalkingSubject) FreeVillagerFromTalking();
                     villager = target.GetComponent<Villager>();
+                    //read next line if clicked on same villager
+                    if (villager.talking)
+                    {
+                        ReadNextLine();
+                        return;
+                    }
+
                     textBox.gameObject.SetActive(true);
                     SetTextLines(villager);
                     villager.talking = true;
                     villager.TalkToPlayer(gameObject);
+                    currentTalkingSubject = villager.gameObject;
                     textLineIndex = 0;
+                    villager.currentIndex = 0;
+                    villager.ProcessNextString();
                     UpdateTextBox();
                     creatureMovement.agent.SetDestination(target.transform.position);
                     LookAt(target.transform);
@@ -140,6 +152,7 @@ public class Player : Creature
     public void ReadNextLine()
     {
         textLineIndex++;
+        villager.ProcessNextString();
         UpdateTextBox();
     }
 
@@ -148,7 +161,9 @@ public class Player : Creature
         if (villager != null)
         {
             villager.talking = false;
+            villager.currentIndex = 0;
             villager = null;
+            currentTalkingSubject = null;
         }
     }
 

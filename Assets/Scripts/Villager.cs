@@ -1,4 +1,5 @@
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class Villager : CreatureMovement
@@ -12,6 +13,7 @@ public class Villager : CreatureMovement
 
     public bool talking;
     public string[] textLines;
+    public int currentIndex;
 
     private GameObject player;
 
@@ -54,5 +56,60 @@ public class Villager : CreatureMovement
             yield return new WaitForSeconds(Random.Range(minWaitTime, maxWaitTime));
             if (!talking) agent.destination = new Vector3(startingPosition.x + Random.Range(-freeSpaceX, freeSpaceX), startingPosition.y, startingPosition.z + Random.Range(-freeSpaceZ, freeSpaceZ));
         }
+    }
+
+    public void ProcessNextString()
+    {
+        if (currentIndex < textLines.Length)
+        {
+            string str = textLines[currentIndex];
+            int wordCount = CountWords(str);
+            //Debug.Log($"String {currentIndex + 1}: \"{str}\", Word Count: {wordCount}");
+
+            int[] randomNumbers = GenerateRandomNumbers(wordCount);
+            //Debug.Log("Random Numbers:");
+            //foreach (var num in randomNumbers)
+            //{
+            //    Debug.Log(num + " ");
+            //}
+            //Debug.Log("\n");
+
+            currentIndex++;
+        }
+        else
+        {
+            //Debug.Log("No more strings to process.");
+        }
+    }
+
+    int CountWords(string str)
+    {
+        // Split the string by spaces
+        string[] words = str.Split(' ');
+        // Return the number of words
+        return words.Length;
+    }
+
+    int[] GenerateRandomNumbers(int max)
+    {
+        System.Random rand = new System.Random();
+        // Create an array to store the numbers
+        List<int> numbers = new List<int>();
+        // Add numbers from 0 to max-1
+        for (int i = 0; i < max; i++)
+        {
+            numbers.Add(i);
+        }
+
+        int[] randomNumbers = new int[max];
+        // Shuffle the numbers
+        for (int i = 0; i < max; i++)
+        {
+            int index = rand.Next(0, numbers.Count);
+            randomNumbers[i] = numbers[index];
+            numbers.RemoveAt(index);
+        }
+
+        return randomNumbers;
     }
 }
