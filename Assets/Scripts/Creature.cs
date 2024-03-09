@@ -7,6 +7,8 @@ public class Creature : MonoBehaviour
     public Weapon weaponOnHand;
     public CreatureMovement creatureMovement;
     private Coroutine attackCoroutine;
+    private bool onCooldown;
+
     void Start()
     {
         
@@ -27,18 +29,13 @@ public class Creature : MonoBehaviour
 
             if (shouldAttack)
             {
-                if (attackCoroutine == null) attackCoroutine = StartCoroutine(Attack());
+                if (!onCooldown) attackCoroutine = StartCoroutine(Attack());
             }
             else
             {
                 LookAt(creatureMovement.target);
-                if (attackCoroutine != null) StopCoroutine(attackCoroutine);
-                attackCoroutine = null;
             }
         }
-        // Move the attack condition logic to the Weapon class
-        if (attackCoroutine != null) StopCoroutine(attackCoroutine);
-        attackCoroutine = null;
     }
 
     public void LookAt(Transform objToLookAt)
@@ -62,10 +59,12 @@ public class Creature : MonoBehaviour
 
     private IEnumerator Attack()
     {
+        onCooldown = true;
         while (creatureMovement.target)
         {
             weaponOnHand.Attack(creatureMovement.animator);
             yield return new WaitForSeconds(weaponOnHand.attackCooldown);
         }
+        onCooldown = false;
     }
 }
