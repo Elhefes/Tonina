@@ -170,6 +170,7 @@ public class Player : Creature
 
     public void SwitchWeapon(WeaponType weaponType)
     {
+        if (this == null) return;
         foreach (GameObject obj in weaponObjects)
         {
             obj.SetActive(false);

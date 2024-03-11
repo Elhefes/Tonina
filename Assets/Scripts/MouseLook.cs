@@ -87,6 +87,8 @@ public class MouseLook : MonoBehaviour
         distanceFromObject = Mathf.Clamp(distanceFromObject - scrollWheel * sensitivity, minCameraZoom, maxCameraZoom);
         minimapCamera.orthographicSize = distanceFromObject / 2 + 20f;
 
+        if (playerToFollow == null) return;
+
         if (cameraOnPlayer)
         {
             playerToFollowAngledDirection = new Vector3(playerToFollow.transform.position.x, playerToFollow.transform.position.y + distanceFromObject, playerToFollow.transform.position.z - (distanceFromObject / Mathf.Tan(60 * Mathf.PI / 180)) + 0.66f);
