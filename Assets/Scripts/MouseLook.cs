@@ -9,21 +9,23 @@ public class MouseLook : MonoBehaviour
     private Vector3 playerToFollowAngledDirection;
     private Vector3 playerToFollowDirection;
     private Vector3 freeMinimapCameraDirection;
+    private Vector3 xDirection;
     public float distanceFromObject;
     private float currentDistance;
     public float smoothSpeed;
     public float minCameraZoom;
     public float maxCameraZoom;
+    private bool onXLim;
     public GameObject playerToFollow;
     public bool cameraOnPlayer = true;
     public Camera minimapCamera;
 
     public CameraOnPlayerButton cameraOnPlayerButton;
+    public CameraLimiter cameraLimiter;
     public MinimapInput minimapInput;
     public float minimapInputSensitivity;
+    private float acceleration;
 
-    float minX = -29f;
-    float maxX = 29f;
     float minZ = -142f;
     float maxZ = -80f;
 
@@ -51,6 +53,18 @@ public class MouseLook : MonoBehaviour
         }
     }
 
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.CompareTag("ClickBlocker"))
+        {
+            cameraLimiter = other.GetComponent<CameraLimiter>();
+            if (cameraLimiter != null)
+            {
+                onXLim = true;
+            }
+        }
+    }
+
     // Update is called once per frame
     void Update()
     {
@@ -63,7 +77,6 @@ public class MouseLook : MonoBehaviour
 
             // Update the position with clamping
             Vector3 newPosition = transform.position + moveDirection * moveSpeed * Time.deltaTime;
-            newPosition.x = Mathf.Clamp(newPosition.x, minX, maxX); // Adjust minX and maxX as needed
             newPosition.z = Mathf.Clamp(newPosition.z, minZ, maxZ); // Adjust minZ and maxZ as needed
             if (transform.position.z < minZ - 0.5f || transform.position.z > maxZ + 0.5f) transform.position = Vector3.Lerp(transform.position, newPosition, smoothSpeed);
             else transform.position = newPosition;
@@ -105,6 +118,40 @@ public class MouseLook : MonoBehaviour
                     Vector3 targetPosition = hit.point + (transform.position - hit.point).normalized * distanceFromObject;
                     transform.position = Vector3.Lerp(transform.position, targetPosition, smoothSpeed);
                 }
+            }
+        }
+    }
+
+    // Limit camera's movement smoothly in x-axis
+    private void FixedUpdate()
+    {
+        if (cameraLimiter != null && onXLim)
+        {
+            if (Mathf.Abs(transform.position.x) > Mathf.Abs(cameraLimiter.xLim))
+            {
+                xDirection = new Vector3(moveDirection.x + transform.position.x + acceleration, transform.position.y, transform.position.z);
+                transform.position = Vector3.Lerp(transform.position, xDirection, smoothSpeed);
+                if (transform.position.x > 0)
+                {
+                    if (transform.position.x > cameraLimiter.xLim + 3)
+                    {
+                        acceleration -= 0.18f;
+                    }
+                    acceleration -= 0.06f;
+                }
+                else
+                {
+                    if (transform.position.x < cameraLimiter.xLim - 3)
+                    {
+                        acceleration += 0.18f;
+                    }
+                    acceleration += 0.06f;
+                }
+            }
+            else
+            {
+                acceleration = 0f;
+                onXLim = false;
             }
         }
     }

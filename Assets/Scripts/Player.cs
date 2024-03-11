@@ -74,7 +74,7 @@ public class Player : Creature
             {
                 GameObject target = hit.collider.gameObject;
 
-                if (target.CompareTag("ClickBlocker"))
+                if (target.CompareTag("ClickBlocker") || target.CompareTag("ClickBlockerZ"))
                 {
                     return;
                 }
