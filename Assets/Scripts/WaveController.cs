@@ -41,7 +41,7 @@ public class WaveController : MonoBehaviour
     {
         List<string> bits = new(round.Split(' '));
         isSpawningEnemies = true;
-        bool skipToNextBit;
+        bool skipToNextBit = false;
         int index;
         
         foreach (string bit in bits)
@@ -52,41 +52,44 @@ public class WaveController : MonoBehaviour
                 float spawnHaltDelay = (float)delay / 10;
                 yield return new WaitForSeconds(spawnHaltDelay);
             }
-            var splittedBit = bit.Split('-');
-            Int32.TryParse(splittedBit[1], out index);
-            string bitStart = splittedBit[0];
+            else
+            {
+                var splittedBit = bit.Split('-');
+                Int32.TryParse(splittedBit[1], out index);
+                string bitStart = splittedBit[0];
             
-            if (bitStart.StartsWith("X"))
-            {
-                skipToNextBit = true;
-            }
-            int enemyCount = 0;
-            string intConstructor = "";
-            char enemy = 'a';
-
-            foreach (char c in bitStart)
-            {
-                if (Char.IsDigit(c))
+                if (bitStart.StartsWith("X"))
                 {
-                    intConstructor += c;
+                    skipToNextBit = true;
                 }
-                else if (Char.IsLetter(c))
+                int enemyCount = 0;
+                string intConstructor = "";
+                char enemy = 'a';
+
+                foreach (char c in bitStart)
                 {
-                    enemy = c;
-                    Int32.TryParse(intConstructor, out enemyCount);
-                    intConstructor = "";
+                    if (Char.IsDigit(c))
+                    {
+                        intConstructor += c;
+                    }
+                    else if (Char.IsLetter(c))
+                    {
+                        enemy = c;
+                        Int32.TryParse(intConstructor, out enemyCount);
+                        intConstructor = "";
+                    }
                 }
-            }
 
-            int time = Int32.Parse(intConstructor);
-            float spawnDuration = (float)time / 10 / (float)enemyCount;
+                int time = Int32.Parse(intConstructor);
+                float spawnDuration = (float)time / 10 / (float)enemyCount;
 
-            int spawned = 0;
-            while (spawned < enemyCount)
-            {
-                SpawnEnemyOfType(enemy, index);
-                spawned++;
-                yield return new WaitForSeconds(spawnDuration);
+                int spawned = 0;
+                while (spawned < enemyCount)
+                {
+                    SpawnEnemyOfType(enemy, index);
+                    spawned++;
+                    if (!skipToNextBit) yield return new WaitForSeconds(spawnDuration);
+                }
             }
         }
         //InvokeRepeating("CheckForEnemies", 1f, 1f);

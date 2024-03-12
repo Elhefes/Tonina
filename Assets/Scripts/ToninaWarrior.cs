@@ -14,7 +14,6 @@ public class ToninaWarrior : Creature
 
     void Awake()
     {
-        if (moveTowardsTarget) creatureMovement.target = GameObject.FindGameObjectsWithTag("Enemy")[0].transform;
         health = startingHealth;
     }
 
