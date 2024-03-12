@@ -37,6 +37,8 @@ public class Player : Creature
     private string[] linesToRead;
     public int textLineIndex;
 
+    public Vector3 destination;
+
     public Light weaponRangeIndicatorLight;
 
     private void Awake()
@@ -119,6 +121,7 @@ public class Player : Creature
                 else creatureMovement.agent.stoppingDistance = 0.1f;
 
                 creatureMovement.agent.SetDestination(hit.point);
+                destination = hit.point;
             }
         }
 
