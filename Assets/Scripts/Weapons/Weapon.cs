@@ -12,6 +12,8 @@ public class Weapon : MonoBehaviour
     public float attackDistance;
     public float attackAngleThreshold;
     public bool canHit;
+    public AudioClip hitSound;
+    public AudioSource soundPlayer;
 
     private List<GameObject> hitEnemies = new List<GameObject>();
 
@@ -59,6 +61,7 @@ public class Weapon : MonoBehaviour
             obj.GetComponent<Player>()?.TakeDamage(damage);
             obj.GetComponent<ToninaWarrior>()?.TakeDamage(damage);
         }
+        if (hitSound != null) soundPlayer.PlayOneShot(hitSound);
     }
 }
 
