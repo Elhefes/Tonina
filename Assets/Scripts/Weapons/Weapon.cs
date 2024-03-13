@@ -56,11 +56,12 @@ public class Weapon : MonoBehaviour
             obj.GetComponent<Enemy>()?.TakeDamage(damage);
             if (hitSound != null) soundPlayer.PlayOneShot(hitSound);
         }
-        if (user == WeaponUser.Attacker && (obj.CompareTag("Player") || obj.CompareTag("ToninaTribe")) && !hitEnemies.Contains(obj))
+        if (user == WeaponUser.Attacker && (obj.CompareTag("Player") || obj.CompareTag("ToninaTribe") || obj.CompareTag("Barricade")) && !hitEnemies.Contains(obj))
         {
             hitEnemies.Add(obj);
             obj.GetComponent<Player>()?.TakeDamage(damage);
             obj.GetComponent<ToninaWarrior>()?.TakeDamage(damage);
+            obj.GetComponent<Barricade>()?.TakeDamage(damage);
             if (hitSound != null) soundPlayer.PlayOneShot(hitSound);
         }
     }
