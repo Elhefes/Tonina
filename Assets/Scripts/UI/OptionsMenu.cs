@@ -3,11 +3,13 @@ using UnityEngine.UI;
 
 public class OptionsMenu : MonoBehaviour
 {
-    public Button closeOptionsButton;
-    public Button optionsMenuBackround;
+    public AudioController audioController;
+    public Slider musicVolumeSlider;
+    public Slider soundVolumeSlider;
 
-    public void CloseOptions()
+    private void Awake()
     {
-        gameObject.SetActive(false);
+        musicVolumeSlider.value = PlayerPrefs.GetFloat("musicVolume", 0.5f);
+        musicVolumeSlider.onValueChanged.AddListener(delegate { audioController.ChangeMusicVolume(musicVolumeSlider); });
     }
 }
