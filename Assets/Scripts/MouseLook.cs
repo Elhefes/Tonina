@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.UI;
 
 public class MouseLook : MonoBehaviour
 {
@@ -21,6 +22,7 @@ public class MouseLook : MonoBehaviour
     public Camera minimapCamera;
 
     public CameraOnPlayerButton cameraOnPlayerButton;
+    public GameObject optionsMenu;
     public CameraLimiter cameraLimiter;
     public MinimapInput minimapInput;
     public float minimapInputSensitivity;
@@ -69,6 +71,11 @@ public class MouseLook : MonoBehaviour
     void Update()
     {
         if (Input.GetKeyDown("c")) ToggleCameraOnPlayer();
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            if (optionsMenu.activeSelf) optionsMenu.SetActive(false);
+            else optionsMenu.SetActive(true);
+        }
 
         if (Input.GetAxis("Horizontal") != 0 || Input.GetAxis("Vertical") != 0 || minimapInput.GetMinimapInput().x != 0 || minimapInput.GetMinimapInput().y != 0)
         {
