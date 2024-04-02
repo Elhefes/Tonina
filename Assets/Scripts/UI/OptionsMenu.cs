@@ -14,4 +14,9 @@ public class OptionsMenu : MonoBehaviour
         soundVolumeSlider.value = PlayerPrefs.GetFloat("soundSliderValue", 0.5f);
         soundVolumeSlider.onValueChanged.AddListener(delegate { audioController.ChangeSoundVolume(soundVolumeSlider); });
     }
+
+    public void QuitGame()
+    {
+        Application.Quit();
+    }
 }
