@@ -15,7 +15,7 @@ public class AudioController : MonoBehaviour
 
     private void Awake()
     {
-        float savedVolume = PlayerPrefs.GetFloat("musicVolume", 0.5f);
+        float savedVolume = PlayerPrefs.GetFloat("musicVolume", 0.2f);
         musicController.volume = savedVolume;
 
         int musicMuted = PlayerPrefs.GetInt("musicMuted", 0);
@@ -46,7 +46,7 @@ public class AudioController : MonoBehaviour
         {
             musicToggleButton.image.sprite = musicIcon;
             PlayerPrefs.SetInt("musicMuted", 0);
-            musicController.volume = PlayerPrefs.GetFloat("musicVolume", 0.5f);
+            musicController.volume = PlayerPrefs.GetFloat("musicVolume", 0.2f);
         }
         else
         {
