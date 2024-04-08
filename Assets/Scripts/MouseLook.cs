@@ -17,7 +17,7 @@ public class MouseLook : MonoBehaviour
     public float minCameraZoom;
     public float maxCameraZoom;
     private bool onXLim;
-    public GameObject playerToFollow;
+    public Player player;
     public bool cameraOnPlayer = true;
     public Camera minimapCamera;
 
@@ -94,15 +94,28 @@ public class MouseLook : MonoBehaviour
         distanceFromObject = Mathf.Clamp(distanceFromObject - scrollWheel * sensitivity, minCameraZoom, maxCameraZoom);
         minimapCamera.orthographicSize = distanceFromObject / 2 + 20f;
 
-        if (playerToFollow == null) return;
+        if (player == null) return;
 
         if (cameraOnPlayer)
         {
-            playerToFollowAngledDirection = new Vector3(playerToFollow.transform.position.x, playerToFollow.transform.position.y + distanceFromObject, playerToFollow.transform.position.z - (distanceFromObject / Mathf.Tan(60 * Mathf.PI / 180)) + 0.66f);
-            transform.position = Vector3.Lerp(transform.position, playerToFollowAngledDirection, smoothSpeed);
-            playerToFollowDirection = new Vector3(playerToFollow.transform.position.x, playerToFollow.transform.position.y + 100f, playerToFollow.transform.position.z);
-            minimapCamera.transform.position = Vector3.Lerp(minimapCamera.transform.position, playerToFollowDirection, smoothSpeed);
-
+            if (!player.insideKingHouse)
+            {
+                playerToFollowAngledDirection = new Vector3(player.transform.position.x, player.transform.position.y + distanceFromObject, player.transform.position.z - (distanceFromObject / Mathf.Tan(60 * Mathf.PI / 180)) + 0.66f);
+                transform.position = Vector3.Lerp(transform.position, playerToFollowAngledDirection, smoothSpeed);
+                playerToFollowDirection = new Vector3(player.transform.position.x, player.transform.position.y + 100f, player.transform.position.z);
+                minimapCamera.transform.position = Vector3.Lerp(minimapCamera.transform.position, playerToFollowDirection, smoothSpeed);
+                if (transform.rotation.y != 0) transform.rotation = Quaternion.RotateTowards(transform.rotation, Quaternion.Euler(60f, 0f, 0f), 2f);
+            }
+            else
+            {
+                playerToFollowAngledDirection = new Vector3(player.transform.position.x + (distanceFromObject / Mathf.Tan(60 * Mathf.PI / 180)) - 0.66f, player.transform.position.y + distanceFromObject, player.transform.position.z);
+                transform.position = Vector3.Lerp(transform.position, playerToFollowAngledDirection, smoothSpeed);
+                playerToFollowDirection = new Vector3(player.transform.position.x, player.transform.position.y + 100f, player.transform.position.z);
+                minimapCamera.transform.position = Vector3.Lerp(minimapCamera.transform.position, playerToFollowDirection, smoothSpeed);
+                transform.rotation = Quaternion.RotateTowards(transform.rotation, Quaternion.Euler(60f, -90f, 0f), 2f);
+                // this doesn't work for some reason
+                //minimapCamera.transform.rotation = Quaternion.RotateTowards(transform.rotation, Quaternion.Euler(90f, -90f, 0f), 2.4f);
+            }
         }
         else
         {

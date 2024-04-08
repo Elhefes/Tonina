@@ -19,6 +19,8 @@ public class Player : Creature
     public float secondsBetweenOverHealDecayTicks;
     private bool overHealDecay;
 
+    public bool insideKingHouse;
+
     public MaizePlace maizePlace;
     private BuildingRoof buildingRoof;
     private Villager villager;
@@ -264,6 +266,7 @@ public class Player : Creature
         {
             buildingRoof = other.GetComponentInParent<BuildingRoof>();
             buildingRoof.MakeRoofInvisible();
+            if (other.ToString().Equals("kinghouse_floor_mesh (UnityEngine.MeshCollider)")) insideKingHouse = true;
         }
     }
 
@@ -277,6 +280,7 @@ public class Player : Creature
         {
             buildingRoof = other.GetComponentInParent<BuildingRoof>();
             buildingRoof.MakeRoofVisible();
+            if (other.ToString().Equals("kinghouse_floor_mesh (UnityEngine.MeshCollider)")) insideKingHouse = false;
         }
     }
 
