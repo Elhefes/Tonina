@@ -33,12 +33,14 @@ public class MouseLook : MonoBehaviour
 
     public void ToggleCameraOnPlayer()
     {
+        if (transform.rotation.y != 0) return;
         cameraOnPlayer = !cameraOnPlayer;
         cameraOnPlayerButton.ChangeIconSprite(cameraOnPlayer);
     }
 
     void CameraOnPlayerOff()
     {
+        if (player.insideKingHouse || transform.rotation.y != 0) return;
         cameraOnPlayer = false;
         cameraOnPlayerButton.ChangeIconSprite(cameraOnPlayer);
     }
@@ -77,16 +79,19 @@ public class MouseLook : MonoBehaviour
             else optionsMenu.SetActive(true);
         }
 
-        if (Input.GetAxis("Horizontal") != 0 || Input.GetAxis("Vertical") != 0 || minimapInput.GetMinimapInput().x != 0 || minimapInput.GetMinimapInput().y != 0)
+        if (!player.insideKingHouse)
         {
-            CameraOnPlayerOff();
-            moveDirection = new Vector3(Input.GetAxis("Horizontal") + minimapInput.GetMinimapInput().x * minimapInputSensitivity, 0f, Input.GetAxis("Vertical") + minimapInput.GetMinimapInput().y * minimapInputSensitivity);
+            if (Input.GetAxis("Horizontal") != 0 || Input.GetAxis("Vertical") != 0 || minimapInput.GetMinimapInput().x != 0 || minimapInput.GetMinimapInput().y != 0)
+            {
+                CameraOnPlayerOff();
+                moveDirection = new Vector3(Input.GetAxis("Horizontal") + minimapInput.GetMinimapInput().x * minimapInputSensitivity, 0f, Input.GetAxis("Vertical") + minimapInput.GetMinimapInput().y * minimapInputSensitivity);
 
-            // Update the position with clamping
-            Vector3 newPosition = transform.position + moveDirection * moveSpeed * Time.deltaTime;
-            newPosition.z = Mathf.Clamp(newPosition.z, minZ, maxZ); // Adjust minZ and maxZ as needed
-            if (transform.position.z < minZ - 0.5f || transform.position.z > maxZ + 0.5f) transform.position = Vector3.Lerp(transform.position, newPosition, smoothSpeed);
-            else transform.position = newPosition;
+                // Update the position with clamping
+                Vector3 newPosition = transform.position + moveDirection * moveSpeed * Time.deltaTime;
+                newPosition.z = Mathf.Clamp(newPosition.z, minZ, maxZ); // Adjust minZ and maxZ as needed
+                if (transform.position.z < minZ - 0.5f || transform.position.z > maxZ + 0.5f) transform.position = Vector3.Lerp(transform.position, newPosition, smoothSpeed);
+                else transform.position = newPosition;
+            }
         }
 
         // Use scroll wheel to zoom in or out
@@ -119,6 +124,12 @@ public class MouseLook : MonoBehaviour
         }
         else
         {
+            if (player.insideKingHouse)
+            {
+                ToggleCameraOnPlayer();
+                return;
+            }
+
             freeMinimapCameraDirection = new Vector3(transform.position.x, transform.position.y + 100f, transform.position.z);
             minimapCamera.transform.position = Vector3.Lerp(minimapCamera.transform.position, freeMinimapCameraDirection, smoothSpeed);
             // Cast a ray downwards from the camera's position
