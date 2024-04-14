@@ -109,7 +109,9 @@ public class MouseLook : MonoBehaviour
                 transform.position = Vector3.Lerp(transform.position, playerToFollowAngledDirection, smoothSpeed);
                 playerToFollowDirection = new Vector3(player.transform.position.x, player.transform.position.y + 100f, player.transform.position.z);
                 minimapCamera.transform.position = Vector3.Lerp(minimapCamera.transform.position, playerToFollowDirection, smoothSpeed);
+                // rotate cameras smoothly
                 if (transform.rotation.y != 0) transform.rotation = Quaternion.RotateTowards(transform.rotation, Quaternion.Euler(60f, 0f, 0f), 2f);
+                minimapCamera.transform.rotation = Quaternion.RotateTowards(minimapCamera.transform.rotation, Quaternion.Euler(90f, 0f, 0f), 2f);
             }
             else
             {
@@ -117,9 +119,9 @@ public class MouseLook : MonoBehaviour
                 transform.position = Vector3.Lerp(transform.position, playerToFollowAngledDirection, smoothSpeed);
                 playerToFollowDirection = new Vector3(player.transform.position.x, player.transform.position.y + 100f, player.transform.position.z);
                 minimapCamera.transform.position = Vector3.Lerp(minimapCamera.transform.position, playerToFollowDirection, smoothSpeed);
+                // rotate cameras smoothly
                 transform.rotation = Quaternion.RotateTowards(transform.rotation, Quaternion.Euler(60f, -90f, 0f), 2f);
-                // this doesn't work for some reason
-                //minimapCamera.transform.rotation = Quaternion.RotateTowards(transform.rotation, Quaternion.Euler(90f, -90f, 0f), 2.4f);
+                minimapCamera.transform.rotation = Quaternion.RotateTowards(minimapCamera.transform.rotation, Quaternion.Euler(90f, -90f, 0f), 2f);
             }
         }
         else
