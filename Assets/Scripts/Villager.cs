@@ -85,7 +85,7 @@ public class Villager : CreatureMovement
         {
             if (!playingVoiceLines) break;
             int r = Random.Range(0, voiceLines.Length);
-            soundPlayer.PlayOneShot(voiceLines[r]);
+            soundPlayer.PlayOneShot(voiceLines[r], PlayerPrefs.GetFloat("soundVolume", 0.5f));
             yield return new WaitForSeconds(voiceLines[r].length * 0.75f);
         }
         soundPlayer.Stop();

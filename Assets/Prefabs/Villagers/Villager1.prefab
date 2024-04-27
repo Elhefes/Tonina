@@ -1909,6 +1909,7 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 8d4c9dd8db786804986f43c8d351e3ec, type: 3}
   - {fileID: 8300000, guid: e9c0d69ce1d4fe14ca882a0f94a992c8, type: 3}
   soundPlayer: {fileID: 6942311005927204141}
+  playingVoiceLines: 0
 --- !u!143 &5446998419158490782
 CharacterController:
   m_ObjectHideFlags: 0
@@ -2018,9 +2019,9 @@ AudioSource:
   Spatialize: 0
   SpatializePostEffects: 0
   Priority: 128
-  DopplerLevel: 1
-  MinDistance: 1
-  MaxDistance: 500
+  DopplerLevel: 0
+  MinDistance: 3.5
+  MaxDistance: 10
   Pan2D: 0
   rolloffMode: 0
   BypassEffects: 0
@@ -2055,7 +2056,7 @@ AudioSource:
     m_Curve:
     - serializedVersion: 3
       time: 0
-      value: 0
+      value: 1
       inSlope: 0
       outSlope: 0
       tangentMode: 0
