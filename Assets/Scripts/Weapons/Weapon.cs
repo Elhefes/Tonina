@@ -12,6 +12,7 @@ public class Weapon : MonoBehaviour
     public float attackDistance;
     public float attackAngleThreshold;
     public bool canHit;
+    public AudioClip switchSound;
     public AudioClip hitSound;
     public AudioSource soundPlayer;
 

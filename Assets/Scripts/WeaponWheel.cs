@@ -22,6 +22,8 @@ public class WeaponWheel : MonoBehaviour
     private int slices = 5;
     public Weapon[] weapons;
 
+    public AudioSource soundEffectPlayer;
+
     private Player player;
 
     private void Start()
@@ -53,6 +55,7 @@ public class WeaponWheel : MonoBehaviour
         weaponSprites[currentIndex].sprite = wep.uiSprite;
         player.SwitchWeapon(wep.type);
         weaponWheelAnimator.SetTrigger("NextWeapon");
+        if (wep.switchSound != null) soundEffectPlayer.PlayOneShot(wep.switchSound, PlayerPrefs.GetFloat("soundVolume", 0.5f));
     }
 
     public void PreviousWeapon()
@@ -73,6 +76,7 @@ public class WeaponWheel : MonoBehaviour
         weaponSprites[currentIndex].sprite = wep.uiSprite;
         player.SwitchWeapon(wep.type);
         weaponWheelAnimator.SetTrigger("PreviousWeapon");
+        if (wep.switchSound != null) soundEffectPlayer.PlayOneShot(wep.switchSound, PlayerPrefs.GetFloat("soundVolume", 0.5f));
     }
 
     void StartWeaponWheelCooldown()
