@@ -9,15 +9,21 @@ public class WaveController : MonoBehaviour
     private List<string> parsedLines;
     public TextAsset txt;
     public int roundNumber = 1;
+    public int friendlyWarriorsAmount;
     private bool isSpawningEnemies;
 
     public Transform[] spawnPoints;
+    private Vector3 housePos;
 
     private List<Coroutine> coroutines;
     public GameObject enemyPrefab;
+    public GameObject friendlyWarriorPrefab;
+    private GameObject kingHouse;
 
     void Start()
     {
+        kingHouse = GameObject.Find("king_house");
+        housePos = kingHouse.transform.position;
         coroutines = new List<Coroutine>();
         print(txt.text);
         lines = new List<string>(txt.text.Split('\n'));
@@ -43,7 +49,9 @@ public class WaveController : MonoBehaviour
         isSpawningEnemies = true;
         bool skipToNextBit = false;
         int index;
-        
+
+        if (friendlyWarriorsAmount > 0) SpawnFriendlies(friendlyWarriorsAmount);
+
         foreach (string bit in bits)
         {
             if (bit.StartsWith("P"))
@@ -122,4 +130,39 @@ public class WaveController : MonoBehaviour
         // gameController.SpawnEnemy(enemyName);
     }
 
+    void SpawnFriendlies(int friendlyWarriorsAmount)
+    {
+        float xOffset = -11f;
+        float zOffset = -11f;
+        float xStep = 1.5f;
+        float zStep = 1.5f;
+
+        int pairs = friendlyWarriorsAmount / 2;
+        bool isOdd = friendlyWarriorsAmount % 2 != 0;
+
+        for (int i = 0; i < pairs; i++)
+        {
+            SpawnFriendlyPair(new Vector3(housePos.x + xOffset, housePos.y, housePos.z + zOffset));
+
+            if ((i + 1) % 3 == 0)
+            {
+                zOffset += zStep;
+                xOffset = -11f; // Reset xOffset for the next row
+            }
+            else xOffset -= xStep; // Increment xOffset using xStep
+            
+        }
+
+        if (isOdd)
+        {
+            // Spawn a single friendly warrior to the negative x side
+            Instantiate(friendlyWarriorPrefab, new Vector3(housePos.x + xOffset, housePos.y, housePos.z + zOffset), kingHouse.transform.rotation);
+        }
+    }
+
+    void SpawnFriendlyPair(Vector3 spawnPosition)
+    {
+        Instantiate(friendlyWarriorPrefab, spawnPosition, kingHouse.transform.rotation);
+        Instantiate(friendlyWarriorPrefab, new Vector3((spawnPosition.x * -1f) - 2f, spawnPosition.y, spawnPosition.z), kingHouse.transform.rotation);
+    }
 }
