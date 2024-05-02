@@ -6,10 +6,6 @@ public class MainMenu : MonoBehaviour
     public GameObject UI_Elements;
     public GameObject clickBlocker;
 
-    public Button playIntroButton;
-    public Button continueHereButton;
-    public Button playAsAttackersButton;
-
     private Camera playerCamera;
     private Camera mainMenuCamera;
 

@@ -8,7 +8,7 @@ public class WaveController : MonoBehaviour
     private List<string> lines;
     private List<string> parsedLines;
     public TextAsset txt;
-    public int roundNumber = 1;
+    public int roundNumber;
     public int friendlyWarriorsAmount;
     private bool isSpawningEnemies;
 
@@ -34,13 +34,11 @@ public class WaveController : MonoBehaviour
             if (line.Length == 0) break;
             parsedLines.Add(line.Substring(4, line.Length - 4));
         }
-        StartRound();
     }
 
-    public void StartRound(string roundDefinition = null)
+    public void StartRound(int roundNumber)
     {
         coroutines.Add(StartCoroutine(ParseRound(parsedLines[roundNumber - 1])));
-        if (roundNumber < 100) roundNumber++;
     }
 
     public IEnumerator ParseRound(string round)

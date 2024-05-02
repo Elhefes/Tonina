@@ -21,6 +21,8 @@ public class Player : Creature
 
     public bool insideKingHouse;
 
+    public BattlefieldMenu battlefieldMenu;
+
     public MaizePlace maizePlace;
     private BuildingRoof buildingRoof;
     private Villager villager;
@@ -268,6 +270,10 @@ public class Player : Creature
             buildingRoof.MakeRoofInvisible();
             if (other.ToString().Equals("kinghouse_floor_mesh (UnityEngine.MeshCollider)")) insideKingHouse = true;
         }
+        if (other.CompareTag("BattlefieldPrompt"))
+        {
+            battlefieldMenu.gameObject.SetActive(true);
+        }
     }
 
     private void OnTriggerExit(Collider other)
@@ -281,6 +287,10 @@ public class Player : Creature
             buildingRoof = other.GetComponentInParent<BuildingRoof>();
             buildingRoof.MakeRoofVisible();
             if (other.ToString().Equals("kinghouse_floor_mesh (UnityEngine.MeshCollider)")) insideKingHouse = false;
+        }
+        if (other.CompareTag("BattlefieldPrompt"))
+        {
+            battlefieldMenu.Exit();
         }
     }
 
