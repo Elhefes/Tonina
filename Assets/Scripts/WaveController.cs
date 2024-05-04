@@ -16,6 +16,7 @@ public class WaveController : MonoBehaviour
     private Vector3 housePos;
 
     private List<Coroutine> coroutines;
+    public GameObject battleWinningScreen;
     public GameObject enemyPrefab;
     public GameObject friendlyWarriorPrefab;
     private GameObject kingHouse;
@@ -101,7 +102,7 @@ public class WaveController : MonoBehaviour
                 }
             }
         }
-        //InvokeRepeating("CheckForEnemies", 1f, 1f);
+        InvokeRepeating("CheckForEnemies", 1f, 1f);
     }
 
     void SpawnEnemyOfType(char c, int i)
@@ -129,6 +130,21 @@ public class WaveController : MonoBehaviour
         else if (c.Equals('R')) enemyName = "Khnum";
         else if (c.Equals('S')) enemyName = "Sobek";
         // gameController.SpawnEnemy(enemyName);
+    }
+
+    void CheckForEnemies()
+    {
+        if (GameObject.FindGameObjectsWithTag("Enemy").Length == 0)
+        {
+            isSpawningEnemies = false;
+            CancelInvoke("CheckForEnemies");
+            WinBattle();
+        }
+    }
+
+    void WinBattle()
+    {
+        battleWinningScreen.SetActive(true);
     }
 
     void SpawnFriendlies(int friendlyWarriorsAmount)

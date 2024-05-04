@@ -38,13 +38,13 @@ public class BattlefieldMenu : MonoBehaviour
     void UpdateThreatLevel()
     {
         threatLevelText.text = threatLevel.ToString();
-        PlayerPrefs.SetInt("battleSongID", battleSongID);
+        PlayerPrefs.SetInt("currentThreatLevel", threatLevel);
     }
 
     void UpdateBattleSong()
     {
         chosenSong.text = waveController.musicPlayer.battleSongs[battleSongID].name;
-        PlayerPrefs.SetInt("currentThreatLevel", threatLevel);
+        PlayerPrefs.SetInt("battleSongID", battleSongID);
     }
 
     public void NextThreatLevel()
