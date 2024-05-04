@@ -38,10 +38,10 @@ public class WaveController : MonoBehaviour
         }
     }
 
-    public void StartRound(int roundNumber)
+    public void StartRound(int roundNumber, int battleSongID)
     {
         coroutines.Add(StartCoroutine(ParseRound(parsedLines[roundNumber - 1])));
-        musicPlayer.PlayBattleSong(0);
+        musicPlayer.PlayBattleSong(battleSongID);
     }
 
     public IEnumerator ParseRound(string round)

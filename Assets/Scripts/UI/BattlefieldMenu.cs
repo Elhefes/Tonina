@@ -6,8 +6,10 @@ public class BattlefieldMenu : MonoBehaviour
     public GameObject modeSelect;
     public GameObject battleSelectedUI;
 
-    public int threatLevel;
+    private int threatLevel;
+    private int battleSongID;
     public TMP_Text threatLevelText;
+    public TMP_Text chosenSong;
 
     int maxThreatLevel = 25;
 
@@ -16,7 +18,9 @@ public class BattlefieldMenu : MonoBehaviour
     private void Start()
     {
         threatLevel = PlayerPrefs.GetInt("currentThreatLevel", 1);
+        battleSongID = PlayerPrefs.GetInt("battleSongID", 0);
         UpdateThreatLevel();
+        UpdateBattleSong();
     }
 
     public void SelectBattle()
@@ -27,13 +31,19 @@ public class BattlefieldMenu : MonoBehaviour
 
     public void StartBattle()
     {
-        waveController.StartRound(threatLevel);
+        waveController.StartRound(threatLevel, battleSongID);
         Exit();
     }
 
     void UpdateThreatLevel()
     {
         threatLevelText.text = threatLevel.ToString();
+        PlayerPrefs.SetInt("battleSongID", battleSongID);
+    }
+
+    void UpdateBattleSong()
+    {
+        chosenSong.text = waveController.musicPlayer.battleSongs[battleSongID].name;
         PlayerPrefs.SetInt("currentThreatLevel", threatLevel);
     }
 
@@ -53,6 +63,20 @@ public class BattlefieldMenu : MonoBehaviour
             threatLevel--;
             UpdateThreatLevel();
         }
+    }
+
+    public void NextBattleSong()
+    {
+        if (battleSongID < waveController.musicPlayer.battleSongs.Count - 1) battleSongID++;
+        else battleSongID = 0;
+        UpdateBattleSong();
+    }
+
+    public void PreviousBattleSong()
+    {
+        if (battleSongID > 0) battleSongID--;
+        else battleSongID = waveController.musicPlayer.battleSongs.Count - 1;
+        UpdateBattleSong();
     }
 
     public void Exit()
