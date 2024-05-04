@@ -2,6 +2,7 @@ using UnityEngine;
 using System.Collections.Generic;
 using System.Collections;
 using System;
+using TMPro;
 
 public class WaveController : MonoBehaviour
 {
@@ -11,6 +12,7 @@ public class WaveController : MonoBehaviour
     public int roundNumber;
     public int friendlyWarriorsAmount;
     private bool isSpawningEnemies;
+    private int secondsInBattle;
 
     public Transform[] spawnPoints;
     private Vector3 housePos;
@@ -19,6 +21,7 @@ public class WaveController : MonoBehaviour
     public GameObject overworldOptionsButton;
     public GameObject battleUI;
     public GameObject battleWinningScreen;
+    public TMP_Text battleTimeText;
     public GameObject enemyPrefab;
     public GameObject friendlyWarriorPrefab;
     private GameObject kingHouse;
@@ -46,6 +49,7 @@ public class WaveController : MonoBehaviour
         coroutines.Add(StartCoroutine(ParseRound(parsedLines[roundNumber - 1])));
         musicPlayer.PlayBattleSong(battleSongID);
         EnableBattleUI();
+        StartCoroutine(SecondCounter());
     }
 
     void EnableBattleUI()
@@ -160,6 +164,8 @@ public class WaveController : MonoBehaviour
     void WinBattle()
     {
         battleWinningScreen.SetActive(true);
+        battleTimeText.text = GetBattleTimerString(secondsInBattle);
+        StopCoroutine(SecondCounter());
         DisableBattleUI();
     }
 
@@ -197,5 +203,20 @@ public class WaveController : MonoBehaviour
     {
         Instantiate(friendlyWarriorPrefab, spawnPosition, kingHouse.transform.rotation);
         Instantiate(friendlyWarriorPrefab, new Vector3((spawnPosition.x * -1f) - 2f, spawnPosition.y, spawnPosition.z), kingHouse.transform.rotation);
+    }
+
+    IEnumerator SecondCounter()
+    {
+        secondsInBattle = 0;
+        while (!battleWinningScreen.activeSelf)
+        {
+            yield return new WaitForSecondsRealtime(1f);
+            secondsInBattle++;
+        }
+    }
+
+    public string GetBattleTimerString(int seconds)
+    {
+        return string.Format("{0:00}:{1:00}", seconds / 60, seconds % 60);
     }
 }
