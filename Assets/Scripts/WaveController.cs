@@ -16,8 +16,8 @@ public class WaveController : MonoBehaviour
     private Vector3 housePos;
 
     private List<Coroutine> coroutines;
+    public GameObject overworldOptionsButton;
     public GameObject battleUI;
-    public GameObject cameraOnPlayerButton;
     public GameObject battleWinningScreen;
     public GameObject enemyPrefab;
     public GameObject friendlyWarriorPrefab;
@@ -50,14 +50,14 @@ public class WaveController : MonoBehaviour
 
     void EnableBattleUI()
     {
+        overworldOptionsButton.SetActive(false);
         battleUI.SetActive(true);
-        cameraOnPlayerButton.transform.position = new Vector3(376, 930, 0);
     }
 
     void DisableBattleUI()
     {
         battleUI.SetActive(false);
-        cameraOnPlayerButton.transform.position = new Vector3(376, 1030, 0);
+        overworldOptionsButton.SetActive(true);
     }
 
     public IEnumerator ParseRound(string round)
