@@ -20,6 +20,7 @@ public class MouseLook : MonoBehaviour
     public Player player;
     public bool cameraOnPlayer = true;
     public Camera minimapCamera;
+    public GameObject minimapIndicators;
 
     public CameraOnPlayerButton cameraOnPlayerButton;
     public GameObject optionsMenu;
@@ -112,6 +113,7 @@ public class MouseLook : MonoBehaviour
                 // rotate cameras smoothly
                 if (transform.rotation.y != 0) transform.rotation = Quaternion.RotateTowards(transform.rotation, Quaternion.Euler(60f, 0f, 0f), 2f);
                 minimapCamera.transform.rotation = Quaternion.RotateTowards(minimapCamera.transform.rotation, Quaternion.Euler(90f, 0f, 0f), 2f);
+                if (!minimapIndicators.activeSelf) minimapIndicators.SetActive(true);
             }
             else
             {
@@ -122,6 +124,7 @@ public class MouseLook : MonoBehaviour
                 // rotate cameras smoothly
                 transform.rotation = Quaternion.RotateTowards(transform.rotation, Quaternion.Euler(60f, -90f, 0f), 2f);
                 minimapCamera.transform.rotation = Quaternion.RotateTowards(minimapCamera.transform.rotation, Quaternion.Euler(90f, -90f, 0f), 2f);
+                if (minimapIndicators.activeSelf) minimapIndicators.SetActive(false);
             }
         }
         else
