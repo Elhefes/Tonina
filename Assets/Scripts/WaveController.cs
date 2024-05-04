@@ -16,6 +16,8 @@ public class WaveController : MonoBehaviour
     private Vector3 housePos;
 
     private List<Coroutine> coroutines;
+    public GameObject battleUI;
+    public GameObject cameraOnPlayerButton;
     public GameObject battleWinningScreen;
     public GameObject enemyPrefab;
     public GameObject friendlyWarriorPrefab;
@@ -43,6 +45,19 @@ public class WaveController : MonoBehaviour
     {
         coroutines.Add(StartCoroutine(ParseRound(parsedLines[roundNumber - 1])));
         musicPlayer.PlayBattleSong(battleSongID);
+        EnableBattleUI();
+    }
+
+    void EnableBattleUI()
+    {
+        battleUI.SetActive(true);
+        cameraOnPlayerButton.transform.position = new Vector3(376, 930, 0);
+    }
+
+    void DisableBattleUI()
+    {
+        battleUI.SetActive(false);
+        cameraOnPlayerButton.transform.position = new Vector3(376, 1030, 0);
     }
 
     public IEnumerator ParseRound(string round)
@@ -145,6 +160,7 @@ public class WaveController : MonoBehaviour
     void WinBattle()
     {
         battleWinningScreen.SetActive(true);
+        DisableBattleUI();
     }
 
     void SpawnFriendlies(int friendlyWarriorsAmount)

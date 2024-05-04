@@ -3,7 +3,8 @@ using UnityEngine.UI;
 
 public class MainMenu : MonoBehaviour
 {
-    public GameObject UI_Elements;
+    public GameObject mainMenuUI;
+    public GameObject overworldUI;
     public GameObject clickBlocker;
 
     private Camera playerCamera;
@@ -27,7 +28,8 @@ public class MainMenu : MonoBehaviour
     {
         mainMenuCameraAnimator.enabled = false;
         movingToPlayerCamera = true;
-        UI_Elements.SetActive(false);
+        mainMenuUI.SetActive(false);
+        overworldUI.SetActive(true);
     }
 
     private void FixedUpdate()
