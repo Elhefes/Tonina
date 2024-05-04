@@ -20,6 +20,8 @@ public class WaveController : MonoBehaviour
     public GameObject friendlyWarriorPrefab;
     private GameObject kingHouse;
 
+    public MusicPlayer musicPlayer;
+
     void Start()
     {
         kingHouse = GameObject.Find("king_house");
@@ -39,6 +41,7 @@ public class WaveController : MonoBehaviour
     public void StartRound(int roundNumber)
     {
         coroutines.Add(StartCoroutine(ParseRound(parsedLines[roundNumber - 1])));
+        musicPlayer.PlayBattleSong(0);
     }
 
     public IEnumerator ParseRound(string round)

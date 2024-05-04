@@ -4,12 +4,8 @@ using UnityEngine;
 
 public class MusicPlayer : MonoBehaviour
 {
-    public MusicEnvironment environment;
-    public enum MusicEnvironment
-    {
-        Peaceful,
-        Battle
-    }
+    private bool playingPeacefulSongs;
+    private bool playingBattleSongs;
 
     public AudioSource audioSource;
     public AudioClip firstSong;
@@ -20,13 +16,12 @@ public class MusicPlayer : MonoBehaviour
 
     private void Start()
     {
-        if (environment == MusicEnvironment.Peaceful) PlayPeacefulSongs(true);
-        if (environment == MusicEnvironment.Battle) PlayBattleSong(0);
+        PlayPeacefulSongs(true);
     }
 
     private void Update()
     {
-        if (!audioSource.isPlaying && environment == MusicEnvironment.Peaceful)
+        if (!audioSource.isPlaying && playingPeacefulSongs)
         {
             PlayNextSong();
         }
@@ -34,24 +29,20 @@ public class MusicPlayer : MonoBehaviour
 
     public void PlayPeacefulSongs(bool firstPlay)
     {
-        if (environment == MusicEnvironment.Battle)
+        if (playingBattleSongs)
         {
             StopBattleSong();
         }
 
-        environment = MusicEnvironment.Peaceful;
+        playingPeacefulSongs = true;
         ShufflePlaylist(firstPlay);
         PlayNextSong();
     }
 
     public void PlayBattleSong(int songNumber)
     {
-        if (environment == MusicEnvironment.Peaceful)
-        {
-            StopBattleSong();
-        }
-
-        environment = MusicEnvironment.Battle;
+        audioSource.Stop();
+        playingBattleSongs = true;
         audioSource.loop = true;
         audioSource.clip = battleSongs[songNumber];
         audioSource.Play();
