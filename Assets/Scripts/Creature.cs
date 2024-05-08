@@ -8,6 +8,7 @@ public class Creature : MonoBehaviour
     public CreatureMovement creatureMovement;
     private Coroutine attackCoroutine;
     private bool onCooldown;
+    private bool shouldAttack;
 
     void Start()
     {
@@ -25,7 +26,7 @@ public class Creature : MonoBehaviour
             directionToTarget.y = 0;
             var angle = Vector3.Angle(transform.forward, directionToTarget);
             Debug.DrawLine(transform.position, transform.position + directionToTarget * 114f, Color.red);
-            bool shouldAttack = weaponOnHand.ShouldAttack(Vector3.Distance(transform.position, creatureMovement.target.position), angle);
+            shouldAttack = weaponOnHand.ShouldAttack(Vector3.Distance(transform.position, creatureMovement.target.position), angle);
 
             if (shouldAttack)
             {
@@ -60,7 +61,7 @@ public class Creature : MonoBehaviour
     private IEnumerator Attack()
     {
         onCooldown = true;
-        while (creatureMovement.target)
+        while (creatureMovement.target && shouldAttack)
         {
             weaponOnHand.Attack(creatureMovement.animator);
             yield return new WaitForSeconds(weaponOnHand.attackCooldown);
