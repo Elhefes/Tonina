@@ -110,10 +110,6 @@ public class MouseLook : MonoBehaviour
                 transform.position = Vector3.Lerp(transform.position, playerToFollowAngledDirection, smoothSpeed);
                 playerToFollowDirection = new Vector3(player.transform.position.x, player.transform.position.y + 100f, player.transform.position.z);
                 minimapCamera.transform.position = Vector3.Lerp(minimapCamera.transform.position, playerToFollowDirection, smoothSpeed);
-                // rotate cameras smoothly
-                if (transform.rotation.y != 0) transform.rotation = Quaternion.RotateTowards(transform.rotation, Quaternion.Euler(60f, 0f, 0f), 2f);
-                minimapCamera.transform.rotation = Quaternion.RotateTowards(minimapCamera.transform.rotation, Quaternion.Euler(90f, 0f, 0f), 2f);
-                if (!minimapIndicators.activeSelf) minimapIndicators.SetActive(true);
             }
             else
             {
@@ -121,10 +117,6 @@ public class MouseLook : MonoBehaviour
                 transform.position = Vector3.Lerp(transform.position, playerToFollowAngledDirection, smoothSpeed);
                 playerToFollowDirection = new Vector3(player.transform.position.x, player.transform.position.y + 100f, player.transform.position.z);
                 minimapCamera.transform.position = Vector3.Lerp(minimapCamera.transform.position, playerToFollowDirection, smoothSpeed);
-                // rotate cameras smoothly
-                transform.rotation = Quaternion.RotateTowards(transform.rotation, Quaternion.Euler(60f, -90f, 0f), 2f);
-                minimapCamera.transform.rotation = Quaternion.RotateTowards(minimapCamera.transform.rotation, Quaternion.Euler(90f, -90f, 0f), 2f);
-                if (minimapIndicators.activeSelf) minimapIndicators.SetActive(false);
             }
         }
         else
@@ -163,6 +155,20 @@ public class MouseLook : MonoBehaviour
     // Limit camera's movement smoothly in x-axis
     private void FixedUpdate()
     {
+        // Rotate camera when entering and exiting king house
+        if (player.insideKingHouse)
+        {
+            transform.rotation = Quaternion.RotateTowards(transform.rotation, Quaternion.Euler(60f, -90f, 0f), 1.25f);
+            minimapCamera.transform.rotation = Quaternion.RotateTowards(minimapCamera.transform.rotation, Quaternion.Euler(90f, -90f, 0f), 1.25f);
+            if (minimapIndicators.activeSelf) minimapIndicators.SetActive(false);
+        }
+        else
+        {
+            if (transform.rotation.y != 0) transform.rotation = Quaternion.RotateTowards(transform.rotation, Quaternion.Euler(60f, 0f, 0f), 1.5f);
+            minimapCamera.transform.rotation = Quaternion.RotateTowards(minimapCamera.transform.rotation, Quaternion.Euler(90f, 0f, 0f), 1.5f);
+            if (!minimapIndicators.activeSelf) minimapIndicators.SetActive(true);
+        }
+
         if (cameraLimiter != null && onXLim)
         {
             if (Mathf.Abs(transform.position.x) > Mathf.Abs(cameraLimiter.xLim))
