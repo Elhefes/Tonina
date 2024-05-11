@@ -24,12 +24,13 @@ public class MouseLook : MonoBehaviour
 
     public CameraOnPlayerButton cameraOnPlayerButton;
     public GameObject optionsMenu;
+    public GameObject battleFieldMenu;
     public CameraLimiter cameraLimiter;
     public MinimapInput minimapInput;
     public float minimapInputSensitivity;
     private float acceleration;
 
-    float minZ = -142f;
+    float minZ = -152f;
     float maxZ = -80f;
 
     public void ToggleCameraOnPlayer()
@@ -74,7 +75,7 @@ public class MouseLook : MonoBehaviour
     void Update()
     {
         if (Input.GetKeyDown("c")) ToggleCameraOnPlayer();
-        if (Input.GetKeyDown(KeyCode.Escape))
+        if (Input.GetKeyDown(KeyCode.Escape) && !battleFieldMenu.activeSelf)
         {
             if (optionsMenu.activeSelf) optionsMenu.SetActive(false);
             else optionsMenu.SetActive(true);
