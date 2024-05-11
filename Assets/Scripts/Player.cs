@@ -42,6 +42,9 @@ public class Player : Creature
     public int textLineIndex;
 
     public Vector3 destination;
+    public Vector3 kingHouseSpawnPosition;
+    public GameObject blackFader;
+    private Coroutine returnHomeCoroutine;
 
     public Light weaponRangeIndicatorLight;
 
@@ -330,5 +333,22 @@ public class Player : Creature
         {
             creatureMovement.agent.SetDestination(new Vector3(transform.position.x, transform.position.y, mapLimitZ));
         }
+    }
+
+    public void ReturnHome(GameObject objectToDisable)
+    {
+        if (insideKingHouse) return;
+        if (objectToDisable != null) objectToDisable.SetActive(false);
+        returnHomeCoroutine = StartCoroutine(TeleportHome());
+    }
+
+    IEnumerator TeleportHome()
+    {
+        blackFader.SetActive(true);
+        creatureMovement.agent.SetDestination(transform.position);
+        yield return new WaitForSeconds(0.33f);
+        gameObject.SetActive(false);
+        transform.position = kingHouseSpawnPosition;
+        gameObject.SetActive(true);
     }
 }
