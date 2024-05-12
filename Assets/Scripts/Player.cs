@@ -119,7 +119,6 @@ public class Player : Creature
                 }
                 else
                 {
-                    textBox.gameObject.SetActive(false);
                     FreeVillagerFromTalking();
                 }
 
@@ -158,7 +157,6 @@ public class Player : Creature
         }
         else
         {
-            textBox.gameObject.SetActive(false);
             FreeVillagerFromTalking();
         }
     }
@@ -170,7 +168,7 @@ public class Player : Creature
         UpdateTextBox();
     }
 
-    void FreeVillagerFromTalking()
+    public void FreeVillagerFromTalking()
     {
         if (villager != null)
         {
@@ -179,6 +177,7 @@ public class Player : Creature
             villager.currentIndex = 0;
             villager = null;
             currentTalkingSubject = null;
+            textBox.gameObject.SetActive(false);
         }
     }
 
