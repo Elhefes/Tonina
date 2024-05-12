@@ -89,4 +89,15 @@ public class WeaponWheel : MonoBehaviour
     {
         weaponWheelCooldown = false;
     }
+
+    public void ResetToDefaultWeapon()
+    {
+        var wep = weapons[0];
+        weaponSprites[currentIndex].sprite = wep.uiSprite;
+        currentIndex = 0;
+        weaponIndex = 0;
+        player.SwitchWeapon(wep.type);
+        // Reset rotation of weapon wheel's circle
+        weaponWheelAnimator.gameObject.transform.eulerAngles = new Vector3(0f, 0f, 0f);
+    }
 }

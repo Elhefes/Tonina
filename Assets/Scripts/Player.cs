@@ -60,6 +60,30 @@ public class Player : Creature
         InvokeRepeating("LimitMovementInZAxis", 2.5f, 2.5f);
     }
 
+    public void EnableBattleMode()
+    {
+        EquipDefaultWeapon();
+        healthBar.gameObject.SetActive(true);
+    }
+
+    public void DisableBattleMode()
+    {
+        foreach (GameObject obj in weaponObjects)
+        {
+            obj.SetActive(false);
+        }
+        if (health < startingHealth) RestoreHealth(startingHealth - health);
+        healthBar.gameObject.SetActive(false);
+        creatureMovement.animator.SetInteger("WeaponIndex", 0);
+        battlefieldMenu.waveController.musicPlayer.PlayPeacefulSongs(false);
+    }
+
+    void EquipDefaultWeapon()
+    {
+        weaponObjects[0].SetActive(true);
+        creatureMovement.animator.SetInteger("WeaponIndex", 0);
+    }
+
     private void Update()
     {
         base.Update();
