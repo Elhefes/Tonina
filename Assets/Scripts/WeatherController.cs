@@ -9,7 +9,7 @@ public class WeatherController : MonoBehaviour
     private float rainFogDensity = 0.025f;
     private int currentRainEmissionAmount;
     private int randomRainEmissionAmount;
-    private Coroutine rainBuildUpCoroutine;
+    private Coroutine rainTransitionCoroutine;
     private Color clearAmbientColor = new Color(0.5411765f, 0.5764706f, 0.5058824f);
     private Color rainAmbientColor = new Color(0.2745098f, 0.3411765f, 0.2745098f);
 
@@ -31,6 +31,23 @@ public class WeatherController : MonoBehaviour
             var emission = rainParticleSystem.emission;
             emission.rateOverTime = currentRainEmissionAmount;
         }
+        else
+        {
+            if (Mathf.Clamp(RenderSettings.ambientLight.r, rainAmbientColor.r, clearAmbientColor.r) < clearAmbientColor.r)
+                RenderSettings.ambientLight += new Color(0.0003f, 0f, 0f);
+            if (Mathf.Clamp(RenderSettings.ambientLight.g, rainAmbientColor.g, clearAmbientColor.g) < clearAmbientColor.g)
+                RenderSettings.ambientLight += new Color(0f, 0.0003f, 0f);
+            if (Mathf.Clamp(RenderSettings.ambientLight.b, rainAmbientColor.b, clearAmbientColor.b) < clearAmbientColor.b)
+                RenderSettings.ambientLight += new Color(0f, 0f, 0.0003f);
+
+            if (RenderSettings.fogDensity > 0) RenderSettings.fogDensity -= 0.00001f;
+
+            if (currentRainEmissionAmount > 0)
+            {
+                var emission = rainParticleSystem.emission;
+                emission.rateOverTime = currentRainEmissionAmount;
+            }
+        }
     }
 
     void StartRain()
@@ -38,16 +55,14 @@ public class WeatherController : MonoBehaviour
         raining = true;
         rainParticleSystem.Play();
         randomRainEmissionAmount = Random.Range(150, 1100);
-        rainBuildUpCoroutine = StartCoroutine(RainBuildUp());
+        rainTransitionCoroutine = StartCoroutine(RainBuildUp());
     }
 
     void StopRain()
     {
         raining = false;
-        RenderSettings.ambientLight = clearAmbientColor;
-        RenderSettings.fogDensity = 0f;
         StopCoroutine(RainBuildUp());
-        rainParticleSystem.Stop();
+        rainTransitionCoroutine = StartCoroutine(FadeRainAway());
     }
 
     public enum Weather
@@ -58,7 +73,7 @@ public class WeatherController : MonoBehaviour
 
     private IEnumerator RainBuildUp()
     {
-        while (currentRainEmissionAmount < randomRainEmissionAmount)
+        while ((currentRainEmissionAmount < randomRainEmissionAmount) && raining)
         {
             if (currentRainEmissionAmount + 25 > randomRainEmissionAmount)
             {
@@ -67,5 +82,19 @@ public class WeatherController : MonoBehaviour
             else currentRainEmissionAmount += 25;
             yield return new WaitForSeconds(1.8f);
         }
+    }
+
+    private IEnumerator FadeRainAway()
+    {
+        while (currentRainEmissionAmount > 0 && !raining)
+        {
+            if (currentRainEmissionAmount - 44 < 0)
+            {
+                currentRainEmissionAmount -= currentRainEmissionAmount;
+            }
+            else currentRainEmissionAmount -= 44;
+            yield return new WaitForSeconds(1.8f);
+        }
+        rainParticleSystem.Stop();
     }
 }
