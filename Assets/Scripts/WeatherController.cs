@@ -3,20 +3,23 @@ using UnityEngine;
 
 public class WeatherController : MonoBehaviour
 {
-    public Weather weather;
     public ParticleSystem rainParticleSystem;
     private bool raining;
     private float rainFogDensity = 0.025f;
     private int currentRainEmissionAmount;
     private int randomRainEmissionAmount;
     private Coroutine rainTransitionCoroutine;
+    private Coroutine naturalWeatherCoroutine;
     private Color clearAmbientColor = new Color(0.5411765f, 0.5764706f, 0.5058824f);
     private Color rainAmbientColor = new Color(0.2745098f, 0.3411765f, 0.2745098f);
 
+    private void Start()
+    {
+        naturalWeatherCoroutine = StartCoroutine(StartNaturalWeather());
+    }
+
     void FixedUpdate()
     {
-        if (weather == Weather.Rain && !raining) StartRain();
-        if (weather == Weather.Clear && raining) StopRain();
         if (raining)
         {
             if (Mathf.Clamp(RenderSettings.ambientLight.r, rainAmbientColor.r, clearAmbientColor.r) > rainAmbientColor.r)
@@ -53,8 +56,9 @@ public class WeatherController : MonoBehaviour
     void StartRain()
     {
         raining = true;
+        StopCoroutine(FadeRainAway());
         rainParticleSystem.Play();
-        randomRainEmissionAmount = Random.Range(150, 1100);
+        randomRainEmissionAmount = Random.Range(150, 1101);
         rainTransitionCoroutine = StartCoroutine(RainBuildUp());
     }
 
@@ -63,12 +67,6 @@ public class WeatherController : MonoBehaviour
         raining = false;
         StopCoroutine(RainBuildUp());
         rainTransitionCoroutine = StartCoroutine(FadeRainAway());
-    }
-
-    public enum Weather
-    {
-        Clear,
-        Rain,
     }
 
     private IEnumerator RainBuildUp()
@@ -90,11 +88,29 @@ public class WeatherController : MonoBehaviour
         {
             if (currentRainEmissionAmount - 44 < 0)
             {
-                currentRainEmissionAmount -= currentRainEmissionAmount;
+                currentRainEmissionAmount = 0;
             }
             else currentRainEmissionAmount -= 44;
             yield return new WaitForSeconds(1.8f);
         }
-        rainParticleSystem.Stop();
+        if (!raining) rainParticleSystem.Stop();
+    }
+
+    private IEnumerator StartNaturalWeather()
+    {
+        yield return new WaitForSeconds(30);
+        while (true)
+        {
+            if (Random.Range(1, 9) == 1)
+            {
+                StartRain();
+                int rainLength = Random.Range(240, 721);
+                yield return new WaitForSeconds(rainLength);
+                StopRain();
+                // Guarantee 4 minutes of clear weather after a long rain
+                if (rainLength > 480) yield return new WaitForSeconds(240);
+            }
+            else yield return new WaitForSeconds(60);
+        }
     }
 }
