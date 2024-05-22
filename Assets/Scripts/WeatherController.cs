@@ -53,12 +53,12 @@ public class WeatherController : MonoBehaviour
         }
     }
 
-    void StartRain()
+    void StartRain(int randomMin, int randomMax)
     {
         raining = true;
         StopCoroutine(FadeRainAway());
         rainParticleSystem.Play();
-        randomRainEmissionAmount = Random.Range(150, 1101);
+        randomRainEmissionAmount = Random.Range(randomMin, randomMax);
         rainTransitionCoroutine = StartCoroutine(RainBuildUp());
     }
 
@@ -78,6 +78,17 @@ public class WeatherController : MonoBehaviour
                 currentRainEmissionAmount += randomRainEmissionAmount - currentRainEmissionAmount;
             }
             else currentRainEmissionAmount += 25;
+            yield return new WaitForSeconds(1.8f);
+        }
+
+        // If heavy rainfall switches to lighter rainfall
+        while ((currentRainEmissionAmount > randomRainEmissionAmount) && raining)
+        {
+            if (currentRainEmissionAmount - 25 < randomRainEmissionAmount)
+            {
+                currentRainEmissionAmount = randomRainEmissionAmount;
+            }
+            else currentRainEmissionAmount -= 25;
             yield return new WaitForSeconds(1.8f);
         }
     }
@@ -103,7 +114,8 @@ public class WeatherController : MonoBehaviour
         {
             if (Random.Range(1, 9) == 1)
             {
-                StartRain();
+                // Natural rain emission is between 150 and 1100
+                StartRain(150, 1101);
                 int rainLength = Random.Range(240, 721);
                 yield return new WaitForSeconds(rainLength);
                 StopRain();
@@ -112,5 +124,25 @@ public class WeatherController : MonoBehaviour
             }
             else yield return new WaitForSeconds(60);
         }
+    }
+
+    public void SetArtificialWeather(bool setRain, int randomMin, int randomMax, int effectLength)
+    {
+        StopAllCoroutines();
+        if (setRain)
+        {
+            StartRain(randomMin, randomMax);
+        }
+        else
+        {
+            StopRain();
+        }
+        rainTransitionCoroutine = StartCoroutine(KeepArtificialWeather(effectLength));
+    }
+
+    private IEnumerator KeepArtificialWeather(int effectLength)
+    {
+        yield return new WaitForSeconds(effectLength - 30);
+        StartNaturalWeather();
     }
 }
