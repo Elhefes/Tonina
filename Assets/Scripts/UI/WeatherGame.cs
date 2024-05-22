@@ -5,6 +5,7 @@ public class WeatherGame : MonoBehaviour
     public GameObject selectWeather;
     public GameObject gameScreen;
     private bool setRain;
+    public WeatherGameResults weatherGameResults;
 
     public void SetRainBool(bool value)
     {
@@ -21,6 +22,8 @@ public class WeatherGame : MonoBehaviour
     {
         selectWeather.SetActive(true);
         gameScreen.SetActive(false);
-        print(finalScore);
+        weatherGameResults.gameObject.SetActive(true);
+        weatherGameResults.SetTextsByResult(finalScore, setRain);
+        gameObject.SetActive(false);
     }
 }

@@ -28,6 +28,8 @@ public class Player : Creature
     private Villager villager;
     private GameObject currentTalkingSubject;
     private GameObject weatherStone;
+    public GameObject weatherGame;
+    public GameObject weatherGameResults;
     public int startingMaize;
     public int maxMaize;
     public int maizeHealAmount;
@@ -161,6 +163,7 @@ public class Player : Creature
                     weatherStone = target;
                     creatureMovement.agent.SetDestination(weatherStone.transform.position);
                     creatureMovement.agent.stoppingDistance = 2.5f;
+                    if (!weatherGameResults.activeSelf) weatherGame.SetActive(true);
                     return;
                 }
                 else weatherStone = null;
