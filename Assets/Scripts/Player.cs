@@ -27,6 +27,7 @@ public class Player : Creature
     private BuildingRoof buildingRoof;
     private Villager villager;
     private GameObject currentTalkingSubject;
+    private GameObject weatherStone;
     public int startingMaize;
     public int maxMaize;
     public int maizeHealAmount;
@@ -154,13 +155,26 @@ public class Player : Creature
                 }
                 else creatureMovement.agent.stoppingDistance = 0.1f;
 
+                // Check if player clicks the god pillar inside the weather temple
+                if (target.name == "chaac_stone" && Vector3.Distance(target.transform.position, transform.position) < 2.85f)
+                {
+                    weatherStone = target;
+                    creatureMovement.agent.SetDestination(weatherStone.transform.position);
+                    creatureMovement.agent.stoppingDistance = 2.5f;
+                    return;
+                }
+                else weatherStone = null;
+
                 creatureMovement.agent.SetDestination(hit.point);
                 destination = hit.point;
             }
         }
 
-        //rotate towards villager when talking up close
+        // Rotate towards villager when talking up close
         if (villager != null && villager.talking) LookAt(villager.gameObject.transform);
+
+        // Rotate towards weather stone when it's clicked up close
+        if (weatherStone != null) LookAt(weatherStone.transform);
 
         if (weaponRangeIndicatorLight.intensity > 0)
         {
