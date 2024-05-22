@@ -110,6 +110,15 @@ public class WeatherController : MonoBehaviour
     private IEnumerator StartNaturalWeather()
     {
         yield return new WaitForSeconds(30);
+
+        // Stop artificial rain
+        if (raining)
+        {
+            yield return new WaitForSeconds(Random.Range(0, 121));
+            StopRain();
+            yield return new WaitForSeconds(30);
+        }
+
         while (true)
         {
             if (Random.Range(1, 9) == 1)
@@ -143,6 +152,6 @@ public class WeatherController : MonoBehaviour
     private IEnumerator KeepArtificialWeather(int effectLength)
     {
         yield return new WaitForSeconds(effectLength - 30);
-        StartNaturalWeather();
+        StartCoroutine(StartNaturalWeather());
     }
 }
