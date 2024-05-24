@@ -4,6 +4,8 @@ using UnityEngine;
 public class WeatherController : MonoBehaviour
 {
     public ParticleSystem rainParticleSystem;
+    public AudioSource rainSoundSource;
+    private float rainSoundFaderValue;
     private bool raining;
     private float rainFogDensity = 0.025f;
     private int currentRainEmissionAmount;
@@ -16,6 +18,7 @@ public class WeatherController : MonoBehaviour
     private void Start()
     {
         naturalWeatherCoroutine = StartCoroutine(StartNaturalWeather());
+        rainSoundSource.volume = 0f;
     }
 
     void FixedUpdate()
@@ -33,6 +36,11 @@ public class WeatherController : MonoBehaviour
 
             var emission = rainParticleSystem.emission;
             emission.rateOverTime = currentRainEmissionAmount;
+
+            if (rainSoundFaderValue < (currentRainEmissionAmount / 1100f)) rainSoundFaderValue += 0.00012f;
+            else if (rainSoundFaderValue > (currentRainEmissionAmount / 1100f) + 0.00012f) rainSoundFaderValue -= 0.0003f;
+
+            rainSoundSource.volume = rainSoundFaderValue * PlayerPrefs.GetFloat("soundVolume", 0.5f);
         }
         else
         {
@@ -50,6 +58,12 @@ public class WeatherController : MonoBehaviour
                 var emission = rainParticleSystem.emission;
                 emission.rateOverTime = currentRainEmissionAmount;
             }
+
+            if (rainSoundFaderValue > 0f)
+            {
+                if (rainSoundFaderValue > (currentRainEmissionAmount / 1100f)) rainSoundFaderValue -= 0.0003f;
+                rainSoundSource.volume = rainSoundFaderValue * PlayerPrefs.GetFloat("soundVolume", 0.5f);
+            }
         }
     }
 
@@ -60,6 +74,7 @@ public class WeatherController : MonoBehaviour
         rainParticleSystem.Play();
         randomRainEmissionAmount = Random.Range(randomMin, randomMax);
         rainTransitionCoroutine = StartCoroutine(RainBuildUp());
+        rainSoundSource.Play();
     }
 
     void StopRain()
@@ -104,7 +119,13 @@ public class WeatherController : MonoBehaviour
             else currentRainEmissionAmount -= 44;
             yield return new WaitForSeconds(1.8f);
         }
-        if (!raining) rainParticleSystem.Stop();
+        if (!raining)
+        {
+            rainParticleSystem.Stop();
+            rainSoundSource.Stop();
+            rainSoundSource.volume = 0f;
+            rainSoundFaderValue = 0f;
+        }
     }
 
     private IEnumerator StartNaturalWeather()
