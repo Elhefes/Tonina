@@ -22,6 +22,7 @@ public class Player : Creature
     public bool insideKingHouse;
 
     public BattlefieldMenu battlefieldMenu;
+    public GameObject villageTPMenu;
 
     public MaizePlace maizePlace;
     private BuildingRoof buildingRoof;
@@ -47,7 +48,7 @@ public class Player : Creature
     public Vector3 destination;
     public Vector3 kingHouseSpawnPosition;
     public GameObject blackFader;
-    private Coroutine returnHomeCoroutine;
+    private Coroutine teleportCoroutine;
 
     public Light weaponRangeIndicatorLight;
 
@@ -321,6 +322,10 @@ public class Player : Creature
         {
             battlefieldMenu.gameObject.SetActive(true);
         }
+        if (other.CompareTag("VillageTPSpot"))
+        {
+            villageTPMenu.SetActive(true);
+        }
     }
 
     private void OnTriggerExit(Collider other)
@@ -338,6 +343,10 @@ public class Player : Creature
         if (other.CompareTag("BattlefieldPrompt"))
         {
             battlefieldMenu.Exit();
+        }
+        if (other.CompareTag("VillageTPSpot"))
+        {
+            villageTPMenu.SetActive(false);
         }
     }
 
@@ -379,16 +388,22 @@ public class Player : Creature
     {
         if (insideKingHouse) return;
         if (objectToDisable != null) objectToDisable.SetActive(false);
-        returnHomeCoroutine = StartCoroutine(TeleportHome());
+        teleportCoroutine = StartCoroutine(TeleportPlayerToSpot(kingHouseSpawnPosition));
     }
 
-    IEnumerator TeleportHome()
+    public void TeleportToVillageGate(Transform gatePosition)
+    {
+        if (villageTPMenu != null) villageTPMenu.SetActive(false);
+        teleportCoroutine = StartCoroutine(TeleportPlayerToSpot(gatePosition.position));
+    }
+
+    IEnumerator TeleportPlayerToSpot(Vector3 newPosition)
     {
         blackFader.SetActive(true);
         creatureMovement.agent.SetDestination(transform.position);
         yield return new WaitForSeconds(0.33f);
         gameObject.SetActive(false);
-        transform.position = kingHouseSpawnPosition;
+        transform.position = newPosition;
         gameObject.SetActive(true);
     }
 }
