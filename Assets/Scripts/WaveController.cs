@@ -163,7 +163,6 @@ public class WaveController : MonoBehaviour
         battleWinningScreen.SetActive(true);
         threatLevelText.text = currentRoundNumber.ToString();
         battleTimeText.text = GetBattleTimerString(secondsInBattle);
-        rewardsText.text = GetTotalRewards().ToString();
         StopCoroutine(SecondCounter());
         rewardsRisingCoroutine = StartCoroutine(PlayRewardsRisingAnimation());
         DisableBattleUI();
