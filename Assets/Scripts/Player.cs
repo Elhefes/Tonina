@@ -20,6 +20,7 @@ public class Player : Creature
     private bool overHealDecay;
 
     public bool insideKingHouse;
+    public bool inVillage;
 
     public BattlefieldMenu battlefieldMenu;
     public GameObject villageTPMenu;
@@ -316,7 +317,11 @@ public class Player : Creature
         {
             buildingRoof = other.GetComponentInParent<BuildingRoof>();
             buildingRoof.MakeRoofInvisible();
-            if (other.ToString().Equals("kinghouse_floor_mesh (UnityEngine.MeshCollider)")) insideKingHouse = true;
+            if (other.ToString().Equals("kinghouse_floor_mesh (UnityEngine.MeshCollider)"))
+            {
+                inVillage = false;
+                insideKingHouse = true;
+            }
         }
         if (other.CompareTag("BattlefieldPrompt"))
         {
@@ -395,6 +400,8 @@ public class Player : Creature
     {
         if (villageTPMenu != null) villageTPMenu.SetActive(false);
         teleportCoroutine = StartCoroutine(TeleportPlayerToSpot(gatePosition.position));
+        insideKingHouse = false;
+        inVillage = true;
     }
 
     IEnumerator TeleportPlayerToSpot(Vector3 newPosition)

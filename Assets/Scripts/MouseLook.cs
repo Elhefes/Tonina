@@ -30,19 +30,19 @@ public class MouseLook : MonoBehaviour
     public float minimapInputSensitivity;
     private float acceleration;
 
-    float minZ = -152f;
-    float maxZ = -80f;
+    float farthestZLimit = 152f;
+    float closestZLimit = 80f;
 
     public void ToggleCameraOnPlayer()
     {
-        if (transform.rotation.y != 0) return;
+        if (transform.rotation.y != 0 && transform.rotation.eulerAngles.y != 180) return;
         cameraOnPlayer = !cameraOnPlayer;
         cameraOnPlayerButton.ChangeIconSprite(cameraOnPlayer);
     }
 
     void CameraOnPlayerOff()
     {
-        if (player.insideKingHouse || transform.rotation.y != 0) return;
+        if (player.insideKingHouse && (transform.rotation.y != 0 || transform.rotation.eulerAngles.y != 180)) return;
         cameraOnPlayer = false;
         cameraOnPlayerButton.ChangeIconSprite(cameraOnPlayer);
     }
@@ -87,13 +87,27 @@ public class MouseLook : MonoBehaviour
             if (Input.GetAxis("Horizontal") != 0 || Input.GetAxis("Vertical") != 0 || minimapInput.GetMinimapInput().x != 0 || minimapInput.GetMinimapInput().y != 0)
             {
                 CameraOnPlayerOff();
-                moveDirection = new Vector3(Input.GetAxis("Horizontal") + minimapInput.GetMinimapInput().x * minimapInputSensitivity, 0f, Input.GetAxis("Vertical") + minimapInput.GetMinimapInput().y * minimapInputSensitivity);
+                // Invert minimap controls when player is in village
+                if (player.inVillage) moveDirection = new Vector3(Input.GetAxis("Horizontal") + minimapInput.GetMinimapInput().x * -minimapInputSensitivity, 0f, Input.GetAxis("Vertical") + minimapInput.GetMinimapInput().y * -minimapInputSensitivity);
+                else moveDirection = new Vector3(Input.GetAxis("Horizontal") + minimapInput.GetMinimapInput().x * minimapInputSensitivity, 0f, Input.GetAxis("Vertical") + minimapInput.GetMinimapInput().y * minimapInputSensitivity);
 
-                // Update the position with clamping
-                Vector3 newPosition = transform.position + moveDirection * moveSpeed * Time.deltaTime;
-                newPosition.z = Mathf.Clamp(newPosition.z, minZ, maxZ); // Adjust minZ and maxZ as needed
-                if (transform.position.z < minZ - 0.5f || transform.position.z > maxZ + 0.5f) transform.position = Vector3.Lerp(transform.position, newPosition, smoothSpeed);
-                else transform.position = newPosition;
+                if (player.inVillage)
+                {
+                    // Update the position with clamping
+                    Vector3 newPosition = transform.position + moveDirection * moveSpeed * Time.deltaTime;
+                    newPosition.z = Mathf.Clamp(newPosition.z, closestZLimit, farthestZLimit); // Adjust minZ and maxZ as needed
+                    if (transform.position.z > farthestZLimit - 0.5f || transform.position.z < closestZLimit + 0.5f) transform.position = Vector3.Lerp(transform.position, newPosition, smoothSpeed);
+                    else transform.position = newPosition;
+                    transform.position = newPosition;
+                }
+                else
+                {
+                    // Update the position with clamping
+                    Vector3 newPosition = transform.position + moveDirection * moveSpeed * Time.deltaTime;
+                    newPosition.z = Mathf.Clamp(newPosition.z, -farthestZLimit, -closestZLimit); // Adjust minZ and maxZ as needed
+                    if (transform.position.z < -farthestZLimit - 0.5f || transform.position.z > -closestZLimit + 0.5f) transform.position = Vector3.Lerp(transform.position, newPosition, smoothSpeed);
+                    else transform.position = newPosition;
+                }
             }
         }
 
@@ -106,7 +120,14 @@ public class MouseLook : MonoBehaviour
 
         if (cameraOnPlayer)
         {
-            if (!player.insideKingHouse)
+            if (player.inVillage)
+            {
+                playerToFollowAngledDirection = new Vector3(player.transform.position.x, player.transform.position.y + distanceFromObject, player.transform.position.z + (distanceFromObject / Mathf.Tan(60 * Mathf.PI / 180)) - 0.66f);
+                transform.position = Vector3.Lerp(transform.position, playerToFollowAngledDirection, smoothSpeed);
+                playerToFollowDirection = new Vector3(player.transform.position.x, player.transform.position.y + 100f, player.transform.position.z);
+                minimapCamera.transform.position = Vector3.Lerp(minimapCamera.transform.position, playerToFollowDirection, smoothSpeed);
+            }
+            else if (!player.insideKingHouse)
             {
                 playerToFollowAngledDirection = new Vector3(player.transform.position.x, player.transform.position.y + distanceFromObject, player.transform.position.z - (distanceFromObject / Mathf.Tan(60 * Mathf.PI / 180)) + 0.66f);
                 transform.position = Vector3.Lerp(transform.position, playerToFollowAngledDirection, smoothSpeed);
@@ -163,6 +184,12 @@ public class MouseLook : MonoBehaviour
             transform.rotation = Quaternion.RotateTowards(transform.rotation, Quaternion.Euler(60f, -90f, 0f), 1.25f);
             minimapCamera.transform.rotation = Quaternion.RotateTowards(minimapCamera.transform.rotation, Quaternion.Euler(90f, -90f, 0f), 1.25f);
             if (minimapIndicators.activeSelf) minimapIndicators.SetActive(false);
+        }
+        else if (player.inVillage)
+        {
+            if (transform.rotation.y != 0) transform.rotation = Quaternion.RotateTowards(transform.rotation, Quaternion.Euler(60f, 180f, 0f), 1.5f);
+            minimapCamera.transform.rotation = Quaternion.RotateTowards(minimapCamera.transform.rotation, Quaternion.Euler(90f, 180f, 0f), 1.5f);
+            if (!minimapIndicators.activeSelf) minimapIndicators.SetActive(true);
         }
         else
         {
