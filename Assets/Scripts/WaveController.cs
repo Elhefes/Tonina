@@ -9,8 +9,6 @@ public class WaveController : MonoBehaviour
     public ThreatLevels threatLevels;
     private ThreatLevels.ThreatLevel threatLevel;
     private int currentRoundNumber;
-    private List<string> lines;
-    private List<string> parsedLines;
     public TextAsset txt;
     private int friendlyWarriorsAmount;
     private bool isSpawningEnemies;
@@ -20,6 +18,7 @@ public class WaveController : MonoBehaviour
     private Vector3 housePos;
 
     private List<Coroutine> coroutines;
+    private Coroutine rewardsRisingCoroutine;
     public GameObject overworldOptionsButton;
     public GameObject battleUI;
     public GameObject battleWinningScreen;
@@ -166,6 +165,7 @@ public class WaveController : MonoBehaviour
         battleTimeText.text = GetBattleTimerString(secondsInBattle);
         rewardsText.text = GetTotalRewards().ToString();
         StopCoroutine(SecondCounter());
+        rewardsRisingCoroutine = StartCoroutine(PlayRewardsRisingAnimation());
         DisableBattleUI();
     }
 
@@ -173,6 +173,22 @@ public class WaveController : MonoBehaviour
     {
         if (secondsInBattle <= threatLevel.timeLimitForBonusReward) return threatLevel.baseReward + threatLevel.timeBonusReward;
         return threatLevel.baseReward;
+    }
+
+    private IEnumerator PlayRewardsRisingAnimation()
+    {
+        int tempRewards = 0;
+        int totalRewardsNumber = GetTotalRewards();
+        while (tempRewards < totalRewardsNumber)
+        {
+            rewardsText.text = tempRewards.ToString();
+            tempRewards += 1;
+            yield return new WaitForSeconds(2.5f / totalRewardsNumber);
+        }
+        if (tempRewards <= totalRewardsNumber)
+        {
+            rewardsText.text = totalRewardsNumber.ToString();
+        }
     }
 
     void SpawnFriendlies(int friendlyWarriorsAmount)
