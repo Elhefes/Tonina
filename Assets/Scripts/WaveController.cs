@@ -6,11 +6,13 @@ using TMPro;
 
 public class WaveController : MonoBehaviour
 {
+    public ThreatLevels threatLevels;
+    private ThreatLevels.ThreatLevel threatLevel;
+    private int currentRoundNumber;
     private List<string> lines;
     private List<string> parsedLines;
     public TextAsset txt;
-    public int roundNumber;
-    public int friendlyWarriorsAmount;
+    private int friendlyWarriorsAmount;
     private bool isSpawningEnemies;
     private int secondsInBattle;
 
@@ -21,7 +23,9 @@ public class WaveController : MonoBehaviour
     public GameObject overworldOptionsButton;
     public GameObject battleUI;
     public GameObject battleWinningScreen;
+    public TMP_Text threatLevelText;
     public TMP_Text battleTimeText;
+    public TMP_Text rewardsText;
     public GameObject enemyPrefab;
     public GameObject friendlyWarriorPrefab;
     private GameObject kingHouse;
@@ -33,20 +37,14 @@ public class WaveController : MonoBehaviour
         kingHouse = GameObject.Find("king_house");
         housePos = kingHouse.transform.position;
         coroutines = new List<Coroutine>();
-        print(txt.text);
-        lines = new List<string>(txt.text.Split('\n'));
-        parsedLines = new List<string>();
-
-        foreach (string line in lines)
-        {
-            if (line.Length == 0) break;
-            parsedLines.Add(line.Substring(4, line.Length - 4));
-        }
     }
 
     public void StartRound(int roundNumber, int battleSongID)
     {
-        coroutines.Add(StartCoroutine(ParseRound(parsedLines[roundNumber - 1])));
+        currentRoundNumber = roundNumber;
+        threatLevel = threatLevels.GetThreatLevel(roundNumber - 1);
+        friendlyWarriorsAmount = threatLevel.friendlyWarriorsAmount;
+        coroutines.Add(StartCoroutine(ParseRound(threatLevel.wave)));
         musicPlayer.PlayBattleSong(battleSongID);
         EnableBattleUI();
         StartCoroutine(SecondCounter());
@@ -164,9 +162,17 @@ public class WaveController : MonoBehaviour
     void WinBattle()
     {
         battleWinningScreen.SetActive(true);
+        threatLevelText.text = currentRoundNumber.ToString();
         battleTimeText.text = GetBattleTimerString(secondsInBattle);
+        rewardsText.text = GetTotalRewards().ToString();
         StopCoroutine(SecondCounter());
         DisableBattleUI();
+    }
+
+    int GetTotalRewards()
+    {
+        if (secondsInBattle <= threatLevel.timeLimitForBonusReward) return threatLevel.baseReward + threatLevel.timeBonusReward;
+        return threatLevel.baseReward;
     }
 
     void SpawnFriendlies(int friendlyWarriorsAmount)
