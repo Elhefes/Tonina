@@ -389,6 +389,16 @@ public class Player : Creature
         }
     }
 
+    public void DestroyFriendlyWarriors()
+    {
+        GameObject[] friendlyWarriors = GameObject.FindGameObjectsWithTag("ToninaTribe");
+        foreach (GameObject friendly in friendlyWarriors)
+        {
+            if (friendly.ToString().Equals("Akuxa (UnityEngine.GameObject)")) continue;
+            Destroy(friendly);
+        }
+    }
+
     public void ReturnHome(GameObject objectToDisable)
     {
         if (insideKingHouse) return;
