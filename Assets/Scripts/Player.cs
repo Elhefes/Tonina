@@ -168,7 +168,11 @@ public class Player : Creature
                     if (!weatherGameResults.activeSelf) weatherGame.SetActive(true);
                     return;
                 }
-                else weatherStone = null;
+                else
+                {
+                    weatherGame.SetActive(false);
+                    weatherStone = null;
+                }
 
                 creatureMovement.agent.SetDestination(hit.point);
                 destination = hit.point;
