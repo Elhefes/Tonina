@@ -244,6 +244,7 @@ public class Player : Creature
         weaponOnHand = weaponObjects[weaponIndex].GetComponent<Weapon>();
         weaponObjects[weaponIndex].SetActive(true);
         creatureMovement.animator.SetInteger("WeaponIndex", weaponIndex);
+        weaponOnHand.canHit = false;
         UpdateWeaponRangeIndicator();
     }
 
