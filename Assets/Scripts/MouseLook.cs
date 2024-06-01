@@ -88,7 +88,7 @@ public class MouseLook : MonoBehaviour
             {
                 CameraOnPlayerOff();
                 // Invert minimap controls when player is in village
-                if (player.inVillage) moveDirection = new Vector3(Input.GetAxis("Horizontal") + minimapInput.GetMinimapInput().x * -minimapInputSensitivity, 0f, Input.GetAxis("Vertical") + minimapInput.GetMinimapInput().y * -minimapInputSensitivity);
+                if (player.inVillage) moveDirection = new Vector3(-Input.GetAxis("Horizontal") + minimapInput.GetMinimapInput().x * -minimapInputSensitivity, 0f, -Input.GetAxis("Vertical") + minimapInput.GetMinimapInput().y * -minimapInputSensitivity);
                 else moveDirection = new Vector3(Input.GetAxis("Horizontal") + minimapInput.GetMinimapInput().x * minimapInputSensitivity, 0f, Input.GetAxis("Vertical") + minimapInput.GetMinimapInput().y * minimapInputSensitivity);
 
                 if (player.inVillage)
