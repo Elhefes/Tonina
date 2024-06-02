@@ -13,6 +13,7 @@ public class WaveController : MonoBehaviour
     private int friendlyWarriorsAmount;
     private bool isSpawningEnemies;
     private int secondsInBattle;
+    public bool battleIsLost;
 
     public Transform[] spawnPoints;
     private Vector3 housePos;
@@ -40,6 +41,7 @@ public class WaveController : MonoBehaviour
 
     public void StartRound(int roundNumber, int battleSongID)
     {
+        battleIsLost = false;
         currentRoundNumber = roundNumber;
         threatLevel = threatLevels.GetThreatLevel(roundNumber - 1);
         friendlyWarriorsAmount = threatLevel.friendlyWarriorsAmount;
@@ -150,12 +152,20 @@ public class WaveController : MonoBehaviour
 
     void CheckForEnemies()
     {
+        if (battleIsLost) return;
         if (GameObject.FindGameObjectsWithTag("Enemy").Length == 0)
         {
             isSpawningEnemies = false;
             CancelInvoke("CheckForEnemies");
             WinBattle();
         }
+    }
+
+    public void LoseBattle()
+    {
+        CancelInvoke("CheckForEnemies");
+        StopCoroutine(SecondCounter());
+        DisableBattleUI();
     }
 
     void WinBattle()

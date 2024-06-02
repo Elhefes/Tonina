@@ -23,6 +23,7 @@ public class Player : Creature
     public bool inVillage;
 
     public BattlefieldMenu battlefieldMenu;
+    public LosingScreen losingScreen;
     public GameObject villageTPMenu;
 
     public MaizePlace maizePlace;
@@ -263,7 +264,10 @@ public class Player : Creature
         health -= damage;
         if (health <= 0)
         {
-            Destroy(gameObject);
+            health = 0;
+            losingScreen.gameObject.SetActive(true);
+            losingScreen.SetPlayerDied(true);
+            gameObject.SetActive(false);
         }
         if (health + damage >= startingHealth) overHealBar.UpdateOverHealBar(health, startingHealth);
         playerHealthIndicator.UpdateHealthIndicator(health);
@@ -394,7 +398,22 @@ public class Player : Creature
         }
     }
 
-    public void DestroyFriendlyWarriors()
+    public void LoseBattle() { battlefieldMenu.waveController.LoseBattle(); }
+
+    public void EndBattle()
+    {
+        DestroyEnemies();
+        DestroyFriendlyWarriors();
+        DisableBattleMode();
+    }
+
+    void DestroyEnemies()
+    {
+        GameObject[] enemies = GameObject.FindGameObjectsWithTag("Enemy");
+        foreach (GameObject enemy in enemies) { Destroy(enemy); }
+    }
+
+    void DestroyFriendlyWarriors()
     {
         GameObject[] friendlyWarriors = GameObject.FindGameObjectsWithTag("ToninaTribe");
         foreach (GameObject friendly in friendlyWarriors)
