@@ -9,6 +9,7 @@ public class LosingScreen : MonoBehaviour
     public TMP_Text tryAgainText;
     public Animator backgroundAnimator;
     public Player player;
+    public AudioPassController audioPassController;
     public bool playerDied;
     public GameObject kingBarricade;
     private Coroutine textTypingCoroutine;
@@ -19,6 +20,7 @@ public class LosingScreen : MonoBehaviour
     {
         player.battlefieldMenu.waveController.battleIsLost = true;
         textTypingCoroutine = StartCoroutine(TypeTexts());
+        audioPassController.muffleEffect = true;
     }
 
     public void SetPlayerDied(bool value) { playerDied = value; }
@@ -70,6 +72,7 @@ public class LosingScreen : MonoBehaviour
             tryAgainText.text = currentText;
         }
 
+        audioPassController.muffleEffect = false;
         player.gameObject.SetActive(true);
         player.LoseBattle();
         player.EndBattle();
