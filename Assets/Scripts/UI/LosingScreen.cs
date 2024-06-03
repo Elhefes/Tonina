@@ -9,6 +9,7 @@ public class LosingScreen : MonoBehaviour
     public TMP_Text tryAgainText;
     public Animator backgroundAnimator;
     public Player player;
+    public MouseLook mouseLook;
     public AudioPassController audioPassController;
     public bool playerDied;
     public GameObject kingBarricade;
@@ -77,6 +78,7 @@ public class LosingScreen : MonoBehaviour
         player.LoseBattle();
         player.EndBattle();
         player.ReturnHome(null);
+        mouseLook.ToggleCameraOnPlayer();
         if (!playerDied) kingBarricade.SetActive(true);
         yield return new WaitForSeconds(1f);
         youLoseText.gameObject.SetActive(false);
