@@ -9,6 +9,7 @@ public class MusicPlayer : MonoBehaviour
 
     public AudioSource audioSource;
     public AudioClip firstSong;
+    public AudioClip introMusic;
     public List<AudioClip> peacefulSongs;
     public List<AudioClip> battleSongs;
     private List<AudioClip> shuffledPlaylist;
@@ -31,9 +32,10 @@ public class MusicPlayer : MonoBehaviour
     {
         if (playingBattleSongs)
         {
-            StopBattleSong();
+            audioSource.Stop();
         }
 
+        audioSource.loop = false;
         playingPeacefulSongs = true;
         ShufflePlaylist(firstPlay);
         PlayNextSong();
@@ -58,12 +60,6 @@ public class MusicPlayer : MonoBehaviour
             return;
         }
         currentIndex = (currentIndex + 1) % shuffledPlaylist.Count;
-    }
-
-    private void StopBattleSong()
-    {
-        audioSource.Stop();
-        audioSource.loop = false;
     }
 
     private void ShufflePlaylist(bool firstPlay)
@@ -102,5 +98,13 @@ public class MusicPlayer : MonoBehaviour
         }
 
         currentIndex = 0;
+    }
+
+    public void PlayIntroMusic()
+    {
+        audioSource.Stop();
+        audioSource.loop = true;
+        audioSource.clip = introMusic;
+        audioSource.Play();
     }
 }
