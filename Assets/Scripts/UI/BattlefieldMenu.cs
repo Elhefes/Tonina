@@ -7,6 +7,10 @@ public class BattlefieldMenu : MonoBehaviour
     public GameObject battleSelectedUI;
 
     private int threatLevel;
+    public ThreatLevels threatLevels;
+    public TMP_Text TTWarriorsText;
+    public TMP_Text rewardsText;
+
     private int battleSongID;
     public TMP_Text threatLevelText;
     public TMP_Text chosenSong;
@@ -39,6 +43,11 @@ public class BattlefieldMenu : MonoBehaviour
     {
         threatLevelText.text = threatLevel.ToString();
         PlayerPrefs.SetInt("currentThreatLevel", threatLevel);
+        if (threatLevel <= threatLevels.threatLevels.Length)
+        {
+            TTWarriorsText.text = threatLevels.threatLevels[threatLevel - 1].friendlyWarriorsAmount.ToString();
+            rewardsText.text = threatLevels.threatLevels[threatLevel - 1].baseReward.ToString();
+        }
     }
 
     void UpdateBattleSong()
