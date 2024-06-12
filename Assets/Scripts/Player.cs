@@ -52,6 +52,8 @@ public class Player : Creature
     public GameObject blackFader;
     private Coroutine teleportCoroutine;
 
+    public ClickerMaterial clickerObject;
+
     public Light weaponRangeIndicatorLight;
 
     private float mapLimitZ = -140f;
@@ -96,7 +98,7 @@ public class Player : Creature
         if (Input.GetKeyDown("m") && maizeAmount > 0) EatMaize();
         Debug.DrawLine(transform.position, transform.position + transform.forward * 114f, Color.red);
 
-        
+        if (creatureMovement.target != null) clickerObject.gameObject.transform.position = creatureMovement.target.transform.position;
 
         if (Input.GetMouseButtonDown(0))
         {
@@ -177,6 +179,7 @@ public class Player : Creature
 
                 creatureMovement.agent.SetDestination(hit.point);
                 destination = hit.point;
+                if (creatureMovement.target != null) clickerObject.alpha = 1f;
             }
         }
 
