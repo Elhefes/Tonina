@@ -177,6 +177,14 @@ public class Player : Creature
                     weatherStone = null;
                 }
 
+                if (target.CompareTag("VillageTPSpot") && Vector3.Distance(target.transform.position, transform.position) < 4f)
+                {
+                    creatureMovement.agent.SetDestination(Vector3.Lerp(transform.position, target.transform.position, 0.5f));
+                    villageTPMenu.SetActive(true);
+                    return;
+                }
+                else villageTPMenu.SetActive(false);
+
                 creatureMovement.agent.SetDestination(hit.point);
                 destination = hit.point;
                 if (creatureMovement.target != null) clickerObject.alpha = 1f;
