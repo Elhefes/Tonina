@@ -67,7 +67,6 @@ public class WaveController : MonoBehaviour
     {
         List<string> bits = new(round.Split(' '));
         isSpawningEnemies = true;
-        bool skipToNextBit = false;
         int index;
 
         if (friendlyWarriorsAmount > 0) SpawnFriendlies(friendlyWarriorsAmount);
@@ -82,6 +81,7 @@ public class WaveController : MonoBehaviour
             }
             else
             {
+                bool skipToNextBit = false;
                 var splittedBit = bit.Split('-');
                 Int32.TryParse(splittedBit[1], out index);
                 string bitStart = splittedBit[0];
