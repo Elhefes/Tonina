@@ -508,16 +508,23 @@ MonoBehaviour:
   startingHealth: 100
   weaponObjects:
   - {fileID: 8291348453499908256}
+  - {fileID: 3231447827573151896}
   - {fileID: 6440043927369519843}
   - {fileID: 482384435570632228}
-  - {fileID: 3231447827573151896}
   defaultAttackStoppingDistance: 1.5
   healthBar: {fileID: 3872663564488066035}
   playerHealthIndicator: {fileID: 0}
   overHealBar: {fileID: 825657633798101330}
   secondsBeforeOverHealDecay: 8
   secondsBetweenOverHealDecayTicks: 1.5
+  insideKingHouse: 0
+  inVillage: 0
+  battlefieldMenu: {fileID: 0}
+  losingScreen: {fileID: 0}
+  villageTPMenu: {fileID: 0}
   maizePlace: {fileID: 1002431552744195371, guid: adebe25711332d549bfc3c168e6175c5, type: 3}
+  weatherGame: {fileID: 0}
+  weatherGameResults: {fileID: 0}
   startingMaize: 0
   maxMaize: 4
   maizeHealAmount: 25
@@ -529,6 +536,9 @@ MonoBehaviour:
   textBoxText: {fileID: 0}
   textLineIndex: 0
   destination: {x: 0, y: 0, z: 0}
+  kingHouseSpawnPosition: {x: 0, y: 0, z: 0}
+  blackFader: {fileID: 0}
+  clickerObject: {fileID: 0}
   weaponRangeIndicatorLight: {fileID: 7063041251900934834}
 --- !u!54 &8457402616446038429
 Rigidbody:
