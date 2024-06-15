@@ -9,7 +9,6 @@ public class WaveController : MonoBehaviour
     public ThreatLevels threatLevels;
     private ThreatLevels.ThreatLevel threatLevel;
     private int currentRoundNumber;
-    public TextAsset txt;
     private int friendlyWarriorsAmount;
     private bool isSpawningEnemies;
     private int secondsInBattle;
@@ -26,11 +25,15 @@ public class WaveController : MonoBehaviour
     public TMP_Text threatLevelText;
     public TMP_Text battleTimeText;
     public TMP_Text rewardsText;
-    public GameObject enemyPrefab;
-    public GameObject friendlyWarriorPrefab;
     private GameObject kingHouse;
 
     public MusicPlayer musicPlayer;
+
+    public GameObject friendlyWarriorPrefab;
+
+    [Header("Enemies")]
+    public GameObject clubber;
+    public GameObject runner;
 
     void Start()
     {
@@ -125,29 +128,8 @@ public class WaveController : MonoBehaviour
 
     void SpawnEnemyOfType(char c, int i)
     {
-        if (c.Equals('A')) Instantiate(enemyPrefab, spawnPoints[i].position, spawnPoints[i].rotation);
-        return;
-
-
-        string enemyName = "";
-        if (c.Equals('A')) enemyName = "ScarredMummy";
-        else if (c.Equals('B')) enemyName = "MintMummy";
-        else if (c.Equals('C')) enemyName = "ArmoredMummy";
-        else if (c.Equals('D')) enemyName = "Skeleton";
-        else if (c.Equals('E')) enemyName = "GoldenSkeleton";
-        else if (c.Equals('F')) enemyName = "MummyWagon";
-        else if (c.Equals('G')) enemyName = "SkeletonWagon";
-        else if (c.Equals('H')) enemyName = "StoneMan";
-        else if (c.Equals('I')) enemyName = "Sandman";
-        else if (c.Equals('J')) enemyName = "DarkSandman";
-        else if (c.Equals('K')) enemyName = "Ibis";
-        else if (c.Equals('L')) enemyName = "MummyKing";
-        else if (c.Equals('M')) enemyName = "UndeadChariot";
-        else if (c.Equals('N')) enemyName = "MiniMummyKing";
-        else if (c.Equals('Q')) enemyName = "Anubis";
-        else if (c.Equals('R')) enemyName = "Khnum";
-        else if (c.Equals('S')) enemyName = "Sobek";
-        // gameController.SpawnEnemy(enemyName);
+        if (c.Equals('A')) Instantiate(clubber, spawnPoints[i].position, spawnPoints[i].rotation);
+        else if (c.Equals('B')) Instantiate(runner, spawnPoints[i].position, spawnPoints[i].rotation);
     }
 
     void CheckForEnemies()
