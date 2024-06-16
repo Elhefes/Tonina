@@ -27,6 +27,7 @@ public class Player : Creature
     public GameObject villageTPMenu;
 
     public MaizePlace maizePlace;
+    public FillOkil fillOkil;
     private BuildingRoof buildingRoof;
     private Villager villager;
     private GameObject currentTalkingSubject;
@@ -41,6 +42,12 @@ public class Player : Creature
     public TMP_Text maizeAmountTMP;
     public TMP_Text maizeInPlaceTMP;
     private int maizeAmount;
+    public GameObject fillOkilPickUp;
+    public Image fillOkilButtonFill;
+    public FillOkilHoldButton fillOkilHoldButton;
+    public TMP_Text stonesInFillTMP;
+    public TMP_Text spearsInFillTMP;
+    public TMP_Text arrowsInFillTMP;
 
     public Button textBox;
     public TMP_Text textBoxText;
@@ -203,6 +210,24 @@ public class Player : Creature
         }
     }
 
+    private void FixedUpdate()
+    {
+        if (fillOkilHoldButton.buttonPressed)
+        {
+            if (fillOkil.stoneAmount == 0 && fillOkil.spearAmount == 0 && fillOkil.arrowAmount == 0) return;
+            fillOkilButtonFill.fillAmount += 1 / 300f;
+            if (fillOkilButtonFill.fillAmount >= 1)
+            {
+                TakeAllFromFillOkil();
+                fillOkilButtonFill.fillAmount = 0;
+            }
+        }
+        else
+        {
+            if (fillOkilPickUp.activeSelf) fillOkilButtonFill.fillAmount = 0;
+        }
+    }
+
     void SetTextLines(Villager villager)
     {
         linesToRead = villager.textLines;
@@ -333,6 +358,11 @@ public class Player : Creature
             maizePlace = other.GetComponentInParent<MaizePlace>();
             EnterMaizePlace();
         }
+        if (other.CompareTag("Fill-Okil"))
+        {
+            fillOkil = other.GetComponentInParent<FillOkil>();
+            EnterFillOkil();
+        }
         if (other.CompareTag("Building"))
         {
             buildingRoof = other.GetComponentInParent<BuildingRoof>();
@@ -359,6 +389,7 @@ public class Player : Creature
         {
             ExitMaizePlace();
         }
+        if (other.CompareTag("Fill-Okil")) { fillOkilPickUp.SetActive(false); }
         if (other.CompareTag("Building"))
         {
             buildingRoof = other.GetComponentInParent<BuildingRoof>();
@@ -399,6 +430,34 @@ public class Player : Creature
         maizeAmount += 1;
         maizeAmountTMP.text = maizeAmount.ToString();
         if (maizePlace.maizeInPlace < 1) maizePickUp.SetActive(false);
+    }
+    public void EnterFillOkil()
+    {
+        fillOkilPickUp.SetActive(true);
+        fillOkilButtonFill.fillAmount = 0f;
+        stonesInFillTMP.text = fillOkil.stoneAmount.ToString();
+        spearsInFillTMP.text = fillOkil.spearAmount.ToString();
+        arrowsInFillTMP.text = fillOkil.arrowAmount.ToString();
+    }
+
+    public void TakeAllFromFillOkil()
+    {
+        // When inventory space is added, this should give all of these at once until max. amount reached
+        if (fillOkil.stoneAmount > 0)
+        {
+            fillOkil.stoneAmount--;
+            stonesInFillTMP.text = fillOkil.stoneAmount.ToString();
+        }
+        if (fillOkil.spearAmount > 0)
+        {
+            fillOkil.spearAmount--;
+            spearsInFillTMP.text = fillOkil.spearAmount.ToString();
+        }
+        if (fillOkil.arrowAmount > 0)
+        {
+            fillOkil.arrowAmount--;
+            arrowsInFillTMP.text = fillOkil.arrowAmount.ToString();
+        }
     }
 
     void LimitMovementInZAxis()
