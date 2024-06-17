@@ -476,7 +476,7 @@ NavMeshAgent:
   m_AutoRepath: 1
   m_Height: 2
   m_BaseOffset: 0
-  m_WalkableMask: 4294967295
+  m_WalkableMask: 7
   m_ObstacleAvoidanceType: 4
 --- !u!114 &577319696662315431
 MonoBehaviour:
@@ -523,6 +523,7 @@ MonoBehaviour:
   losingScreen: {fileID: 0}
   villageTPMenu: {fileID: 0}
   maizePlace: {fileID: 1002431552744195371, guid: adebe25711332d549bfc3c168e6175c5, type: 3}
+  fillOkil: {fileID: 0}
   weatherGame: {fileID: 0}
   weatherGameResults: {fileID: 0}
   startingMaize: 0
@@ -532,6 +533,12 @@ MonoBehaviour:
   maizePickUp: {fileID: 0}
   maizeAmountTMP: {fileID: 0}
   maizeInPlaceTMP: {fileID: 0}
+  fillOkilPickUp: {fileID: 0}
+  fillOkilButtonFill: {fileID: 0}
+  fillOkilHoldButton: {fileID: 0}
+  stonesInFillTMP: {fileID: 0}
+  spearsInFillTMP: {fileID: 0}
+  arrowsInFillTMP: {fileID: 0}
   textBox: {fileID: 0}
   textBoxText: {fileID: 0}
   textLineIndex: 0
