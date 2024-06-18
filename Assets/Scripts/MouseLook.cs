@@ -28,10 +28,16 @@ public class MouseLook : MonoBehaviour
 
     private void Start()
     {
-        cameraLimiter.leftLimiterLine = (cameraLimiter.BF_LeftLimZ2 - cameraLimiter.BF_LeftLimZ1)
+        // Calculate limiter lines
+        cameraLimiter.BF_leftLimiterLine = (cameraLimiter.BF_LeftLimZ2 - cameraLimiter.BF_LeftLimZ1)
             / (cameraLimiter.BF_LeftLimX2 - cameraLimiter.BF_LeftLimX1);
-        cameraLimiter.rightLimiterLine = (cameraLimiter.BF_RightLimZ2 - cameraLimiter.BF_RightLimZ1)
+        cameraLimiter.BF_rightLimiterLine = (cameraLimiter.BF_RightLimZ2 - cameraLimiter.BF_RightLimZ1)
             / (cameraLimiter.BF_RightLimX2 - cameraLimiter.BF_RightLimX1);
+
+        cameraLimiter.village_leftLimiterLine = (cameraLimiter.village_LeftLimZ2 - cameraLimiter.village_LeftLimZ1)
+            / (cameraLimiter.village_LeftLimX2 - cameraLimiter.village_LeftLimX1);
+        cameraLimiter.village_rightLimiterLine = (cameraLimiter.village_RightLimZ2 - cameraLimiter.village_RightLimZ1)
+            / (cameraLimiter.village_RightLimX2 - cameraLimiter.village_RightLimX1);
     }
 
     public void ToggleCameraOnPlayer()
@@ -84,19 +90,21 @@ public class MouseLook : MonoBehaviour
                 {
                     // Update the position with clamping
                     Vector3 newPosition = transform.position + moveDirection * moveSpeed * Time.deltaTime;
-                    newPosition.z = Mathf.Clamp(newPosition.z, cameraLimiter.BF_ZLimit1, cameraLimiter.BF_ZLimit2); // Adjust minZ and maxZ as needed
-                    newPosition.x = Mathf.Clamp(newPosition.x, cameraLimiter.BF_LeftLimX1 + (Mathf.Abs(cameraLimiter.BF_LeftLimZ1) - Mathf.Abs(transform.position.z)) / cameraLimiter.leftLimiterLine, 200f); // Adjust minZ and maxZ as needed
-                    //if (transform.position.z > farthestZLimit - 0.5f || transform.position.z < closestZLimit + 0.5f) transform.position = Vector3.Lerp(transform.position, newPosition, smoothSpeed);
-                    //else transform.position = newPosition;
+                    newPosition.z = Mathf.Clamp(newPosition.z, cameraLimiter.village_ZLimit1, cameraLimiter.village_ZLimit2);
+                    newPosition.x = Mathf.Clamp(newPosition.x, cameraLimiter.village_RightLimX1 - (Mathf.Abs(cameraLimiter.village_RightLimZ1) - Mathf.Abs(transform.position.z)) / cameraLimiter.village_rightLimiterLine,
+                        cameraLimiter.village_LeftLimX1 - (Mathf.Abs(cameraLimiter.village_LeftLimZ1) - Mathf.Abs(transform.position.z)) / cameraLimiter.village_leftLimiterLine);
+                    // General limits in x-axis
+                    if (newPosition.x >= 130f) newPosition.x = 130f;
+                    if (newPosition.x <= -138f) newPosition.x = -138f;
                     transform.position = newPosition;
                 }
                 else
                 {
                     // Update the position with clamping
                     Vector3 newPosition = transform.position + moveDirection * moveSpeed * Time.deltaTime;
-                    newPosition.z = Mathf.Clamp(newPosition.z, cameraLimiter.BF_ZLimit2, cameraLimiter.BF_ZLimit1); // Adjust minZ and maxZ as needed
-                    newPosition.x = Mathf.Clamp(newPosition.x, cameraLimiter.BF_LeftLimX1 + (Mathf.Abs(cameraLimiter.BF_LeftLimZ1) - Mathf.Abs(transform.position.z)) / cameraLimiter.leftLimiterLine,
-                        cameraLimiter.BF_RightLimX1 + (Mathf.Abs(cameraLimiter.BF_RightLimZ1) - Mathf.Abs(transform.position.z)) / cameraLimiter.rightLimiterLine); // Adjust minZ and maxZ as needed
+                    newPosition.z = Mathf.Clamp(newPosition.z, cameraLimiter.BF_ZLimit2, cameraLimiter.BF_ZLimit1);
+                    newPosition.x = Mathf.Clamp(newPosition.x, cameraLimiter.BF_LeftLimX1 + (Mathf.Abs(cameraLimiter.BF_LeftLimZ1) - Mathf.Abs(transform.position.z)) / cameraLimiter.BF_leftLimiterLine,
+                        cameraLimiter.BF_RightLimX1 + (Mathf.Abs(cameraLimiter.BF_RightLimZ1) - Mathf.Abs(transform.position.z)) / cameraLimiter.BF_rightLimiterLine);
                     transform.position = newPosition;
                 }
             }
