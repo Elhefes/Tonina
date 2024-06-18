@@ -126,11 +126,6 @@ public class Player : Creature
             {
                 GameObject target = hit.collider.gameObject;
 
-                if (target.CompareTag("ClickBlocker") || target.CompareTag("ClickBlockerZ"))
-                {
-                    return;
-                }
-
                 if (target.CompareTag("TalkPrompt") && Vector3.Distance(transform.position, target.transform.position) < 2.7f)
                 {
                     if (target != currentTalkingSubject) FreeVillagerFromTalking();

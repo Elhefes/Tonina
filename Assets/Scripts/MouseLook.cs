@@ -1,5 +1,4 @@
 using UnityEngine;
-using UnityEngine.UI;
 
 public class MouseLook : MonoBehaviour
 {
@@ -10,13 +9,11 @@ public class MouseLook : MonoBehaviour
     private Vector3 playerToFollowAngledDirection;
     private Vector3 playerToFollowDirection;
     private Vector3 freeMinimapCameraDirection;
-    private Vector3 xDirection;
     public float distanceFromObject;
     private float currentDistance;
     public float smoothSpeed;
     public float minCameraZoom;
     public float maxCameraZoom;
-    private bool onXLim;
     public Player player;
     public bool cameraOnPlayer = true;
     public Camera minimapCamera;
@@ -28,10 +25,14 @@ public class MouseLook : MonoBehaviour
     public CameraLimiter cameraLimiter;
     public MinimapInput minimapInput;
     public float minimapInputSensitivity;
-    private float acceleration;
 
-    float farthestZLimit = 152f;
-    float closestZLimit = 80f;
+    private void Start()
+    {
+        cameraLimiter.leftLimiterLine = (cameraLimiter.BF_LeftLimZ2 - cameraLimiter.BF_LeftLimZ1)
+            / (cameraLimiter.BF_LeftLimX2 - cameraLimiter.BF_LeftLimX1);
+        cameraLimiter.rightLimiterLine = (cameraLimiter.BF_RightLimZ2 - cameraLimiter.BF_RightLimZ1)
+            / (cameraLimiter.BF_RightLimX2 - cameraLimiter.BF_RightLimX1);
+    }
 
     public void ToggleCameraOnPlayer()
     {
@@ -59,18 +60,6 @@ public class MouseLook : MonoBehaviour
         }
     }
 
-    private void OnTriggerEnter(Collider other)
-    {
-        if (other.CompareTag("ClickBlocker"))
-        {
-            cameraLimiter = other.GetComponent<CameraLimiter>();
-            if (cameraLimiter != null)
-            {
-                onXLim = true;
-            }
-        }
-    }
-
     // Update is called once per frame
     void Update()
     {
@@ -95,18 +84,20 @@ public class MouseLook : MonoBehaviour
                 {
                     // Update the position with clamping
                     Vector3 newPosition = transform.position + moveDirection * moveSpeed * Time.deltaTime;
-                    newPosition.z = Mathf.Clamp(newPosition.z, closestZLimit, farthestZLimit); // Adjust minZ and maxZ as needed
-                    if (transform.position.z > farthestZLimit - 0.5f || transform.position.z < closestZLimit + 0.5f) transform.position = Vector3.Lerp(transform.position, newPosition, smoothSpeed);
-                    else transform.position = newPosition;
+                    newPosition.z = Mathf.Clamp(newPosition.z, cameraLimiter.BF_ZLimit1, cameraLimiter.BF_ZLimit2); // Adjust minZ and maxZ as needed
+                    newPosition.x = Mathf.Clamp(newPosition.x, cameraLimiter.BF_LeftLimX1 + (Mathf.Abs(cameraLimiter.BF_LeftLimZ1) - Mathf.Abs(transform.position.z)) / cameraLimiter.leftLimiterLine, 200f); // Adjust minZ and maxZ as needed
+                    //if (transform.position.z > farthestZLimit - 0.5f || transform.position.z < closestZLimit + 0.5f) transform.position = Vector3.Lerp(transform.position, newPosition, smoothSpeed);
+                    //else transform.position = newPosition;
                     transform.position = newPosition;
                 }
                 else
                 {
                     // Update the position with clamping
                     Vector3 newPosition = transform.position + moveDirection * moveSpeed * Time.deltaTime;
-                    newPosition.z = Mathf.Clamp(newPosition.z, -farthestZLimit, -closestZLimit); // Adjust minZ and maxZ as needed
-                    if (transform.position.z < -farthestZLimit - 0.5f || transform.position.z > -closestZLimit + 0.5f) transform.position = Vector3.Lerp(transform.position, newPosition, smoothSpeed);
-                    else transform.position = newPosition;
+                    newPosition.z = Mathf.Clamp(newPosition.z, cameraLimiter.BF_ZLimit2, cameraLimiter.BF_ZLimit1); // Adjust minZ and maxZ as needed
+                    newPosition.x = Mathf.Clamp(newPosition.x, cameraLimiter.BF_LeftLimX1 + (Mathf.Abs(cameraLimiter.BF_LeftLimZ1) - Mathf.Abs(transform.position.z)) / cameraLimiter.leftLimiterLine,
+                        cameraLimiter.BF_RightLimX1 + (Mathf.Abs(cameraLimiter.BF_RightLimZ1) - Mathf.Abs(transform.position.z)) / cameraLimiter.rightLimiterLine); // Adjust minZ and maxZ as needed
+                    transform.position = newPosition;
                 }
             }
         }
@@ -196,36 +187,6 @@ public class MouseLook : MonoBehaviour
             if (transform.rotation.y != 0) transform.rotation = Quaternion.RotateTowards(transform.rotation, Quaternion.Euler(60f, 0f, 0f), 1.5f);
             minimapCamera.transform.rotation = Quaternion.RotateTowards(minimapCamera.transform.rotation, Quaternion.Euler(90f, 0f, 0f), 1.5f);
             if (!minimapIndicators.activeSelf) minimapIndicators.SetActive(true);
-        }
-
-        if (cameraLimiter != null && onXLim)
-        {
-            if (Mathf.Abs(transform.position.x) > Mathf.Abs(cameraLimiter.xLim))
-            {
-                xDirection = new Vector3(moveDirection.x + transform.position.x + acceleration, transform.position.y, transform.position.z);
-                transform.position = Vector3.Lerp(transform.position, xDirection, smoothSpeed);
-                if (transform.position.x > 0)
-                {
-                    if (transform.position.x > cameraLimiter.xLim + 3)
-                    {
-                        acceleration -= 0.18f;
-                    }
-                    acceleration -= 0.06f;
-                }
-                else
-                {
-                    if (transform.position.x < cameraLimiter.xLim - 3)
-                    {
-                        acceleration += 0.18f;
-                    }
-                    acceleration += 0.06f;
-                }
-            }
-            else
-            {
-                acceleration = 0f;
-                onXLim = false;
-            }
         }
     }
 }
