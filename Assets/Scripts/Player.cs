@@ -63,16 +63,12 @@ public class Player : Creature
 
     public Light weaponRangeIndicatorLight;
 
-    private float mapLimitZ = -140f;
-
     private void Awake()
     {
         health = startingHealth;
         maizeAmount = startingMaize;
         maizeAmountTMP.text = startingMaize.ToString();
         if (startingMaize > 0) maizeInventory.SetActive(true);
-        // This could be moved to start when player enters battlefield
-        InvokeRepeating("LimitMovementInZAxis", 2.5f, 2.5f);
     }
 
     public void EnableBattleMode()
@@ -109,7 +105,7 @@ public class Player : Creature
 
         if (Input.GetMouseButtonDown(0))
         {
-            if (EventSystem.current.IsPointerOverGameObject() || transform.position.z < mapLimitZ) return;
+            if (EventSystem.current.IsPointerOverGameObject()) return;
 
             // Check if there is a touch
             if (Input.touchCount > 0 && Input.GetTouch(0).phase == TouchPhase.Began)
@@ -452,14 +448,6 @@ public class Player : Creature
         {
             fillOkil.arrowAmount--;
             arrowsInFillTMP.text = fillOkil.arrowAmount.ToString();
-        }
-    }
-
-    void LimitMovementInZAxis()
-    {
-        if (transform.position.z < mapLimitZ)
-        {
-            creatureMovement.agent.SetDestination(new Vector3(transform.position.x, transform.position.y, mapLimitZ));
         }
     }
 
