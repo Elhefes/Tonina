@@ -243,8 +243,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f419ae60a87d256488cc3ba733dfb420, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  startingHealth: 300
+  startingHealth: 480
   layerToDisappear: {fileID: 8150374696807718246}
+  loseWhenDestroyed: 0
+  losingScreen: {fileID: 0}
 --- !u!1 &1420117287840863477
 GameObject:
   m_ObjectHideFlags: 0
