@@ -5,6 +5,7 @@ public class WeatherController : MonoBehaviour
 {
     public ParticleSystem rainParticleSystem;
     public AudioSource rainSoundSource;
+    public AudioLooper audioLooper;
     private float rainSoundFaderValue;
     private bool raining;
     private float rainFogDensity = 0.025f;
@@ -19,6 +20,7 @@ public class WeatherController : MonoBehaviour
     {
         naturalWeatherCoroutine = StartCoroutine(StartNaturalWeather());
         rainSoundSource.volume = 0f;
+        rainSoundSource.clip = audioLooper.trimSilence(rainSoundSource.clip);
     }
 
     void FixedUpdate()

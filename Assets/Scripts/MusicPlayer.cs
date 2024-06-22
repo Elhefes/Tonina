@@ -7,6 +7,7 @@ public class MusicPlayer : MonoBehaviour
     private bool playingPeacefulSongs;
     private bool playingBattleSongs;
 
+    public AudioLooper audioLooper;
     public AudioSource audioSource;
     public AudioClip firstSong;
     public AudioClip introMusic;
@@ -104,7 +105,7 @@ public class MusicPlayer : MonoBehaviour
     {
         audioSource.Stop();
         audioSource.loop = true;
-        audioSource.clip = introMusic;
+        audioSource.clip = audioLooper.trimSilence(introMusic);
         audioSource.Play();
     }
 }
