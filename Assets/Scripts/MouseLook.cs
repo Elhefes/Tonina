@@ -40,9 +40,15 @@ public class MouseLook : MonoBehaviour
             / (cameraLimiter.village_RightLimX2 - cameraLimiter.village_RightLimX1);
     }
 
+    public void CameraOnPlayerButton()
+    {
+        // This check can be buggy, but it likely won't matter with button calls
+        if (transform.rotation.y != 0 && transform.rotation.eulerAngles.y != 180) return;
+        ToggleCameraOnPlayer();
+    }
+
     public void ToggleCameraOnPlayer()
     {
-        if (transform.rotation.y != 0 && transform.rotation.eulerAngles.y != 180) return;
         cameraOnPlayer = !cameraOnPlayer;
         cameraOnPlayerButton.ChangeIconSprite(cameraOnPlayer);
     }
@@ -69,7 +75,7 @@ public class MouseLook : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown("c")) ToggleCameraOnPlayer();
+        if (Input.GetKeyDown("c")) CameraOnPlayerButton();
         if (Input.GetKeyDown(KeyCode.Escape) && !battleFieldMenu.activeSelf)
         {
             player.FreeVillagerFromTalking();
