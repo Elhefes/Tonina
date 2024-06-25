@@ -22,6 +22,8 @@ public class Player : Creature
     public bool insideKingHouse;
     public bool inVillage;
 
+    public OptionsMenu optionsMenu;
+
     public BattlefieldMenu battlefieldMenu;
     public LosingScreen losingScreen;
     public GameObject villageTPMenu;
@@ -479,6 +481,13 @@ public class Player : Creature
     public void ReturnHome(GameObject objectToDisable)
     {
         if (insideKingHouse) return;
+        // Confirmation in battle before returning home
+        if (battlefieldMenu.waveController.battleUI.activeSelf && !optionsMenu.confirmReturnHomeMenu.activeSelf)
+        {
+            optionsMenu.confirmReturnHomeMenu.SetActive(true);
+            optionsMenu.normalMenu.SetActive(false);
+            return;
+        }
         if (objectToDisable != null) objectToDisable.SetActive(false);
         teleportCoroutine = StartCoroutine(TeleportPlayerToSpot(kingHouseSpawnPosition));
     }

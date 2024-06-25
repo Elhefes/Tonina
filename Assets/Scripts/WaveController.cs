@@ -145,8 +145,9 @@ public class WaveController : MonoBehaviour
 
     public void LoseBattle()
     {
+        isSpawningEnemies = false;
         CancelInvoke("CheckForEnemies");
-        StopCoroutine(SecondCounter());
+        StopAllCoroutines();
         DisableBattleUI();
     }
 
