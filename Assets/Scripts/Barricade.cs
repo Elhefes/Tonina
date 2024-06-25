@@ -10,6 +10,11 @@ public class Barricade : MonoBehaviour
 
     private void OnEnable()
     {
+        RestoreBarricade();
+    }
+
+    public void RestoreBarricade()
+    {
         health = startingHealth;
         if (!layerToDisappear.activeSelf) layerToDisappear.SetActive(true);
     }

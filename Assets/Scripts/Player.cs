@@ -26,6 +26,7 @@ public class Player : Creature
 
     public BattlefieldMenu battlefieldMenu;
     public LosingScreen losingScreen;
+    public BarricadesController barricadeController;
     public GameObject villageTPMenu;
 
     public MaizePlace maizePlace;
@@ -460,6 +461,7 @@ public class Player : Creature
         DestroyEnemies();
         DestroyFriendlyWarriors();
         DisableBattleMode();
+        barricadeController.RestoreBarricades();
     }
 
     void DestroyEnemies()
