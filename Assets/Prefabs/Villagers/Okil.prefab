@@ -685,6 +685,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1742763307648839638}
   - component: {fileID: 419476965528522519}
+  - component: {fileID: 4293455441966766948}
   - component: {fileID: 7030914599080415107}
   - component: {fileID: 4266341833948830035}
   - component: {fileID: 1340806667369558695}
@@ -787,12 +788,7 @@ MonoBehaviour:
   freeSpaceZ: 3
   minWaitTime: 4
   maxWaitTime: 10
-  talking: 0
-  textLines:
-  - Hello, my name is Okil.
-  - Welcome to my weapon workshop!
-  - Would you like brand new obsidian spears?
-  currentIndex: 0
+  textSubject: {fileID: 4293455441966766948}
   voiceLines:
   - {fileID: 8300000, guid: 7b803c5f33bccc6499259b731e5f8a89, type: 3}
   - {fileID: 8300000, guid: 3fe2051b0b7dfb94d8ef747d251e47dc, type: 3}
@@ -801,6 +797,24 @@ MonoBehaviour:
   - {fileID: 8300000, guid: e9c0d69ce1d4fe14ca882a0f94a992c8, type: 3}
   soundPlayer: {fileID: 576451482120433098}
   playingVoiceLines: 0
+--- !u!114 &4293455441966766948
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1397339994142422380}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 531e5b15f0f04cb48aa84b927c27d19a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  textIsActive: 0
+  textLines:
+  - Hello, my name is Okil.
+  - Welcome to my weapon workshop!
+  - Would you like brand new obsidian spears?
+  currentIndex: 0
 --- !u!143 &7030914599080415107
 CharacterController:
   m_ObjectHideFlags: 0

@@ -1816,6 +1816,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3556944717457470067}
   - component: {fileID: 4435524425506235267}
+  - component: {fileID: 5668456217277715989}
   - component: {fileID: 5446998419158490782}
   - component: {fileID: 3086020947872757682}
   - component: {fileID: 7309495381040981001}
@@ -1897,11 +1898,7 @@ MonoBehaviour:
   freeSpaceZ: 3
   minWaitTime: 4
   maxWaitTime: 10
-  talking: 0
-  textLines:
-  - This is my first line.
-  - My 2nd line is much cooler than the 1st one!
-  currentIndex: 0
+  textSubject: {fileID: 5668456217277715989}
   voiceLines:
   - {fileID: 8300000, guid: 7b803c5f33bccc6499259b731e5f8a89, type: 3}
   - {fileID: 8300000, guid: 3fe2051b0b7dfb94d8ef747d251e47dc, type: 3}
@@ -1910,6 +1907,23 @@ MonoBehaviour:
   - {fileID: 8300000, guid: e9c0d69ce1d4fe14ca882a0f94a992c8, type: 3}
   soundPlayer: {fileID: 6942311005927204141}
   playingVoiceLines: 0
+--- !u!114 &5668456217277715989
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4185848242794227913}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 531e5b15f0f04cb48aa84b927c27d19a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  textIsActive: 0
+  textLines:
+  - This is my first line.
+  - My 2nd line is much cooler than the 1st one!
+  currentIndex: 0
 --- !u!143 &5446998419158490782
 CharacterController:
   m_ObjectHideFlags: 0

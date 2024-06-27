@@ -78,7 +78,7 @@ public class MouseLook : MonoBehaviour
         if (Input.GetKeyDown("c")) CameraOnPlayerButton();
         if (Input.GetKeyDown(KeyCode.Escape) && !battleFieldMenu.activeSelf)
         {
-            player.FreeVillagerFromTalking();
+            player.FreeTextSubject();
             if (optionsMenu.activeSelf) optionsMenu.SetActive(false);
             else optionsMenu.SetActive(true);
         }

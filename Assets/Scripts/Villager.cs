@@ -11,9 +11,7 @@ public class Villager : CreatureMovement
     public float minWaitTime;
     public float maxWaitTime;
 
-    public bool talking;
-    public string[] textLines;
-    public int currentIndex;
+    public TextSubject textSubject;
 
     public AudioClip[] voiceLines;
     public AudioSource soundPlayer;
@@ -31,7 +29,7 @@ public class Villager : CreatureMovement
     private void Update()
     {
         base.Update();
-        if (talking && player != null)
+        if (textSubject.textIsActive && player != null)
         {
             // Calculate the direction to the destination
             Vector3 direction = (player.transform.position - transform.position).normalized;
@@ -59,22 +57,22 @@ public class Villager : CreatureMovement
         while (true)
         {
             yield return new WaitForSeconds(Random.Range(minWaitTime, maxWaitTime));
-            if (!talking) agent.destination = new Vector3(startingPosition.x + Random.Range(-freeSpaceX, freeSpaceX), startingPosition.y, startingPosition.z + Random.Range(-freeSpaceZ, freeSpaceZ));
+            if (!textSubject.textIsActive) agent.destination = new Vector3(startingPosition.x + Random.Range(-freeSpaceX, freeSpaceX), startingPosition.y, startingPosition.z + Random.Range(-freeSpaceZ, freeSpaceZ));
         }
     }
 
     public void ProcessNextLines()
     {
-        if (currentIndex < textLines.Length)
+        if (textSubject.currentIndex < textSubject.textLines.Length)
         {
             //stop potential previous speech
             soundPlayer.Stop();
             if (voiceCoroutine != null) StopCoroutine(voiceCoroutine);
 
-            string str = textLines[currentIndex];
+            string str = textSubject.textLines[textSubject.currentIndex];
             int wordCount = CountWords(str);
             voiceCoroutine = StartCoroutine(PlayRandomVoiceLines(wordCount));
-            currentIndex++;
+            textSubject.currentIndex++;
         }
     }
 

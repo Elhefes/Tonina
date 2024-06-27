@@ -13938,6 +13938,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5564542543676618659}
+  - component: {fileID: 7416096815419692480}
   - component: {fileID: 6024250919342735121}
   - component: {fileID: 1282403056761534204}
   - component: {fileID: 2395143951097886586}
@@ -13963,6 +13964,23 @@ Transform:
   m_Father: {fileID: 7868398700705448107}
   m_RootOrder: 123
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &7416096815419692480
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8040391778464466782}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 531e5b15f0f04cb48aa84b927c27d19a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  textIsActive: 0
+  textLines:
+  - King Akuxa
+  - The 8th king of Tonina Tribe
+  currentIndex: 0
 --- !u!33 &6024250919342735121
 MeshFilter:
   m_ObjectHideFlags: 0

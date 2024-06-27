@@ -33,7 +33,7 @@ public class Player : Creature
     public FillOkil fillOkil;
     private BuildingRoof buildingRoof;
     private Villager villager;
-    private GameObject currentTalkingSubject;
+    private GameObject currentTextSubject;
     private GameObject weatherStone;
     public GameObject weatherGame;
     public GameObject weatherGameResults;
@@ -127,32 +127,43 @@ public class Player : Creature
 
                 if (target.CompareTag("TalkPrompt") && Vector3.Distance(transform.position, target.transform.position) < 2.7f)
                 {
-                    if (target != currentTalkingSubject) FreeVillagerFromTalking();
-                    villager = target.GetComponent<Villager>();
-                    //read next line if clicked on same villager
-                    if (villager.talking)
+                    if (target == currentTextSubject)
                     {
                         ReadNextLine();
                         return;
                     }
-
-                    textBox.gameObject.SetActive(true);
-                    SetTextLines(villager);
-                    villager.talking = true;
-                    villager.TalkToPlayer(gameObject);
-                    currentTalkingSubject = villager.gameObject;
+                    else
+                    {
+                        FreeTextSubject();
+                        villager = target.GetComponent<Villager>();
+                        if (villager != null)
+                        {
+                            SetTextLines(villager.textSubject.textLines);
+                            villager.textSubject.textIsActive = true;
+                            villager.TalkToPlayer(gameObject);
+                            currentTextSubject = villager.gameObject;
+                            villager.textSubject.currentIndex = 0;
+                            villager.ProcessNextLines();
+                        }
+                        else
+                        {
+                            TextSubject textSubject = target.GetComponent<TextSubject>();
+                            SetTextLines(textSubject.textLines);
+                            currentTextSubject = textSubject.gameObject;
+                            textSubject.currentIndex = 0;
+                        }
+                    }
+                        
                     textLineIndex = 0;
-                    villager.currentIndex = 0;
-                    villager.ProcessNextLines();
+                    textBox.gameObject.SetActive(true);
                     UpdateTextBox();
                     creatureMovement.agent.SetDestination(target.transform.position);
-                    LookAt(target.transform);
                     creatureMovement.agent.stoppingDistance = 1.6f;
                     return;
                 }
                 else
                 {
-                    FreeVillagerFromTalking();
+                    FreeTextSubject();
                 }
 
                 if (target.CompareTag("Enemy"))
@@ -192,8 +203,8 @@ public class Player : Creature
             }
         }
 
-        // Rotate towards villager when talking up close
-        if (villager != null && villager.talking) LookAt(villager.gameObject.transform);
+        // Rotate towards text subject when it exists
+        if (currentTextSubject != null) LookAt(currentTextSubject.gameObject.transform);
 
         // Rotate towards weather stone when it's clicked up close
         if (weatherStone != null) LookAt(weatherStone.transform);
@@ -222,9 +233,9 @@ public class Player : Creature
         }
     }
 
-    void SetTextLines(Villager villager)
+    void SetTextLines(string[] textLines)
     {
-        linesToRead = villager.textLines;
+        linesToRead = textLines;
     }
 
     void UpdateTextBox()
@@ -235,28 +246,28 @@ public class Player : Creature
         }
         else
         {
-            FreeVillagerFromTalking();
+            FreeTextSubject();
         }
     }
 
     public void ReadNextLine()
     {
         textLineIndex++;
-        villager.ProcessNextLines();
+        if (villager != null) villager.ProcessNextLines();
         UpdateTextBox();
     }
 
-    public void FreeVillagerFromTalking()
+    public void FreeTextSubject()
     {
         if (villager != null)
         {
-            villager.talking = false;
+            villager.textSubject.textIsActive = false;
             villager.playingVoiceLines = false;
-            villager.currentIndex = 0;
+            villager.textSubject.currentIndex = 0;
             villager = null;
-            currentTalkingSubject = null;
-            textBox.gameObject.SetActive(false);
         }
+        currentTextSubject = null;
+        textBox.gameObject.SetActive(false);
     }
 
     public void SwitchWeapon(WeaponType weaponType)
