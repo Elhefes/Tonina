@@ -3,16 +3,16 @@ using UnityEngine;
 public class Projectile : Weapon
 {
     public Transform shootingPoint;
-    public float projectileForce;
+    public GameObject directorComponent;
 
     public void SpawnProjectile()
     {
         // TODO: When projectile cycling is implemented, set canHit to false
         canHit = true;
+        directorComponent.SetActive(true);
 
         GameObject projectile = Instantiate(gameObject, shootingPoint.position, shootingPoint.rotation);
-        Rigidbody rb = projectile.GetComponent<Rigidbody>();
-        rb.AddForce(projectile.transform.right * projectileForce, ForceMode.Impulse);
+        directorComponent.SetActive(false);
         gameObject.SetActive(false);
     }
 }

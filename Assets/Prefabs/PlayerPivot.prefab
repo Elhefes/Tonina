@@ -519,8 +519,10 @@ MonoBehaviour:
   secondsBetweenOverHealDecayTicks: 1.5
   insideKingHouse: 0
   inVillage: 0
+  optionsMenu: {fileID: 0}
   battlefieldMenu: {fileID: 0}
   losingScreen: {fileID: 0}
+  barricadeController: {fileID: 0}
   villageTPMenu: {fileID: 0}
   maizePlace: {fileID: 1002431552744195371, guid: adebe25711332d549bfc3c168e6175c5, type: 3}
   fillOkil: {fileID: 0}
@@ -1004,6 +1006,14 @@ PrefabInstance:
       propertyPath: creatureMovement
       value: 
       objectReference: {fileID: 4129278258679320684}
+    - target: {fileID: 2329549409515938359, guid: 2a62ad8bdf5a4ee428036edb7057ce04, type: 3}
+      propertyPath: pointA
+      value: 
+      objectReference: {fileID: 9100174395643030370}
+    - target: {fileID: 2329549409515938359, guid: 2a62ad8bdf5a4ee428036edb7057ce04, type: 3}
+      propertyPath: creatureMovement
+      value: 
+      objectReference: {fileID: 4129278258679320684}
     - target: {fileID: 2537462154092368551, guid: 2a62ad8bdf5a4ee428036edb7057ce04, type: 3}
       propertyPath: m_Constraints
       value: 0
@@ -1112,6 +1122,14 @@ PrefabInstance:
       propertyPath: m_LocalRotation.z
       value: -0.00005196052
       objectReference: {fileID: 0}
+    - target: {fileID: 7859077472969311144, guid: 2a62ad8bdf5a4ee428036edb7057ce04, type: 3}
+      propertyPath: pointA
+      value: 
+      objectReference: {fileID: 9100174395643030370}
+    - target: {fileID: 7859077472969311144, guid: 2a62ad8bdf5a4ee428036edb7057ce04, type: 3}
+      propertyPath: creatureMovement
+      value: 
+      objectReference: {fileID: 4129278258679320684}
     - target: {fileID: 8993902590316862340, guid: 2a62ad8bdf5a4ee428036edb7057ce04, type: 3}
       propertyPath: m_LocalRotation.w
       value: -0.0003150326
