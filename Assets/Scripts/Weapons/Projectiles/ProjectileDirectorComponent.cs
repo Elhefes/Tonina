@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 
 public class ProjectileDirectorComponent : MonoBehaviour
@@ -28,6 +29,8 @@ public class ProjectileDirectorComponent : MonoBehaviour
     private bool movingToNextPoint = true;
     private Vector3 direction;
 
+    private Coroutine destroyerCoroutine;
+
     void Start()
     {
         pointC = creatureMovement.target;
@@ -44,6 +47,8 @@ public class ProjectileDirectorComponent : MonoBehaviour
         points[0] = pointA;
         points[1] = new GameObject("PointB").transform;
         points[2] = new GameObject("PointC_Corrected").transform;
+
+        destroyerCoroutine = StartCoroutine(DestroyObject());
     }
 
     void Update()
@@ -124,5 +129,11 @@ public class ProjectileDirectorComponent : MonoBehaviour
         Quaternion targetRotation = Quaternion.LookRotation(direction);
         Quaternion offsetRotation = Quaternion.Euler(0, yRotationOffset, 0);
         rb.rotation = Quaternion.Slerp(rb.rotation, targetRotation * offsetRotation, rotationSpeed * Time.fixedDeltaTime);
+    }
+
+    private IEnumerator DestroyObject()
+    {
+        yield return new WaitForSeconds(1.5f);
+        Destroy(rb.gameObject);
     }
 }
