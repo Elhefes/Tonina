@@ -34,6 +34,7 @@ public class WaveController : MonoBehaviour
     [Header("Enemies")]
     public GameObject clubber;
     public GameObject runner;
+    public GameObject spearWarrior;
 
     void Start()
     {
@@ -130,6 +131,7 @@ public class WaveController : MonoBehaviour
     {
         if (c.Equals('A')) Instantiate(clubber, spawnPoints[i].position, spawnPoints[i].rotation);
         else if (c.Equals('B')) Instantiate(runner, spawnPoints[i].position, spawnPoints[i].rotation);
+        else if (c.Equals('C')) Instantiate(spearWarrior, spawnPoints[i].position, spawnPoints[i].rotation);
     }
 
     void CheckForEnemies()

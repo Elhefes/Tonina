@@ -11,7 +11,7 @@ public class EnemyAI : MonoBehaviour
         AI_ControllerCoroutine = StartCoroutine(PeriodicalTargetChecking());
     }
 
-    private IEnumerator PeriodicalTargetChecking()
+    protected virtual IEnumerator PeriodicalTargetChecking()
     {
         while (true)
         {

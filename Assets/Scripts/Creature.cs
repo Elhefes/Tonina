@@ -7,8 +7,8 @@ public class Creature : MonoBehaviour
     public Weapon weaponOnHand;
     public CreatureMovement creatureMovement;
     private Coroutine attackCoroutine;
-    private bool onCooldown;
-    private bool shouldAttack;
+    public bool onCooldown;
+    public bool shouldAttack;
 
     void Start()
     {
@@ -58,7 +58,7 @@ public class Creature : MonoBehaviour
         }
     }
 
-    private IEnumerator Attack()
+    protected virtual IEnumerator Attack()
     {
         onCooldown = true;
         while (creatureMovement.target && shouldAttack)
