@@ -24,12 +24,14 @@ public class WeaponWheel : MonoBehaviour
 
     public AudioSource soundEffectPlayer;
 
-    private Player player;
+    public Player player;
 
     private void Start()
     {
-        player = GameObject.FindGameObjectsWithTag("Player")[0].GetComponent<Player>();
+        if (player == null) player = GameObject.FindGameObjectsWithTag("Player")[0].GetComponent<Player>();
     }
+
+    private void OnEnable() { ResetToDefaultWeapon(); }
 
     private void Update()
     {
@@ -93,9 +95,9 @@ public class WeaponWheel : MonoBehaviour
     public void ResetToDefaultWeapon()
     {
         var wep = weapons[0];
-        weaponSprites[currentIndex].sprite = wep.uiSprite;
         currentIndex = 0;
         weaponIndex = 0;
+        weaponSprites[currentIndex].sprite = wep.uiSprite;
         player.SwitchWeapon(wep.type);
         // Reset rotation of weapon wheel's circle
         weaponWheelAnimator.gameObject.transform.eulerAngles = new Vector3(0f, 0f, 0f);
