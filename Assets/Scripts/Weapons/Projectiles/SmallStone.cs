@@ -16,6 +16,7 @@ public class SmallStone : Projectile
         {
             Enemy enemy = other.gameObject.GetComponent<Enemy>();
             enemy.SlowDownEnemy();
+            Destroy(gameObject);
         }
     }
 }
