@@ -22,6 +22,8 @@ public class Player : Creature
     public bool insideKingHouse;
     public bool inVillage;
 
+    public ClickToEnableObject clickToEnableObject;
+
     public OptionsMenu optionsMenu;
 
     public BattlefieldMenu battlefieldMenu;
@@ -158,7 +160,7 @@ public class Player : Creature
                     textBox.gameObject.SetActive(true);
                     UpdateTextBox();
                     creatureMovement.agent.SetDestination(target.transform.position);
-                    creatureMovement.agent.stoppingDistance = 1.6f;
+                    creatureMovement.agent.stoppingDistance = 1.7f;
                     return;
                 }
                 else
@@ -179,7 +181,7 @@ public class Player : Creature
                 {
                     weatherStone = target;
                     creatureMovement.agent.SetDestination(weatherStone.transform.position);
-                    creatureMovement.agent.stoppingDistance = 2.5f;
+                    creatureMovement.agent.stoppingDistance = 2.85f;
                     if (!weatherGameResults.activeSelf) weatherGame.SetActive(true);
                     return;
                 }
@@ -197,6 +199,32 @@ public class Player : Creature
                 }
                 else villageTPMenu.SetActive(false);
 
+                // Click 1st object to enable the 2nd. Click 1st again to disable 2nd.
+                if (target.CompareTag("ClickToEnableObject") && Vector3.Distance(target.transform.position, transform.position) < 4f)
+                {
+                    if (clickToEnableObject != null && clickToEnableObject.objectToEnable.activeSelf)
+                    {
+                        clickToEnableObject.objectToEnable.SetActive(false);
+                        clickToEnableObject = null;
+                        creatureMovement.agent.SetDestination(gameObject.transform.position);
+                        return;
+                    }
+                    else
+                    {
+                        clickToEnableObject = target.GetComponent<ClickToEnableObject>();
+                        clickToEnableObject.objectToEnable.SetActive(true);
+                        creatureMovement.agent.stoppingDistance = 3f;
+                    }
+                }
+                else
+                {
+                    if (clickToEnableObject != null)
+                    {
+                        clickToEnableObject.objectToEnable.SetActive(false);
+                        clickToEnableObject = null;
+                    }
+                }
+
                 creatureMovement.agent.SetDestination(hit.point);
                 destination = hit.point;
                 if (creatureMovement.target != null) clickerObject.alpha = 1f;
@@ -207,7 +235,12 @@ public class Player : Creature
         if (currentTextSubject != null) LookAt(currentTextSubject.gameObject.transform);
 
         // Rotate towards weather stone when it's clicked up close
-        if (weatherStone != null) LookAt(weatherStone.transform);
+        else if (weatherStone != null) LookAt(weatherStone.transform);
+
+        else if (clickToEnableObject != null)
+        {
+            if (clickToEnableObject.objectToEnable.activeSelf) LookAt(clickToEnableObject.gameObject.transform);
+        }
 
         if (weaponRangeIndicatorLight.intensity > 0)
         {
