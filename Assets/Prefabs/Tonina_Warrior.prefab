@@ -42,7 +42,7 @@ GameObject:
   m_Component:
   - component: {fileID: 894412122081861020}
   - component: {fileID: 7504011785742090726}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: lips
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -858,7 +858,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4399092911693542389}
   - component: {fileID: 1988647667077774846}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: ear_right
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1497,7 +1497,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4967068960415773889}
   - component: {fileID: 5810110370362987029}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: eyebrow_left
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2182,7 +2182,7 @@ GameObject:
   - component: {fileID: 4949210254446936531}
   - component: {fileID: 2638164082051421843}
   - component: {fileID: 6086095381331675431}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Box068
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2379,7 +2379,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6951726704744100265}
   - component: {fileID: 1031589750670685967}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: ear_left
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2465,7 +2465,7 @@ GameObject:
   m_Component:
   - component: {fileID: 9124047251175183398}
   - component: {fileID: 6468578211516154832}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: eye_left
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2682,6 +2682,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   weaponOnHand: {fileID: 6429265170520830913}
   creatureMovement: {fileID: 3454009534845570013}
+  onCooldown: 0
+  shouldAttack: 0
   agent: {fileID: 7033625827880630577}
   healthBar: {fileID: 3091264148329709579}
   startingHealth: 80
@@ -3665,7 +3667,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3888731014637761140}
   - component: {fileID: 6716154420629130409}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: mouth
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5150,7 +5152,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8843829237530040449}
   - component: {fileID: 34454252877297331}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: hair
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5673,7 +5675,7 @@ GameObject:
   - component: {fileID: 433773771376446986}
   - component: {fileID: 2252557212699740660}
   - component: {fileID: 5689790130188763818}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: hat_white2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5948,7 +5950,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6151133587201189823}
   - component: {fileID: 4003269348649653349}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: eyebrow_right
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -6034,7 +6036,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3532067466498191172}
   - component: {fileID: 6917985051797558831}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: eye_right
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -6158,7 +6160,7 @@ GameObject:
   - component: {fileID: 7289446155240959203}
   - component: {fileID: 8944000481118119629}
   - component: {fileID: 192458175675432259}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: hat_edges
   m_TagString: Untagged
   m_Icon: {fileID: 0}
