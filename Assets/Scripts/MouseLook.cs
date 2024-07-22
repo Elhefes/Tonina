@@ -100,8 +100,8 @@ public class MouseLook : MonoBehaviour
                     newPosition.x = Mathf.Clamp(newPosition.x, cameraLimiter.village_RightLimX1 - (Mathf.Abs(cameraLimiter.village_RightLimZ1) - Mathf.Abs(transform.position.z)) / cameraLimiter.village_rightLimiterLine,
                         cameraLimiter.village_LeftLimX1 - (Mathf.Abs(cameraLimiter.village_LeftLimZ1) - Mathf.Abs(transform.position.z)) / cameraLimiter.village_leftLimiterLine);
                     // General limits in x-axis
-                    if (newPosition.x >= 130f) newPosition.x = 130f;
-                    if (newPosition.x <= -138f) newPosition.x = -138f;
+                    if (newPosition.x >= 133f) newPosition.x = 133f;
+                    if (newPosition.x <= -133f) newPosition.x = -133f;
                     transform.position = newPosition;
                 }
                 else
