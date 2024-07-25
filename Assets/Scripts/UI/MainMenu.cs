@@ -19,6 +19,7 @@ public class MainMenu : MonoBehaviour
 
     private void Start()
     {
+        Application.targetFrameRate = Screen.currentResolution.refreshRate;
         playerCamera = Camera.main;
         mainMenuCamera = GameObject.Find("MainMenuCamera").GetComponent<Camera>();
         mainMenuCameraAnimator = mainMenuCamera.GetComponent<Animator>();
