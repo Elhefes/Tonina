@@ -76,7 +76,6 @@ public class MouseLook : MonoBehaviour
     void Update()
     {
         if (Input.GetKeyDown("c")) CameraOnPlayerButton();
-        if (Input.GetKeyDown(KeyCode.Escape) && !battleFieldMenu.activeSelf) player.FreeTextSubject();
 
         if (!player.insideKingHouse)
         {

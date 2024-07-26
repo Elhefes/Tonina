@@ -5,6 +5,7 @@ public class UI_Controller : MonoBehaviour
     public GameObject[] overlappingElements;
     public GameObject optionsMenu;
     public GameObject mainMenuScreen;
+    public Player player;
 
     private void Update()
     {
@@ -15,6 +16,11 @@ public class UI_Controller : MonoBehaviour
                 if (OverlappingElementActive())
                 {
                     DisableOverlappingElements();
+                    return;
+                }
+                else if (player.textBox.gameObject.activeSelf)
+                {
+                    player.FreeTextSubject();
                     return;
                 }
                 optionsMenu.SetActive(true);
