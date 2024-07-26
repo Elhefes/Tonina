@@ -36,7 +36,7 @@ public class BattlefieldMenu : MonoBehaviour
     public void StartBattle()
     {
         waveController.StartRound(threatLevel, battleSongID);
-        Exit();
+        gameObject.SetActive(false);
     }
 
     void UpdateThreatLevel()
@@ -88,15 +88,10 @@ public class BattlefieldMenu : MonoBehaviour
         UpdateBattleSong();
     }
 
-    public void Exit()
+    void OnDisable()
     {
         battleSelectedUI.SetActive(false);
         modeSelect.SetActive(true);
         gameObject.SetActive(false);
-    }
-
-    private void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.Escape)) Exit();
     }
 }

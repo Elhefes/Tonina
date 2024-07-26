@@ -411,11 +411,15 @@ public class Player : Creature
                 insideKingHouse = true;
             }
         }
-        if (other.CompareTag("BattlefieldPrompt"))
+
+        // Prevent UI overlapping
+        if (optionsMenu.gameObject.activeSelf) return;
+
+        else if (other.CompareTag("BattlefieldPrompt"))
         {
             battlefieldMenu.gameObject.SetActive(true);
         }
-        if (other.CompareTag("VillageTPSpot"))
+        else if (other.CompareTag("VillageTPSpot"))
         {
             villageTPMenu.SetActive(true);
         }
@@ -436,7 +440,7 @@ public class Player : Creature
         }
         if (other.CompareTag("BattlefieldPrompt"))
         {
-            battlefieldMenu.Exit();
+            battlefieldMenu.gameObject.SetActive(false);
         }
         if (other.CompareTag("VillageTPSpot"))
         {
