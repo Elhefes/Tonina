@@ -532,7 +532,7 @@ public class Player : Creature
     {
         if (insideKingHouse) return;
         // Confirmation in battle before returning home
-        if (battlefieldMenu.waveController.battleUI.activeSelf && !optionsMenu.confirmReturnHomeMenu.activeSelf)
+        if ((battlefieldMenu.waveController.battleUI.activeSelf || optionsMenu.returnFromBuilder) && !optionsMenu.confirmReturnHomeMenu.activeSelf)
         {
             optionsMenu.confirmReturnHomeMenu.SetActive(true);
             optionsMenu.normalMenu.SetActive(false);
