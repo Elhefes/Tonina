@@ -56,7 +56,7 @@ public class WeaponWheel : MonoBehaviour
         var wep = weapons[weaponIndex];
         weaponSprites[currentIndex].sprite = wep.uiSprite;
         player.SwitchWeapon(wep.type);
-        weaponWheelAnimator.SetTrigger("NextWeapon");
+        weaponWheelAnimator.SetTrigger("NextInWheel");
         if (wep.switchSound != null) soundEffectPlayer.PlayOneShot(wep.switchSound, PlayerPrefs.GetFloat("soundVolume", 0.5f));
     }
 
@@ -77,7 +77,7 @@ public class WeaponWheel : MonoBehaviour
         var wep = weapons[weaponIndex];
         weaponSprites[currentIndex].sprite = wep.uiSprite;
         player.SwitchWeapon(wep.type);
-        weaponWheelAnimator.SetTrigger("PreviousWeapon");
+        weaponWheelAnimator.SetTrigger("PreviousInWheel");
         if (wep.switchSound != null) soundEffectPlayer.PlayOneShot(wep.switchSound, PlayerPrefs.GetFloat("soundVolume", 0.5f));
     }
 
