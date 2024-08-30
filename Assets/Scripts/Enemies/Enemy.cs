@@ -9,6 +9,7 @@ public class Enemy : Creature
     public Slider healthBar;
     public int startingHealth;
     private int health;
+    public GameObject deathSoundObject;
     public bool moveTowardsTarget;
     public float attackExtraCooldown;
     private Coroutine slowDownCoroutine;
@@ -28,6 +29,11 @@ public class Enemy : Creature
         health -= damage;
         if (health <= 0)
         {
+            if (deathSoundObject != null)
+            {
+                deathSoundObject.SetActive(true);
+                deathSoundObject.transform.SetParent(null);
+            }
             Destroy(gameObject);
         }
         print(health);

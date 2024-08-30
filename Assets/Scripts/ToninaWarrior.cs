@@ -9,6 +9,7 @@ public class ToninaWarrior : Creature
     public Slider healthBar;
     public int startingHealth;
     private int health;
+    public GameObject deathSoundObject;
     public bool moveTowardsTarget;
     public float attackExtraCooldown;
 
@@ -23,6 +24,11 @@ public class ToninaWarrior : Creature
         health -= damage;
         if (health <= 0)
         {
+            if (deathSoundObject != null)
+            {
+                deathSoundObject.SetActive(true);
+                deathSoundObject.transform.SetParent(null);
+            }
             Destroy(gameObject);
         }
         print(health);
