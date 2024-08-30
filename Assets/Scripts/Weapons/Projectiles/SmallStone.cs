@@ -2,6 +2,8 @@ using UnityEngine;
 
 public class SmallStone : Projectile
 {
+    public GameObject hitSoundObject;
+
     public override void Attack(Animator animator)
     {
         animator.SetTrigger("StoneAttack");
@@ -16,6 +18,8 @@ public class SmallStone : Projectile
         {
             Enemy enemy = other.gameObject.GetComponent<Enemy>();
             enemy.SlowDownEnemy();
+            hitSoundObject.SetActive(true);
+            hitSoundObject.transform.SetParent(null);
             Destroy(gameObject);
         }
     }
