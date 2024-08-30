@@ -10,6 +10,7 @@ public class MainMenu : MonoBehaviour
     private Camera playerCamera;
     private Camera mainMenuCamera;
 
+    public Animator textsAnimator;
     private Animator mainMenuCameraAnimator;
 
     private bool movingToPlayerCamera;
@@ -25,12 +26,27 @@ public class MainMenu : MonoBehaviour
         mainMenuCameraAnimator = mainMenuCamera.GetComponent<Animator>();
     }
 
+    public void SetIntroAsPlayed()
+    {
+        PlayerPrefs.SetInt("introPlayed", 1); // Set this later to be called when intro is finished, not when it's started
+    }
+
     public void ContinueHere()
     {
+        if (PlayerPrefs.GetInt("introPlayed", 0) == 0)
+        {
+            textsAnimator.SetTrigger("PlayIntroFirstText");
+            return;
+        }
         mainMenuCameraAnimator.enabled = false;
         movingToPlayerCamera = true;
         mainMenuUI.SetActive(false);
         overworldUI.SetActive(true);
+    }
+
+    public void PlayAsAttackers()
+    {
+        textsAnimator.SetTrigger("GrandiosityText");
     }
 
     private void FixedUpdate()
