@@ -2,6 +2,8 @@ using UnityEngine;
 
 public class MouseLook : MonoBehaviour
 {
+    public Rigidbody rb;
+    public GameObject mainCameraObject;
     public float moveSpeed;
     public float sensitivity;
     public LayerMask layerMask;
@@ -75,6 +77,7 @@ public class MouseLook : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        mainCameraObject.transform.position = Vector3.Lerp(mainCameraObject.transform.position, transform.position, smoothSpeed);
         if (Input.GetKeyDown("c")) CameraOnPlayerButton();
 
         if (!player.insideKingHouse)
@@ -96,7 +99,7 @@ public class MouseLook : MonoBehaviour
                     // General limits in x-axis
                     if (newPosition.x >= 133f) newPosition.x = 133f;
                     if (newPosition.x <= -133f) newPosition.x = -133f;
-                    transform.position = newPosition;
+                    rb.AddForce(moveDirection * 13500f * Time.deltaTime, ForceMode.Force);
                 }
                 else
                 {
@@ -105,7 +108,7 @@ public class MouseLook : MonoBehaviour
                     newPosition.z = Mathf.Clamp(newPosition.z, cameraLimiter.BF_ZLimit2, cameraLimiter.BF_ZLimit1);
                     newPosition.x = Mathf.Clamp(newPosition.x, cameraLimiter.BF_LeftLimX1 + (Mathf.Abs(cameraLimiter.BF_LeftLimZ1) - Mathf.Abs(transform.position.z)) / cameraLimiter.BF_leftLimiterLine,
                         cameraLimiter.BF_RightLimX1 + (Mathf.Abs(cameraLimiter.BF_RightLimZ1) - Mathf.Abs(transform.position.z)) / cameraLimiter.BF_rightLimiterLine);
-                    transform.position = newPosition;
+                    rb.AddForce(moveDirection * 13500f * Time.deltaTime, ForceMode.Force);
                 }
             }
         }
@@ -181,18 +184,27 @@ public class MouseLook : MonoBehaviour
         if (player.insideKingHouse)
         {
             transform.rotation = Quaternion.RotateTowards(transform.rotation, Quaternion.Euler(60f, -90f, 0f), 1.25f);
+            mainCameraObject.transform.rotation = Quaternion.RotateTowards(transform.rotation, Quaternion.Euler(60f, -90f, 0f), 1.25f);
             minimapCamera.transform.rotation = Quaternion.RotateTowards(minimapCamera.transform.rotation, Quaternion.Euler(90f, -90f, 0f), 1.25f);
             if (minimapIndicators.activeSelf) minimapIndicators.SetActive(false);
         }
         else if (player.inVillage)
         {
-            if (transform.rotation.y != 0) transform.rotation = Quaternion.RotateTowards(transform.rotation, Quaternion.Euler(60f, 180f, 0f), 1.5f);
+            if (transform.rotation.y != 0)
+            {
+                transform.rotation = Quaternion.RotateTowards(transform.rotation, Quaternion.Euler(60f, 180f, 0f), 1.5f);
+                mainCameraObject.transform.rotation = Quaternion.RotateTowards(transform.rotation, Quaternion.Euler(60f, 180f, 0f), 1.5f);
+            }
             minimapCamera.transform.rotation = Quaternion.RotateTowards(minimapCamera.transform.rotation, Quaternion.Euler(90f, 180f, 0f), 1.5f);
             if (!minimapIndicators.activeSelf) minimapIndicators.SetActive(true);
         }
         else
         {
-            if (transform.rotation.y != 0) transform.rotation = Quaternion.RotateTowards(transform.rotation, Quaternion.Euler(60f, 0f, 0f), 1.5f);
+            if (transform.rotation.y != 0)
+            {
+                transform.rotation = Quaternion.RotateTowards(transform.rotation, Quaternion.Euler(60f, 0f, 0f), 1.5f);
+                mainCameraObject.transform.rotation = Quaternion.RotateTowards(transform.rotation, Quaternion.Euler(60f, 0f, 0f), 1.5f);
+            }
             minimapCamera.transform.rotation = Quaternion.RotateTowards(minimapCamera.transform.rotation, Quaternion.Euler(90f, 0f, 0f), 1.5f);
             if (!minimapIndicators.activeSelf) minimapIndicators.SetActive(true);
         }
