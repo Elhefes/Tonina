@@ -24,23 +24,8 @@ public class MouseLook : MonoBehaviour
     public CameraOnPlayerButton cameraOnPlayerButton;
     public GameObject optionsMenu;
     public GameObject battleFieldMenu;
-    public CameraLimiter cameraLimiter;
     public MinimapInput minimapInput;
     public float minimapInputSensitivity;
-
-    private void Start()
-    {
-        // Calculate limiter lines
-        cameraLimiter.BF_leftLimiterLine = (cameraLimiter.BF_LeftLimZ2 - cameraLimiter.BF_LeftLimZ1)
-            / (cameraLimiter.BF_LeftLimX2 - cameraLimiter.BF_LeftLimX1);
-        cameraLimiter.BF_rightLimiterLine = (cameraLimiter.BF_RightLimZ2 - cameraLimiter.BF_RightLimZ1)
-            / (cameraLimiter.BF_RightLimX2 - cameraLimiter.BF_RightLimX1);
-
-        cameraLimiter.village_leftLimiterLine = (cameraLimiter.village_LeftLimZ2 - cameraLimiter.village_LeftLimZ1)
-            / (cameraLimiter.village_LeftLimX2 - cameraLimiter.village_LeftLimX1);
-        cameraLimiter.village_rightLimiterLine = (cameraLimiter.village_RightLimZ2 - cameraLimiter.village_RightLimZ1)
-            / (cameraLimiter.village_RightLimX2 - cameraLimiter.village_RightLimX1);
-    }
 
     public void CameraOnPlayerButton()
     {
@@ -91,23 +76,10 @@ public class MouseLook : MonoBehaviour
 
                 if (player.inVillage)
                 {
-                    // Update the position with clamping
-                    Vector3 newPosition = transform.position + moveDirection * moveSpeed * Time.deltaTime;
-                    newPosition.z = Mathf.Clamp(newPosition.z, cameraLimiter.village_ZLimit1, cameraLimiter.village_ZLimit2);
-                    newPosition.x = Mathf.Clamp(newPosition.x, cameraLimiter.village_RightLimX1 - (Mathf.Abs(cameraLimiter.village_RightLimZ1) - Mathf.Abs(transform.position.z)) / cameraLimiter.village_rightLimiterLine,
-                        cameraLimiter.village_LeftLimX1 - (Mathf.Abs(cameraLimiter.village_LeftLimZ1) - Mathf.Abs(transform.position.z)) / cameraLimiter.village_leftLimiterLine);
-                    // General limits in x-axis
-                    if (newPosition.x >= 133f) newPosition.x = 133f;
-                    if (newPosition.x <= -133f) newPosition.x = -133f;
                     rb.AddForce(moveDirection * 320000f * Time.deltaTime, ForceMode.Force);
                 }
                 else
                 {
-                    // Update the position with clamping
-                    Vector3 newPosition = transform.position + moveDirection * moveSpeed * Time.deltaTime;
-                    newPosition.z = Mathf.Clamp(newPosition.z, cameraLimiter.BF_ZLimit2, cameraLimiter.BF_ZLimit1);
-                    newPosition.x = Mathf.Clamp(newPosition.x, cameraLimiter.BF_LeftLimX1 + (Mathf.Abs(cameraLimiter.BF_LeftLimZ1) - Mathf.Abs(transform.position.z)) / cameraLimiter.BF_leftLimiterLine,
-                        cameraLimiter.BF_RightLimX1 + (Mathf.Abs(cameraLimiter.BF_RightLimZ1) - Mathf.Abs(transform.position.z)) / cameraLimiter.BF_rightLimiterLine);
                     rb.AddForce(moveDirection * 320000f * Time.deltaTime, ForceMode.Force);
                 }
             }
