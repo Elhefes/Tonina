@@ -99,7 +99,7 @@ public class MouseLook : MonoBehaviour
                     // General limits in x-axis
                     if (newPosition.x >= 133f) newPosition.x = 133f;
                     if (newPosition.x <= -133f) newPosition.x = -133f;
-                    rb.AddForce(moveDirection * 13500f * Time.deltaTime, ForceMode.Force);
+                    rb.AddForce(moveDirection * 320000f * Time.deltaTime, ForceMode.Force);
                 }
                 else
                 {
@@ -108,7 +108,7 @@ public class MouseLook : MonoBehaviour
                     newPosition.z = Mathf.Clamp(newPosition.z, cameraLimiter.BF_ZLimit2, cameraLimiter.BF_ZLimit1);
                     newPosition.x = Mathf.Clamp(newPosition.x, cameraLimiter.BF_LeftLimX1 + (Mathf.Abs(cameraLimiter.BF_LeftLimZ1) - Mathf.Abs(transform.position.z)) / cameraLimiter.BF_leftLimiterLine,
                         cameraLimiter.BF_RightLimX1 + (Mathf.Abs(cameraLimiter.BF_RightLimZ1) - Mathf.Abs(transform.position.z)) / cameraLimiter.BF_rightLimiterLine);
-                    rb.AddForce(moveDirection * 13500f * Time.deltaTime, ForceMode.Force);
+                    rb.AddForce(moveDirection * 320000f * Time.deltaTime, ForceMode.Force);
                 }
             }
         }
@@ -165,13 +165,13 @@ public class MouseLook : MonoBehaviour
                 {
                     // If the camera is too close to the object, move it backwards smoothly
                     Vector3 targetPosition = hit.point + (transform.position - hit.point).normalized * distanceFromObject;
-                    transform.position = Vector3.Lerp(transform.position, targetPosition, smoothSpeed);
+                    rb.AddForce((targetPosition - rb.position) * 250000f * Time.deltaTime, ForceMode.Force);
                 }
                 else if (currentDistance > distanceFromObject)
                 {
                     // If the camera is too far from the object, move it forwards smoothly
                     Vector3 targetPosition = hit.point + (transform.position - hit.point).normalized * distanceFromObject;
-                    transform.position = Vector3.Lerp(transform.position, targetPosition, smoothSpeed);
+                    rb.AddForce((targetPosition - rb.position) * 250000f * Time.deltaTime, ForceMode.Force);
                 }
             }
         }
