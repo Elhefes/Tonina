@@ -9,7 +9,7 @@ public class Player : Creature
     private int health;
     public int maxHealth;
     public int startingHealth;
-    public GameObject[] weaponObjects;
+    public Weapon[] weapons;
     public float defaultAttackStoppingDistance;
     public Slider healthBar;
 
@@ -84,9 +84,9 @@ public class Player : Creature
 
     public void DisableBattleMode()
     {
-        foreach (GameObject obj in weaponObjects)
+        foreach (Weapon obj in weapons)
         {
-            obj.SetActive(false);
+            obj.gameObject.SetActive(false);
         }
         if (health < startingHealth) RestoreHealth(startingHealth - health);
         healthBar.gameObject.SetActive(false);
@@ -96,7 +96,7 @@ public class Player : Creature
 
     void EquipDefaultWeapon()
     {
-        weaponObjects[0].SetActive(true);
+        weapons[0].gameObject.SetActive(true);
         creatureMovement.animator.SetInteger("WeaponIndex", 0);
     }
 
@@ -306,9 +306,9 @@ public class Player : Creature
     public void SwitchWeapon(WeaponType weaponType)
     {
         if (this == null) return;
-        foreach (GameObject obj in weaponObjects)
+        foreach (Weapon obj in weapons)
         {
-            obj.SetActive(false);
+            obj.gameObject.SetActive(false);
         }
 
         int weaponIndex = 0;
@@ -316,8 +316,8 @@ public class Player : Creature
         if (weaponType == WeaponType.Axe) weaponIndex = 2;
         if (weaponType == WeaponType.Small_stone) weaponIndex = 3;
 
-        weaponOnHand = weaponObjects[weaponIndex].GetComponent<Weapon>();
-        weaponObjects[weaponIndex].SetActive(true);
+        weaponOnHand = weapons[weaponIndex];
+        weapons[weaponIndex].gameObject.SetActive(true);
         creatureMovement.animator.SetInteger("WeaponIndex", weaponIndex);
         weaponOnHand.canHit = false;
         UpdateWeaponRangeIndicator();

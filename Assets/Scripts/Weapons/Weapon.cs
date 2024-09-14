@@ -4,6 +4,7 @@ using UnityEngine;
 public class Weapon : MonoBehaviour
 {
     public string weaponName;
+    public bool notAvailable;
     public WeaponType type;
     public WeaponUser user;
     public int damage;

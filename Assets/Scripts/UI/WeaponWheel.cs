@@ -42,17 +42,27 @@ public class WeaponWheel : MonoBehaviour
     public void NextWeapon()
     {
         if (weaponWheelCooldown) return;
-        StartWeaponWheelCooldown();
-        currentIndex++;
         weaponIndex++;
-        if (currentIndex > slices - 1)
-        {
-            currentIndex = 0;
-        }
         if (weaponIndex > weapons.Length - 1)
         {
             weaponIndex = 0;
         }
+
+        while (player.weapons[weaponIndex].notAvailable)
+        {
+            weaponIndex++;
+            if (weaponIndex > weapons.Length - 1)
+            {
+                weaponIndex = 0;
+            }
+        }
+
+        currentIndex++;
+        if (currentIndex > slices - 1)
+        {
+            currentIndex = 0;
+        }
+        StartWeaponWheelCooldown();
         var wep = weapons[weaponIndex];
         weaponSprites[currentIndex].sprite = wep.uiSprite;
         player.SwitchWeapon(wep.type);
@@ -63,17 +73,27 @@ public class WeaponWheel : MonoBehaviour
     public void PreviousWeapon()
     {
         if (weaponWheelCooldown) return;
-        StartWeaponWheelCooldown();
-        currentIndex--;
         weaponIndex--;
-        if (currentIndex < 0)
-        {
-            currentIndex = slices - 1;
-        }
         if (weaponIndex < 0)
         {
             weaponIndex = weapons.Length - 1;
         }
+
+        while (player.weapons[weaponIndex].notAvailable)
+        {
+            weaponIndex--;
+            if (weaponIndex < 0)
+            {
+                weaponIndex = weapons.Length - 1;
+            }
+        }
+
+        currentIndex--;
+        if (currentIndex < 0)
+        {
+            currentIndex = slices - 1;
+        }
+        StartWeaponWheelCooldown();
         var wep = weapons[weaponIndex];
         weaponSprites[currentIndex].sprite = wep.uiSprite;
         player.SwitchWeapon(wep.type);
