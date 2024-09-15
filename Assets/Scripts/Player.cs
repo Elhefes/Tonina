@@ -512,21 +512,26 @@ public class Player : Creature
 
     public void TakeAllFromFillOkil()
     {
-        // When inventory space is added, this should give all of these at once until max. amount reached
-        if (fillOkil.stoneAmount > 0)
-        {
-            fillOkil.stoneAmount--;
-            stonesInFillTMP.text = fillOkil.stoneAmount.ToString();
-        }
         if (fillOkil.spearAmount > 0)
         {
-            fillOkil.spearAmount--;
-            spearsInFillTMP.text = fillOkil.spearAmount.ToString();
+            if (spear.quantity < spearStartingQuantity)
+            {
+                spear.quantity++;
+                spear.notAvailable = false;
+                fillOkil.spearAmount--;
+                spearsInFillTMP.text = fillOkil.spearAmount.ToString();
+            }
         }
-        if (fillOkil.arrowAmount > 0)
+        if (fillOkil.stoneAmount > 0)
         {
-            fillOkil.arrowAmount--;
-            arrowsInFillTMP.text = fillOkil.arrowAmount.ToString();
+            if (spear.quantity < spearStartingQuantity)
+            {
+                smallStone.quantity++;
+                smallStone.notAvailable = false;
+                fillOkil.stoneAmount--;
+                stonesInFillTMP.text = fillOkil.stoneAmount.ToString();
+                if (smallStone.gameObject.activeSelf) projectileQuantityTMP.text = smallStone.quantity.ToString();
+            }
         }
     }
 
