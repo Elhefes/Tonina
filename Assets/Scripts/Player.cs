@@ -10,6 +10,11 @@ public class Player : Creature
     public int maxHealth;
     public int startingHealth;
     public Weapon[] weapons;
+    public Spear spear;
+    public SmallStone smallStone;
+    public int spearStartingQuantity;
+    public int smallStoneStartingQuantity;
+    public TMP_Text projectileQuantityTMP;
     public float defaultAttackStoppingDistance;
     public Slider healthBar;
 
@@ -68,18 +73,20 @@ public class Player : Creature
 
     public Light weaponRangeIndicatorLight;
 
-    private void Awake()
+    private void Start()
     {
         health = startingHealth;
         maizeAmount = startingMaize;
         maizeAmountTMP.text = startingMaize.ToString();
         if (startingMaize > 0) maizeInventory.SetActive(true);
+        SetProjectilesToMax();
     }
 
     public void EnableBattleMode()
     {
         EquipDefaultWeapon();
         healthBar.gameObject.SetActive(true);
+        SetProjectilesToMax();
     }
 
     public void DisableBattleMode()
@@ -98,6 +105,15 @@ public class Player : Creature
     {
         weapons[0].gameObject.SetActive(true);
         creatureMovement.animator.SetInteger("WeaponIndex", 0);
+    }
+
+    void SetProjectilesToMax()
+    {
+        // Idea: projectile quantities could be persistent and have to be refilled somewhere before a battle
+        spear.quantity = spearStartingQuantity;
+        spear.notAvailable = false;
+        smallStone.quantity = smallStoneStartingQuantity;
+        smallStone.notAvailable = false;
     }
 
     private void Update()
@@ -321,6 +337,18 @@ public class Player : Creature
         creatureMovement.animator.SetInteger("WeaponIndex", weaponIndex);
         weaponOnHand.canHit = false;
         UpdateWeaponRangeIndicator();
+
+        if (spear.gameObject.activeSelf)
+        {
+            projectileQuantityTMP.text = spear.quantity.ToString();
+            projectileQuantityTMP.gameObject.SetActive(true);
+        }
+        else if (smallStone.gameObject.activeSelf)
+        {
+            projectileQuantityTMP.text = smallStone.quantity.ToString();
+            projectileQuantityTMP.gameObject.SetActive(true);
+        }
+        else projectileQuantityTMP.gameObject.SetActive(false);
     }
 
     private void UpdateWeaponRangeIndicator()
