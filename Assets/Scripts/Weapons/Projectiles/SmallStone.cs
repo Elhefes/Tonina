@@ -12,8 +12,10 @@ public class SmallStone : Projectile
 
     private void OnTriggerEnter(Collider other)
     {
-        base.HandleCollision(other.gameObject);
+        // If weapon switching is spammed, it's possible that canHit = true, while directorComponent isn't active.
+        if (!canHit || !base.directorComponent.activeSelf) return;
 
+        base.HandleCollision(other.gameObject);
         if (other.CompareTag("Enemy"))
         {
             Enemy enemy = other.gameObject.GetComponent<Enemy>();

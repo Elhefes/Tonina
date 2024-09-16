@@ -65,6 +65,9 @@ public class Creature : MonoBehaviour
         {
             weaponOnHand.Attack(creatureMovement.animator);
             yield return new WaitForSeconds(weaponOnHand.attackCooldown);
+
+            // Projectile respawn on hand
+            if (!weaponOnHand.gameObject.activeSelf) weaponOnHand.gameObject.SetActive(true);
         }
         onCooldown = false;
     }

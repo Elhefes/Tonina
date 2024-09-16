@@ -333,9 +333,9 @@ public class Player : Creature
         if (weaponType == WeaponType.Small_stone) weaponIndex = 3;
 
         weaponOnHand = weapons[weaponIndex];
+        weaponOnHand.canHit = false;
         weapons[weaponIndex].gameObject.SetActive(true);
         creatureMovement.animator.SetInteger("WeaponIndex", weaponIndex);
-        weaponOnHand.canHit = false;
         UpdateWeaponRangeIndicator();
 
         if (spear.gameObject.activeSelf)

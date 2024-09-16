@@ -19,6 +19,7 @@ public class Projectile : Weapon
         if (weaponWheelQuantityTMP != null) weaponWheelQuantityTMP.text = quantity.ToString();
 
         GameObject projectile = Instantiate(gameObject, shootingPoint.position, shootingPoint.rotation);
+        canHit = false;
         directorComponent.SetActive(false);
         gameObject.SetActive(false);
     }
