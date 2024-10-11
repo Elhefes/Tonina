@@ -10,6 +10,7 @@ public class Player : Creature
     public int maxHealth;
     public int startingHealth;
     public Weapon[] weapons;
+    private string weaponOrder;
     public Spear spear;
     public SmallStone smallStone;
     public int spearStartingQuantity;
@@ -84,9 +85,11 @@ public class Player : Creature
 
     public void EnableBattleMode()
     {
+        weaponOrder = PlayerPrefs.GetString("CustomWeaponOrder", "0123");
         EquipDefaultWeapon();
         healthBar.gameObject.SetActive(true);
         SetProjectilesToMax();
+        UpdateProjectileQuantityText();
     }
 
     public void DisableBattleMode()
@@ -103,8 +106,8 @@ public class Player : Creature
 
     void EquipDefaultWeapon()
     {
-        weapons[0].gameObject.SetActive(true);
-        creatureMovement.animator.SetInteger("WeaponIndex", 0);
+        weapons[weaponOrder[0] - '0'].gameObject.SetActive(true);
+        creatureMovement.animator.SetInteger("WeaponIndex", weaponOrder[0] - '0');
     }
 
     void SetProjectilesToMax()
@@ -337,7 +340,11 @@ public class Player : Creature
         weapons[weaponIndex].gameObject.SetActive(true);
         creatureMovement.animator.SetInteger("WeaponIndex", weaponIndex);
         UpdateWeaponRangeIndicator();
+        UpdateProjectileQuantityText();
+    }
 
+    private void UpdateProjectileQuantityText()
+    {
         if (spear.gameObject.activeSelf)
         {
             projectileQuantityTMP.text = spear.quantity.ToString();

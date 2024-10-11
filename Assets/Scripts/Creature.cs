@@ -67,7 +67,7 @@ public class Creature : MonoBehaviour
             yield return new WaitForSeconds(weaponOnHand.attackCooldown);
 
             // Projectile respawn on hand
-            if (!weaponOnHand.gameObject.activeSelf) weaponOnHand.gameObject.SetActive(true);
+            if (!weaponOnHand.gameObject.activeSelf && !weaponOnHand.notAvailable) weaponOnHand.gameObject.SetActive(true);
         }
         onCooldown = false;
     }

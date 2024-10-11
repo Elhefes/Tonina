@@ -2,20 +2,20 @@ using UnityEngine;
 
 public class CustomWeaponOrder : MonoBehaviour
 {
-    // When bow is added, place it to the second last slot -> "CSABR"
+    // When bow is added, place it to the second last slot
 
     private string customWeaponOrder;
     private int[] slotXValues = { -500, -250, 0, 500 };
     private int chosenWepIndex = 2;
     public Transform moveButtons;
-    public Transform C;
-    public Transform S;
-    public Transform A;
-    public Transform R;
+    public Transform clubSlot;
+    public Transform spearSlot;
+    public Transform axeSlot;
+    public Transform smallStoneSlot;
 
     private void Start()
     {
-        customWeaponOrder = PlayerPrefs.GetString("CustomWeaponOrder", "CSAR");
+        customWeaponOrder = PlayerPrefs.GetString("CustomWeaponOrder", "0123");
         UpdateSlotPositions();
     }
 
@@ -35,8 +35,8 @@ public class CustomWeaponOrder : MonoBehaviour
 
     public void ResetWeaponOrder()
     {
-        PlayerPrefs.SetString("CustomWeaponOrder", "CSAR");
-        customWeaponOrder = "CSAR";
+        PlayerPrefs.SetString("CustomWeaponOrder", "0123");
+        customWeaponOrder = "0123";
         UpdateSlotPositions();
     }
 
@@ -44,20 +44,20 @@ public class CustomWeaponOrder : MonoBehaviour
     {
         for (int i = 0; i < customWeaponOrder.Length; i++)
         {
-            if (customWeaponOrder[i].ToString() == "C") {
-                C.position = new Vector3(slotXValues[i] + 960, 540, 0);
+            if (customWeaponOrder[i].ToString() == "0") {
+                clubSlot.position = new Vector3(slotXValues[i] + 960, 540, 0);
             }
-            else if (customWeaponOrder[i].ToString() == "S")
+            else if (customWeaponOrder[i].ToString() == "1")
             {
-                S.position = new Vector3(slotXValues[i] + 960, 540, 0);
+                spearSlot.position = new Vector3(slotXValues[i] + 960, 540, 0);
             }
-            else if (customWeaponOrder[i].ToString() == "A")
+            else if (customWeaponOrder[i].ToString() == "2")
             {
-                A.position = new Vector3(slotXValues[i] + 960, 540, 0);
+                axeSlot.position = new Vector3(slotXValues[i] + 960, 540, 0);
             }
-            else if (customWeaponOrder[i].ToString() == "R")
+            else if (customWeaponOrder[i].ToString() == "3")
             {
-                R.position = new Vector3(slotXValues[i] + 960, 540, 0);
+                smallStoneSlot.position = new Vector3(slotXValues[i] + 960, 540, 0);
             }
         }
     }

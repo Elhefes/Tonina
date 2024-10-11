@@ -17,10 +17,14 @@ public class WeaponWheel : MonoBehaviour
     public Image nextWeaponImage;
     public Image previousWeaponImage;
     public Image[] weaponSprites;
+    private string weaponOrder;
     private int currentIndex;
     private int weaponIndex;
     private int slices = 5;
     public Weapon[] weapons;
+
+    private bool nextWeaponAutoSwitch = true;
+    private bool previousWeaponAutoSwitch;
 
     public AudioSource soundEffectPlayer;
 
@@ -31,12 +35,27 @@ public class WeaponWheel : MonoBehaviour
         if (player == null) player = GameObject.FindGameObjectsWithTag("Player")[0].GetComponent<Player>();
     }
 
-    private void OnEnable() { ResetToDefaultWeapon(); }
+    private void OnEnable()
+    {
+        weaponOrder = PlayerPrefs.GetString("CustomWeaponOrder", "0123");
+        ResetToDefaultWeapon();
+
+        // Auto switch is to next weapon by default
+        nextWeaponAutoSwitch = true;
+        previousWeaponAutoSwitch = false;
+    }
 
     private void Update()
     {
         if (Input.GetKeyDown(KeyCode.E)) NextWeapon();
         if (Input.GetKeyDown(KeyCode.Q)) PreviousWeapon();
+
+        // Auto switch to next / previous weapon when it's not available anymore
+        if (player.weaponOnHand.notAvailable && !player.onCooldown)
+        {
+            if (nextWeaponAutoSwitch) NextWeapon();
+            else if (previousWeaponAutoSwitch) PreviousWeapon();
+        }
     }
 
     public void NextWeapon()
@@ -48,7 +67,7 @@ public class WeaponWheel : MonoBehaviour
             weaponIndex = 0;
         }
 
-        while (player.weapons[weaponIndex].notAvailable)
+        while (player.weapons[weaponOrder[weaponIndex] - '0'].notAvailable)
         {
             weaponIndex++;
             if (weaponIndex > weapons.Length - 1)
@@ -63,11 +82,14 @@ public class WeaponWheel : MonoBehaviour
             currentIndex = 0;
         }
         StartWeaponWheelCooldown();
-        var wep = weapons[weaponIndex];
+        var wep = weapons[weaponOrder[weaponIndex] - '0'];
         weaponSprites[currentIndex].sprite = wep.uiSprite;
         player.SwitchWeapon(wep.type);
         weaponWheelAnimator.SetTrigger("NextInWheel");
         if (wep.switchSound != null) soundEffectPlayer.PlayOneShot(wep.switchSound, PlayerPrefs.GetFloat("soundVolume", 0.5f));
+
+        nextWeaponAutoSwitch = true;
+        previousWeaponAutoSwitch = false;
     }
 
     public void PreviousWeapon()
@@ -79,7 +101,7 @@ public class WeaponWheel : MonoBehaviour
             weaponIndex = weapons.Length - 1;
         }
 
-        while (player.weapons[weaponIndex].notAvailable)
+        while (player.weapons[weaponOrder[weaponIndex] - '0'].notAvailable)
         {
             weaponIndex--;
             if (weaponIndex < 0)
@@ -94,11 +116,14 @@ public class WeaponWheel : MonoBehaviour
             currentIndex = slices - 1;
         }
         StartWeaponWheelCooldown();
-        var wep = weapons[weaponIndex];
+        var wep = weapons[weaponOrder[weaponIndex] - '0'];
         weaponSprites[currentIndex].sprite = wep.uiSprite;
         player.SwitchWeapon(wep.type);
         weaponWheelAnimator.SetTrigger("PreviousInWheel");
         if (wep.switchSound != null) soundEffectPlayer.PlayOneShot(wep.switchSound, PlayerPrefs.GetFloat("soundVolume", 0.5f));
+
+        previousWeaponAutoSwitch = true;
+        nextWeaponAutoSwitch = false;
     }
 
     void StartWeaponWheelCooldown()
@@ -114,7 +139,7 @@ public class WeaponWheel : MonoBehaviour
 
     public void ResetToDefaultWeapon()
     {
-        var wep = weapons[0];
+        var wep = weapons[weaponOrder[0] - '0'];
         currentIndex = 0;
         weaponIndex = 0;
         weaponSprites[currentIndex].sprite = wep.uiSprite;
