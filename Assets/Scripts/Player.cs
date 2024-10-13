@@ -251,14 +251,14 @@ public class Player : Creature
         }
 
         // Rotate towards text subject when it exists
-        if (currentTextSubject != null) LookAt(currentTextSubject.gameObject.transform);
+        if (currentTextSubject != null) LookAt(currentTextSubject.gameObject.transform, true);
 
         // Rotate towards weather stone when it's clicked up close
-        else if (weatherStone != null) LookAt(weatherStone.transform);
+        else if (weatherStone != null) LookAt(weatherStone.transform, true);
 
         else if (clickToEnableObject != null)
         {
-            if (clickToEnableObject.objectToEnable.activeSelf) LookAt(clickToEnableObject.gameObject.transform);
+            if (clickToEnableObject.objectToEnable.activeSelf) LookAt(clickToEnableObject.gameObject.transform, true);
         }
 
         if (weaponRangeIndicatorLight.intensity > 0)

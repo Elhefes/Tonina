@@ -12,7 +12,7 @@ public class Creature : MonoBehaviour
 
     void Start()
     {
-        
+
     }
 
     // Update is called once per frame
@@ -26,22 +26,29 @@ public class Creature : MonoBehaviour
             directionToTarget.y = 0;
             var angle = Vector3.Angle(transform.forward, directionToTarget);
             Debug.DrawLine(transform.position, transform.position + directionToTarget * 114f, Color.red);
+
+            // This could be optimized in theory by replacing shouldAttack with 'float distanceToTarget', but it didn't work in testing
             shouldAttack = weaponOnHand.ShouldAttack(Vector3.Distance(transform.position, creatureMovement.target.position), angle);
 
             if (shouldAttack)
             {
                 if (!onCooldown) attackCoroutine = StartCoroutine(Attack());
+                return;
             }
-            else
+            else if (Vector3.Distance(transform.position, creatureMovement.target.position) < weaponOnHand.attackDistance - 0.5f)
             {
-                LookAt(creatureMovement.target);
+                LookAt(creatureMovement.target, false);
+                creatureMovement.agent.isStopped = true;
+                return;
             }
         }
+        creatureMovement.agent.isStopped = false;
     }
 
-    public void LookAt(Transform objToLookAt)
+    public void LookAt(Transform objToLookAt, bool stopInFront)
     {
-        if (Vector3.Distance(transform.position, objToLookAt.position) <= creatureMovement.agent.stoppingDistance + 1f)
+        if ((!stopInFront && Vector3.Distance(transform.position, objToLookAt.position) <= weaponOnHand.attackDistance || 
+            (Vector3.Distance(transform.position, objToLookAt.position) <= creatureMovement.agent.stoppingDistance + 1f)))
         {
             // Calculate the direction to the destination
             Vector3 direction = (creatureMovement.agent.destination - transform.position).normalized;
