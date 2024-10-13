@@ -324,12 +324,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   weaponName: Small Stone
+  notAvailable: 0
   type: 2
   user: 0
   damage: 12
   uiSprite: {fileID: 21300000, guid: 07c704b29e8def74aa2d3f874a535444, type: 3}
   attackCooldown: 1
-  attackDistance: 16
+  attackDistance: 8
   attackAngleThreshold: 2
   canHit: 0
   switchSound: {fileID: 8300000, guid: 63898964f37bd4c4cbcba9bd1461ec50, type: 3}
@@ -337,6 +338,8 @@ MonoBehaviour:
   soundPlayer: {fileID: 2507686418522535728}
   shootingPoint: {fileID: 0}
   directorComponent: {fileID: 1064538629880005888}
+  quantity: 0
+  weaponWheelQuantityTMP: {fileID: 0}
   hitSoundObject: {fileID: 4097969360181743727}
 --- !u!82 &2507686418522535728
 AudioSource:

@@ -360,7 +360,7 @@ public class Player : Creature
 
     private void UpdateWeaponRangeIndicator()
     {
-        weaponRangeIndicatorLight.spotAngle = Mathf.Asin((weaponOnHand.attackDistance / 25f)) * 180 / Mathf.PI;
+        weaponRangeIndicatorLight.spotAngle = 2 * Mathf.Asin((weaponOnHand.attackDistance / 25f)) * 180 / Mathf.PI;
         weaponRangeIndicatorLight.intensity = 1.75f;
     }
 

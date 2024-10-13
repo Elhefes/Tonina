@@ -187,12 +187,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   weaponName: Spear
+  notAvailable: 0
   type: 3
   user: 0
   damage: 110
   uiSprite: {fileID: 21300000, guid: 9f03a6d9ead109d499a705e995930b80, type: 3}
   attackCooldown: 1
-  attackDistance: 24
+  attackDistance: 13.75
   attackAngleThreshold: 2
   canHit: 0
   switchSound: {fileID: 8300000, guid: 55dcaa77e1f41894da2a52f46a850eca, type: 3}
@@ -200,6 +201,8 @@ MonoBehaviour:
   soundPlayer: {fileID: 6148967509101788350}
   shootingPoint: {fileID: 0}
   directorComponent: {fileID: 367706627151701062}
+  quantity: 0
+  weaponWheelQuantityTMP: {fileID: 0}
 --- !u!54 &661997034402309505
 Rigidbody:
   m_ObjectHideFlags: 0
