@@ -81,7 +81,13 @@ public class BuildingWheel : MonoBehaviour
         {
             building.gameObject.SetActive(false);
         }
+        placeableBuildingsOnPlayer[buildingIndex].gameObject.transform.eulerAngles = new Vector3(0f, 180f, 0f); // Reset rotation
         placeableBuildingsOnPlayer[buildingIndex].gameObject.SetActive(true);
+    }
+
+    public void RotatePlaceableBuilding(int degrees)
+    {
+        placeableBuildingsOnPlayer[buildingIndex].gameObject.transform.eulerAngles += new Vector3(0f, degrees, 0f);
     }
 
     void StartBuildingWheelCooldown()
