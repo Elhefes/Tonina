@@ -20,16 +20,9 @@ public class BuildingWheel : MonoBehaviour
     private int currentIndex;
     private int buildingIndex;
     private int slices = 5;
-    public Weapon[] buildings;
+    public BuildingPlacing[] placeableBuildingsOnPlayer;
 
     public AudioSource soundEffectPlayer;
-
-    public Player player;
-
-    private void Start()
-    {
-        if (player == null) player = GameObject.FindGameObjectsWithTag("Player")[0].GetComponent<Player>();
-    }
 
     private void OnEnable() { ResetToDefaultBuilding(); }
 
@@ -49,13 +42,13 @@ public class BuildingWheel : MonoBehaviour
         {
             currentIndex = 0;
         }
-        if (buildingIndex > buildings.Length - 1)
+        if (buildingIndex > placeableBuildingsOnPlayer.Length - 1)
         {
             buildingIndex = 0;
         }
-        var wep = buildings[buildingIndex];
-        buildingSprites[currentIndex].sprite = wep.uiSprite;
-        //player.SwitchWeapon(wep.type);
+        var building = placeableBuildingsOnPlayer[buildingIndex];
+        buildingSprites[currentIndex].sprite = building.uiSprite;
+        SwitchToBuilding(buildingIndex);
         buildingWheelAnimator.SetTrigger("NextInWheel");
         //if (wep.switchSound != null) soundEffectPlayer.PlayOneShot(wep.switchSound, PlayerPrefs.GetFloat("soundVolume", 0.5f));
     }
@@ -72,13 +65,23 @@ public class BuildingWheel : MonoBehaviour
         }
         if (buildingIndex < 0)
         {
-            buildingIndex = buildings.Length - 1;
+            buildingIndex = placeableBuildingsOnPlayer.Length - 1;
         }
-        var wep = buildings[buildingIndex];
-        buildingSprites[currentIndex].sprite = wep.uiSprite;
-        //player.SwitchWeapon(wep.type);
+        var building = placeableBuildingsOnPlayer[buildingIndex];
+        buildingSprites[currentIndex].sprite = building.uiSprite;
+        SwitchToBuilding(buildingIndex);
         buildingWheelAnimator.SetTrigger("PreviousInWheel");
         //if (wep.switchSound != null) soundEffectPlayer.PlayOneShot(wep.switchSound, PlayerPrefs.GetFloat("soundVolume", 0.5f));
+    }
+
+    void SwitchToBuilding(int buildingIndex)
+    {
+        if (this == null) return;
+        foreach (BuildingPlacing building in placeableBuildingsOnPlayer)
+        {
+            building.gameObject.SetActive(false);
+        }
+        placeableBuildingsOnPlayer[buildingIndex].gameObject.SetActive(true);
     }
 
     void StartBuildingWheelCooldown()
@@ -94,11 +97,11 @@ public class BuildingWheel : MonoBehaviour
 
     public void ResetToDefaultBuilding()
     {
-        var building = buildings[0];
+        var building = placeableBuildingsOnPlayer[0];
         currentIndex = 0;
         buildingIndex = 0;
         buildingSprites[currentIndex].sprite = building.uiSprite;
-        //player.SwitchWeapon(wep.type);
+        SwitchToBuilding(buildingIndex);
         // Reset rotation of building wheel's circle
         buildingWheelAnimator.gameObject.transform.eulerAngles = new Vector3(0f, 0f, 0f);
     }

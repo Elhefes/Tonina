@@ -10,6 +10,8 @@ public class BuildingPlacing : MonoBehaviour
     public float collisionRadius; // Change this later when there's more building shapes
     public LayerMask collisionLayerMask; // Which layer objects prevent building placement
 
+    public Sprite uiSprite;
+
     void Start()
     {
         placingMat.color = canPlaceColor;
