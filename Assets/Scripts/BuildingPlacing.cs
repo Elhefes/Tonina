@@ -2,7 +2,9 @@ using UnityEngine;
 
 public class BuildingPlacing : MonoBehaviour
 {
+    public GameObject prefabObject;
     public Material placingMat;
+    public bool canPlace;
     Color canPlaceColor = new Color(58f / 255f, 189f / 255f, 105f / 255f, 99f / 255f); // Green jade color
     Color cannotPlaceColor = new Color(255f / 255f, 0f / 255f, 0f / 255f, 99f / 255f);  // Red color
 
@@ -18,8 +20,16 @@ public class BuildingPlacing : MonoBehaviour
 
     private void Update()
     {
-        if (isPlaceable()) placingMat.color = canPlaceColor;
-        else placingMat.color = cannotPlaceColor;
+        if (isPlaceable())
+        {
+            placingMat.color = canPlaceColor;
+            canPlace = true;
+        }
+        else
+        {
+            placingMat.color = cannotPlaceColor;
+            canPlace = false;
+        }
     }
 
     private bool isPlaceable()

@@ -654,8 +654,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 03d45b4c7525583479a744d4e771e157, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  prefabObject: {fileID: 8123262988046963406, guid: de11e80c55f59ee469f105c3ed1f18a5, type: 3}
   placingMat: {fileID: 2100000, guid: f08362506d58b8946966a855b86610a6, type: 2}
-  halfExtentsVector: {x: 0.75, y: 0.1, z: 0.75}
+  canPlace: 0
+  halfExtentsVector: {x: 0.7, y: 0.1, z: 0.7}
   collisionLayerMask:
     serializedVersion: 2
     m_Bits: 65

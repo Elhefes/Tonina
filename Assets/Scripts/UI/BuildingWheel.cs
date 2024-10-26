@@ -26,6 +26,14 @@ public class BuildingWheel : MonoBehaviour
 
     private void OnEnable() { ResetToDefaultBuilding(); }
 
+    public void ExitBuildMode()
+    {
+        foreach (BuildingPlacing building in placeableBuildingsOnPlayer)
+        {
+            building.gameObject.SetActive(false);
+        }
+    }
+
     private void Update()
     {
         if (Input.GetKeyDown(KeyCode.E)) NextBuilding();
@@ -83,6 +91,20 @@ public class BuildingWheel : MonoBehaviour
         }
         placeableBuildingsOnPlayer[buildingIndex].gameObject.transform.eulerAngles = new Vector3(0f, 180f, 0f); // Reset rotation
         placeableBuildingsOnPlayer[buildingIndex].gameObject.SetActive(true);
+    }
+
+    public void TryToPlaceBuilding()
+    {
+        foreach (BuildingPlacing building in placeableBuildingsOnPlayer) // This could be optimised by only recieving the one that's active
+        {
+            if (building.gameObject.activeSelf)
+            {
+                if (building.canPlace)
+                {
+                    Instantiate(building.prefabObject, building.gameObject.transform.position, building.gameObject.transform.rotation);
+                }
+            }
+        }
     }
 
     public void RotatePlaceableBuilding(int degrees)
