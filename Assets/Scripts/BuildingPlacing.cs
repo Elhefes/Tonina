@@ -6,8 +6,7 @@ public class BuildingPlacing : MonoBehaviour
     Color canPlaceColor = new Color(58f / 255f, 189f / 255f, 105f / 255f, 99f / 255f); // Green jade color
     Color cannotPlaceColor = new Color(255f / 255f, 0f / 255f, 0f / 255f, 99f / 255f);  // Red color
 
-    public Transform bottomTransform;
-    public float collisionRadius; // Change this later when there's more building shapes
+    public Vector3 halfExtentsVector; // Input x = half of width, y = small number above 0, and z = half of depth
     public LayerMask collisionLayerMask; // Which layer objects prevent building placement
 
     public Sprite uiSprite;
@@ -19,21 +18,20 @@ public class BuildingPlacing : MonoBehaviour
 
     private void Update()
     {
-        if (Physics.OverlapSphere(bottomTransform.position, collisionRadius, LayerMask.GetMask("GroundForBuilding")).Length > 0)
+        if (isPlaceable()) placingMat.color = canPlaceColor;
+        else placingMat.color = cannotPlaceColor;
+    }
+
+    private bool isPlaceable()
+    {
+        if (Physics.OverlapBox(transform.position, halfExtentsVector, Quaternion.Euler(0f, 0f, 0f), LayerMask.GetMask("GroundForBuilding")).Length > 0)
         {
-            if (Physics.OverlapSphere(bottomTransform.position, collisionRadius, collisionLayerMask).Length > 0)
+            if (Physics.OverlapBox(transform.position, halfExtentsVector, transform.rotation, collisionLayerMask).Length > 0)
             {
-                placingMat.color = cannotPlaceColor;
-                return;
-            }
-            else
-            {
-                placingMat.color = canPlaceColor;
+                return false;
             }
         }
-        else
-        {
-            placingMat.color = cannotPlaceColor;
-        }
+        else return false;
+        return true;
     }
 }
