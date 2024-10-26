@@ -9,6 +9,7 @@ public class Kancho : MonoBehaviour
     public GameObject snakeRotator;
     public GameObject target;
     public Animator snakeAnimator;
+    public AudioSource soundPlayer;
 
     private void Start()
     {
@@ -36,6 +37,7 @@ public class Kancho : MonoBehaviour
     void SnakeAttack(GameObject obj)
     {
         snakeAnimator.SetTrigger("SnakeAttack");
+        soundPlayer.PlayOneShot(soundPlayer.clip, PlayerPrefs.GetFloat("soundVolume", 0.5f));
         obj.GetComponent<Enemy>()?.TakeDamage(snakeDamage);
         snakeOnCooldown = true;
         target = null;
