@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -21,17 +22,29 @@ public class BuildingWheel : MonoBehaviour
     private int buildingIndex;
     private int slices = 5;
     public BuildingPlacing[] placeableBuildingsOnPlayer;
+    private List<GameObject> buildingsToBePlaced = new List<GameObject>();
 
     public AudioSource soundEffectPlayer;
 
+    public Player player;
+
     private void OnEnable() { ResetToDefaultBuilding(); }
 
-    public void ExitBuildMode()
+    public void ExitBuildMode(bool saving)
     {
         foreach (BuildingPlacing building in placeableBuildingsOnPlayer)
         {
             building.gameObject.SetActive(false);
         }
+        if (!saving)
+        {
+            foreach (GameObject obj in buildingsToBePlaced)
+            {
+                Destroy(obj);
+            }
+        }
+        buildingsToBePlaced.Clear();
+        player.StartTeleportToHome();
     }
 
     private void Update()
@@ -101,7 +114,8 @@ public class BuildingWheel : MonoBehaviour
             {
                 if (building.canPlace)
                 {
-                    Instantiate(building.prefabObject, building.gameObject.transform.position, building.gameObject.transform.rotation);
+                    GameObject obj = Instantiate(building.prefabObject, building.gameObject.transform.position, building.gameObject.transform.rotation);
+                    buildingsToBePlaced.Add(obj);
                 }
             }
         }

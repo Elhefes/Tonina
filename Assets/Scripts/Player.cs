@@ -579,6 +579,11 @@ public class Player : Creature
             return;
         }
         if (objectToDisable != null) objectToDisable.SetActive(false);
+        StartTeleportToHome();
+    }
+
+    public void StartTeleportToHome()
+    {
         teleportCoroutine = StartCoroutine(TeleportPlayerToSpot(kingHouseSpawnPosition));
     }
 

@@ -15,6 +15,9 @@ public class OptionsMenu : MonoBehaviour
     public GameObject battleReturnConfirmText;
     public GameObject builderReturnConfirmText;
 
+    public GameObject returnFromBattleButton;
+    public GameObject returnFromBuilderButton;
+
     private void Awake()
     {
         musicVolumeSlider.value = PlayerPrefs.GetFloat("musicVolume", 0.2f);
@@ -35,12 +38,16 @@ public class OptionsMenu : MonoBehaviour
             if (returnFromBuilder)
             {
                 builderReturnConfirmText.SetActive(true);
+                returnFromBuilderButton.SetActive(true);
                 battleReturnConfirmText.SetActive(false);
+                returnFromBattleButton.SetActive(false);
             }
             else
             {
                 builderReturnConfirmText.SetActive(false);
+                returnFromBuilderButton.SetActive(false);
                 battleReturnConfirmText.SetActive(true);
+                returnFromBattleButton.SetActive(true);
             }
         }
     }
