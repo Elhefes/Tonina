@@ -768,6 +768,7 @@ GameObject:
   - component: {fileID: 3316073463835985071}
   - component: {fileID: 1858768564329165603}
   - component: {fileID: 1422272984708544630}
+  - component: {fileID: 1725038249361023478}
   m_Layer: 0
   m_Name: Kancho
   m_TagString: SnakeTrap
@@ -939,6 +940,22 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!208 &1725038249361023478
+NavMeshObstacle:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8123262988046963406}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Shape: 0
+  m_Extents: {x: 0.45, y: 1, z: 0.45}
+  m_MoveThreshold: 0.1
+  m_Carve: 1
+  m_CarveOnlyStationary: 1
+  m_Center: {x: 0, y: 0.4, z: 0}
+  m_TimeToStationary: 0.5
 --- !u!1 &8501591840496690972
 GameObject:
   m_ObjectHideFlags: 0
