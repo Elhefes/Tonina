@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class MaizePlace : MonoBehaviour
+public class MaizePlace : PlaceableBuilding
 {
     public int maizeInPlace;
     public GameObject maizeInBarrel;

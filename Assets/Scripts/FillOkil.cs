@@ -1,6 +1,4 @@
-using UnityEngine;
-
-public class FillOkil : MonoBehaviour
+public class FillOkil : PlaceableBuilding
 {
     public int stoneAmount;
     public int spearAmount;

@@ -1,5 +1,7 @@
 using UnityEngine;
-using UnityEngine.UI;
+using System.Collections;
+using System;
+using TMPro;
 
 public class MainMenu : MonoBehaviour
 {
@@ -18,12 +20,18 @@ public class MainMenu : MonoBehaviour
 
     private float acceleration;
 
+    public TMP_Text playTimeAmountTMP;
+    private int secondsPlayed;
+
     private void Start()
     {
         Application.targetFrameRate = Screen.currentResolution.refreshRate;
         playerCamera = Camera.main;
         mainMenuCamera = GameObject.Find("MainMenuCamera").GetComponent<Camera>();
         mainMenuCameraAnimator = mainMenuCamera.GetComponent<Animator>();
+
+        secondsPlayed = PlayerPrefs.GetInt("secondsPlayed", 0);
+        StartCoroutine(SecondCounter());
     }
 
     public void SetIntroAsPlayed()
@@ -64,6 +72,20 @@ public class MainMenu : MonoBehaviour
                 clickBlocker.SetActive(false);
             }
             acceleration += 0.0008f;
+        }
+    }
+
+    IEnumerator SecondCounter()
+    {
+        while (true)
+        {
+            yield return new WaitForSecondsRealtime(1f);
+            secondsPlayed++;
+            PlayerPrefs.SetInt("secondsPlayed", secondsPlayed);
+            TimeSpan time = TimeSpan.FromSeconds(secondsPlayed);
+
+            string timePlayed = time.TotalHours.ToString("00") + ":" + time.Minutes.ToString("00") + ":" + time.Seconds.ToString("00");
+            playTimeAmountTMP.text = timePlayed;
         }
     }
 }

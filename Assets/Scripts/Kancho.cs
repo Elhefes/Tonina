@@ -1,8 +1,6 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-public class Kancho : MonoBehaviour
+public class Kancho : PlaceableBuilding
 {
     public int snakeDamage;
     private bool snakeOnCooldown;
