@@ -15,7 +15,7 @@ public class StatsBoard : MonoBehaviour
     public TMP_Text battleWinPercentageAmountTMP;
     public TMP_Text battlesForfeitedAmountTMP;
 
-    private void Start()
+    private void OnEnable()
     {
         stats = SaveLoad.LoadStats();
         UpdateStatsMenuTexts();
@@ -30,7 +30,11 @@ public class StatsBoard : MonoBehaviour
         changesToBattlefieldAmountTMP.text = "" + stats.changesToBattlefield;
         battlesWonAmountTMP.text = "" + stats.battlesWon;
         battlesLostAmountTMP.text = "" + stats.battlesLost;
-        battleWinPercentageAmountTMP.text = "" + stats.battlesWon / (stats.battlesWon + stats.battlesLost) + "%";
+        int percentage;
+        if (stats.battlesLost == 0 && stats.battlesWon != 0) percentage = 100;
+        else percentage = Mathf.RoundToInt((float)stats.battlesWon / (stats.battlesWon + stats.battlesLost) * 100);
+        print(Mathf.RoundToInt((float)stats.battlesWon / (stats.battlesWon + stats.battlesLost) * 100));
+        battleWinPercentageAmountTMP.text = "" + percentage + "%";
         battlesForfeitedAmountTMP.text = "" + stats.battlesForfeited;
     }
 }

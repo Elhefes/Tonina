@@ -17,6 +17,8 @@ public class WaveController : MonoBehaviour
     public Transform[] spawnPoints;
     private Vector3 housePos;
 
+    public StatsController statsController;
+
     private List<Coroutine> coroutines;
     private Coroutine rewardsRisingCoroutine;
     public GameObject overworldOptionsButton;
@@ -153,6 +155,8 @@ public class WaveController : MonoBehaviour
         CancelInvoke("CheckForEnemies");
         StopAllCoroutines();
         DisableBattleUI();
+        statsController.battlesLost++;
+        statsController.SaveStats();
     }
 
     void WinBattle()
@@ -163,6 +167,8 @@ public class WaveController : MonoBehaviour
         StopCoroutine(SecondCounter());
         rewardsRisingCoroutine = StartCoroutine(PlayRewardsRisingAnimation());
         DisableBattleUI();
+        statsController.battlesWon++;
+        statsController.SaveStats();
     }
 
     int GetTotalRewards()
@@ -175,6 +181,8 @@ public class WaveController : MonoBehaviour
     {
         int tempRewards = 0;
         int totalRewardsNumber = GetTotalRewards();
+        statsController.totalMoneyEarned += totalRewardsNumber;
+        statsController.availableMoney += totalRewardsNumber;
         while (tempRewards < totalRewardsNumber)
         {
             rewardsText.text = tempRewards.ToString();

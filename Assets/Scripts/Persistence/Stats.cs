@@ -9,4 +9,16 @@ public class Stats
     public int battlesWon { get; set; }
     public int battlesLost { get; set; }
     public int battlesForfeited { get; set; }
+
+    public Stats(StatsController statsController)
+    {
+        pyramidLevelsBuilt = statsController.pyramidLevelsBuilt;
+        availableMoney = statsController.availableMoney;
+        totalMoneyEarned = statsController.totalMoneyEarned;
+        enemiesKilled = statsController.enemiesKilled;
+        changesToBattlefield = statsController.changesToBattlefield;
+        battlesWon = statsController.battlesWon;
+        battlesLost = statsController.battlesLost;
+        battlesForfeited = statsController.battlesForfeited;
+    }
 }
