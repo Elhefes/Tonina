@@ -4,7 +4,6 @@ using UnityEngine;
 public class PlaySoundAndDestroy : MonoBehaviour
 {
     public AudioSource audioSource;
-    private Coroutine destroyerCoroutine;
 
     private void OnEnable()
     {
@@ -13,13 +12,14 @@ public class PlaySoundAndDestroy : MonoBehaviour
 
     void PlayAndDie()
     {
-        destroyerCoroutine = StartCoroutine(DeathCoroutine());
+        StartCoroutine(DeathCoroutine());
     }
 
     IEnumerator DeathCoroutine()
     {
-        audioSource.PlayOneShot(audioSource.clip, PlayerPrefs.GetFloat("soundVolume", 0.5f));
-        yield return new WaitUntil(() => audioSource.time >= audioSource.clip.length);
+        audioSource.volume = PlayerPrefs.GetFloat("soundVolume", 0.5f);
+        audioSource.Play();
+        yield return new WaitUntil(() => !audioSource.isPlaying);
         Destroy(gameObject);
     }
 }
