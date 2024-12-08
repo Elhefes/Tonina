@@ -21,16 +21,16 @@ public class CustomWeaponOrder : MonoBehaviour
 
     public void UpdateChosenWepIndex(Transform slot)
     {
-        if (slot.transform.position.x - 960 == -500) chosenWepIndex = 0;
-        else if (slot.transform.position.x - 960 == -250) chosenWepIndex = 1;
-        else if (slot.transform.position.x - 960 == 0) chosenWepIndex = 2;
-        else if (slot.transform.position.x - 960 == 500) chosenWepIndex = 3;
+        if (slot.transform.localPosition.x == -500) chosenWepIndex = 0;
+        else if (slot.transform.localPosition.x == -250) chosenWepIndex = 1;
+        else if (slot.transform.localPosition.x == 0) chosenWepIndex = 2;
+        else if (slot.transform.localPosition.x == 500) chosenWepIndex = 3;
         UpdateMoveButtonsPosition();
     }
 
     public void UpdateMoveButtonsPosition()
     {
-        moveButtons.position = new Vector3(slotXValues[chosenWepIndex] + 960, 540, 0);
+        moveButtons.localPosition = new Vector3(slotXValues[chosenWepIndex], 0, 0);
     }
 
     public void ResetWeaponOrder()
@@ -45,19 +45,19 @@ public class CustomWeaponOrder : MonoBehaviour
         for (int i = 0; i < customWeaponOrder.Length; i++)
         {
             if (customWeaponOrder[i].ToString() == "0") {
-                clubSlot.position = new Vector3(slotXValues[i] + 960, 540, 0);
+                clubSlot.localPosition = new Vector3(slotXValues[i], 0, 0);
             }
             else if (customWeaponOrder[i].ToString() == "1")
             {
-                spearSlot.position = new Vector3(slotXValues[i] + 960, 540, 0);
+                spearSlot.localPosition = new Vector3(slotXValues[i], 0, 0);
             }
             else if (customWeaponOrder[i].ToString() == "2")
             {
-                axeSlot.position = new Vector3(slotXValues[i] + 960, 540, 0);
+                axeSlot.localPosition = new Vector3(slotXValues[i], 0, 0);
             }
             else if (customWeaponOrder[i].ToString() == "3")
             {
-                smallStoneSlot.position = new Vector3(slotXValues[i] + 960, 540, 0);
+                smallStoneSlot.localPosition = new Vector3(slotXValues[i], 0, 0);
             }
         }
     }
