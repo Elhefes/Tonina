@@ -25,7 +25,7 @@ public class StatsBoard : MonoBehaviour
     {
         if (stats == null) return;
         pyramidLevelsBuiltAmountTMP.text = "" + stats.pyramidLevelsBuilt + "/14";
-        availableMoneyAmountTMP.text = "" + stats.availableMoney;
+        availableMoneyAmountTMP.text = "" + stats.availableMoney + " gold";
         enemiesKilledAmountTMP.text = "" + stats.enemiesKilled;
         changesToBattlefieldAmountTMP.text = "" + stats.changesToBattlefield;
         battlesWonAmountTMP.text = "" + stats.battlesWon;
