@@ -39,6 +39,7 @@ public class Player : Creature
 
     public MaizePlace maizePlace;
     public FillOkil fillOkil;
+    private SpearRack spearRack;
     private BuildingRoof buildingRoof;
     private Villager villager;
     private GameObject currentTextSubject;
@@ -174,7 +175,7 @@ public class Player : Creature
                             textSubject.currentIndex = 0;
                         }
                     }
-                        
+
                     textLineIndex = 0;
                     textBox.gameObject.SetActive(true);
                     UpdateTextBox();
@@ -241,6 +242,15 @@ public class Player : Creature
                     {
                         clickToEnableObject.objectToEnable.SetActive(false);
                         clickToEnableObject = null;
+                    }
+                }
+
+                if (battlefieldMenu.waveController.battleUI.activeSelf && target.CompareTag("SpearRack") && Vector3.Distance(target.transform.position, transform.position) < 2.25f)
+                {
+                    if (target != null)
+                    {
+                        TryToTakeSpearFromRack(target);
+                        return;
                     }
                 }
 
@@ -539,6 +549,20 @@ public class Player : Creature
                 stonesInFillTMP.text = fillOkil.stoneAmount.ToString();
                 if (smallStone.gameObject.activeSelf) projectileQuantityTMP.text = smallStone.quantity.ToString();
             }
+        }
+    }
+
+    void TryToTakeSpearFromRack(GameObject rackObj)
+    {
+        if (spearRack == null || rackObj != spearRack)
+        {
+            spearRack = rackObj.GetComponent<SpearRack>();
+        }
+        if (spearRack != null && spear.quantity < spearStartingQuantity && spearRack.numOfSpearsInRack > 0)
+        {
+            spear.quantity++;
+            spear.notAvailable = false;
+            spearRack.TakeSpear();
         }
     }
 
