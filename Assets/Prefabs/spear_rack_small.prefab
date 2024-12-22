@@ -796,7 +796,7 @@ GameObject:
   - component: {fileID: 420966433588715493}
   m_Layer: 0
   m_Name: spear_rack_small
-  m_TagString: SpearRack
+  m_TagString: PlaceableBuilding
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 2147483647
@@ -823,6 +823,7 @@ Transform:
   - {fileID: 5036066773146449832}
   - {fileID: 207344591287961042}
   - {fileID: 5408314489461854354}
+  - {fileID: 6601208240006542746}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -838,6 +839,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 49ca4d55e6ae1d0438163b5dafe8c350, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  cost: 0
+  removingBuildingCoat: {fileID: 5825374541190852384}
   spears:
   - {fileID: 696776333654564712}
   - {fileID: 8177805545261847416}
@@ -1487,3 +1490,74 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!1001 &5739595886069712050
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 1457785185801220392}
+    m_Modifications:
+    - target: {fileID: 1457785185801220392, guid: a286db427e38be845b364e30ab369173, type: 3}
+      propertyPath: m_RootOrder
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 1457785185801220392, guid: a286db427e38be845b364e30ab369173, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1457785185801220392, guid: a286db427e38be845b364e30ab369173, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1457785185801220392, guid: a286db427e38be845b364e30ab369173, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1457785185801220392, guid: a286db427e38be845b364e30ab369173, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1457785185801220392, guid: a286db427e38be845b364e30ab369173, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1457785185801220392, guid: a286db427e38be845b364e30ab369173, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1457785185801220392, guid: a286db427e38be845b364e30ab369173, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1457785185801220392, guid: a286db427e38be845b364e30ab369173, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1457785185801220392, guid: a286db427e38be845b364e30ab369173, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1457785185801220392, guid: a286db427e38be845b364e30ab369173, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2265529739721730962, guid: a286db427e38be845b364e30ab369173, type: 3}
+      propertyPath: m_Name
+      value: SpearRackRemoving
+      objectReference: {fileID: 0}
+    - target: {fileID: 2265529739721730962, guid: a286db427e38be845b364e30ab369173, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: a286db427e38be845b364e30ab369173, type: 3}
+--- !u!1 &5825374541190852384 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2265529739721730962, guid: a286db427e38be845b364e30ab369173, type: 3}
+  m_PrefabInstance: {fileID: 5739595886069712050}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &6601208240006542746 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 1457785185801220392, guid: a286db427e38be845b364e30ab369173, type: 3}
+  m_PrefabInstance: {fileID: 5739595886069712050}
+  m_PrefabAsset: {fileID: 0}

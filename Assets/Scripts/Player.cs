@@ -37,6 +37,10 @@ public class Player : Creature
     public BarricadesController barricadeController;
     public GameObject villageTPMenu;
 
+    public BuildingRemover buildingRemover;
+    private PlaceableBuilding selectedPlaceableBuilding;
+    private bool readyToRemove;
+
     public MaizePlace maizePlace;
     public FillOkil fillOkil;
     private SpearRack spearRack;
@@ -245,7 +249,29 @@ public class Player : Creature
                     }
                 }
 
-                if (battlefieldMenu.waveController.battleUI.activeSelf && target.CompareTag("SpearRack") && Vector3.Distance(target.transform.position, transform.position) < 2.25f)
+                if (readyToRemove)
+                {
+                    if (target.CompareTag("PlaceableBuilding"))
+                    {
+                        if (selectedPlaceableBuilding == null)
+                        {
+                            selectedPlaceableBuilding = target.GetComponentInParent<PlaceableBuilding>();
+                            buildingRemover.SelectBuilding(selectedPlaceableBuilding);
+                        }
+                        else if (target.gameObject == selectedPlaceableBuilding.gameObject)
+                        {
+                            buildingRemover.SelectBuilding(selectedPlaceableBuilding);
+                        }
+                        else
+                        {
+                            selectedPlaceableBuilding = target.GetComponentInParent<PlaceableBuilding>();
+                            buildingRemover.SelectBuilding(selectedPlaceableBuilding);
+                        }
+                        return;
+                    }
+                }
+
+                if (battlefieldMenu.waveController.battleUI.activeSelf && (target.name == "spear_rack_small(Clone)") && Vector3.Distance(target.transform.position, transform.position) < 2.25f)
                 {
                     if (target != null)
                     {
@@ -436,12 +462,12 @@ public class Player : Creature
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("MaizePlace"))
+        if (other.gameObject.name == "Maize Place(Clone)")
         {
             maizePlace = other.GetComponentInParent<MaizePlace>();
             EnterMaizePlace();
         }
-        if (other.CompareTag("Fill-Okil"))
+        if (other.gameObject.name == "Fill-Okil(Clone)")
         {
             fillOkil = other.GetComponentInParent<FillOkil>();
             EnterFillOkil();
@@ -472,11 +498,8 @@ public class Player : Creature
 
     private void OnTriggerExit(Collider other)
     {
-        if (other.CompareTag("MaizePlace"))
-        {
-            ExitMaizePlace();
-        }
-        if (other.CompareTag("Fill-Okil")) { fillOkilPickUp.SetActive(false); }
+        if (other.gameObject.name == "Maize Place(Clone)") ExitMaizePlace();
+        if (other.gameObject.name == "Fill-Okil(Clone)") { fillOkilPickUp.SetActive(false); }
         if (other.CompareTag("Building"))
         {
             buildingRoof = other.GetComponentInParent<BuildingRoof>();
@@ -565,6 +588,8 @@ public class Player : Creature
             spearRack.TakeSpear();
         }
     }
+
+    public void SetReadyToRemove(bool value) { readyToRemove = value; }
 
     public void LoseBattle() { battlefieldMenu.waveController.LoseBattle(); }
 

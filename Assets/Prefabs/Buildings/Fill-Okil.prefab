@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 6671541953306269196}
   m_Layer: 6
   m_Name: Fill-Okil
-  m_TagString: Fill-Okil
+  m_TagString: PlaceableBuilding
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 2147483647
@@ -48,6 +48,7 @@ Transform:
   - {fileID: 4887555894148140547}
   - {fileID: 7949187921499992368}
   - {fileID: 2522138582141013370}
+  - {fileID: 1800321341060837551}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -63,6 +64,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b5d7a2759a43e4947b9788d2d1a137f4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  cost: 0
+  removingBuildingCoat: {fileID: 1420839588943637013}
   stoneAmount: 20
   spearAmount: 5
   arrowAmount: 15
@@ -93,7 +96,7 @@ GameObject:
   - component: {fileID: 6395898028377666273}
   m_Layer: 8
   m_Name: Box018
-  m_TagString: Untagged
+  m_TagString: PlaceableBuilding
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 2147483647
@@ -191,7 +194,7 @@ GameObject:
   - component: {fileID: 4766560464058498679}
   m_Layer: 8
   m_Name: Box020
-  m_TagString: Untagged
+  m_TagString: PlaceableBuilding
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 2147483647
@@ -290,7 +293,7 @@ GameObject:
   - component: {fileID: 3859976155955129070}
   m_Layer: 6
   m_Name: Box004
-  m_TagString: Untagged
+  m_TagString: PlaceableBuilding
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 2147483647
@@ -405,7 +408,7 @@ GameObject:
   - component: {fileID: 4736388781801317960}
   m_Layer: 6
   m_Name: Box003
-  m_TagString: Untagged
+  m_TagString: PlaceableBuilding
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 2147483647
@@ -520,7 +523,7 @@ GameObject:
   - component: {fileID: 2738053833688030865}
   m_Layer: 6
   m_Name: Box002
-  m_TagString: Untagged
+  m_TagString: PlaceableBuilding
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 2147483647
@@ -634,7 +637,7 @@ GameObject:
   - component: {fileID: 8857461355951388734}
   m_Layer: 6
   m_Name: Box016
-  m_TagString: Untagged
+  m_TagString: PlaceableBuilding
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 2147483647
@@ -733,7 +736,7 @@ GameObject:
   - component: {fileID: 2217758710031666753}
   m_Layer: 6
   m_Name: Box022
-  m_TagString: Untagged
+  m_TagString: PlaceableBuilding
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 2147483647
@@ -847,7 +850,7 @@ GameObject:
   - component: {fileID: 1009291766696138712}
   m_Layer: 8
   m_Name: Box019
-  m_TagString: Untagged
+  m_TagString: PlaceableBuilding
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 2147483647
@@ -944,7 +947,7 @@ GameObject:
   - component: {fileID: 1238892451647351986}
   m_Layer: 6
   m_Name: Box017B
-  m_TagString: Untagged
+  m_TagString: PlaceableBuilding
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 2147483647
@@ -1029,7 +1032,7 @@ GameObject:
   - component: {fileID: 8059983364964477067}
   m_Layer: 6
   m_Name: Box021
-  m_TagString: Untagged
+  m_TagString: PlaceableBuilding
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 2147483647
@@ -1188,7 +1191,7 @@ GameObject:
   - component: {fileID: 2142617105798088630}
   m_Layer: 6
   m_Name: Box007
-  m_TagString: Untagged
+  m_TagString: PlaceableBuilding
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 2147483647
@@ -1285,7 +1288,7 @@ GameObject:
   - component: {fileID: 6324515244882841436}
   m_Layer: 6
   m_Name: Box019B
-  m_TagString: Untagged
+  m_TagString: PlaceableBuilding
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 2147483647
@@ -1369,7 +1372,7 @@ GameObject:
   - component: {fileID: 3521972234571021244}
   m_Layer: 8
   m_Name: Box017
-  m_TagString: Untagged
+  m_TagString: PlaceableBuilding
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 2147483647
@@ -1466,7 +1469,7 @@ GameObject:
   - component: {fileID: 1132842006739552965}
   m_Layer: 6
   m_Name: Box018B
-  m_TagString: Untagged
+  m_TagString: PlaceableBuilding
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 2147483647
@@ -1550,7 +1553,7 @@ GameObject:
   - component: {fileID: 5275461605943587853}
   m_Layer: 6
   m_Name: Box001
-  m_TagString: Untagged
+  m_TagString: PlaceableBuilding
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 2147483647
@@ -1648,7 +1651,7 @@ GameObject:
   - component: {fileID: 4735077128499367652}
   m_Layer: 6
   m_Name: Box005
-  m_TagString: Untagged
+  m_TagString: PlaceableBuilding
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 2147483647
@@ -1761,7 +1764,7 @@ GameObject:
   - component: {fileID: 6157240544509911321}
   m_Layer: 6
   m_Name: Box016B
-  m_TagString: Untagged
+  m_TagString: PlaceableBuilding
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 2147483647
@@ -1831,3 +1834,74 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!1001 &1368233195965525521
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 720846897787461310}
+    m_Modifications:
+    - target: {fileID: 93210839114318852, guid: bbe8830c67b3b7c45bafea3976ad2955, type: 3}
+      propertyPath: m_Name
+      value: Fill-OkilRemoving
+      objectReference: {fileID: 0}
+    - target: {fileID: 93210839114318852, guid: bbe8830c67b3b7c45bafea3976ad2955, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 720846897787461310, guid: bbe8830c67b3b7c45bafea3976ad2955, type: 3}
+      propertyPath: m_RootOrder
+      value: 18
+      objectReference: {fileID: 0}
+    - target: {fileID: 720846897787461310, guid: bbe8830c67b3b7c45bafea3976ad2955, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 720846897787461310, guid: bbe8830c67b3b7c45bafea3976ad2955, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 720846897787461310, guid: bbe8830c67b3b7c45bafea3976ad2955, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 720846897787461310, guid: bbe8830c67b3b7c45bafea3976ad2955, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 720846897787461310, guid: bbe8830c67b3b7c45bafea3976ad2955, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 720846897787461310, guid: bbe8830c67b3b7c45bafea3976ad2955, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 720846897787461310, guid: bbe8830c67b3b7c45bafea3976ad2955, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 720846897787461310, guid: bbe8830c67b3b7c45bafea3976ad2955, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 720846897787461310, guid: bbe8830c67b3b7c45bafea3976ad2955, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 720846897787461310, guid: bbe8830c67b3b7c45bafea3976ad2955, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: bbe8830c67b3b7c45bafea3976ad2955, type: 3}
+--- !u!1 &1420839588943637013 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 93210839114318852, guid: bbe8830c67b3b7c45bafea3976ad2955, type: 3}
+  m_PrefabInstance: {fileID: 1368233195965525521}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &1800321341060837551 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 720846897787461310, guid: bbe8830c67b3b7c45bafea3976ad2955, type: 3}
+  m_PrefabInstance: {fileID: 1368233195965525521}
+  m_PrefabAsset: {fileID: 0}
