@@ -39,6 +39,7 @@ public class Player : Creature
 
     public BuildingRemover buildingRemover;
     private PlaceableBuilding selectedPlaceableBuilding;
+    public GameObject placeableBuildings; // Use this only for hiding e.g. when removing in build mode
     private bool readyToRemove;
 
     public MaizePlace maizePlace;

@@ -16,6 +16,7 @@ public class BuildingWheel : MonoBehaviour
     public float coolDownTime;
 
     public TMP_Text buildingsPlacedText;
+    public GameObject noMoreRoomForBuildingsIndicator;
 
     public Image currentBuildingImage;
     public Image nextBuildingImage;
@@ -36,6 +37,7 @@ public class BuildingWheel : MonoBehaviour
     {
         UpdateBuildingsPlacedText();
         ResetToDefaultBuilding();
+        ShowBuildingInHandIfPossible();
     }
 
     public void ExitBuildMode(bool saving)
@@ -46,10 +48,13 @@ public class BuildingWheel : MonoBehaviour
         }
         if (!saving)
         {
+            int i = 0;
             foreach (GameObject obj in buildingsToBePlaced)
             {
                 Destroy(obj);
+                i++;
             }
+            RemoveBuildingsByAmount(i);
         }
         buildingsToBePlaced.Clear();
         player.StartTeleportToHome();
@@ -64,6 +69,26 @@ public class BuildingWheel : MonoBehaviour
     void UpdateBuildingsPlacedText()
     {
         buildingsPlacedText.text = "Buildings placed:\n" + buildingsManager.buildingsPlaced + " / " + buildingsManager.maxBuildingAmount;
+        if (buildingsManager.buildingsPlaced < buildingsManager.maxBuildingAmount)
+        {
+            noMoreRoomForBuildingsIndicator.SetActive(false);
+        }
+        else
+        {
+            noMoreRoomForBuildingsIndicator.SetActive(true);
+        }
+    }
+
+    public void ShowBuildingInHandIfPossible()
+    {
+        if (buildingsManager.buildingsPlaced < buildingsManager.maxBuildingAmount)
+        {
+            player.placeableBuildings.SetActive(true);
+        }
+        else
+        {
+            player.placeableBuildings.SetActive(false);
+        }
     }
 
     public void NextBuilding()
@@ -84,6 +109,7 @@ public class BuildingWheel : MonoBehaviour
         buildingSprites[currentIndex].sprite = building.uiSprite;
         SwitchToBuilding(buildingIndex);
         buildingWheelAnimator.SetTrigger("NextInWheel");
+        // Add switch sound later?
         //if (wep.switchSound != null) soundEffectPlayer.PlayOneShot(wep.switchSound, PlayerPrefs.GetFloat("soundVolume", 0.5f));
     }
 
@@ -105,6 +131,7 @@ public class BuildingWheel : MonoBehaviour
         buildingSprites[currentIndex].sprite = building.uiSprite;
         SwitchToBuilding(buildingIndex);
         buildingWheelAnimator.SetTrigger("PreviousInWheel");
+        // Add switch sound later?
         //if (wep.switchSound != null) soundEffectPlayer.PlayOneShot(wep.switchSound, PlayerPrefs.GetFloat("soundVolume", 0.5f));
     }
 
@@ -123,7 +150,6 @@ public class BuildingWheel : MonoBehaviour
     {
         if (buildingsManager.buildingsPlaced >= buildingsManager.maxBuildingAmount)
         {
-            // Add more stuff here, for example add some display that shows player can't place
             return;
         }
         foreach (BuildingPlacing building in placeableBuildingsOnPlayer) // This could be optimised by only recieving the one that's active?
@@ -136,6 +162,7 @@ public class BuildingWheel : MonoBehaviour
                     buildingsToBePlaced.Add(obj);
                     buildingsManager.buildingsPlaced++;
                     UpdateBuildingsPlacedText();
+                    ShowBuildingInHandIfPossible();
                 }
             }
         }
