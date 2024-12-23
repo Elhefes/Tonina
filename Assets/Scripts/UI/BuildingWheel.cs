@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 
 public class BuildingWheel : MonoBehaviour
 {
@@ -14,6 +15,8 @@ public class BuildingWheel : MonoBehaviour
     private bool buildingWheelCooldown;
     public float coolDownTime;
 
+    public TMP_Text buildingsPlacedText;
+
     public Image currentBuildingImage;
     public Image nextBuildingImage;
     public Image previousBuildingImage;
@@ -21,6 +24,7 @@ public class BuildingWheel : MonoBehaviour
     private int currentIndex;
     private int buildingIndex;
     private int slices = 5;
+    public BuildingsManager buildingsManager;
     public BuildingPlacing[] placeableBuildingsOnPlayer;
     private List<GameObject> buildingsToBePlaced = new List<GameObject>();
 
@@ -28,7 +32,11 @@ public class BuildingWheel : MonoBehaviour
 
     public Player player;
 
-    private void OnEnable() { ResetToDefaultBuilding(); }
+    private void OnEnable()
+    {
+        UpdateBuildingsPlacedText();
+        ResetToDefaultBuilding();
+    }
 
     public void ExitBuildMode(bool saving)
     {
@@ -51,6 +59,11 @@ public class BuildingWheel : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.E)) NextBuilding();
         if (Input.GetKeyDown(KeyCode.Q)) PreviousBuilding();
+    }
+
+    void UpdateBuildingsPlacedText()
+    {
+        buildingsPlacedText.text = "Buildings placed:\n" + buildingsManager.buildingsPlaced + " / " + buildingsManager.maxBuildingAmount;
     }
 
     public void NextBuilding()
@@ -108,7 +121,12 @@ public class BuildingWheel : MonoBehaviour
 
     public void TryToPlaceBuilding()
     {
-        foreach (BuildingPlacing building in placeableBuildingsOnPlayer) // This could be optimised by only recieving the one that's active
+        if (buildingsManager.buildingsPlaced >= buildingsManager.maxBuildingAmount)
+        {
+            // Add more stuff here, for example add some display that shows player can't place
+            return;
+        }
+        foreach (BuildingPlacing building in placeableBuildingsOnPlayer) // This could be optimised by only recieving the one that's active?
         {
             if (building.gameObject.activeSelf)
             {
@@ -116,9 +134,17 @@ public class BuildingWheel : MonoBehaviour
                 {
                     GameObject obj = Instantiate(building.prefabObject, building.gameObject.transform.position, building.gameObject.transform.rotation);
                     buildingsToBePlaced.Add(obj);
+                    buildingsManager.buildingsPlaced++;
+                    UpdateBuildingsPlacedText();
                 }
             }
         }
+    }
+
+    public void RemoveBuildingsByAmount(int amount)
+    {
+        buildingsManager.buildingsPlaced = buildingsManager.buildingsPlaced - amount;
+        UpdateBuildingsPlacedText();
     }
 
     public void RotatePlaceableBuilding(int degrees)

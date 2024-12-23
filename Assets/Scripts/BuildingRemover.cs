@@ -3,7 +3,8 @@ using UnityEngine;
 
 public class BuildingRemover : MonoBehaviour
 {
-    public List<PlaceableBuilding> removableBuildings = new List<PlaceableBuilding>();
+    public BuildingWheel buildingWheel;
+    private List<PlaceableBuilding> removableBuildings = new List<PlaceableBuilding>();
 
     private void OnEnable()
     {
@@ -31,11 +32,14 @@ public class BuildingRemover : MonoBehaviour
     {
         if (removableBuildings != null)
         {
+            int i = 0;
             foreach (PlaceableBuilding building in removableBuildings)
             {
                 Destroy(building.gameObject);
+                i++;
             }
             removableBuildings.Clear();
+            buildingWheel.RemoveBuildingsByAmount(i);
         }
     }
 
