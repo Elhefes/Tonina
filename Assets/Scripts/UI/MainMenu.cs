@@ -12,6 +12,9 @@ public class MainMenu : MonoBehaviour
     private Camera playerCamera;
     private Camera mainMenuCamera;
 
+    public Animator optionsBarAnimator;
+    public GameObject bar;
+
     public Animator textsAnimator;
     private Animator mainMenuCameraAnimator;
 
@@ -46,6 +49,17 @@ public class MainMenu : MonoBehaviour
             textsAnimator.SetTrigger("PlayIntroFirstText");
             return;
         }
+        if (bar.transform.localPosition.x > -1000f)
+        {
+            CloseOptions();
+            Invoke("ExitMainMenuView", 0.75f); // Wait for options bar to close
+            return;
+        }
+        ExitMainMenuView();
+    }
+
+    void ExitMainMenuView()
+    {
         mainMenuCameraAnimator.enabled = false;
         movingToPlayerCamera = true;
         mainMenuUI.SetActive(false);
@@ -55,6 +69,16 @@ public class MainMenu : MonoBehaviour
     public void PlayAsAttackers()
     {
         textsAnimator.SetTrigger("GrandiosityText");
+    }
+
+    public void OpenOptions()
+    {
+        optionsBarAnimator.SetTrigger("Open");
+    }
+
+    public void CloseOptions()
+    {
+        optionsBarAnimator.SetTrigger("Close");
     }
 
     private void FixedUpdate()
