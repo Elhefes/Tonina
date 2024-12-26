@@ -46,17 +46,7 @@ public class Kancho : PlaceableBuilding
         snakeOnCooldown = false;
     }
 
-    private void OnCollisionEnter(Collision collision)
-    {
-        HandleCollision(collision.gameObject);
-    }
-
-    private void OnTriggerEnter(Collider other)
-    {
-        HandleCollision(other.gameObject);
-    }
-
-    private void HandleCollision(GameObject obj)
+    public void HandleCollision(GameObject obj)
     {
         if (obj.CompareTag("Enemy"))
         {
