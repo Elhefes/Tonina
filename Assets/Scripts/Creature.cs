@@ -68,7 +68,7 @@ public class Creature : MonoBehaviour
     protected virtual IEnumerator Attack()
     {
         onCooldown = true;
-        while (creatureMovement.target && shouldAttack)
+        while (creatureMovement.target && shouldAttack && !weaponOnHand.notAvailable)
         {
             weaponOnHand.Attack(creatureMovement.animator);
             yield return new WaitForSeconds(weaponOnHand.attackCooldown);
