@@ -31,6 +31,8 @@ public class OptionsMenu : MonoBehaviour
 
     private void OnEnable()
     {
+        audioController.LoadAudioSettings();
+
         if (normalMenu != null) normalMenu.SetActive(true);
         if (confirmReturnHomeMenu != null) confirmReturnHomeMenu.SetActive(false);
         if (battleReturnConfirmText != null && builderReturnConfirmText != null)

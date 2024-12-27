@@ -13,7 +13,7 @@ public class AudioController : MonoBehaviour
     public Sprite muteSoundIcon;
     private bool soundsOn = true;
 
-    private void Awake()
+    public void LoadAudioSettings()
     {
         float savedVolume = PlayerPrefs.GetFloat("musicVolume", 0.2f);
         musicController.volume = savedVolume;
