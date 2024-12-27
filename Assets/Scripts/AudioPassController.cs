@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class AudioPassController : MonoBehaviour
 {
-    private int minFilterValue = 500;
+    private int minFilterValue = 650;
     private int maxFilterValue = 14000;
     private float faderTime = 2.5f;
     private float increment;
