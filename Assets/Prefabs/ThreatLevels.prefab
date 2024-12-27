@@ -47,16 +47,19 @@ MonoBehaviour:
   threatLevels:
   - wave: P160 1A100-0 X1A10-1 1A10-0
     friendlyWarriorsAmount: 2
-    baseReward: 8
-    timeBonusReward: 2
-    timeLimitForBonusReward: 38
+    minReward: 7
+    maxReward: 10
+    rewardTimerMin: 38
+    rewardTimerMax: 52
   - wave: P100 1A60-1 X2A30-0 2A30-1
     friendlyWarriorsAmount: 3
-    baseReward: 10
-    timeBonusReward: 3
-    timeLimitForBonusReward: 40
+    minReward: 9
+    maxReward: 14
+    rewardTimerMin: 40
+    rewardTimerMax: 55
   - wave: P100 1A15-0 1A15-1 1A15-0 1A15-1 1A15-0 1A15-1
     friendlyWarriorsAmount: 4
-    baseReward: 12
-    timeBonusReward: 4
-    timeLimitForBonusReward: 50
+    minReward: 12
+    maxReward: 16
+    rewardTimerMin: 50
+    rewardTimerMax: 65

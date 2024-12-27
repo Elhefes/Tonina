@@ -10,9 +10,10 @@ public class ThreatLevels : MonoBehaviour
         public int friendlyWarriorsAmount;
 
         [Header("Rewards")]
-        public int baseReward;
-        public int timeBonusReward;
-        public int timeLimitForBonusReward;
+        public int minReward;
+        public int maxReward;
+        public int rewardTimerMin;
+        public int rewardTimerMax;
     }
 
     public ThreatLevel[] threatLevels;

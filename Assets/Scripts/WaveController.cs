@@ -173,8 +173,10 @@ public class WaveController : MonoBehaviour
 
     int GetTotalRewards()
     {
-        if (secondsInBattle <= threatLevel.timeLimitForBonusReward) return threatLevel.baseReward + threatLevel.timeBonusReward;
-        return threatLevel.baseReward;
+        if (secondsInBattle <= threatLevel.rewardTimerMin) return threatLevel.maxReward;
+        else if (secondsInBattle >= threatLevel.rewardTimerMax) return threatLevel.minReward;
+        return Mathf.RoundToInt(threatLevel.maxReward - (threatLevel.maxReward - threatLevel.minReward) * 
+            ((float)secondsInBattle - threatLevel.rewardTimerMin) / (threatLevel.rewardTimerMax - threatLevel.rewardTimerMin));
     }
 
     private IEnumerator PlayRewardsRisingAnimation()

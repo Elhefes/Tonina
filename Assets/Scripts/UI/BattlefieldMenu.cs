@@ -46,7 +46,7 @@ public class BattlefieldMenu : MonoBehaviour
         if (threatLevel <= threatLevels.threatLevels.Length)
         {
             TTWarriorsText.text = threatLevels.threatLevels[threatLevel - 1].friendlyWarriorsAmount.ToString();
-            rewardsText.text = threatLevels.threatLevels[threatLevel - 1].baseReward.ToString();
+            rewardsText.text = threatLevels.threatLevels[threatLevel - 1].minReward.ToString() + " - " + threatLevels.threatLevels[threatLevel - 1].maxReward.ToString();
         }
     }
 
