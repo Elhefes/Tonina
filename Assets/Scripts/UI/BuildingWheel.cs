@@ -28,6 +28,7 @@ public class BuildingWheel : MonoBehaviour
     public BuildingsManager buildingsManager;
     public BuildingPlacing[] placeableBuildingsOnPlayer;
     private List<GameObject> buildingsToBePlaced = new List<GameObject>();
+    private int buildingCountAtModeStart;
 
     public AudioSource soundEffectPlayer;
 
@@ -35,6 +36,7 @@ public class BuildingWheel : MonoBehaviour
 
     private void OnEnable()
     {
+        buildingCountAtModeStart = buildingsManager.buildingsPlaced;
         UpdateBuildingsPlacedText();
         ResetToDefaultBuilding();
         ShowBuildingInHandIfPossible();
@@ -48,13 +50,11 @@ public class BuildingWheel : MonoBehaviour
         }
         if (!saving)
         {
-            int i = 0;
             foreach (GameObject obj in buildingsToBePlaced)
             {
                 Destroy(obj);
-                i++;
             }
-            RemoveBuildingsByAmount(i);
+            buildingsManager.buildingsPlaced = buildingCountAtModeStart;
         }
         buildingsToBePlaced.Clear();
         player.StartTeleportToHome();
