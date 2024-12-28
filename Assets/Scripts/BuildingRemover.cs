@@ -5,6 +5,7 @@ public class BuildingRemover : MonoBehaviour
 {
     public BuildingWheel buildingWheel;
     private List<PlaceableBuilding> removableBuildings = new List<PlaceableBuilding>();
+    private List<GameObject> hiddenBuildings = new List<GameObject>();
 
     private void OnEnable()
     {
@@ -28,18 +29,44 @@ public class BuildingRemover : MonoBehaviour
         }
     }
 
-    public void RemoveSelectedBuildings()
+    public void HideSelectedBuildings()
     {
         if (removableBuildings != null)
         {
             int i = 0;
             foreach (PlaceableBuilding building in removableBuildings)
             {
-                Destroy(building.gameObject);
+                hiddenBuildings.Add(building.gameObject);
+                building.gameObject.SetActive(false);
                 i++;
             }
-            removableBuildings.Clear();
             buildingWheel.RemoveBuildingsByAmount(i);
+        }
+    }
+
+    public void DestroyHiddenBuildings()
+    {
+        if (hiddenBuildings != null)
+        {
+            foreach (GameObject building in hiddenBuildings)
+            {
+                Destroy(building);
+            }
+            removableBuildings.Clear();
+            hiddenBuildings.Clear();
+        }
+    }
+
+    public void RestoreHiddenBuildings()
+    {
+        if (hiddenBuildings != null)
+        {
+            foreach (GameObject building in hiddenBuildings)
+            {
+                building.SetActive(true);
+            }
+            removableBuildings.Clear();
+            hiddenBuildings.Clear();
         }
     }
 
