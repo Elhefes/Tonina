@@ -10,6 +10,9 @@ public class OptionsMenu : MonoBehaviour
     public GameObject normalMenu;
     public GameObject confirmReturnHomeMenu;
 
+    public GameObject returnHomeButton;
+    public GameObject mainMenuButton;
+
     public bool returnFromBuilder;
 
     public GameObject battleReturnConfirmText;
@@ -17,6 +20,8 @@ public class OptionsMenu : MonoBehaviour
 
     public GameObject returnFromBattleButton;
     public GameObject returnFromBuilderButton;
+
+    public Player player;
 
     private void Awake()
     {
@@ -35,6 +40,20 @@ public class OptionsMenu : MonoBehaviour
 
         if (normalMenu != null) normalMenu.SetActive(true);
         if (confirmReturnHomeMenu != null) confirmReturnHomeMenu.SetActive(false);
+
+        if (player != null)
+        {
+            if (player.insideKingHouse)
+            {
+                returnHomeButton.SetActive(false);
+                mainMenuButton.SetActive(true);
+                return;
+            }
+        }
+
+        if (mainMenuButton != null) mainMenuButton.SetActive(false);
+        if (returnHomeButton != null) returnHomeButton.SetActive(true);
+
         if (battleReturnConfirmText != null && builderReturnConfirmText != null)
         {
             if (returnFromBuilder)
