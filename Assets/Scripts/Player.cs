@@ -410,6 +410,9 @@ public class Player : Creature
         health -= damage;
         if (health <= 0)
         {
+            onCooldown = false;
+            shouldAttack = false;
+
             health = 0;
             losingScreen.gameObject.SetActive(true);
             losingScreen.SetPlayerDied(true);
