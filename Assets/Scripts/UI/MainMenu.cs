@@ -66,6 +66,24 @@ public class MainMenu : MonoBehaviour
         overworldUI.SetActive(true);
     }
 
+    public void StartEnteringMainMenu()
+    {
+        Invoke("EnterMainMenuView", 0.33f);
+    }
+
+    void EnterMainMenuView()
+    {
+        mainMenuCameraAnimator.enabled = true;
+        movingToPlayerCamera = false;
+        onPlayerCamera = false;
+        mainMenuUI.SetActive(true);
+        overworldUI.SetActive(false);
+        mainMenuCamera.enabled = true;
+        playerCamera.enabled = false;
+        clickBlocker.SetActive(true);
+        acceleration = 0f;
+    }
+
     public void PlayAsAttackers()
     {
         textsAnimator.SetTrigger("GrandiosityText");

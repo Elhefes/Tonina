@@ -76,6 +76,8 @@ public class Player : Creature
     public GameObject blackFader;
     private Coroutine teleportCoroutine;
 
+    private GameObject miniPyramid; // Used in main menu teleport
+
     public ClickerMaterial clickerObject;
 
     public Light weaponRangeIndicatorLight;
@@ -653,8 +655,20 @@ public class Player : Creature
         blackFader.SetActive(true);
         creatureMovement.agent.SetDestination(transform.position);
         yield return new WaitForSeconds(0.33f);
+        if (miniPyramid != null)
+        {
+            if (Vector3.Distance(gameObject.transform.position, miniPyramid.transform.position) > 5f)
+            {
+                yield break;
+            }
+        }
         gameObject.SetActive(false);
         transform.position = newPosition;
         gameObject.SetActive(true);
+    }
+
+    public void FindMiniPyramid()
+    {
+        miniPyramid = GameObject.Find("tonina_pyramid_mini");
     }
 }

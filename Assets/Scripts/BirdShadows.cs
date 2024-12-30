@@ -18,7 +18,7 @@ public class BirdShadows : MonoBehaviour
         while (true)
         {
             yield return new WaitForSeconds(Random.Range(5f, 20f));
-            EnableIfWithinRange(Camera.main.gameObject.transform.position.z);
+            if (Camera.main != null) EnableIfWithinRange(Camera.main.gameObject.transform.position.z);
         }
     }
 
