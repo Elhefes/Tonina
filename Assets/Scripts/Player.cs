@@ -659,9 +659,11 @@ public class Player : Creature
         {
             if (Vector3.Distance(gameObject.transform.position, miniPyramid.transform.position) > 5f)
             {
+                miniPyramid = null;
                 yield break;
             }
         }
+        miniPyramid = null;
         gameObject.SetActive(false);
         transform.position = newPosition;
         gameObject.SetActive(true);
