@@ -372,7 +372,8 @@ public class Player : Creature
         int weaponIndex = 0;
         if (weaponType == WeaponType.Spear) weaponIndex = 1;
         if (weaponType == WeaponType.Axe) weaponIndex = 2;
-        if (weaponType == WeaponType.Small_stone) weaponIndex = 3;
+        if (weaponType == WeaponType.Bow) weaponIndex = 3;
+        if (weaponType == WeaponType.Small_stone) weaponIndex = 4;
 
         weaponOnHand = weapons[weaponIndex];
         weaponOnHand.canHit = false;

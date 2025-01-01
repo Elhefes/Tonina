@@ -581,6 +581,7 @@ MonoBehaviour:
   - {fileID: 2132955804924996249}
   - {fileID: 9074640649311339407}
   - {fileID: 6215058942711421286}
+  - {fileID: 4524125974109804650}
   - {fileID: 203286184505837349}
   spear: {fileID: 9074640649311339407}
   smallStone: {fileID: 203286184505837349}
@@ -1582,6 +1583,10 @@ PrefabInstance:
       propertyPath: creatureMovement
       value: 
       objectReference: {fileID: 4129278258679320684}
+    - target: {fileID: 7962229151230049409, guid: 2a62ad8bdf5a4ee428036edb7057ce04, type: 3}
+      propertyPath: shootingPoint
+      value: 
+      objectReference: {fileID: 9100174395643030370}
     - target: {fileID: 8993902590316862340, guid: 2a62ad8bdf5a4ee428036edb7057ce04, type: 3}
       propertyPath: m_LocalRotation.w
       value: -0.0003150326
@@ -1612,6 +1617,17 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 5cfcb8c4f43aa13409a4693a914d0ecd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &4524125974109804650 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7962229151230049409, guid: 2a62ad8bdf5a4ee428036edb7057ce04, type: 3}
+  m_PrefabInstance: {fileID: 5816233582753834219}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 92eb9a058efac0a4898cf6652ea622e4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!114 &6215058942711421286 stripped

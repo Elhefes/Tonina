@@ -74,7 +74,8 @@ public enum WeaponType
     Club,
     Axe,
     Small_stone,
-    Spear
+    Spear,
+    Bow
 }
 
 public enum WeaponUser
