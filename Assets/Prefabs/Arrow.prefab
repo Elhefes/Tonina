@@ -107,7 +107,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1161038598373653003}
   - component: {fileID: 882731542666539497}
-  - component: {fileID: 6790601954099450619}
+  - component: {fileID: 8467020967535928057}
   m_Layer: 0
   m_Name: Arrow
   m_TagString: Untagged
@@ -150,7 +150,7 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 126
   m_CollisionDetection: 0
---- !u!114 &6790601954099450619
+--- !u!114 &8467020967535928057
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -159,7 +159,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1970050889735758001}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c7e266e241439784a8650adbb80ee1ae, type: 3}
+  m_Script: {fileID: 11500000, guid: 75fbe7794ba98044c8e3a73d4446fd02, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   weaponName: Bow
@@ -171,10 +171,15 @@ MonoBehaviour:
   attackCooldown: 1
   attackDistance: 0
   attackAngleThreshold: 0
-  canHit: 1
+  canHit: 0
   switchSound: {fileID: 0}
   hitSound: {fileID: 0}
   soundPlayer: {fileID: 0}
+  shootingPoint: {fileID: 0}
+  directorComponent: {fileID: 3475426005384786513}
+  quantity: 1
+  weaponWheelQuantityTMP: {fileID: 0}
+  hitSoundObject: {fileID: 0}
 --- !u!1 &2864349957172199171
 GameObject:
   m_ObjectHideFlags: 0

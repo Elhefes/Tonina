@@ -115,7 +115,8 @@ MonoBehaviour:
   directorComponent: {fileID: 8149491784958467019}
   quantity: 0
   weaponWheelQuantityTMP: {fileID: 0}
-  arrow: {fileID: 5576557745212971123}
+  arrow: {fileID: 3792902411408362339}
+  arrowRb: {fileID: 5576557745212971123}
 --- !u!82 &3121257655562685906
 AudioSource:
   m_ObjectHideFlags: 0
@@ -281,6 +282,17 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c593b831eb13c784aa09668a36790fed, type: 3}
+--- !u!114 &3792902411408362339 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8467020967535928057, guid: c593b831eb13c784aa09668a36790fed, type: 3}
+  m_PrefabInstance: {fileID: 4693874583209814426}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 75fbe7794ba98044c8e3a73d4446fd02, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!54 &5576557745212971123 stripped
 Rigidbody:
   m_CorrespondingSourceObject: {fileID: 882731542666539497, guid: c593b831eb13c784aa09668a36790fed, type: 3}
