@@ -92,7 +92,7 @@ BoxCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 998566085218364268}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
   m_Size: {x: 0.03937008, y: 0.007874018, z: 0.01116308}
@@ -107,7 +107,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1161038598373653003}
   - component: {fileID: 882731542666539497}
-  - component: {fileID: 255111170227654697}
+  - component: {fileID: 6790601954099450619}
   m_Layer: 0
   m_Name: Arrow
   m_TagString: Untagged
@@ -145,25 +145,36 @@ Rigidbody:
   m_Mass: 1
   m_Drag: 0
   m_AngularDrag: 0.05
-  m_UseGravity: 1
+  m_UseGravity: 0
   m_IsKinematic: 0
   m_Interpolate: 0
   m_Constraints: 126
   m_CollisionDetection: 0
---- !u!64 &255111170227654697
-MeshCollider:
+--- !u!114 &6790601954099450619
+MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1970050889735758001}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
   m_Enabled: 1
-  serializedVersion: 4
-  m_Convex: 0
-  m_CookingOptions: 30
-  m_Mesh: {fileID: 0}
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c7e266e241439784a8650adbb80ee1ae, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  weaponName: Bow
+  notAvailable: 0
+  type: 4
+  user: 1
+  damage: 70
+  uiSprite: {fileID: 0}
+  attackCooldown: 1
+  attackDistance: 0
+  attackAngleThreshold: 0
+  canHit: 1
+  switchSound: {fileID: 0}
+  hitSound: {fileID: 0}
+  soundPlayer: {fileID: 0}
 --- !u!1 &2864349957172199171
 GameObject:
   m_ObjectHideFlags: 0
@@ -175,7 +186,6 @@ GameObject:
   - component: {fileID: 3898665785283048027}
   - component: {fileID: 1271298755028619101}
   - component: {fileID: 7774037065844684009}
-  - component: {fileID: 6304061921075967103}
   m_Layer: 0
   m_Name: wood
   m_TagString: Untagged
@@ -248,19 +258,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &6304061921075967103
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2864349957172199171}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 0.003937008, y: 0.003937008, z: 0.29921257}
-  m_Center: {x: 0, y: 0, z: 0.14960629}
 --- !u!1 &3475426005384786513
 GameObject:
   m_ObjectHideFlags: 0
@@ -311,7 +308,7 @@ MonoBehaviour:
   speed: 24
   thresholdDistance: 1
   rotationSpeed: 10
-  yRotationOffset: -90
+  yRotationOffset: 90
 --- !u!1 &5230551268859106520
 GameObject:
   m_ObjectHideFlags: 0

@@ -12,8 +12,10 @@ public class Player : Creature
     public Weapon[] weapons;
     private string weaponOrder;
     public Spear spear;
+    public Bow bow;
     public SmallStone smallStone;
     public int spearStartingQuantity;
+    public int arrowStartingQuantity;
     public int smallStoneStartingQuantity;
     public TMP_Text projectileQuantityTMP;
     public float defaultAttackStoppingDistance;
@@ -123,6 +125,8 @@ public class Player : Creature
         // Idea: projectile quantities could be persistent and have to be refilled somewhere before a battle
         spear.quantity = spearStartingQuantity;
         spear.notAvailable = false;
+        bow.quantity = arrowStartingQuantity;
+        bow.notAvailable = false;
         smallStone.quantity = smallStoneStartingQuantity;
         smallStone.notAvailable = false;
     }
@@ -393,6 +397,11 @@ public class Player : Creature
         else if (smallStone.gameObject.activeSelf)
         {
             projectileQuantityTMP.text = smallStone.quantity.ToString();
+            projectileQuantityTMP.gameObject.SetActive(true);
+        }
+        else if (bow.gameObject.activeSelf)
+        {
+            projectileQuantityTMP.text = bow.quantity.ToString();
             projectileQuantityTMP.gameObject.SetActive(true);
         }
         else projectileQuantityTMP.gameObject.SetActive(false);
