@@ -13,9 +13,8 @@ public class Arrow : Projectile
         {
             Enemy enemy = other.gameObject.GetComponent<Enemy>();
             enemy.SlowDownEnemy();
-            // TODO: add hit sounds
-            //hitSoundObject.SetActive(true);
-            //hitSoundObject.transform.SetParent(null);
+            hitSoundObject.SetActive(true);
+            hitSoundObject.transform.SetParent(null);
             Destroy(gameObject);
         }
     }
