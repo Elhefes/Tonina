@@ -8,6 +8,8 @@ public class Bow : Projectile
 
     public float arrowPrimeTime;
 
+    public AudioClip shootSound;
+
     public CreatureMovement creatureMovement;
 
     private bool primingArrow;
@@ -35,6 +37,7 @@ public class Bow : Projectile
         if (creatureMovement.target != null)
         {
             ShootArrow();
+            if (shootSound != null) soundPlayer.PlayOneShot(shootSound, PlayerPrefs.GetFloat("soundVolume", 0.5f));
             yield return new WaitForSeconds(attackCooldown);
             arrow.gameObject.SetActive(true);
         }

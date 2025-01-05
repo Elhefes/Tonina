@@ -118,6 +118,7 @@ MonoBehaviour:
   arrow: {fileID: 3792902411408362339}
   arrowRb: {fileID: 5576557745212971123}
   arrowPrimeTime: 0.666
+  shootSound: {fileID: 8300000, guid: 263563c3c094c014b8ebb1e1de4d6edb, type: 3}
   creatureMovement: {fileID: 0}
 --- !u!82 &3121257655562685906
 AudioSource:
@@ -129,7 +130,7 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 0}
+  m_audioClip: {fileID: 8300000, guid: 263563c3c094c014b8ebb1e1de4d6edb, type: 3}
   m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
