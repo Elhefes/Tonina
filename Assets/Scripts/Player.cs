@@ -315,7 +315,7 @@ public class Player : Creature
         if (fillOkilHoldButton.buttonPressed)
         {
             if (fillOkil.stoneAmount == 0 && fillOkil.spearAmount == 0 && fillOkil.arrowAmount == 0) return;
-            fillOkilButtonFill.fillAmount += 1 / 300f;
+            fillOkilButtonFill.fillAmount += 1 / 150f;
             if (fillOkilButtonFill.fillAmount >= 1)
             {
                 TakeAllFromFillOkil();
@@ -587,6 +587,17 @@ public class Player : Creature
                 fillOkil.stoneAmount--;
                 stonesInFillTMP.text = fillOkil.stoneAmount.ToString();
                 if (smallStone.gameObject.activeSelf) projectileQuantityTMP.text = smallStone.quantity.ToString();
+            }
+        }
+        if (fillOkil.arrowAmount > 0)
+        {
+            if (bow.quantity < arrowStartingQuantity)
+            {
+                bow.quantity++;
+                bow.notAvailable = false;
+                fillOkil.arrowAmount--;
+                arrowsInFillTMP.text = fillOkil.arrowAmount.ToString();
+                if (bow.gameObject.activeSelf) projectileQuantityTMP.text = bow.quantity.ToString();
             }
         }
     }
