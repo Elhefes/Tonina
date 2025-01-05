@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 
 public class Bow : Projectile
@@ -5,13 +6,42 @@ public class Bow : Projectile
     public Arrow arrow;
     public Rigidbody arrowRb;
 
+    public float arrowPrimeTime;
+
+    public CreatureMovement creatureMovement;
+
+    private bool primingArrow;
+    private Coroutine primingCoroutine;
+
+    private void OnEnable()
+    {
+        primingArrow = false;
+        arrow.gameObject.SetActive(true);
+    }
+
     public override void Attack(Animator animator)
     {
         //animator.SetTrigger("BowAttack");
-        SpawnArrow();
+        if (!primingArrow)
+        {
+            primingCoroutine = StartCoroutine("StartAiming");
+        }
     }
 
-    void SpawnArrow()
+    private IEnumerator StartAiming()
+    {
+        primingArrow = true;
+        yield return new WaitForSeconds(arrowPrimeTime);
+        if (creatureMovement.target != null)
+        {
+            ShootArrow();
+            yield return new WaitForSeconds(attackCooldown);
+            arrow.gameObject.SetActive(true);
+        }
+        primingArrow = false;
+    }
+
+    void ShootArrow()
     {
         arrow.directorComponent.SetActive(true);
         arrow.canHit = true;
@@ -26,7 +56,6 @@ public class Bow : Projectile
         arrowRb.constraints = RigidbodyConstraints.FreezeAll;
         arrow.directorComponent.SetActive(false);
         arrow.canHit = false;
-        // Need to find a way to disable and enable arrow after shooting
-        //arrow.gameObject.SetActive(false);
+        arrow.gameObject.SetActive(false);
     }
 }

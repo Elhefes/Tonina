@@ -587,7 +587,7 @@ MonoBehaviour:
   bow: {fileID: 4524125974109804650}
   smallStone: {fileID: 203286184505837349}
   spearStartingQuantity: 1
-  arrowStartingQuantity: 5
+  arrowStartingQuantity: 6
   smallStoneStartingQuantity: 8
   projectileQuantityTMP: {fileID: 0}
   defaultAttackStoppingDistance: 1.5
@@ -1597,6 +1597,10 @@ PrefabInstance:
       propertyPath: shootingPoint
       value: 
       objectReference: {fileID: 9100174395643030370}
+    - target: {fileID: 7962229151230049409, guid: 2a62ad8bdf5a4ee428036edb7057ce04, type: 3}
+      propertyPath: creatureMovement
+      value: 
+      objectReference: {fileID: 4129278258679320684}
     - target: {fileID: 8993902590316862340, guid: 2a62ad8bdf5a4ee428036edb7057ce04, type: 3}
       propertyPath: m_LocalRotation.w
       value: -0.0003150326
