@@ -15,7 +15,11 @@ public class BuildingWheel : MonoBehaviour
     private bool buildingWheelCooldown;
     public float coolDownTime;
 
+    public int incomingCost;
+
     public TMP_Text buildingsPlacedText;
+    public TMP_Text buildingCostText;
+    public TMP_Text incomingCostText;
     public GameObject noMoreRoomForBuildingsIndicator;
 
     public Image currentBuildingImage;
@@ -36,7 +40,9 @@ public class BuildingWheel : MonoBehaviour
 
     private void OnEnable()
     {
+        incomingCost = 0;
         buildingCountAtModeStart = buildingsManager.buildingsPlaced;
+        UpdateIncomingCostText();
         UpdateBuildingsPlacedText();
         ResetToDefaultBuilding();
         ShowBuildingInHandIfPossible();
@@ -77,6 +83,16 @@ public class BuildingWheel : MonoBehaviour
         {
             noMoreRoomForBuildingsIndicator.SetActive(true);
         }
+    }
+
+    void UpdateBuildingCostText()
+    {
+        buildingCostText.text = placeableBuildingsOnPlayer[buildingIndex].placeableBuildingPrefab.cost.ToString();
+    }
+
+    public void UpdateIncomingCostText()
+    {
+        incomingCostText.text = incomingCost + " / 9999999";
     }
 
     public void ShowBuildingInHandIfPossible()
@@ -144,6 +160,7 @@ public class BuildingWheel : MonoBehaviour
         }
         placeableBuildingsOnPlayer[buildingIndex].gameObject.transform.eulerAngles = new Vector3(0f, 180f, 0f); // Reset rotation
         placeableBuildingsOnPlayer[buildingIndex].gameObject.SetActive(true);
+        UpdateBuildingCostText();
     }
 
     public void TryToPlaceBuilding()
@@ -158,10 +175,12 @@ public class BuildingWheel : MonoBehaviour
             {
                 if (building.canPlace)
                 {
-                    GameObject obj = Instantiate(building.prefabObject, building.gameObject.transform.position, building.gameObject.transform.rotation);
+                    GameObject obj = Instantiate(building.placeableBuildingPrefab.gameObject, building.gameObject.transform.position, building.gameObject.transform.rotation);
                     buildingsToBePlaced.Add(obj);
                     buildingsManager.buildingsPlaced++;
+                    incomingCost += building.placeableBuildingPrefab.cost;
                     UpdateBuildingsPlacedText();
+                    UpdateIncomingCostText();
                     ShowBuildingInHandIfPossible();
                 }
             }

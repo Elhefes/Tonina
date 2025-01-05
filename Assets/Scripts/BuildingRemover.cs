@@ -36,9 +36,14 @@ public class BuildingRemover : MonoBehaviour
             int i = 0;
             foreach (PlaceableBuilding building in removableBuildings)
             {
-                hiddenBuildings.Add(building.gameObject);
-                building.gameObject.SetActive(false);
-                i++;
+                if (building.gameObject.activeSelf)
+                {
+                    hiddenBuildings.Add(building.gameObject);
+                    building.gameObject.SetActive(false);
+                    buildingWheel.incomingCost -= building.cost;
+                    buildingWheel.UpdateIncomingCostText();
+                    i++;
+                }
             }
             buildingWheel.RemoveBuildingsByAmount(i);
         }
