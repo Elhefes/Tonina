@@ -13,32 +13,6 @@ public class AudioController : MonoBehaviour
     public Sprite muteSoundIcon;
     private bool soundsOn = true;
 
-    public void LoadAudioSettings()
-    {
-        float savedVolume = PlayerPrefs.GetFloat("musicVolume", 0.2f);
-        musicController.volume = savedVolume;
-
-        int musicMuted = PlayerPrefs.GetInt("musicMuted", 0);
-        if (musicMuted == 1)
-        {
-            SetMusic(false);
-        }
-        else
-        {
-            SetMusic(true);
-        }
-
-        int soundMuted = PlayerPrefs.GetInt("soundMuted", 0);
-        if (soundMuted == 1)
-        {
-            SetSounds(false);
-        }
-        else
-        {
-            SetSounds(true);
-        }
-    }
-
     public void SetMusic(bool value)
     {
         musicOn = value;
@@ -56,7 +30,7 @@ public class AudioController : MonoBehaviour
         }
     }
 
-    void SetSounds(bool value)
+    public void SetSounds(bool value)
     {
         soundsOn = value;
         if (soundsOn)
