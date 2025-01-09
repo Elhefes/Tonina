@@ -5,6 +5,7 @@ public class Barricade : MonoBehaviour
     public int startingHealth;
     private int health;
     public GameObject layerToDisappear;
+    public GameObject fullObject; // Needed for placeable barricades
     public bool loseWhenDestroyed;
     public LosingScreen losingScreen;
 
@@ -30,7 +31,7 @@ public class Barricade : MonoBehaviour
                 losingScreen.gameObject.SetActive(true);
                 losingScreen.SetPlayerDied(false);
             }
-            gameObject.SetActive(false);
+            fullObject.SetActive(false);
         }
         print("Barricade health: " + health);
     }
