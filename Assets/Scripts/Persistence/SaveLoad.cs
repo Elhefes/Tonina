@@ -41,19 +41,38 @@ public static class SaveLoad
         }
     }
 
-    public static void DeleteMapsData()
+    // Save and Load for ProgressionData
+    public static void SaveProgressionData(ProgressionData data)
     {
-        File.Delete(persistentPath + "/mapsData" + GetEditorPathExtension() + ".imox");
+        string filePath = persistentPath + "/progression.imox";
+
+        BinaryFormatter formatter = new BinaryFormatter();
+        FileStream stream = new FileStream(filePath, FileMode.Create);
+        formatter.Serialize(stream, data);
+        stream.Close();
     }
 
-    public static void DeleteStats()
+    public static ProgressionData LoadProgressionData()
     {
-        File.Delete(persistentPath + "/stats" + GetEditorPathExtension() + ".imox");
+        string filePath = persistentPath + "/progression.imox";
+
+        if (File.Exists(filePath))
+        {
+            BinaryFormatter formatter = new BinaryFormatter();
+            FileStream stream = new FileStream(filePath, FileMode.Open);
+            ProgressionData data = formatter.Deserialize(stream) as ProgressionData;
+            stream.Close();
+            return data;
+        }
+        else
+        {
+            Debug.LogWarning("Save file not found: progression.imox");
+            return null;
+        }
     }
 
-    public static string GetEditorPathExtension()
+    private static string GetEditorPathExtension()
     {
         return Application.isEditor ? "Editor" : "";
     }
-
 }

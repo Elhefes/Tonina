@@ -62,6 +62,8 @@ public class BuildingWheel : MonoBehaviour
             }
             buildingsManager.buildingsPlaced = buildingCountAtModeStart;
         }
+        // TODO: Save buildingsToBePlaced as data in SaveLoad
+
         buildingsToBePlaced.Clear();
         player.StartTeleportToHome();
     }

@@ -33,7 +33,6 @@ public class StatsBoard : MonoBehaviour
         int percentage;
         if (stats.battlesLost == 0 && stats.battlesWon != 0) percentage = 100;
         else percentage = Mathf.RoundToInt((float)stats.battlesWon / (stats.battlesWon + stats.battlesLost) * 100);
-        print(Mathf.RoundToInt((float)stats.battlesWon / (stats.battlesWon + stats.battlesLost) * 100));
         battleWinPercentageAmountTMP.text = "" + percentage + "%";
         battlesForfeitedAmountTMP.text = "" + stats.battlesForfeited;
     }
