@@ -38,6 +38,8 @@ public class BuildingWheel : MonoBehaviour
 
     public Player player;
 
+    public StatsController statsController;
+
     private void OnEnable()
     {
         incomingCost = 0;
@@ -62,6 +64,11 @@ public class BuildingWheel : MonoBehaviour
             }
             buildingsManager.buildingsPlaced = buildingCountAtModeStart;
         }
+        else
+        {
+            if (buildingsToBePlaced != null) statsController.changesToBattlefield += buildingsToBePlaced.Count;
+        }
+        statsController.SaveStats();
         // TODO: Save buildingsToBePlaced as data in SaveLoad
 
         buildingsToBePlaced.Clear();

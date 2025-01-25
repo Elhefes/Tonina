@@ -155,7 +155,8 @@ public class WaveController : MonoBehaviour
         CancelInvoke("CheckForEnemies");
         StopAllCoroutines();
         DisableBattleUI();
-        statsController.battlesLost++;
+        if (secondsInBattle < 16) statsController.battlesForfeited++;
+        else statsController.battlesLost++;
         statsController.SaveStats();
     }
 

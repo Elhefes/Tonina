@@ -56,6 +56,7 @@ public class BuildingRemover : MonoBehaviour
             foreach (GameObject building in hiddenBuildings)
             {
                 Destroy(building);
+                buildingWheel.statsController.changesToBattlefield++;
             }
             removableBuildings.Clear();
             hiddenBuildings.Clear();
