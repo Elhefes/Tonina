@@ -28,7 +28,16 @@ public class Creature : MonoBehaviour
             Debug.DrawLine(transform.position, transform.position + directionToTarget * 114f, Color.red);
 
             // This could be optimized in theory by replacing shouldAttack with 'float distanceToTarget', but it didn't work in testing
-            shouldAttack = weaponOnHand.ShouldAttack(Vector3.Distance(transform.position, creatureMovement.target.position), angle);
+            if (creatureMovement.agent.velocity != Vector3.zero)
+            {
+                shouldAttack = weaponOnHand.ShouldAttack(Vector3.Distance(transform.position, creatureMovement.target.position), angle);
+            }
+            else
+            {
+                RotateTowardsTarget();
+                // 0.5f is for attacking Fences, needs changes when Tower is created
+                shouldAttack = weaponOnHand.ShouldAttack(Vector3.Distance(transform.position, creatureMovement.target.position) - 0.5f, 0f);
+            }
 
             if (shouldAttack)
             {
@@ -50,18 +59,23 @@ public class Creature : MonoBehaviour
         if ((!stopInFront && Vector3.Distance(transform.position, objToLookAt.position) <= weaponOnHand.attackDistance || 
             (Vector3.Distance(transform.position, objToLookAt.position) <= creatureMovement.agent.stoppingDistance + 1f)))
         {
-            // Calculate the direction to the destination
-            Vector3 direction = (creatureMovement.agent.destination - transform.position).normalized;
+            RotateTowardsTarget();
+        }
+    }
 
-            // Ignore the y-axis to prevent tilting
-            direction.y = 0f;
+    private void RotateTowardsTarget()
+    {
+        // Calculate the direction to the destination
+        Vector3 direction = (creatureMovement.agent.destination - transform.position).normalized;
 
-            // Rotate towards the destination
-            if (direction != Vector3.zero)
-            {
-                Quaternion toRotation = Quaternion.LookRotation(direction);
-                transform.rotation = Quaternion.RotateTowards(transform.rotation, toRotation, Time.deltaTime * creatureMovement.agent.angularSpeed * 0.25f);
-            }
+        // Ignore the y-axis to prevent tilting
+        direction.y = 0f;
+
+        // Rotate towards the destination
+        if (direction != Vector3.zero)
+        {
+            Quaternion toRotation = Quaternion.LookRotation(direction);
+            transform.rotation = Quaternion.RotateTowards(transform.rotation, toRotation, Time.deltaTime * creatureMovement.agent.angularSpeed * 0.25f);
         }
     }
 
