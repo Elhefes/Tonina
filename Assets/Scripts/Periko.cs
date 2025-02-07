@@ -16,7 +16,7 @@ public class Periko : MonoBehaviour
         while (true)
         {
             PickRandomAnim();
-            yield return new WaitForSeconds(Random.Range(30f, 75f));
+            yield return new WaitForSeconds(Random.Range(24f, 70f));
         }
     }
 
