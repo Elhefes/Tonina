@@ -69,6 +69,7 @@ public class Player : Creature
     public TMP_Text arrowsInFillTMP;
 
     public Button textBox;
+    public TMP_Text speakerNameText;
     public TMP_Text textBoxText;
     private string[] linesToRead;
     public int textLineIndex;
@@ -335,6 +336,7 @@ public class Player : Creature
 
     void UpdateTextBox()
     {
+        speakerNameText.text = currentTextSubject.gameObject.name;
         if (textLineIndex < linesToRead.Length)
         {
             textBoxText.text = linesToRead[textLineIndex];
