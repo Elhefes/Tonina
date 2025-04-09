@@ -358,6 +358,14 @@ public class Player : Creature
     {
         if (villager != null)
         {
+            if (villager.textSubject.UI_popUpAfterLastLine && textLineIndex == villager.textSubject.textLines.Length)
+            {
+                if (villager.textSubject.popUpElements != null)
+                {
+                    foreach (GameObject element in villager.textSubject.popUpElements) element.SetActive(true);
+                }
+            }
+
             villager.textSubject.textIsActive = false;
             villager.playingVoiceLines = false;
             villager.textSubject.currentIndex = 0;
