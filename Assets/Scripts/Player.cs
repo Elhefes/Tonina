@@ -665,6 +665,7 @@ public class Player : Creature
             return;
         }
         if (objectToDisable != null) objectToDisable.SetActive(false);
+        if (buildingRoof != null) buildingRoof.MakeRoofVisible();
         StartTeleportToHome();
     }
 
