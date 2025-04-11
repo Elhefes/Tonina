@@ -6,6 +6,7 @@ public class Projectile : Weapon
     public Transform shootingPoint;
     public GameObject directorComponent;
     public int quantity;
+    public bool infinite;
     public TMP_Text weaponWheelQuantityTMP;
 
     public void SpawnProjectile()
@@ -14,7 +15,7 @@ public class Projectile : Weapon
         canHit = true;
         directorComponent.SetActive(true);
 
-        quantity--;
+        if (!infinite) quantity--;
         if (quantity < 1) notAvailable = true;
         if (weaponWheelQuantityTMP != null) weaponWheelQuantityTMP.text = quantity.ToString();
 

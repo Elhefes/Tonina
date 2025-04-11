@@ -49,7 +49,7 @@ public class Bow : Projectile
         arrow.directorComponent.SetActive(true);
         arrow.canHit = true;
 
-        quantity--;
+        if (!infinite) quantity--;
         if (quantity < 1) notAvailable = true;
         if (weaponWheelQuantityTMP != null) weaponWheelQuantityTMP.text = quantity.ToString();
 
