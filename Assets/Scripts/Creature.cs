@@ -8,6 +8,7 @@ public class Creature : MonoBehaviour
     public CreatureMovement creatureMovement;
     private Coroutine attackCoroutine;
     public bool onCooldown;
+    public float attackExtraCooldownTime;
     public bool shouldAttack;
 
     void Start()
@@ -89,6 +90,7 @@ public class Creature : MonoBehaviour
 
             // Projectile respawn on hand
             if (!weaponOnHand.gameObject.activeSelf && !weaponOnHand.notAvailable) weaponOnHand.gameObject.SetActive(true);
+            yield return new WaitForSeconds(attackExtraCooldownTime);
         }
         onCooldown = false;
     }

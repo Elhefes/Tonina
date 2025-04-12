@@ -11,7 +11,6 @@ public class Enemy : Creature
     private int health;
     public GameObject deathSoundObject;
     public bool moveTowardsTarget;
-    public float attackExtraCooldown;
     private Coroutine slowDownCoroutine;
     private bool slowedDown;
     public float slowDownTimeFromStone;
