@@ -484,7 +484,7 @@ GameObject:
   - component: {fileID: 3536230150113977096}
   - component: {fileID: 8457402616446038429}
   - component: {fileID: 3989676228140028571}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: PlayerPivot
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -641,6 +641,7 @@ MonoBehaviour:
   textLineIndex: 0
   destination: {x: 0, y: 0, z: 0}
   kingHouseSpawnPosition: {x: 0, y: 0, z: 0}
+  battleFieldStartingPosition: {x: 0, y: 0, z: 0}
   blackFader: {fileID: 0}
   clickerObject: {fileID: 0}
   weaponRangeIndicatorLight: {fileID: 7063041251900934834}
