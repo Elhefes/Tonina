@@ -75,7 +75,11 @@ public class Player : Creature
     public int textLineIndex;
 
     public Vector3 destination;
+
+    // Change these to automatically update positions when pyramid floors are built
     public Vector3 kingHouseSpawnPosition;
+    public Vector3 battleFieldStartingPosition;
+
     public GameObject blackFader;
     private Coroutine teleportCoroutine;
 
@@ -672,6 +676,13 @@ public class Player : Creature
     public void StartTeleportToHome()
     {
         teleportCoroutine = StartCoroutine(TeleportPlayerToSpot(kingHouseSpawnPosition));
+    }
+
+    public void StartTeleportToBattleField()
+    {
+        if (buildingRoof != null) buildingRoof.MakeRoofVisible();
+        insideKingHouse = false;
+        teleportCoroutine = StartCoroutine(TeleportPlayerToSpot(battleFieldStartingPosition));
     }
 
     public void TeleportToVillageGate(Transform gatePosition)
