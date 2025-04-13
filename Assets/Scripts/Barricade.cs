@@ -3,7 +3,7 @@ using UnityEngine;
 public class Barricade : MonoBehaviour
 {
     public int startingHealth;
-    private int health;
+    public int health;
     public GameObject layerToDisappear;
     public GameObject fullObject; // Needed for placeable barricades
     public bool loseWhenDestroyed;
@@ -14,13 +14,13 @@ public class Barricade : MonoBehaviour
         RestoreBarricade();
     }
 
-    public void RestoreBarricade()
+    public virtual void RestoreBarricade()
     {
         health = startingHealth;
         if (!layerToDisappear.activeSelf) layerToDisappear.SetActive(true);
     }
 
-    public void TakeDamage(int damage)
+    public virtual void TakeDamage(int damage)
     {
         health -= damage;
         if (health <= startingHealth / 2 && layerToDisappear != null) layerToDisappear.SetActive(false);
