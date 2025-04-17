@@ -653,7 +653,7 @@ public class Player : Creature
         GameObject[] friendlyWarriors = GameObject.FindGameObjectsWithTag("ToninaTribe");
         foreach (GameObject friendly in friendlyWarriors)
         {
-            if (friendly.ToString().Equals("Akuxa (UnityEngine.GameObject)")) continue;
+            if (friendly.ToString().Equals("Sartom (UnityEngine.GameObject)")) continue;
             Destroy(friendly);
         }
     }
