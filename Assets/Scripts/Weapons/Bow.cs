@@ -23,10 +23,10 @@ public class Bow : Projectile
 
     public override void Attack(Animator animator)
     {
-        //animator.SetTrigger("BowAttack");
         if (!primingArrow)
         {
             primingCoroutine = StartCoroutine("StartAiming");
+            animator.SetTrigger("BowAttack");
         }
     }
 
