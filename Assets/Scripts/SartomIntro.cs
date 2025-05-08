@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class Sartom_intro : MonoBehaviour
+public class SartomIntro : MonoBehaviour
 {
     public Animator animator;
 
