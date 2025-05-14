@@ -13,6 +13,9 @@ public class WeaponWheel : MonoBehaviour
     private bool weaponWheelCooldown;
     public float coolDownTime;
 
+    public Image nextWeaponArrowImage;
+    public Image previousWeaponArrowImage;
+
     public Image currentWeaponImage;
     public Image nextWeaponImage;
     public Image previousWeaponImage;
@@ -51,10 +54,31 @@ public class WeaponWheel : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Q)) PreviousWeapon();
 
         // Auto switch to next / previous weapon when it's not available anymore
-        if (player.weaponOnHand.notAvailable && !player.onCooldown)
+        if (!player.onCooldown)
         {
-            if (nextWeaponAutoSwitch) NextWeapon();
-            else if (previousWeaponAutoSwitch) PreviousWeapon();
+            if (player.weaponOnHand.notAvailable)
+            {
+                if (nextWeaponAutoSwitch) NextWeapon();
+                else if (previousWeaponAutoSwitch) PreviousWeapon();
+            }
+            if (!weaponWheelCooldown)
+            {
+                // To prevent stuck or unwanted non-fills
+                previousWeaponArrowImage.fillAmount = 1f;
+                nextWeaponArrowImage.fillAmount = 1f;
+            }
+        }
+        else
+        {
+            if (nextWeaponArrowImage.fillAmount >= 1f)
+            {
+                // Arrows become dark when cooldown starts
+                previousWeaponArrowImage.fillAmount = 0f;
+                nextWeaponArrowImage.fillAmount = 0f;
+            }
+            // Add normal fill at the rate of cooldown time of the weapon in hand
+            previousWeaponArrowImage.fillAmount += 1f / (weapons[weaponOrder[weaponIndex] - '0'].attackCooldown / Time.deltaTime);
+            nextWeaponArrowImage.fillAmount += 1f / (weapons[weaponOrder[weaponIndex] - '0'].attackCooldown / Time.deltaTime);
         }
     }
 
@@ -83,6 +107,7 @@ public class WeaponWheel : MonoBehaviour
             currentIndex = 0;
         }
         StartWeaponWheelCooldown();
+        nextWeaponArrowImage.fillAmount = 0f;
         var wep = weapons[weaponOrder[weaponIndex] - '0'];
         weaponSprites[currentIndex].sprite = wep.uiSprite;
         player.SwitchWeapon(wep.type);
@@ -118,6 +143,7 @@ public class WeaponWheel : MonoBehaviour
             currentIndex = slices - 1;
         }
         StartWeaponWheelCooldown();
+        previousWeaponArrowImage.fillAmount = 0f;
         var wep = weapons[weaponOrder[weaponIndex] - '0'];
         weaponSprites[currentIndex].sprite = wep.uiSprite;
         player.SwitchWeapon(wep.type);
@@ -137,6 +163,8 @@ public class WeaponWheel : MonoBehaviour
     void ResetWeaponWheelCooldown()
     {
         weaponWheelCooldown = false;
+        previousWeaponArrowImage.fillAmount = 1f;
+        nextWeaponArrowImage.fillAmount = 1f;
     }
 
     public void ResetToDefaultWeapon()
