@@ -100,6 +100,7 @@ public class Player : Creature
 
     public void EnableBattleMode()
     {
+        onCooldown = false;
         weaponOrder = PlayerPrefs.GetString("CustomWeaponOrder", "0123");
         EquipDefaultWeapon();
         healthBar.gameObject.SetActive(true);
@@ -109,6 +110,7 @@ public class Player : Creature
 
     public void DisableBattleMode()
     {
+        onCooldown = false;
         foreach (Weapon obj in weapons)
         {
             obj.gameObject.SetActive(false);

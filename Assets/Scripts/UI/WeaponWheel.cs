@@ -60,6 +60,7 @@ public class WeaponWheel : MonoBehaviour
 
     public void NextWeapon()
     {
+        if (player.onCooldown) return;
         if (weaponWheelCooldown) return;
         weaponIndex++;
         if (weaponIndex > weapons.Length - 1)
@@ -94,6 +95,7 @@ public class WeaponWheel : MonoBehaviour
 
     public void PreviousWeapon()
     {
+        if (player.onCooldown) return;
         if (weaponWheelCooldown) return;
         weaponIndex--;
         if (weaponIndex < 0)
