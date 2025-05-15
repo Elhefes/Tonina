@@ -38,7 +38,7 @@ public class Bow : Projectile
         {
             ShootArrow();
             if (shootSound != null) soundPlayer.PlayOneShot(shootSound, PlayerPrefs.GetFloat("soundVolume", 0.5f));
-            yield return new WaitForSeconds(attackCooldown);
+            yield return new WaitForSeconds(attackCooldown - arrowPrimeTime - 0.05f); // Short buffer time needed to prevent timing overlap bugs
             arrow.gameObject.SetActive(true);
         }
         primingArrow = false;
