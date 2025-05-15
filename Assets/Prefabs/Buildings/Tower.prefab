@@ -2278,6 +2278,7 @@ GameObject:
   - component: {fileID: 4112164815951608130}
   - component: {fileID: 5633546094173179212}
   - component: {fileID: 474410921546104757}
+  - component: {fileID: 176089328444398525}
   m_Layer: 0
   m_Name: Tower
   m_TagString: PlaceableBuilding
@@ -2374,6 +2375,27 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   startingHealth: 300
   health: 300
+--- !u!65 &176089328444398525
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3628362741210145784}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 3, y: 7, z: 3}
+  m_Center: {x: 0, y: 2.3, z: 0}
 --- !u!1 &3735590020347687354
 GameObject:
   m_ObjectHideFlags: 0
