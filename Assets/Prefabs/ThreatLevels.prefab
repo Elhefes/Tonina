@@ -24,13 +24,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4770325377979725831}
+  serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &4870193148731322537
 MonoBehaviour:
@@ -51,15 +51,27 @@ MonoBehaviour:
     maxReward: 10
     rewardTimerMin: 38
     rewardTimerMax: 52
-  - wave: P100 1A60-1 X2A30-0 2A30-1
+  - wave: P130 1A60-1 X2A30-0 2A30-1
     friendlyWarriorsAmount: 3
     minReward: 9
     maxReward: 14
     rewardTimerMin: 40
     rewardTimerMax: 55
-  - wave: P100 1A15-0 1A15-1 1A15-0 1A15-1 1A15-0 1A15-1
+  - wave: P110 1A15-0 1A15-1 1A15-0 1A15-1 1A15-0 1A15-1
     friendlyWarriorsAmount: 4
     minReward: 12
     maxReward: 16
     rewardTimerMin: 50
     rewardTimerMax: 65
+  - wave: P100 1B15-0 1B15-1 1A15-0 1A15-1 P50 1A15-0 1A15-1 1B10-0 1A15-1
+    friendlyWarriorsAmount: 4
+    minReward: 14
+    maxReward: 18
+    rewardTimerMin: 52
+    rewardTimerMax: 66
+  - wave: P140 2B50-0 2A50-0 P40 1A15-0 1B15-1 P90 2A30-1 2B50-1
+    friendlyWarriorsAmount: 5
+    minReward: 17
+    maxReward: 22
+    rewardTimerMin: 57
+    rewardTimerMax: 75
