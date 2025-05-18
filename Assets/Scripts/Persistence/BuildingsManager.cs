@@ -66,19 +66,25 @@ public class BuildingsManager : MonoBehaviour
     public void ResetPlacedBuildings()
     {
         placedBuildings = FindPlacedBuildings();
-        foreach (GameObject obj in placedBuildings)
+        if (placedBuildings != null)
         {
-            obj.SetActive(false);
-            obj.SetActive(true);
+            foreach (GameObject obj in placedBuildings)
+            {
+                obj.SetActive(false);
+                obj.SetActive(true);
+            }
         }
     }
 
     public void DestroyPlacedBuildings()
     {
         placedBuildings = FindPlacedBuildings();
-        foreach (GameObject obj in placedBuildings)
+        if (placedBuildings != null)
         {
-            Destroy(obj);
+            foreach (GameObject obj in placedBuildings)
+            {
+                Destroy(obj);
+            }
         }
     }
 }

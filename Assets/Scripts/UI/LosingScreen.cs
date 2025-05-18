@@ -9,6 +9,7 @@ public class LosingScreen : MonoBehaviour
     public TMP_Text tryAgainText;
     public Animator backgroundAnimator;
     public Player player;
+    public BuildingsManager buildingsManager;
     public MouseLook mouseLook;
     public AudioPassController audioPassController;
     public bool playerDied;
@@ -45,6 +46,9 @@ public class LosingScreen : MonoBehaviour
             yield return new WaitForSeconds(0.15f);
             youLoseText.text = currentText;
         }
+
+        buildingsManager.DestroyPlacedBuildings(); // Destroy all placed buildings in battlefield
+        buildingsManager.buildingsPlaced = 0;
 
         SetReasonText();
         yield return new WaitForSeconds(1.5f);
