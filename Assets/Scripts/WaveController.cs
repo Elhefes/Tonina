@@ -132,10 +132,10 @@ public class WaveController : MonoBehaviour
 
     void SpawnEnemyOfType(char c, int i)
     {
-        if (c.Equals('A')) Instantiate(clubber, spawnPoints[i].position, spawnPoints[i].rotation);
-        else if (c.Equals('B')) Instantiate(runner, spawnPoints[i].position, spawnPoints[i].rotation);
-        else if (c.Equals('C')) Instantiate(spearWarrior, spawnPoints[i].position, spawnPoints[i].rotation);
-        else if (c.Equals('D')) Instantiate(axeWarrior, spawnPoints[i].position, spawnPoints[i].rotation);
+        if (c.Equals('A')) Instantiate(clubber, spawnPoints[i].position + new Vector3(UnityEngine.Random.Range(-10f, 10f), 0f, 0f), spawnPoints[i].rotation);
+        else if (c.Equals('B')) Instantiate(runner, spawnPoints[i].position + new Vector3(UnityEngine.Random.Range(-10f, 10f), 0f, 0f), spawnPoints[i].rotation);
+        else if (c.Equals('C')) Instantiate(spearWarrior, spawnPoints[i].position + new Vector3(UnityEngine.Random.Range(-10f, 10f), 0f, 0f), spawnPoints[i].rotation);
+        else if (c.Equals('D')) Instantiate(axeWarrior, spawnPoints[i].position + new Vector3(UnityEngine.Random.Range(-10f, 10f), 0f, 0f), spawnPoints[i].rotation);
     }
 
     void CheckForEnemies()
