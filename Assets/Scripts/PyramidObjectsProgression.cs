@@ -2,6 +2,11 @@ using UnityEngine;
 
 public class PyramidObjectsProgression : MonoBehaviour
 {
+    public GameObject kingHouse;
+    public int extraFloorsBuilt;
+
+    public Vector3[] kingHousePositionsFrom4thTo14th;
+
     [Header("Pyramid Levels")]
     public GameObject lvl4Floor;
     public GameObject lvl4Walls;
@@ -26,6 +31,12 @@ public class PyramidObjectsProgression : MonoBehaviour
     [Header("Stairs")]
     public GameObject lvl4Stairs;
 
+    private void Start()
+    {
+        extraFloorsBuilt = 0; // Change this when save/load works
+        UpdateKingHousePosition();
+    }
+
     public void BuildNextPyramidLevel()
     {
         // very placeholder code
@@ -46,5 +57,13 @@ public class PyramidObjectsProgression : MonoBehaviour
         lvl4VillageFence.SetActive(true);
 
         lvl4Stairs.SetActive(true);
+
+        extraFloorsBuilt++;
+        UpdateKingHousePosition();
+    }
+
+    void UpdateKingHousePosition()
+    {
+        if (extraFloorsBuilt > 0) kingHouse.transform.position = kingHousePositionsFrom4thTo14th[extraFloorsBuilt - 1];
     }
 }
