@@ -13061,6 +13061,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7868398700705448107}
   - component: {fileID: 1936786677971682963}
+  - component: {fileID: 6405987430969088880}
   m_Layer: 0
   m_Name: king_house
   m_TagString: Untagged
@@ -13239,6 +13240,20 @@ MonoBehaviour:
   - {fileID: 8200034328030346593}
   - {fileID: 504597462838961473}
   - {fileID: 3252059886422667931}
+--- !u!114 &6405987430969088880
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7384208227975682577}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 289fd26aac3b2244690d4b71d05609dd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerSpawnPosition: {x: -4, y: 0, z: -0.5}
+  battleFieldStartingPosition: {x: 0, y: 0, z: -12}
 --- !u!1 &7471331876075990883
 GameObject:
   m_ObjectHideFlags: 0
