@@ -896,6 +896,7 @@ Transform:
   - {fileID: 6822635880489700506}
   - {fileID: 8597272966471303348}
   - {fileID: 5002170728395902575}
+  - {fileID: 56179047767383467}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &6139368975954732730
@@ -4349,6 +4350,97 @@ PrefabInstance:
 Transform:
   m_CorrespondingSourceObject: {fileID: 1403629692627086235, guid: 770f514a708d8e64eb302ed2bc32f1b8, type: 3}
   m_PrefabInstance: {fileID: 2004842387334340890}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1001 &3574548499217231832
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 1826011368325299044}
+    m_Modifications:
+    - target: {fileID: 3556944717457470067, guid: 8bfd9d78d6dff414fbceadccb912c611, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -2.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 3556944717457470067, guid: 8bfd9d78d6dff414fbceadccb912c611, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 3556944717457470067, guid: 8bfd9d78d6dff414fbceadccb912c611, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0.75
+      objectReference: {fileID: 0}
+    - target: {fileID: 3556944717457470067, guid: 8bfd9d78d6dff414fbceadccb912c611, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3556944717457470067, guid: 8bfd9d78d6dff414fbceadccb912c611, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3556944717457470067, guid: 8bfd9d78d6dff414fbceadccb912c611, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3556944717457470067, guid: 8bfd9d78d6dff414fbceadccb912c611, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3556944717457470067, guid: 8bfd9d78d6dff414fbceadccb912c611, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3556944717457470067, guid: 8bfd9d78d6dff414fbceadccb912c611, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3556944717457470067, guid: 8bfd9d78d6dff414fbceadccb912c611, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4185848242794227913, guid: 8bfd9d78d6dff414fbceadccb912c611, type: 3}
+      propertyPath: m_Name
+      value: Kareel Yoxte
+      objectReference: {fileID: 0}
+    - target: {fileID: 4435524425506235267, guid: 8bfd9d78d6dff414fbceadccb912c611, type: 3}
+      propertyPath: freeSpaceZ
+      value: 2.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 5668456217277715989, guid: 8bfd9d78d6dff414fbceadccb912c611, type: 3}
+      propertyPath: textLines.Array.size
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 5668456217277715989, guid: 8bfd9d78d6dff414fbceadccb912c611, type: 3}
+      propertyPath: 'textLines.Array.data[0]'
+      value: This temple is dedicated to Chaac.
+      objectReference: {fileID: 0}
+    - target: {fileID: 5668456217277715989, guid: 8bfd9d78d6dff414fbceadccb912c611, type: 3}
+      propertyPath: 'textLines.Array.data[1]'
+      value: He brings rain upon us if we are worthy!
+      objectReference: {fileID: 0}
+    - target: {fileID: 5668456217277715989, guid: 8bfd9d78d6dff414fbceadccb912c611, type: 3}
+      propertyPath: 'textLines.Array.data[2]'
+      value: So, his power is vital for our ability to grow maize and everything
+        else.
+      objectReference: {fileID: 0}
+    - target: {fileID: 5668456217277715989, guid: 8bfd9d78d6dff414fbceadccb912c611, type: 3}
+      propertyPath: 'textLines.Array.data[3]'
+      value: Look at the stone image in the center and pray.
+      objectReference: {fileID: 0}
+    - target: {fileID: 5668456217277715989, guid: 8bfd9d78d6dff414fbceadccb912c611, type: 3}
+      propertyPath: 'textLines.Array.data[4]'
+      value: Be patient and focus well, Chaac will answer your prayers!
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 8bfd9d78d6dff414fbceadccb912c611, type: 3}
+--- !u!4 &56179047767383467 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 3556944717457470067, guid: 8bfd9d78d6dff414fbceadccb912c611, type: 3}
+  m_PrefabInstance: {fileID: 3574548499217231832}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &6310128131950989249
 PrefabInstance:
