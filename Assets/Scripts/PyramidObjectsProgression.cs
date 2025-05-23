@@ -34,6 +34,10 @@ public class PyramidObjectsProgression : MonoBehaviour
     [Header("Border bumps")]
     public GameObject lvl4BorderBumps;
 
+    [Header("Weather Temple objects")]
+    public GameObject weatherTempleObjToDisable;
+    public GameObject[] weatherTempleObjectsToEnable;
+
     private void Start()
     {
         extraFloorsBuilt = 0; // Change this when save/load works
@@ -62,6 +66,9 @@ public class PyramidObjectsProgression : MonoBehaviour
         lvl4Stairs.SetActive(true);
 
         lvl4BorderBumps.SetActive(true);
+
+        weatherTempleObjToDisable.SetActive(false);
+        foreach (GameObject obj in weatherTempleObjectsToEnable) obj.SetActive(true);
 
         extraFloorsBuilt++;
         UpdateKingHousePosition();
