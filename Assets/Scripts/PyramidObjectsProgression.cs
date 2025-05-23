@@ -31,6 +31,9 @@ public class PyramidObjectsProgression : MonoBehaviour
     [Header("Stairs")]
     public GameObject lvl4Stairs;
 
+    [Header("Border bumps")]
+    public GameObject lvl4BorderBumps;
+
     private void Start()
     {
         extraFloorsBuilt = 0; // Change this when save/load works
@@ -57,6 +60,8 @@ public class PyramidObjectsProgression : MonoBehaviour
         lvl4VillageFence.SetActive(true);
 
         lvl4Stairs.SetActive(true);
+
+        lvl4BorderBumps.SetActive(true);
 
         extraFloorsBuilt++;
         UpdateKingHousePosition();
