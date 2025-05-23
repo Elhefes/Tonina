@@ -15,7 +15,6 @@ public class WaveController : MonoBehaviour
     public bool battleIsLost;
 
     public Transform[] spawnPoints;
-    private Vector3 housePos;
 
     public StatsController statsController;
 
@@ -42,7 +41,6 @@ public class WaveController : MonoBehaviour
     void Start()
     {
         kingHouse = GameObject.Find("king_house");
-        housePos = kingHouse.transform.position;
         coroutines = new List<Coroutine>();
     }
 
@@ -210,7 +208,7 @@ public class WaveController : MonoBehaviour
 
         for (int i = 0; i < pairs; i++)
         {
-            SpawnFriendlyPair(new Vector3(housePos.x + xOffset, housePos.y, housePos.z + zOffset));
+            SpawnFriendlyPair(new Vector3(kingHouse.transform.position.x + xOffset, kingHouse.transform.position.y, kingHouse.transform.position.z + zOffset));
 
             if ((i + 1) % 3 == 0)
             {
@@ -224,7 +222,7 @@ public class WaveController : MonoBehaviour
         if (isOdd)
         {
             // Spawn a single friendly warrior to the negative x side
-            Instantiate(friendlyWarriorPrefab, new Vector3(housePos.x + xOffset, housePos.y, housePos.z + zOffset), kingHouse.transform.rotation);
+            Instantiate(friendlyWarriorPrefab, new Vector3(kingHouse.transform.position.x + xOffset, kingHouse.transform.position.y, kingHouse.transform.position.z + zOffset), kingHouse.transform.rotation);
         }
     }
 
