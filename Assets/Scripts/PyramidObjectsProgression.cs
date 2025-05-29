@@ -34,6 +34,12 @@ public class PyramidObjectsProgression : MonoBehaviour
     [Header("Border bumps")]
     public GameObject lvl4BorderBumps;
 
+    [Header("Camera map colliders")]
+    public GameObject lvl3BfCollider;
+    public GameObject lvl3VillageCollider;
+    public GameObject lvl4BfCollider;
+    public GameObject lvl4VillageCollider;
+
     [Header("Weather Temple objects")]
     public GameObject weatherTempleObjToDisable;
     public GameObject[] weatherTempleObjectsToEnable;
@@ -66,6 +72,11 @@ public class PyramidObjectsProgression : MonoBehaviour
         lvl4Stairs.SetActive(true);
 
         lvl4BorderBumps.SetActive(true);
+
+        lvl3BfCollider.SetActive(false);
+        lvl3VillageCollider.SetActive(false);
+        lvl4BfCollider.SetActive(true);
+        lvl4VillageCollider.SetActive(true);
 
         weatherTempleObjToDisable.SetActive(false);
         foreach (GameObject obj in weatherTempleObjectsToEnable) obj.SetActive(true);
