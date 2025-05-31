@@ -21,6 +21,8 @@ public class Player : Creature
     public float defaultAttackStoppingDistance;
     public Slider healthBar;
 
+    public MouseLook mouseLook;
+
     public PlayerHealthIndicator playerHealthIndicator;
     public OverHealBar overHealBar;
     public float secondsBeforeOverHealDecay;
@@ -710,12 +712,15 @@ public class Player : Creature
         gameObject.SetActive(false);
         transform.position = newPosition;
         gameObject.SetActive(true);
+        mouseLook.TeleportCameras();
 
         if (battlefieldMenu.waveController.battleUI.activeSelf) EquipDefaultWeapon(); // When starting battle
     }
 
     public void FindMiniPyramid()
     {
+        // Delete if king house never gets destroyed
+        // and replace with public GameObject
         miniPyramid = GameObject.Find("tonina_pyramid_mini");
     }
 }

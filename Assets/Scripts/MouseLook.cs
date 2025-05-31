@@ -59,7 +59,15 @@ public class MouseLook : MonoBehaviour
         }
     }
 
-    // Update is called once per frame
+    public void TeleportCameras()
+    {
+        // Teleports cameras to where the cameras should be after teleport
+        CalculatePlayerToFollowAngledDirection();
+        mainCameraObject.transform.position = playerToFollowAngledDirection;
+        gameObject.transform.position = playerToFollowAngledDirection;
+        minimapCamera.transform.position = playerToFollowDirection;
+    }
+
     void Update()
     {
         mainCameraObject.transform.position = Vector3.Lerp(mainCameraObject.transform.position, transform.position, smoothSpeed);
@@ -94,27 +102,7 @@ public class MouseLook : MonoBehaviour
 
         if (cameraOnPlayer)
         {
-            if (player.inVillage)
-            {
-                playerToFollowAngledDirection = new Vector3(player.transform.position.x, player.transform.position.y + distanceFromObject, player.transform.position.z + (distanceFromObject / Mathf.Tan(60 * Mathf.PI / 180)) - 0.66f);
-                transform.position = Vector3.Lerp(transform.position, playerToFollowAngledDirection, smoothSpeed);
-                playerToFollowDirection = new Vector3(player.transform.position.x, player.transform.position.y + 100f, player.transform.position.z);
-                minimapCamera.transform.position = Vector3.Lerp(minimapCamera.transform.position, playerToFollowDirection, smoothSpeed);
-            }
-            else if (!player.insideKingHouse)
-            {
-                playerToFollowAngledDirection = new Vector3(player.transform.position.x, player.transform.position.y + distanceFromObject, player.transform.position.z - (distanceFromObject / Mathf.Tan(60 * Mathf.PI / 180)) + 0.66f);
-                transform.position = Vector3.Lerp(transform.position, playerToFollowAngledDirection, smoothSpeed);
-                playerToFollowDirection = new Vector3(player.transform.position.x, player.transform.position.y + 100f, player.transform.position.z);
-                minimapCamera.transform.position = Vector3.Lerp(minimapCamera.transform.position, playerToFollowDirection, smoothSpeed);
-            }
-            else
-            {
-                playerToFollowAngledDirection = new Vector3(player.transform.position.x + (distanceFromObject / Mathf.Tan(60 * Mathf.PI / 180)) - 0.66f, player.transform.position.y + distanceFromObject, player.transform.position.z);
-                transform.position = Vector3.Lerp(transform.position, playerToFollowAngledDirection, smoothSpeed);
-                playerToFollowDirection = new Vector3(player.transform.position.x, player.transform.position.y + 100f, player.transform.position.z);
-                minimapCamera.transform.position = Vector3.Lerp(minimapCamera.transform.position, playerToFollowDirection, smoothSpeed);
-            }
+            CalculatePlayerToFollowAngledDirection();
         }
         else
         {
@@ -146,6 +134,31 @@ public class MouseLook : MonoBehaviour
                     rb.AddForce((targetPosition - rb.position) * 250000f * Time.deltaTime, ForceMode.Force);
                 }
             }
+        }
+    }
+
+    void CalculatePlayerToFollowAngledDirection()
+    {
+        if (player.inVillage)
+        {
+            playerToFollowAngledDirection = new Vector3(player.transform.position.x, player.transform.position.y + distanceFromObject, player.transform.position.z + (distanceFromObject / Mathf.Tan(60 * Mathf.PI / 180)) - 0.66f);
+            transform.position = Vector3.Lerp(transform.position, playerToFollowAngledDirection, smoothSpeed);
+            playerToFollowDirection = new Vector3(player.transform.position.x, player.transform.position.y + 100f, player.transform.position.z);
+            minimapCamera.transform.position = Vector3.Lerp(minimapCamera.transform.position, playerToFollowDirection, smoothSpeed);
+        }
+        else if (!player.insideKingHouse)
+        {
+            playerToFollowAngledDirection = new Vector3(player.transform.position.x, player.transform.position.y + distanceFromObject, player.transform.position.z - (distanceFromObject / Mathf.Tan(60 * Mathf.PI / 180)) + 0.66f);
+            transform.position = Vector3.Lerp(transform.position, playerToFollowAngledDirection, smoothSpeed);
+            playerToFollowDirection = new Vector3(player.transform.position.x, player.transform.position.y + 100f, player.transform.position.z);
+            minimapCamera.transform.position = Vector3.Lerp(minimapCamera.transform.position, playerToFollowDirection, smoothSpeed);
+        }
+        else
+        {
+            playerToFollowAngledDirection = new Vector3(player.transform.position.x + (distanceFromObject / Mathf.Tan(60 * Mathf.PI / 180)) - 0.66f, player.transform.position.y + distanceFromObject, player.transform.position.z);
+            transform.position = Vector3.Lerp(transform.position, playerToFollowAngledDirection, smoothSpeed);
+            playerToFollowDirection = new Vector3(player.transform.position.x, player.transform.position.y + 100f, player.transform.position.z);
+            minimapCamera.transform.position = Vector3.Lerp(minimapCamera.transform.position, playerToFollowDirection, smoothSpeed);
         }
     }
 
