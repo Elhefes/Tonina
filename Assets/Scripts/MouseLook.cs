@@ -181,7 +181,7 @@ public class MouseLook : MonoBehaviour
                 mainCameraObject.transform.rotation = Quaternion.RotateTowards(transform.rotation, Quaternion.Euler(60f, 180f, 0f), 1.5f);
             }
             minimapCamera.transform.rotation = Quaternion.RotateTowards(minimapCamera.transform.rotation, Quaternion.Euler(90f, 180f, 0f), 1.5f);
-            if (!minimapIndicators.activeSelf) minimapIndicators.SetActive(true);
+            if (!minimapIndicators.activeSelf && !minimapInput.buttonPressed) minimapIndicators.SetActive(true);
         }
         else
         {
@@ -191,7 +191,7 @@ public class MouseLook : MonoBehaviour
                 mainCameraObject.transform.rotation = Quaternion.RotateTowards(transform.rotation, Quaternion.Euler(60f, 0f, 0f), 1.5f);
             }
             minimapCamera.transform.rotation = Quaternion.RotateTowards(minimapCamera.transform.rotation, Quaternion.Euler(90f, 0f, 0f), 1.5f);
-            if (!minimapIndicators.activeSelf) minimapIndicators.SetActive(true);
+            if (!minimapIndicators.activeSelf && !minimapInput.buttonPressed) minimapIndicators.SetActive(true);
         }
     }
 }

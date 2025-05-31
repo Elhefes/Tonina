@@ -5,7 +5,7 @@ using UnityEngine.EventSystems;
 
 public class MinimapInput : MonoBehaviour, IPointerDownHandler, IPointerUpHandler
 {
-    bool buttonPressed;
+    public bool buttonPressed;
 
     private Vector3 distanceFromClick;
     private Vector3 initialClickPosition;
