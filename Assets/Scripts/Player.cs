@@ -21,6 +21,8 @@ public class Player : Creature
     public float defaultAttackStoppingDistance;
     public Slider healthBar;
 
+    public LayerMask clickLayerMask;
+
     public MouseLook mouseLook;
 
     public PlayerHealthIndicator playerHealthIndicator;
@@ -161,7 +163,7 @@ public class Player : Creature
             }
             creatureMovement.target = null;
             RaycastHit hit;
-            if (Physics.Raycast(Camera.main.ScreenPointToRay(Input.mousePosition), out hit))
+            if (Physics.Raycast(Camera.main.ScreenPointToRay(Input.mousePosition), out hit, Mathf.Infinity, clickLayerMask))
             {
                 GameObject target = hit.collider.gameObject;
 

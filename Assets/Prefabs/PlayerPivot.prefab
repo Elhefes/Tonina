@@ -604,6 +604,10 @@ MonoBehaviour:
   projectileQuantityTMP: {fileID: 0}
   defaultAttackStoppingDistance: 1.5
   healthBar: {fileID: 3872663564488066035}
+  clickLayerMask:
+    serializedVersion: 2
+    m_Bits: 345
+  mouseLook: {fileID: 0}
   playerHealthIndicator: {fileID: 0}
   overHealBar: {fileID: 825657633798101330}
   secondsBeforeOverHealDecay: 8
@@ -640,8 +644,7 @@ MonoBehaviour:
   textBoxText: {fileID: 0}
   textLineIndex: 0
   destination: {x: 0, y: 0, z: 0}
-  kingHouseSpawnPosition: {x: 0, y: 0, z: 0}
-  battleFieldStartingPosition: {x: 0, y: 0, z: 0}
+  kingHouse: {fileID: 0}
   blackFader: {fileID: 0}
   clickerObject: {fileID: 0}
   weaponRangeIndicatorLight: {fileID: 7063041251900934834}
