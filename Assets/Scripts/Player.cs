@@ -87,7 +87,8 @@ public class Player : Creature
 
     private GameObject miniPyramid; // Used in main menu teleport
 
-    public ClickerMaterial clickerObject;
+    public ClickerMaterial clickerDestinationObject;
+    public ClickerMaterial clickerTargetObject;
 
     public Light weaponRangeIndicatorLight;
 
@@ -146,7 +147,7 @@ public class Player : Creature
         if (Input.GetKeyDown("m") && maizeAmount > 0) EatMaize();
         Debug.DrawLine(transform.position, transform.position + transform.forward * 114f, Color.red);
 
-        if (creatureMovement.target != null) clickerObject.gameObject.transform.position = creatureMovement.target.transform.position;
+        if (creatureMovement.target != null) clickerTargetObject.gameObject.transform.position = creatureMovement.target.transform.position;
 
         if (Input.GetMouseButtonDown(0))
         {
@@ -298,7 +299,13 @@ public class Player : Creature
 
                 creatureMovement.agent.SetDestination(hit.point);
                 destination = hit.point;
-                if (creatureMovement.target != null) clickerObject.alpha = 1f;
+                
+                if (!battlefieldMenu.waveController.battleUI.activeSelf && !optionsMenu.returnFromBuilder)
+                {
+                    clickerDestinationObject.gameObject.transform.position = creatureMovement.agent.destination;
+                    clickerDestinationObject.alpha = 1f;
+                }
+                if (creatureMovement.target != null) clickerTargetObject.alpha = 1f;
             }
         }
 
