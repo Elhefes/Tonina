@@ -302,6 +302,8 @@ public class Player : Creature
                 
                 if (!battlefieldMenu.waveController.battleUI.activeSelf && !optionsMenu.returnFromBuilder)
                 {
+                    float scaleValue = Mathf.Lerp(0.36f, 0.6f, (mouseLook.distanceFromObject - 5f) / (30f - 5f));
+                    clickerDestinationObject.transform.localScale = new Vector3(scaleValue, scaleValue, scaleValue);
                     clickerDestinationObject.gameObject.transform.position = creatureMovement.agent.destination;
                     clickerDestinationObject.alpha = 1f;
                 }
