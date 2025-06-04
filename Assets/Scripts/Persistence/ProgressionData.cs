@@ -20,6 +20,6 @@ public class ProgressionData
     public bool fenceUnlocked { get; set; }
     public bool maizePlaceUnlocked { get; set; }
     public bool spearRackUnlocked { get; set; }
-    public bool fillOkilUnlocked { get; set; }
+    public bool fillOkillUnlocked { get; set; }
     public bool towerUnlocked { get; set; }
 }

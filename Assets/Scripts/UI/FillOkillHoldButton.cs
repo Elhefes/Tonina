@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.EventSystems;
 
-public class FillOkilHoldButton : MonoBehaviour, IPointerDownHandler, IPointerUpHandler
+public class FillOkillHoldButton : MonoBehaviour, IPointerDownHandler, IPointerUpHandler
 {
     public bool buttonPressed;
 

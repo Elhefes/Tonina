@@ -49,7 +49,7 @@ public class Player : Creature
     private bool readyToRemove;
 
     public MaizePlace maizePlace;
-    public FillOkil fillOkil;
+    public FillOkill fillOkill;
     private SpearRack spearRack;
     private BuildingRoof buildingRoof;
     private Villager villager;
@@ -65,9 +65,9 @@ public class Player : Creature
     public TMP_Text maizeAmountTMP;
     public TMP_Text maizeInPlaceTMP;
     private int maizeAmount;
-    public GameObject fillOkilPickUp;
-    public Image fillOkilButtonFill;
-    public FillOkilHoldButton fillOkilHoldButton;
+    public GameObject fillOkillPickUp;
+    public Image fillOkillButtonFill;
+    public FillOkillHoldButton fillOkillHoldButton;
     public TMP_Text stonesInFillTMP;
     public TMP_Text spearsInFillTMP;
     public TMP_Text arrowsInFillTMP;
@@ -321,19 +321,19 @@ public class Player : Creature
 
     private void FixedUpdate()
     {
-        if (fillOkilHoldButton.buttonPressed)
+        if (fillOkillHoldButton.buttonPressed)
         {
-            if (fillOkil.stoneAmount == 0 && fillOkil.spearAmount == 0 && fillOkil.arrowAmount == 0) return;
-            fillOkilButtonFill.fillAmount += 1 / 150f;
-            if (fillOkilButtonFill.fillAmount >= 1)
+            if (fillOkill.stoneAmount == 0 && fillOkill.spearAmount == 0 && fillOkill.arrowAmount == 0) return;
+            fillOkillButtonFill.fillAmount += 1 / 150f;
+            if (fillOkillButtonFill.fillAmount >= 1)
             {
-                TakeAllFromFillOkil();
-                fillOkilButtonFill.fillAmount = 0;
+                TakeAllFromFillOkill();
+                fillOkillButtonFill.fillAmount = 0;
             }
         }
         else
         {
-            if (fillOkilPickUp.activeSelf) fillOkilButtonFill.fillAmount = 0;
+            if (fillOkillPickUp.activeSelf) fillOkillButtonFill.fillAmount = 0;
         }
     }
 
@@ -501,10 +501,10 @@ public class Player : Creature
             maizePlace = other.GetComponentInParent<MaizePlace>();
             EnterMaizePlace();
         }
-        if (other.gameObject.name == "Fill-Okil(Clone)")
+        if (other.gameObject.name == "Fill-Okill(Clone)")
         {
-            fillOkil = other.GetComponentInParent<FillOkil>();
-            EnterFillOkil();
+            fillOkill = other.GetComponentInParent<FillOkill>();
+            EnterFillOkill();
         }
         if (other.CompareTag("Building"))
         {
@@ -533,7 +533,7 @@ public class Player : Creature
     private void OnTriggerExit(Collider other)
     {
         if (other.gameObject.name == "Maize Place(Clone)") ExitMaizePlace();
-        if (other.gameObject.name == "Fill-Okil(Clone)") { fillOkilPickUp.SetActive(false); }
+        if (other.gameObject.name == "Fill-Okill(Clone)") { fillOkillPickUp.SetActive(false); }
         if (other.CompareTag("Building"))
         {
             buildingRoof = other.GetComponentInParent<BuildingRoof>();
@@ -575,46 +575,46 @@ public class Player : Creature
         maizeAmountTMP.text = maizeAmount.ToString();
         if (maizePlace.maizeInPlace < 1) maizePickUp.SetActive(false);
     }
-    public void EnterFillOkil()
+    public void EnterFillOkill()
     {
-        fillOkilPickUp.SetActive(true);
-        fillOkilButtonFill.fillAmount = 0f;
-        stonesInFillTMP.text = fillOkil.stoneAmount.ToString();
-        spearsInFillTMP.text = fillOkil.spearAmount.ToString();
-        arrowsInFillTMP.text = fillOkil.arrowAmount.ToString();
+        fillOkillPickUp.SetActive(true);
+        fillOkillButtonFill.fillAmount = 0f;
+        stonesInFillTMP.text = fillOkill.stoneAmount.ToString();
+        spearsInFillTMP.text = fillOkill.spearAmount.ToString();
+        arrowsInFillTMP.text = fillOkill.arrowAmount.ToString();
     }
 
-    public void TakeAllFromFillOkil()
+    public void TakeAllFromFillOkill()
     {
-        if (fillOkil.spearAmount > 0)
+        if (fillOkill.spearAmount > 0)
         {
             if (spear.quantity < spearStartingQuantity)
             {
                 spear.quantity++;
                 spear.notAvailable = false;
-                fillOkil.spearAmount--;
-                spearsInFillTMP.text = fillOkil.spearAmount.ToString();
+                fillOkill.spearAmount--;
+                spearsInFillTMP.text = fillOkill.spearAmount.ToString();
             }
         }
-        if (fillOkil.stoneAmount > 0)
+        if (fillOkill.stoneAmount > 0)
         {
             if (spear.quantity < spearStartingQuantity)
             {
                 smallStone.quantity++;
                 smallStone.notAvailable = false;
-                fillOkil.stoneAmount--;
-                stonesInFillTMP.text = fillOkil.stoneAmount.ToString();
+                fillOkill.stoneAmount--;
+                stonesInFillTMP.text = fillOkill.stoneAmount.ToString();
                 if (smallStone.gameObject.activeSelf) projectileQuantityTMP.text = smallStone.quantity.ToString();
             }
         }
-        if (fillOkil.arrowAmount > 0)
+        if (fillOkill.arrowAmount > 0)
         {
             if (bow.quantity < arrowStartingQuantity)
             {
                 bow.quantity++;
                 bow.notAvailable = false;
-                fillOkil.arrowAmount--;
-                arrowsInFillTMP.text = fillOkil.arrowAmount.ToString();
+                fillOkill.arrowAmount--;
+                arrowsInFillTMP.text = fillOkill.arrowAmount.ToString();
                 if (bow.gameObject.activeSelf) projectileQuantityTMP.text = bow.quantity.ToString();
             }
         }
