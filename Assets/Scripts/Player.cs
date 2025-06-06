@@ -43,6 +43,7 @@ public class Player : Creature
     public BarricadesController barricadeController;
     public GameObject villageTPMenu;
 
+    public GameObject buildModeUI;
     public BuildingRemover buildingRemover;
     private PlaceableBuilding selectedPlaceableBuilding;
     public GameObject placeableBuildings; // Use this only for hiding e.g. when removing in build mode
@@ -505,16 +506,20 @@ public class Player : Creature
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.name == "Maize Place(Clone)")
+        if (!buildModeUI.activeSelf) // If not in build mode
         {
-            maizePlace = other.GetComponentInParent<MaizePlace>();
-            EnterMaizePlace();
+            if (other.gameObject.name == "Maize Place(Clone)")
+            {
+                maizePlace = other.GetComponentInParent<MaizePlace>();
+                EnterMaizePlace();
+            }
+            if (other.gameObject.name == "Fill-Okill(Clone)")
+            {
+                fillOkill = other.GetComponentInParent<FillOkill>();
+                EnterFillOkill();
+            }
         }
-        if (other.gameObject.name == "Fill-Okill(Clone)")
-        {
-            fillOkill = other.GetComponentInParent<FillOkill>();
-            EnterFillOkill();
-        }
+        
         if (other.CompareTag("Building"))
         {
             buildingRoof = other.GetComponentInParent<BuildingRoof>();
