@@ -4,6 +4,7 @@ public class BuildModeGuide : MonoBehaviour
 {
     public GameObject slide1;
     public GameObject darkener;
+    public GameObject postText;
 
     public void AutoStart()
     {
@@ -18,6 +19,11 @@ public class BuildModeGuide : MonoBehaviour
             darkener.SetActive(false);
             gameObject.SetActive(false);
         }
+    }
+
+    private void OnDisable()
+    {
+        if (PlayerPrefs.GetInt("BuildModeGuided", 0) == 0) postText.SetActive(true);
     }
 
     public void SetBuildModeGuided()
