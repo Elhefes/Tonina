@@ -6,7 +6,7 @@ using TMPro;
 
 public class Player : Creature
 {
-    private int health;
+    public int health;
     public int maxHealth;
     public int startingHealth;
     public Weapon[] weapons;
@@ -49,7 +49,6 @@ public class Player : Creature
     public GameObject placeableBuildings; // Use this only for hiding e.g. when removing in build mode
     private bool readyToRemove;
 
-    public MaizePlace maizePlace;
     public FillOkill fillOkill;
     private SpearRack spearRack;
     private BuildingRoof buildingRoof;
@@ -58,14 +57,6 @@ public class Player : Creature
     private GameObject weatherStone;
     public GameObject weatherGame;
     public GameObject weatherGameResults;
-    public int startingMaize;
-    public int maxMaize;
-    public int maizeHealAmount;
-    public GameObject maizeInventory;
-    public GameObject maizePickUp;
-    public TMP_Text maizeAmountTMP;
-    public TMP_Text maizeInPlaceTMP;
-    private int maizeAmount;
     public GameObject fillOkillPickUp;
     public Image fillOkillButtonFill;
     public FillOkillHoldButton fillOkillHoldButton;
@@ -96,9 +87,6 @@ public class Player : Creature
     private void Start()
     {
         health = startingHealth;
-        maizeAmount = startingMaize;
-        maizeAmountTMP.text = startingMaize.ToString();
-        if (startingMaize > 0) maizeInventory.SetActive(true);
         SetProjectilesToMax();
     }
 
@@ -145,7 +133,6 @@ public class Player : Creature
     private void Update()
     {
         base.Update();
-        if (Input.GetKeyDown("m") && maizeAmount > 0) EatMaize();
         Debug.DrawLine(transform.position, transform.position + transform.forward * 114f, Color.red);
 
         if (creatureMovement.target != null) clickerTargetObject.gameObject.transform.position = creatureMovement.target.transform.position;
@@ -463,16 +450,6 @@ public class Player : Creature
         print(health);
     }
 
-    public void EatMaize()
-    {
-        // Eat 1 maize and remove it from maizeInventory
-        if (health == maxHealth || maizeAmount < 1) return;
-        RestoreHealth(maizeHealAmount);
-        maizeAmount--;
-        maizeAmountTMP.text = maizeAmount.ToString();
-        if (maizeAmount < 1) maizeInventory.SetActive(false);
-    }
-
     public void RestoreHealth(int amount)
     {
         healthBar.value += (float)amount / startingHealth;
@@ -508,11 +485,6 @@ public class Player : Creature
     {
         if (!buildModeUI.activeSelf) // If not in build mode
         {
-            if (other.gameObject.name == "Maize Place(Clone)")
-            {
-                maizePlace = other.GetComponentInParent<MaizePlace>();
-                EnterMaizePlace();
-            }
             if (other.gameObject.name == "Fill-Okill(Clone)")
             {
                 fillOkill = other.GetComponentInParent<FillOkill>();
@@ -546,7 +518,6 @@ public class Player : Creature
 
     private void OnTriggerExit(Collider other)
     {
-        if (other.gameObject.name == "Maize Place(Clone)") ExitMaizePlace();
         if (other.gameObject.name == "Fill-Okill(Clone)") { fillOkillPickUp.SetActive(false); }
         if (other.CompareTag("Building"))
         {
@@ -564,31 +535,6 @@ public class Player : Creature
         }
     }
 
-    public void EnterMaizePlace()
-    {
-        maizeInventory.SetActive(true);
-        if (maizePlace.maizeInPlace < 1) return;
-        maizePickUp.SetActive(true);
-        maizeInPlaceTMP.text = maizePlace.maizeInPlace.ToString();
-    }
-
-    public void ExitMaizePlace()
-    {
-        if (maizeAmount < 1) maizeInventory.SetActive(false);
-        maizePickUp.SetActive(false);
-    }
-
-    public void PickupMaize()
-    {
-        // Moves 1 maize from MaizePlace to player's inventory
-        if (maizeAmount >= maxMaize) return;
-        maizePlace.GetMaizeFromPlace();
-        maizeInPlaceTMP.text = maizePlace.maizeInPlace.ToString();
-        maizeInventory.SetActive(true);
-        maizeAmount += 1;
-        maizeAmountTMP.text = maizeAmount.ToString();
-        if (maizePlace.maizeInPlace < 1) maizePickUp.SetActive(false);
-    }
     public void EnterFillOkill()
     {
         fillOkillPickUp.SetActive(true);

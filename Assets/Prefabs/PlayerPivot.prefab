@@ -481,6 +481,7 @@ GameObject:
   - component: {fileID: 5021349066847927871}
   - component: {fileID: 577319696662315431}
   - component: {fileID: 5412454603876469069}
+  - component: {fileID: 385070561597705185}
   - component: {fileID: 3536230150113977096}
   - component: {fileID: 8457402616446038429}
   - component: {fileID: 3989676228140028571}
@@ -587,6 +588,7 @@ MonoBehaviour:
   onCooldown: 0
   attackExtraCooldownTime: 0
   shouldAttack: 0
+  health: 0
   maxHealth: 150
   startingHealth: 100
   weapons:
@@ -620,22 +622,15 @@ MonoBehaviour:
   losingScreen: {fileID: 0}
   barricadeController: {fileID: 0}
   villageTPMenu: {fileID: 0}
+  buildModeUI: {fileID: 0}
   buildingRemover: {fileID: 3536230150113977096}
   placeableBuildings: {fileID: 846291943352493500}
-  maizePlace: {fileID: 1002431552744195371, guid: adebe25711332d549bfc3c168e6175c5, type: 3}
-  fillOkil: {fileID: 0}
+  fillOkill: {fileID: 0}
   weatherGame: {fileID: 0}
   weatherGameResults: {fileID: 0}
-  startingMaize: 0
-  maxMaize: 4
-  maizeHealAmount: 25
-  maizeInventory: {fileID: 0}
-  maizePickUp: {fileID: 0}
-  maizeAmountTMP: {fileID: 0}
-  maizeInPlaceTMP: {fileID: 0}
-  fillOkilPickUp: {fileID: 0}
-  fillOkilButtonFill: {fileID: 0}
-  fillOkilHoldButton: {fileID: 0}
+  fillOkillPickUp: {fileID: 0}
+  fillOkillButtonFill: {fileID: 0}
+  fillOkillHoldButton: {fileID: 0}
   stonesInFillTMP: {fileID: 0}
   spearsInFillTMP: {fileID: 0}
   arrowsInFillTMP: {fileID: 0}
@@ -646,8 +641,29 @@ MonoBehaviour:
   destination: {x: 0, y: 0, z: 0}
   kingHouse: {fileID: 0}
   blackFader: {fileID: 0}
-  clickerObject: {fileID: 0}
+  clickerDestinationObject: {fileID: 0}
+  clickerTargetObject: {fileID: 0}
   weaponRangeIndicatorLight: {fileID: 7063041251900934834}
+--- !u!114 &385070561597705185
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5021349066847927866}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c63bfe995a1c2934684c848a64f4d756, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maizePlace: {fileID: 0}
+  startingMaize: 0
+  maxMaize: 4
+  maizeHealAmount: 25
+  maizeInventory: {fileID: 0}
+  maizePickUp: {fileID: 0}
+  maizeAmountTMP: {fileID: 0}
+  maizeInPlaceTMP: {fileID: 0}
 --- !u!114 &3536230150113977096
 MonoBehaviour:
   m_ObjectHideFlags: 0
