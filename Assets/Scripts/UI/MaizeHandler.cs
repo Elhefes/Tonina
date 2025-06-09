@@ -13,6 +13,7 @@ public class MaizeHandler : MonoBehaviour
 
     public GameObject maizeInventory;
     public GameObject maizePickUp;
+    public GameObject maizePickUpIcon;
     public TMP_Text maizeAmountTMP;
     public TMP_Text maizeInPlaceTMP;
     private int maizeAmount;
@@ -31,7 +32,7 @@ public class MaizeHandler : MonoBehaviour
         if (maizePlace.maizeInPlace < 1) return;
         maizePickUp.SetActive(true);
         maizeInPlaceTMP.text = maizePlace.maizeInPlace.ToString();
-        UpdateMaizePlacePickupStartingPosition();
+        UpdatePickupStartingPosition();
     }
 
     public void ExitMaizePlace()
@@ -54,14 +55,14 @@ public class MaizeHandler : MonoBehaviour
             maizePickUp.SetActive(false);
             return;
         }
-        UpdateMaizePlacePickupStartingPosition();
+        UpdatePickupStartingPosition();
     }
 
-    void UpdateMaizePlacePickupStartingPosition()
+    void UpdatePickupStartingPosition()
     {
         // Starting position = Maize Place's center position on the screen, with restrictions
         Vector3 maizePos = Camera.main.WorldToScreenPoint(maizePlace.transform.position);
-        maizePickUp.transform.position = new Vector3(Mathf.Clamp(maizePos.x, 500, 1500), Mathf.Clamp(maizePos.y, 250, 830), 0);
+        maizePickUpIcon.transform.position = new Vector3(Mathf.Clamp(maizePos.x, 500, 1500), Mathf.Clamp(maizePos.y, 250, 830), 0);
     }
 
     public void EatMaize()
