@@ -19,6 +19,8 @@ public class DragMaizeIcon : MonoBehaviour, IBeginDragHandler, IDragHandler, IEn
     private Vector3 mOriginalPanelLocalPosition;
     public Vector2 mStartingPosition;
 
+    public MaizeHandler maizeHandler;
+
     /// <summary>
     /// Initializes the original position of the UI element.
     /// </summary>
@@ -117,6 +119,9 @@ public class DragMaizeIcon : MonoBehaviour, IBeginDragHandler, IDragHandler, IEn
     /// <param name="eventData">Event data associated with the drag operation.</param>
     public void OnEndDrag(PointerEventData eventData)
     {
+        // Find again where the Maize Place is
+        maizeHandler.UpdatePickupStartingPosition();
+
         // Snap the UI element back to its original position using a coroutine
         StartCoroutine(Coroutine_MoveUIElement(UIDragElement, mStartingPosition, 0.5f));
 
