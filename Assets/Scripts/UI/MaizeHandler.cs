@@ -5,6 +5,8 @@ public class MaizeHandler : MonoBehaviour
 {
     public MaizePlace maizePlace;
 
+    public DragMaizeIcon dragMaizeIcon;
+
     private Player player;
 
     public int startingMaize;
@@ -62,7 +64,9 @@ public class MaizeHandler : MonoBehaviour
     {
         // Starting position = Maize Place's center position on the screen, with restrictions
         Vector3 maizePos = Camera.main.WorldToScreenPoint(maizePlace.transform.position);
-        maizePickUpIcon.transform.position = new Vector3(Mathf.Clamp(maizePos.x, 500, 1500), Mathf.Clamp(maizePos.y, 250, 830), 0);
+        Vector3 clampedPos = new Vector3(Mathf.Clamp(maizePos.x, 500, 1500), Mathf.Clamp(maizePos.y, 250, 830));
+        dragMaizeIcon.transform.position = clampedPos;
+        dragMaizeIcon.mStartingPosition = clampedPos + new Vector3(-960, -540, 0);
     }
 
     public void EatMaize()
