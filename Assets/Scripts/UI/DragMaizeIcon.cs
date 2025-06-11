@@ -119,6 +119,13 @@ public class DragMaizeIcon : MonoBehaviour, IBeginDragHandler, IDragHandler, IEn
     /// <param name="eventData">Event data associated with the drag operation.</param>
     public void OnEndDrag(PointerEventData eventData)
     {
+        // Pick up maize if UI element is dragged over the inventory slot position
+        if (UIDragElement.transform.position.x > 1760 && UIDragElement.transform.position.y > 395 && UIDragElement.transform.position.y < 805)
+        {
+            maizeHandler.PickupMaize();
+            return;
+        }
+
         // Find again where the Maize Place is
         maizeHandler.UpdatePickupStartingPosition();
 
