@@ -52,6 +52,8 @@ public class DragMaizeIcon : MonoBehaviour, IBeginDragHandler, IDragHandler, IEn
     /// <param name="data">Event data associated with the drag operation.</param>
     public void OnDrag(PointerEventData data)
     {
+        maizeHandler.arrow.SetActive(false);
+
         // Convert screen point to local point in canvas space during the drag
         Vector2 localPointerPosition;
         if (RectTransformUtility.ScreenPointToLocalPointInRectangle(
@@ -119,6 +121,8 @@ public class DragMaizeIcon : MonoBehaviour, IBeginDragHandler, IDragHandler, IEn
     /// <param name="eventData">Event data associated with the drag operation.</param>
     public void OnEndDrag(PointerEventData eventData)
     {
+        maizeHandler.arrow.SetActive(true);
+
         // Pick up maize if UI element is dragged over the inventory slot position
         if (UIDragElement.transform.position.x > 1760 && UIDragElement.transform.position.y > 395 && UIDragElement.transform.position.y < 805)
         {
