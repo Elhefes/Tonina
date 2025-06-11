@@ -131,46 +131,5 @@ public class DragMaizeIcon : MonoBehaviour, IBeginDragHandler, IDragHandler, IEn
 
         // Snap the UI element back to its original position using a coroutine
         StartCoroutine(Coroutine_MoveUIElement(UIDragElement, mStartingPosition, 0.5f));
-
-        // Perform a raycast to determine the position where the drag ended
-        RaycastHit hit;
-        Ray ray = Camera.main.ScreenPointToRay(eventData.position);
-
-        // Check if the ray hits something within the specified range
-        if (Physics.Raycast(ray, out hit, 1000.0f))
-        {
-            Vector3 worldPoint = hit.point;
-
-            // Uncomment the next line to display the world point in the console.
-            // Debug.Log(worldPoint);
-
-            // Create an object at the hit position if it satisfies certain criteria
-            //CreateObject(worldPoint);
-        }
-    }
-
-    /// <summary>
-    /// Instantiates a prefab at the specified position if the conditions are met.
-    /// </summary>
-    /// <param name="position">Position at which the prefab will be instantiated.</param>
-    //public void CreateObject(Vector3 position)
-    //{
-        // Check if the position meets certain criteria (Placeholder logic in PositionWithinCell method)
-    //    if (PositionWithinCell(position))
-    //    {
-            // Instantiate the prefab at the specified position
-            //GameObject obj = Instantiate(PrefabToInstantiate, position, Quaternion.identity);
-    //    }
-    //}
-
-    /// <summary>
-    /// Placeholder method to determine if a position is within a specific cell or meets certain criteria.
-    /// </summary>
-    /// <param name="pos">Position to be checked.</param>
-    /// <returns>True if the position meets the criteria, false otherwise.</returns>
-    private bool PositionWithinCell(Vector3 pos)
-    {
-        // Placeholder logic: Always return true. Implement your own logic here.
-        return true;
     }
 }
