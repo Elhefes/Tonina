@@ -96,7 +96,7 @@ public class MaizeHandler : MonoBehaviour
     private void Update()
     {
         if (Input.GetKeyDown("m") && maizeAmount > 0) EatMaize();
-        UpdateArrow();
+        if (arrow.activeSelf) UpdateArrow();
     }
 
     void UpdateArrow()
