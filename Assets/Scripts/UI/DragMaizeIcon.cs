@@ -21,6 +21,8 @@ public class DragMaizeIcon : MonoBehaviour, IBeginDragHandler, IDragHandler, IEn
 
     public MaizeHandler maizeHandler;
 
+    public GameObject inventoryGlowEffect;
+
     /// <summary>
     /// Initializes the original position of the UI element.
     /// </summary>
@@ -53,6 +55,7 @@ public class DragMaizeIcon : MonoBehaviour, IBeginDragHandler, IDragHandler, IEn
     public void OnDrag(PointerEventData data)
     {
         maizeHandler.arrow.SetActive(false);
+        inventoryGlowEffect.SetActive(true);
 
         // Convert screen point to local point in canvas space during the drag
         Vector2 localPointerPosition;
@@ -122,6 +125,7 @@ public class DragMaizeIcon : MonoBehaviour, IBeginDragHandler, IDragHandler, IEn
     public void OnEndDrag(PointerEventData eventData)
     {
         maizeHandler.arrow.SetActive(true);
+        inventoryGlowEffect.SetActive(false);
 
         // Pick up maize if UI element is dragged over the inventory slot position
         if (UIDragElement.transform.localPosition.x > 803 && UIDragElement.transform.localPosition.y > -145 && UIDragElement.transform.localPosition.y < 265)

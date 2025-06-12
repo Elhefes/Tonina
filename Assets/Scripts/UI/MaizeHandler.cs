@@ -45,6 +45,7 @@ public class MaizeHandler : MonoBehaviour
     {
         if (maizeAmount < 1) maizeInventory.SetActive(false);
         maizePickUp.SetActive(false);
+        dragMaizeIcon.inventoryGlowEffect.SetActive(false);
     }
 
     public void PickupMaize()
