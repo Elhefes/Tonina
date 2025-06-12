@@ -124,7 +124,7 @@ public class DragMaizeIcon : MonoBehaviour, IBeginDragHandler, IDragHandler, IEn
         maizeHandler.arrow.SetActive(true);
 
         // Pick up maize if UI element is dragged over the inventory slot position
-        if (UIDragElement.transform.position.x > 1760 && UIDragElement.transform.position.y > 395 && UIDragElement.transform.position.y < 805)
+        if (UIDragElement.transform.localPosition.x > 803 && UIDragElement.transform.localPosition.y > -145 && UIDragElement.transform.localPosition.y < 265)
         {
             maizeHandler.PickupMaize();
             return;
