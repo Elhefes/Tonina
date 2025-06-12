@@ -12,7 +12,7 @@ public class DragMaizeIcon : MonoBehaviour, IBeginDragHandler, IDragHandler, IEn
     [SerializeField] private RectTransform UIDragElement;
 
     // Reference to the RectTransform of the canvas containing the UI element
-    [SerializeField] private RectTransform Canvas;
+    [SerializeField] public RectTransform Canvas;
 
     // Variables for tracking original positions during the drag
     private Vector2 mOriginalLocalPointerPosition;

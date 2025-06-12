@@ -67,19 +67,19 @@ public class MaizeHandler : MonoBehaviour
 
     private void UpdatePickupTransformPosition()
     {
-        dragMaizeIcon.transform.position = clampedPos();
+        dragMaizeIcon.transform.localPosition = clampedPos();
     }
 
     public void UpdatePickupStartingPosition()
     {
-        dragMaizeIcon.mStartingPosition = clampedPos() + new Vector3(-960, -540, 0);
+        dragMaizeIcon.mStartingPosition = clampedPos();
     }
 
     private Vector3 clampedPos()
     {
         // Starting position = Maize Place's center position on the screen, with restrictions
-        Vector3 maizePos = Camera.main.WorldToScreenPoint(maizePlace.transform.position);
-        return new Vector3(Mathf.Clamp(maizePos.x, 500, 1500), Mathf.Clamp(maizePos.y, 250, 830));
+        Vector3 maizePos = Camera.main.WorldToScreenPoint(maizePlace.transform.localPosition) - dragMaizeIcon.Canvas.localPosition;
+        return new Vector3(Mathf.Clamp(maizePos.x, -475, 550), Mathf.Clamp(maizePos.y, -300, 275));
     }
 
     public void EatMaize()
