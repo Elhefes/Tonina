@@ -31,6 +31,7 @@ public class BuildingWheel : MonoBehaviour
     private int slices = 5;
     public BuildingsManager buildingsManager;
     public BuildingPlacing[] placeableBuildingsOnPlayer;
+    public PlacedObjectsGrid placedObjectsGrid;
     private List<GameObject> buildingsToBePlaced = new List<GameObject>();
     private int buildingCountAtModeStart;
 
@@ -188,6 +189,8 @@ public class BuildingWheel : MonoBehaviour
                     buildingsToBePlaced.Add(obj);
                     buildingsManager.buildingsPlaced++;
                     incomingCost += building.placeableBuildingPrefab.cost;
+                    placedObjectsGrid.gameObject.SetActive(true);
+                    placedObjectsGrid.UpdatePlacedBuildingIndicator(building.buildingIndex, 1);
                     UpdateBuildingsPlacedText();
                     UpdateIncomingCostText();
                     ShowBuildingInHandIfPossible();
