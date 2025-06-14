@@ -31,4 +31,13 @@ public class PlacedObjectsGrid : MonoBehaviour
             }
         }
     }
+
+    public bool anyElementIsActive()
+    {
+        foreach (int i in placedObjectAmounts)
+        {
+            if (i > 0) return true;
+        }
+        return false;
+    }
 }
