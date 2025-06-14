@@ -32,6 +32,7 @@ public class BuildingWheel : MonoBehaviour
     public BuildingsManager buildingsManager;
     public BuildingPlacing[] placeableBuildingsOnPlayer;
     public PlacedObjectsGrid placedObjectsGrid;
+    private int[] originalPlacedObjectAmounts;
     private List<GameObject> buildingsToBePlaced = new List<GameObject>();
     private int buildingCountAtModeStart;
 
@@ -45,6 +46,12 @@ public class BuildingWheel : MonoBehaviour
     {
         incomingCost = 0;
         buildingCountAtModeStart = buildingsManager.buildingsPlaced;
+
+        // Keep original array for exiting without saving
+        originalPlacedObjectAmounts = new int[placedObjectsGrid.placedObjectAmounts.Length];
+        System.Array.Copy(placedObjectsGrid.placedObjectAmounts, originalPlacedObjectAmounts, placedObjectsGrid.placedObjectAmounts.Length);
+        placedObjectsGrid.UpdateIndicatorsByArray(originalPlacedObjectAmounts);
+
         UpdateIncomingCostText();
         UpdateBuildingsPlacedText();
         ResetToDefaultBuilding();
@@ -63,10 +70,12 @@ public class BuildingWheel : MonoBehaviour
             {
                 Destroy(obj);
             }
+            placedObjectsGrid.UpdateIndicatorsByArray(originalPlacedObjectAmounts);
             buildingsManager.buildingsPlaced = buildingCountAtModeStart;
         }
         else
         {
+            originalPlacedObjectAmounts = placedObjectsGrid.placedObjectAmounts;
             if (buildingsToBePlaced != null) statsController.changesToBattlefield += buildingsToBePlaced.Count;
         }
         statsController.SaveStats();
@@ -189,8 +198,8 @@ public class BuildingWheel : MonoBehaviour
                     buildingsToBePlaced.Add(obj);
                     buildingsManager.buildingsPlaced++;
                     incomingCost += building.placeableBuildingPrefab.cost;
-                    placedObjectsGrid.gameObject.SetActive(true);
-                    placedObjectsGrid.UpdatePlacedBuildingIndicator(building.buildingIndex, 1);
+                    placedObjectsGrid.placedObjectAmounts[building.placeableBuildingPrefab.buildingIndex] += 1;
+                    placedObjectsGrid.UpdatePlacedBuildingIndicator(building.placeableBuildingPrefab.buildingIndex);
                     UpdateBuildingsPlacedText();
                     UpdateIncomingCostText();
                     ShowBuildingInHandIfPossible();

@@ -42,6 +42,8 @@ public class BuildingRemover : MonoBehaviour
                     building.gameObject.SetActive(false);
                     buildingWheel.incomingCost -= building.cost;
                     buildingWheel.UpdateIncomingCostText();
+                    buildingWheel.placedObjectsGrid.placedObjectAmounts[building.buildingIndex] -= 1;
+                    buildingWheel.placedObjectsGrid.UpdatePlacedBuildingIndicator(building.buildingIndex);
                     i++;
                 }
             }

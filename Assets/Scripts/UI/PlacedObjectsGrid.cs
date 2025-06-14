@@ -4,13 +4,11 @@ using TMPro;
 public class PlacedObjectsGrid : MonoBehaviour
 {
     public GameObject[] placedObjectIndicators;
-    public int[] placedObjectAmounts;
+    public int[] placedObjectAmounts = new int[] { 0, 0, 0, 0, 0, 0 };
     public TMP_Text[] placedObjectIndicatorsTexts;
 
-    public void UpdatePlacedBuildingIndicator(int placedObjectId, int amount)
+    public void UpdatePlacedBuildingIndicator(int placedObjectId)
     {
-        placedObjectAmounts[placedObjectId] += amount;
-
         if (!placedObjectIndicators[placedObjectId].activeSelf && placedObjectAmounts[placedObjectId] > 0)
         {
             placedObjectIndicators[placedObjectId].SetActive(true);
@@ -18,5 +16,19 @@ public class PlacedObjectsGrid : MonoBehaviour
 
         placedObjectIndicatorsTexts[placedObjectId].text = placedObjectIndicatorsTexts[placedObjectId].name + placedObjectAmounts[placedObjectId].ToString();
         if (placedObjectAmounts[placedObjectId] < 1) placedObjectIndicators[placedObjectId].SetActive(false);
+    }
+
+    public void UpdateIndicatorsByArray(int[] existingBuildingAmounts)
+    {
+        if (existingBuildingAmounts != null)
+        {
+            //placedObjectAmounts = existingBuildingAmounts; lol this would update the existingBuildingAmounts with placedObjectAmounts??
+            System.Array.Copy(existingBuildingAmounts, placedObjectAmounts, existingBuildingAmounts.Length);
+
+            for (int i = 0; i < placedObjectAmounts.Length; i++)
+            {
+                UpdatePlacedBuildingIndicator(i);
+            }
+        }
     }
 }
