@@ -548,7 +548,7 @@ public class Player : Creature
     {
         if (fillOkill.spearAmount > 0)
         {
-            if (spear.quantity < spearStartingQuantity)
+            if (spear.selected && spear.quantity < spearStartingQuantity)
             {
                 spear.quantity++;
                 spear.notAvailable = false;
@@ -558,7 +558,7 @@ public class Player : Creature
         }
         if (fillOkill.stoneAmount > 0)
         {
-            if (spear.quantity < spearStartingQuantity)
+            if (smallStone.selected && smallStone.quantity < smallStoneStartingQuantity)
             {
                 smallStone.quantity++;
                 smallStone.notAvailable = false;
@@ -569,7 +569,7 @@ public class Player : Creature
         }
         if (fillOkill.arrowAmount > 0)
         {
-            if (bow.quantity < arrowStartingQuantity)
+            if (bow.selected && bow.quantity < arrowStartingQuantity)
             {
                 bow.quantity++;
                 bow.notAvailable = false;
@@ -582,15 +582,18 @@ public class Player : Creature
 
     void TryToTakeSpearFromRack(GameObject rackObj)
     {
-        if (spearRack == null || rackObj != spearRack)
+        if (spear.selected)
         {
-            spearRack = rackObj.GetComponent<SpearRack>();
-        }
-        if (spearRack != null && spear.quantity < spearStartingQuantity && spearRack.numOfSpearsInRack > 0)
-        {
-            spear.quantity++;
-            spear.notAvailable = false;
-            spearRack.TakeSpear();
+            if (spearRack == null || rackObj != spearRack)
+            {
+                spearRack = rackObj.GetComponent<SpearRack>();
+            }
+            if (spearRack != null && spear.quantity < spearStartingQuantity && spearRack.numOfSpearsInRack > 0)
+            {
+                spear.quantity++;
+                spear.notAvailable = false;
+                spearRack.TakeSpear();
+            }
         }
     }
 

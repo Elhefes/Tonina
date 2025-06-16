@@ -92,7 +92,7 @@ public class WeaponWheel : MonoBehaviour
             weaponIndex = 0;
         }
 
-        while (player.weapons[weaponOrder[weaponIndex] - '0'].notAvailable)
+        while (player.weapons[weaponOrder[weaponIndex] - '0'].notAvailable || !player.weapons[weaponOrder[weaponIndex] - '0'].selected)
         {
             weaponIndex++;
             if (weaponIndex > weapons.Length - 1)
@@ -128,7 +128,7 @@ public class WeaponWheel : MonoBehaviour
             weaponIndex = weapons.Length - 1;
         }
 
-        while (player.weapons[weaponOrder[weaponIndex] - '0'].notAvailable)
+        while (player.weapons[weaponOrder[weaponIndex] - '0'].notAvailable || !player.weapons[weaponOrder[weaponIndex] - '0'].selected)
         {
             weaponIndex--;
             if (weaponIndex < 0)
