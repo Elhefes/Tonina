@@ -20,6 +20,8 @@ public class WeaponSelection : MonoBehaviour
 
     public TMP_Text selectMoreTMP;
 
+    public Animator meleeTextAnimator;
+
     [Header("Images & Sprites")]
     public Image[] spriteArray;
     public Sprite weaponSelectedSprite;
@@ -27,6 +29,7 @@ public class WeaponSelection : MonoBehaviour
 
     private void OnEnable()
     {
+        meleeTextAnimator.SetTrigger("Reset");
         maxWeaponAmount = 3;
         customWeaponOrder = PlayerPrefs.GetString("CustomWeaponOrder", "01234");
         selectedWeaponOrder = PlayerPrefs.GetString("SelectedWeaponOrder", "0");
@@ -48,6 +51,13 @@ public class WeaponSelection : MonoBehaviour
         }
         else
         {
+            if ((weaponIndex == 0 && !selectedWeaponOrder.Contains("2")) || 
+                (weaponIndex == 2 && !selectedWeaponOrder.Contains("0"))) // 1 Melee weapon must be selected always
+            {
+                meleeTextAnimator.SetTrigger("MeleePopUp");
+                return;
+            }
+
             selectedWeaponsAmount--;
             spriteArray[weaponIndex].sprite = weaponNotSelectedSprite;
             RemoveSelectedFromString(weaponIndex);
