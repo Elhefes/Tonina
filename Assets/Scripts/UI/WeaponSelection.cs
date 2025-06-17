@@ -118,7 +118,8 @@ public class WeaponSelection : MonoBehaviour
 
     void UpdateSelectionText()
     {
-        selectMoreTMP.text = "Choose " + (maxWeaponAmount - selectedWeaponsAmount) + " more!";
+        if (selectedWeaponsAmount == maxWeaponAmount) selectMoreTMP.text = "All weapons selected!";
+        else selectMoreTMP.text = "Choose " + (maxWeaponAmount - selectedWeaponsAmount) + " more!";
     }
 
     private void UpdateSlotPositions()
