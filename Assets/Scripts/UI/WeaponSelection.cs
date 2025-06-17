@@ -1,6 +1,8 @@
 using TMPro;
+using System;
 using UnityEngine;
 using UnityEngine.UI;
+using System.Collections.Generic;
 
 public class WeaponSelection : MonoBehaviour
 {
@@ -8,6 +10,7 @@ public class WeaponSelection : MonoBehaviour
     private int selectedWeaponsAmount;
 
     private string customWeaponOrder;
+    private string selectedWeaponOrder;
     private int[] slotXValues = { -500, -250, 0, 250, 500 };
     public Transform clubSlot;
     public Transform spearSlot;
@@ -24,27 +27,83 @@ public class WeaponSelection : MonoBehaviour
 
     private void OnEnable()
     {
-        //selectedWeaponsAmount = 0;
         maxWeaponAmount = 3;
         customWeaponOrder = PlayerPrefs.GetString("CustomWeaponOrder", "01234");
-        UpdateSlotPositions();
+        selectedWeaponOrder = PlayerPrefs.GetString("SelectedWeaponOrder", "0");
+
+        SelectWeaponsFromString();
+        selectedWeaponsAmount = selectedWeaponOrder.Length;
         UpdateSelectionText();
+        UpdateSlotPositions();
     }
 
     public void SelectWeaponIfPossible(int weaponIndex)
     {
         if (spriteArray[weaponIndex].sprite == weaponNotSelectedSprite)
         {
-            selectedWeaponsAmount++;
-            spriteArray[weaponIndex].sprite = weaponSelectedSprite;
-            UpdateSelectionText();
+            if (selectedWeaponsAmount < maxWeaponAmount)
+            {
+                SelectWeapon(weaponIndex);
+            }
         }
         else
         {
             selectedWeaponsAmount--;
             spriteArray[weaponIndex].sprite = weaponNotSelectedSprite;
+            RemoveSelectedFromString(weaponIndex);
             UpdateSelectionText();
+            UpdateSelectedWeaponOrder();
         }
+    }
+
+    void SelectWeapon(int weaponIndex)
+    {
+        spriteArray[weaponIndex].sprite = weaponSelectedSprite;
+        if (!selectedWeaponOrder.Contains(weaponIndex.ToString()))
+        {
+            AddSelectedToString(weaponIndex);
+            selectedWeaponsAmount++;
+        }
+        UpdateSelectionText();
+        UpdateSelectedWeaponOrder();
+    }
+
+    void AddSelectedToString(int weaponIndex)
+    {
+        selectedWeaponOrder += weaponIndex;
+    }
+
+    void RemoveSelectedFromString(int weaponIndex)
+    {
+        selectedWeaponOrder = selectedWeaponOrder.Replace(weaponIndex.ToString(), "");
+    }
+
+    void UpdateSelectedWeaponOrder()
+    {
+        PlayerPrefs.SetString("SelectedWeaponOrder", selectedWeaponOrder);
+    }
+
+    public void SelectWeaponsFromString()
+    {
+        List<int> intList = ConvertStringToIntArray(selectedWeaponOrder);
+        foreach (int i in intList)
+        {
+            SelectWeapon(i);
+        }
+    }
+
+    public List<int> ConvertStringToIntArray(string input)
+    {
+        List<int> intList = new List<int>();
+
+        foreach (char c in input)
+        {
+            if (char.IsDigit(c))
+            {
+                intList.Add(int.Parse(c.ToString()));
+            }
+        }
+        return intList;
     }
 
     void UpdateSelectionText()
