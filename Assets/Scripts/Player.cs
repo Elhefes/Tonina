@@ -697,6 +697,9 @@ public class Player : Creature
         transform.position = newPosition;
         gameObject.SetActive(true);
         mouseLook.TeleportCameras();
+
+        // Equip default weapon when starting battle
+        if (battlefieldMenu.waveController.battleUI.activeSelf) EquipDefaultWeapon();
     }
 
     public void FindMiniPyramid()
