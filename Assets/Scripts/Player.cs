@@ -3,6 +3,7 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 using TMPro;
+using System;
 
 public class Player : Creature
 {
@@ -11,6 +12,7 @@ public class Player : Creature
     public int startingHealth;
     public Weapon[] weapons;
     private string weaponOrder;
+    private string selectedWeaponOrder;
     public Spear spear;
     public Bow bow;
     public SmallStone smallStone;
@@ -93,7 +95,9 @@ public class Player : Creature
     public void EnableBattleMode()
     {
         onCooldown = false;
-        weaponOrder = PlayerPrefs.GetString("CustomWeaponOrder", "0123");
+        weaponOrder = PlayerPrefs.GetString("CustomWeaponOrder", "01234");
+        selectedWeaponOrder = PlayerPrefs.GetString("SelectedWeaponOrder", "0");
+        EquipOnlySelectedWeapons();
         EquipDefaultWeapon();
         healthBar.gameObject.SetActive(true);
         SetProjectilesToMax();
@@ -113,10 +117,25 @@ public class Player : Creature
         battlefieldMenu.waveController.musicPlayer.PlayPeacefulSongs(false);
     }
 
+    void EquipOnlySelectedWeapons()
+    {
+        foreach (char c in weaponOrder)
+        {
+            if (selectedWeaponOrder.Contains(c.ToString()))
+            {
+                weapons[(int)Char.GetNumericValue(c)].selected = true;
+            }
+            else
+            {
+                weapons[(int)Char.GetNumericValue(c)].selected = false;
+            }
+        }
+    }
+
     void EquipDefaultWeapon()
     {
-        weapons[weaponOrder[0] - '0'].gameObject.SetActive(true);
-        creatureMovement.animator.SetInteger("WeaponIndex", weaponOrder[0] - '0');
+        weapons[selectedWeaponOrder[0] - '0'].gameObject.SetActive(true);
+        creatureMovement.animator.SetInteger("WeaponIndex", selectedWeaponOrder[0] - '0');
     }
 
     void SetProjectilesToMax()
@@ -388,16 +407,16 @@ public class Player : Creature
             obj.gameObject.SetActive(false);
         }
 
-        int weaponIndex = 0;
-        if (weaponType == WeaponType.Spear) weaponIndex = 1;
-        if (weaponType == WeaponType.Axe) weaponIndex = 2;
-        if (weaponType == WeaponType.Bow) weaponIndex = 3;
-        if (weaponType == WeaponType.Small_stone) weaponIndex = 4;
+        int weaponTypeIndex = 0;
+        if (weaponType == WeaponType.Spear) weaponTypeIndex = 1;
+        if (weaponType == WeaponType.Axe) weaponTypeIndex = 2;
+        if (weaponType == WeaponType.Bow) weaponTypeIndex = 3;
+        if (weaponType == WeaponType.Small_stone) weaponTypeIndex = 4;
 
-        weaponOnHand = weapons[weaponIndex];
+        weaponOnHand = weapons[weaponTypeIndex];
         weaponOnHand.canHit = false;
-        weapons[weaponIndex].gameObject.SetActive(true);
-        creatureMovement.animator.SetInteger("WeaponIndex", weaponIndex);
+        weapons[weaponTypeIndex].gameObject.SetActive(true);
+        creatureMovement.animator.SetInteger("WeaponIndex", weaponTypeIndex);
         UpdateWeaponRangeIndicator();
         UpdateProjectileQuantityText();
     }
@@ -678,8 +697,6 @@ public class Player : Creature
         transform.position = newPosition;
         gameObject.SetActive(true);
         mouseLook.TeleportCameras();
-
-        if (battlefieldMenu.waveController.battleUI.activeSelf) EquipDefaultWeapon(); // When starting battle
     }
 
     public void FindMiniPyramid()

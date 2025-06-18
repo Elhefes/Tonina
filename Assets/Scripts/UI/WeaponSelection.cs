@@ -90,10 +90,20 @@ public class WeaponSelection : MonoBehaviour
 
     void UpdateSelectedWeaponOrder()
     {
-        PlayerPrefs.SetString("SelectedWeaponOrder", selectedWeaponOrder);
+        // Order selectedWeaponOrder in order of customWeaponOrder
+        string result = "";
+        foreach (char c in customWeaponOrder)
+        {
+            if (selectedWeaponOrder.Contains(c.ToString()))
+            {
+                result += c;
+            }
+        }
+
+        PlayerPrefs.SetString("SelectedWeaponOrder", result);
     }
 
-    public void SelectWeaponsFromString()
+    void SelectWeaponsFromString()
     {
         List<int> intList = ConvertStringToIntArray(selectedWeaponOrder);
         foreach (int i in intList)
@@ -102,7 +112,7 @@ public class WeaponSelection : MonoBehaviour
         }
     }
 
-    public List<int> ConvertStringToIntArray(string input)
+    private List<int> ConvertStringToIntArray(string input)
     {
         List<int> intList = new List<int>();
 
