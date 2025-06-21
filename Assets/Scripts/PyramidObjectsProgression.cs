@@ -17,6 +17,7 @@ public class PyramidObjectsProgression : MonoBehaviour
 
     [Header("NavMesh surfaces")]
     public GameObject lvl3NavMeshSurface;
+    public GameObject lvl3WeatherTempleNavMeshSurface;
     public GameObject lvl4NavMeshSurface;
 
     [Header("Temporary objects in village")]
@@ -41,6 +42,7 @@ public class PyramidObjectsProgression : MonoBehaviour
     public GameObject lvl4VillageCollider;
 
     [Header("Weather Temple objects")]
+    public GameObject weatherTemple;
     public GameObject weatherTempleObjToDisable;
     public GameObject[] weatherTempleObjectsToEnable;
 
@@ -61,6 +63,7 @@ public class PyramidObjectsProgression : MonoBehaviour
         lvl4Terrain.gameObject.SetActive(true);
 
         lvl3NavMeshSurface.SetActive(false);
+        lvl3WeatherTempleNavMeshSurface.SetActive(false);
         lvl4NavMeshSurface.SetActive(true);
 
         lvl3TemporaryVillageObject.SetActive(false);
@@ -79,6 +82,7 @@ public class PyramidObjectsProgression : MonoBehaviour
         lvl4VillageCollider.SetActive(true);
 
         weatherTempleObjToDisable.SetActive(false);
+        weatherTemple.SetActive(true);
         foreach (GameObject obj in weatherTempleObjectsToEnable) obj.SetActive(true);
 
         extraFloorsBuilt++;
