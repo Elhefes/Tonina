@@ -43,8 +43,8 @@ public class PyramidObjectsProgression : MonoBehaviour
 
     [Header("Weather Temple objects")]
     public GameObject weatherTemple;
-    public GameObject weatherTempleObjToDisable;
-    public GameObject[] weatherTempleObjectsToEnable;
+    public GameObject weatherTempleLvl3Obj;
+    public GameObject weatherTempleLvl4Obj;
 
     private void Start()
     {
@@ -81,9 +81,9 @@ public class PyramidObjectsProgression : MonoBehaviour
         lvl4BfCollider.SetActive(true);
         lvl4VillageCollider.SetActive(true);
 
-        weatherTempleObjToDisable.SetActive(false);
+        weatherTempleLvl3Obj.SetActive(false);
         weatherTemple.SetActive(true);
-        foreach (GameObject obj in weatherTempleObjectsToEnable) obj.SetActive(true);
+        weatherTempleLvl4Obj.SetActive(true);
 
         extraFloorsBuilt++;
         UpdateKingHousePosition();
