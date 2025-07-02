@@ -61,14 +61,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 03d45b4c7525583479a744d4e771e157, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  buildingIndex: 4
   placeableBuildingPrefab: {fileID: 5296152399746067078, guid: 881ab1f1c6deed14d914c3e8c2d88409, type: 3}
   placingMat: {fileID: 2100000, guid: f08362506d58b8946966a855b86610a6, type: 2}
   canPlace: 0
+  canPlaceOnGrass: 0
   halfExtentsVector: {x: 2, y: 0.1, z: 1.5}
   collisionLayerMask:
     serializedVersion: 2
-    m_Bits: 321
+    m_Bits: 1345
   uiSprite: {fileID: 21300000, guid: 10e1fff4dc150a34db0aa74875ab0a3a, type: 3}
 --- !u!1 &263504382672252160
 GameObject:
