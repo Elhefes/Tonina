@@ -2363,7 +2363,7 @@ GameObject:
   - component: {fileID: 1737709399785776841}
   - component: {fileID: 2301083680316317887}
   - component: {fileID: 4209230059100997322}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: TowerBowGuy
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5583,7 +5583,7 @@ GameObject:
   - component: {fileID: 288131000532874180}
   - component: {fileID: 8721519812337612242}
   - component: {fileID: 8486930574992059147}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Rope_Placeholder
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -6217,6 +6217,10 @@ PrefabInstance:
       propertyPath: creatureMovement
       value: 
       objectReference: {fileID: 3454009534845570013}
+    - target: {fileID: 699562876899458370, guid: dde0289bc2245564084b57b27c5bb670, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
     - target: {fileID: 2676832763894799705, guid: dde0289bc2245564084b57b27c5bb670, type: 3}
       propertyPath: pointA
       value: 
@@ -6228,6 +6232,22 @@ PrefabInstance:
     - target: {fileID: 3792902411408362339, guid: dde0289bc2245564084b57b27c5bb670, type: 3}
       propertyPath: shootingPoint
       value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 4576414451980759053, guid: dde0289bc2245564084b57b27c5bb670, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 4923749451045862799, guid: dde0289bc2245564084b57b27c5bb670, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 5546289044688061174, guid: dde0289bc2245564084b57b27c5bb670, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 6518108101815617835, guid: dde0289bc2245564084b57b27c5bb670, type: 3}
+      propertyPath: m_Layer
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 7352515943044205766, guid: dde0289bc2245564084b57b27c5bb670, type: 3}
       propertyPath: m_RootOrder
@@ -6273,13 +6293,25 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7413990466532923033, guid: dde0289bc2245564084b57b27c5bb670, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
     - target: {fileID: 7873051807633348220, guid: dde0289bc2245564084b57b27c5bb670, type: 3}
       propertyPath: m_Name
       value: Bow
       objectReference: {fileID: 0}
     - target: {fileID: 7873051807633348220, guid: dde0289bc2245564084b57b27c5bb670, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 7873051807633348220, guid: dde0289bc2245564084b57b27c5bb670, type: 3}
       propertyPath: m_IsActive
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8149491784958467019, guid: dde0289bc2245564084b57b27c5bb670, type: 3}
+      propertyPath: m_Layer
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 8149491784958467019, guid: dde0289bc2245564084b57b27c5bb670, type: 3}
       propertyPath: m_IsActive
