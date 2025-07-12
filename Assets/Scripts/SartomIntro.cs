@@ -4,6 +4,11 @@ public class SartomIntro : MonoBehaviour
 {
     public Animator animator;
 
+    public void CallTrigger(string trigger)
+    {
+        animator.SetTrigger(trigger);
+    }
+
     void LegsTimingTrigger()
     {
         animator.SetTrigger("LegsTiming");
