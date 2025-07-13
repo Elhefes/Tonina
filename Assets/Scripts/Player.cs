@@ -235,17 +235,17 @@ public class Player : Creature
                 }
                 else
                 {
-                    weatherGame.SetActive(false);
+                    if (weatherGame != null) weatherGame.SetActive(false);
                     weatherStone = null;
                 }
 
                 if (target.CompareTag("VillageTPSpot") && Vector3.Distance(target.transform.position, transform.position) < 4f)
                 {
                     creatureMovement.agent.SetDestination(Vector3.Lerp(transform.position, target.transform.position, 0.5f));
-                    villageTPMenu.SetActive(true);
+                    if (villageTPMenu != null) villageTPMenu.SetActive(true);
                     return;
                 }
-                else villageTPMenu.SetActive(false);
+                else if (villageTPMenu != null) villageTPMenu.SetActive(false);
 
                 // Click 1st object to enable the 2nd. Click 1st again to disable 2nd.
                 if (target.CompareTag("ClickToEnableObject") && Vector3.Distance(target.transform.position, transform.position) < 4f)
@@ -295,7 +295,7 @@ public class Player : Creature
                     }
                 }
 
-                if (battlefieldMenu.waveController.battleUI.activeSelf && (target.name == "spear_rack_small(Clone)") && Vector3.Distance(target.transform.position, transform.position) < 2.25f)
+                if (healthBar.gameObject.activeInHierarchy && (target.name == "spear_rack_small(Clone)") && Vector3.Distance(target.transform.position, transform.position) < 2.25f)
                 {
                     if (target != null)
                     {
@@ -307,7 +307,7 @@ public class Player : Creature
                 creatureMovement.agent.SetDestination(hit.point);
                 destination = hit.point;
                 
-                if (!battlefieldMenu.waveController.battleUI.activeSelf && !optionsMenu.returnFromBuilder)
+                if (!healthBar.gameObject.activeInHierarchy && !optionsMenu.returnFromBuilder)
                 {
                     float scaleValue = Mathf.Lerp(0.36f, 0.6f, (mouseLook.distanceFromObject - 5f) / (30f - 5f));
                     clickerDestinationObject.transform.localScale = new Vector3(scaleValue, scaleValue, scaleValue);
@@ -527,11 +527,11 @@ public class Player : Creature
 
         else if (other.CompareTag("BattlefieldPrompt"))
         {
-            battlefieldMenu.gameObject.SetActive(true);
+            if (battlefieldMenu != null) battlefieldMenu.gameObject.SetActive(true);
         }
         else if (other.CompareTag("VillageTPSpot"))
         {
-            villageTPMenu.SetActive(true);
+            if (villageTPMenu != null) villageTPMenu.SetActive(true);
         }
     }
 

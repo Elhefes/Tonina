@@ -21707,7 +21707,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1904667358}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: BuildingRemover, Assembly-CSharp
         m_MethodName: ExitFromRemoving
         m_Mode: 1
@@ -21719,7 +21719,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 1904667358}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: BuildingRemover, Assembly-CSharp
         m_MethodName: DestroyHiddenBuildings
         m_Mode: 1
@@ -23428,7 +23428,7 @@ PrefabInstance:
     - target: {fileID: 5644011193178383887, guid: ec16dfae91153d14cbd61ee89314e64a, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Target
       value: 
-      objectReference: {fileID: 1904667358}
+      objectReference: {fileID: 0}
     - target: {fileID: 5644011193178383887, guid: ec16dfae91153d14cbd61ee89314e64a, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[2].m_Target
       value: 
@@ -23444,7 +23444,7 @@ PrefabInstance:
     - target: {fileID: 5644011193178383887, guid: ec16dfae91153d14cbd61ee89314e64a, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[5].m_Target
       value: 
-      objectReference: {fileID: 1904667358}
+      objectReference: {fileID: 0}
     - target: {fileID: 5644011193178383887, guid: ec16dfae91153d14cbd61ee89314e64a, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[6].m_Target
       value: 
@@ -25184,7 +25184,7 @@ MonoBehaviour:
   UIDragElement: {fileID: 622461462}
   Canvas: {fileID: 1098428928}
   mStartingPosition: {x: 0, y: 0}
-  maizeHandler: {fileID: 1904667365}
+  maizeHandler: {fileID: 0}
   inventoryGlowEffect: {fileID: 2113787724}
 --- !u!1 &623443696
 GameObject:
@@ -36989,6 +36989,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 0}
     - target: {fileID: 5412454603876469069, guid: f1110e22860f9844396abf95985246eb, type: 3}
+      propertyPath: buildingRemover
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 5412454603876469069, guid: f1110e22860f9844396abf95985246eb, type: 3}
       propertyPath: fillOkillPickUp
       value: 
       objectReference: {fileID: 1542148166}
@@ -37124,7 +37128,9 @@ PrefabInstance:
       propertyPath: weaponWheelQuantityTMP
       value: 
       objectReference: {fileID: 587814492}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 385070561597705185, guid: f1110e22860f9844396abf95985246eb, type: 3}
+    - {fileID: 3536230150113977096, guid: f1110e22860f9844396abf95985246eb, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
@@ -74360,7 +74366,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1904667365}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: MaizeHandler, Assembly-CSharp
         m_MethodName: EatMaize
         m_Mode: 1
@@ -78797,28 +78803,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f790da50e6ef0d4469092112e7f8e618, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &1904667358 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 3536230150113977096, guid: f1110e22860f9844396abf95985246eb, type: 3}
-  m_PrefabInstance: {fileID: 910515677}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 49602c56280bd7f409aabde4f0b36466, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &1904667365 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 385070561597705185, guid: f1110e22860f9844396abf95985246eb, type: 3}
-  m_PrefabInstance: {fileID: 910515677}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c63bfe995a1c2934684c848a64f4d756, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1905289331
 GameObject:
   m_ObjectHideFlags: 0
@@ -82965,7 +82949,6 @@ GameObject:
   m_Component:
   - component: {fileID: 2025598137}
   - component: {fileID: 2025598136}
-  - component: {fileID: 2025598135}
   - component: {fileID: 2025598138}
   m_Layer: 0
   m_Name: IntroMovingCamera
@@ -82974,14 +82957,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!81 &2025598135
-AudioListener:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2025598134}
-  m_Enabled: 1
 --- !u!20 &2025598136
 Camera:
   m_ObjectHideFlags: 0
@@ -85762,7 +85737,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1904667358}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: BuildingRemover, Assembly-CSharp
         m_MethodName: HideSelectedBuildings
         m_Mode: 1
