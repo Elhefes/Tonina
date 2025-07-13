@@ -9,6 +9,9 @@ public class SartomIntro : MonoBehaviour
         animator.SetTrigger(trigger);
     }
 
+    public void SetIsMovingTrue() { animator.SetBool("IsMoving", true); }
+    public void SetIsMovingFalse() { animator.SetBool("IsMoving", false); }
+
     void LegsTimingTrigger()
     {
         animator.SetTrigger("LegsTiming");
