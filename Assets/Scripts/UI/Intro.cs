@@ -11,7 +11,6 @@ public class Intro : MonoBehaviour
 
     public void EndIntro()
     {
-        musicPlayer.PlayPeacefulSongs(true);
-        gameObject.SetActive(false);
+        SceneChangingManager.Instance.LoadScene("IntroScene");
     }
 }
