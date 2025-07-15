@@ -28,31 +28,7 @@ public class OptionsMenu : MonoBehaviour
 
     private void OnEnable()
     {
-        // Adjust audio sliders and then mute them if they were muted before
-
-        int musicMuted = PlayerPrefs.GetInt("musicMuted", 0);
-        musicVolumeSlider.value = PlayerPrefs.GetFloat("musicVolume", 0.2f);
-        musicVolumeSlider.onValueChanged.AddListener(delegate { audioController.ChangeMusicVolume(musicVolumeSlider); });
-        if (musicMuted == 1)
-        {
-            audioController.SetMusic(false);
-        }
-        else
-        {
-            audioController.SetMusic(true);
-        }
-
-        int soundMuted = PlayerPrefs.GetInt("soundMuted", 0);
-        soundVolumeSlider.value = PlayerPrefs.GetFloat("soundSliderValue", 0.5f);
-        soundVolumeSlider.onValueChanged.AddListener(delegate { audioController.ChangeSoundVolume(soundVolumeSlider); });
-        if (soundMuted == 1)
-        {
-            audioController.SetSounds(false);
-        }
-        else
-        {
-            audioController.SetSounds(true);
-        }
+        LoadAudioSettings();
 
         if (normalMenu != null) normalMenu.SetActive(true);
         if (confirmReturnHomeMenu != null) confirmReturnHomeMenu.SetActive(false);
@@ -86,6 +62,35 @@ public class OptionsMenu : MonoBehaviour
                 battleReturnConfirmText.SetActive(true);
                 returnFromBattleButton.SetActive(true);
             }
+        }
+    }
+
+    public void LoadAudioSettings()
+    {
+        // Adjust audio sliders and then mute them if they were muted before
+
+        int musicMuted = PlayerPrefs.GetInt("musicMuted", 0);
+        musicVolumeSlider.value = PlayerPrefs.GetFloat("musicVolume", 0.2f);
+        musicVolumeSlider.onValueChanged.AddListener(delegate { audioController.ChangeMusicVolume(musicVolumeSlider); });
+        if (musicMuted == 1)
+        {
+            audioController.SetMusic(false);
+        }
+        else
+        {
+            audioController.SetMusic(true);
+        }
+
+        int soundMuted = PlayerPrefs.GetInt("soundMuted", 0);
+        soundVolumeSlider.value = PlayerPrefs.GetFloat("soundSliderValue", 0.5f);
+        soundVolumeSlider.onValueChanged.AddListener(delegate { audioController.ChangeSoundVolume(soundVolumeSlider); });
+        if (soundMuted == 1)
+        {
+            audioController.SetSounds(false);
+        }
+        else
+        {
+            audioController.SetSounds(true);
         }
     }
 

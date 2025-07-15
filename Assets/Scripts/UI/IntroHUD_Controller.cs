@@ -3,7 +3,12 @@ using UnityEngine;
 public class IntroHUD_Controller : MonoBehaviour
 {
     public GameObject battleUI;
-    public GameObject optionsMenu;
+    public OptionsMenu optionsMenu;
+
+    private void Start()
+    {
+        optionsMenu.LoadAudioSettings();
+    }
 
     public void EnableBattleModeHUD(bool value)
     {
@@ -21,8 +26,8 @@ public class IntroHUD_Controller : MonoBehaviour
         {
             if (battleUI.activeSelf)
             {
-                if (!optionsMenu.activeSelf) optionsMenu.SetActive(true);
-                else optionsMenu.SetActive(false);
+                if (!optionsMenu.gameObject.activeSelf) optionsMenu.gameObject.SetActive(true);
+                else optionsMenu.gameObject.SetActive(false);
             }
         }
     }
