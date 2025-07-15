@@ -10,6 +10,11 @@ public class IntroHUD_Controller : MonoBehaviour
         battleUI.SetActive(value);
     }
 
+    public void ReturnToMainMenu()
+    {
+        SceneChangingManager.Instance.LoadScene("Tonina");
+    }
+
     private void Update()
     {
         if (Input.GetKeyDown(KeyCode.Escape))
