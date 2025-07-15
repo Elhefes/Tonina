@@ -502,15 +502,12 @@ public class Player : Creature
 
     private void OnTriggerEnter(Collider other)
     {
-        if (!buildModeUI.activeSelf) // If not in build mode
+        if (buildModeUI != null && !buildModeUI.activeSelf && other.gameObject.name == "Fill-Okill(Clone)")
         {
-            if (other.gameObject.name == "Fill-Okill(Clone)")
-            {
-                fillOkill = other.GetComponentInParent<FillOkill>();
-                EnterFillOkill();
-            }
+            fillOkill = other.GetComponentInParent<FillOkill>();
+            EnterFillOkill();
         }
-        
+
         if (other.CompareTag("Building"))
         {
             buildingRoof = other.GetComponentInParent<BuildingRoof>();

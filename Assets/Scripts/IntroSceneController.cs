@@ -14,6 +14,8 @@ public class IntroSceneController : MonoBehaviour
     private bool onPlayerCamera;
     private float acceleration;
 
+    public GameObject battleUI;
+
     private void OnEnable()
     {
         Application.targetFrameRate = Screen.currentResolution.refreshRate;
@@ -44,6 +46,7 @@ public class IntroSceneController : MonoBehaviour
                     introCamera.enabled = false;
                     playerCamera.enabled = true;
                     clickBlocker.SetActive(false);
+                    battleUI.SetActive(true);
                 }
                 acceleration += 0.0008f;
             }
