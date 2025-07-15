@@ -14,7 +14,7 @@ public class IntroSceneController : MonoBehaviour
     private bool onPlayerCamera;
     private float acceleration;
 
-    public GameObject battleUI;
+    public IntroHUD_Controller introHUD_Controller;
 
     private void OnEnable()
     {
@@ -46,7 +46,7 @@ public class IntroSceneController : MonoBehaviour
                     introCamera.enabled = false;
                     playerCamera.enabled = true;
                     clickBlocker.SetActive(false);
-                    battleUI.SetActive(true);
+                    introHUD_Controller.EnableBattleModeHUD(true);
                 }
                 acceleration += 0.0008f;
             }
