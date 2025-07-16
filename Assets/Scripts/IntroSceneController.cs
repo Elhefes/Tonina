@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 
 public class IntroSceneController : MonoBehaviour
@@ -14,6 +15,8 @@ public class IntroSceneController : MonoBehaviour
     private bool onPlayerCamera;
     private float acceleration;
 
+    public Enemy[] introEnemies;
+
     public IntroHUD_Controller introHUD_Controller;
 
     private void OnEnable()
@@ -28,6 +31,19 @@ public class IntroSceneController : MonoBehaviour
         playerPivot.SetActive(true);
         staticTwinStatue.SetActive(true);
         sartomIntroObject.SetActive(false);
+    }
+
+    public void SendFirstEnemies()
+    {
+        StartCoroutine(FirstEnemyWave());
+    }
+
+    IEnumerator FirstEnemyWave()
+    {
+        yield return new WaitForSeconds(2.5f);
+        introEnemies[0].creatureMovement.agent.speed = 3.5f; // from 0 to default speed, i.e. "starts to move"
+        yield return new WaitForSeconds(8.5f);
+        introEnemies[1].gameObject.SetActive(true);
     }
 
     private void FixedUpdate()
