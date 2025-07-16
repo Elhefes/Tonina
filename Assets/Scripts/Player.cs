@@ -10,6 +10,7 @@ public class Player : Creature
     public int health;
     public int maxHealth;
     public int startingHealth;
+    public bool godMode;
     public Weapon[] weapons;
     private string weaponOrder;
     private string selectedWeaponOrder;
@@ -449,11 +450,16 @@ public class Player : Creature
 
     public void TakeDamage(int damage)
     {
+        health -= damage;
+        if (godMode && health <= 8)
+        {
+            health = 8;
+        }
         if (health <= startingHealth)
         {
-            healthBar.value -= (float)damage / startingHealth;
+            healthBar.value = (float)health / startingHealth;
         }
-        health -= damage;
+        
         if (health <= 0)
         {
             onCooldown = false;
