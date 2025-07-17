@@ -6,7 +6,7 @@ public class IntroSceneController : MonoBehaviour
     public GameObject clickBlocker;
 
     public GameObject sartomIntroObject;
-    public GameObject playerPivot;
+    public Player playerPivot;
     public GameObject staticTwinStatue;
 
     public Camera playerCamera;
@@ -28,7 +28,8 @@ public class IntroSceneController : MonoBehaviour
 
     public void EnableOnlyBattleModeObjects()
     {
-        playerPivot.SetActive(true);
+        playerPivot.gameObject.SetActive(true);
+        playerPivot.EnableBattleMode();
         staticTwinStatue.SetActive(true);
         sartomIntroObject.SetActive(false);
     }
