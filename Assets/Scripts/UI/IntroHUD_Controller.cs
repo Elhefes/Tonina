@@ -5,6 +5,7 @@ public class IntroHUD_Controller : MonoBehaviour
     public GameObject battleUI;
     public GameObject[] presentationStartObjects;
     public OptionsMenu optionsMenu;
+    public bool presenting;
 
     private void Start()
     {
@@ -22,9 +23,11 @@ public class IntroHUD_Controller : MonoBehaviour
         SceneChangingManager.Instance.LoadScene("Tonina");
     }
 
+    public void SetPresenting(bool value) { presenting = value; }
+
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Escape))
+        if (Input.GetKeyDown(KeyCode.Escape) && !presenting)
         {
             if (battleUI.activeSelf)
             {

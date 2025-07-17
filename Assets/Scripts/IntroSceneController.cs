@@ -37,12 +37,15 @@ public class IntroSceneController : MonoBehaviour
     {
         if (introEnemies[0].healthBar.value <= 0 && introEnemies[1].healthBar.value <= 0) // 1st wave is cleared
         {
+            introHUD_Controller.optionsMenu.gameObject.SetActive(false);
+            introHUD_Controller.presenting = true;
             introHUD_Controller.presentationStartObjects[1].SetActive(true);
         }
     }
 
     public void SendFirstEnemies()
     {
+        introHUD_Controller.presenting = false;
         StartCoroutine(FirstEnemyWave());
     }
 

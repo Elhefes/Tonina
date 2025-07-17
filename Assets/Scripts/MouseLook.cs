@@ -17,6 +17,7 @@ public class MouseLook : MonoBehaviour
     public float minCameraZoom;
     public float maxCameraZoom;
     public Player player;
+    public bool inCutScene;
     public bool cameraOnPlayer = true;
     public Camera minimapCamera;
     public GameObject minimapIndicators;
@@ -71,32 +72,36 @@ public class MouseLook : MonoBehaviour
     void Update()
     {
         mainCameraObject.transform.position = Vector3.Lerp(mainCameraObject.transform.position, transform.position, smoothSpeed);
-        if (Input.GetKeyDown("c")) CameraOnPlayerButton();
 
-        if (!player.insideKingHouse)
+        if (!inCutScene)
         {
-            if (Input.GetAxis("Horizontal") != 0 || Input.GetAxis("Vertical") != 0 || minimapInput.GetMinimapInput().x != 0 || minimapInput.GetMinimapInput().y != 0)
-            {
-                CameraOnPlayerOff();
-                // Invert minimap controls when player is in village
-                if (player.inVillage) moveDirection = new Vector3(-Input.GetAxis("Horizontal") + minimapInput.GetMinimapInput().x * -minimapInputSensitivity, 0f, -Input.GetAxis("Vertical") + minimapInput.GetMinimapInput().y * -minimapInputSensitivity);
-                else moveDirection = new Vector3(Input.GetAxis("Horizontal") + minimapInput.GetMinimapInput().x * minimapInputSensitivity, 0f, Input.GetAxis("Vertical") + minimapInput.GetMinimapInput().y * minimapInputSensitivity);
+            if (Input.GetKeyDown("c")) CameraOnPlayerButton();
 
-                if (player.inVillage)
+            if (!player.insideKingHouse)
+            {
+                if (Input.GetAxis("Horizontal") != 0 || Input.GetAxis("Vertical") != 0 || minimapInput.GetMinimapInput().x != 0 || minimapInput.GetMinimapInput().y != 0)
                 {
-                    rb.AddForce(moveDirection * 320000f * Time.deltaTime, ForceMode.Force);
-                }
-                else
-                {
-                    rb.AddForce(moveDirection * 320000f * Time.deltaTime, ForceMode.Force);
+                    CameraOnPlayerOff();
+                    // Invert minimap controls when player is in village
+                    if (player.inVillage) moveDirection = new Vector3(-Input.GetAxis("Horizontal") + minimapInput.GetMinimapInput().x * -minimapInputSensitivity, 0f, -Input.GetAxis("Vertical") + minimapInput.GetMinimapInput().y * -minimapInputSensitivity);
+                    else moveDirection = new Vector3(Input.GetAxis("Horizontal") + minimapInput.GetMinimapInput().x * minimapInputSensitivity, 0f, Input.GetAxis("Vertical") + minimapInput.GetMinimapInput().y * minimapInputSensitivity);
+
+                    if (player.inVillage)
+                    {
+                        rb.AddForce(moveDirection * 320000f * Time.deltaTime, ForceMode.Force);
+                    }
+                    else
+                    {
+                        rb.AddForce(moveDirection * 320000f * Time.deltaTime, ForceMode.Force);
+                    }
                 }
             }
-        }
 
-        // Use scroll wheel to zoom in or out
-        float scrollWheel = Input.GetAxis("Mouse ScrollWheel");
-        distanceFromObject = Mathf.Clamp(distanceFromObject - scrollWheel * sensitivity, minCameraZoom, maxCameraZoom);
-        minimapCamera.orthographicSize = distanceFromObject / 2 + 20f;
+            // Use scroll wheel to zoom in or out
+            float scrollWheel = Input.GetAxis("Mouse ScrollWheel");
+            distanceFromObject = Mathf.Clamp(distanceFromObject - scrollWheel * sensitivity, minCameraZoom, maxCameraZoom);
+            minimapCamera.orthographicSize = distanceFromObject / 2 + 20f;
+        }
 
         if (player == null) return;
 
@@ -194,4 +199,6 @@ public class MouseLook : MonoBehaviour
             if (!minimapIndicators.activeSelf && !minimapInput.buttonPressed) minimapIndicators.SetActive(true);
         }
     }
+
+    public void SetInCutScene(bool value) { inCutScene = value; }
 }
