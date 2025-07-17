@@ -33,6 +33,14 @@ public class IntroSceneController : MonoBehaviour
         sartomIntroObject.SetActive(false);
     }
 
+    public void TryToMoveToNextEvent()
+    {
+        if (introEnemies[0].healthBar.value <= 0 && introEnemies[1].healthBar.value <= 0) // 1st wave is cleared
+        {
+            introHUD_Controller.presentationStartObjects[1].SetActive(true);
+        }
+    }
+
     public void SendFirstEnemies()
     {
         StartCoroutine(FirstEnemyWave());

@@ -5205,6 +5205,7 @@ GameObject:
   - component: {fileID: 6343346848353158166}
   - component: {fileID: 7812979347286968457}
   - component: {fileID: 8149474888653598790}
+  - component: {fileID: 7695243170046053970}
   - component: {fileID: 3064382434425509416}
   - component: {fileID: 3105274350733072314}
   - component: {fileID: 9139819231286459539}
@@ -5316,6 +5317,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   creature: {fileID: 6343346848353158166}
+--- !u!114 &7695243170046053970
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7187010017827347340}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 270aa8b673aa0ad4997e18addc4fd599, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!143 &3064382434425509416
 CharacterController:
   m_ObjectHideFlags: 0

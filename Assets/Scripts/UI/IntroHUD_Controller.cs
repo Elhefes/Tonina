@@ -3,7 +3,7 @@ using UnityEngine;
 public class IntroHUD_Controller : MonoBehaviour
 {
     public GameObject battleUI;
-    public GameObject presentations;
+    public GameObject[] presentationStartObjects;
     public OptionsMenu optionsMenu;
 
     private void Start()
@@ -14,7 +14,7 @@ public class IntroHUD_Controller : MonoBehaviour
     public void EnableBattleModeHUD(bool value)
     {
         battleUI.SetActive(value);
-        presentations.SetActive(true);
+        presentationStartObjects[0].SetActive(true);
     }
 
     public void ReturnToMainMenu()
