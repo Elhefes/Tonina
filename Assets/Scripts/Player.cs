@@ -97,7 +97,7 @@ public class Player : Creature
     {
         onCooldown = false;
         weaponOrder = PlayerPrefs.GetString("CustomWeaponOrder", "01234");
-        selectedWeaponOrder = PlayerPrefs.GetString("SelectedWeaponOrder", "0");
+        selectedWeaponOrder = PlayerPrefs.GetString("SelectedWeaponOrder", "04");
         EquipOnlySelectedWeapons();
         EquipDefaultWeapon();
         healthBar.gameObject.SetActive(true);

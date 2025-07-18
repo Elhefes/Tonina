@@ -40,7 +40,7 @@ public class WeaponWheel : MonoBehaviour
 
     private void OnEnable()
     {
-        selectedWeaponOrder = PlayerPrefs.GetString("SelectedWeaponOrder", "0");
+        selectedWeaponOrder = PlayerPrefs.GetString("SelectedWeaponOrder", "04");
         ResetToDefaultWeapon();
 
         // Auto switch is to next weapon by default
