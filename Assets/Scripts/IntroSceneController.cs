@@ -96,6 +96,7 @@ public class IntroSceneController : MonoBehaviour
             if (playerPivot.weaponRangeIndicatorLight.intensity > 1f) // If weapon is switched (fast clicker pros are allowed to skip lol)
             {
                 introHUD_Controller.presentationStartObjects[2].SetActive(false);
+                introEnemies[2].gameObject.SetActive(true);
             }
         }
     }
