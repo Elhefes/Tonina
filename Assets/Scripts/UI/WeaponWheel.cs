@@ -90,6 +90,9 @@ public class WeaponWheel : MonoBehaviour
         if (player.onCooldown) return;
         if (weaponWheelCooldown) return;
         if (selectedWeaponOrder.Length < 2) return;
+
+        int initialWeaponIndexValue = weaponIndex;
+
         weaponIndex++;
         if (weaponIndex > selectedWeaponOrder.Length - 1)
         {
@@ -105,6 +108,8 @@ public class WeaponWheel : MonoBehaviour
                 weaponIndex = 0;
             }
         }
+
+        if (weaponIndex == initialWeaponIndexValue) return; // Prevents switching when projectiles have ran out
 
         currentIndex++;
         if (currentIndex > slices - 1)
@@ -128,6 +133,9 @@ public class WeaponWheel : MonoBehaviour
         if (player.onCooldown) return;
         if (weaponWheelCooldown) return;
         if (selectedWeaponOrder.Length < 2) return;
+
+        int initialWeaponIndexValue = weaponIndex;
+
         weaponIndex--;
         if (weaponIndex < 0)
         {
@@ -143,6 +151,8 @@ public class WeaponWheel : MonoBehaviour
                 weaponIndex = selectedWeaponOrder.Length - 1;
             }
         }
+
+        if (weaponIndex == initialWeaponIndexValue) return; // Prevents switching when projectiles have ran out
 
         currentIndex--;
         if (currentIndex < 0)
