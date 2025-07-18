@@ -34,13 +34,25 @@ public class IntroSceneController : MonoBehaviour
         sartomIntroObject.SetActive(false);
     }
 
-    public void TryToMoveToNextEvent()
+    public void TryToMoveToNextEvent(int eventIndex)
     {
-        if (introEnemies[0].healthBar.value <= 0 && introEnemies[1].healthBar.value <= 0) // 1st wave is cleared
+        if (eventIndex == 0)
         {
-            introHUD_Controller.optionsMenu.gameObject.SetActive(false);
-            introHUD_Controller.presenting = true;
-            introHUD_Controller.presentationStartObjects[1].SetActive(true);
+            if (introEnemies[0].healthBar.value <= 0 && introEnemies[1].healthBar.value <= 0) // 1st wave is cleared
+            {
+                introHUD_Controller.optionsMenu.gameObject.SetActive(false);
+                introHUD_Controller.presenting = true;
+                introHUD_Controller.presentationStartObjects[1].SetActive(true);
+            }
+        }
+        else if (eventIndex == 1)
+        {
+            if (usableWeaponsAmount() > 1) // Start weapon switching presentation
+            {
+                introHUD_Controller.optionsMenu.gameObject.SetActive(false);
+                introHUD_Controller.presenting = true;
+                introHUD_Controller.presentationStartObjects[2].SetActive(true);
+            }
         }
     }
 
@@ -79,5 +91,15 @@ public class IntroSceneController : MonoBehaviour
                 acceleration += 0.0008f;
             }
         }
+    }
+
+    private int usableWeaponsAmount()
+    {
+        int i = 0;
+        foreach (Weapon wep in playerPivot.weapons)
+        {
+            if (!wep.notAvailable && wep.selected) i++;
+        }
+        return i;
     }
 }
