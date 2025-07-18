@@ -57,12 +57,12 @@ public class IntroSceneController : MonoBehaviour
             }
             else
             {
-                StartSpearPickUpPresentation();
+                if (!playerPivot.spear.selected) StartSpearPickUpPresentation();
             }
         }
         else if (eventIndex == 2)
         {
-            StartSpearPickUpPresentation();
+            if (!playerPivot.spear.selected) StartSpearPickUpPresentation();
         }
     }
 
@@ -84,6 +84,8 @@ public class IntroSceneController : MonoBehaviour
     {
         introHUD_Controller.presentationStartObjects[3].SetActive(true);
         spearPickUpPointerObject.SetActive(true);
+        playerPivot.spear.selected = true;
+        playerPivot.spear.quantity = 0;
     }
 
     private void FixedUpdate()
