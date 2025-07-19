@@ -55,7 +55,6 @@ public class IntroSceneController : MonoBehaviour
             if (usableWeaponsAmount() > 1) // Start weapon switching presentation
             {
                 introHUD_Controller.optionsMenu.gameObject.SetActive(false);
-                introHUD_Controller.presenting = true;
                 introHUD_Controller.presentationStartObjects[2].SetActive(true);
             }
             else if (!playerPivot.spear.selected) StartSpearPickUpPresentation();
