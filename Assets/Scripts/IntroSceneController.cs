@@ -92,7 +92,7 @@ public class IntroSceneController : MonoBehaviour
 
     void StartSpearPickUpPresentation()
     {
-        introHUD_Controller.presentationStartObjects[3].SetActive(true);
+        if (introHUD_Controller.presentationStartObjects[3] != null) introHUD_Controller.presentationStartObjects[3].SetActive(true);
         spearPickUpPointerObject.SetActive(true);
         playerPivot.spear.notAvailable = true;
         playerPivot.spear.quantity = 0;

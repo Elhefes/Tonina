@@ -90,6 +90,7 @@ public class Player : Creature
     private void Start()
     {
         health = startingHealth;
+        playerHealthIndicator.UpdateHealthIndicator(health, startingHealth);
         SetProjectilesToMax();
     }
 
@@ -471,7 +472,7 @@ public class Player : Creature
             gameObject.SetActive(false);
         }
         if (health + damage >= startingHealth) overHealBar.UpdateOverHealBar(health, startingHealth);
-        playerHealthIndicator.UpdateHealthIndicator(health);
+        playerHealthIndicator.UpdateHealthIndicator(health, startingHealth);
         print(health);
     }
 
@@ -488,7 +489,7 @@ public class Player : Creature
             overHealBar.UpdateOverHealBar(health, startingHealth);
             if (!overHealDecay) StartCoroutine(OverHealDecay());
         }
-        playerHealthIndicator.UpdateHealthIndicator(health);
+        playerHealthIndicator.UpdateHealthIndicator(health, startingHealth);
         print(health);
     }
 

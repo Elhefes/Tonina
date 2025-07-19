@@ -589,8 +589,9 @@ MonoBehaviour:
   attackExtraCooldownTime: 0
   shouldAttack: 0
   health: 0
-  maxHealth: 150
-  startingHealth: 100
+  maxHealth: 200
+  startingHealth: 150
+  godMode: 0
   weapons:
   - {fileID: 1816558850182266449}
   - {fileID: 7486617068787240087}
@@ -660,7 +661,7 @@ MonoBehaviour:
   dragMaizeIcon: {fileID: 0}
   startingMaize: 0
   maxMaize: 4
-  maizeHealAmount: 25
+  maizeHealAmount: 50
   maizeInventory: {fileID: 0}
   maizeInventoryIcon: {fileID: 0}
   maizePickUp: {fileID: 0}
