@@ -194,4 +194,10 @@ public class WeaponWheel : MonoBehaviour
         // Reset rotation of weapon wheel's circle
         weaponWheelAnimator.gameObject.transform.eulerAngles = new Vector3(0f, 0f, 0f);
     }
+
+    public void AddWeaponToSelectedWeapons(int weaponIndex)
+    {
+        player.weapons[weaponIndex].selected = true;
+        selectedWeaponOrder += weaponIndex.ToString();
+    }
 }

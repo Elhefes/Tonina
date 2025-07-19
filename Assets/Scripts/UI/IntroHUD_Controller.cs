@@ -4,6 +4,8 @@ public class IntroHUD_Controller : MonoBehaviour
 {
     public GameObject battleUI;
     public GameObject[] presentationStartObjects;
+    public GameObject pickUpSpearTextBox;
+    public GameObject equipSpearTextBox;
     public OptionsMenu optionsMenu;
     public bool presenting;
 

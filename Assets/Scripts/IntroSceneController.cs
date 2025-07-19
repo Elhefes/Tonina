@@ -21,6 +21,8 @@ public class IntroSceneController : MonoBehaviour
 
     public IntroHUD_Controller introHUD_Controller;
 
+    public WeaponWheel weaponWheel;
+
     private void OnEnable()
     {
         Application.targetFrameRate = Screen.currentResolution.refreshRate;
@@ -55,14 +57,16 @@ public class IntroSceneController : MonoBehaviour
                 introHUD_Controller.presenting = true;
                 introHUD_Controller.presentationStartObjects[2].SetActive(true);
             }
-            else
-            {
-                if (!playerPivot.spear.selected) StartSpearPickUpPresentation();
-            }
+            else if (!playerPivot.spear.selected) StartSpearPickUpPresentation();
+            else SendLastEnemies();
         }
         else if (eventIndex == 2)
         {
             if (!playerPivot.spear.selected) StartSpearPickUpPresentation();
+        }
+        else
+        {
+
         }
     }
 
@@ -70,6 +74,12 @@ public class IntroSceneController : MonoBehaviour
     {
         introHUD_Controller.presenting = false;
         StartCoroutine(FirstEnemyWave());
+    }
+
+    void SendLastEnemies()
+    {
+        introEnemies[3].gameObject.SetActive(true);
+        introEnemies[4].gameObject.SetActive(true);
     }
 
     IEnumerator FirstEnemyWave()
@@ -84,8 +94,9 @@ public class IntroSceneController : MonoBehaviour
     {
         introHUD_Controller.presentationStartObjects[3].SetActive(true);
         spearPickUpPointerObject.SetActive(true);
-        playerPivot.spear.selected = true;
+        playerPivot.spear.notAvailable = true;
         playerPivot.spear.quantity = 0;
+        weaponWheel.AddWeaponToSelectedWeapons(1); // 1 = Spear's weapon ID
     }
 
     private void FixedUpdate()
@@ -114,7 +125,22 @@ public class IntroSceneController : MonoBehaviour
             if (playerPivot.weaponRangeIndicatorLight.intensity > 1f) // If weapon is switched (fast clicker pros are allowed to skip lol)
             {
                 introHUD_Controller.presentationStartObjects[2].SetActive(false);
+                introHUD_Controller.presenting = false;
                 introEnemies[2].gameObject.SetActive(true);
+            }
+        }
+        else if (introHUD_Controller.presentationStartObjects[3].activeSelf) // Spear pick-up presentation
+        {
+            if (playerPivot.spear.quantity > 0)
+            {
+                introHUD_Controller.pickUpSpearTextBox.SetActive(false);
+                introHUD_Controller.equipSpearTextBox.SetActive(true);
+
+                if (introHUD_Controller.equipSpearTextBox.activeSelf && playerPivot.weaponOnHand.name == "Spear")
+                {
+                    introHUD_Controller.presentationStartObjects[3].SetActive(false);
+                    SendLastEnemies();
+                }
             }
         }
     }
