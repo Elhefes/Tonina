@@ -13,6 +13,7 @@ public class IntroSceneController : MonoBehaviour
     public Camera introCamera;
     private Animator introCameraAnimator;
     private bool onPlayerCamera;
+    private bool switchPresented;
     private float acceleration;
 
     public Enemy[] introEnemies;
@@ -66,7 +67,7 @@ public class IntroSceneController : MonoBehaviour
         }
         else
         {
-
+            spearPickUpPointerObject.SetActive(false);
         }
     }
 
@@ -125,6 +126,7 @@ public class IntroSceneController : MonoBehaviour
             if (playerPivot.weaponRangeIndicatorLight.intensity > 1f) // If weapon is switched (fast clicker pros are allowed to skip lol)
             {
                 introHUD_Controller.presentationStartObjects[2].SetActive(false);
+                switchPresented = true;
                 introHUD_Controller.presenting = false;
                 introEnemies[2].gameObject.SetActive(true);
             }
@@ -134,15 +136,22 @@ public class IntroSceneController : MonoBehaviour
             if (playerPivot.spear.quantity > 0)
             {
                 introHUD_Controller.pickUpSpearTextBox.SetActive(false);
-                introHUD_Controller.equipSpearTextBox.SetActive(true);
+                EnableEquipSpearTextBox();
 
-                if (introHUD_Controller.equipSpearTextBox.activeSelf && playerPivot.weaponOnHand.name == "Spear")
+                if ((introHUD_Controller.equipSpearTextBoxSwitchedVersion.activeSelf ||
+                    introHUD_Controller.equipSpearTextBoxNotSwitchedVersion.activeSelf) && playerPivot.weaponOnHand.name == "Spear")
                 {
                     introHUD_Controller.presentationStartObjects[3].SetActive(false);
                     SendLastEnemies();
                 }
             }
         }
+    }
+
+     private void EnableEquipSpearTextBox()
+    {
+        if (switchPresented) introHUD_Controller.equipSpearTextBoxSwitchedVersion.SetActive(true);
+        else introHUD_Controller.equipSpearTextBoxNotSwitchedVersion.SetActive(true);
     }
 
     private int usableWeaponsAmount()
