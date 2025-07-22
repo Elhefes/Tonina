@@ -19,4 +19,9 @@ public class IntroMovingCamera : MonoBehaviour
     {
         introSceneController.StartFinalFade();
     }
+
+    public void EndTexts()
+    {
+        introSceneController.StartEndTexts();
+    }
 }

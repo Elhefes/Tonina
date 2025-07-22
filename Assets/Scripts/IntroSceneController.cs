@@ -136,6 +136,8 @@ public class IntroSceneController : MonoBehaviour
         introBlackFader.animator.SetTrigger("Fade2");
     }
 
+    public void StartEndTexts() { introHUD_Controller.endTexts.SetActive(true); }
+
     private void FixedUpdate()
     {
         if (!onPlayerCamera)
