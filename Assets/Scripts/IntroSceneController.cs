@@ -20,7 +20,7 @@ public class IntroSceneController : MonoBehaviour
 
     public GameObject spearPickUpPointerObject;
 
-    public GameObject blackFader;
+    public IntroBlackFader introBlackFader;
 
     public IntroHUD_Controller introHUD_Controller;
 
@@ -118,7 +118,9 @@ public class IntroSceneController : MonoBehaviour
         introHUD_Controller.battleUI.SetActive(false);
         introHUD_Controller.optionsMenu.gameObject.SetActive(false);
         introHUD_Controller.presenting = true;
-        blackFader.SetActive(true);
+
+        introBlackFader.gameObject.SetActive(true);
+        introBlackFader.animator.SetTrigger("Fade1");
     }
 
     public void StartLastScene()
@@ -126,6 +128,12 @@ public class IntroSceneController : MonoBehaviour
         introCameraAnimator.enabled = true;
         introCameraAnimator.SetTrigger("LastScene");
         introCamera.enabled = true;
+    }
+
+    public void StartFinalFade()
+    {
+        introBlackFader.gameObject.SetActive(true);
+        introBlackFader.animator.SetTrigger("Fade2");
     }
 
     private void FixedUpdate()

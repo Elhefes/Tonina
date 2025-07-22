@@ -14,4 +14,9 @@ public class IntroMovingCamera : MonoBehaviour
     {
         introSceneController.EnableOnlyBattleModeObjects();
     }
+
+    public void FinalFade()
+    {
+        introSceneController.StartFinalFade();
+    }
 }
