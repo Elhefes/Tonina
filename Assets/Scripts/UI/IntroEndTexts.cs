@@ -11,10 +11,10 @@ public class IntroEndTexts : MonoBehaviour
 
     private void OnEnable()
     {
-        StartCoroutine(TypeTexts());
+        StartCoroutine(TypeEndTexts());
     }
 
-    private IEnumerator TypeTexts()
+    private IEnumerator TypeEndTexts()
     {
         fullText = welcomeTMP.text;
         welcomeTMP.text = "";
@@ -38,5 +38,9 @@ public class IntroEndTexts : MonoBehaviour
             yield return new WaitForSeconds(0.18f);
             revolutionTMP.text = currentText;
         }
+
+        yield return new WaitForSeconds(3f);
+
+        SceneChangingManager.Instance.LoadScene("Tonina");
     }
 }
