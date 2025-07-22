@@ -7,6 +7,7 @@ public class IntroHUD_Controller : MonoBehaviour
     public GameObject pickUpSpearTextBox;
     public GameObject equipSpearTextBoxSwitchedVersion;
     public GameObject equipSpearTextBoxNotSwitchedVersion;
+    public GameObject popUpTexts;
     public GameObject endTexts;
     public OptionsMenu optionsMenu;
     public bool presenting;
