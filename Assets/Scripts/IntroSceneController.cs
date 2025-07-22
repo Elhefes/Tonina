@@ -20,6 +20,8 @@ public class IntroSceneController : MonoBehaviour
 
     public GameObject spearPickUpPointerObject;
 
+    public GameObject blackFader;
+
     public IntroHUD_Controller introHUD_Controller;
 
     public WeaponWheel weaponWheel;
@@ -63,10 +65,14 @@ public class IntroSceneController : MonoBehaviour
         else if (eventIndex == 2)
         {
             if (!playerPivot.spear.selected) StartSpearPickUpPresentation();
+            else FinishGameplaySection();
         }
         else
         {
-            spearPickUpPointerObject.SetActive(false);
+            if (introEnemies[3].healthBar.value <= 0 && introEnemies[4].healthBar.value <= 0) // Last wave is cleared
+            {
+                FinishGameplaySection();
+            }
         }
     }
 
@@ -97,6 +103,29 @@ public class IntroSceneController : MonoBehaviour
         playerPivot.spear.notAvailable = true;
         playerPivot.spear.quantity = 0;
         weaponWheel.AddWeaponToSelectedWeapons(1); // 1 = Spear's weapon ID
+    }
+
+    void FinishGameplaySection()
+    {
+        spearPickUpPointerObject.SetActive(false);
+
+        // Don't stay in an aiming animation
+        if (playerPivot.weaponOnHand.name == "Spear" || playerPivot.weaponOnHand.name == "Small Stone")
+        {
+            playerPivot.creatureMovement.animator.SetInteger("WeaponIndex", 0);
+        }
+
+        introHUD_Controller.battleUI.SetActive(false);
+        introHUD_Controller.optionsMenu.gameObject.SetActive(false);
+        introHUD_Controller.presenting = true;
+        blackFader.SetActive(true);
+    }
+
+    public void StartLastScene()
+    {
+        introCameraAnimator.enabled = true;
+        introCameraAnimator.SetTrigger("LastScene");
+        introCamera.enabled = true;
     }
 
     private void FixedUpdate()
