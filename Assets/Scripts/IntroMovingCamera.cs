@@ -13,6 +13,7 @@ public class IntroMovingCamera : MonoBehaviour
     public void EnablePlayerPivot() { introSceneController.EnableOnlyBattleModeObjects(); }
 
     public void IntroPopUpTexts() { introSceneController.introHUD_Controller.popUpTexts.SetActive(true); }
+    public void EnableBattlefieldWarriors() { introSceneController.EnableBattlefieldWarriors(true); }
     public void FinalFade() { introSceneController.StartFinalFade(); }
     public void EndTexts() { introSceneController.StartEndTexts(); }
 }

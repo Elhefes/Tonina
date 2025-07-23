@@ -18,6 +18,8 @@ public class IntroSceneController : MonoBehaviour
 
     public Enemy[] introEnemies;
 
+    public GameObject warriorsInBattlefield;
+
     public GameObject spearPickUpPointerObject;
 
     public IntroBlackFader introBlackFader;
@@ -129,6 +131,8 @@ public class IntroSceneController : MonoBehaviour
         introCameraAnimator.SetTrigger("LastScene");
         introCamera.enabled = true;
     }
+
+    public void EnableBattlefieldWarriors(bool value) { warriorsInBattlefield.SetActive(value); }
 
     public void StartFinalFade()
     {
