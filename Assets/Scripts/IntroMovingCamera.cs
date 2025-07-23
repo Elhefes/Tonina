@@ -3,7 +3,15 @@ using UnityEngine;
 public class IntroMovingCamera : MonoBehaviour
 {
     public Animator introCameraAnimator;
+    public LayerMask normalLayerMask;
+    public LayerMask terrainLayerMask;
     public IntroSceneController introSceneController;
+    private Camera camera;
+
+    private void Start()
+    {
+        camera = gameObject.GetComponent<Camera>();
+    }
 
     public void SetBoolTrue(string boolName)
     {
@@ -23,4 +31,7 @@ public class IntroMovingCamera : MonoBehaviour
 
     public void FinalFade() { introSceneController.StartFinalFade(); }
     public void EndTexts() { introSceneController.StartEndTexts(); }
+
+    public void SwitchToTerrainLayerMask() { camera.cullingMask = terrainLayerMask; }
+    public void SwitchToNormalLayerMask() { camera.cullingMask = normalLayerMask; }
 }
