@@ -14,6 +14,13 @@ public class IntroMovingCamera : MonoBehaviour
 
     public void IntroPopUpTexts() { introSceneController.introHUD_Controller.popUpTexts.SetActive(true); }
     public void EnableBattlefieldWarriors() { introSceneController.EnableBattlefieldWarriors(true); }
+
+    // Placeable buildings are "built" on the battlefield
+    public void BuildFillOkill() { introSceneController.BuildBuildingsOnBattlefield(0); }
+    public void BuildKancho() { introSceneController.BuildBuildingsOnBattlefield(1); }
+    public void BuildFences() { introSceneController.BuildBuildingsOnBattlefield(2); }
+    public void BuildTower() { introSceneController.BuildBuildingsOnBattlefield(3); }
+
     public void FinalFade() { introSceneController.StartFinalFade(); }
     public void EndTexts() { introSceneController.StartEndTexts(); }
 }

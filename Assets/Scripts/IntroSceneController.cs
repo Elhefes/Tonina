@@ -19,6 +19,8 @@ public class IntroSceneController : MonoBehaviour
     public Enemy[] introEnemies;
 
     public GameObject warriorsInBattlefield;
+    public GameObject[] greenBuildings;
+    public GameObject[] placedBuildings;
 
     public GameObject spearPickUpPointerObject;
 
@@ -27,6 +29,9 @@ public class IntroSceneController : MonoBehaviour
     public IntroHUD_Controller introHUD_Controller;
 
     public WeaponWheel weaponWheel;
+
+    public AudioListener playerCamListener;
+    public AudioListener introCamListener;
 
     private void OnEnable()
     {
@@ -130,9 +135,17 @@ public class IntroSceneController : MonoBehaviour
         introCameraAnimator.enabled = true;
         introCameraAnimator.SetTrigger("LastScene");
         introCamera.enabled = true;
+        playerCamListener.enabled = false;
+        introCamListener.enabled = true;
     }
 
     public void EnableBattlefieldWarriors(bool value) { warriorsInBattlefield.SetActive(value); }
+
+    public void BuildBuildingsOnBattlefield(int orderNumber)
+    {
+        greenBuildings[orderNumber].SetActive(false);
+        placedBuildings[orderNumber].SetActive(true);
+    }
 
     public void StartFinalFade()
     {
