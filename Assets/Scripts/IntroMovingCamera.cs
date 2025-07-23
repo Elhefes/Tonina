@@ -8,6 +8,8 @@ public class IntroMovingCamera : MonoBehaviour
     public IntroSceneController introSceneController;
     private Camera camera;
 
+    public GameObject villageScreenShot;
+
     private void Start()
     {
         camera = gameObject.GetComponent<Camera>();
@@ -20,6 +22,7 @@ public class IntroMovingCamera : MonoBehaviour
 
     public void EnablePlayerPivot() { introSceneController.EnableOnlyBattleModeObjects(); }
 
+    public void EnableVillageScreenShot() { villageScreenShot.SetActive(true); }
     public void IntroPopUpTexts() { introSceneController.introHUD_Controller.popUpTexts.SetActive(true); }
     public void EnableBattlefieldWarriors() { introSceneController.EnableBattlefieldWarriors(true); }
 
