@@ -33,6 +33,12 @@ public class IntroSceneController : MonoBehaviour
     public AudioListener playerCamListener;
     public AudioListener introCamListener;
 
+    public AudioSource musicAudioSource;
+    public AudioClip finalSceneMusic;
+    private bool fadingMusicDown;
+    private float musicVolumeAtStart;
+    private float musicFadeIncrement;
+
     private void OnEnable()
     {
         Application.targetFrameRate = Screen.currentResolution.refreshRate;
@@ -128,6 +134,8 @@ public class IntroSceneController : MonoBehaviour
 
         introBlackFader.gameObject.SetActive(true);
         introBlackFader.animator.SetTrigger("Fade1");
+
+        StartFadingMusicDown(350f);
     }
 
     public void StartLastScene()
@@ -137,6 +145,10 @@ public class IntroSceneController : MonoBehaviour
         introCamera.enabled = true;
         playerCamListener.enabled = false;
         introCamListener.enabled = true;
+        fadingMusicDown = false;
+        musicAudioSource.clip = finalSceneMusic;
+        musicAudioSource.volume = musicVolumeAtStart;
+        musicAudioSource.Play();
     }
 
     public void EnableBattlefieldWarriors(bool value) { warriorsInBattlefield.SetActive(value); }
@@ -155,8 +167,17 @@ public class IntroSceneController : MonoBehaviour
 
     public void StartEndTexts() { introHUD_Controller.endTexts.SetActive(true); }
 
+    public void StartFadingMusicDown(float denominator)
+    {
+        musicVolumeAtStart = musicAudioSource.volume;
+        musicFadeIncrement = musicVolumeAtStart / denominator;
+        fadingMusicDown = true;
+    }
+
     private void FixedUpdate()
     {
+        if (fadingMusicDown) { musicAudioSource.volume -= musicFadeIncrement; }
+
         if (!onPlayerCamera)
         {
             if (introCameraAnimator.GetBool("FirstSceneFinished"))

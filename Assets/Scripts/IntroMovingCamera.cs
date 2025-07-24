@@ -6,13 +6,13 @@ public class IntroMovingCamera : MonoBehaviour
     public LayerMask normalLayerMask;
     public LayerMask terrainLayerMask;
     public IntroSceneController introSceneController;
-    private Camera camera;
+    private Camera cam;
 
     public GameObject villageScreenShot;
 
     private void Start()
     {
-        camera = gameObject.GetComponent<Camera>();
+        cam = gameObject.GetComponent<Camera>();
     }
 
     public void SetBoolTrue(string boolName)
@@ -34,7 +34,8 @@ public class IntroMovingCamera : MonoBehaviour
 
     public void FinalFade() { introSceneController.StartFinalFade(); }
     public void EndTexts() { introSceneController.StartEndTexts(); }
+    public void FinalMusicFade() { introSceneController.StartFadingMusicDown(250f); }
 
-    public void SwitchToTerrainLayerMask() { camera.cullingMask = terrainLayerMask; }
-    public void SwitchToNormalLayerMask() { camera.cullingMask = normalLayerMask; }
+    public void SwitchToTerrainLayerMask() { cam.cullingMask = terrainLayerMask; }
+    public void SwitchToNormalLayerMask() { cam.cullingMask = normalLayerMask; }
 }
