@@ -37,11 +37,6 @@ public class MainMenu : MonoBehaviour
         StartCoroutine(SecondCounter());
     }
 
-    public void SetIntroAsPlayed()
-    {
-        PlayerPrefs.SetInt("introPlayed", 1); // Set this later to be called when intro is finished, not when it's started
-    }
-
     public void ContinueHere()
     {
         if (PlayerPrefs.GetInt("introPlayed", 0) == 0)

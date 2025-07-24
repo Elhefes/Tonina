@@ -165,7 +165,11 @@ public class IntroSceneController : MonoBehaviour
         introBlackFader.animator.SetTrigger("Fade2");
     }
 
-    public void StartEndTexts() { introHUD_Controller.endTexts.SetActive(true); }
+    public void StartEndTexts()
+    {
+        introHUD_Controller.endTexts.SetActive(true);
+        PlayerPrefs.SetInt("introPlayed", 1);
+    }
 
     public void StartFadingMusicDown(float denominator)
     {
