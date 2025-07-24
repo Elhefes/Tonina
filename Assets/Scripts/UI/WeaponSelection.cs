@@ -32,7 +32,7 @@ public class WeaponSelection : MonoBehaviour
         meleeTextAnimator.SetTrigger("Reset");
         maxWeaponAmount = 3;
         customWeaponOrder = PlayerPrefs.GetString("CustomWeaponOrder", "01234");
-        selectedWeaponOrder = PlayerPrefs.GetString("SelectedWeaponOrder", "0");
+        selectedWeaponOrder = PlayerPrefs.GetString("SelectedWeaponOrder", "04");
 
         SelectWeaponsFromString();
         selectedWeaponsAmount = selectedWeaponOrder.Length;
