@@ -10,7 +10,7 @@ public class OptionsMenu : MonoBehaviour
     public GameObject normalMenu;
     public GameObject confirmReturnHomeMenu;
 
-    public GameObject returnHomeButton;
+    public Button returnHomeButton;
     public GameObject mainMenuButton;
 
     public bool returnFromBuilder;
@@ -37,14 +37,14 @@ public class OptionsMenu : MonoBehaviour
         {
             if (player.insideKingHouse)
             {
-                returnHomeButton.SetActive(false);
+                returnHomeButton.gameObject.SetActive(false);
                 mainMenuButton.SetActive(true);
                 return;
             }
         }
 
         if (mainMenuButton != null) mainMenuButton.SetActive(false);
-        if (returnHomeButton != null) returnHomeButton.SetActive(true);
+        if (returnHomeButton != null) returnHomeButton.gameObject.SetActive(true);
 
         if (battleReturnConfirmText != null && builderReturnConfirmText != null)
         {

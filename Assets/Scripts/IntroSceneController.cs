@@ -44,6 +44,8 @@ public class IntroSceneController : MonoBehaviour
         Application.targetFrameRate = Screen.currentResolution.refreshRate;
         introCameraAnimator = introCamera.GetComponent<Animator>();
         if (introCameraAnimator != null) introCameraAnimator.SetBool("FirstSceneFinished", false);
+
+        if (PlayerPrefs.GetInt("introPlayed", 0) == 1) introHUD_Controller.optionsMenu.returnHomeButton.interactable = true;
     }
 
     public void EnableOnlyBattleModeObjects()
