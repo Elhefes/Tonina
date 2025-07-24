@@ -29,6 +29,8 @@ public class WeaponWheel : MonoBehaviour
     private bool nextWeaponAutoSwitch = true;
     private bool previousWeaponAutoSwitch;
 
+    private bool fillingArrows;
+
     public AudioSource soundEffectPlayer;
 
     public Player player;
@@ -70,17 +72,24 @@ public class WeaponWheel : MonoBehaviour
         }
         else
         {
-            if (nextWeaponArrowImage.fillAmount < 1f)
+            if (nextWeaponArrowImage.fillAmount >= 1f)
             {
-                // Add normal fill at the rate of cooldown time of the weapon in hand
-                previousWeaponArrowImage.fillAmount += 1f / (weapons[selectedWeaponOrder[weaponIndex] - '0'].attackCooldown / Time.deltaTime);
-                nextWeaponArrowImage.fillAmount += 1f / (weapons[selectedWeaponOrder[weaponIndex] - '0'].attackCooldown / Time.deltaTime);
+                if (!fillingArrows)
+                {
+                    // Arrows become dark when cooldown starts
+                    previousWeaponArrowImage.fillAmount = 0f;
+                    nextWeaponArrowImage.fillAmount = 0f;
+                }
+
+                fillingArrows = false;
             }
             else
             {
-                // Arrows become dark when cooldown starts
-                previousWeaponArrowImage.fillAmount = 0f;
-                nextWeaponArrowImage.fillAmount = 0f;
+                fillingArrows = true;
+
+                // Add normal fill at the rate of cooldown time of the weapon in hand
+                previousWeaponArrowImage.fillAmount += 1f / (weapons[selectedWeaponOrder[weaponIndex] - '0'].attackCooldown / Time.deltaTime);
+                nextWeaponArrowImage.fillAmount += 1f / (weapons[selectedWeaponOrder[weaponIndex] - '0'].attackCooldown / Time.deltaTime);
             }
         }
     }
