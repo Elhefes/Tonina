@@ -6,6 +6,8 @@ public class BattlefieldMenu : MonoBehaviour
     public GameObject modeSelect;
     public GameObject battleSelectedUI;
 
+    public GameObject weaponSelectionMenu;
+
     private int threatLevel;
     public ThreatLevels threatLevels;
     public TMP_Text TTWarriorsText;
@@ -31,6 +33,10 @@ public class BattlefieldMenu : MonoBehaviour
     {
         modeSelect.SetActive(false);
         battleSelectedUI.SetActive(true);
+
+        // This is used to update the custom weapon selection from WeaponSelection's OnEnable function
+        weaponSelectionMenu.SetActive(true);
+        weaponSelectionMenu.SetActive(false);
     }
 
     public void StartBattle()
