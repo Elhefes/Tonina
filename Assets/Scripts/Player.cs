@@ -179,39 +179,42 @@ public class Player : Creature
 
                 if (target.CompareTag("TalkPrompt") && Vector3.Distance(transform.position, target.transform.position) < 2.7f)
                 {
-                    if (target == currentTextSubject)
+                    if (notInBattlefield())
                     {
-                        ReadNextLine();
-                        return;
-                    }
-                    else
-                    {
-                        FreeTextSubject();
-                        villager = target.GetComponent<Villager>();
-                        if (villager != null)
+                        if (target == currentTextSubject)
                         {
-                            SetTextLines(villager.textSubject.textLines);
-                            villager.textSubject.textIsActive = true;
-                            villager.TalkToPlayer(gameObject);
-                            currentTextSubject = villager.gameObject;
-                            villager.textSubject.currentIndex = 0;
-                            villager.ProcessNextLines();
+                            ReadNextLine();
+                            return;
                         }
                         else
                         {
-                            TextSubject textSubject = target.GetComponent<TextSubject>();
-                            SetTextLines(textSubject.textLines);
-                            currentTextSubject = textSubject.gameObject;
-                            textSubject.currentIndex = 0;
+                            FreeTextSubject();
+                            villager = target.GetComponent<Villager>();
+                            if (villager != null)
+                            {
+                                SetTextLines(villager.textSubject.textLines);
+                                villager.textSubject.textIsActive = true;
+                                villager.TalkToPlayer(gameObject);
+                                currentTextSubject = villager.gameObject;
+                                villager.textSubject.currentIndex = 0;
+                                villager.ProcessNextLines();
+                            }
+                            else
+                            {
+                                TextSubject textSubject = target.GetComponent<TextSubject>();
+                                SetTextLines(textSubject.textLines);
+                                currentTextSubject = textSubject.gameObject;
+                                textSubject.currentIndex = 0;
+                            }
                         }
-                    }
 
-                    textLineIndex = 0;
-                    textBox.gameObject.SetActive(true);
-                    UpdateTextBox();
-                    creatureMovement.agent.SetDestination(target.transform.position);
-                    creatureMovement.agent.stoppingDistance = 1.7f;
-                    return;
+                        textLineIndex = 0;
+                        textBox.gameObject.SetActive(true);
+                        UpdateTextBox();
+                        creatureMovement.agent.SetDestination(target.transform.position);
+                        creatureMovement.agent.stoppingDistance = 1.7f;
+                        return;
+                    }
                 }
                 else
                 {
@@ -252,18 +255,21 @@ public class Player : Creature
                 // Click 1st object to enable the 2nd. Click 1st again to disable 2nd.
                 if (target.CompareTag("ClickToEnableObject") && Vector3.Distance(target.transform.position, transform.position) < 4f)
                 {
-                    if (clickToEnableObject != null && clickToEnableObject.objectToEnable.activeSelf)
+                    if (notInBattlefield())
                     {
-                        clickToEnableObject.objectToEnable.SetActive(false);
-                        clickToEnableObject = null;
-                        creatureMovement.agent.SetDestination(gameObject.transform.position);
-                        return;
-                    }
-                    else
-                    {
-                        clickToEnableObject = target.GetComponent<ClickToEnableObject>();
-                        clickToEnableObject.objectToEnable.SetActive(true);
-                        creatureMovement.agent.stoppingDistance = 3f;
+                        if (clickToEnableObject != null && clickToEnableObject.objectToEnable.activeSelf)
+                        {
+                            clickToEnableObject.objectToEnable.SetActive(false);
+                            clickToEnableObject = null;
+                            creatureMovement.agent.SetDestination(gameObject.transform.position);
+                            return;
+                        }
+                        else
+                        {
+                            clickToEnableObject = target.GetComponent<ClickToEnableObject>();
+                            clickToEnableObject.objectToEnable.SetActive(true);
+                            creatureMovement.agent.stoppingDistance = 3f;
+                        }
                     }
                 }
                 else
@@ -309,7 +315,7 @@ public class Player : Creature
                 creatureMovement.agent.SetDestination(hit.point);
                 destination = hit.point;
                 
-                if (!healthBar.gameObject.activeInHierarchy && !optionsMenu.returnFromBuilder)
+                if (notInBattlefield()) // If not in battle or builder mode
                 {
                     float scaleValue = Mathf.Lerp(0.36f, 0.6f, (mouseLook.distanceFromObject - 5f) / (30f - 5f));
                     clickerDestinationObject.transform.localScale = new Vector3(scaleValue, scaleValue, scaleValue);
@@ -354,6 +360,8 @@ public class Player : Creature
             if (fillOkillPickUp.activeSelf) fillOkillButtonFill.fillAmount = 0;
         }
     }
+
+    private bool notInBattlefield() { return !healthBar.gameObject.activeInHierarchy && !optionsMenu.returnFromBuilder; }
 
     void SetTextLines(string[] textLines)
     {
