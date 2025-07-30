@@ -1,32 +1,31 @@
 using UnityEngine;
 using UnityEngine.EventSystems;
 
-public class VillageBuildMenu : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IPointerDownHandler
+public class VillageBuildMenu : MonoBehaviour, IPointerDownHandler
 {
-    public bool buildingSelected;
-    public VillageBuildSelection villageBuildSelection;
     public GameObject defaultTexts;
+    public bool buildingSelected;
+    public VillageBuildSelection[] villageBuildSelections;
 
-    void IPointerEnterHandler.OnPointerEnter(PointerEventData pointerEventData)
+    public void UnselectAll()
     {
-
-    }
-
-    void IPointerExitHandler.OnPointerExit(PointerEventData pointerEventData)
-    {
-
+        if (villageBuildSelections != null)
+        {
+            foreach (VillageBuildSelection selection in villageBuildSelections)
+            {
+                if (selection.selectedVillageBuildingInfo.gameObject.activeSelf)
+                {
+                    selection.highlighted = false;
+                    selection.selectedVillageBuildingInfo.gameObject.SetActive(false);
+                }
+            }
+        }
+        defaultTexts.SetActive(true);
+        buildingSelected = false;
     }
 
     void IPointerDownHandler.OnPointerDown(PointerEventData eventData)
     {
-        if (villageBuildSelection != null)
-        {
-            villageBuildSelection.highlighted = false;
-            villageBuildSelection.selectedVillageBuildingInfo.gameObject.SetActive(false);
-        }
-        
-        defaultTexts.SetActive(true);
-        buildingSelected = false;
-        villageBuildSelection = null;
+        UnselectAll();
     }
 }

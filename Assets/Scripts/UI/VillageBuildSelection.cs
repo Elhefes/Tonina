@@ -8,16 +8,16 @@ public class VillageBuildSelection : MonoBehaviour, IPointerEnterHandler, IPoint
     public GameObject defaultTexts;
     public GameObject optionalSelection;
 
-    public bool isHovered;
     public bool highlighted;
+    private bool isHovered;
 
     void IPointerEnterHandler.OnPointerEnter(PointerEventData pointerEventData)
     {
         if (!villageBuildMenu.buildingSelected)
         {
             highlighted = true;
-            isHovered = true;
         }
+        isHovered = true;
     }
 
     void IPointerExitHandler.OnPointerExit(PointerEventData pointerEventData)
@@ -37,7 +37,12 @@ public class VillageBuildSelection : MonoBehaviour, IPointerEnterHandler, IPoint
             if (highlighted)
             {
                 villageBuildMenu.buildingSelected = true;
-                villageBuildMenu.villageBuildSelection = this;
+            }
+            else
+            {
+                villageBuildMenu.UnselectAll();
+                highlighted = true;
+                villageBuildMenu.buildingSelected = true;
             }
         }
     }
