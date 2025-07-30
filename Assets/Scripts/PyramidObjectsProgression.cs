@@ -91,6 +91,11 @@ public class PyramidObjectsProgression : MonoBehaviour
 
     void UpdateKingHousePosition()
     {
-        if (extraFloorsBuilt > 0) kingHouse.transform.position = kingHousePositionsFrom4thTo14th[extraFloorsBuilt - 1];
+        if (extraFloorsBuilt > 0)
+        {
+            kingHouse.SetActive(false);
+            kingHouse.transform.position = kingHousePositionsFrom4thTo14th[extraFloorsBuilt - 1];
+            kingHouse.SetActive(true);
+        }
     }
 }
