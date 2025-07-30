@@ -5,7 +5,6 @@ public class VillageBuildSelection : MonoBehaviour, IPointerEnterHandler, IPoint
 {
     public SelectedVillageBuildingInfo selectedVillageBuildingInfo;
     public VillageBuildMenu villageBuildMenu;
-    public GameObject defaultTexts;
 
     public bool highlighted;
     private bool isHovered;
@@ -32,7 +31,7 @@ public class VillageBuildSelection : MonoBehaviour, IPointerEnterHandler, IPoint
         if (!villageBuildMenu.buildingSelected)
         {
             highlighted = false;
-            defaultTexts.SetActive(true);
+            villageBuildMenu.defaultTexts.SetActive(true);
         }
         isHovered = false;
     }
@@ -61,7 +60,7 @@ public class VillageBuildSelection : MonoBehaviour, IPointerEnterHandler, IPoint
         if (highlighted)
         {
             selectedVillageBuildingInfo.gameObject.SetActive(true);
-            defaultTexts.SetActive(false);
+            villageBuildMenu.defaultTexts.SetActive(false);
         }
         else
         {
