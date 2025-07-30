@@ -7,7 +7,7 @@ public class MaizeHandler : MonoBehaviour
 
     public DragMaizeIcon dragMaizeIcon;
 
-    private Player player;
+    public Player player;
 
     public int startingMaize;
     public int maxMaize;
@@ -22,9 +22,8 @@ public class MaizeHandler : MonoBehaviour
     public TMP_Text maizeInPlaceTMP;
     private int maizeAmount;
 
-    private void Start()
+    private void OnEnable()
     {
-        player = GetComponent<Player>();
         maizeAmount = startingMaize;
         maizeAmountTMP.text = startingMaize.ToString();
         if (startingMaize > 0) maizeInventory.SetActive(true);

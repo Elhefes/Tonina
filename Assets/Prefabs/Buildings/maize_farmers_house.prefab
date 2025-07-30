@@ -3285,6 +3285,7 @@ Transform:
   - {fileID: 7890555012890822213}
   - {fileID: 1536048492976732344}
   - {fileID: 8428414752123418555}
+  - {fileID: 8108699024224036702}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &7669234274696664986
@@ -6258,6 +6259,100 @@ PrefabInstance:
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 00316d5d374993d4ca133d070148a84e, type: 3}
   m_PrefabInstance: {fileID: 4663016045852960207}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1001 &4745435753917388077
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 8166887350430557502}
+    m_Modifications:
+    - target: {fileID: 3556944717457470067, guid: 8bfd9d78d6dff414fbceadccb912c611, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3556944717457470067, guid: 8bfd9d78d6dff414fbceadccb912c611, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.050000668
+      objectReference: {fileID: 0}
+    - target: {fileID: 3556944717457470067, guid: 8bfd9d78d6dff414fbceadccb912c611, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 3556944717457470067, guid: 8bfd9d78d6dff414fbceadccb912c611, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3556944717457470067, guid: 8bfd9d78d6dff414fbceadccb912c611, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3556944717457470067, guid: 8bfd9d78d6dff414fbceadccb912c611, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3556944717457470067, guid: 8bfd9d78d6dff414fbceadccb912c611, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3556944717457470067, guid: 8bfd9d78d6dff414fbceadccb912c611, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3556944717457470067, guid: 8bfd9d78d6dff414fbceadccb912c611, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3556944717457470067, guid: 8bfd9d78d6dff414fbceadccb912c611, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4185848242794227913, guid: 8bfd9d78d6dff414fbceadccb912c611, type: 3}
+      propertyPath: m_Name
+      value: Yoxte
+      objectReference: {fileID: 0}
+    - target: {fileID: 4435524425506235267, guid: 8bfd9d78d6dff414fbceadccb912c611, type: 3}
+      propertyPath: freeSpaceX
+      value: 5.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 4435524425506235267, guid: 8bfd9d78d6dff414fbceadccb912c611, type: 3}
+      propertyPath: freeSpaceZ
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 5668456217277715989, guid: 8bfd9d78d6dff414fbceadccb912c611, type: 3}
+      propertyPath: textLines.Array.size
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 5668456217277715989, guid: 8bfd9d78d6dff414fbceadccb912c611, type: 3}
+      propertyPath: UI_popUpAfterLastLine
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5668456217277715989, guid: 8bfd9d78d6dff414fbceadccb912c611, type: 3}
+      propertyPath: 'textLines.Array.data[0]'
+      value: All my workers are currently working in the maize fields.
+      objectReference: {fileID: 0}
+    - target: {fileID: 5668456217277715989, guid: 8bfd9d78d6dff414fbceadccb912c611, type: 3}
+      propertyPath: 'textLines.Array.data[1]'
+      value: Would you like to buy some maize?
+      objectReference: {fileID: 0}
+    - target: {fileID: 5668456217277715989, guid: 8bfd9d78d6dff414fbceadccb912c611, type: 3}
+      propertyPath: 'textLines.Array.data[2]'
+      value: Maize could prove useful to have in battles!
+      objectReference: {fileID: 0}
+    - target: {fileID: 5668456217277715989, guid: 8bfd9d78d6dff414fbceadccb912c611, type: 3}
+      propertyPath: popUpElements.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 8bfd9d78d6dff414fbceadccb912c611, type: 3}
+--- !u!4 &8108699024224036702 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 3556944717457470067, guid: 8bfd9d78d6dff414fbceadccb912c611, type: 3}
+  m_PrefabInstance: {fileID: 4745435753917388077}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &4908743417434155862
 PrefabInstance:
