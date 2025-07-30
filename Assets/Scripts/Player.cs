@@ -101,6 +101,9 @@ public class Player : Creature
         selectedWeaponOrder = PlayerPrefs.GetString("SelectedWeaponOrder", "04");
         EquipOnlySelectedWeapons();
         EquipDefaultWeapon();
+        health = startingHealth;
+        playerHealthIndicator.UpdateHealthIndicator(health, startingHealth);
+        overHealDecay = false;
         healthBar.gameObject.SetActive(true);
         SetProjectilesToMax();
         UpdateProjectileQuantityText();
