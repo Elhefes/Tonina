@@ -7,6 +7,7 @@ public class VillageBuildMenu : MonoBehaviour, IPointerDownHandler
     public GameObject buyButtonObject;
     public bool buildingSelected;
     public VillageBuildSelection[] villageBuildSelections;
+    public VillageBuildSelection currentBuildSelection;
 
     public void UnselectAll()
     {
@@ -22,8 +23,18 @@ public class VillageBuildMenu : MonoBehaviour, IPointerDownHandler
             }
         }
         buyButtonObject.SetActive(false);
+        currentBuildSelection = null;
         defaultTexts.SetActive(true);
         buildingSelected = false;
+    }
+
+    public void BuyCurrentSelection()
+    {
+        if (currentBuildSelection != null)
+        {
+            currentBuildSelection.BuyThisSelection();
+            UnselectAll();
+        }
     }
 
     void IPointerDownHandler.OnPointerDown(PointerEventData eventData)

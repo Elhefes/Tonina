@@ -6,10 +6,17 @@ public class VillageBuildSelection : MonoBehaviour, IPointerEnterHandler, IPoint
     public SelectedVillageBuildingInfo selectedVillageBuildingInfo;
     public VillageBuildMenu villageBuildMenu;
     public GameObject defaultTexts;
-    public GameObject optionalSelection;
 
     public bool highlighted;
     private bool isHovered;
+
+    public GameObject[] boughtObjectsToEnable;
+    public GameObject[] boughtObjectsToDisable;
+
+    public bool buildsNextFloor;
+    public PyramidObjectsProgression pyramidObjectsProgression;
+
+    public VillageTeleportMenu villageTPMenu;
 
     void IPointerEnterHandler.OnPointerEnter(PointerEventData pointerEventData)
     {
@@ -44,6 +51,7 @@ public class VillageBuildSelection : MonoBehaviour, IPointerEnterHandler, IPoint
                 highlighted = true;
                 villageBuildMenu.buildingSelected = true;
             }
+            villageBuildMenu.currentBuildSelection = this;
             villageBuildMenu.buyButtonObject.SetActive(true);
         }
     }
@@ -58,6 +66,45 @@ public class VillageBuildSelection : MonoBehaviour, IPointerEnterHandler, IPoint
         else
         {
             selectedVillageBuildingInfo.gameObject.SetActive(false);
+        }
+    }
+
+    public void BuyThisSelection()
+    {
+        if (boughtObjectsToEnable != null)
+        {
+            if (boughtObjectsToEnable.Length > 0)
+            {
+                foreach (GameObject obj in boughtObjectsToEnable)
+                {
+                    obj.SetActive(true);
+                }
+            }
+        }
+
+        if (boughtObjectsToDisable != null)
+        {
+            if (boughtObjectsToDisable.Length > 0)
+            {
+                foreach (GameObject obj in boughtObjectsToDisable)
+                {
+                    obj.SetActive(false);
+                }
+            }
+        }
+
+        if (pyramidObjectsProgression != null)
+        {
+            if (buildsNextFloor) pyramidObjectsProgression.BuildNextPyramidLevel();
+        }
+
+        if (villageTPMenu != null)
+        {
+            if (buildsNextFloor)
+            {
+                villageTPMenu.IncrementExtraFloorsBuilt();
+                villageTPMenu.UpdateMiddleGatePosition();
+            }
         }
     }
 }
