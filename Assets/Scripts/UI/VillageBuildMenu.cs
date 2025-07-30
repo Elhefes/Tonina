@@ -4,6 +4,7 @@ using UnityEngine.EventSystems;
 public class VillageBuildMenu : MonoBehaviour, IPointerDownHandler
 {
     public GameObject defaultTexts;
+    public GameObject buyButtonObject;
     public bool buildingSelected;
     public VillageBuildSelection[] villageBuildSelections;
 
@@ -20,6 +21,7 @@ public class VillageBuildMenu : MonoBehaviour, IPointerDownHandler
                 }
             }
         }
+        buyButtonObject.SetActive(false);
         defaultTexts.SetActive(true);
         buildingSelected = false;
     }

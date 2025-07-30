@@ -44,6 +44,7 @@ public class VillageBuildSelection : MonoBehaviour, IPointerEnterHandler, IPoint
                 highlighted = true;
                 villageBuildMenu.buildingSelected = true;
             }
+            villageBuildMenu.buyButtonObject.SetActive(true);
         }
     }
 
