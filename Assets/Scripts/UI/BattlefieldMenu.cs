@@ -36,8 +36,11 @@ public class BattlefieldMenu : MonoBehaviour
         battleSelectedUI.SetActive(true);
 
         // This is used to update the custom weapon selection from WeaponSelection's OnEnable function
-        weaponSelectionMenu.SetActive(true);
-        weaponSelectionMenu.SetActive(false);
+        if (!weaponSelectionMenu.activeInHierarchy)
+        {
+            weaponSelectionMenu.SetActive(true);
+            weaponSelectionMenu.SetActive(false);
+        }
     }
 
     public void SelectBuild()
