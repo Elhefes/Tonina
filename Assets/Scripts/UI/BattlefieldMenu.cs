@@ -5,6 +5,7 @@ public class BattlefieldMenu : MonoBehaviour
 {
     public GameObject modeSelect;
     public GameObject battleSelectedUI;
+    public GameObject buildSelectedUI;
 
     public GameObject weaponSelectionMenu;
 
@@ -37,6 +38,12 @@ public class BattlefieldMenu : MonoBehaviour
         // This is used to update the custom weapon selection from WeaponSelection's OnEnable function
         weaponSelectionMenu.SetActive(true);
         weaponSelectionMenu.SetActive(false);
+    }
+
+    public void SelectBuild()
+    {
+        modeSelect.SetActive(false);
+        buildSelectedUI.SetActive(true);
     }
 
     public void StartBattle()
@@ -97,6 +104,7 @@ public class BattlefieldMenu : MonoBehaviour
     void OnDisable()
     {
         battleSelectedUI.SetActive(false);
+        buildSelectedUI.SetActive(false);
         modeSelect.SetActive(true);
         gameObject.SetActive(false);
     }
