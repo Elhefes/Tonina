@@ -31,12 +31,14 @@ public class MouseLook : MonoBehaviour
     public void EnableBuildMode()
     {
         player.inBuildMode = true;
+        cameraOnPlayer = false;
         cameraOnPlayerButton.gameObject.SetActive(false);
     }
 
     public void DisableBuildMode()
     {
         player.inBuildMode = false;
+        cameraOnPlayer = true;
         cameraOnPlayerButton.gameObject.SetActive(true);
     }
 
@@ -87,9 +89,12 @@ public class MouseLook : MonoBehaviour
 
         if (!inCutScene)
         {
-            if (Input.GetKeyDown("c")) CameraOnPlayerButton();
+            if (!player.inBuildMode)
+            {
+                if (Input.GetKeyDown("c")) CameraOnPlayerButton();
+            }
 
-            if (!player.insideKingHouse)
+            if (!player.insideKingHouse || player.inBuildMode)
             {
                 if (Input.GetAxis("Horizontal") != 0 || Input.GetAxis("Vertical") != 0 || minimapInput.GetMinimapInput().x != 0 || minimapInput.GetMinimapInput().y != 0)
                 {
@@ -123,7 +128,7 @@ public class MouseLook : MonoBehaviour
         }
         else
         {
-            if (player.insideKingHouse)
+            if (player.insideKingHouse && !player.inBuildMode)
             {
                 ToggleCameraOnPlayer();
                 return;
