@@ -662,7 +662,7 @@ public class Player : Creature
 
     public void ReturnHome(GameObject objectToDisable)
     {
-        if (insideKingHouse) return;
+        if (insideKingHouse && !inBuildMode) return;
         // Confirmation in battle before returning home
         if ((battlefieldMenu.waveController.battleUI.activeSelf || optionsMenu.returnFromBuilder) && !optionsMenu.confirmReturnHomeMenu.activeSelf)
         {
