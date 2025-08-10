@@ -3,11 +3,10 @@ using UnityEngine;
 
 public class Periko : MonoBehaviour
 {
-    private Animator animator;
+    public Animator animator;
 
-    void Start()
+    private void OnEnable()
     {
-        animator = gameObject.GetComponent<Animator>();
         StartCoroutine(randomAnimTimer());
     }
 
