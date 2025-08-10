@@ -161,7 +161,7 @@ public class MouseLook : MonoBehaviour
 
     void CalculatePlayerToFollowAngledDirection()
     {
-        if (player.inBuildMode)
+        if (player.inBuildMode || player.healthBar.gameObject.activeSelf)
         {
             playerToFollowAngledDirection = new Vector3(player.transform.position.x, player.transform.position.y + distanceFromObject, player.transform.position.z - (distanceFromObject / Mathf.Tan(60 * Mathf.PI / 180)) + 0.66f);
             transform.position = Vector3.Lerp(transform.position, playerToFollowAngledDirection, smoothSpeed);
@@ -189,13 +189,7 @@ public class MouseLook : MonoBehaviour
     {
         if (player.inBuildMode)
         {
-            if (transform.rotation.y != 0)
-            {
-                transform.rotation = Quaternion.RotateTowards(transform.rotation, Quaternion.Euler(60f, 0f, 0f), 1.5f);
-                mainCameraObject.transform.rotation = Quaternion.RotateTowards(transform.rotation, Quaternion.Euler(60f, 0f, 0f), 1.5f);
-            }
-            minimapCamera.transform.rotation = Quaternion.RotateTowards(minimapCamera.transform.rotation, Quaternion.Euler(90f, 0f, 0f), 1.5f);
-            if (!minimapIndicators.activeSelf && !minimapInput.buttonPressed) minimapIndicators.SetActive(true);
+            RotateCameraToBattlefieldAngle();
         }
 
         // Rotate camera when entering and exiting king house
@@ -216,6 +210,19 @@ public class MouseLook : MonoBehaviour
             minimapCamera.transform.rotation = Quaternion.RotateTowards(minimapCamera.transform.rotation, Quaternion.Euler(90f, 180f, 0f), 1.5f);
             if (!minimapIndicators.activeSelf && !minimapInput.buttonPressed) minimapIndicators.SetActive(true);
         }
+
+        else RotateCameraToBattlefieldAngle();
+    }
+
+    void RotateCameraToBattlefieldAngle()
+    {
+        if (transform.rotation.y != 0)
+        {
+            transform.rotation = Quaternion.RotateTowards(transform.rotation, Quaternion.Euler(60f, 0f, 0f), 1.5f);
+            mainCameraObject.transform.rotation = Quaternion.RotateTowards(transform.rotation, Quaternion.Euler(60f, 0f, 0f), 1.5f);
+        }
+        minimapCamera.transform.rotation = Quaternion.RotateTowards(minimapCamera.transform.rotation, Quaternion.Euler(90f, 0f, 0f), 1.5f);
+        if (!minimapIndicators.activeSelf && !minimapInput.buttonPressed) minimapIndicators.SetActive(true);
     }
 
     public void SetInCutScene(bool value) { inCutScene = value; }
