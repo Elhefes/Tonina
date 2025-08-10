@@ -107,9 +107,9 @@ public class MouseLook : MonoBehaviour
                     {
                         rb.AddForce(moveDirection * 320000f * Time.deltaTime, ForceMode.Force);
                     }
-                    else
+                    else if (player.inBuildMode)
                     {
-                        rb.AddForce(moveDirection * 320000f * Time.deltaTime, ForceMode.Force);
+                        rb.AddForce(moveDirection * 10200f * distanceFromObject * Time.deltaTime, ForceMode.Force);
                     }
                 }
             }
