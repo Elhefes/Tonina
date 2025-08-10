@@ -36,6 +36,7 @@ public class Player : Creature
 
     public bool insideKingHouse;
     public bool inVillage;
+    public bool inBuildMode;
 
     public ClickToEnableObject clickToEnableObject;
 
@@ -153,6 +154,9 @@ public class Player : Creature
         smallStone.quantity = smallStoneStartingQuantity;
         smallStone.notAvailable = false;
     }
+
+    public void EnableInBuildMode() { inBuildMode = true; }
+    public void DisableInBuildMode() { inBuildMode = false; }
 
     private void Update()
     {
