@@ -155,9 +155,6 @@ public class Player : Creature
         smallStone.notAvailable = false;
     }
 
-    public void EnableInBuildMode() { inBuildMode = true; }
-    public void DisableInBuildMode() { inBuildMode = false; }
-
     private void Update()
     {
         base.Update();

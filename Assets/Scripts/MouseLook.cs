@@ -28,6 +28,18 @@ public class MouseLook : MonoBehaviour
     public MinimapInput minimapInput;
     public float minimapInputSensitivity;
 
+    public void EnableBuildMode()
+    {
+        player.inBuildMode = true;
+        cameraOnPlayerButton.gameObject.SetActive(false);
+    }
+
+    public void DisableBuildMode()
+    {
+        player.inBuildMode = false;
+        cameraOnPlayerButton.gameObject.SetActive(true);
+    }
+
     public void CameraOnPlayerButton()
     {
         // This check can be buggy, but it likely won't matter with button calls
