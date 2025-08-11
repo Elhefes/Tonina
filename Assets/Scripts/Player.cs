@@ -36,6 +36,7 @@ public class Player : Creature
 
     public bool insideKingHouse;
     public bool inVillage;
+    public bool inBuildMode;
 
     public ClickToEnableObject clickToEnableObject;
 
@@ -314,6 +315,8 @@ public class Player : Creature
                         return;
                     }
                 }
+
+                if (inBuildMode) return;
 
                 creatureMovement.agent.SetDestination(hit.point);
                 destination = hit.point;
@@ -661,7 +664,7 @@ public class Player : Creature
 
     public void ReturnHome(GameObject objectToDisable)
     {
-        if (insideKingHouse) return;
+        if (insideKingHouse && !inBuildMode) return;
         // Confirmation in battle before returning home
         if ((battlefieldMenu.waveController.battleUI.activeSelf || optionsMenu.returnFromBuilder) && !optionsMenu.confirmReturnHomeMenu.activeSelf)
         {

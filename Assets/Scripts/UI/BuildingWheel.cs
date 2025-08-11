@@ -30,7 +30,7 @@ public class BuildingWheel : MonoBehaviour
     private int buildingIndex;
     private int slices = 5;
     public BuildingsManager buildingsManager;
-    public BuildingPlacing[] placeableBuildingsOnPlayer;
+    public BuildingPlacing[] placeablesOnCamera;
     public PlacedObjectsGrid placedObjectsGrid;
     private int[] originalPlacedObjectAmounts;
     private List<GameObject> buildingsToBePlaced = new List<GameObject>();
@@ -60,7 +60,7 @@ public class BuildingWheel : MonoBehaviour
 
     public void ExitBuildMode(bool saving)
     {
-        foreach (BuildingPlacing building in placeableBuildingsOnPlayer)
+        foreach (BuildingPlacing building in placeablesOnCamera)
         {
             building.gameObject.SetActive(false);
         }
@@ -106,7 +106,7 @@ public class BuildingWheel : MonoBehaviour
 
     void UpdateBuildingCostText()
     {
-        buildingCostText.text = placeableBuildingsOnPlayer[buildingIndex].placeableBuildingPrefab.cost.ToString();
+        buildingCostText.text = placeablesOnCamera[buildingIndex].placeableBuildingPrefab.cost.ToString();
     }
 
     public void UpdateIncomingCostText()
@@ -136,11 +136,11 @@ public class BuildingWheel : MonoBehaviour
         {
             currentIndex = 0;
         }
-        if (buildingIndex > placeableBuildingsOnPlayer.Length - 1)
+        if (buildingIndex > placeablesOnCamera.Length - 1)
         {
             buildingIndex = 0;
         }
-        var building = placeableBuildingsOnPlayer[buildingIndex];
+        var building = placeablesOnCamera[buildingIndex];
         buildingSprites[currentIndex].sprite = building.uiSprite;
         SwitchToBuilding(buildingIndex);
         buildingWheelAnimator.SetTrigger("NextInWheel");
@@ -160,9 +160,9 @@ public class BuildingWheel : MonoBehaviour
         }
         if (buildingIndex < 0)
         {
-            buildingIndex = placeableBuildingsOnPlayer.Length - 1;
+            buildingIndex = placeablesOnCamera.Length - 1;
         }
-        var building = placeableBuildingsOnPlayer[buildingIndex];
+        var building = placeablesOnCamera[buildingIndex];
         buildingSprites[currentIndex].sprite = building.uiSprite;
         SwitchToBuilding(buildingIndex);
         buildingWheelAnimator.SetTrigger("PreviousInWheel");
@@ -173,12 +173,12 @@ public class BuildingWheel : MonoBehaviour
     void SwitchToBuilding(int buildingIndex)
     {
         if (this == null) return;
-        foreach (BuildingPlacing building in placeableBuildingsOnPlayer)
+        foreach (BuildingPlacing building in placeablesOnCamera)
         {
             building.gameObject.SetActive(false);
         }
-        placeableBuildingsOnPlayer[buildingIndex].gameObject.transform.eulerAngles = new Vector3(0f, 180f, 0f); // Reset rotation
-        placeableBuildingsOnPlayer[buildingIndex].gameObject.SetActive(true);
+        placeablesOnCamera[buildingIndex].gameObject.transform.eulerAngles = new Vector3(0f, 180f, 0f); // Reset rotation
+        placeablesOnCamera[buildingIndex].gameObject.SetActive(true);
         UpdateBuildingCostText();
     }
 
@@ -188,7 +188,7 @@ public class BuildingWheel : MonoBehaviour
         {
             return;
         }
-        foreach (BuildingPlacing building in placeableBuildingsOnPlayer) // This could be optimised by only recieving the one that's active?
+        foreach (BuildingPlacing building in placeablesOnCamera) // This could be optimised by only recieving the one that's active?
         {
             if (building.gameObject.activeSelf)
             {
@@ -216,7 +216,7 @@ public class BuildingWheel : MonoBehaviour
 
     public void RotatePlaceableBuilding(int degrees)
     {
-        placeableBuildingsOnPlayer[buildingIndex].gameObject.transform.eulerAngles += new Vector3(0f, degrees, 0f);
+        placeablesOnCamera[buildingIndex].gameObject.transform.eulerAngles += new Vector3(0f, degrees, 0f);
     }
 
     void StartBuildingWheelCooldown()
@@ -232,7 +232,7 @@ public class BuildingWheel : MonoBehaviour
 
     public void ResetToDefaultBuilding()
     {
-        var building = placeableBuildingsOnPlayer[0];
+        var building = placeablesOnCamera[0];
         currentIndex = 0;
         buildingIndex = 0;
         buildingSprites[currentIndex].sprite = building.uiSprite;

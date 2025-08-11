@@ -35,7 +35,7 @@ public class OptionsMenu : MonoBehaviour
 
         if (player != null)
         {
-            if (player.insideKingHouse)
+            if (player.insideKingHouse && !player.inBuildMode)
             {
                 returnHomeButton.gameObject.SetActive(false);
                 mainMenuButton.SetActive(true);
