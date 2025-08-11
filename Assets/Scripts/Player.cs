@@ -316,6 +316,8 @@ public class Player : Creature
                     }
                 }
 
+                if (inBuildMode) return;
+
                 creatureMovement.agent.SetDestination(hit.point);
                 destination = hit.point;
                 
