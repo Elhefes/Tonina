@@ -22,6 +22,8 @@ public class MouseLook : MonoBehaviour
     public Camera minimapCamera;
     public GameObject minimapIndicators;
 
+    public GameObject placeablesParent;
+
     public CameraOnPlayerButton cameraOnPlayerButton;
     public GameObject optionsMenu;
     public GameObject battleFieldMenu;
@@ -154,6 +156,15 @@ public class MouseLook : MonoBehaviour
                     // If the camera is too far from the object, move it forwards smoothly
                     Vector3 targetPosition = hit.point + (transform.position - hit.point).normalized * distanceFromObject;
                     rb.AddForce((targetPosition - rb.position) * 250000f * Time.deltaTime, ForceMode.Force);
+                }
+            }
+
+            // Placeables parent follows the center of the camera
+            if (player.inBuildMode)
+            {
+                if (placeablesParent != null)
+                {
+                    placeablesParent.transform.position = hit.point;
                 }
             }
         }
