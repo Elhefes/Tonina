@@ -30,7 +30,6 @@ public class BuildingWheel : MonoBehaviour
     private int buildingIndex;
     private int slices = 5;
     public BuildingsManager buildingsManager;
-    public BuildingPlacing[] placeableBuildingsOnPlayer;
     public BuildingPlacing[] placeablesOnCamera;
     public PlacedObjectsGrid placedObjectsGrid;
     private int[] originalPlacedObjectAmounts;
