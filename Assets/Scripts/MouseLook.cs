@@ -105,13 +105,13 @@ public class MouseLook : MonoBehaviour
                     if (player.inVillage) moveDirection = new Vector3(-Input.GetAxis("Horizontal") + minimapInput.GetMinimapInput().x * -minimapInputSensitivity, 0f, -Input.GetAxis("Vertical") + minimapInput.GetMinimapInput().y * -minimapInputSensitivity);
                     else moveDirection = new Vector3(Input.GetAxis("Horizontal") + minimapInput.GetMinimapInput().x * minimapInputSensitivity, 0f, Input.GetAxis("Vertical") + minimapInput.GetMinimapInput().y * minimapInputSensitivity);
 
-                    if (player.inVillage)
-                    {
-                        rb.AddForce(moveDirection * 320000f * Time.deltaTime, ForceMode.Force);
-                    }
-                    else if (player.inBuildMode)
+                    if (player.inBuildMode)
                     {
                         rb.AddForce(moveDirection * 10200f * distanceFromObject * Time.deltaTime, ForceMode.Force);
+                    }
+                    else
+                    {
+                        rb.AddForce(moveDirection * 320000f * Time.deltaTime, ForceMode.Force);
                     }
                 }
             }
