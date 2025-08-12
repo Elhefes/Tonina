@@ -198,6 +198,7 @@ public class Player : Creature
                             if (target.name == "Periko") periko = target.GetComponent<Periko>();
                             if (periko != null)
                             {
+                                if (periko.inFlight) return;
                                 SetTextLines(periko.textSubject.textLines);
                                 periko.textSubject.textIsActive = true;
                                 currentTextSubject = periko.gameObject;
