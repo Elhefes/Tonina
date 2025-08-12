@@ -29,7 +29,7 @@ public class Kancho : PlaceableBuilding
             }
             snakeRotator.transform.rotation = Quaternion.Euler(-90f, 0f, -angle + 180f);
         }
-        if (target != null && !snakeOnCooldown && Vector3.Distance(transform.position, target.transform.position) <= 1.5f) SnakeAttack(target);
+        if (target != null && !snakeOnCooldown && Vector3.Distance(transform.position, target.transform.position) <= 1.75f) SnakeAttack(target);
     }
 
     void SnakeAttack(GameObject obj)
