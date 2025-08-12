@@ -57,6 +57,7 @@ public class Player : Creature
     private SpearRack spearRack;
     private BuildingRoof buildingRoof;
     private Villager villager;
+    private Periko periko;
     private GameObject currentTextSubject;
     private GameObject weatherStone;
     public GameObject weatherGame;
@@ -193,6 +194,17 @@ public class Player : Creature
                         else
                         {
                             FreeTextSubject();
+
+                            if (target.name == "Periko") periko = target.GetComponent<Periko>();
+                            if (periko != null)
+                            {
+                                SetTextLines(periko.textSubject.textLines);
+                                periko.textSubject.textIsActive = true;
+                                currentTextSubject = periko.gameObject;
+                                periko.textSubject.currentIndex = 0;
+                                periko.ProcessNextLines();
+                            }
+
                             villager = target.GetComponent<Villager>();
                             if (villager != null)
                             {
@@ -203,12 +215,15 @@ public class Player : Creature
                                 villager.textSubject.currentIndex = 0;
                                 villager.ProcessNextLines();
                             }
-                            else
+                            else if (villager == null && periko == null)
                             {
                                 TextSubject textSubject = target.GetComponent<TextSubject>();
-                                SetTextLines(textSubject.textLines);
-                                currentTextSubject = textSubject.gameObject;
-                                textSubject.currentIndex = 0;
+                                if (textSubject != null)
+                                {
+                                    SetTextLines(textSubject.textLines);
+                                    currentTextSubject = textSubject.gameObject;
+                                    textSubject.currentIndex = 0;
+                                }
                             }
                         }
 
@@ -391,6 +406,7 @@ public class Player : Creature
     {
         textLineIndex++;
         if (villager != null) villager.ProcessNextLines();
+        else if (periko != null) periko.ProcessNextLines();
         UpdateTextBox();
     }
 
@@ -411,6 +427,23 @@ public class Player : Creature
             villager.textSubject.currentIndex = 0;
             villager = null;
         }
+
+        if (periko != null)
+        {
+            if (periko.textSubject.UI_popUpAfterLastLine && textLineIndex == periko.textSubject.textLines.Length)
+            {
+                if (periko.textSubject.popUpElements != null)
+                {
+                    foreach (GameObject element in periko.textSubject.popUpElements) element.SetActive(true);
+                }
+            }
+
+            periko.textSubject.textIsActive = false;
+            periko.playingVoiceLines = false;
+            periko.textSubject.currentIndex = 0;
+            periko = null;
+        }
+
         currentTextSubject = null;
         textBox.gameObject.SetActive(false);
     }
