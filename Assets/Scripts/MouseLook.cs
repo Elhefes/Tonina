@@ -189,7 +189,7 @@ public class MouseLook : MonoBehaviour
             // The camera doesn't have time to get to x = 0 before rotation y = 0, so the x is a little bit off 0
             if (transform.rotation.eulerAngles.y == 0f && (Mathf.Abs(transform.position.x) <= 0.08f)) transitioningToBuildModeAngle = false;
         }
-        else if (player.healthBar.gameObject.activeSelf)
+        else if (!player.inVillage && !player.insideKingHouse) // In battle mode
         {
             playerToFollowAngledDirection = new Vector3(player.transform.position.x, player.transform.position.y + distanceFromObject, player.transform.position.z - (distanceFromObject / Mathf.Tan(60 * Mathf.PI / 180)) + 0.66f);
             transform.position = Vector3.Lerp(transform.position, playerToFollowAngledDirection, smoothSpeed);
