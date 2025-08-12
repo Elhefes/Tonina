@@ -23,6 +23,7 @@ public class MouseLook : MonoBehaviour
     public GameObject minimapIndicators;
 
     public GameObject placeablesParent;
+    private bool transitioningToBuildModeAngle;
 
     public CameraOnPlayerButton cameraOnPlayerButton;
     public GameObject optionsMenu;
@@ -35,6 +36,7 @@ public class MouseLook : MonoBehaviour
         player.inBuildMode = true;
         cameraOnPlayer = false;
         cameraOnPlayerButton.gameObject.SetActive(false);
+        transitioningToBuildModeAngle = true;
     }
 
     public void DisableBuildMode()
@@ -42,6 +44,7 @@ public class MouseLook : MonoBehaviour
         player.inBuildMode = false;
         cameraOnPlayer = true;
         cameraOnPlayerButton.gameObject.SetActive(true);
+        transitioningToBuildModeAngle = false;
     }
 
     public void CameraOnPlayerButton()
@@ -96,7 +99,7 @@ public class MouseLook : MonoBehaviour
                 if (Input.GetKeyDown("c")) CameraOnPlayerButton();
             }
 
-            if (!player.insideKingHouse || player.inBuildMode)
+            if (!player.insideKingHouse || (player.inBuildMode && !transitioningToBuildModeAngle))
             {
                 if (Input.GetAxis("Horizontal") != 0 || Input.GetAxis("Vertical") != 0 || minimapInput.GetMinimapInput().x != 0 || minimapInput.GetMinimapInput().y != 0)
                 {
@@ -124,7 +127,7 @@ public class MouseLook : MonoBehaviour
 
         if (player == null) return;
 
-        if (cameraOnPlayer)
+        if (cameraOnPlayer || transitioningToBuildModeAngle)
         {
             CalculatePlayerToFollowAngledDirection();
         }
@@ -172,7 +175,21 @@ public class MouseLook : MonoBehaviour
 
     void CalculatePlayerToFollowAngledDirection()
     {
-        if (player.inBuildMode || player.healthBar.gameObject.activeSelf)
+        if (player.inBuildMode)
+        {
+            // This assumes that King House's x = 0 always, it makes sense design-wise
+
+            Vector3 kingHouseEntrancePosition = new Vector3(0f, player.kingHouse.transform.position.y, player.kingHouse.transform.position.z - 11.8f);
+
+            playerToFollowAngledDirection = new Vector3(0f, kingHouseEntrancePosition.y + distanceFromObject, kingHouseEntrancePosition.z - (distanceFromObject / Mathf.Tan(60 * Mathf.PI / 180)));
+            transform.position = Vector3.Lerp(transform.position, playerToFollowAngledDirection, smoothSpeed * distanceFromObject / 10f);
+            playerToFollowDirection = new Vector3(0f, kingHouseEntrancePosition.y + 100f, kingHouseEntrancePosition.z);
+            minimapCamera.transform.position = Vector3.Lerp(minimapCamera.transform.position, playerToFollowDirection, smoothSpeed);
+
+            // The camera doesn't have time to get to x = 0 before rotation y = 0, so the x is a little bit off 0
+            if (transform.rotation.eulerAngles.y == 0f && (Mathf.Abs(transform.position.x) <= 0.08f)) transitioningToBuildModeAngle = false;
+        }
+        else if (player.healthBar.gameObject.activeSelf)
         {
             playerToFollowAngledDirection = new Vector3(player.transform.position.x, player.transform.position.y + distanceFromObject, player.transform.position.z - (distanceFromObject / Mathf.Tan(60 * Mathf.PI / 180)) + 0.66f);
             transform.position = Vector3.Lerp(transform.position, playerToFollowAngledDirection, smoothSpeed);
