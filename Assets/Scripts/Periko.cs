@@ -27,7 +27,7 @@ public class Periko : MonoBehaviour
     {
         while (true)
         {
-            yield return new WaitForSeconds(Random.Range(7.5f, 15f));
+            yield return new WaitForSeconds(Random.Range(5f, 15f));
             if (!textSubject.textIsActive && !inFlight) PickRandomAnim();
         }
     }
