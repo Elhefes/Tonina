@@ -407,7 +407,15 @@ public class Player : Creature
     {
         textLineIndex++;
         if (villager != null) villager.ProcessNextLines();
-        else if (periko != null) periko.ProcessNextLines();
+        else if (periko != null)
+        {
+            if (periko.textSubject.currentIndex < periko.randomVoiceLinesLength) periko.ProcessNextLines();
+            else
+            {
+                FreeTextSubject();
+                return;
+            }
+        }
         UpdateTextBox();
     }
 

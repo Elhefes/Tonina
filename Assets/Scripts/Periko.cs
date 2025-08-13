@@ -13,8 +13,13 @@ public class Periko : MonoBehaviour
     public bool playingVoiceLines;
     private Coroutine voiceCoroutine;
 
+    public int randomVoiceLinesLength;
+
     private void OnEnable()
     {
+        inFlight = false;
+        animator.SetTrigger("Idle");
+
         StartCoroutine(randomAnimTimer());
     }
 
@@ -22,26 +27,41 @@ public class Periko : MonoBehaviour
     {
         while (true)
         {
+            yield return new WaitForSeconds(Random.Range(7.5f, 15f));
             if (!textSubject.textIsActive && !inFlight) PickRandomAnim();
-            yield return new WaitForSeconds(Random.Range(5f, 10f));
         }
     }
 
     private void PickRandomAnim()
     {
         int r = Random.Range(0, 2);
-        if (r == 0) animator.SetTrigger("Idle");
-        else animator.SetTrigger("Flight1");
+        if (r == 0)
+        {
+            inFlight = false;
+            animator.SetTrigger("Idle");
+        }
+        else
+        {
+            inFlight = true;
+            animator.SetTrigger("Flight1");
+        }
     }
 
     public void EnableInFlight() { inFlight = true; }
     public void DisableInFlight() { inFlight = false; }
 
-    // Code below is copied from Villager.cs -- not good practice but whatever lol
+    // Code below is mostly copied from Villager.cs -- not good practice but whatever lol
 
     public void ProcessNextLines()
     {
-        if (textSubject.currentIndex < textSubject.textLines.Length)
+        if (textSubject.currentIndex == 0)
+        {
+            // Pick 1 to 4 random lines
+            randomVoiceLinesLength = Random.Range(1, 5);
+            ReshuffleArray(textSubject.textLines);
+        }
+
+        if (textSubject.currentIndex < randomVoiceLinesLength)
         {
             //stop potential previous speech
             soundPlayer.Stop();
@@ -51,6 +71,18 @@ public class Periko : MonoBehaviour
             int wordCount = CountWords(str);
             voiceCoroutine = StartCoroutine(PlayRandomVoiceLines(wordCount));
             textSubject.currentIndex++;
+        }
+    }
+
+    void ReshuffleArray(string[] texts)
+    {
+        // Knuth shuffle algorithm :: courtesy of Wikipedia :)
+        for (int t = 0; t < texts.Length; t++)
+        {
+            string tmp = texts[t];
+            int r = Random.Range(t, texts.Length);
+            texts[t] = texts[r];
+            texts[r] = tmp;
         }
     }
 

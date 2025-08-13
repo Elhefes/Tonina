@@ -1611,6 +1611,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   animator: {fileID: 790756961802687610}
+  inFlight: 0
   textSubject: {fileID: 8821187526578136142}
   voiceLines:
   - {fileID: 8300000, guid: 2e82734736fa0c14a9f5a2fb800596ed, type: 3}
@@ -1618,6 +1619,7 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 999bfbbb86009fc4ab9272cc94c21c8b, type: 3}
   soundPlayer: {fileID: 9053901573188765729}
   playingVoiceLines: 0
+  randomVoiceLinesLength: 0
 --- !u!114 &8821187526578136142
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1634,9 +1636,26 @@ MonoBehaviour:
   UI_popUpAfterLastLine: 0
   popUpElements: []
   textLines:
-  - test
-  - 2
-  - 3 3 4
+  - GIVE FRUIT ME GIVE
+  - EAT FRUIT ME EAT
+  - FRUIT GIVE ME EAT
+  - FRUIT GIVE ME YOU
+  - BUILD MORE
+  - EAT PLANT
+  - NOT HUNGRY
+  - YES
+  - NO
+  - I'M WITH YOU
+  - ALWAYS
+  - NEED MORE GOLD
+  - CAMAZO MY FRIEND
+  - I LIKE MY HOME
+  - CHIOH CLAN BAD
+  - FRIENDS HERE
+  - TALK VILLAGERS
+  - STATUE NEEDS OTHER TWIN
+  - LOVE YOUR HIGHNESS
+  - OKILL THINKS HE IS COOL
   currentIndex: 0
 --- !u!136 &2336876375717566444
 CapsuleCollider:
