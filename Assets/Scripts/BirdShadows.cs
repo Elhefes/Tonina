@@ -4,7 +4,7 @@ using UnityEngine;
 public class BirdShadows : MonoBehaviour
 {
     public BirdShadowSpawner[] birdShadowSpawners;
-    private float range = 70f;
+    private float range = 72f;
     private Coroutine sectorEnablerCoroutine;
 
     void Start()
