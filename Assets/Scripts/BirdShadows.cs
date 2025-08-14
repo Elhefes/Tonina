@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class BirdShadows : MonoBehaviour
 {
-    public GameObject[] Z_Sectors;
+    public BirdShadowSpawner[] birdShadowSpawners;
     private float range = 70f;
     private Coroutine sectorEnablerCoroutine;
 
@@ -24,10 +24,17 @@ public class BirdShadows : MonoBehaviour
 
     void EnableIfWithinRange(float value)
     {
-        for (int i = 0; i < Z_Sectors.Length; i++)
+        for (int i = 0; i < birdShadowSpawners.Length; i++)
         {
-            if (IsWithinRange(value, Z_Sectors[i].gameObject.transform.position.z)) Z_Sectors[i].gameObject.SetActive(true);
-            else Z_Sectors[i].gameObject.SetActive(false);
+            if (IsWithinRange(value, birdShadowSpawners[i].gameObject.transform.position.z)) birdShadowSpawners[i].gameObject.SetActive(true);
+            else
+            {
+                foreach (GameObject shadowObj in birdShadowSpawners[i].shadowObjects)
+                {
+                    shadowObj.SetActive(false); // This is to reset their animators so they don't get stuck to where they were disabled
+                }
+                birdShadowSpawners[i].gameObject.SetActive(false);
+            }
         }
     }
 
