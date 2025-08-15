@@ -1,5 +1,6 @@
 using UnityEngine;
 using TMPro;
+using UnityEngine.UI;
 
 public class BattlefieldMenu : MonoBehaviour
 {
@@ -17,6 +18,8 @@ public class BattlefieldMenu : MonoBehaviour
     private int battleSongID;
     public TMP_Text threatLevelText;
     public TMP_Text chosenSong;
+
+    public Button startBattleButton;
 
     int maxThreatLevel = 25;
 
@@ -63,6 +66,13 @@ public class BattlefieldMenu : MonoBehaviour
         {
             TTWarriorsText.text = threatLevels.threatLevels[threatLevel - 1].friendlyWarriorsAmount.ToString();
             rewardsText.text = threatLevels.threatLevels[threatLevel - 1].minReward.ToString() + " - " + threatLevels.threatLevels[threatLevel - 1].maxReward.ToString();
+            startBattleButton.interactable = true;
+        }
+        else
+        {
+            TTWarriorsText.text = "-";
+            rewardsText.text = "-";
+            startBattleButton.interactable = false;
         }
     }
 
