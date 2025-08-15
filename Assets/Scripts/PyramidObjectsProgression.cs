@@ -24,6 +24,9 @@ public class PyramidObjectsProgression : MonoBehaviour
     public GameObject lvl3TemporaryVillageObject;
     public GameObject lvl4TemporaryVillageObject;
 
+    [Header("Village houses")]
+    public GameObject lvl4Houses;
+
     [Header("Fences")]
     public GameObject lvl3BattlefieldFence;
     public GameObject lvl4BattlefieldFence;
@@ -67,6 +70,8 @@ public class PyramidObjectsProgression : MonoBehaviour
         lvl4NavMeshSurface.SetActive(true);
 
         lvl3TemporaryVillageObject.SetActive(false);
+
+        lvl4Houses.SetActive(true);
 
         lvl3BattlefieldFence.SetActive(false);
         lvl4BattlefieldFence.SetActive(true);
