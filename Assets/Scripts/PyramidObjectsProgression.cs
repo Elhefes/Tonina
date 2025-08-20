@@ -23,6 +23,7 @@ public class PyramidObjectsProgression : MonoBehaviour
     public GameObject lvl3NavMeshSurface;
     public GameObject lvl3WeatherTempleNavMeshSurface;
     public GameObject lvl4NavMeshSurface;
+    public GameObject lvl4MaizeFarmersHouseNavMeshSurface;
     public GameObject lvl5NavMeshSurface;
 
     [Header("Temporary objects in village")]
@@ -121,6 +122,7 @@ public class PyramidObjectsProgression : MonoBehaviour
             lvl5Terrain.gameObject.SetActive(true);
 
             lvl4NavMeshSurface.SetActive(false);
+            lvl4MaizeFarmersHouseNavMeshSurface.SetActive(false);
             lvl5NavMeshSurface.SetActive(true);
 
             lvl5Villagers.SetActive(true);
