@@ -5,6 +5,8 @@ public class PyramidObjectsProgression : MonoBehaviour
     public GameObject kingHouse;
     public int extraFloorsBuilt;
 
+    public EnemySpawnPointController enemySpawnPointController;
+
     public Vector3[] kingHousePositionsFrom4thTo14th;
 
     [Header("Pyramid Levels")]
@@ -111,6 +113,8 @@ public class PyramidObjectsProgression : MonoBehaviour
             weatherTempleLvl4Obj.SetActive(true);
 
             extraFloorsBuilt++;
+
+            enemySpawnPointController.UpdateSpawnPositions(extraFloorsBuilt, 45f);
         }
 
         else if (extraFloorsBuilt == 1)
@@ -144,6 +148,8 @@ public class PyramidObjectsProgression : MonoBehaviour
             lvl5VillageCollider.SetActive(true);
 
             extraFloorsBuilt++;
+
+            enemySpawnPointController.UpdateSpawnPositions(extraFloorsBuilt, 65f);
         }
         
         UpdateKingHousePosition();
