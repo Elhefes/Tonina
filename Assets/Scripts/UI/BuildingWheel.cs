@@ -45,6 +45,7 @@ public class BuildingWheel : MonoBehaviour
     private void OnEnable()
     {
         incomingCost = 0;
+        buildingsManager.UpdateExistingBuildingsAmount();
         buildingCountAtModeStart = buildingsManager.buildingsPlaced;
 
         // Keep original array for exiting without saving

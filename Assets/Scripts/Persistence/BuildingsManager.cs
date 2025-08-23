@@ -56,11 +56,20 @@ public class BuildingsManager : MonoBehaviour
     {
         GameObject[] objectsWithName = GameObject.FindGameObjectsWithTag("PlaceableBuilding");
 
+        placedBuildings.Clear();
+
         foreach (GameObject obj in objectsWithName)
         {
-            placedBuildings.Add(obj);
+            if (obj.transform.parent == null) placedBuildings.Add(obj);
+
         }
         return placedBuildings;
+    }
+
+    public void UpdateExistingBuildingsAmount()
+    {
+        if (FindPlacedBuildings() == null) buildingsPlaced = 0;
+        else buildingsPlaced = FindPlacedBuildings().Count;
     }
 
     public void ResetPlacedBuildings()
