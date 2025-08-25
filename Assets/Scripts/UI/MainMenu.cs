@@ -9,6 +9,7 @@ public class MainMenu : MonoBehaviour
     public GameObject overworldUI;
     public GameObject clickBlocker;
 
+    public GameObject minimapCamera;
     private Camera playerCamera;
     private Camera mainMenuCamera;
 
@@ -63,6 +64,7 @@ public class MainMenu : MonoBehaviour
         mainMenuCameraAnimator.enabled = false;
         movingToPlayerCamera = true;
         mainMenuUI.SetActive(false);
+        minimapCamera.SetActive(true);
         overworldUI.SetActive(true);
 
         playerCamera.gameObject.tag = "MainCamera";
@@ -79,6 +81,7 @@ public class MainMenu : MonoBehaviour
         mainMenuCameraAnimator.enabled = true;
         movingToPlayerCamera = false;
         onPlayerCamera = false;
+        minimapCamera.SetActive(false);
         mainMenuUI.SetActive(true);
         overworldUI.SetActive(false);
         clickBlocker.SetActive(true);
