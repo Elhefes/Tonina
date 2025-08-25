@@ -37,6 +37,11 @@ public class MainMenu : MonoBehaviour
         StartCoroutine(SecondCounter());
     }
 
+    private void Awake()
+    {
+        StartCoroutine(SwitchMainCameraToMainMenuCamera());
+    }
+
     public void ContinueHere()
     {
         if (PlayerPrefs.GetInt("introPlayed", 0) == 0)
@@ -59,6 +64,9 @@ public class MainMenu : MonoBehaviour
         movingToPlayerCamera = true;
         mainMenuUI.SetActive(false);
         overworldUI.SetActive(true);
+
+        playerCamera.gameObject.tag = "MainCamera";
+        mainMenuCamera.gameObject.tag = "Untagged";
     }
 
     public void StartEnteringMainMenu()
@@ -73,10 +81,10 @@ public class MainMenu : MonoBehaviour
         onPlayerCamera = false;
         mainMenuUI.SetActive(true);
         overworldUI.SetActive(false);
-        mainMenuCamera.enabled = true;
-        playerCamera.enabled = false;
         clickBlocker.SetActive(true);
         acceleration = 0f;
+
+        StartCoroutine(SwitchMainCameraToMainMenuCamera());
     }
 
     public void PlayAsAttackers()
@@ -110,6 +118,15 @@ public class MainMenu : MonoBehaviour
             }
             acceleration += 0.0008f;
         }
+    }
+
+    IEnumerator SwitchMainCameraToMainMenuCamera()
+    {
+        yield return new WaitForEndOfFrame();
+        mainMenuCamera.gameObject.tag = "MainCamera";
+        mainMenuCamera.enabled = true;
+        playerCamera.gameObject.tag = "Untagged";
+        playerCamera.enabled = false;
     }
 
     IEnumerator SecondCounter()
