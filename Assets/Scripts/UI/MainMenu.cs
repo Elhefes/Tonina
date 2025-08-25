@@ -41,6 +41,7 @@ public class MainMenu : MonoBehaviour
     private void Awake()
     {
         StartCoroutine(SwitchMainCameraToMainMenuCamera());
+        StartCoroutine(SetPlayerCameraDrawDistance(100f));
     }
 
     public void ContinueHere()
@@ -130,6 +131,12 @@ public class MainMenu : MonoBehaviour
         mainMenuCamera.enabled = true;
         playerCamera.gameObject.tag = "Untagged";
         playerCamera.enabled = false;
+    }
+
+    IEnumerator SetPlayerCameraDrawDistance(float maxDistance)
+    {
+        yield return new WaitForEndOfFrame();
+        playerCamera.farClipPlane = maxDistance;
     }
 
     IEnumerator SecondCounter()
