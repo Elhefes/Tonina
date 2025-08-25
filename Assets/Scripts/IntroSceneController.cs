@@ -9,6 +9,7 @@ public class IntroSceneController : MonoBehaviour
     public Player playerPivot;
     public GameObject staticTwinStatue;
 
+    public GameObject minimapCamera;
     public Camera playerCamera;
     public Camera introCamera;
     private Animator introCameraAnimator;
@@ -46,6 +47,27 @@ public class IntroSceneController : MonoBehaviour
         if (introCameraAnimator != null) introCameraAnimator.SetBool("FirstSceneFinished", false);
 
         if (PlayerPrefs.GetInt("introPlayed", 0) == 1) introHUD_Controller.optionsMenu.returnHomeButton.interactable = true;
+    }
+
+    private void Awake()
+    {
+        StartCoroutine(SwitchMainCameraToMovingCamera());
+        StartCoroutine(SetPlayerCameraDrawDistance(100f));
+    }
+
+    IEnumerator SwitchMainCameraToMovingCamera()
+    {
+        yield return new WaitForEndOfFrame();
+        introCamera.gameObject.tag = "MainCamera";
+        introCamera.enabled = true;
+        playerCamera.gameObject.tag = "Untagged";
+        playerCamera.enabled = false;
+    }
+
+    IEnumerator SetPlayerCameraDrawDistance(float maxDistance)
+    {
+        yield return new WaitForEndOfFrame();
+        playerCamera.farClipPlane = maxDistance;
     }
 
     public void EnableOnlyBattleModeObjects()
@@ -137,6 +159,8 @@ public class IntroSceneController : MonoBehaviour
         introBlackFader.gameObject.SetActive(true);
         introBlackFader.animator.SetTrigger("Fade1");
 
+        minimapCamera.SetActive(false);
+
         StartFadingMusicDown(350f);
     }
 
@@ -151,6 +175,7 @@ public class IntroSceneController : MonoBehaviour
         musicAudioSource.clip = finalSceneMusic;
         musicAudioSource.volume = musicVolumeAtStart;
         musicAudioSource.Play();
+        StartCoroutine(SwitchMainCameraToMovingCamera());
     }
 
     public void EnableBattlefieldWarriors(bool value) { warriorsInBattlefield.SetActive(value); }
@@ -194,9 +219,12 @@ public class IntroSceneController : MonoBehaviour
                 if (Vector3.Distance(introCamera.transform.position, playerCamera.transform.position) < 0.2f)
                 {
                     playerCamera.transform.position = introCamera.transform.position;
+                    playerCamera.gameObject.tag = "MainCamera";
+                    introCamera.gameObject.tag = "Untagged";
                     onPlayerCamera = true;
                     introCamera.enabled = false;
                     playerCamera.enabled = true;
+                    minimapCamera.SetActive(true);
                     clickBlocker.SetActive(false);
                     introHUD_Controller.EnableBattleModeHUD(true);
                 }
