@@ -454,7 +454,7 @@ public class Player : Creature
         }
 
         currentTextSubject = null;
-        textBox.gameObject.SetActive(false);
+        if (textBox != null) textBox.gameObject.SetActive(false);
     }
 
     public void SwitchWeapon(WeaponType weaponType)
