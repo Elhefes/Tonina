@@ -21,7 +21,11 @@ public class EnemyAI : MonoBehaviour
                 if (NearestTarget("ToninaTribe", 8f) != null) break;
                 else if (NearestTarget("Barricade", 10f) != null) break;
                 else if (NearestTarget("ToninaTribe", 20f) != null) break;
-                creatureMovement.target = GameObject.FindGameObjectsWithTag("Target")[0].transform;
+                else
+                {
+                    GameObject[] g = GameObject.FindGameObjectsWithTag("Target");
+                    if (g.Length > 0) creatureMovement.target = g[0].transform;
+                }
                 break;
             }
         }

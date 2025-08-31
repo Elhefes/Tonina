@@ -121,7 +121,7 @@ public class Player : Creature
         if (health < startingHealth) RestoreHealth(startingHealth - health);
         healthBar.gameObject.SetActive(false);
         creatureMovement.animator.SetInteger("WeaponIndex", 0);
-        battlefieldMenu.waveController.musicPlayer.PlayPeacefulSongs(false);
+        if (battlefieldMenu != null) battlefieldMenu.waveController.musicPlayer.PlayPeacefulSongs(false);
     }
 
     void EquipOnlySelectedWeapons()
@@ -678,7 +678,7 @@ public class Player : Creature
 
     public void SetReadyToRemove(bool value) { readyToRemove = value; }
 
-    public void LoseBattle() { battlefieldMenu.waveController.LoseBattle(); }
+    public void LoseBattle() { if (battlefieldMenu != null) battlefieldMenu.waveController.LoseBattle(); }
 
     public void EndBattle()
     {
@@ -706,7 +706,7 @@ public class Player : Creature
 
     public void ReturnHome(GameObject objectToDisable)
     {
-        if (insideKingHouse && !inBuildMode) return;
+        if (battlefieldMenu == null || insideKingHouse && !inBuildMode) return;
         // Confirmation in battle before returning home
         if ((battlefieldMenu.waveController.battleUI.activeSelf || optionsMenu.returnFromBuilder) && !optionsMenu.confirmReturnHomeMenu.activeSelf)
         {

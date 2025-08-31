@@ -20,7 +20,7 @@ public class LosingScreen : MonoBehaviour
 
     private void OnEnable()
     {
-        player.battlefieldMenu.waveController.battleIsLost = true;
+        if (player.battlefieldMenu != null) player.battlefieldMenu.waveController.battleIsLost = true;
         textTypingCoroutine = StartCoroutine(TypeTexts());
         audioPassController.muffleEffect = true;
     }
