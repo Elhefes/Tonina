@@ -19,6 +19,7 @@ public class MouseLook : MonoBehaviour
     public Player player;
     public bool inCutScene;
     public bool cameraOnPlayer = true;
+    public bool notCastingRays; // Don't cast rays in Attack Mode Minimap view
     public Camera minimapCamera;
     public GameObject minimapIndicators;
 
@@ -141,33 +142,37 @@ public class MouseLook : MonoBehaviour
 
             freeMinimapCameraDirection = new Vector3(transform.position.x, transform.position.y + 100f, transform.position.z);
             minimapCamera.transform.position = Vector3.Lerp(minimapCamera.transform.position, freeMinimapCameraDirection, smoothSpeed);
-            // Cast a ray downwards from the camera's position
-            Ray ray = new Ray(transform.position, transform.forward);
-            RaycastHit hit;
 
-            if (Physics.Raycast(ray, out hit, Mathf.Infinity, layerMask))
+            if (!notCastingRays)
             {
-                currentDistance = Vector3.Distance(transform.position, hit.point);
-                if (currentDistance < distanceFromObject)
-                {
-                    // If the camera is too close to the object, move it backwards smoothly
-                    Vector3 targetPosition = hit.point + (transform.position - hit.point).normalized * distanceFromObject;
-                    rb.AddForce((targetPosition - rb.position) * 250000f * Time.deltaTime, ForceMode.Force);
-                }
-                else if (currentDistance > distanceFromObject)
-                {
-                    // If the camera is too far from the object, move it forwards smoothly
-                    Vector3 targetPosition = hit.point + (transform.position - hit.point).normalized * distanceFromObject;
-                    rb.AddForce((targetPosition - rb.position) * 250000f * Time.deltaTime, ForceMode.Force);
-                }
-            }
+                // Cast a ray downwards from the camera's position
+                Ray ray = new Ray(transform.position, transform.forward);
+                RaycastHit hit;
 
-            // Placeables parent follows the center of the camera
-            if (player.inBuildMode)
-            {
-                if (placeablesParent != null)
+                if (Physics.Raycast(ray, out hit, Mathf.Infinity, layerMask))
                 {
-                    placeablesParent.transform.position = hit.point;
+                    currentDistance = Vector3.Distance(transform.position, hit.point);
+                    if (currentDistance < distanceFromObject)
+                    {
+                        // If the camera is too close to the object, move it backwards smoothly
+                        Vector3 targetPosition = hit.point + (transform.position - hit.point).normalized * distanceFromObject;
+                        rb.AddForce((targetPosition - rb.position) * 250000f * Time.deltaTime, ForceMode.Force);
+                    }
+                    else if (currentDistance > distanceFromObject)
+                    {
+                        // If the camera is too far from the object, move it forwards smoothly
+                        Vector3 targetPosition = hit.point + (transform.position - hit.point).normalized * distanceFromObject;
+                        rb.AddForce((targetPosition - rb.position) * 250000f * Time.deltaTime, ForceMode.Force);
+                    }
+                }
+
+                // Placeables parent follows the center of the camera
+                if (player.inBuildMode)
+                {
+                    if (placeablesParent != null)
+                    {
+                        placeablesParent.transform.position = hit.point;
+                    }
                 }
             }
         }
