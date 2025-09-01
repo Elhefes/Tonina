@@ -120,12 +120,15 @@ public class MaizeHandler : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (!player.buildModeUI.activeSelf) // If not in build mode
+        if (player.buildModeUI != null)
         {
-            if (other.gameObject.name == "Maize Place(Clone)")
+            if (!player.buildModeUI.activeSelf) // If not in build mode
             {
-                maizePlace = other.GetComponentInParent<MaizePlace>();
-                EnterMaizePlace();
+                if (other.gameObject.name == "Maize Place(Clone)")
+                {
+                    maizePlace = other.GetComponentInParent<MaizePlace>();
+                    EnterMaizePlace();
+                }
             }
         }
     }
