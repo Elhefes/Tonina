@@ -38605,7 +38605,6 @@ GameObject:
   - component: {fileID: 1393370857}
   - component: {fileID: 1393370858}
   - component: {fileID: 1393370859}
-  - component: {fileID: 1393370860}
   m_Layer: 0
   m_Name: GameController
   m_TagString: Untagged
@@ -38730,60 +38729,6 @@ MonoBehaviour:
   buildingsPlaced: 0
   maxBuildingAmount: 0
   buildingPrefabs: []
---- !u!114 &1393370860
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1393370853}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 523a92802ba9d474cbb39bd6ac7b3b13, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  kingHouse: {fileID: 0}
-  extraFloorsBuilt: 0
-  buildingsManager: {fileID: 1393370859}
-  enemySpawnPointController: {fileID: 1841777525}
-  kingHousePositionsFrom4thTo14th:
-  - {x: 0, y: 20, z: -82.5}
-  - {x: 0, y: 27.5, z: -70.5}
-  lvl4Floor: {fileID: 0}
-  lvl4Walls: {fileID: 0}
-  lvl5Floor: {fileID: 0}
-  lvl5Walls: {fileID: 0}
-  lvl3Terrain: {fileID: 0}
-  lvl4Terrain: {fileID: 0}
-  lvl5Terrain: {fileID: 0}
-  lvl3NavMeshSurface: {fileID: 0}
-  lvl3WeatherTempleNavMeshSurface: {fileID: 0}
-  lvl4NavMeshSurface: {fileID: 0}
-  lvl4MaizeFarmersHouseNavMeshSurface: {fileID: 0}
-  lvl5NavMeshSurface: {fileID: 0}
-  lvl3TemporaryVillageObject: {fileID: 0}
-  lvl4Villagers: {fileID: 0}
-  lvl5Villagers: {fileID: 0}
-  lvl4Houses: {fileID: 0}
-  lvl5Houses: {fileID: 0}
-  lvl3BattlefieldFence: {fileID: 0}
-  lvl4BattlefieldFence: {fileID: 0}
-  lvl4VillageFence: {fileID: 0}
-  lvl5BattlefieldFence: {fileID: 0}
-  lvl5VillageFence: {fileID: 0}
-  lvl4Stairs: {fileID: 0}
-  lvl5Stairs: {fileID: 0}
-  lvl4BorderBumps: {fileID: 0}
-  lvl5BorderBumps: {fileID: 0}
-  lvl3BfCollider: {fileID: 1679843738}
-  lvl3VillageCollider: {fileID: 908208853}
-  lvl4BfCollider: {fileID: 742125594}
-  lvl4VillageCollider: {fileID: 1459957425}
-  lvl5BfCollider: {fileID: 505380401}
-  lvl5VillageCollider: {fileID: 493531086}
-  weatherTemple: {fileID: 0}
-  weatherTempleLvl3Obj: {fileID: 0}
-  weatherTempleLvl4Obj: {fileID: 0}
 --- !u!1 &1396039129
 GameObject:
   m_ObjectHideFlags: 0
@@ -50061,6 +50006,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 92d8920e763c76c43af66da49dd20ce5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  battleAreaWidth: 123
   leftestSpawnPointTransform: {fileID: 1103779032}
   rightestSpawnPointTransform: {fileID: 1612620595}
   spawnPointTransformsInBetween:
@@ -50071,19 +50017,9 @@ MonoBehaviour:
   - {fileID: 786422358}
   - {fileID: 880426761}
   leftestSpawnPoints:
-  - {x: -40, y: 0.5, z: -170}
-  - {x: -55, y: 0.5, z: -170}
-  - {x: -75, y: 0.5, z: -170}
-  - {x: 0, y: 0.5, z: -170}
-  - {x: 0, y: 0.5, z: -170}
-  - {x: -170, y: 0.5, z: -68}
+  - {x: -155, y: 0.5, z: -60}
   rightestSpawnPoints:
-  - {x: 40, y: 0.5, z: -170}
-  - {x: 55, y: 0.5, z: -170}
-  - {x: 75, y: 0.5, z: -170}
-  - {x: 0, y: 0.5, z: -170}
-  - {x: 0, y: 0.5, z: -170}
-  - {x: 170, y: 0.5, z: -68}
+  - {x: 155, y: 0.5, z: -60}
   centerSpawnPoint: {x: 0, y: 0.5, z: -170}
   clubber: {fileID: 7187010017827347340, guid: 9461b381c953c4541b1daf9f8f496ec2, type: 3}
 --- !u!1001 &1845241647

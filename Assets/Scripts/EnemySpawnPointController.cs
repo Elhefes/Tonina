@@ -2,6 +2,8 @@ using UnityEngine;
 
 public class EnemySpawnPointController : MonoBehaviour
 {
+    public float battleAreaWidth;
+
     public Transform leftestSpawnPointTransform;
     public Transform rightestSpawnPointTransform;
     public Transform[] spawnPointTransformsInBetween;
@@ -15,12 +17,14 @@ public class EnemySpawnPointController : MonoBehaviour
     private void Start()
     {
         // Change this when save/load is implemented
-        UpdateSpawnPositions(0, 30f);
+        UpdateSpawnPositions(0);
 
         //TestSpawns(); // Uncomment this to test if enemies (agents) spawn correctly on their positions
     }
 
-    public void UpdateSpawnPositions(int extraFloorsBuilt, float battleAreaWidth)
+    public void UpdateBattleAreaWidth(float newWidth) { battleAreaWidth = newWidth; }
+
+    public void UpdateSpawnPositions(int extraFloorsBuilt)
     {
         leftestSpawnPointTransform.position = leftestSpawnPoints[extraFloorsBuilt];
         rightestSpawnPointTransform.transform.position = rightestSpawnPoints[extraFloorsBuilt];

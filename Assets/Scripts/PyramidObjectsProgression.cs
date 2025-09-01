@@ -115,7 +115,8 @@ public class PyramidObjectsProgression : MonoBehaviour
 
             extraFloorsBuilt++;
 
-            enemySpawnPointController.UpdateSpawnPositions(extraFloorsBuilt, 45f);
+            enemySpawnPointController.UpdateBattleAreaWidth(45f);
+            enemySpawnPointController.UpdateSpawnPositions(extraFloorsBuilt);
         }
 
         else if (extraFloorsBuilt == 1)
@@ -150,7 +151,8 @@ public class PyramidObjectsProgression : MonoBehaviour
 
             extraFloorsBuilt++;
 
-            enemySpawnPointController.UpdateSpawnPositions(extraFloorsBuilt, 65f);
+            enemySpawnPointController.UpdateBattleAreaWidth(65f);
+            enemySpawnPointController.UpdateSpawnPositions(extraFloorsBuilt);
         }
 
         buildingsManager.maxBuildingAmount += 2;
