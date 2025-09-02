@@ -1335,6 +1335,30 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 136132844}
+        m_TargetAssemblyTypeName: AttackModeSpawnController, Assembly-CSharp
+        m_MethodName: UpdateSelectedSpawnNumber
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 3
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 136132844}
+        m_TargetAssemblyTypeName: AttackModeSpawnController, Assembly-CSharp
+        m_MethodName: UpdateButtonsPosition
+        m_Mode: 4
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: -200
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &58995918
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3015,6 +3039,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 136132843}
+  - component: {fileID: 136132844}
   m_Layer: 5
   m_Name: SelectAttackPoints
   m_TagString: Untagged
@@ -3054,6 +3079,31 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &136132844
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 136132842}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a94022732cd790c46bcaf5f6deb52aeb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  spawnArray: 000000000000000000000000000000000000000000000000000000000000000000000000
+  selectedSpawnNumber: 0
+  spawnTexts:
+  - {fileID: 994171051}
+  - {fileID: 1710577440}
+  - {fileID: 1017128486}
+  - {fileID: 665209055}
+  - {fileID: 1304132901}
+  - {fileID: 1973778930}
+  - {fileID: 727603798}
+  - {fileID: 774285180}
+  - {fileID: 1155712617}
+  amountButtons: {fileID: 1050495521}
 --- !u!1 &144830625
 GameObject:
   m_ObjectHideFlags: 0
@@ -4823,6 +4873,30 @@ MonoBehaviour:
         m_TargetAssemblyTypeName: AttackModePositionButton, Assembly-CSharp
         m_MethodName: StartMovingToPosition
         m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 136132844}
+        m_TargetAssemblyTypeName: AttackModeSpawnController, Assembly-CSharp
+        m_MethodName: UpdateSelectedSpawnNumber
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 4
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 136132844}
+        m_TargetAssemblyTypeName: AttackModeSpawnController, Assembly-CSharp
+        m_MethodName: UpdateButtonsPosition
+        m_Mode: 4
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -12849,7 +12923,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 559838389}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 136132844}
+        m_TargetAssemblyTypeName: AttackModeSpawnController, Assembly-CSharp
+        m_MethodName: DecreaseSpawn
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &559838389
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -17045,6 +17131,30 @@ MonoBehaviour:
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 136132844}
+        m_TargetAssemblyTypeName: AttackModeSpawnController, Assembly-CSharp
+        m_MethodName: UpdateSelectedSpawnNumber
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 8
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 136132844}
+        m_TargetAssemblyTypeName: AttackModeSpawnController, Assembly-CSharp
+        m_MethodName: UpdateButtonsPosition
+        m_Mode: 4
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 800
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
@@ -25502,6 +25612,30 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 136132844}
+        m_TargetAssemblyTypeName: AttackModeSpawnController, Assembly-CSharp
+        m_MethodName: UpdateSelectedSpawnNumber
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 136132844}
+        m_TargetAssemblyTypeName: AttackModeSpawnController, Assembly-CSharp
+        m_MethodName: UpdateButtonsPosition
+        m_Mode: 4
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: -800
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1028724923
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -26653,6 +26787,30 @@ MonoBehaviour:
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 136132844}
+        m_TargetAssemblyTypeName: AttackModeSpawnController, Assembly-CSharp
+        m_MethodName: UpdateSelectedSpawnNumber
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 5
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 136132844}
+        m_TargetAssemblyTypeName: AttackModeSpawnController, Assembly-CSharp
+        m_MethodName: UpdateButtonsPosition
+        m_Mode: 4
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 200
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
@@ -35601,6 +35759,30 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 136132844}
+        m_TargetAssemblyTypeName: AttackModeSpawnController, Assembly-CSharp
+        m_MethodName: UpdateSelectedSpawnNumber
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 2
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 136132844}
+        m_TargetAssemblyTypeName: AttackModeSpawnController, Assembly-CSharp
+        m_MethodName: UpdateButtonsPosition
+        m_Mode: 4
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: -400
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1243310620
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -37712,6 +37894,30 @@ MonoBehaviour:
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 136132844}
+        m_TargetAssemblyTypeName: AttackModeSpawnController, Assembly-CSharp
+        m_MethodName: UpdateSelectedSpawnNumber
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 1
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 136132844}
+        m_TargetAssemblyTypeName: AttackModeSpawnController, Assembly-CSharp
+        m_MethodName: UpdateButtonsPosition
+        m_Mode: 4
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: -600
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
@@ -45996,6 +46202,30 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 136132844}
+        m_TargetAssemblyTypeName: AttackModeSpawnController, Assembly-CSharp
+        m_MethodName: UpdateSelectedSpawnNumber
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 7
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 136132844}
+        m_TargetAssemblyTypeName: AttackModeSpawnController, Assembly-CSharp
+        m_MethodName: UpdateButtonsPosition
+        m_Mode: 4
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 600
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1657356974
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -52582,7 +52812,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1904677316}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 136132844}
+        m_TargetAssemblyTypeName: AttackModeSpawnController, Assembly-CSharp
+        m_MethodName: IncreaseSpawn
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1904677316
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -56488,6 +56730,30 @@ MonoBehaviour:
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 136132844}
+        m_TargetAssemblyTypeName: AttackModeSpawnController, Assembly-CSharp
+        m_MethodName: UpdateSelectedSpawnNumber
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 6
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 136132844}
+        m_TargetAssemblyTypeName: AttackModeSpawnController, Assembly-CSharp
+        m_MethodName: UpdateButtonsPosition
+        m_Mode: 4
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 400
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
