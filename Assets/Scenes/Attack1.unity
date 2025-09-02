@@ -1250,6 +1250,7 @@ GameObject:
   - component: {fileID: 58995916}
   - component: {fileID: 58995919}
   - component: {fileID: 58995918}
+  - component: {fileID: 58995920}
   - component: {fileID: 58995917}
   m_Layer: 5
   m_Name: 4Button
@@ -1321,7 +1322,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 58995918}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 58995920}
+        m_TargetAssemblyTypeName: AttackModePositionButton, Assembly-CSharp
+        m_MethodName: StartMovingToPosition
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &58995918
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1360,6 +1373,20 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 58995915}
   m_CullTransparentMesh: 1
+--- !u!114 &58995920
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 58995915}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1ee123a16301cb04eaf16fccacb824a2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  positionToMoveTo: {x: -41, y: 15, z: -150}
+  mouseLook: {fileID: 1626136263}
 --- !u!1001 &59171047
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -4719,6 +4746,7 @@ GameObject:
   - component: {fileID: 220411153}
   - component: {fileID: 220411156}
   - component: {fileID: 220411155}
+  - component: {fileID: 220411157}
   - component: {fileID: 220411154}
   m_Layer: 5
   m_Name: 5Button
@@ -4790,7 +4818,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 220411155}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 220411157}
+        m_TargetAssemblyTypeName: AttackModePositionButton, Assembly-CSharp
+        m_MethodName: StartMovingToPosition
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &220411155
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4829,6 +4869,20 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 220411152}
   m_CullTransparentMesh: 1
+--- !u!114 &220411157
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 220411152}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1ee123a16301cb04eaf16fccacb824a2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  positionToMoveTo: {x: 0, y: 15, z: -150}
+  mouseLook: {fileID: 1626136263}
 --- !u!1 &220614799
 GameObject:
   m_ObjectHideFlags: 0
@@ -16909,6 +16963,7 @@ GameObject:
   - component: {fileID: 702135060}
   - component: {fileID: 702135063}
   - component: {fileID: 702135062}
+  - component: {fileID: 702135064}
   - component: {fileID: 702135061}
   m_Layer: 5
   m_Name: 9Button
@@ -16980,7 +17035,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 702135062}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 702135064}
+        m_TargetAssemblyTypeName: AttackModePositionButton, Assembly-CSharp
+        m_MethodName: StartMovingToPosition
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &702135062
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -17019,6 +17086,20 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 702135059}
   m_CullTransparentMesh: 1
+--- !u!114 &702135064
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 702135059}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1ee123a16301cb04eaf16fccacb824a2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  positionToMoveTo: {x: 135, y: 15, z: -60}
+  mouseLook: {fileID: 1626136263}
 --- !u!1 &707547373
 GameObject:
   m_ObjectHideFlags: 0
@@ -25336,6 +25417,7 @@ GameObject:
   - component: {fileID: 1028724921}
   - component: {fileID: 1028724924}
   - component: {fileID: 1028724923}
+  - component: {fileID: 1028724925}
   - component: {fileID: 1028724922}
   m_Layer: 5
   m_Name: 1Button
@@ -25407,7 +25489,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1028724923}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1028724925}
+        m_TargetAssemblyTypeName: AttackModePositionButton, Assembly-CSharp
+        m_MethodName: StartMovingToPosition
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1028724923
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -25446,6 +25540,20 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1028724920}
   m_CullTransparentMesh: 1
+--- !u!114 &1028724925
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1028724920}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1ee123a16301cb04eaf16fccacb824a2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  positionToMoveTo: {x: -135, y: 15, z: -60}
+  mouseLook: {fileID: 1626136263}
 --- !u!1 &1028765779
 GameObject:
   m_ObjectHideFlags: 0
@@ -26463,6 +26571,7 @@ GameObject:
   - component: {fileID: 1082268004}
   - component: {fileID: 1082268007}
   - component: {fileID: 1082268006}
+  - component: {fileID: 1082268008}
   - component: {fileID: 1082268005}
   m_Layer: 5
   m_Name: 6Button
@@ -26534,7 +26643,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1082268006}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1082268008}
+        m_TargetAssemblyTypeName: AttackModePositionButton, Assembly-CSharp
+        m_MethodName: StartMovingToPosition
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1082268006
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -26573,6 +26694,20 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1082268003}
   m_CullTransparentMesh: 1
+--- !u!114 &1082268008
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1082268003}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1ee123a16301cb04eaf16fccacb824a2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  positionToMoveTo: {x: 41, y: 15, z: -150}
+  mouseLook: {fileID: 1626136263}
 --- !u!1 &1086168815
 GameObject:
   m_ObjectHideFlags: 0
@@ -35381,6 +35516,7 @@ GameObject:
   - component: {fileID: 1243310618}
   - component: {fileID: 1243310621}
   - component: {fileID: 1243310620}
+  - component: {fileID: 1243310622}
   - component: {fileID: 1243310619}
   m_Layer: 5
   m_Name: 3Button
@@ -35452,7 +35588,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1243310620}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1243310622}
+        m_TargetAssemblyTypeName: AttackModePositionButton, Assembly-CSharp
+        m_MethodName: StartMovingToPosition
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1243310620
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -35491,6 +35639,20 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1243310617}
   m_CullTransparentMesh: 1
+--- !u!114 &1243310622
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1243310617}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1ee123a16301cb04eaf16fccacb824a2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  positionToMoveTo: {x: -82, y: 15, z: -150}
+  mouseLook: {fileID: 1626136263}
 --- !u!1 &1244660798
 GameObject:
   m_ObjectHideFlags: 0
@@ -37468,6 +37630,7 @@ GameObject:
   - component: {fileID: 1351139025}
   - component: {fileID: 1351139028}
   - component: {fileID: 1351139027}
+  - component: {fileID: 1351139029}
   - component: {fileID: 1351139026}
   m_Layer: 5
   m_Name: 2Button
@@ -37539,7 +37702,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1351139027}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1351139029}
+        m_TargetAssemblyTypeName: AttackModePositionButton, Assembly-CSharp
+        m_MethodName: StartMovingToPosition
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1351139027
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -37578,6 +37753,20 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1351139024}
   m_CullTransparentMesh: 1
+--- !u!114 &1351139029
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1351139024}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1ee123a16301cb04eaf16fccacb824a2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  positionToMoveTo: {x: -123, y: 15, z: -150}
+  mouseLook: {fileID: 1626136263}
 --- !u!1 &1352090285
 GameObject:
   m_ObjectHideFlags: 0
@@ -43233,7 +43422,7 @@ Camera:
   far clip plane: 200
   field of view: 60
   orthographic: 1
-  orthographic size: 18
+  orthographic size: 27.5
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -43258,7 +43447,7 @@ Transform:
   m_GameObject: {fileID: 1569821201}
   serializedVersion: 2
   m_LocalRotation: {x: 0.7071068, y: 0, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: 0, y: 51.41, z: -102.01}
+  m_LocalPosition: {x: 0, y: 100, z: -150}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -45134,7 +45323,7 @@ Transform:
   m_GameObject: {fileID: 1626136257}
   serializedVersion: 2
   m_LocalRotation: {x: 0.5, y: 0, z: 0, w: 0.8660254}
-  m_LocalPosition: {x: 0, y: 15, z: -175}
+  m_LocalPosition: {x: 0, y: 15, z: -150}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -45192,7 +45381,7 @@ MonoBehaviour:
   maxCameraZoom: 30
   player: {fileID: 1904667352}
   inCutScene: 0
-  cameraOnPlayer: 1
+  cameraOnPlayer: 0
   notCastingRays: 1
   minimapCamera: {fileID: 1569821203}
   minimapIndicators: {fileID: 1028765779}
@@ -45722,6 +45911,7 @@ GameObject:
   - component: {fileID: 1657356972}
   - component: {fileID: 1657356975}
   - component: {fileID: 1657356974}
+  - component: {fileID: 1657356976}
   - component: {fileID: 1657356973}
   m_Layer: 5
   m_Name: 8Button
@@ -45793,7 +45983,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1657356974}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1657356976}
+        m_TargetAssemblyTypeName: AttackModePositionButton, Assembly-CSharp
+        m_MethodName: StartMovingToPosition
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1657356974
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -45832,6 +46034,20 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1657356971}
   m_CullTransparentMesh: 1
+--- !u!114 &1657356976
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1657356971}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1ee123a16301cb04eaf16fccacb824a2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  positionToMoveTo: {x: 123, y: 15, z: -150}
+  mouseLook: {fileID: 1626136263}
 --- !u!1001 &1660641144
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -56190,6 +56406,7 @@ GameObject:
   - component: {fileID: 2082452199}
   - component: {fileID: 2082452202}
   - component: {fileID: 2082452201}
+  - component: {fileID: 2082452203}
   - component: {fileID: 2082452200}
   m_Layer: 5
   m_Name: 7Button
@@ -56261,7 +56478,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 2082452201}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 2082452203}
+        m_TargetAssemblyTypeName: AttackModePositionButton, Assembly-CSharp
+        m_MethodName: StartMovingToPosition
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &2082452201
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -56300,6 +56529,20 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2082452198}
   m_CullTransparentMesh: 1
+--- !u!114 &2082452203
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2082452198}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1ee123a16301cb04eaf16fccacb824a2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  positionToMoveTo: {x: 82, y: 15, z: -150}
+  mouseLook: {fileID: 1626136263}
 --- !u!1001 &2082651471
 PrefabInstance:
   m_ObjectHideFlags: 0

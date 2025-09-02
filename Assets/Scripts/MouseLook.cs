@@ -18,7 +18,7 @@ public class MouseLook : MonoBehaviour
     public float maxCameraZoom;
     public Player player;
     public bool inCutScene;
-    public bool cameraOnPlayer = true;
+    public bool cameraOnPlayer;
     public bool notCastingRays; // Don't cast rays in Attack Mode Minimap view
     public Camera minimapCamera;
     public GameObject minimapIndicators;
@@ -31,6 +31,9 @@ public class MouseLook : MonoBehaviour
     public GameObject battleFieldMenu;
     public MinimapInput minimapInput;
     public float minimapInputSensitivity;
+
+    private Vector3 specificPosition;
+    private bool movingToSpecificPosition;
 
     public void EnableBuildMode()
     {
@@ -66,6 +69,14 @@ public class MouseLook : MonoBehaviour
         if (player.insideKingHouse && (transform.rotation.y != 0 || transform.rotation.eulerAngles.y != 180)) return;
         cameraOnPlayer = false;
         cameraOnPlayerButton.ChangeIconSprite(cameraOnPlayer);
+
+        movingToSpecificPosition = false;
+    }
+
+    public void StartMovingToPosition(Vector3 pos)
+    {
+        specificPosition = pos;
+        movingToSpecificPosition = true;
     }
 
     public void ZoomCameraInOrOut(bool zoom_in)
@@ -124,6 +135,11 @@ public class MouseLook : MonoBehaviour
             float scrollWheel = Input.GetAxis("Mouse ScrollWheel");
             distanceFromObject = Mathf.Clamp(distanceFromObject - scrollWheel * sensitivity, minCameraZoom, maxCameraZoom);
             minimapCamera.orthographicSize = distanceFromObject / 2 + 20f;
+        }
+
+        if (movingToSpecificPosition)
+        {
+            MoveToSpecificPosition();
         }
 
         if (player == null) return;
@@ -214,6 +230,15 @@ public class MouseLook : MonoBehaviour
             transform.position = Vector3.Lerp(transform.position, playerToFollowAngledDirection, smoothSpeed);
             playerToFollowDirection = new Vector3(player.transform.position.x, player.transform.position.y + 100f, player.transform.position.z);
             minimapCamera.transform.position = Vector3.Lerp(minimapCamera.transform.position, playerToFollowDirection, smoothSpeed);
+        }
+    }
+
+    private void MoveToSpecificPosition()
+    {
+        if (specificPosition != null)
+        {
+            transform.position = Vector3.Lerp(transform.position, specificPosition, smoothSpeed * 0.5f);
+            minimapCamera.transform.position = Vector3.Lerp(minimapCamera.transform.position, specificPosition, smoothSpeed * 0.5f);
         }
     }
 
