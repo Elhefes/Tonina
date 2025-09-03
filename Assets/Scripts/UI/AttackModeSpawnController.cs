@@ -11,11 +11,17 @@ public class AttackModeSpawnController : MonoBehaviour
     public TMP_Text[] spawnTexts;
     public GameObject amountButtons;
 
+    public GameObject playerSpawnElement;
+    public GameObject spawnTextInBetween;
+    public GameObject leftestSpawnText;
+    public GameObject rightestSpawnText;
+
     private void OnEnable()
     {
         selectedSpawnNumber = 4;
         UpdateSpawnArray();
         UpdateAddText();
+        UpdatePlayerSpawnElements(4, 0f);
     }
 
     public void IncreaseSpawn()
@@ -48,6 +54,28 @@ public class AttackModeSpawnController : MonoBehaviour
     public void UpdateButtonsPosition(float elementPositionX)
     {
         amountButtons.transform.localPosition = new Vector3(elementPositionX, 0f, 0f);
+    }
+
+    public void UpdatePlayerSpawnElements(int spawnNumber, float buttonPosition)
+    {
+        if (spawnNumber == 0)
+        {
+            leftestSpawnText.SetActive(true);
+            spawnTextInBetween.SetActive(false);
+        }
+        else if (spawnNumber == 8)
+        {
+            rightestSpawnText.SetActive(true);
+            spawnTextInBetween.SetActive(false);
+        }
+        else
+        {
+            leftestSpawnText.SetActive(false);
+            rightestSpawnText.SetActive(false);
+            spawnTextInBetween.SetActive(true);
+        }
+
+        playerSpawnElement.transform.localPosition = new Vector3(buttonPosition, -490f, 0f);
     }
 
     void UpdateSpawnArray()

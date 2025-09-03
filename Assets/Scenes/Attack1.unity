@@ -1229,9 +1229,8 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 1917764840}
-  - {fileID: 291165061}
-  - {fileID: 1449566779}
+  - {fileID: 2018714457}
+  - {fileID: 1200039187}
   m_Father: {fileID: 136132843}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
@@ -1335,30 +1334,6 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 136132844}
-        m_TargetAssemblyTypeName: AttackModeSpawnController, Assembly-CSharp
-        m_MethodName: UpdateSelectedSpawnNumber
-        m_Mode: 3
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 3
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 136132844}
-        m_TargetAssemblyTypeName: AttackModeSpawnController, Assembly-CSharp
-        m_MethodName: UpdateButtonsPosition
-        m_Mode: 4
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: -200
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
 --- !u!114 &58995918
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1411,6 +1386,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   positionToMoveTo: {x: -41, y: 15, z: -150}
   mouseLook: {fileID: 1626136263}
+  attackModeSpawnController: {fileID: 136132844}
 --- !u!1001 &59171047
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3069,6 +3045,8 @@ RectTransform:
   - {fileID: 1657356972}
   - {fileID: 702135060}
   - {fileID: 57454970}
+  - {fileID: 1252652971}
+  - {fileID: 1149498751}
   - {fileID: 2070611705}
   - {fileID: 1050495522}
   - {fileID: 393509804}
@@ -3105,6 +3083,10 @@ MonoBehaviour:
   - {fileID: 774285180}
   - {fileID: 1155712617}
   amountButtons: {fileID: 1050495521}
+  playerSpawnElement: {fileID: 57454969}
+  spawnTextInBetween: {fileID: 2018714456}
+  leftestSpawnText: {fileID: 1252652970}
+  rightestSpawnText: {fileID: 1149498750}
 --- !u!1 &144830625
 GameObject:
   m_ObjectHideFlags: 0
@@ -4882,30 +4864,6 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 136132844}
-        m_TargetAssemblyTypeName: AttackModeSpawnController, Assembly-CSharp
-        m_MethodName: UpdateSelectedSpawnNumber
-        m_Mode: 3
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 4
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 136132844}
-        m_TargetAssemblyTypeName: AttackModeSpawnController, Assembly-CSharp
-        m_MethodName: UpdateButtonsPosition
-        m_Mode: 4
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
 --- !u!114 &220411155
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4958,6 +4916,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   positionToMoveTo: {x: 0, y: 15, z: -150}
   mouseLook: {fileID: 1626136263}
+  attackModeSpawnController: {fileID: 136132844}
 --- !u!1 &220614799
 GameObject:
   m_ObjectHideFlags: 0
@@ -6506,43 +6465,6 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 548394b7f5927d2429b6ad946f3b72bc, type: 3}
---- !u!1 &291165060
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 291165061}
-  m_Layer: 5
-  m_Name: leftest
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 0
---- !u!224 &291165061
-RectTransform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 291165060}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 1252652971}
-  - {fileID: 1324069987}
-  m_Father: {fileID: 57454970}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -800, y: 0}
-  m_SizeDelta: {x: 100, y: 100}
-  m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1001 &292238870
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -17135,30 +17057,6 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 136132844}
-        m_TargetAssemblyTypeName: AttackModeSpawnController, Assembly-CSharp
-        m_MethodName: UpdateSelectedSpawnNumber
-        m_Mode: 3
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 8
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 136132844}
-        m_TargetAssemblyTypeName: AttackModeSpawnController, Assembly-CSharp
-        m_MethodName: UpdateButtonsPosition
-        m_Mode: 4
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 800
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
 --- !u!114 &702135062
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -17211,6 +17109,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   positionToMoveTo: {x: 135, y: 15, z: -60}
   mouseLook: {fileID: 1626136263}
+  attackModeSpawnController: {fileID: 136132844}
 --- !u!1 &707547373
 GameObject:
   m_ObjectHideFlags: 0
@@ -20985,81 +20884,6 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 842404093}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
---- !u!1 &845595673
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 845595674}
-  - component: {fileID: 845595676}
-  - component: {fileID: 845595675}
-  m_Layer: 5
-  m_Name: arrow
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!224 &845595674
-RectTransform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 845595673}
-  m_LocalRotation: {x: -0, y: -0, z: 0.7071068, w: 0.7071068}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.66999996, y: 0.66999996, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 1449566779}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 90}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 60}
-  m_SizeDelta: {x: 120, y: 120}
-  m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &845595675
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 845595673}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_RaycastTarget: 0
-  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
-  m_Maskable: 1
-  m_OnCullStateChanged:
-    m_PersistentCalls:
-      m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 66da86d7a8f5ec8449c29bafcc7f6a04, type: 3}
-  m_Type: 0
-  m_PreserveAspect: 0
-  m_FillCenter: 1
-  m_FillMethod: 4
-  m_FillAmount: 1
-  m_FillClockwise: 1
-  m_FillOrigin: 0
-  m_UseSpriteMesh: 0
-  m_PixelsPerUnitMultiplier: 1
---- !u!222 &845595676
-CanvasRenderer:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 845595673}
-  m_CullTransparentMesh: 1
 --- !u!1 &849322649
 GameObject:
   m_ObjectHideFlags: 0
@@ -25613,30 +25437,6 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 136132844}
-        m_TargetAssemblyTypeName: AttackModeSpawnController, Assembly-CSharp
-        m_MethodName: UpdateSelectedSpawnNumber
-        m_Mode: 3
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 136132844}
-        m_TargetAssemblyTypeName: AttackModeSpawnController, Assembly-CSharp
-        m_MethodName: UpdateButtonsPosition
-        m_Mode: 4
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: -800
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
 --- !u!114 &1028724923
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -25689,6 +25489,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   positionToMoveTo: {x: -135, y: 15, z: -60}
   mouseLook: {fileID: 1626136263}
+  attackModeSpawnController: {fileID: 136132844}
 --- !u!1 &1028765779
 GameObject:
   m_ObjectHideFlags: 0
@@ -26791,30 +26592,6 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 136132844}
-        m_TargetAssemblyTypeName: AttackModeSpawnController, Assembly-CSharp
-        m_MethodName: UpdateSelectedSpawnNumber
-        m_Mode: 3
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 5
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 136132844}
-        m_TargetAssemblyTypeName: AttackModeSpawnController, Assembly-CSharp
-        m_MethodName: UpdateButtonsPosition
-        m_Mode: 4
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 200
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
 --- !u!114 &1082268006
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -26867,6 +26644,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   positionToMoveTo: {x: 41, y: 15, z: -150}
   mouseLook: {fileID: 1626136263}
+  attackModeSpawnController: {fileID: 136132844}
 --- !u!1 &1086168815
 GameObject:
   m_ObjectHideFlags: 0
@@ -28278,12 +28056,12 @@ GameObject:
   - component: {fileID: 1149498753}
   - component: {fileID: 1149498752}
   m_Layer: 5
-  m_Name: Text (TMP)
+  m_Name: RightestTMP
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1149498751
 RectTransform:
   m_ObjectHideFlags: 0
@@ -28296,11 +28074,11 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 1449566779}
+  m_Father: {fileID: 136132843}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -100, y: 0}
+  m_AnchoredPosition: {x: 700, y: -490}
   m_SizeDelta: {x: 450, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1149498752
@@ -34426,10 +34204,10 @@ RectTransform:
   m_GameObject: {fileID: 1200039186}
   m_LocalRotation: {x: -0, y: -0, z: 0.7071068, w: 0.7071068}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.66999996, y: 0.66999996, z: 1}
+  m_LocalScale: {x: 0.6699999, y: 0.6699999, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 1917764840}
+  m_Father: {fileID: 57454970}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 90}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -34450,7 +34228,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_RaycastTarget: 0
+  m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
@@ -35760,30 +35538,6 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 136132844}
-        m_TargetAssemblyTypeName: AttackModeSpawnController, Assembly-CSharp
-        m_MethodName: UpdateSelectedSpawnNumber
-        m_Mode: 3
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 2
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 136132844}
-        m_TargetAssemblyTypeName: AttackModeSpawnController, Assembly-CSharp
-        m_MethodName: UpdateButtonsPosition
-        m_Mode: 4
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: -400
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
 --- !u!114 &1243310620
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -35836,6 +35590,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   positionToMoveTo: {x: -82, y: 15, z: -150}
   mouseLook: {fileID: 1626136263}
+  attackModeSpawnController: {fileID: 136132844}
 --- !u!1 &1244660798
 GameObject:
   m_ObjectHideFlags: 0
@@ -36019,12 +35774,12 @@ GameObject:
   - component: {fileID: 1252652973}
   - component: {fileID: 1252652972}
   m_Layer: 5
-  m_Name: Text (TMP)
+  m_Name: LeftestTMP
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1252652971
 RectTransform:
   m_ObjectHideFlags: 0
@@ -36037,11 +35792,11 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 291165061}
+  m_Father: {fileID: 136132843}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 100, y: 0}
+  m_AnchoredPosition: {x: -700, y: -490}
   m_SizeDelta: {x: 450, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1252652972
@@ -37242,81 +36997,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1498565851}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &1324069986
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1324069987}
-  - component: {fileID: 1324069989}
-  - component: {fileID: 1324069988}
-  m_Layer: 5
-  m_Name: arrow
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!224 &1324069987
-RectTransform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1324069986}
-  m_LocalRotation: {x: -0, y: -0, z: 0.7071068, w: 0.7071068}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.66999996, y: 0.66999996, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 291165061}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 90}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 60}
-  m_SizeDelta: {x: 120, y: 120}
-  m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &1324069988
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1324069986}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_RaycastTarget: 0
-  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
-  m_Maskable: 1
-  m_OnCullStateChanged:
-    m_PersistentCalls:
-      m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 66da86d7a8f5ec8449c29bafcc7f6a04, type: 3}
-  m_Type: 0
-  m_PreserveAspect: 0
-  m_FillCenter: 1
-  m_FillMethod: 4
-  m_FillAmount: 1
-  m_FillClockwise: 1
-  m_FillOrigin: 0
-  m_UseSpriteMesh: 0
-  m_PixelsPerUnitMultiplier: 1
---- !u!222 &1324069989
-CanvasRenderer:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1324069986}
-  m_CullTransparentMesh: 1
 --- !u!1001 &1325274937
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -37898,30 +37578,6 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 136132844}
-        m_TargetAssemblyTypeName: AttackModeSpawnController, Assembly-CSharp
-        m_MethodName: UpdateSelectedSpawnNumber
-        m_Mode: 3
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 1
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 136132844}
-        m_TargetAssemblyTypeName: AttackModeSpawnController, Assembly-CSharp
-        m_MethodName: UpdateButtonsPosition
-        m_Mode: 4
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: -600
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
 --- !u!114 &1351139027
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -37974,6 +37630,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   positionToMoveTo: {x: -123, y: 15, z: -150}
   mouseLook: {fileID: 1626136263}
+  attackModeSpawnController: {fileID: 136132844}
 --- !u!1 &1352090285
 GameObject:
   m_ObjectHideFlags: 0
@@ -40158,43 +39815,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1498565851}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &1449566778
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1449566779}
-  m_Layer: 5
-  m_Name: rightest
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 0
---- !u!224 &1449566779
-RectTransform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1449566778}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 1149498751}
-  - {fileID: 845595674}
-  m_Father: {fileID: 57454970}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 800, y: 0}
-  m_SizeDelta: {x: 100, y: 100}
-  m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1001 &1459716530
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -46212,30 +45832,6 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 136132844}
-        m_TargetAssemblyTypeName: AttackModeSpawnController, Assembly-CSharp
-        m_MethodName: UpdateSelectedSpawnNumber
-        m_Mode: 3
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 7
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 136132844}
-        m_TargetAssemblyTypeName: AttackModeSpawnController, Assembly-CSharp
-        m_MethodName: UpdateButtonsPosition
-        m_Mode: 4
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 600
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
 --- !u!114 &1657356974
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -46288,6 +45884,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   positionToMoveTo: {x: 123, y: 15, z: -150}
   mouseLook: {fileID: 1626136263}
+  attackModeSpawnController: {fileID: 136132844}
 --- !u!1001 &1660641144
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -53335,43 +52932,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1498565851}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &1917764839
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1917764840}
-  m_Layer: 5
-  m_Name: default
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!224 &1917764840
-RectTransform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1917764839}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 2018714457}
-  - {fileID: 1200039187}
-  m_Father: {fileID: 57454970}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 100, y: 100}
-  m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &1919385121
 GameObject:
   m_ObjectHideFlags: 0
@@ -55503,7 +55063,7 @@ GameObject:
   - component: {fileID: 2018714459}
   - component: {fileID: 2018714458}
   m_Layer: 5
-  m_Name: Text (TMP)
+  m_Name: TMP_InBetween
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -55521,7 +55081,7 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 1917764840}
+  m_Father: {fileID: 57454970}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -56743,30 +56303,6 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 136132844}
-        m_TargetAssemblyTypeName: AttackModeSpawnController, Assembly-CSharp
-        m_MethodName: UpdateSelectedSpawnNumber
-        m_Mode: 3
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 6
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 136132844}
-        m_TargetAssemblyTypeName: AttackModeSpawnController, Assembly-CSharp
-        m_MethodName: UpdateButtonsPosition
-        m_Mode: 4
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 400
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
 --- !u!114 &2082452201
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -56819,6 +56355,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   positionToMoveTo: {x: 82, y: 15, z: -150}
   mouseLook: {fileID: 1626136263}
+  attackModeSpawnController: {fileID: 136132844}
 --- !u!1001 &2082651471
 PrefabInstance:
   m_ObjectHideFlags: 0
