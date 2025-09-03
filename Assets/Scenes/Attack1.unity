@@ -3091,8 +3091,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a94022732cd790c46bcaf5f6deb52aeb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  maxFriendliesAmount: 15
   spawnArray: 000000000000000000000000000000000000000000000000000000000000000000000000
-  selectedSpawnNumber: 0
+  addText: {fileID: 393509805}
   spawnTexts:
   - {fileID: 994171051}
   - {fileID: 1710577440}
@@ -43586,6 +43587,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1569821204}
   - component: {fileID: 1569821203}
+  - component: {fileID: 1569821205}
   m_Layer: 0
   m_Name: minimapCamera
   m_TagString: MainCamera
@@ -43659,6 +43661,14 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 90, y: 0, z: 0}
+--- !u!81 &1569821205
+AudioListener:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1569821201}
+  m_Enabled: 1
 --- !u!1 &1572176829
 GameObject:
   m_ObjectHideFlags: 0
