@@ -10,6 +10,7 @@ public class AttackModeSpawnController : MonoBehaviour
     public TMP_Text addText;
     public TMP_Text[] spawnTexts;
     public GameObject amountButtons;
+    public GameObject startButton;
 
     public GameObject playerSpawnElement;
     public GameObject spawnTextInBetween;
@@ -32,6 +33,10 @@ public class AttackModeSpawnController : MonoBehaviour
             currentFriendliesAmount++;
             UpdateSpawnArray();
             UpdateAddText();
+            if (currentFriendliesAmount == maxFriendliesAmount)
+            {
+                startButton.SetActive(true);
+            }
         }
     }
 
@@ -43,6 +48,7 @@ public class AttackModeSpawnController : MonoBehaviour
             currentFriendliesAmount--;
             UpdateSpawnArray();
             UpdateAddText();
+            startButton.SetActive(false);
         }
     }
 
