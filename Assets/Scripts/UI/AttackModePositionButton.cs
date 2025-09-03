@@ -1,18 +1,21 @@
 using System;
+using System.Collections;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
-public class AttackModePositionButton : MonoBehaviour, IPointerClickHandler
+public class AttackModePositionButton : MonoBehaviour, IPointerClickHandler, IPointerDownHandler, IPointerUpHandler
 {
     [SerializeField] private Vector3 positionToMoveTo;
     public MouseLook mouseLook;
     public AttackModeSpawnController attackModeSpawnController;
 
-    int spawnNumber;
+    private int spawnNumber;
 
-    float clicked = 0;
-    float clickTime = 0;
-    float clickDelay = 0.67f;
+    private float clicked = 0;
+    private float clickTime = 0;
+    private float clickDelay = 0.67f;
+
+    private bool buttonPressed;
 
     void Start()
     {
@@ -39,6 +42,36 @@ public class AttackModePositionButton : MonoBehaviour, IPointerClickHandler
         }
         else if (clicked > 2 || Time.time - clickTime > 1)
             clicked = 0;
+    }
+
+    IEnumerator StartDelayedButtonPress()
+    {
+        yield return new WaitForSeconds(0.4f);
+        if (buttonPressed)
+        {
+            attackModeSpawnController.UpdateSelectedSpawnNumber(spawnNumber);
+            attackModeSpawnController.UpdateButtonsPosition(transform.localPosition.x);
+            SelectPlayerSpawn();
+            StartMovingToPosition();
+        }
+    }
+
+    public void OnPointerDown(PointerEventData eventData)
+    {
+        buttonPressed = true;
+        StartCoroutine(StartDelayedButtonPress());
+    }
+
+    public void OnPointerUp(PointerEventData eventData)
+    {
+        buttonPressed = false;
+        StopAllCoroutines();
+    }
+
+    void OnDisable()
+    {
+        StopAllCoroutines();
+        buttonPressed = false;
     }
 
     public void StartMovingToPosition()

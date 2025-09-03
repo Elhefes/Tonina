@@ -61,10 +61,12 @@ public class AttackModeSpawnController : MonoBehaviour
         if (spawnNumber == 0)
         {
             leftestSpawnText.SetActive(true);
+            rightestSpawnText.SetActive(false);
             spawnTextInBetween.SetActive(false);
         }
         else if (spawnNumber == 8)
         {
+            leftestSpawnText.SetActive(false);
             rightestSpawnText.SetActive(true);
             spawnTextInBetween.SetActive(false);
         }
