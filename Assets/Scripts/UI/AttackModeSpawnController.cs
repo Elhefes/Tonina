@@ -3,6 +3,10 @@ using TMPro;
 
 public class AttackModeSpawnController : MonoBehaviour
 {
+    public Animator animator;
+    public Transform moveableElements;
+    private bool isDown;
+
     public int maxFriendliesAmount;
     private int currentFriendliesAmount;
     public int[] spawnArray;
@@ -23,6 +27,23 @@ public class AttackModeSpawnController : MonoBehaviour
         UpdateSpawnArray();
         UpdateAddText();
         UpdatePlayerSpawnElements(4, 0f);
+        animator.SetTrigger("Up");
+    }
+
+    public void UpDownTrigger()
+    {
+        if (Mathf.Abs(moveableElements.localPosition.y) > 0.5f && Mathf.Abs(moveableElements.localPosition.y + 330) > 0.5f) return; // When elements aren't up or down
+        isDown = !isDown;
+        if (isDown)
+        {
+            animator.SetTrigger("Down");
+            amountButtons.SetActive(false);
+        }
+        else
+        {
+            animator.SetTrigger("Up");
+            amountButtons.SetActive(true);
+        }
     }
 
     public void IncreaseSpawn()
@@ -33,9 +54,11 @@ public class AttackModeSpawnController : MonoBehaviour
             currentFriendliesAmount++;
             UpdateSpawnArray();
             UpdateAddText();
+
             if (currentFriendliesAmount == maxFriendliesAmount)
             {
                 startButton.SetActive(true);
+                UpDownTrigger();
             }
         }
     }
@@ -54,16 +77,18 @@ public class AttackModeSpawnController : MonoBehaviour
 
     public void UpdateSelectedSpawnNumber(int spawnNumber)
     {
-        selectedSpawnNumber = spawnNumber;
+        if (!isDown) selectedSpawnNumber = spawnNumber;
     }
 
     public void UpdateButtonsPosition(float elementPositionX)
     {
-        amountButtons.transform.localPosition = new Vector3(elementPositionX, 0f, 0f);
+        if (!isDown) amountButtons.transform.localPosition = new Vector3(elementPositionX, 0f, 0f);
     }
 
     public void UpdatePlayerSpawnElements(int spawnNumber, float buttonPosition)
     {
+        if (isDown) return;
+
         if (spawnNumber == 0)
         {
             leftestSpawnText.SetActive(true);
@@ -88,6 +113,7 @@ public class AttackModeSpawnController : MonoBehaviour
 
     void UpdateSpawnArray()
     {
+        if (isDown) return;
         for (int i = 0; i < spawnArray.Length; i++)
         {
             spawnTexts[i].text = spawnArray[i].ToString();
@@ -96,6 +122,7 @@ public class AttackModeSpawnController : MonoBehaviour
 
     void UpdateAddText()
     {
+        if (isDown) return;
         if (currentFriendliesAmount == maxFriendliesAmount)
         {
             addText.text = "All spawns selected!";
