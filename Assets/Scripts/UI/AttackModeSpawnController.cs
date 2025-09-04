@@ -3,6 +3,12 @@ using TMPro;
 
 public class AttackModeSpawnController : MonoBehaviour
 {
+    public MouseLook mouseLook;
+    public Camera mainCamera;
+    public AudioListener minimapAudioListener;
+    public RenderTexture minimapRenderTexture;
+    public GameObject minimapRenderTextureObject;
+
     public Animator animator;
     public Transform moveableElements;
     private bool isDown;
@@ -16,10 +22,14 @@ public class AttackModeSpawnController : MonoBehaviour
     public GameObject amountButtons;
     public GameObject startButton;
 
+    public GameObject enemiesObject;
+
     public GameObject playerSpawnElement;
     public GameObject spawnTextInBetween;
     public GameObject leftestSpawnText;
     public GameObject rightestSpawnText;
+
+    public GameObject battleUI;
 
     private void OnEnable()
     {
@@ -109,6 +119,21 @@ public class AttackModeSpawnController : MonoBehaviour
         }
 
         playerSpawnElement.transform.localPosition = new Vector3(buttonPosition, -490f, 0f);
+    }
+
+    public void StartAttack()
+    {
+        mainCamera.gameObject.tag = "MainCamera";
+        mainCamera.enabled = true;
+        minimapAudioListener.enabled = false;
+        mouseLook.minimapCamera.gameObject.tag = "Untagged";
+        mouseLook.minimapCamera.targetTexture = minimapRenderTexture;
+        mouseLook.notCastingRays = false;
+        mainCamera.gameObject.SetActive(true);
+        minimapRenderTextureObject.SetActive(true);
+        battleUI.SetActive(true);
+        mouseLook.ToggleCameraOnPlayer();
+        enemiesObject.SetActive(true);
     }
 
     void UpdateSpawnArray()
