@@ -127,6 +127,7 @@ public class AttackModeSpawnController : MonoBehaviour
 
     public void StartAttack()
     {
+        mouseLook.SetMovingToSpecificPosition(false);
         mainCamera.gameObject.tag = "MainCamera";
         mainCamera.enabled = true;
         minimapAudioListener.enabled = false;

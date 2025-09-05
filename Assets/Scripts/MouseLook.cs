@@ -73,6 +73,8 @@ public class MouseLook : MonoBehaviour
         movingToSpecificPosition = false;
     }
 
+    public void SetMovingToSpecificPosition(bool value) { movingToSpecificPosition = value; }
+
     public void StartMovingToPosition(Vector3 pos)
     {
         specificPosition = pos;
