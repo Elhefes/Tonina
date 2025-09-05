@@ -38,7 +38,7 @@ public class AttackModeCreatureSpawner : MonoBehaviour
                     return;
                 }
 
-                friendlies[creatureIndex].transform.position = spawns[i].position;
+                friendlies[creatureIndex].transform.position = spawns[i].position + new Vector3(Random.Range(-3f, 3f), 0f, Random.Range(-3f, 3f));
                 creatureIndex++;
             }
         }
