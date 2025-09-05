@@ -4,8 +4,8 @@ public class AttackModeCreatureSpawner : MonoBehaviour
 {
     public GameObject friendliesParentObject;
     [SerializeField] private GameObject spawnsParentObject;
+    public Transform[] spawns;
     private GameObject[] friendlies;
-    private Transform[] spawns;
 
     void Start()
     {

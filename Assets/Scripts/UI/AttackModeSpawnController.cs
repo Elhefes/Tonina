@@ -16,6 +16,7 @@ public class AttackModeSpawnController : MonoBehaviour
     public int maxFriendliesAmount;
     private int currentFriendliesAmount;
     public int[] spawnArray;
+    private int playerSpawnNumber;
     private int selectedSpawnNumber;
     public TMP_Text addText;
     public TMP_Text[] spawnTexts;
@@ -34,10 +35,11 @@ public class AttackModeSpawnController : MonoBehaviour
 
     private void OnEnable()
     {
+        playerSpawnNumber = 4;
         selectedSpawnNumber = 4;
         UpdateSpawnArray();
         UpdateAddText();
-        UpdatePlayerSpawnElements(4, 0f);
+        UpdatePlayerSpawnElements(playerSpawnNumber, 0f);
         animator.SetTrigger("Up");
     }
 
@@ -119,6 +121,7 @@ public class AttackModeSpawnController : MonoBehaviour
             spawnTextInBetween.SetActive(true);
         }
 
+        playerSpawnNumber = spawnNumber;
         playerSpawnElement.transform.localPosition = new Vector3(buttonPosition, -490f, 0f);
     }
 
@@ -130,6 +133,8 @@ public class AttackModeSpawnController : MonoBehaviour
         mouseLook.minimapCamera.gameObject.tag = "Untagged";
         mouseLook.minimapCamera.targetTexture = minimapRenderTexture;
         mouseLook.notCastingRays = false;
+        mouseLook.player.transform.position = attackModeCreatureSpawner.spawns[playerSpawnNumber].position;
+        mouseLook.player.gameObject.SetActive(true);
         mainCamera.gameObject.SetActive(true);
         minimapRenderTextureObject.SetActive(true);
         battleUI.SetActive(true);

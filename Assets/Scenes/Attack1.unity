@@ -18896,6 +18896,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   friendliesParentObject: {fileID: 407768231}
   spawnsParentObject: {fileID: 1841777523}
+  spawns: []
 --- !u!1001 &770572421
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -22802,11 +22803,11 @@ PrefabInstance:
       objectReference: {fileID: 587814492}
     - target: {fileID: 4959015639858434263, guid: f1110e22860f9844396abf95985246eb, type: 3}
       propertyPath: m_AnchorMax.x
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4959015639858434263, guid: f1110e22860f9844396abf95985246eb, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5021349066847927866, guid: f1110e22860f9844396abf95985246eb, type: 3}
       propertyPath: m_Name
@@ -22814,7 +22815,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5021349066847927866, guid: f1110e22860f9844396abf95985246eb, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5021349066847927869, guid: f1110e22860f9844396abf95985246eb, type: 3}
       propertyPath: m_RootOrder
