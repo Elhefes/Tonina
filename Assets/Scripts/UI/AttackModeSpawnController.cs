@@ -22,6 +22,7 @@ public class AttackModeSpawnController : MonoBehaviour
     public GameObject amountButtons;
     public GameObject startButton;
 
+    public AttackModeCreatureSpawner attackModeCreatureSpawner;
     public GameObject enemiesObject;
 
     public GameObject playerSpawnElement;
@@ -134,6 +135,8 @@ public class AttackModeSpawnController : MonoBehaviour
         battleUI.SetActive(true);
         mouseLook.ToggleCameraOnPlayer();
         enemiesObject.SetActive(true);
+        attackModeCreatureSpawner.MoveFriendliesToSpawns(spawnArray);
+        attackModeCreatureSpawner.friendliesParentObject.SetActive(true);
     }
 
     void UpdateSpawnArray()
