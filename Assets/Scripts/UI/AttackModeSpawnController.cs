@@ -33,18 +33,21 @@ public class AttackModeSpawnController : MonoBehaviour
     public GameObject rightestSpawnText;
 
     public GameObject battleUI;
+    public GameObject optionsButton;
 
     private void Start()
     {
         playerSpawnNumber = 4;
         selectedSpawnNumber = 4;
         playerSpawnButtonPosition = 0f;
+        UpdatePlayerSpawnElements(playerSpawnNumber, playerSpawnButtonPosition); // Start updates later than OnEnable
         animator.SetTrigger("Up");
     }
 
     private void OnEnable()
     {
         ResetSpawns();
+        optionsButton.SetActive(true);
     }
 
     void ResetSpawns()
@@ -155,6 +158,7 @@ public class AttackModeSpawnController : MonoBehaviour
         mouseLook.player.gameObject.SetActive(true);
         mainCamera.gameObject.SetActive(true);
         minimapRenderTextureObject.SetActive(true);
+        optionsButton.SetActive(false);
         battleUI.SetActive(true);
         mouseLook.ToggleCameraOnPlayer();
         enemiesObject.SetActive(true);
