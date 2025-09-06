@@ -82,8 +82,10 @@ public class LosingScreen : MonoBehaviour
         player.LoseBattle();
         player.EndBattle();
         player.ReturnHome(null);
-        mouseLook.ToggleCameraOnPlayer();
-        if (!playerDied) kingBarricade.SetActive(true);
+        if (kingBarricade != null)
+        {
+            if (!playerDied) kingBarricade.SetActive(true);
+        }
         yield return new WaitForSeconds(1f);
         youLoseText.gameObject.SetActive(false);
         reasonText.gameObject.SetActive(false);

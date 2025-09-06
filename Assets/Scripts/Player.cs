@@ -686,6 +686,11 @@ public class Player : Creature
         DestroyFriendlyWarriors();
         DisableBattleMode();
         barricadeController.RestoreBarricades();
+
+        if (optionsMenu.attackModeSpawnController != null)
+        {
+            optionsMenu.ReturnToAttackSpawnSelection();
+        }
     }
 
     void DestroyEnemies()

@@ -12222,18 +12222,6 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 136132842}
-        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
-        m_MethodName: SetActive
-        m_Mode: 6
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
 --- !u!114 &527625039
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -13830,6 +13818,10 @@ PrefabInstance:
       propertyPath: audioController
       value: 
       objectReference: {fileID: 1393370857}
+    - target: {fileID: 1908653721089072746, guid: ec16dfae91153d14cbd61ee89314e64a, type: 3}
+      propertyPath: attackModeSpawnController
+      value: 
+      objectReference: {fileID: 136132844}
     - target: {fileID: 2461216350514387108, guid: ec16dfae91153d14cbd61ee89314e64a, type: 3}
       propertyPath: m_Name
       value: optionsMenu
@@ -53200,6 +53192,7 @@ MonoBehaviour:
   returnFromBattleButton: {fileID: 0}
   returnFromBuilderButton: {fileID: 0}
   player: {fileID: 1904667352}
+  attackModeSpawnController: {fileID: 0}
 --- !u!1 &1913493728
 GameObject:
   m_ObjectHideFlags: 0

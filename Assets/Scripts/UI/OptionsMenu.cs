@@ -23,6 +23,8 @@ public class OptionsMenu : MonoBehaviour
 
     public Player player;
 
+    public AttackModeSpawnController attackModeSpawnController;
+
     public void SetBuilderMode() { returnFromBuilder = true; }
     public void SetBattleMode() { returnFromBuilder = false; }
 
@@ -92,6 +94,11 @@ public class OptionsMenu : MonoBehaviour
         {
             audioController.SetSounds(true);
         }
+    }
+
+    public void ReturnToAttackSpawnSelection()
+    {
+        attackModeSpawnController.ReturnToSpawnSelection();
     }
 
     public void QuitGame()

@@ -18,6 +18,7 @@ public class AttackModeSpawnController : MonoBehaviour
     public int[] spawnArray;
     private int playerSpawnNumber;
     private int selectedSpawnNumber;
+    private float playerSpawnButtonPosition;
     public TMP_Text addText;
     public TMP_Text[] spawnTexts;
     public GameObject amountButtons;
@@ -33,14 +34,29 @@ public class AttackModeSpawnController : MonoBehaviour
 
     public GameObject battleUI;
 
-    private void OnEnable()
+    private void Start()
     {
         playerSpawnNumber = 4;
         selectedSpawnNumber = 4;
+        playerSpawnButtonPosition = 0f;
+        animator.SetTrigger("Up");
+    }
+
+    private void OnEnable()
+    {
+        ResetSpawns();
+    }
+
+    void ResetSpawns()
+    {
+        System.Array.Clear(spawnArray, 0, spawnArray.Length);
+        currentFriendliesAmount = 0;
+        isDown = false;
         UpdateSpawnArray();
         UpdateAddText();
-        UpdatePlayerSpawnElements(playerSpawnNumber, 0f);
-        animator.SetTrigger("Up");
+        UpdatePlayerSpawnElements(playerSpawnNumber, playerSpawnButtonPosition);
+        startButton.SetActive(false);
+        amountButtons.SetActive(true);
     }
 
     public void UpDownTrigger()
@@ -122,7 +138,8 @@ public class AttackModeSpawnController : MonoBehaviour
         }
 
         playerSpawnNumber = spawnNumber;
-        playerSpawnElement.transform.localPosition = new Vector3(buttonPosition, -490f, 0f);
+        playerSpawnButtonPosition = buttonPosition;
+        playerSpawnElement.transform.localPosition = new Vector3(playerSpawnButtonPosition, -490f, 0f);
     }
 
     public void StartAttack()
@@ -143,6 +160,25 @@ public class AttackModeSpawnController : MonoBehaviour
         enemiesObject.SetActive(true);
         attackModeCreatureSpawner.MoveFriendliesToSpawns(spawnArray);
         attackModeCreatureSpawner.friendliesParentObject.SetActive(true);
+        gameObject.SetActive(false); // This gameObject is the SelectAttackPoints UI object
+    }
+
+    public void ReturnToSpawnSelection()
+    {
+        mainCamera.gameObject.tag = "Untagged";
+        mainCamera.enabled = false;
+        minimapAudioListener.enabled = true;
+        mouseLook.minimapCamera.gameObject.tag = "MainCamera";
+        mouseLook.minimapCamera.targetTexture = null;
+        if (mouseLook.cameraOnPlayer) mouseLook.ToggleCameraOnPlayer();
+        mouseLook.notCastingRays = true;
+        mouseLook.player.gameObject.SetActive(false);
+        mainCamera.gameObject.SetActive(false);
+        minimapRenderTextureObject.SetActive(false);
+        battleUI.SetActive(false);
+        enemiesObject.SetActive(false);
+        attackModeCreatureSpawner.friendliesParentObject.SetActive(false);
+        gameObject.SetActive(true); // This gameObject is the SelectAttackPoints UI object
     }
 
     void UpdateSpawnArray()

@@ -108,7 +108,7 @@ public class MouseLook : MonoBehaviour
 
         if (!inCutScene)
         {
-            if (!player.inBuildMode)
+            if (!player.inBuildMode && !notCastingRays)
             {
                 if (Input.GetKeyDown("c")) CameraOnPlayerButton();
             }
