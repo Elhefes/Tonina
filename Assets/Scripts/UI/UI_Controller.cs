@@ -11,20 +11,20 @@ public class UI_Controller : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Escape))
             {
-            if (!mainMenuScreen.activeSelf)
+            if (player.blackFader.activeSelf) return;
+            if (mainMenuScreen != null && mainMenuScreen.activeSelf) return;
+
+            if (OverlappingElementActive())
             {
-                if (OverlappingElementActive())
-                {
-                    DisableOverlappingElements();
-                    return;
-                }
-                else if (player.textBox.gameObject.activeSelf)
-                {
-                    player.FreeTextSubject();
-                    return;
-                }
-                optionsMenu.SetActive(true);
+                DisableOverlappingElements();
+                return;
             }
+            else if (player.textBox != null && player.textBox.gameObject.activeSelf)
+            {
+                player.FreeTextSubject();
+                return;
+            }
+            optionsMenu.SetActive(true);
         }
     }
 
@@ -32,7 +32,7 @@ public class UI_Controller : MonoBehaviour
     {
         foreach (GameObject obj in overlappingElements)
         {
-            obj.SetActive(false);
+            if (obj != null) obj.SetActive(false);
         }
     }
 
@@ -40,7 +40,7 @@ public class UI_Controller : MonoBehaviour
     {
         foreach (GameObject obj in overlappingElements)
         {
-            if (obj.activeSelf) return true;
+            if (obj != null && obj.activeSelf) return true;
         }
         return false;
     }
