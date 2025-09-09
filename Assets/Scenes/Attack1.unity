@@ -11813,6 +11813,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 535815518}
+        m_TargetAssemblyTypeName: MusicPlayer, Assembly-CSharp
+        m_MethodName: PlayBattleSong
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 4
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &527625039
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -12006,8 +12018,8 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: b7b308f0369ea8c4e906c8627db8d349, type: 3}
-  m_Resource: {fileID: 8300000, guid: b7b308f0369ea8c4e906c8627db8d349, type: 3}
+  m_audioClip: {fileID: 8300000, guid: 977963e5dfaa49e459b9eab01d023a84, type: 3}
+  m_Resource: {fileID: 8300000, guid: 977963e5dfaa49e459b9eab01d023a84, type: 3}
   m_PlayOnAwake: 1
   m_Volume: 0.5
   m_Pitch: 1
@@ -12101,12 +12113,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 535815515}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: -21.650635, z: -12.5}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 1905289335}
+  m_Father: {fileID: 1626136261}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &535815518
 MonoBehaviour:
@@ -12120,19 +12132,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 20b89101630c6a442ae8a2f396f5860d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  playingWaitingMusic: 1
   audioLooper: {fileID: 535815519}
   audioSource: {fileID: 535815516}
-  firstSong: {fileID: 8300000, guid: fb373c68484c5e94ca96c0429afc327e, type: 3}
-  introMusic: {fileID: 8300000, guid: 5f1564af168577542a2052dd1fed5e1d, type: 3}
-  peacefulSongs:
-  - {fileID: 8300000, guid: fb373c68484c5e94ca96c0429afc327e, type: 3}
-  - {fileID: 8300000, guid: 4cbf8340e373fa3478080b6284acc450, type: 3}
-  - {fileID: 8300000, guid: 6a4845881c49eb04996537c4cda620d9, type: 3}
-  - {fileID: 8300000, guid: bb426b7b86cc16840b6ce20c42978345, type: 3}
-  - {fileID: 8300000, guid: b0aa312fa1a1d314a94a723210e3840c, type: 3}
-  - {fileID: 8300000, guid: af6e2c0f8a514df42aac62add3afe7f4, type: 3}
-  - {fileID: 8300000, guid: 61c7c1f9c3e34a94ea74d93e66e74ec2, type: 3}
-  - {fileID: 8300000, guid: 9b790ef973104df4a9cc341e24728cda, type: 3}
+  firstSong: {fileID: 8300000, guid: 977963e5dfaa49e459b9eab01d023a84, type: 3}
+  introMusic: {fileID: 0}
+  waitingMusic: {fileID: 8300000, guid: 977963e5dfaa49e459b9eab01d023a84, type: 3}
+  peacefulSongs: []
   battleSongs:
   - {fileID: 8300000, guid: 97c8c4409c5f5454bb9bb2fefcf3c8e8, type: 3}
   - {fileID: 8300000, guid: 0e914ce027971014e8a03c25cbd39760, type: 3}
@@ -44294,7 +44300,8 @@ Transform:
   m_LocalPosition: {x: 0, y: 15, z: -114}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 535815517}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 60, y: 0, z: 0}
 --- !u!54 &1626136262
@@ -51317,7 +51324,6 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1188016949}
-  - {fileID: 535815517}
   - {fileID: 1512358780}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}

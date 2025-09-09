@@ -7,10 +7,13 @@ public class MusicPlayer : MonoBehaviour
     private bool playingPeacefulSongs;
     private bool playingBattleSongs;
 
+    public bool playingWaitingMusic;
+
     public AudioLooper audioLooper;
     public AudioSource audioSource;
     public AudioClip firstSong;
     public AudioClip introMusic;
+    public AudioClip waitingMusic;
     public List<AudioClip> peacefulSongs;
     public List<AudioClip> battleSongs;
     private List<AudioClip> shuffledPlaylist;
@@ -18,7 +21,8 @@ public class MusicPlayer : MonoBehaviour
 
     private void Start()
     {
-        PlayPeacefulSongs(true);
+        if (playingWaitingMusic) PlayWaitingMusic();
+        else PlayPeacefulSongs(true);
     }
 
     private void Update()
@@ -53,52 +57,60 @@ public class MusicPlayer : MonoBehaviour
 
     private void PlayNextSong()
     {
-        audioSource.clip = shuffledPlaylist[currentIndex];
-        audioSource.Play();
-        if ((currentIndex + 1) >= shuffledPlaylist.Count)
+        if (shuffledPlaylist != null)
         {
-            ShufflePlaylist(false);
-            return;
+            audioSource.clip = shuffledPlaylist[currentIndex];
+            audioSource.Play();
+            if ((currentIndex + 1) >= shuffledPlaylist.Count)
+            {
+                ShufflePlaylist(false);
+                return;
+            }
+            currentIndex = (currentIndex + 1) % shuffledPlaylist.Count;
         }
-        currentIndex = (currentIndex + 1) % shuffledPlaylist.Count;
     }
 
     private void ShufflePlaylist(bool firstPlay)
     {
+        if (peacefulSongs.Count < 1) return;
         shuffledPlaylist = new List<AudioClip>(peacefulSongs);
-        // Create a random number generator
-        System.Random rng = new System.Random();
 
-        // Get the count of elements in the list
-        int n = shuffledPlaylist.Count;
-
-        // Iterate through the list
-        while (n > 1)
+        if (shuffledPlaylist != null)
         {
-            n--;
-            // Get a random index within the range of the list
-            int k = rng.Next(n + 1);
+            // Create a random number generator
+            System.Random rng = new System.Random();
 
-            // Swap the elements at indices n and k
-            AudioClip temp = shuffledPlaylist[k];
-            shuffledPlaylist[k] = shuffledPlaylist[n];
-            shuffledPlaylist[n] = temp;
-        }
+            // Get the count of elements in the list
+            int n = shuffledPlaylist.Count;
 
-        // The newly shuffled list's first song won't be the previous list's last song
-        if (shuffledPlaylist[0] == audioSource.clip) shuffledPlaylist.Reverse();
-
-        // Play main theme song as the first song
-        if (firstPlay)
-        {
-            if (shuffledPlaylist.Contains(firstSong))
+            // Iterate through the list
+            while (n > 1)
             {
-                shuffledPlaylist.Remove(firstSong);
-            }
-            shuffledPlaylist.Insert(0, firstSong);
-        }
+                n--;
+                // Get a random index within the range of the list
+                int k = rng.Next(n + 1);
 
-        currentIndex = 0;
+                // Swap the elements at indices n and k
+                AudioClip temp = shuffledPlaylist[k];
+                shuffledPlaylist[k] = shuffledPlaylist[n];
+                shuffledPlaylist[n] = temp;
+            }
+
+            // The newly shuffled list's first song won't be the previous list's last song
+            if (shuffledPlaylist[0] == audioSource.clip) shuffledPlaylist.Reverse();
+
+            // Play main theme song as the first song
+            if (firstPlay)
+            {
+                if (shuffledPlaylist.Contains(firstSong))
+                {
+                    shuffledPlaylist.Remove(firstSong);
+                }
+                shuffledPlaylist.Insert(0, firstSong);
+            }
+
+            currentIndex = 0;
+        }
     }
 
     public void PlayIntroMusic()
@@ -106,6 +118,14 @@ public class MusicPlayer : MonoBehaviour
         audioSource.Stop();
         audioSource.loop = true;
         audioSource.clip = audioLooper.trimSilence(introMusic);
+        audioSource.Play();
+    }
+
+    public void PlayWaitingMusic()
+    {
+        audioSource.Stop();
+        audioSource.loop = true;
+        audioSource.clip = audioLooper.trimSilence(waitingMusic);
         audioSource.Play();
     }
 }
