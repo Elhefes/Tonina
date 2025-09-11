@@ -270,7 +270,6 @@ GameObject:
   - component: {fileID: 4190685269568042776}
   - component: {fileID: 676348005559697048}
   - component: {fileID: 1102685125974051009}
-  - component: {fileID: 4925370560237394439}
   m_Layer: 8
   m_Name: InvisibleWall
   m_TagString: Untagged
@@ -367,22 +366,6 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &4925370560237394439
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1963122464378355351}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1e2f24603af44b4478f65ea251cdefe6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_OverrideArea: 1
-  m_Area: 1
-  m_IgnoreFromBuild: 0
-  m_AffectedAgents: ffffffff
 --- !u!1 &4731400866475022753
 GameObject:
   m_ObjectHideFlags: 0
