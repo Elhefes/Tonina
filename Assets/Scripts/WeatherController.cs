@@ -16,11 +16,29 @@ public class WeatherController : MonoBehaviour
     private Color clearAmbientColor = new Color(0.5411765f, 0.5764706f, 0.5058824f);
     private Color rainAmbientColor = new Color(0.2745098f, 0.3411765f, 0.2745098f);
 
+    private Material skyboxMat;
+    private Color clearSkyColor = new Color(0.401f, 0.639f, 1f);
+    private Color rainSkyColor = new Color(0.451f, 0.31765f, 0f);
+    private Color clearSkyGroundColor = new Color(0.49475f, 0.962f, 0.71f);
+    private Color rainSkyGroundColor = new Color(0.388f, 0.388f, 0.388f);
+    private float clearAtmosphereThickness = 0.85f;
+    private float rainAtmosphereThickness = 1.08f;
+    private float clearSkyExposure = 2.4f;
+    private float rainSkyExposure = 0.13f;
+
     private void Start()
     {
         naturalWeatherCoroutine = StartCoroutine(StartNaturalWeather());
         rainSoundSource.volume = 0f;
         rainSoundSource.clip = audioLooper.trimSilence(rainSoundSource.clip);
+
+        skyboxMat = RenderSettings.skybox;
+        SetSunnySkybox();
+    }
+
+    private void OnDisable()
+    {
+        SetSunnySkybox();
     }
 
     void FixedUpdate()
@@ -69,6 +87,22 @@ public class WeatherController : MonoBehaviour
         }
     }
 
+    void SetSunnySkybox()
+    {
+        skyboxMat.SetColor("_SkyTint", clearSkyColor);
+        skyboxMat.SetColor("_GroundColor", clearSkyGroundColor);
+        skyboxMat.SetFloat("_AtmosphereThickness", clearAtmosphereThickness);
+        skyboxMat.SetFloat("_Exposure", clearSkyExposure);
+    }
+
+    void SetRainySkybox()
+    {
+        skyboxMat.SetColor("_SkyTint", rainSkyColor);
+        skyboxMat.SetColor("_GroundColor", rainSkyGroundColor);
+        skyboxMat.SetFloat("_AtmosphereThickness", rainAtmosphereThickness);
+        skyboxMat.SetFloat("_Exposure", rainSkyExposure);
+    }
+
     void StartRain(int randomMin, int randomMax)
     {
         raining = true;
@@ -77,6 +111,7 @@ public class WeatherController : MonoBehaviour
         randomRainEmissionAmount = Random.Range(randomMin, randomMax);
         rainTransitionCoroutine = StartCoroutine(RainBuildUp());
         rainSoundSource.Play();
+        SetRainySkybox();
     }
 
     void StopRain()
@@ -84,6 +119,7 @@ public class WeatherController : MonoBehaviour
         raining = false;
         StopCoroutine(RainBuildUp());
         rainTransitionCoroutine = StartCoroutine(FadeRainAway());
+        SetSunnySkybox();
     }
 
     private IEnumerator RainBuildUp()
