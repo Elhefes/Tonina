@@ -43,48 +43,37 @@ public class WeatherController : MonoBehaviour
 
     void FixedUpdate()
     {
-        if (raining)
-        {
-            if (Mathf.Clamp(RenderSettings.ambientLight.r, rainAmbientColor.r, clearAmbientColor.r) > rainAmbientColor.r)
-                RenderSettings.ambientLight -= new Color(0.0003f, 0f, 0f);
-            if (Mathf.Clamp(RenderSettings.ambientLight.g, rainAmbientColor.g, clearAmbientColor.g) > rainAmbientColor.g)
-                RenderSettings.ambientLight -= new Color(0f, 0.0003f, 0f);
-            if (Mathf.Clamp(RenderSettings.ambientLight.b, rainAmbientColor.b, clearAmbientColor.b) > rainAmbientColor.b)
-                RenderSettings.ambientLight -= new Color(0f, 0f, 0.0003f);
+        // --- Ambient light ---
+        Color targetAmbient = raining ? rainAmbientColor : clearAmbientColor;
+        RenderSettings.ambientLight = Color.Lerp(RenderSettings.ambientLight, targetAmbient, 0.5f * Time.fixedDeltaTime);
 
-            if (Mathf.Clamp(RenderSettings.fogDensity, 0f, rainFogDensity) < rainFogDensity) RenderSettings.fogDensity += 0.00001f;
+        // --- Fog density ---
+        float targetFogDensity = raining ? rainFogDensity : 0f;
+        RenderSettings.fogDensity = Mathf.Lerp(RenderSettings.fogDensity, targetFogDensity, 0.1f * Time.fixedDeltaTime);
 
-            var emission = rainParticleSystem.emission;
-            emission.rateOverTime = currentRainEmissionAmount;
+        // --- Rain particle emission ---
+        var emission = rainParticleSystem.emission;
+        emission.rateOverTime = currentRainEmissionAmount;
 
-            if (rainSoundFaderValue < (currentRainEmissionAmount / 1100f)) rainSoundFaderValue += 0.00012f;
-            else if (rainSoundFaderValue > (currentRainEmissionAmount / 1100f) + 0.00012f) rainSoundFaderValue -= 0.0003f;
+        // --- Rain sound ---
+        float targetRainSound = raining ? (currentRainEmissionAmount / 1100f) : 0f;
+        rainSoundFaderValue = Mathf.MoveTowards(rainSoundFaderValue, targetRainSound, 0.0003f);
+        rainSoundSource.volume = rainSoundFaderValue * PlayerPrefs.GetFloat("soundVolume", 0.5f);
 
-            rainSoundSource.volume = rainSoundFaderValue * PlayerPrefs.GetFloat("soundVolume", 0.5f);
-        }
-        else
-        {
-            if (Mathf.Clamp(RenderSettings.ambientLight.r, rainAmbientColor.r, clearAmbientColor.r) < clearAmbientColor.r)
-                RenderSettings.ambientLight += new Color(0.0003f, 0f, 0f);
-            if (Mathf.Clamp(RenderSettings.ambientLight.g, rainAmbientColor.g, clearAmbientColor.g) < clearAmbientColor.g)
-                RenderSettings.ambientLight += new Color(0f, 0.0003f, 0f);
-            if (Mathf.Clamp(RenderSettings.ambientLight.b, rainAmbientColor.b, clearAmbientColor.b) < clearAmbientColor.b)
-                RenderSettings.ambientLight += new Color(0f, 0f, 0.0003f);
+        // --- Skybox transition ---
+        Color targetSkyColor = raining ? rainSkyColor : clearSkyColor;
+        Color targetGroundColor = raining ? rainSkyGroundColor : clearSkyGroundColor;
+        float targetAtmosphereThickness = raining ? rainAtmosphereThickness : clearAtmosphereThickness;
+        float targetExposure = raining ? rainSkyExposure : clearSkyExposure;
 
-            if (RenderSettings.fogDensity > 0) RenderSettings.fogDensity -= 0.00001f;
-
-            if (currentRainEmissionAmount > 0)
-            {
-                var emission = rainParticleSystem.emission;
-                emission.rateOverTime = currentRainEmissionAmount;
-            }
-
-            if (rainSoundFaderValue > 0f)
-            {
-                if (rainSoundFaderValue > (currentRainEmissionAmount / 1100f)) rainSoundFaderValue -= 0.0003f;
-                rainSoundSource.volume = rainSoundFaderValue * PlayerPrefs.GetFloat("soundVolume", 0.5f);
-            }
-        }
+        skyboxMat.SetColor("_SkyTint",
+            Color.Lerp(skyboxMat.GetColor("_SkyTint"), targetSkyColor, 0.08f * Time.fixedDeltaTime));
+        skyboxMat.SetColor("_GroundColor",
+            Color.Lerp(skyboxMat.GetColor("_GroundColor"), targetGroundColor, 0.08f * Time.fixedDeltaTime));
+        skyboxMat.SetFloat("_AtmosphereThickness",
+            Mathf.Lerp(skyboxMat.GetFloat("_AtmosphereThickness"), targetAtmosphereThickness, 0.33f * Time.fixedDeltaTime));
+        skyboxMat.SetFloat("_Exposure",
+            Mathf.Lerp(skyboxMat.GetFloat("_Exposure"), targetExposure, 0.2f * Time.fixedDeltaTime));
     }
 
     void SetSunnySkybox()
@@ -95,14 +84,6 @@ public class WeatherController : MonoBehaviour
         skyboxMat.SetFloat("_Exposure", clearSkyExposure);
     }
 
-    void SetRainySkybox()
-    {
-        skyboxMat.SetColor("_SkyTint", rainSkyColor);
-        skyboxMat.SetColor("_GroundColor", rainSkyGroundColor);
-        skyboxMat.SetFloat("_AtmosphereThickness", rainAtmosphereThickness);
-        skyboxMat.SetFloat("_Exposure", rainSkyExposure);
-    }
-
     void StartRain(int randomMin, int randomMax)
     {
         raining = true;
@@ -111,7 +92,6 @@ public class WeatherController : MonoBehaviour
         randomRainEmissionAmount = Random.Range(randomMin, randomMax);
         rainTransitionCoroutine = StartCoroutine(RainBuildUp());
         rainSoundSource.Play();
-        SetRainySkybox();
     }
 
     void StopRain()
@@ -119,7 +99,6 @@ public class WeatherController : MonoBehaviour
         raining = false;
         StopCoroutine(RainBuildUp());
         rainTransitionCoroutine = StartCoroutine(FadeRainAway());
-        SetSunnySkybox();
     }
 
     private IEnumerator RainBuildUp()
