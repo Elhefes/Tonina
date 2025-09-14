@@ -5,6 +5,7 @@ using UnityEngine.UI;
 
 public class Enemy : Creature
 {
+    public string enemyType;
     public NavMeshAgent agent;
     public Slider healthBar;
     public int startingHealth;
@@ -16,10 +17,22 @@ public class Enemy : Creature
     public float slowDownTimeFromStone;
     public float speedDropFromStone;
 
+    public ObjectPooler pooler;
+    protected bool enemyInPool = true;
+
     void Awake()
     {
+        pooler = ObjectPooler.Instance;
         if (moveTowardsTarget) creatureMovement.target = GameObject.FindGameObjectsWithTag("Target")[0].transform;
+        ResetEnemyAttributes();
+    }
+
+    public void ResetEnemyAttributes()
+    {
         health = startingHealth;
+        healthBar.value = health;
+        slowedDown = false;
+        StopAllCoroutines();
     }
 
     public void TakeDamage(int damage)
@@ -33,9 +46,21 @@ public class Enemy : Creature
                 deathSoundObject.SetActive(true);
                 deathSoundObject.transform.SetParent(null);
             }
-            Destroy(gameObject);
+            if (enemyInPool)
+            {
+                pooler.AddEnemyToPool(this, enemyType);
+            }
+            else
+            {
+                Destroy(gameObject);
+            }
         }
         print(health);
+    }
+
+    public void SetEnemyInPool(bool value)
+    {
+        enemyInPool = value;
     }
 
     public void SlowDownEnemy()

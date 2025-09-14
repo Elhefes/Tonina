@@ -11,9 +11,10 @@ public class Creature : MonoBehaviour
     public float attackExtraCooldownTime;
     public bool shouldAttack;
 
-    void Start()
+    private void OnDisable()
     {
-
+        shouldAttack = false;
+        onCooldown = false;
     }
 
     // Update is called once per frame

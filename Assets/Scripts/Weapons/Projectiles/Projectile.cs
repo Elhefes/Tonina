@@ -9,9 +9,10 @@ public class Projectile : Weapon
     public bool infinite;
     public TMP_Text weaponWheelQuantityTMP;
 
+    protected bool projectileInPool = true;
+
     public void SpawnProjectile()
     {
-        // TODO: When projectile cycling is implemented, set canHit to false
         canHit = true;
         directorComponent.SetActive(true);
 
@@ -23,5 +24,19 @@ public class Projectile : Weapon
         canHit = false;
         directorComponent.SetActive(false);
         gameObject.SetActive(false);
+    }
+
+    public void SetProjectileInPool(bool value)
+    {
+        projectileInPool = value;
+    }
+
+    public void Destroy()
+    {
+        CancelInvoke();
+        if (!gameObject.activeSelf) return;
+        //if (projectileInPool) ObjectPooler.Instance.AddProjectileToPool(this, gameObject.name.Remove(gameObject.name.Length - 7));
+        //else Destroy(gameObject);
+        Destroy(gameObject);
     }
 }

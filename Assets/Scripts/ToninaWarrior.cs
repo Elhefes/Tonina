@@ -5,6 +5,7 @@ using UnityEngine.UI;
 
 public class ToninaWarrior : Creature
 {
+    public string friendlyType;
     public NavMeshAgent agent;
     public Slider healthBar;
     public int startingHealth;
@@ -13,9 +14,24 @@ public class ToninaWarrior : Creature
     public bool moveTowardsTarget;
     public float attackExtraCooldown;
 
+    public ObjectPooler pooler;
+    protected bool friendlyInPool = true;
+
     void Awake()
     {
         health = startingHealth;
+        pooler = ObjectPooler.Instance;
+    }
+
+    public void ResetFriendlyAttributes()
+    {
+        health = startingHealth;
+        healthBar.value = health;
+    }
+
+    public void SetFriendlyInPool(bool value)
+    {
+        friendlyInPool = value;
     }
 
     public void TakeDamage(int damage)
@@ -29,7 +45,14 @@ public class ToninaWarrior : Creature
                 deathSoundObject.SetActive(true);
                 deathSoundObject.transform.SetParent(null);
             }
-            Destroy(gameObject);
+            if (friendlyInPool)
+            {
+                pooler.AddFriendlyToPool(this, friendlyType);
+            }
+            else
+            {
+                Destroy(gameObject);
+            }
         }
         print(health);
     }

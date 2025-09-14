@@ -1834,6 +1834,7 @@ MonoBehaviour:
   onCooldown: 0
   attackExtraCooldownTime: 0.25
   shouldAttack: 0
+  enemyType: SpearWarrior
   agent: {fileID: 4856313535646885530}
   healthBar: {fileID: 6968589313548457029}
   startingHealth: 80
@@ -1841,6 +1842,7 @@ MonoBehaviour:
   moveTowardsTarget: 1
   slowDownTimeFromStone: 6
   speedDropFromStone: 1
+  pooler: {fileID: 0}
   spear: {fileID: 5579262335658251513}
   club: {fileID: 5271360773342437029}
 --- !u!114 &9167552780147776406

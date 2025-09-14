@@ -22,7 +22,7 @@ public class SmallStone : Projectile
             enemy.SlowDownEnemy();
             hitSoundObject.SetActive(true);
             hitSoundObject.transform.SetParent(null);
-            Destroy(gameObject);
+            Destroy();
         }
     }
 }
