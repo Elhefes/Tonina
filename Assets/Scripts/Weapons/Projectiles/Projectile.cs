@@ -33,12 +33,6 @@ public class Projectile : Weapon
         if (!infinite) quantity--;
         if (quantity < 1) notAvailable = true;
         if (weaponWheelQuantityTMP != null) weaponWheelQuantityTMP.text = quantity.ToString();
-
-        //GameObject projectile = Instantiate(gameObject, shootingPoint.position, shootingPoint.rotation);
-        //canHit = false;
-        //directorComponent.SetActive(false);
-        //gameObject.SetActive(false);
-
     }
 
     public void SetProjectileInPool(bool value)

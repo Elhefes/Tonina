@@ -20,6 +20,11 @@ public class Weapon : MonoBehaviour
 
     private List<GameObject> hitEnemies = new List<GameObject>();
 
+    private void OnEnable()
+    {
+        hitEnemies.Clear();
+    }
+
     public virtual void Attack(Animator animator)
     {
             
