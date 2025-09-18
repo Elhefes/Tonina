@@ -25,7 +25,6 @@ public class SmallStone : Projectile
                 hitSoundObject.SetActive(true);
                 hitSoundObject.transform.SetParent(null);
             }
-            else print("hitSoundObject is null");
             Destroy();
         }
     }

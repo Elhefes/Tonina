@@ -6,7 +6,6 @@ public class Creature : MonoBehaviour
 {
     public Weapon weaponOnHand;
     public CreatureMovement creatureMovement;
-    private Coroutine attackCoroutine;
     public bool onCooldown;
     public float attackExtraCooldownTime;
     public bool shouldAttack;
@@ -20,7 +19,7 @@ public class Creature : MonoBehaviour
     // Update is called once per frame
     public void Update()
     {
-        if (creatureMovement.target)
+        if (creatureMovement.target && creatureMovement.target.gameObject.activeSelf)
         {
             creatureMovement.agent.destination = creatureMovement.target.position;
 
@@ -43,7 +42,7 @@ public class Creature : MonoBehaviour
 
             if (shouldAttack)
             {
-                if (!onCooldown) attackCoroutine = StartCoroutine(Attack());
+                if (!onCooldown) StartCoroutine(Attack());
                 return;
             }
             else if (Vector3.Distance(transform.position, creatureMovement.target.position) < weaponOnHand.attackDistance - 0.5f)
@@ -84,7 +83,7 @@ public class Creature : MonoBehaviour
     protected virtual IEnumerator Attack()
     {
         onCooldown = true;
-        while (creatureMovement.target && shouldAttack && !weaponOnHand.notAvailable)
+        while (creatureMovement.target && creatureMovement.target.gameObject.activeSelf && shouldAttack && !weaponOnHand.notAvailable)
         {
             weaponOnHand.Attack(creatureMovement.animator);
             yield return new WaitForSeconds(weaponOnHand.attackCooldown);
