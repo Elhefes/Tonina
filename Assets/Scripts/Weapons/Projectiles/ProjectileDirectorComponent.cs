@@ -136,7 +136,6 @@ public class ProjectileDirectorComponent : MonoBehaviour
     private IEnumerator DisableObject()
     {
         yield return new WaitForSeconds(1.5f);
-        //Destroy(rb.gameObject);
         gameObject.SetActive(false);
     }
 }
