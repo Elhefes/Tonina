@@ -114,6 +114,7 @@ public class Player : Creature
     public void DisableBattleMode()
     {
         onCooldown = false;
+        creatureMovement.target = null;
         foreach (Weapon obj in weapons)
         {
             obj.gameObject.SetActive(false);

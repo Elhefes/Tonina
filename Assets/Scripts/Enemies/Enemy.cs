@@ -23,7 +23,6 @@ public class Enemy : Creature
     void Awake()
     {
         pooler = ObjectPooler.Instance;
-        if (moveTowardsTarget) creatureMovement.target = GameObject.FindGameObjectsWithTag("Target")[0].transform;
         ResetEnemyAttributes();
     }
 
@@ -31,6 +30,7 @@ public class Enemy : Creature
     {
         health = startingHealth;
         healthBar.value = health;
+        if (moveTowardsTarget) creatureMovement.target = GameObject.FindGameObjectsWithTag("Target")[0].transform;
         slowedDown = false;
         StopAllCoroutines();
     }

@@ -27,6 +27,7 @@ public class ToninaWarrior : Creature
     {
         health = startingHealth;
         healthBar.value = health;
+        creatureMovement.target = null;
     }
 
     public void SetFriendlyInPool(bool value)
