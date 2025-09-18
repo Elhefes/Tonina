@@ -114,6 +114,7 @@ public class Player : Creature
     public void DisableBattleMode()
     {
         onCooldown = false;
+        creatureMovement.target = null;
         foreach (Weapon obj in weapons)
         {
             obj.gameObject.SetActive(false);
@@ -469,7 +470,7 @@ public class Player : Creature
         if (weaponType == WeaponType.Spear) weaponTypeIndex = 1;
         if (weaponType == WeaponType.Axe) weaponTypeIndex = 2;
         if (weaponType == WeaponType.Bow) weaponTypeIndex = 3;
-        if (weaponType == WeaponType.Small_stone) weaponTypeIndex = 4;
+        if (weaponType == WeaponType.SmallStone) weaponTypeIndex = 4;
 
         weaponOnHand = weapons[weaponTypeIndex];
         weaponOnHand.canHit = false;
@@ -682,30 +683,13 @@ public class Player : Creature
 
     public void EndBattle()
     {
-        DestroyEnemies();
-        DestroyFriendlyWarriors();
+        battlefieldMenu.waveController.pooler.ResetPools();
         DisableBattleMode();
         barricadeController.RestoreBarricades();
 
         if (optionsMenu.attackModeSpawnController != null)
         {
             optionsMenu.ReturnToAttackSpawnSelection();
-        }
-    }
-
-    void DestroyEnemies()
-    {
-        GameObject[] enemies = GameObject.FindGameObjectsWithTag("Enemy");
-        foreach (GameObject enemy in enemies) { Destroy(enemy); }
-    }
-
-    void DestroyFriendlyWarriors()
-    {
-        GameObject[] friendlyWarriors = GameObject.FindGameObjectsWithTag("ToninaTribe");
-        foreach (GameObject friendly in friendlyWarriors)
-        {
-            if (friendly.ToString().Equals("Sartom (UnityEngine.GameObject)")) continue;
-            Destroy(friendly);
         }
     }
 

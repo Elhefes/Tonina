@@ -16,7 +16,7 @@ public class ProjectileDirectorComponent : MonoBehaviour
     public Transform pointA;
     private Vector3 startingPoint;
     private Transform pointC;
-    private Vector3 pointC_CorrectedPosition;
+    private Vector3 pointC_correctedPosition;
     public float speed;
     public float thresholdDistance;
     public float rotationSpeed;
@@ -25,14 +25,14 @@ public class ProjectileDirectorComponent : MonoBehaviour
 
     private Vector3 pointB;
     private Vector3[] points;
-    private int currentPointIndex = 0;
-    private bool movingToNextPoint = true;
+    private int currentPointIndex;
+    private bool movingToNextPoint;
     private Vector3 direction;
 
-    private Coroutine destroyerCoroutine;
-
-    void Start()
+    void OnEnable()
     {
+        currentPointIndex = 0;
+
         pointC = creatureMovement.target;
 
         if (rb == null)
@@ -44,12 +44,15 @@ public class ProjectileDirectorComponent : MonoBehaviour
         CalculatePointB();
         UpdatePointC();
 
+        //points = null;
         points = new Vector3[3];
         points[0] = startingPoint;
         points[1] = pointB;
-        points[2] = pointC_CorrectedPosition;
+        points[2] = pointC_correctedPosition;
 
-        destroyerCoroutine = StartCoroutine(DestroyObject());
+        StartCoroutine(DisableObject());
+
+        movingToNextPoint = true;
     }
 
     void Update()
@@ -57,7 +60,7 @@ public class ProjectileDirectorComponent : MonoBehaviour
         if (pointC != null)
         {
             UpdatePointC();
-            points[2] = pointC_CorrectedPosition;
+            points[2] = pointC_correctedPosition;
         }
 
         if (currentPointIndex < 2)
@@ -83,8 +86,8 @@ public class ProjectileDirectorComponent : MonoBehaviour
     {
         if (pointA != null && pointC != null)
         {
-            Vector3 midPoint = (startingPoint + pointC_CorrectedPosition) / 2;
-            float distanceAC = Vector3.Distance(startingPoint, pointC_CorrectedPosition);
+            Vector3 midPoint = (startingPoint + pointC_correctedPosition) / 2;
+            float distanceAC = Vector3.Distance(startingPoint, pointC_correctedPosition);
             pointB = new Vector3(midPoint.x, midPoint.y + distanceAC * 0.12f, midPoint.z);
         }
     }
@@ -93,7 +96,7 @@ public class ProjectileDirectorComponent : MonoBehaviour
     {
         if (pointC != null)
         {
-            pointC_CorrectedPosition = new Vector3(pointC.position.x, pointC.position.y + 1.5f, pointC.position.z);
+            pointC_correctedPosition = new Vector3(pointC.position.x, pointC.position.y + 1.5f, pointC.position.z);
         }
     }
 
@@ -130,9 +133,9 @@ public class ProjectileDirectorComponent : MonoBehaviour
         rb.rotation = Quaternion.Slerp(rb.rotation, targetRotation * offsetRotation, rotationSpeed * Time.fixedDeltaTime);
     }
 
-    private IEnumerator DestroyObject()
+    private IEnumerator DisableObject()
     {
         yield return new WaitForSeconds(1.5f);
-        Destroy(rb.gameObject);
+        gameObject.SetActive(false);
     }
 }

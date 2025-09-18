@@ -5274,6 +5274,7 @@ MonoBehaviour:
   onCooldown: 0
   attackExtraCooldownTime: 0.25
   shouldAttack: 0
+  enemyType: Clubber
   agent: {fileID: 3105274350733072314}
   healthBar: {fileID: 972549612466187003}
   startingHealth: 80
@@ -5281,6 +5282,7 @@ MonoBehaviour:
   moveTowardsTarget: 1
   slowDownTimeFromStone: 6
   speedDropFromStone: 1
+  pooler: {fileID: 0}
 --- !u!114 &7812979347286968457
 MonoBehaviour:
   m_ObjectHideFlags: 0

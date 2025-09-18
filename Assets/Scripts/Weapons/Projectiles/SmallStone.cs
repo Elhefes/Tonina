@@ -7,22 +7,25 @@ public class SmallStone : Projectile
     public override void Attack(Animator animator)
     {
         animator.SetTrigger("StoneAttack");
-        base.SpawnProjectile();
+        SpawnProjectile();
     }
 
     private void OnTriggerEnter(Collider other)
     {
         // If weapon switching is spammed, it's possible that canHit = true, while directorComponent isn't active.
-        if (!canHit || !base.directorComponent.activeSelf) return;
+        if (!canHit || !directorComponent.gameObject.activeSelf) return;
 
-        base.HandleCollision(other.gameObject);
+        HandleCollision(other.gameObject);
         if (other.CompareTag("Enemy"))
         {
             Enemy enemy = other.gameObject.GetComponent<Enemy>();
             enemy.SlowDownEnemy();
-            hitSoundObject.SetActive(true);
-            hitSoundObject.transform.SetParent(null);
-            Destroy(gameObject);
+            if (hitSoundObject != null)
+            {
+                hitSoundObject.SetActive(true);
+                hitSoundObject.transform.SetParent(null);
+            }
+            Destroy();
         }
     }
 }

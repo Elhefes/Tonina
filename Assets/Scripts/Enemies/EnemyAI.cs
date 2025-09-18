@@ -6,7 +6,7 @@ public class EnemyAI : MonoBehaviour
     public CreatureMovement creatureMovement;
     private Coroutine AI_ControllerCoroutine;
 
-    void Awake()
+    void OnEnable()
     {
         AI_ControllerCoroutine = StartCoroutine(PeriodicalTargetChecking());
     }

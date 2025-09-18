@@ -12,8 +12,12 @@ public class FriendlyAI : MonoBehaviour
 
     void Awake()
     {
+        player = FindObjectOfType<Player>();
+    }
+
+    private void OnEnable()
+    {
         normalStoppingDistance = creatureMovement.agent.stoppingDistance;
-        player = GameObject.FindObjectOfType<Player>();
         AI_ControllerCoroutine = StartCoroutine(PeriodicalTargetChecking());
     }
 
@@ -77,6 +81,8 @@ public class FriendlyAI : MonoBehaviour
 
     void FollowPlayerDirections()
     {
+        if (player == null) return;
+
         if (player.destination == Vector3.zero) creatureMovement.agent.destination = player.transform.position;
         else creatureMovement.agent.destination = player.destination;
         creatureMovement.agent.stoppingDistance = 2.8f;

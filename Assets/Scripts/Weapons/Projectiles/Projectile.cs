@@ -4,24 +4,49 @@ using TMPro;
 public class Projectile : Weapon
 {
     public Transform shootingPoint;
-    public GameObject directorComponent;
+    public ProjectileDirectorComponent directorComponent;
     public int quantity;
     public bool infinite;
     public TMP_Text weaponWheelQuantityTMP;
 
+    public ObjectPooler pooler;
+    protected bool projectileInPool = true;
+
+    private void Start()
+    {
+        pooler = ObjectPooler.Instance;
+    }
+
     public void SpawnProjectile()
     {
-        // TODO: When projectile cycling is implemented, set canHit to false
-        canHit = true;
-        directorComponent.SetActive(true);
+        Projectile spawnedProjectile = pooler.SpawnProjectileFromPool(gameObject.name, shootingPoint.position, transform.rotation);
+        spawnedProjectile.shootingPoint = shootingPoint;
+        spawnedProjectile.transform.position = shootingPoint.position;
+        spawnedProjectile.directorComponent.creatureMovement = directorComponent.creatureMovement;
+        spawnedProjectile.directorComponent.pointA = shootingPoint;
+        spawnedProjectile.isFriendly = isFriendly;
+        spawnedProjectile.directorComponent.rb.constraints = RigidbodyConstraints.None;
+
+        spawnedProjectile.canHit = true;
+        spawnedProjectile.directorComponent.gameObject.SetActive(true);
 
         if (!infinite) quantity--;
         if (quantity < 1) notAvailable = true;
         if (weaponWheelQuantityTMP != null) weaponWheelQuantityTMP.text = quantity.ToString();
 
-        GameObject projectile = Instantiate(gameObject, shootingPoint.position, shootingPoint.rotation);
-        canHit = false;
-        directorComponent.SetActive(false);
         gameObject.SetActive(false);
+    }
+
+    public void SetProjectileInPool(bool value)
+    {
+        projectileInPool = value;
+    }
+
+    public void Destroy()
+    {
+        CancelInvoke();
+        if (!gameObject.activeSelf) return;
+        if (projectileInPool) ObjectPooler.Instance.AddProjectileToPool(this, gameObject.name.Substring(0, gameObject.name.Length - 7));
+        else Destroy(gameObject);
     }
 }

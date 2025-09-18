@@ -233,6 +233,7 @@ MonoBehaviour:
   onCooldown: 0
   attackExtraCooldownTime: 0.35
   shouldAttack: 0
+  enemyType: AxeWarrior
   agent: {fileID: 1261336691822007894}
   healthBar: {fileID: 2026608252246932917}
   startingHealth: 100
@@ -240,6 +241,7 @@ MonoBehaviour:
   moveTowardsTarget: 1
   slowDownTimeFromStone: 7.5
   speedDropFromStone: 1.25
+  pooler: {fileID: 0}
 --- !u!114 &1654545772570424195
 MonoBehaviour:
   m_ObjectHideFlags: 0

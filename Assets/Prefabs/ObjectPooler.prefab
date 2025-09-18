@@ -1,0 +1,70 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &6472332115712361879
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6637316977730216885}
+  - component: {fileID: 2624831061988081983}
+  m_Layer: 0
+  m_Name: ObjectPooler
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &6637316977730216885
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6472332115712361879}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2624831061988081983
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6472332115712361879}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cefcdf119fbae384a8dbf308d53327d7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  friendlyWarrior: {fileID: 3985435863824497963, guid: cd242938179e1e548ae8071a51ce911a, type: 3}
+  enemyClubber: {fileID: 7187010017827347340, guid: 9461b381c953c4541b1daf9f8f496ec2, type: 3}
+  enemyRunner: {fileID: 8995902372229116945, guid: 9d03222d890a1e3439c76f47e640a8d5, type: 3}
+  enemySpearWarrior: {fileID: 4077094486547798183, guid: c4903b18e4761ad47b5fa67b08359b32, type: 3}
+  enemyAxeWarrior: {fileID: 256607142329671182, guid: 317ab042e67e7574e920cfa42e31ddc4, type: 3}
+  smallStone: {fileID: 5871012716712761580, guid: ce38a49735e12024a9912149bd0dab7e, type: 3}
+  arrow: {fileID: 1970050889735758001, guid: c593b831eb13c784aa09668a36790fed, type: 3}
+  spear: {fileID: 8392533763621892454, guid: 06836e3db510699498b45430912508d7, type: 3}
+  kancho: {fileID: 8123262988046963406, guid: de11e80c55f59ee469f105c3ed1f18a5, type: 3}
+  fence: {fileID: 1980318263852156973, guid: f473a50a3b5ecd447ae139a17daac0fd, type: 3}
+  maizePlace: {fileID: 2347078330330480436, guid: adebe25711332d549bfc3c168e6175c5, type: 3}
+  spearRack: {fileID: 2265529739721730962, guid: 5b24d00d2db801340ab3bbe611cdb474, type: 3}
+  fillOkill: {fileID: 93210839114318852, guid: 881ab1f1c6deed14d914c3e8c2d88409, type: 3}
+  tower: {fileID: 3628362741210145784, guid: 9a8e6610e1f5e1e4db7a329e2ce95dcc, type: 3}
+  pools:
+  - tag: ToninaWarrior
+    prefab: {fileID: 3985435863824497963, guid: cd242938179e1e548ae8071a51ce911a, type: 3}
+    size: 0
+  - tag: Clubber
+    prefab: {fileID: 7187010017827347340, guid: 9461b381c953c4541b1daf9f8f496ec2, type: 3}
+    size: 0
+  - tag: Runner
+    prefab: {fileID: 8995902372229116945, guid: 9d03222d890a1e3439c76f47e640a8d5, type: 3}
+    size: 0

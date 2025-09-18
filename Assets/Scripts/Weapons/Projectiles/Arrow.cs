@@ -6,7 +6,7 @@ public class Arrow : Projectile
 
     private void OnTriggerEnter(Collider other)
     {
-        if (!canHit || !directorComponent.activeSelf) return;
+        if (!canHit || !directorComponent.gameObject.activeSelf) return;
 
         base.HandleCollision(other.gameObject);
         if (other.CompareTag("Enemy"))
@@ -15,7 +15,7 @@ public class Arrow : Projectile
             enemy.SlowDownEnemy();
             hitSoundObject.SetActive(true);
             hitSoundObject.transform.SetParent(null);
-            Destroy(gameObject);
+            Destroy();
         }
     }
 }

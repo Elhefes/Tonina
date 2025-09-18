@@ -10,7 +10,6 @@ public class WaveController : MonoBehaviour
     private ThreatLevels.ThreatLevel threatLevel;
     private int currentRoundNumber;
     private int friendlyWarriorsAmount;
-    private bool isSpawningEnemies;
     private int secondsInBattle;
     public bool battleIsLost;
 
@@ -19,7 +18,6 @@ public class WaveController : MonoBehaviour
     public StatsController statsController;
 
     private List<Coroutine> coroutines;
-    private Coroutine rewardsRisingCoroutine;
     public GameObject overworldOptionsButton;
     public GameObject battleUI;
     public GameObject battleWinningScreen;
@@ -38,10 +36,13 @@ public class WaveController : MonoBehaviour
     public GameObject spearWarrior;
     public GameObject axeWarrior;
 
+    public ObjectPooler pooler;
+
     void Start()
     {
         kingHouse = GameObject.Find("king_house");
         coroutines = new List<Coroutine>();
+        pooler = ObjectPooler.Instance;
     }
 
     public void StartRound(int roundNumber, int battleSongID)
@@ -71,7 +72,6 @@ public class WaveController : MonoBehaviour
     public IEnumerator ParseRound(string round)
     {
         List<string> bits = new(round.Split(' '));
-        isSpawningEnemies = true;
         int index;
 
         if (friendlyWarriorsAmount > 0) SpawnFriendlies(friendlyWarriorsAmount);
@@ -130,10 +130,14 @@ public class WaveController : MonoBehaviour
 
     void SpawnEnemyOfType(char c, int i)
     {
-        if (c.Equals('A')) Instantiate(clubber, spawnPoints[i].position + new Vector3(UnityEngine.Random.Range(-10f, 10f), 0f, 0f), spawnPoints[i].rotation);
-        else if (c.Equals('B')) Instantiate(runner, spawnPoints[i].position + new Vector3(UnityEngine.Random.Range(-10f, 10f), 0f, 0f), spawnPoints[i].rotation);
-        else if (c.Equals('C')) Instantiate(spearWarrior, spawnPoints[i].position + new Vector3(UnityEngine.Random.Range(-10f, 10f), 0f, 0f), spawnPoints[i].rotation);
-        else if (c.Equals('D')) Instantiate(axeWarrior, spawnPoints[i].position + new Vector3(UnityEngine.Random.Range(-10f, 10f), 0f, 0f), spawnPoints[i].rotation);
+        string enemyType = "Clubber";
+        if (c.Equals('B')) enemyType = "Runner";
+        if (c.Equals('C')) enemyType = "SpearWarrior";
+        if (c.Equals('D')) enemyType = "AxeWarrior";
+
+        Vector3 spawn = spawnPoints[i].position + new Vector3(UnityEngine.Random.Range(-10f, 10f), 0f, 0f);
+        Enemy enemy = ObjectPooler.Instance.SpawnEnemyFromPool(enemyType, spawn, spawnPoints[i].rotation);
+        enemy.ResetEnemyAttributes();
     }
 
     void CheckForEnemies()
@@ -141,7 +145,6 @@ public class WaveController : MonoBehaviour
         if (battleIsLost) return;
         if (GameObject.FindGameObjectsWithTag("Enemy").Length == 0)
         {
-            isSpawningEnemies = false;
             CancelInvoke("CheckForEnemies");
             WinBattle();
         }
@@ -149,7 +152,6 @@ public class WaveController : MonoBehaviour
 
     public void LoseBattle()
     {
-        isSpawningEnemies = false;
         CancelInvoke("CheckForEnemies");
         StopAllCoroutines();
         DisableBattleUI();
@@ -164,7 +166,7 @@ public class WaveController : MonoBehaviour
         threatLevelText.text = currentRoundNumber.ToString();
         battleTimeText.text = GetBattleTimerString(secondsInBattle);
         StopCoroutine(SecondCounter());
-        rewardsRisingCoroutine = StartCoroutine(PlayRewardsRisingAnimation());
+        StartCoroutine(PlayRewardsRisingAnimation());
         DisableBattleUI();
         statsController.battlesWon++;
         statsController.SaveStats();
@@ -222,14 +224,19 @@ public class WaveController : MonoBehaviour
         if (isOdd)
         {
             // Spawn a single friendly warrior to the negative x side
-            Instantiate(friendlyWarriorPrefab, new Vector3(kingHouse.transform.position.x + xOffset, kingHouse.transform.position.y, kingHouse.transform.position.z + zOffset), kingHouse.transform.rotation);
+            Vector3 spawn = new Vector3(kingHouse.transform.position.x + xOffset, kingHouse.transform.position.y, kingHouse.transform.position.z + zOffset);
+            ToninaWarrior friendly = ObjectPooler.Instance.SpawnFriendlyFromPool("ToninaWarrior", spawn, kingHouse.transform.rotation);
+            friendly.ResetFriendlyAttributes();
         }
     }
 
     void SpawnFriendlyPair(Vector3 spawnPosition)
     {
-        Instantiate(friendlyWarriorPrefab, spawnPosition, kingHouse.transform.rotation);
-        Instantiate(friendlyWarriorPrefab, new Vector3((spawnPosition.x * -1f) - 2f, spawnPosition.y, spawnPosition.z), kingHouse.transform.rotation);
+        ToninaWarrior friendly1 = ObjectPooler.Instance.SpawnFriendlyFromPool("ToninaWarrior", spawnPosition, kingHouse.transform.rotation);
+        friendly1.ResetFriendlyAttributes();
+        Vector3 spawn2 = new Vector3((spawnPosition.x * -1f) - 2f, spawnPosition.y, spawnPosition.z);
+        ToninaWarrior friendly2 = ObjectPooler.Instance.SpawnFriendlyFromPool("ToninaWarrior", spawn2, kingHouse.transform.rotation);
+        friendly2.ResetFriendlyAttributes();
     }
 
     IEnumerator SecondCounter()

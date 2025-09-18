@@ -46,7 +46,7 @@ public class Bow : Projectile
 
     void ShootArrow()
     {
-        arrow.directorComponent.SetActive(true);
+        arrow.directorComponent.gameObject.SetActive(true);
         arrow.canHit = true;
 
         if (!infinite) quantity--;
@@ -57,7 +57,7 @@ public class Bow : Projectile
 
         Instantiate(arrow.gameObject, shootingPoint.position, shootingPoint.rotation);
         arrowRb.constraints = RigidbodyConstraints.FreezeAll;
-        arrow.directorComponent.SetActive(false);
+        arrow.directorComponent.gameObject.SetActive(false);
         arrow.canHit = false;
         arrow.gameObject.SetActive(false);
     }

@@ -6003,6 +6003,7 @@ MonoBehaviour:
   onCooldown: 0
   attackExtraCooldownTime: 0
   shouldAttack: 0
+  enemyType: Runner
   agent: {fileID: 7468566635609905993}
   healthBar: {fileID: 2814281394852320870}
   startingHealth: 60
@@ -6010,6 +6011,7 @@ MonoBehaviour:
   moveTowardsTarget: 1
   slowDownTimeFromStone: 4
   speedDropFromStone: 1
+  pooler: {fileID: 0}
 --- !u!114 &1412483552104816771
 MonoBehaviour:
   m_ObjectHideFlags: 0

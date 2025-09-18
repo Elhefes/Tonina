@@ -181,9 +181,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3570245252696662713}
+  - component: {fileID: 6075038093218669114}
   - component: {fileID: 1748826792029426963}
   - component: {fileID: 8861470018394219423}
-  - component: {fileID: 6075038093218669114}
   - component: {fileID: 140813386184423174}
   m_Layer: 0
   m_Name: Club 1
@@ -218,6 +218,32 @@ Transform:
   - {fileID: 1696184359663807209}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &6075038093218669114
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4235599752637593603}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5cfcb8c4f43aa13409a4693a914d0ecd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  weaponName: Club
+  isFriendly: 0
+  selected: 1
+  notAvailable: 0
+  type: 0
+  damage: 30
+  uiSprite: {fileID: 21300000, guid: 8bd564907fa11a040bc068a94acdce8f, type: 3}
+  attackCooldown: 1
+  attackDistance: 2
+  attackAngleThreshold: 15
+  canHit: 0
+  switchSound: {fileID: 8300000, guid: 34793f396b0378646b9b9de9907e7e68, type: 3}
+  hitSound: {fileID: 8300000, guid: ddab4bfcc48c42e4f831c792463405e6, type: 3}
+  soundPlayer: {fileID: 140813386184423174}
 --- !u!65 &1748826792029426963
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -266,32 +292,6 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 126
   m_CollisionDetection: 0
---- !u!114 &6075038093218669114
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4235599752637593603}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5cfcb8c4f43aa13409a4693a914d0ecd, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  weaponName: Club
-  selected: 1
-  notAvailable: 0
-  type: 0
-  user: 0
-  damage: 30
-  uiSprite: {fileID: 21300000, guid: 8bd564907fa11a040bc068a94acdce8f, type: 3}
-  attackCooldown: 1
-  attackDistance: 2
-  attackAngleThreshold: 15
-  canHit: 0
-  switchSound: {fileID: 8300000, guid: 34793f396b0378646b9b9de9907e7e68, type: 3}
-  hitSound: {fileID: 8300000, guid: ddab4bfcc48c42e4f831c792463405e6, type: 3}
-  soundPlayer: {fileID: 140813386184423174}
 --- !u!82 &140813386184423174
 AudioSource:
   m_ObjectHideFlags: 0
