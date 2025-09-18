@@ -56,6 +56,32 @@ public class ObjectPooler : MonoBehaviour
         }
     }
 
+    public void ResetPools()
+    {
+        // Clear all existing queues
+        foreach (var key in poolDictionary.Keys)
+        {
+            poolDictionary[key].Clear();
+        }
+
+        // Go through all children of this ObjectPooler and reset them
+        foreach (Transform child in transform)
+        {
+            GameObject obj = child.gameObject;
+            obj.SetActive(false);
+
+            // Try to find which pool this belongs to
+            foreach (Pool pool in pools)
+            {
+                if (obj.name.Contains(pool.prefab.name)) // matching prefab type
+                {
+                    poolDictionary[pool.tag].Enqueue(obj);
+                    break;
+                }
+            }
+        }
+    }
+
     public ToninaWarrior SpawnFriendlyFromPool(string tag, Vector3 position, Quaternion rotation)
     {
         if (!poolDictionary.ContainsKey(tag))
@@ -155,7 +181,6 @@ public class ObjectPooler : MonoBehaviour
     {
         poolDictionary[tag].Enqueue(projectile.gameObject);
         projectile.gameObject.SetActive(false);
-        //projectile.ResetProjectileAttributes();
     }
 
     Projectile SpawnNewProjectile(string projectileType, Vector3 position, Quaternion rotation)
