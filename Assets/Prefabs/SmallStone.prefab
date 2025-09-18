@@ -204,13 +204,13 @@ GameObject:
   m_Component:
   - component: {fileID: 6499211415579476566}
   - component: {fileID: 7898765968020098547}
+  - component: {fileID: -3091167720287405587}
   - component: {fileID: 5366877357482752313}
   - component: {fileID: 2614982939846068356}
   - component: {fileID: 1692238666640140335}
-  - component: {fileID: -3091167720287405587}
   - component: {fileID: 2507686418522535728}
   m_Layer: 0
-  m_Name: Small Stone
+  m_Name: SmallStone
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -241,6 +241,39 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5871012716712761580}
   m_Mesh: {fileID: 973877516759717424, guid: bbdf54b9d8353b044bf6478ce970cb4e, type: 3}
+--- !u!114 &-3091167720287405587
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5871012716712761580}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e4c141f3d3e9b024bb35203ac0d14bad, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  weaponName: SmallStone
+  isFriendly: 0
+  selected: 1
+  notAvailable: 0
+  type: 2
+  damage: 12
+  uiSprite: {fileID: 21300000, guid: 07c704b29e8def74aa2d3f874a535444, type: 3}
+  attackCooldown: 1
+  attackDistance: 8
+  attackAngleThreshold: 2
+  canHit: 0
+  switchSound: {fileID: 8300000, guid: 63898964f37bd4c4cbcba9bd1461ec50, type: 3}
+  hitSound: {fileID: 8300000, guid: 585972107439df94fa54ad82f02f09c0, type: 3}
+  soundPlayer: {fileID: 2507686418522535728}
+  shootingPoint: {fileID: 0}
+  directorComponent: {fileID: 2821665265253365780}
+  quantity: 0
+  infinite: 0
+  weaponWheelQuantityTMP: {fileID: 0}
+  pooler: {fileID: 0}
+  hitSoundObject: {fileID: 4097969360181743727}
 --- !u!23 &5366877357482752313
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -334,38 +367,6 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 0.09384273, y: 0.08624227, z: 0.07807943}
   m_Center: {x: 0.00052447803, y: -0.0049122535, z: -0.00022163987}
---- !u!114 &-3091167720287405587
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5871012716712761580}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e4c141f3d3e9b024bb35203ac0d14bad, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  weaponName: Small Stone
-  selected: 1
-  notAvailable: 0
-  type: 2
-  user: 0
-  damage: 12
-  uiSprite: {fileID: 21300000, guid: 07c704b29e8def74aa2d3f874a535444, type: 3}
-  attackCooldown: 1
-  attackDistance: 8
-  attackAngleThreshold: 2
-  canHit: 0
-  switchSound: {fileID: 8300000, guid: 63898964f37bd4c4cbcba9bd1461ec50, type: 3}
-  hitSound: {fileID: 8300000, guid: 585972107439df94fa54ad82f02f09c0, type: 3}
-  soundPlayer: {fileID: 2507686418522535728}
-  shootingPoint: {fileID: 0}
-  directorComponent: {fileID: 1064538629880005888}
-  quantity: 0
-  infinite: 0
-  weaponWheelQuantityTMP: {fileID: 0}
-  hitSoundObject: {fileID: 4097969360181743727}
 --- !u!82 &2507686418522535728
 AudioSource:
   m_ObjectHideFlags: 0

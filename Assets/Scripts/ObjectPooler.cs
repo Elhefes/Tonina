@@ -48,7 +48,7 @@ public class ObjectPooler : MonoBehaviour
             for (int i = 0; i < pool.size; i++)
             {
                 GameObject obj = Instantiate(pool.prefab);
-                obj.transform.parent = this.transform;
+                obj.transform.parent = transform;
                 obj.SetActive(false);
                 objectPool.Enqueue(obj);
             }
@@ -87,7 +87,7 @@ public class ObjectPooler : MonoBehaviour
         GameObject prefab = friendlyWarrior;
         ToninaWarrior newFriendly = Instantiate(prefab, position, rotation).GetComponent<ToninaWarrior>();
         newFriendly.SetFriendlyInPool(false);
-        newFriendly.transform.parent = this.transform;
+        newFriendly.transform.parent = transform;
         return newFriendly;
     }
 
@@ -128,11 +128,11 @@ public class ObjectPooler : MonoBehaviour
         }
         Enemy newEnemy = Instantiate(prefab, position, rotation).GetComponent<Enemy>();
         newEnemy.SetEnemyInPool(false);
-        newEnemy.transform.parent = this.transform;
+        newEnemy.transform.parent = transform;
         return newEnemy;
     }
 
-    public Projectile SpawnProjectile(string tag, Vector3 position, Quaternion rotation)
+    public Projectile SpawnProjectileFromPool(string tag, Vector3 position, Quaternion rotation)
     {
         if (!poolDictionary.ContainsKey(tag))
         {
@@ -160,7 +160,7 @@ public class ObjectPooler : MonoBehaviour
 
     Projectile SpawnNewProjectile(string projectileType, Vector3 position, Quaternion rotation)
     {
-        GameObject prefab = arrow;
+        GameObject prefab = smallStone;
 
         switch (projectileType)
         {
@@ -170,7 +170,7 @@ public class ObjectPooler : MonoBehaviour
 
         Projectile newProjectile = Instantiate(prefab, position, rotation).GetComponent<Projectile>();
         newProjectile.SetProjectileInPool(false);
-        newProjectile.transform.parent = this.transform;
+        newProjectile.transform.parent = transform;
         return newProjectile;
     }
 }

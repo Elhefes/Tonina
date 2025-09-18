@@ -15,7 +15,7 @@ public class Inventory : MonoBehaviour
     void InitiateWeapons()
     {
         availableWeapons.Add(WeaponType.Club);
-        availableWeapons.Add(WeaponType.Small_stone);
+        availableWeapons.Add(WeaponType.SmallStone);
         availableWeapons.Add(WeaponType.Spear);
     }
 }

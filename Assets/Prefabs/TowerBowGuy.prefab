@@ -6202,6 +6202,10 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 244869895026300962, guid: dde0289bc2245564084b57b27c5bb670, type: 3}
+      propertyPath: isFriendly
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 244869895026300962, guid: dde0289bc2245564084b57b27c5bb670, type: 3}
       propertyPath: shootingPoint
       value: 
       objectReference: {fileID: 7658485002800573652}
@@ -6230,9 +6234,17 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 3454009534845570013}
     - target: {fileID: 3792902411408362339, guid: dde0289bc2245564084b57b27c5bb670, type: 3}
+      propertyPath: isFriendly
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3792902411408362339, guid: dde0289bc2245564084b57b27c5bb670, type: 3}
       propertyPath: shootingPoint
       value: 
       objectReference: {fileID: 0}
+    - target: {fileID: 3792902411408362339, guid: dde0289bc2245564084b57b27c5bb670, type: 3}
+      propertyPath: directorComponent
+      value: 
+      objectReference: {fileID: 8490021508633675599}
     - target: {fileID: 4576414451980759053, guid: dde0289bc2245564084b57b27c5bb670, type: 3}
       propertyPath: m_Layer
       value: 8
@@ -6339,5 +6351,16 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 92eb9a058efac0a4898cf6652ea622e4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &8490021508633675599 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2676832763894799705, guid: dde0289bc2245564084b57b27c5bb670, type: 3}
+  m_PrefabInstance: {fileID: 5833455243779299862}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9197ee9ca4033c84794354d91206183d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 

@@ -1083,9 +1083,17 @@ PrefabInstance:
       propertyPath: creatureMovement
       value: 
       objectReference: {fileID: 1327486406127696943}
+    - target: {fileID: 802857524029751252, guid: 23ed3222080efb84990490f64710cfe1, type: 3}
+      propertyPath: isFriendly
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 832000045287718520, guid: 23ed3222080efb84990490f64710cfe1, type: 3}
       propertyPath: m_Constraints
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1284511310196331949, guid: 23ed3222080efb84990490f64710cfe1, type: 3}
+      propertyPath: isFriendly
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3407542076388770727, guid: 23ed3222080efb84990490f64710cfe1, type: 3}
       propertyPath: pointA
@@ -1104,6 +1112,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 5412454603876469069}
     - target: {fileID: 6608262745670789860, guid: 23ed3222080efb84990490f64710cfe1, type: 3}
+      propertyPath: isFriendly
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6608262745670789860, guid: 23ed3222080efb84990490f64710cfe1, type: 3}
       propertyPath: shootingPoint
       value: 
       objectReference: {fileID: 7852712582095150434}
@@ -1111,13 +1123,37 @@ PrefabInstance:
       propertyPath: creatureMovement
       value: 
       objectReference: {fileID: 1327486406127696943}
+    - target: {fileID: 6608262745670789860, guid: 23ed3222080efb84990490f64710cfe1, type: 3}
+      propertyPath: directorComponent
+      value: 
+      objectReference: {fileID: 8435386696039859299}
+    - target: {fileID: 7814775106335062437, guid: 23ed3222080efb84990490f64710cfe1, type: 3}
+      propertyPath: isFriendly
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7814775106335062437, guid: 23ed3222080efb84990490f64710cfe1, type: 3}
+      propertyPath: directorComponent
+      value: 
+      objectReference: {fileID: 8435386696039859299}
+    - target: {fileID: 7999510126228498283, guid: 23ed3222080efb84990490f64710cfe1, type: 3}
+      propertyPath: isFriendly
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 7999510126228498283, guid: 23ed3222080efb84990490f64710cfe1, type: 3}
       propertyPath: shootingPoint
       value: 
       objectReference: {fileID: 7852712582095150434}
+    - target: {fileID: 7999510126228498283, guid: 23ed3222080efb84990490f64710cfe1, type: 3}
+      propertyPath: directorComponent
+      value: 
+      objectReference: {fileID: 2858716950514919515}
     - target: {fileID: 8646584557512123107, guid: 23ed3222080efb84990490f64710cfe1, type: 3}
       propertyPath: m_Name
       value: Sartom
+      objectReference: {fileID: 0}
+    - target: {fileID: 8851937033575042833, guid: 23ed3222080efb84990490f64710cfe1, type: 3}
+      propertyPath: isFriendly
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8851937033575042833, guid: 23ed3222080efb84990490f64710cfe1, type: 3}
       propertyPath: shootingPoint
@@ -1171,6 +1207,10 @@ PrefabInstance:
       propertyPath: creatureMovement
       value: 
       objectReference: {fileID: 1327486406127696943}
+    - target: {fileID: 9132055906840210960, guid: 23ed3222080efb84990490f64710cfe1, type: 3}
+      propertyPath: m_Name
+      value: SmallStone
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects:
@@ -1205,6 +1245,17 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 5cfcb8c4f43aa13409a4693a914d0ecd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &2858716950514919515 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3407542076388770727, guid: 23ed3222080efb84990490f64710cfe1, type: 3}
+  m_PrefabInstance: {fileID: 641260046772988924}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9197ee9ca4033c84794354d91206183d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!114 &6004271826118263064 stripped
@@ -1250,6 +1301,17 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 8986095758790047833, guid: 23ed3222080efb84990490f64710cfe1, type: 3}
   m_PrefabInstance: {fileID: 641260046772988924}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &8435386696039859299 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 9076641233426640799, guid: 23ed3222080efb84990490f64710cfe1, type: 3}
+  m_PrefabInstance: {fileID: 641260046772988924}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9197ee9ca4033c84794354d91206183d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &9158316453348149535 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 8646584557512123107, guid: 23ed3222080efb84990490f64710cfe1, type: 3}

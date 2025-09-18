@@ -65,7 +65,7 @@ public class Enemy : Creature
 
     public void SlowDownEnemy()
     {
-        if (slowedDown)  return;
+        if (slowedDown || !gameObject.activeSelf) return;
         slowDownCoroutine = StartCoroutine(SlowDownCoroutine());
     }
 

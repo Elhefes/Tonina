@@ -10,7 +10,6 @@ public class WaveController : MonoBehaviour
     private ThreatLevels.ThreatLevel threatLevel;
     private int currentRoundNumber;
     private int friendlyWarriorsAmount;
-    private bool isSpawningEnemies;
     private int secondsInBattle;
     public bool battleIsLost;
 
@@ -19,7 +18,6 @@ public class WaveController : MonoBehaviour
     public StatsController statsController;
 
     private List<Coroutine> coroutines;
-    private Coroutine rewardsRisingCoroutine;
     public GameObject overworldOptionsButton;
     public GameObject battleUI;
     public GameObject battleWinningScreen;
@@ -74,7 +72,6 @@ public class WaveController : MonoBehaviour
     public IEnumerator ParseRound(string round)
     {
         List<string> bits = new(round.Split(' '));
-        isSpawningEnemies = true;
         int index;
 
         if (friendlyWarriorsAmount > 0) SpawnFriendlies(friendlyWarriorsAmount);
@@ -148,7 +145,6 @@ public class WaveController : MonoBehaviour
         if (battleIsLost) return;
         if (GameObject.FindGameObjectsWithTag("Enemy").Length == 0)
         {
-            isSpawningEnemies = false;
             CancelInvoke("CheckForEnemies");
             WinBattle();
         }
@@ -156,7 +152,6 @@ public class WaveController : MonoBehaviour
 
     public void LoseBattle()
     {
-        isSpawningEnemies = false;
         CancelInvoke("CheckForEnemies");
         StopAllCoroutines();
         DisableBattleUI();
@@ -171,7 +166,7 @@ public class WaveController : MonoBehaviour
         threatLevelText.text = currentRoundNumber.ToString();
         battleTimeText.text = GetBattleTimerString(secondsInBattle);
         StopCoroutine(SecondCounter());
-        rewardsRisingCoroutine = StartCoroutine(PlayRewardsRisingAnimation());
+        StartCoroutine(PlayRewardsRisingAnimation());
         DisableBattleUI();
         statsController.battlesWon++;
         statsController.SaveStats();
