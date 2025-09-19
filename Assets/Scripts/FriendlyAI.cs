@@ -12,11 +12,12 @@ public class FriendlyAI : MonoBehaviour
 
     void Awake()
     {
-        player = FindObjectOfType<Player>();
+        player = FindFirstObjectByType<Player>();
     }
 
     private void OnEnable()
     {
+        if (player == null) player = FindFirstObjectByType<Player>(); // In attack mode
         normalStoppingDistance = creatureMovement.agent.stoppingDistance;
         AI_ControllerCoroutine = StartCoroutine(PeriodicalTargetChecking());
     }

@@ -2,25 +2,46 @@ using UnityEngine;
 
 public class AttackModeCreatureSpawner : MonoBehaviour
 {
-    public GameObject friendliesParentObject;
     [SerializeField] private GameObject spawnsParentObject;
     public Transform[] spawns;
-    private GameObject[] friendlies;
+    public ToninaWarrior[] friendlies;
+    public Enemy[] enemies;
+
+    public ObjectPooler pooler;
 
     void Start()
     {
+        pooler = ObjectPooler.Instance;
+
         // Store all friendlies in an array
-        friendlies = new GameObject[friendliesParentObject.transform.childCount];
-        for (int i = 0; i < friendliesParentObject.transform.childCount; i++)
-        {
-            friendlies[i] = friendliesParentObject.transform.GetChild(i).gameObject;
-        }
+        friendlies = FindObjectsByType<ToninaWarrior>(FindObjectsInactive.Include, FindObjectsSortMode.InstanceID);
+
+        // Store all enemies (Chioh Clan) in an array
+        enemies = FindObjectsByType<Enemy>(FindObjectsInactive.Include, FindObjectsSortMode.InstanceID);
 
         // Store all spawns in an array
         spawns = new Transform[spawnsParentObject.transform.childCount];
         for (int i = 0; i < spawnsParentObject.transform.childCount; i++)
         {
             spawns[i] = spawnsParentObject.transform.GetChild(i).transform;
+        }
+    }
+
+    public void SetFriendliesActive(bool value)
+    {
+        foreach (ToninaWarrior warrior in friendlies)
+        {
+            warrior.gameObject.SetActive(value);
+            if (value) warrior.ResetFriendlyAttributes();
+        }
+    }
+
+    public void SetEnemiesActive(bool value)
+    {
+        foreach (Enemy enemy in enemies)
+        {
+            enemy.gameObject.SetActive(value);
+            if (value) enemy.ResetEnemyAttributes();
         }
     }
 

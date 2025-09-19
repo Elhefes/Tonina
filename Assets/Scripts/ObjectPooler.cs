@@ -14,13 +14,6 @@ public class ObjectPooler : MonoBehaviour
     public GameObject arrow;
     public GameObject spear;
 
-    public GameObject kancho;
-    public GameObject fence;
-    public GameObject maizePlace;
-    public GameObject spearRack;
-    public GameObject fillOkill;
-    public GameObject tower;
-
     [System.Serializable]
     public class Pool
     {
@@ -47,7 +40,7 @@ public class ObjectPooler : MonoBehaviour
 
             for (int i = 0; i < pool.size; i++)
             {
-                GameObject obj = Instantiate(pool.prefab);
+                GameObject obj = Instantiate(pool.prefab, transform.position, transform.rotation);
                 obj.transform.parent = transform;
                 obj.SetActive(false);
                 objectPool.Enqueue(obj);
