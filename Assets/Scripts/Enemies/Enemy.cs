@@ -24,13 +24,23 @@ public class Enemy : Creature
     {
         pooler = ObjectPooler.Instance;
         ResetEnemyAttributes();
+        FindFirstTarget();
+    }
+
+    void FindFirstTarget()
+    {
+        GameObject[] foundTargets = GameObject.FindGameObjectsWithTag("Target");
+
+        if (foundTargets.Length > 0)
+        {
+            if (moveTowardsTarget) creatureMovement.target = foundTargets[0].transform;
+        }
     }
 
     public void ResetEnemyAttributes()
     {
         health = startingHealth;
         healthBar.value = health;
-        if (moveTowardsTarget) creatureMovement.target = GameObject.FindGameObjectsWithTag("Target")[0].transform;
         slowedDown = false;
         StopAllCoroutines();
     }

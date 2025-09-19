@@ -25,7 +25,6 @@ public class AttackModeSpawnController : MonoBehaviour
     public GameObject startButton;
 
     public AttackModeCreatureSpawner attackModeCreatureSpawner;
-    public GameObject enemiesObject;
 
     public GameObject playerSpawnElement;
     public GameObject spawnTextInBetween;
@@ -161,7 +160,7 @@ public class AttackModeSpawnController : MonoBehaviour
         optionsButton.SetActive(false);
         battleUI.SetActive(true);
         mouseLook.ToggleCameraOnPlayer();
-        enemiesObject.SetActive(true);
+        attackModeCreatureSpawner.SetEnemiesActive(true);
         attackModeCreatureSpawner.MoveFriendliesToSpawns(spawnArray);
         attackModeCreatureSpawner.SetFriendliesActive(true);
         gameObject.SetActive(false); // This gameObject is the SelectAttackPoints UI object
@@ -180,7 +179,7 @@ public class AttackModeSpawnController : MonoBehaviour
         mainCamera.gameObject.SetActive(false);
         minimapRenderTextureObject.SetActive(false);
         battleUI.SetActive(false);
-        enemiesObject.SetActive(false);
+        attackModeCreatureSpawner.SetEnemiesActive(false);
         attackModeCreatureSpawner.SetFriendliesActive(false);
         gameObject.SetActive(true); // This gameObject is the SelectAttackPoints UI object
     }
