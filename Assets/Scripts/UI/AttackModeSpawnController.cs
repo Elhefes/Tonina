@@ -162,6 +162,7 @@ public class AttackModeSpawnController : MonoBehaviour
         optionsButton.SetActive(false);
         battleUI.SetActive(true);
         mouseLook.ToggleCameraOnPlayer();
+        attackModeCreatureSpawner.MoveEnemiesToSpawn();
         attackModeCreatureSpawner.SetEnemiesActive(true);
         attackModeCreatureSpawner.MoveFriendliesToSpawns(spawnArray);
         attackModeCreatureSpawner.SetFriendliesActive(true);

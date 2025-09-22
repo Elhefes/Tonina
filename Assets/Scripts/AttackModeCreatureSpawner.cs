@@ -45,6 +45,14 @@ public class AttackModeCreatureSpawner : MonoBehaviour
         }
     }
 
+    public void MoveEnemiesToSpawn()
+    {
+        foreach (Enemy enemy in enemies)
+        {
+            enemy.gameObject.transform.position = pooler.gameObject.transform.position;
+        }
+    }
+
     public void MoveFriendliesToSpawns(int[] spawnArray)
     {
         int creatureIndex = 0;
