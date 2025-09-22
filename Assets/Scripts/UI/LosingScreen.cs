@@ -14,14 +14,13 @@ public class LosingScreen : MonoBehaviour
     public AudioPassController audioPassController;
     public bool playerDied;
     public GameObject kingBarricade;
-    private Coroutine textTypingCoroutine;
     private string fullText;
     private string currentText = "";
 
     private void OnEnable()
     {
         if (player.battlefieldMenu != null) player.battlefieldMenu.waveController.battleIsLost = true;
-        textTypingCoroutine = StartCoroutine(TypeTexts());
+        StartCoroutine(TypeTexts());
         audioPassController.muffleEffect = true;
     }
 

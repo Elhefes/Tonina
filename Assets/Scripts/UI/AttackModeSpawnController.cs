@@ -5,6 +5,7 @@ public class AttackModeSpawnController : MonoBehaviour
 {
     public MouseLook mouseLook;
     public Camera mainCamera;
+    public MusicPlayer musicPlayer;
     public AudioListener minimapAudioListener;
     public RenderTexture minimapRenderTexture;
     public GameObject minimapRenderTextureObject;
@@ -168,6 +169,7 @@ public class AttackModeSpawnController : MonoBehaviour
 
     public void ReturnToSpawnSelection()
     {
+        musicPlayer.PlayWaitingMusic();
         mainCamera.gameObject.tag = "Untagged";
         mainCamera.enabled = false;
         minimapAudioListener.enabled = true;

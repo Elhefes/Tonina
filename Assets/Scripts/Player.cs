@@ -683,13 +683,17 @@ public class Player : Creature
 
     public void EndBattle()
     {
-        battlefieldMenu.waveController.pooler.ResetPools();
+        if (battlefieldMenu != null) battlefieldMenu.waveController.pooler.ResetPools();
         DisableBattleMode();
         barricadeController.RestoreBarricades();
 
         if (optionsMenu.attackModeSpawnController != null)
         {
             optionsMenu.ReturnToAttackSpawnSelection();
+
+            // Disable audio muffle effect
+            losingScreen.audioPassController.muffleEffect = false;
+            losingScreen.audioPassController.ResetFilterValue();
         }
     }
 
