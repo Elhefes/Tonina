@@ -13,7 +13,7 @@ public class Intro : MonoBehaviour
         musicVolumeAtStart = musicPlayer.audioSource.volume;
     }
 
-    public void EndIntro()
+    public void StartLoadingIntroScene()
     {
         SceneChangingManager.Instance.LoadScene("IntroScene");
     }
