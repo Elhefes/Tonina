@@ -157,6 +157,9 @@ public class AttackModeSpawnController : MonoBehaviour
         mouseLook.notCastingRays = false;
         mouseLook.player.transform.position = attackModeCreatureSpawner.spawns[playerSpawnNumber].position;
         mouseLook.player.gameObject.SetActive(true);
+        mouseLook.player.optionsMenu.gameObject.SetActive(false);
+        mouseLook.player.optionsMenu.returnToAttackPlannerButton.SetActive(true);
+        mouseLook.player.optionsMenu.returnHomeButton.gameObject.SetActive(false);
         mainCamera.gameObject.SetActive(true);
         minimapRenderTextureObject.SetActive(true);
         optionsButton.SetActive(false);
@@ -193,8 +196,18 @@ public class AttackModeSpawnController : MonoBehaviour
         if (battleUI.activeSelf && !gameObject.activeSelf)
         {
             ReturnToSpawnSelection();
-            if (mouseLook.player != null) mouseLook.player.optionsMenu.gameObject.SetActive(false);
+            if (mouseLook.player != null)
+            {
+                mouseLook.player.optionsMenu.gameObject.SetActive(false);
+                mouseLook.player.optionsMenu.returnToAttackPlannerButton.SetActive(false);
+                mouseLook.player.optionsMenu.returnHomeButton.gameObject.SetActive(true);
+            }
         }
+    }
+
+    public void ReturnToMainMenu()
+    {
+        SceneChangingManager.Instance.LoadScene("Tonina");
     }
 
     void UpdateSpawnArray()

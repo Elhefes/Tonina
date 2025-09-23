@@ -12,6 +12,7 @@ public class OptionsMenu : MonoBehaviour
     public GameObject confirmForfeitAttackMenu;
 
     public Button returnHomeButton;
+    public GameObject returnToAttackPlannerButton;
     public GameObject mainMenuButton;
 
     public bool returnFromBuilder;
