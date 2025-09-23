@@ -13604,6 +13604,22 @@ PrefabInstance:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[5].m_Arguments.m_ObjectArgumentAssemblyTypeName
       value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
+    - target: {fileID: 822433934243588718, guid: ec16dfae91153d14cbd61ee89314e64a, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 136132844}
+    - target: {fileID: 822433934243588718, guid: ec16dfae91153d14cbd61ee89314e64a, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: TryToReturnToSpawnSelection
+      objectReference: {fileID: 0}
+    - target: {fileID: 822433934243588718, guid: ec16dfae91153d14cbd61ee89314e64a, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: AttackModeSpawnController, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 822433934243588718, guid: ec16dfae91153d14cbd61ee89314e64a, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
     - target: {fileID: 1430882957608130837, guid: ec16dfae91153d14cbd61ee89314e64a, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -14048,6 +14064,10 @@ PrefabInstance:
       propertyPath: m_AnchorMax.y
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 7514705061173720026, guid: ec16dfae91153d14cbd61ee89314e64a, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 7948757601455251133, guid: ec16dfae91153d14cbd61ee89314e64a, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
       value: 4
@@ -14255,6 +14275,10 @@ PrefabInstance:
     - target: {fileID: 8798775470908522344, guid: ec16dfae91153d14cbd61ee89314e64a, type: 3}
       propertyPath: m_AnchorMin.x
       value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 8961651804365873701, guid: ec16dfae91153d14cbd61ee89314e64a, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 9190128249836380075, guid: ec16dfae91153d14cbd61ee89314e64a, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
@@ -53183,6 +53207,7 @@ MonoBehaviour:
   soundVolumeSlider: {fileID: 597620252}
   normalMenu: {fileID: 597620251}
   confirmReturnHomeMenu: {fileID: 597620254}
+  confirmForfeitAttackMenu: {fileID: 0}
   returnHomeButton: {fileID: 597620250}
   mainMenuButton: {fileID: 597620249}
   returnFromBuilder: 0

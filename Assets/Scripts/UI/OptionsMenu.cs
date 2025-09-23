@@ -9,6 +9,7 @@ public class OptionsMenu : MonoBehaviour
 
     public GameObject normalMenu;
     public GameObject confirmReturnHomeMenu;
+    public GameObject confirmForfeitAttackMenu;
 
     public Button returnHomeButton;
     public GameObject mainMenuButton;
@@ -34,6 +35,7 @@ public class OptionsMenu : MonoBehaviour
 
         if (normalMenu != null) normalMenu.SetActive(true);
         if (confirmReturnHomeMenu != null) confirmReturnHomeMenu.SetActive(false);
+        if (confirmForfeitAttackMenu != null) confirmForfeitAttackMenu.SetActive(false);
 
         if (player != null)
         {

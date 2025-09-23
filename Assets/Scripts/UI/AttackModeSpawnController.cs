@@ -188,6 +188,15 @@ public class AttackModeSpawnController : MonoBehaviour
         gameObject.SetActive(true); // This gameObject is the SelectAttackPoints UI object
     }
 
+    public void TryToReturnToSpawnSelection()
+    {
+        if (battleUI.activeSelf && !gameObject.activeSelf)
+        {
+            ReturnToSpawnSelection();
+            if (mouseLook.player != null) mouseLook.player.optionsMenu.gameObject.SetActive(false);
+        }
+    }
+
     void UpdateSpawnArray()
     {
         if (isDown) return;
