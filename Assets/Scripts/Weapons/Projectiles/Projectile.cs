@@ -19,7 +19,15 @@ public class Projectile : Weapon
 
     public void SpawnProjectile()
     {
-        Projectile spawnedProjectile = pooler.SpawnProjectileFromPool(gameObject.name, shootingPoint.position, transform.rotation);
+        Projectile spawnedProjectile;
+        if (pooler != null)
+        {
+            spawnedProjectile = pooler.SpawnProjectileFromPool(gameObject.name, shootingPoint.position, transform.rotation);
+        }
+        else
+        {
+            spawnedProjectile = Instantiate(this, shootingPoint.position, shootingPoint.rotation);
+        }
         spawnedProjectile.shootingPoint = shootingPoint;
         spawnedProjectile.transform.position = shootingPoint.position;
         spawnedProjectile.directorComponent.creatureMovement = directorComponent.creatureMovement;
@@ -46,7 +54,7 @@ public class Projectile : Weapon
     {
         CancelInvoke();
         if (!gameObject.activeSelf) return;
-        if (projectileInPool) ObjectPooler.Instance.AddProjectileToPool(this, gameObject.name.Substring(0, gameObject.name.Length - 7));
+        if (pooler != null && projectileInPool) ObjectPooler.Instance.AddProjectileToPool(this, gameObject.name.Substring(0, gameObject.name.Length - 7));
         else Destroy(gameObject);
     }
 }

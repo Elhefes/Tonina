@@ -56,7 +56,7 @@ public class Enemy : Creature
                 deathSoundObject.SetActive(true);
                 deathSoundObject.transform.SetParent(null);
             }
-            if (enemyInPool)
+            if (pooler != null && enemyInPool)
             {
                 pooler.AddEnemyToPool(this, enemyType);
             }

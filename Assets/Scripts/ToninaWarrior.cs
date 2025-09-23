@@ -46,7 +46,7 @@ public class ToninaWarrior : Creature
                 deathSoundObject.SetActive(true);
                 deathSoundObject.transform.SetParent(null);
             }
-            if (friendlyInPool)
+            if (pooler != null && friendlyInPool)
             {
                 pooler.AddFriendlyToPool(this, friendlyType);
             }
