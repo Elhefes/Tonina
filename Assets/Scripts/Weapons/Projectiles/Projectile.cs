@@ -15,6 +15,7 @@ public class Projectile : Weapon
     private void Start()
     {
         pooler = ObjectPooler.Instance;
+        if (weaponWheelQuantityTMP != null) weaponWheelQuantityTMP.text = quantity.ToString();
     }
 
     public void SpawnProjectile()
