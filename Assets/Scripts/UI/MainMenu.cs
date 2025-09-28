@@ -9,6 +9,12 @@ public class MainMenu : MonoBehaviour
     public GameObject overworldUI;
     public GameObject clickBlocker;
 
+    public GameObject continueHereLock;
+    public GameObject playAsAttackersLock;
+    public GameObject attackMapScrollView;
+
+    public GameObject pyramid4thFloor; // this is very place holder
+
     public GameObject minimapCamera;
     private Camera playerCamera;
     private Camera mainMenuCamera;
@@ -36,6 +42,9 @@ public class MainMenu : MonoBehaviour
 
         secondsPlayed = PlayerPrefs.GetInt("secondsPlayed", 0);
         StartCoroutine(SecondCounter());
+
+        if (PlayerPrefs.GetInt("introPlayed", 0) == 1) continueHereLock.SetActive(false);
+        if (pyramid4thFloor.activeSelf) playAsAttackersLock.SetActive(false);
     }
 
     private void Awake()
@@ -46,7 +55,7 @@ public class MainMenu : MonoBehaviour
 
     public void ContinueHere()
     {
-        if (PlayerPrefs.GetInt("introPlayed", 0) == 0)
+        if (continueHereLock.activeSelf)
         {
             textsAnimator.SetTrigger("PlayIntroFirstText");
             return;
@@ -79,6 +88,8 @@ public class MainMenu : MonoBehaviour
 
     void EnterMainMenuView()
     {
+        if (pyramid4thFloor.activeSelf) playAsAttackersLock.SetActive(false);
+
         mainMenuCameraAnimator.enabled = true;
         movingToPlayerCamera = false;
         onPlayerCamera = false;
@@ -93,7 +104,8 @@ public class MainMenu : MonoBehaviour
 
     public void PlayAsAttackers()
     {
-        textsAnimator.SetTrigger("GrandiosityText");
+        if (playAsAttackersLock.activeSelf) textsAnimator.SetTrigger("GrandiosityText");
+        else attackMapScrollView.SetActive(true);
     }
 
     public void OpenOptions()
