@@ -5,6 +5,7 @@ public class ToninaCutSceneCamera : MonoBehaviour
 {
     public MouseLook mouseLook;
     public GameObject blackFader;
+    public GameObject clickBlocker;
     public GameObject overworldUI;
 
     [Header("Cutscene UI Elements")]
@@ -34,6 +35,7 @@ public class ToninaCutSceneCamera : MonoBehaviour
         mouseLook.inCutScene = true;
         overworldUI.SetActive(false);
         blackFader.SetActive(true);
+        clickBlocker.SetActive(true);
 
         previousCameraPosition = camTransform;
         previousCameraRotation = currentRotation;
@@ -61,6 +63,7 @@ public class ToninaCutSceneCamera : MonoBehaviour
         mouseLook.ToggleCameraOnPlayer();
         mouseLook.inCutScene = false;
         overworldUI.SetActive(true);
+        clickBlocker.SetActive(false);
 
         mouseLook.notCastingRays = false;
 
