@@ -11,7 +11,7 @@ public class UI_Controller : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Escape))
             {
-            if (player.blackFader.activeSelf) return;
+            if (player.blackFader.activeSelf || player.mouseLook.inCutScene) return;
             if (mainMenuScreen != null && mainMenuScreen.activeSelf) return;
 
             if (OverlappingElementActive())
