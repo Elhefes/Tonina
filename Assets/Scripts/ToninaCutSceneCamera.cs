@@ -8,6 +8,7 @@ public class ToninaCutSceneCamera : MonoBehaviour
     public GameObject overworldUI;
 
     [Header("Cutscene UI Elements")]
+    public GameObject generalReturnButtonObject;
     public GameObject attackModeUnlockUIObject;
 
     public Transform[] pyramidBuildingCameraPositions;
@@ -49,6 +50,7 @@ public class ToninaCutSceneCamera : MonoBehaviour
         Camera.main.farClipPlane = 1500; // Set render distance
 
         if (extraFloorInt == 0) attackModeUnlockUIObject.SetActive(true);
+        else generalReturnButtonObject.SetActive(true);
     }
 
     IEnumerator StartMovingCameraBack()
