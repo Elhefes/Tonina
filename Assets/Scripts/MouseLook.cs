@@ -64,7 +64,7 @@ public class MouseLook : MonoBehaviour
         cameraOnPlayerButton.ChangeIconSprite(cameraOnPlayer);
     }
 
-    void CameraOnPlayerOff()
+    public void CameraOnPlayerOff()
     {
         if (player.insideKingHouse && (transform.rotation.y != 0 || transform.rotation.eulerAngles.y != 180)) return;
         cameraOnPlayer = false;
@@ -247,6 +247,8 @@ public class MouseLook : MonoBehaviour
     // Limit camera's movement smoothly in x-axis
     private void FixedUpdate()
     {
+        if (player.inVillage && inCutScene) return;
+
         if (player.inBuildMode)
         {
             RotateCameraToBattlefieldAngle();

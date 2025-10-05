@@ -9,6 +9,8 @@ public class VillageBuildMenu : MonoBehaviour, IPointerDownHandler
     public VillageBuildSelection[] villageBuildSelections;
     public VillageBuildSelection currentBuildSelection;
 
+    public ToninaCutSceneCamera toninaCutSceneCamera;
+
     public void UnselectAll()
     {
         if (villageBuildSelections != null)

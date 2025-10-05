@@ -8,8 +8,8 @@ public class VillageTeleportMenu : MonoBehaviour
     public Vector3[] middleGateTransformPositionsFrom4rdTo14th;
     public GameObject[] blueBacks;
     public Player player;
+    public int extraFloorsBuilt;
     private int gateIndex;
-    private int extraFloorsBuilt;
 
     private void Start()
     {
