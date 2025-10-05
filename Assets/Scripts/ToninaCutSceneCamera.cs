@@ -33,10 +33,11 @@ public class ToninaCutSceneCamera : MonoBehaviour
         mouseLook.inCutScene = true;
         overworldUI.SetActive(false);
         blackFader.SetActive(true);
-        yield return new WaitForSeconds(0.33f);
 
         previousCameraPosition = camTransform;
         previousCameraRotation = currentRotation;
+
+        yield return new WaitForSeconds(0.33f);
 
         mouseLook.notCastingRays = true;
 
@@ -61,8 +62,10 @@ public class ToninaCutSceneCamera : MonoBehaviour
 
         mouseLook.notCastingRays = false;
 
-        Camera.main.transform.position = previousCameraPosition.position;
-        Camera.main.transform.rotation = previousCameraRotation;
+        mouseLook.mainCameraObject.transform.position = previousCameraPosition.position;
+        mouseLook.mainCameraObject.transform.rotation = Quaternion.Euler(previousCameraRotation.eulerAngles);
+        mouseLook.transform.position = previousCameraPosition.position;
+        mouseLook.transform.rotation = Quaternion.Euler(previousCameraRotation.eulerAngles);
         Camera.main.farClipPlane = previousRenderDistance;
     }
 }
