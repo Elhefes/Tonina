@@ -9,6 +9,10 @@ public class MainMenu : MonoBehaviour
     public GameObject overworldUI;
     public GameObject clickBlocker;
 
+    public GameObject movingElements;
+    public GameObject nameSelection;
+    public GameObject introObject;
+
     public GameObject continueHereLock;
     public GameObject playAsAttackersLock;
     public GameObject attackMapScrollView;
@@ -51,6 +55,19 @@ public class MainMenu : MonoBehaviour
     {
         StartCoroutine(SwitchMainCameraToMainMenuCamera());
         StartCoroutine(SetPlayerCameraDrawDistance(100f));
+    }
+
+    public void PlayIntro()
+    {
+        if (PlayerPrefs.GetInt("introPlayed", 0) == 0)
+        {
+            movingElements.SetActive(false);
+            nameSelection.SetActive(true);
+        }
+        else
+        {
+            introObject.SetActive(true);
+        }
     }
 
     public void ContinueHere()
