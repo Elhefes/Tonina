@@ -2,17 +2,19 @@ using UnityEngine;
 
 public class FPSDisplay : MonoBehaviour
 {
-    private float fps;
     public TMPro.TextMeshProUGUI FPSCounterText;
+    private float deltaTime;
 
-    void Start()
+    void Update()
     {
-        InvokeRepeating("GetFPS", 0.5f, 0.5f);
-    }
+        // Measure time between frames
+        deltaTime += (Time.unscaledDeltaTime - deltaTime) * 0.1f;
 
-    void GetFPS()
-    {
-        fps = (int)(1f / Time.unscaledDeltaTime);
-        FPSCounterText.text = "FPS = " + fps.ToString();
+        // Compute FPS
+        float fps = 1.0f / deltaTime;
+
+        // Update text
+        if (FPSCounterText != null)
+            FPSCounterText.text = $"FPS: {fps:0.}";
     }
 }
