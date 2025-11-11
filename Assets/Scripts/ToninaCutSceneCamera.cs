@@ -49,7 +49,7 @@ public class ToninaCutSceneCamera : MonoBehaviour
         mouseLook.transform.position = pyramidBuildingCameraPositions[extraFloorInt].position;
         mouseLook.transform.rotation = Quaternion.Euler(pyramidBuildingCameraPositions[extraFloorInt].transform.rotation.eulerAngles);
         previousRenderDistance = renderDistance;
-        Camera.main.farClipPlane = 200; // Set render distance
+        Camera.main.farClipPlane = 130; // Set render distance
 
         if (extraFloorInt == 0) attackModeUnlockUIObject.SetActive(true);
         else generalReturnButtonObject.SetActive(true);
