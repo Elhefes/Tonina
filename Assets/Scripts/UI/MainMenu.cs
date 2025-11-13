@@ -67,8 +67,13 @@ public class MainMenu : MonoBehaviour
         else
         {
             introObject.SetActive(true);
+            Invoke("StopCameraMovement", 1f);
+            Invoke("SetLowRenderDistance", 1f);
         }
     }
+
+    void StopCameraMovement() { mainMenuCameraAnimator.SetTrigger("Stop"); }
+    void SetLowRenderDistance() { mainMenuCamera.farClipPlane = 30; }
 
     public void ContinueHere()
     {

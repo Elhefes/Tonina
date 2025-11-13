@@ -23,7 +23,7 @@ public class WeatherController : MonoBehaviour
     private Color rainSkyGroundColor = new Color(0.388f, 0.388f, 0.388f);
     private float clearAtmosphereThickness = 0.85f;
     private float rainAtmosphereThickness = 1.08f;
-    private float clearSkyExposure = 2.4f;
+    private float clearSkyExposure = 1f;
     private float rainSkyExposure = 0.13f;
 
     private void Start()
