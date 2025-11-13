@@ -23,6 +23,15 @@ public class VillageTeleportMenu : MonoBehaviour
         UpdateBlueBacks();
     }
 
+    private void Update()
+    {
+        if (Input.GetKeyDown("1") || Input.GetKeyDown("[1]")) TeleportToVillageGate(0);
+        else if (Input.GetKeyDown("2") || Input.GetKeyDown("[2]")) TeleportToVillageGate(1);
+        else if (Input.GetKeyDown("3") || Input.GetKeyDown("[3]")) TeleportToVillageGate(2);
+        else if (Input.GetKeyDown("0") || Input.GetKeyDown("[0]")) ReturnHome();
+        else if (Input.GetKeyDown("h") || Input.GetKeyDown("home")) ReturnHome();
+    }
+
     void UpdateGateIndex()
     {
         if (player.insideKingHouse) gateIndex = 0;
@@ -48,10 +57,10 @@ public class VillageTeleportMenu : MonoBehaviour
         blueBacks[gateIndex].SetActive(true);
     }
 
-    public void TeleportToVillageGate(Transform gatePosition)
+    public void TeleportToVillageGate(int gateNumber)
     {
-        if (Vector3.Distance(player.transform.position, gatePosition.position) < 5f) return;
-        player.TeleportToVillageGate(gatePosition);
+        if (Vector3.Distance(player.transform.position, gateTransforms[gateNumber].position) < 5f) return;
+        player.TeleportToVillageGate(gateTransforms[gateNumber]);
     }
 
     public void ReturnHome() { player.ReturnHome(gameObject); }
