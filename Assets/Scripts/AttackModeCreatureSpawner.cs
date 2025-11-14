@@ -6,6 +6,7 @@ public class AttackModeCreatureSpawner : MonoBehaviour
     public Transform[] spawns;
     public ToninaWarrior[] friendlies;
     public Enemy[] enemies;
+    private Vector3[] originalEnemyPositions;
 
     public ObjectPooler pooler;
 
@@ -18,6 +19,13 @@ public class AttackModeCreatureSpawner : MonoBehaviour
         for (int i = 0; i < spawnsParentObject.transform.childCount; i++)
         {
             spawns[i] = spawnsParentObject.transform.GetChild(i).transform;
+        }
+
+        originalEnemyPositions = new Vector3[enemies.Length];
+
+        for (int i = 0; i < enemies.Length; i++)
+        {
+            originalEnemyPositions[i] = enemies[i].transform.position;
         }
     }
 
@@ -39,11 +47,19 @@ public class AttackModeCreatureSpawner : MonoBehaviour
         }
     }
 
-    public void MoveEnemiesToSpawn()
+    public void MoveEnemiesToRandomSpawns()
     {
-        foreach (Enemy enemy in enemies)
+        // Shuffle positions
+        for (int i = 0; i < originalEnemyPositions.Length; i++)
         {
-            enemy.gameObject.transform.position = pooler.gameObject.transform.position;
+            int rand = Random.Range(i, originalEnemyPositions.Length);
+            (originalEnemyPositions[i], originalEnemyPositions[rand]) = (originalEnemyPositions[rand], originalEnemyPositions[i]);
+        }
+
+        // Assign shuffled positions back
+        for (int i = 0; i < enemies.Length; i++)
+        {
+            enemies[i].transform.position = originalEnemyPositions[i];
         }
     }
 
