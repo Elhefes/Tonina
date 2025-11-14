@@ -106,6 +106,7 @@ public class Player : Creature
         health = startingHealth;
         playerHealthIndicator.UpdateHealthIndicator(health, startingHealth);
         overHealDecay = false;
+        healthBar.value = health;
         healthBar.gameObject.SetActive(true);
         SetProjectilesToMax();
         UpdateProjectileQuantityText();

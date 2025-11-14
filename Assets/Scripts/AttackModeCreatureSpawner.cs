@@ -13,12 +13,6 @@ public class AttackModeCreatureSpawner : MonoBehaviour
     {
         pooler = ObjectPooler.Instance;
 
-        // Store all friendlies in an array
-        friendlies = FindObjectsByType<ToninaWarrior>(FindObjectsInactive.Include, FindObjectsSortMode.InstanceID);
-
-        // Store all enemies (Chioh Clan) in an array
-        enemies = FindObjectsByType<Enemy>(FindObjectsInactive.Include, FindObjectsSortMode.InstanceID);
-
         // Store all spawns in an array
         spawns = new Transform[spawnsParentObject.transform.childCount];
         for (int i = 0; i < spawnsParentObject.transform.childCount; i++)

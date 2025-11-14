@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class EnemySpawnPointController : MonoBehaviour
+public class AttackerSpawnPointController : MonoBehaviour
 {
     public float battleAreaWidth;
 

@@ -6,7 +6,7 @@ public class PyramidObjectsProgression : MonoBehaviour
     public int extraFloorsBuilt;
 
     public BuildingsManager buildingsManager;
-    public EnemySpawnPointController enemySpawnPointController;
+    public AttackerSpawnPointController attackerSpawnPointController;
 
     public Vector3[] kingHousePositionsFrom4thTo14th;
 
@@ -115,8 +115,8 @@ public class PyramidObjectsProgression : MonoBehaviour
 
             extraFloorsBuilt++;
 
-            enemySpawnPointController.UpdateBattleAreaWidth(45f);
-            enemySpawnPointController.UpdateSpawnPositions(extraFloorsBuilt);
+            attackerSpawnPointController.UpdateBattleAreaWidth(45f);
+            attackerSpawnPointController.UpdateSpawnPositions(extraFloorsBuilt);
         }
 
         else if (extraFloorsBuilt == 1)
@@ -151,8 +151,8 @@ public class PyramidObjectsProgression : MonoBehaviour
 
             extraFloorsBuilt++;
 
-            enemySpawnPointController.UpdateBattleAreaWidth(65f);
-            enemySpawnPointController.UpdateSpawnPositions(extraFloorsBuilt);
+            attackerSpawnPointController.UpdateBattleAreaWidth(65f);
+            attackerSpawnPointController.UpdateSpawnPositions(extraFloorsBuilt);
         }
 
         buildingsManager.maxBuildingAmount += 2;
