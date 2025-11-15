@@ -3,9 +3,12 @@ using UnityEngine;
 public class AttackModeCreatureSpawner : MonoBehaviour
 {
     [SerializeField] private GameObject spawnsParentObject;
+    [SerializeField] private GameObject friendliesParentObject;
+    [SerializeField] private GameObject enemiesParentObject;
+
     public Transform[] spawns;
-    public ToninaWarrior[] friendlies;
-    public Enemy[] enemies;
+    private ToninaWarrior[] friendlies;
+    private Enemy[] enemies;
     private Vector3[] originalEnemyPositions;
 
     public ObjectPooler pooler;
@@ -21,8 +24,12 @@ public class AttackModeCreatureSpawner : MonoBehaviour
             spawns[i] = spawnsParentObject.transform.GetChild(i).transform;
         }
 
-        originalEnemyPositions = new Vector3[enemies.Length];
+        // Get creatures from parent objects
+        friendlies = friendliesParentObject.GetComponentsInChildren<ToninaWarrior>(true);
+        enemies = enemiesParentObject.GetComponentsInChildren<Enemy>(true);
 
+        // Get enemy positions at start
+        originalEnemyPositions = new Vector3[enemies.Length];
         for (int i = 0; i < enemies.Length; i++)
         {
             originalEnemyPositions[i] = enemies[i].transform.position;
