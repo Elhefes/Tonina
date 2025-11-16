@@ -177,7 +177,7 @@ public class Player : Creature
         Debug.DrawLine(transform.position, transform.position + transform.forward * 114f, Color.red);
 
         if (creatureMovement.target != null) clickerTargetObject.gameObject.transform.position = creatureMovement.target.transform.position;
-        if (creatureMovement.agent.velocity.magnitude < 1f) StopRunning();
+        if (running && creatureMovement.agent.velocity.magnitude < 1f) StopRunning();
 
         if (Input.GetMouseButtonDown(0))
         {
@@ -731,8 +731,8 @@ public class Player : Creature
     void StartRunningIfPossible()
     {
         if (stamina < 0.33f) return;
-        if ((creatureMovement.agent.destination != null && Vector3.Distance(transform.position, creatureMovement.agent.destination) > 5f)
-            || (creatureMovement.target != null && Vector3.Distance(transform.position, creatureMovement.target.position) > 5f))
+        if ((creatureMovement.agent.destination != null && Vector3.Distance(transform.position, creatureMovement.agent.destination) > 3.5f)
+            || (creatureMovement.target != null && Vector3.Distance(transform.position, creatureMovement.target.position) > 3.5f))
         {
             running = true;
             creatureMovement.agent.speed = runningSpeed;
@@ -759,7 +759,7 @@ public class Player : Creature
 
         if (recoveryCoroutine != null)
         {
-            StopCoroutine(StartRecoveringStaminaIfPossible());
+            StopCoroutine(recoveryCoroutine);
             recoveryCoroutine = null;
         }
         recoveryCoroutine = StartCoroutine(StartRecoveringStaminaIfPossible());
@@ -817,6 +817,7 @@ public class Player : Creature
         gameObject.SetActive(false);
         transform.position = newPosition;
         gameObject.SetActive(true);
+        if (!recoveringStamina) StopRunning();
         mouseLook.TeleportCameras();
 
         // Equip default weapon when starting battle
