@@ -39,6 +39,8 @@ public class EnemyAI : MonoBehaviour
 
         foreach (GameObject obj in objectsWithTag)
         {
+            if (!obj.activeInHierarchy) continue; // Ignore disabled objects
+
             float distance = Vector3.Distance(transform.position, obj.transform.position);
 
             if (distance < nearestDistance && distance <= range)

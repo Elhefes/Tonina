@@ -63,6 +63,8 @@ public class FriendlyAI : MonoBehaviour
 
         foreach (GameObject obj in objectsWithTag)
         {
+            if (!obj.activeInHierarchy) continue; // Ignore disabled objects
+
             float distance = Vector3.Distance(transform.position, obj.transform.position);
 
             if (distance < nearestDistance && distance <= range)
@@ -82,6 +84,7 @@ public class FriendlyAI : MonoBehaviour
 
     void FollowPlayerDirections()
     {
+        creatureMovement.target = null;
         if (player == null) return;
 
         if (player.destination == Vector3.zero) creatureMovement.agent.destination = player.transform.position;
