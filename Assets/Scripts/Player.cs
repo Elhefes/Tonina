@@ -112,6 +112,8 @@ public class Player : Creature
     public void EnableBattleMode()
     {
         onCooldown = false;
+        stamina = maxStamina;
+        staminaBarImage.fillAmount = stamina;
         weaponOrder = PlayerPrefs.GetString("CustomWeaponOrder", "01234");
         selectedWeaponOrder = PlayerPrefs.GetString("SelectedWeaponOrder", "04");
         EquipOnlySelectedWeapons();
@@ -121,6 +123,7 @@ public class Player : Creature
         overHealDecay = false;
         healthBar.value = health;
         healthBar.gameObject.SetActive(true);
+        SetStaminaBarAlpha(1f);
         SetProjectilesToMax();
         UpdateProjectileQuantityText();
     }
@@ -128,6 +131,8 @@ public class Player : Creature
     public void DisableBattleMode()
     {
         onCooldown = false;
+        stamina = maxStamina;
+        staminaBarImage.fillAmount = stamina;
         creatureMovement.target = null;
         foreach (Weapon obj in weapons)
         {
@@ -135,6 +140,7 @@ public class Player : Creature
         }
         if (health < startingHealth) RestoreHealth(startingHealth - health);
         healthBar.gameObject.SetActive(false);
+        SetStaminaBarAlpha(0f);
         creatureMovement.animator.SetInteger("WeaponIndex", 0);
         if (battlefieldMenu != null) battlefieldMenu.waveController.musicPlayer.PlayPeacefulSongs(false);
     }
@@ -169,6 +175,13 @@ public class Player : Creature
         bow.notAvailable = false;
         smallStone.quantity = smallStoneStartingQuantity;
         smallStone.notAvailable = false;
+    }
+
+    void SetStaminaBarAlpha(float a)
+    {
+        Color c = staminaBarImage.color;
+        c.a = a;
+        staminaBarImage.color = c;
     }
 
     private void Update()
