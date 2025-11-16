@@ -15,6 +15,8 @@ public class Player : Creature
 
     public float maxStamina = 1f;
     private float stamina;
+    private float originalMovementSpeed;
+    private float runningSpeed = 5.25f;
     public Image staminaBarImage;
     public bool running;
     public bool recoveringStamina;
@@ -100,6 +102,7 @@ public class Player : Creature
     {
         health = startingHealth;
         stamina = maxStamina;
+        originalMovementSpeed = creatureMovement.agent.speed;
         playerHealthIndicator.UpdateHealthIndicator(health, startingHealth);
         SetProjectilesToMax();
     }
@@ -172,6 +175,7 @@ public class Player : Creature
         Debug.DrawLine(transform.position, transform.position + transform.forward * 114f, Color.red);
 
         if (creatureMovement.target != null) clickerTargetObject.gameObject.transform.position = creatureMovement.target.transform.position;
+        if (creatureMovement.agent.velocity.magnitude < 1f) StopRunning();
 
         if (Input.GetMouseButtonDown(0))
         {
@@ -346,7 +350,7 @@ public class Player : Creature
 
                 creatureMovement.agent.SetDestination(hit.point);
                 destination = hit.point;
-                
+
                 if (notInBattlefield()) // If not in battle or builder mode
                 {
                     float scaleValue = Mathf.Lerp(0.36f, 0.6f, (mouseLook.distanceFromObject - 5f) / (30f - 5f));
@@ -357,6 +361,7 @@ public class Player : Creature
                 if (creatureMovement.target != null) clickerTargetObject.alpha = 1f;
             }
         }
+        else if (Input.GetKeyDown(KeyCode.LeftShift)) StartRunningIfPossible();
 
         // Rotate towards text subject when it exists
         if (currentTextSubject != null) LookAt(currentTextSubject.gameObject.transform, true);
@@ -379,12 +384,14 @@ public class Player : Creature
     {
         if (running)
         {
-            stamina -= 0.00133f;
+            stamina = Mathf.Clamp(stamina - 0.00133f, 0f, 1f);
             staminaBarImage.fillAmount = stamina;
+
+            if (stamina == 0f) StopRunning();
         }
         else if (recoveringStamina)
         {
-            stamina += 0.00133f;
+            stamina = Mathf.Clamp(stamina + 0.00133f, 0f, 1f);
             staminaBarImage.fillAmount = stamina;
         }
 
@@ -715,6 +722,24 @@ public class Player : Creature
             losingScreen.audioPassController.muffleEffect = false;
             losingScreen.audioPassController.ResetFilterValue();
         }
+    }
+
+    void StartRunningIfPossible()
+    {
+        if ((creatureMovement.agent.destination != null && Vector3.Distance(transform.position, creatureMovement.agent.destination) > 5f)
+            || (creatureMovement.target != null && Vector3.Distance(transform.position, creatureMovement.target.position) > 5f))
+        {
+            running = true;
+            creatureMovement.agent.speed = runningSpeed;
+        }
+        else StopRunning();
+    }
+
+    void StopRunning()
+    {
+        running = false;
+        creatureMovement.agent.speed = originalMovementSpeed;
+        recoveringStamina = true;
     }
 
     public void ReturnHome(GameObject objectToDisable)
