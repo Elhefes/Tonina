@@ -8,6 +8,7 @@ public class AttackModePositionButton : MonoBehaviour, IPointerClickHandler, IPo
     [SerializeField] private Vector3 positionToMoveTo;
     public MouseLook mouseLook;
     public AttackModeSpawnController attackModeSpawnController;
+    public DoubleClickDetector doubleClickDetector;
 
     private int spawnNumber;
 
@@ -27,21 +28,8 @@ public class AttackModePositionButton : MonoBehaviour, IPointerClickHandler, IPo
         attackModeSpawnController.UpdateSelectedSpawnNumber(spawnNumber);
         attackModeSpawnController.UpdateButtonsPosition(transform.localPosition.x);
 
-        // Detecting double click
-        clicked++;
-
-        if (clicked == 1)
-            clickTime = Time.time;
-
-        if (clicked > 1 && Time.time - clickTime < clickDelay)
-        {
-            // Double click detected
-            SelectPlayerSpawn();
-            clicked = 0;
-            clickTime = 0;
-        }
-        else if (clicked > 2 || Time.time - clickTime > 1)
-            clicked = 0;
+        doubleClickDetector.AddClick();
+        if (doubleClickDetector.DoubleClickDetected()) SelectPlayerSpawn();
     }
 
     IEnumerator StartDelayedButtonPress()

@@ -10,7 +10,19 @@ public class Player : Creature
     public int health;
     public int maxHealth;
     public int startingHealth;
+    public Slider healthBar;
     public bool godMode;
+
+    public DoubleClickDetector doubleClickDetector;
+    private Coroutine recoveryCoroutine;
+    public float maxStamina = 1f;
+    private float stamina;
+    private float originalMovementSpeed;
+    private float runningSpeed = 5.25f;
+    public Image staminaBarImage;
+    public bool running;
+    public bool recoveringStamina;
+
     public Weapon[] weapons;
     private string weaponOrder;
     private string selectedWeaponOrder;
@@ -22,7 +34,6 @@ public class Player : Creature
     public int smallStoneStartingQuantity;
     public TMP_Text projectileQuantityTMP;
     public float defaultAttackStoppingDistance;
-    public Slider healthBar;
 
     public LayerMask clickLayerMask;
 
@@ -92,6 +103,8 @@ public class Player : Creature
     private void Start()
     {
         health = startingHealth;
+        stamina = maxStamina;
+        originalMovementSpeed = creatureMovement.agent.speed;
         playerHealthIndicator.UpdateHealthIndicator(health, startingHealth);
         SetProjectilesToMax();
     }
@@ -99,6 +112,8 @@ public class Player : Creature
     public void EnableBattleMode()
     {
         onCooldown = false;
+        stamina = maxStamina;
+        staminaBarImage.fillAmount = stamina;
         weaponOrder = PlayerPrefs.GetString("CustomWeaponOrder", "01234");
         selectedWeaponOrder = PlayerPrefs.GetString("SelectedWeaponOrder", "04");
         EquipOnlySelectedWeapons();
@@ -108,6 +123,7 @@ public class Player : Creature
         overHealDecay = false;
         healthBar.value = health;
         healthBar.gameObject.SetActive(true);
+        SetStaminaBarAlpha(1f);
         SetProjectilesToMax();
         UpdateProjectileQuantityText();
     }
@@ -115,6 +131,8 @@ public class Player : Creature
     public void DisableBattleMode()
     {
         onCooldown = false;
+        stamina = maxStamina;
+        staminaBarImage.fillAmount = stamina;
         creatureMovement.target = null;
         foreach (Weapon obj in weapons)
         {
@@ -122,6 +140,7 @@ public class Player : Creature
         }
         if (health < startingHealth) RestoreHealth(startingHealth - health);
         healthBar.gameObject.SetActive(false);
+        SetStaminaBarAlpha(0f);
         creatureMovement.animator.SetInteger("WeaponIndex", 0);
         if (battlefieldMenu != null) battlefieldMenu.waveController.musicPlayer.PlayPeacefulSongs(false);
     }
@@ -158,12 +177,20 @@ public class Player : Creature
         smallStone.notAvailable = false;
     }
 
+    void SetStaminaBarAlpha(float a)
+    {
+        Color c = staminaBarImage.color;
+        c.a = a;
+        staminaBarImage.color = c;
+    }
+
     private void Update()
     {
         base.Update();
         Debug.DrawLine(transform.position, transform.position + transform.forward * 114f, Color.red);
 
         if (creatureMovement.target != null) clickerTargetObject.gameObject.transform.position = creatureMovement.target.transform.position;
+        if (running && creatureMovement.agent.velocity.magnitude < 1f) StopRunning();
 
         if (Input.GetMouseButtonDown(0))
         {
@@ -338,7 +365,7 @@ public class Player : Creature
 
                 creatureMovement.agent.SetDestination(hit.point);
                 destination = hit.point;
-                
+
                 if (notInBattlefield()) // If not in battle or builder mode
                 {
                     float scaleValue = Mathf.Lerp(0.36f, 0.6f, (mouseLook.distanceFromObject - 5f) / (30f - 5f));
@@ -348,6 +375,9 @@ public class Player : Creature
                 }
                 if (creatureMovement.target != null) clickerTargetObject.alpha = 1f;
             }
+
+            doubleClickDetector.AddClick();
+            if (doubleClickDetector.DoubleClickDetected()) StartRunningIfPossible();
         }
 
         // Rotate towards text subject when it exists
@@ -369,6 +399,19 @@ public class Player : Creature
 
     private void FixedUpdate()
     {
+        if (running)
+        {
+            stamina = Mathf.Clamp(stamina - 0.00133f, 0f, 1f);
+            staminaBarImage.fillAmount = stamina;
+
+            if (stamina == 0f) StopRunning();
+        }
+        else if (recoveringStamina)
+        {
+            stamina = Mathf.Clamp(stamina + 0.001f, 0f, 1f);
+            staminaBarImage.fillAmount = stamina;
+        }
+
         if (fillOkillHoldButton.buttonPressed)
         {
             if (fillOkill.stoneAmount == 0 && fillOkill.spearAmount == 0 && fillOkill.arrowAmount == 0) return;
@@ -698,6 +741,43 @@ public class Player : Creature
         }
     }
 
+    void StartRunningIfPossible()
+    {
+        if (stamina < 0.33f) return;
+        if ((creatureMovement.agent.destination != null && Vector3.Distance(transform.position, creatureMovement.agent.destination) > 3.5f)
+            || (creatureMovement.target != null && Vector3.Distance(transform.position, creatureMovement.target.position) > 3.5f))
+        {
+            running = true;
+            creatureMovement.agent.speed = runningSpeed;
+        }
+        else StopRunning();
+    }
+
+    IEnumerator StartRecoveringStaminaIfPossible()
+    {
+        recoveringStamina = false;
+
+        // Cooldowns based on how much stamina is left
+        yield return new WaitForSeconds(2.5f);
+        if (stamina < 0.33f) yield return new WaitForSeconds(5f);
+        else if (stamina < 0.67f) yield return new WaitForSeconds(2.5f);
+
+        if (!running) recoveringStamina = true;
+    }
+
+    void StopRunning()
+    {
+        running = false;
+        creatureMovement.agent.speed = originalMovementSpeed;
+
+        if (recoveryCoroutine != null)
+        {
+            StopCoroutine(recoveryCoroutine);
+            recoveryCoroutine = null;
+        }
+        recoveryCoroutine = StartCoroutine(StartRecoveringStaminaIfPossible());
+    }
+
     public void ReturnHome(GameObject objectToDisable)
     {
         if (battlefieldMenu == null || insideKingHouse && !inBuildMode) return;
@@ -750,6 +830,7 @@ public class Player : Creature
         gameObject.SetActive(false);
         transform.position = newPosition;
         gameObject.SetActive(true);
+        if (!recoveringStamina) StopRunning();
         mouseLook.TeleportCameras();
 
         // Equip default weapon when starting battle
