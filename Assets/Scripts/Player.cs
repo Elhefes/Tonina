@@ -13,6 +13,7 @@ public class Player : Creature
     public Slider healthBar;
     public bool godMode;
 
+    public DoubleClickDetector doubleClickDetector;
     public float maxStamina = 1f;
     private float stamina;
     private float originalMovementSpeed;
@@ -360,8 +361,10 @@ public class Player : Creature
                 }
                 if (creatureMovement.target != null) clickerTargetObject.alpha = 1f;
             }
+
+            doubleClickDetector.AddClick();
+            if (doubleClickDetector.DoubleClickDetected()) StartRunningIfPossible();
         }
-        else if (Input.GetKeyDown(KeyCode.LeftShift)) StartRunningIfPossible();
 
         // Rotate towards text subject when it exists
         if (currentTextSubject != null) LookAt(currentTextSubject.gameObject.transform, true);

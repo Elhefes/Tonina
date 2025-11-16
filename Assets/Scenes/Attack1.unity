@@ -1391,6 +1391,7 @@ GameObject:
   - component: {fileID: 58995919}
   - component: {fileID: 58995918}
   - component: {fileID: 58995920}
+  - component: {fileID: 58995921}
   - component: {fileID: 58995917}
   m_Layer: 5
   m_Name: 4Button
@@ -1528,6 +1529,19 @@ MonoBehaviour:
   positionToMoveTo: {x: -41, y: 15, z: -114}
   mouseLook: {fileID: 1626136263}
   attackModeSpawnController: {fileID: 136132844}
+  doubleClickDetector: {fileID: 58995921}
+--- !u!114 &58995921
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 58995915}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 174af1ab9052a4a498205a8f855cff2e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &59171047
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -4934,6 +4948,7 @@ GameObject:
   - component: {fileID: 220411156}
   - component: {fileID: 220411155}
   - component: {fileID: 220411157}
+  - component: {fileID: 220411158}
   - component: {fileID: 220411154}
   m_Layer: 5
   m_Name: 5Button
@@ -5071,6 +5086,19 @@ MonoBehaviour:
   positionToMoveTo: {x: 0, y: 15, z: -114}
   mouseLook: {fileID: 1626136263}
   attackModeSpawnController: {fileID: 136132844}
+  doubleClickDetector: {fileID: 220411158}
+--- !u!114 &220411158
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 220411152}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 174af1ab9052a4a498205a8f855cff2e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &220614799
 GameObject:
   m_ObjectHideFlags: 0
@@ -18270,6 +18298,7 @@ GameObject:
   - component: {fileID: 702135063}
   - component: {fileID: 702135062}
   - component: {fileID: 702135064}
+  - component: {fileID: 702135065}
   - component: {fileID: 702135061}
   m_Layer: 5
   m_Name: 9Button
@@ -18407,6 +18436,19 @@ MonoBehaviour:
   positionToMoveTo: {x: 135, y: 15, z: -60}
   mouseLook: {fileID: 1626136263}
   attackModeSpawnController: {fileID: 136132844}
+  doubleClickDetector: {fileID: 702135065}
+--- !u!114 &702135065
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 702135059}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 174af1ab9052a4a498205a8f855cff2e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &702505946
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -20015,8 +20057,6 @@ MonoBehaviour:
   friendliesParentObject: {fileID: 1011885021}
   enemiesParentObject: {fileID: 364971718}
   spawns: []
-  friendlies: []
-  enemies: []
   pooler: {fileID: 0}
 --- !u!1001 &770572421
 PrefabInstance:
@@ -27800,6 +27840,7 @@ GameObject:
   - component: {fileID: 1028724924}
   - component: {fileID: 1028724923}
   - component: {fileID: 1028724925}
+  - component: {fileID: 1028724926}
   - component: {fileID: 1028724922}
   m_Layer: 5
   m_Name: 1Button
@@ -27937,6 +27978,19 @@ MonoBehaviour:
   positionToMoveTo: {x: -135, y: 15, z: -60}
   mouseLook: {fileID: 1626136263}
   attackModeSpawnController: {fileID: 136132844}
+  doubleClickDetector: {fileID: 1028724926}
+--- !u!114 &1028724926
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1028724920}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 174af1ab9052a4a498205a8f855cff2e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1028765779
 GameObject:
   m_ObjectHideFlags: 0
@@ -29065,6 +29119,7 @@ GameObject:
   - component: {fileID: 1082268007}
   - component: {fileID: 1082268006}
   - component: {fileID: 1082268008}
+  - component: {fileID: 1082268009}
   - component: {fileID: 1082268005}
   m_Layer: 5
   m_Name: 6Button
@@ -29202,6 +29257,19 @@ MonoBehaviour:
   positionToMoveTo: {x: 41, y: 15, z: -114}
   mouseLook: {fileID: 1626136263}
   attackModeSpawnController: {fileID: 136132844}
+  doubleClickDetector: {fileID: 1082268009}
+--- !u!114 &1082268009
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1082268003}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 174af1ab9052a4a498205a8f855cff2e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1086168815
 GameObject:
   m_ObjectHideFlags: 0
@@ -38472,6 +38540,7 @@ GameObject:
   - component: {fileID: 1243310621}
   - component: {fileID: 1243310620}
   - component: {fileID: 1243310622}
+  - component: {fileID: 1243310623}
   - component: {fileID: 1243310619}
   m_Layer: 5
   m_Name: 3Button
@@ -38609,6 +38678,19 @@ MonoBehaviour:
   positionToMoveTo: {x: -82, y: 15, z: -114}
   mouseLook: {fileID: 1626136263}
   attackModeSpawnController: {fileID: 136132844}
+  doubleClickDetector: {fileID: 1243310623}
+--- !u!114 &1243310623
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1243310617}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 174af1ab9052a4a498205a8f855cff2e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1244660798
 GameObject:
   m_ObjectHideFlags: 0
@@ -40766,6 +40848,7 @@ GameObject:
   - component: {fileID: 1351139028}
   - component: {fileID: 1351139027}
   - component: {fileID: 1351139029}
+  - component: {fileID: 1351139030}
   - component: {fileID: 1351139026}
   m_Layer: 5
   m_Name: 2Button
@@ -40903,6 +40986,19 @@ MonoBehaviour:
   positionToMoveTo: {x: -123, y: 15, z: -114}
   mouseLook: {fileID: 1626136263}
   attackModeSpawnController: {fileID: 136132844}
+  doubleClickDetector: {fileID: 1351139030}
+--- !u!114 &1351139030
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1351139024}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 174af1ab9052a4a498205a8f855cff2e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1352090285
 GameObject:
   m_ObjectHideFlags: 0
@@ -48796,6 +48892,7 @@ GameObject:
   - component: {fileID: 1657356975}
   - component: {fileID: 1657356974}
   - component: {fileID: 1657356976}
+  - component: {fileID: 1657356977}
   - component: {fileID: 1657356973}
   m_Layer: 5
   m_Name: 8Button
@@ -48933,6 +49030,19 @@ MonoBehaviour:
   positionToMoveTo: {x: 123, y: 15, z: -114}
   mouseLook: {fileID: 1626136263}
   attackModeSpawnController: {fileID: 136132844}
+  doubleClickDetector: {fileID: 1657356977}
+--- !u!114 &1657356977
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1657356971}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 174af1ab9052a4a498205a8f855cff2e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &1660641144
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -60423,6 +60533,7 @@ GameObject:
   - component: {fileID: 2082452202}
   - component: {fileID: 2082452201}
   - component: {fileID: 2082452203}
+  - component: {fileID: 2082452204}
   - component: {fileID: 2082452200}
   m_Layer: 5
   m_Name: 7Button
@@ -60560,6 +60671,19 @@ MonoBehaviour:
   positionToMoveTo: {x: 82, y: 15, z: -114}
   mouseLook: {fileID: 1626136263}
   attackModeSpawnController: {fileID: 136132844}
+  doubleClickDetector: {fileID: 2082452204}
+--- !u!114 &2082452204
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2082452198}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 174af1ab9052a4a498205a8f855cff2e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &2089674385
 GameObject:
   m_ObjectHideFlags: 0

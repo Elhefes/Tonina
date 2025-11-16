@@ -488,6 +488,7 @@ GameObject:
   - component: {fileID: 5021349066847927871}
   - component: {fileID: 577319696662315431}
   - component: {fileID: 5412454603876469069}
+  - component: {fileID: 2119072032070549423}
   - component: {fileID: 385070561597705185}
   - component: {fileID: 3536230150113977096}
   - component: {fileID: 8457402616446038429}
@@ -599,7 +600,8 @@ MonoBehaviour:
   startingHealth: 150
   healthBar: {fileID: 3872663564488066035}
   godMode: 0
-  stamina: 0
+  doubleClickDetector: {fileID: 2119072032070549423}
+  maxStamina: 1
   staminaBarImage: {fileID: 7225796030161537672}
   running: 0
   recoveringStamina: 0
@@ -656,6 +658,18 @@ MonoBehaviour:
   clickerDestinationObject: {fileID: 0}
   clickerTargetObject: {fileID: 0}
   weaponRangeIndicatorLight: {fileID: 7063041251900934834}
+--- !u!114 &2119072032070549423
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5021349066847927866}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 174af1ab9052a4a498205a8f855cff2e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &385070561597705185
 MonoBehaviour:
   m_ObjectHideFlags: 0
