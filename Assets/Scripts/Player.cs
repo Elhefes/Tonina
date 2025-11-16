@@ -14,6 +14,7 @@ public class Player : Creature
     public bool godMode;
 
     public DoubleClickDetector doubleClickDetector;
+    private Coroutine recoveryCoroutine;
     public float maxStamina = 1f;
     private float stamina;
     private float originalMovementSpeed;
@@ -394,7 +395,7 @@ public class Player : Creature
         }
         else if (recoveringStamina)
         {
-            stamina = Mathf.Clamp(stamina + 0.00133f, 0f, 1f);
+            stamina = Mathf.Clamp(stamina + 0.001f, 0f, 1f);
             staminaBarImage.fillAmount = stamina;
         }
 
@@ -729,6 +730,7 @@ public class Player : Creature
 
     void StartRunningIfPossible()
     {
+        if (stamina < 0.33f) return;
         if ((creatureMovement.agent.destination != null && Vector3.Distance(transform.position, creatureMovement.agent.destination) > 5f)
             || (creatureMovement.target != null && Vector3.Distance(transform.position, creatureMovement.target.position) > 5f))
         {
@@ -738,11 +740,29 @@ public class Player : Creature
         else StopRunning();
     }
 
+    IEnumerator StartRecoveringStaminaIfPossible()
+    {
+        recoveringStamina = false;
+
+        // Cooldowns based on how much stamina is left
+        yield return new WaitForSeconds(2.5f);
+        if (stamina < 0.33f) yield return new WaitForSeconds(5f);
+        else if (stamina < 0.67f) yield return new WaitForSeconds(2.5f);
+
+        if (!running) recoveringStamina = true;
+    }
+
     void StopRunning()
     {
         running = false;
         creatureMovement.agent.speed = originalMovementSpeed;
-        recoveringStamina = true;
+
+        if (recoveryCoroutine != null)
+        {
+            StopCoroutine(StartRecoveringStaminaIfPossible());
+            recoveryCoroutine = null;
+        }
+        recoveryCoroutine = StartCoroutine(StartRecoveringStaminaIfPossible());
     }
 
     public void ReturnHome(GameObject objectToDisable)
