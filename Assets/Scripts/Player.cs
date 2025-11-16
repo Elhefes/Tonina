@@ -10,7 +10,15 @@ public class Player : Creature
     public int health;
     public int maxHealth;
     public int startingHealth;
+    public Slider healthBar;
     public bool godMode;
+
+    public float maxStamina = 1f;
+    private float stamina;
+    public Image staminaBarImage;
+    public bool running;
+    public bool recoveringStamina;
+
     public Weapon[] weapons;
     private string weaponOrder;
     private string selectedWeaponOrder;
@@ -22,7 +30,6 @@ public class Player : Creature
     public int smallStoneStartingQuantity;
     public TMP_Text projectileQuantityTMP;
     public float defaultAttackStoppingDistance;
-    public Slider healthBar;
 
     public LayerMask clickLayerMask;
 
@@ -92,6 +99,7 @@ public class Player : Creature
     private void Start()
     {
         health = startingHealth;
+        stamina = maxStamina;
         playerHealthIndicator.UpdateHealthIndicator(health, startingHealth);
         SetProjectilesToMax();
     }
@@ -369,6 +377,17 @@ public class Player : Creature
 
     private void FixedUpdate()
     {
+        if (running)
+        {
+            stamina -= 0.00133f;
+            staminaBarImage.fillAmount = stamina;
+        }
+        else if (recoveringStamina)
+        {
+            stamina += 0.00133f;
+            staminaBarImage.fillAmount = stamina;
+        }
+
         if (fillOkillHoldButton.buttonPressed)
         {
             if (fillOkill.stoneAmount == 0 && fillOkill.spearAmount == 0 && fillOkill.arrowAmount == 0) return;
