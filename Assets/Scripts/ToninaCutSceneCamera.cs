@@ -12,6 +12,7 @@ public class ToninaCutSceneCamera : MonoBehaviour
     public GameObject generalReturnButtonObject;
     public GameObject attackModeUnlockUIObject;
 
+    public Transform[] pyramidFloorCameraPositions;
     public Transform[] pyramidBuildingCameraPositions;
 
     private Transform previousCameraPosition;
@@ -19,9 +20,9 @@ public class ToninaCutSceneCamera : MonoBehaviour
 
     private float previousRenderDistance;
 
-    public void MoveCameraToTemporaryPosition(int extraFloorInt, Transform currentPosition, Quaternion currentRotation, float renderDistance)
+    public void MoveCameraToTemporaryPosition(bool singleBuilding, int extraFloorInt, Transform currentPosition, Quaternion currentRotation, float renderDistance)
     {
-        StartCoroutine(StartMovingCameraToAngle(extraFloorInt, currentPosition, currentRotation, renderDistance));
+        StartCoroutine(StartMovingCameraToAngle(singleBuilding, extraFloorInt, currentPosition, currentRotation, renderDistance));
     }
 
     public void MoveCameraToBack()
@@ -29,7 +30,7 @@ public class ToninaCutSceneCamera : MonoBehaviour
         StartCoroutine(StartMovingCameraBack());
     }
 
-    IEnumerator StartMovingCameraToAngle(int extraFloorInt, Transform camTransform, Quaternion currentRotation, float renderDistance)
+    IEnumerator StartMovingCameraToAngle(bool singleBuilding, int extraFloorInt, Transform camTransform, Quaternion currentRotation, float renderDistance)
     {
         mouseLook.CameraOnPlayerOff();
         mouseLook.inCutScene = true;
@@ -44,14 +45,25 @@ public class ToninaCutSceneCamera : MonoBehaviour
 
         mouseLook.notCastingRays = true;
 
-        mouseLook.mainCameraObject.transform.position = pyramidBuildingCameraPositions[extraFloorInt].position;
-        mouseLook.mainCameraObject.transform.rotation = Quaternion.Euler(pyramidBuildingCameraPositions[extraFloorInt].transform.rotation.eulerAngles);
-        mouseLook.transform.position = pyramidBuildingCameraPositions[extraFloorInt].position;
-        mouseLook.transform.rotation = Quaternion.Euler(pyramidBuildingCameraPositions[extraFloorInt].transform.rotation.eulerAngles);
+        if (singleBuilding)
+        {
+            mouseLook.mainCameraObject.transform.position = pyramidBuildingCameraPositions[extraFloorInt].position;
+            mouseLook.mainCameraObject.transform.rotation = Quaternion.Euler(pyramidBuildingCameraPositions[extraFloorInt].transform.rotation.eulerAngles);
+            mouseLook.transform.position = pyramidBuildingCameraPositions[extraFloorInt].position;
+            mouseLook.transform.rotation = Quaternion.Euler(pyramidBuildingCameraPositions[extraFloorInt].transform.rotation.eulerAngles);
+        }
+        else
+        {
+            mouseLook.mainCameraObject.transform.position = pyramidFloorCameraPositions[extraFloorInt].position;
+            mouseLook.mainCameraObject.transform.rotation = Quaternion.Euler(pyramidFloorCameraPositions[extraFloorInt].transform.rotation.eulerAngles);
+            mouseLook.transform.position = pyramidFloorCameraPositions[extraFloorInt].position;
+            mouseLook.transform.rotation = Quaternion.Euler(pyramidFloorCameraPositions[extraFloorInt].transform.rotation.eulerAngles);
+        }
+        
         previousRenderDistance = renderDistance;
         Camera.main.farClipPlane = 130; // Set render distance
 
-        if (extraFloorInt == 0) attackModeUnlockUIObject.SetActive(true);
+        if (extraFloorInt == 0 && !singleBuilding) attackModeUnlockUIObject.SetActive(true);
         else generalReturnButtonObject.SetActive(true);
     }
 

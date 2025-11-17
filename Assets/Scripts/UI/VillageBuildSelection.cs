@@ -97,9 +97,15 @@ public class VillageBuildSelection : MonoBehaviour, IPointerEnterHandler, IPoint
             if (buildsNextFloor)
             {
                 pyramidObjectsProgression.BuildNextPyramidLevel();
-                villageBuildMenu.toninaCutSceneCamera.MoveCameraToTemporaryPosition(villageTPMenu.extraFloorsBuilt, Camera.main.transform, Camera.main.transform.rotation, Camera.main.farClipPlane);
-                villageBuildMenu.gameObject.SetActive(false);
+                villageBuildMenu.toninaCutSceneCamera.MoveCameraToTemporaryPosition(false, villageTPMenu.extraFloorsBuilt, 
+                    Camera.main.transform, Camera.main.transform.rotation, Camera.main.farClipPlane);
             }
+            else
+            {
+                villageBuildMenu.toninaCutSceneCamera.MoveCameraToTemporaryPosition(true, villageTPMenu.extraFloorsBuilt, 
+                    Camera.main.transform, Camera.main.transform.rotation, Camera.main.farClipPlane);
+            }
+            villageBuildMenu.gameObject.SetActive(false);
         }
 
         if (villageTPMenu != null)
