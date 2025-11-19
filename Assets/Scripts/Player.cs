@@ -682,11 +682,15 @@ public class Player : Creature
         }
         if (fillOkill.stoneAmount > 0)
         {
-            if (smallStone.selected && smallStone.quantity < smallStoneStartingQuantity)
+            // Take two if small stones possible
+            int stonesToTake = Mathf.Min(2, fillOkill.stoneAmount);
+            stonesToTake = Mathf.Min(stonesToTake, smallStoneStartingQuantity - smallStone.quantity);
+
+            if (smallStone.selected && smallStone.quantity < smallStoneStartingQuantity && stonesToTake > 0)
             {
-                smallStone.quantity++;
+                smallStone.quantity += stonesToTake;
                 smallStone.notAvailable = false;
-                fillOkill.stoneAmount--;
+                fillOkill.stoneAmount -= stonesToTake;
                 stonesInFillTMP.text = fillOkill.stoneAmount.ToString();
                 if (smallStone.gameObject.activeSelf) projectileQuantityTMP.text = smallStone.quantity.ToString();
             }
