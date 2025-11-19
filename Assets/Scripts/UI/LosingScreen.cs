@@ -83,7 +83,7 @@ public class LosingScreen : MonoBehaviour
         player.ReturnHome(null);
         if (kingBarricade != null)
         {
-            if (!playerDied) kingBarricade.SetActive(true);
+            kingBarricade.SetActive(true);
         }
         yield return new WaitForSeconds(1f);
         youLoseText.gameObject.SetActive(false);
