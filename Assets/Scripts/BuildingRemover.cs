@@ -4,7 +4,7 @@ using UnityEngine;
 public class BuildingRemover : MonoBehaviour
 {
     public BuildingWheel buildingWheel;
-    private List<PlaceableBuilding> removableBuildings = new List<PlaceableBuilding>();
+    private List<Placeable> removableBuildings = new List<Placeable>();
     private List<GameObject> hiddenBuildings = new List<GameObject>();
 
     private void OnEnable()
@@ -12,7 +12,7 @@ public class BuildingRemover : MonoBehaviour
         removableBuildings.Clear();
     }
 
-    public void SelectBuilding(PlaceableBuilding building)
+    public void SelectBuilding(Placeable building)
     {
         if (building != null)
         {
@@ -34,7 +34,7 @@ public class BuildingRemover : MonoBehaviour
         if (removableBuildings != null)
         {
             int i = 0;
-            foreach (PlaceableBuilding building in removableBuildings)
+            foreach (Placeable building in removableBuildings)
             {
                 if (building.gameObject.activeSelf)
                 {
@@ -82,7 +82,7 @@ public class BuildingRemover : MonoBehaviour
     {
         if (removableBuildings != null)
         {
-            foreach (PlaceableBuilding building in removableBuildings)
+            foreach (Placeable building in removableBuildings)
             {
                 if (building.removingBuildingCoat.activeSelf)
                 {

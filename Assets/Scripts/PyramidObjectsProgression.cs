@@ -5,7 +5,7 @@ public class PyramidObjectsProgression : MonoBehaviour
     public GameObject kingHouse;
     public int extraFloorsBuilt;
 
-    public BuildingsManager buildingsManager;
+    public PlaceablesManager placeablesManager;
     public AttackerSpawnPointController attackerSpawnPointController;
 
     public Vector3[] kingHousePositionsFrom4thTo14th;
@@ -155,7 +155,7 @@ public class PyramidObjectsProgression : MonoBehaviour
             attackerSpawnPointController.UpdateSpawnPositions(extraFloorsBuilt);
         }
 
-        buildingsManager.maxBuildingAmount += 2;
+        //buildingsManager.maxBuildingAmount += 2;
         UpdateKingHousePosition();
     }
 

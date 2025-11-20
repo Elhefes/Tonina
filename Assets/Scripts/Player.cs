@@ -60,7 +60,7 @@ public class Player : Creature
 
     public GameObject buildModeUI;
     public BuildingRemover buildingRemover;
-    private PlaceableBuilding selectedPlaceableBuilding;
+    private Placeable selectedPlaceableBuilding;
     public GameObject placeableBuildings; // Use this only for hiding e.g. when removing in build mode
     private bool readyToRemove;
 
@@ -336,7 +336,7 @@ public class Player : Creature
                     {
                         if (selectedPlaceableBuilding == null)
                         {
-                            selectedPlaceableBuilding = target.GetComponentInParent<PlaceableBuilding>();
+                            selectedPlaceableBuilding = target.GetComponentInParent<Placeable>();
                             buildingRemover.SelectBuilding(selectedPlaceableBuilding);
                         }
                         else if (target.gameObject == selectedPlaceableBuilding.gameObject)
@@ -345,7 +345,7 @@ public class Player : Creature
                         }
                         else
                         {
-                            selectedPlaceableBuilding = target.GetComponentInParent<PlaceableBuilding>();
+                            selectedPlaceableBuilding = target.GetComponentInParent<Placeable>();
                             buildingRemover.SelectBuilding(selectedPlaceableBuilding);
                         }
                         return;

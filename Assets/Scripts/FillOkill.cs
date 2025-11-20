@@ -1,4 +1,4 @@
-public class FillOkill : PlaceableBuilding
+public class FillOkill : Placeable
 {
     public int stoneAmount;
     public int spearAmount;

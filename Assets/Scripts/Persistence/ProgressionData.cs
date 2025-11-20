@@ -16,10 +16,13 @@ public class ProgressionData
     public int highestThreatLevel { get; set; } // From 3 to 25
     public int maizeProductionLevel { get; set; } // How many maize pieces can player start a battle with, maybe also makes Maize Places cheaper?
 
-    // Placeable buildings
+    // Unlocks
     public bool fenceUnlocked { get; set; }
     public bool maizePlaceUnlocked { get; set; }
     public bool spearRackUnlocked { get; set; }
     public bool fillOkillUnlocked { get; set; }
     public bool towerUnlocked { get; set; }
+
+    // Pyramid floors
+    public int pyramidFloorsBuilt { get; set; } = 3;
 }

@@ -29,7 +29,7 @@ public class BuildingWheel : MonoBehaviour
     private int currentIndex;
     private int buildingIndex;
     private int slices = 5;
-    public BuildingsManager buildingsManager;
+    public PlaceablesManager buildingsManager;
     public BuildingPlacing[] placeablesOnCamera;
     public PlacedObjectsGrid placedObjectsGrid;
     private int[] originalPlacedObjectAmounts;
@@ -45,8 +45,8 @@ public class BuildingWheel : MonoBehaviour
     private void OnEnable()
     {
         incomingCost = 0;
-        buildingsManager.UpdateExistingBuildingsAmount();
-        buildingCountAtModeStart = buildingsManager.buildingsPlaced;
+        //buildingsManager.UpdateExistingBuildingsAmount();
+        //buildingCountAtModeStart = buildingsManager.buildingsPlaced;
 
         // Keep original array for exiting without saving
         originalPlacedObjectAmounts = new int[placedObjectsGrid.placedObjectAmounts.Length];
@@ -72,7 +72,7 @@ public class BuildingWheel : MonoBehaviour
                 Destroy(obj);
             }
             placedObjectsGrid.UpdateIndicatorsByArray(originalPlacedObjectAmounts);
-            buildingsManager.buildingsPlaced = buildingCountAtModeStart;
+            //buildingsManager.buildingsPlaced = buildingCountAtModeStart;
         }
         else
         {
@@ -94,15 +94,15 @@ public class BuildingWheel : MonoBehaviour
 
     void UpdateBuildingsPlacedText()
     {
-        buildingsPlacedText.text = "Buildings placed:\n" + buildingsManager.buildingsPlaced + " / " + buildingsManager.maxBuildingAmount;
-        if (buildingsManager.buildingsPlaced < buildingsManager.maxBuildingAmount)
-        {
-            noMoreRoomForBuildingsIndicator.SetActive(false);
-        }
-        else
-        {
-            noMoreRoomForBuildingsIndicator.SetActive(true);
-        }
+        //buildingsPlacedText.text = "Buildings placed:\n" + buildingsManager.buildingsPlaced + " / " + buildingsManager.maxBuildingAmount;
+        //if (buildingsManager.buildingsPlaced < buildingsManager.maxBuildingAmount)
+        //{
+        //    noMoreRoomForBuildingsIndicator.SetActive(false);
+        //}
+        //else
+        //{
+        //    noMoreRoomForBuildingsIndicator.SetActive(true);
+        //}
     }
 
     void UpdateBuildingCostText()
@@ -117,14 +117,16 @@ public class BuildingWheel : MonoBehaviour
 
     public void ShowBuildingInHandIfPossible()
     {
-        if (buildingsManager.buildingsPlaced < buildingsManager.maxBuildingAmount)
-        {
-            player.placeableBuildings.SetActive(true);
-        }
-        else
-        {
-            player.placeableBuildings.SetActive(false);
-        }
+        //if (buildingsManager.buildingsPlaced < buildingsManager.maxBuildingAmount)
+        //{
+        //    player.placeableBuildings.SetActive(true);
+        //}
+        //else
+        //{
+        //    player.placeableBuildings.SetActive(false);
+        //}
+
+        player.placeableBuildings.SetActive(true); // PLACEHOLDER FOR SAVELOAD
     }
 
     public void NextBuilding()
@@ -185,10 +187,10 @@ public class BuildingWheel : MonoBehaviour
 
     public void TryToPlaceBuilding()
     {
-        if (buildingsManager.buildingsPlaced >= buildingsManager.maxBuildingAmount)
-        {
-            return;
-        }
+        //if (buildingsManager.buildingsPlaced >= buildingsManager.maxBuildingAmount)
+        //{
+        //    return;
+        //}
         foreach (BuildingPlacing building in placeablesOnCamera) // This could be optimised by only recieving the one that's active?
         {
             if (building.gameObject.activeSelf)
@@ -197,7 +199,7 @@ public class BuildingWheel : MonoBehaviour
                 {
                     GameObject obj = Instantiate(building.placeableBuildingPrefab.gameObject, building.gameObject.transform.position, building.gameObject.transform.rotation);
                     buildingsToBePlaced.Add(obj);
-                    buildingsManager.buildingsPlaced++;
+                    //buildingsManager.buildingsPlaced++;
                     incomingCost += building.placeableBuildingPrefab.cost;
                     placedObjectsGrid.placedObjectAmounts[building.placeableBuildingPrefab.buildingIndex] += 1;
                     placedObjectsGrid.UpdatePlacedBuildingIndicator(building.placeableBuildingPrefab.buildingIndex);
@@ -211,7 +213,7 @@ public class BuildingWheel : MonoBehaviour
 
     public void RemoveBuildingsByAmount(int amount)
     {
-        buildingsManager.buildingsPlaced = buildingsManager.buildingsPlaced - amount;
+        //buildingsManager.buildingsPlaced = buildingsManager.buildingsPlaced - amount;
         UpdateBuildingsPlacedText();
     }
 
