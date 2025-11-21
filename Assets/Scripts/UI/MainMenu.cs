@@ -13,6 +13,8 @@ public class MainMenu : MonoBehaviour
     public GameObject nameSelection;
     public GameObject introObject;
 
+    public TMP_Text playerNameTMP;
+
     public GameObject continueHereLock;
     public GameObject playAsAttackersLock;
     public GameObject attackMapScrollView;
@@ -55,6 +57,16 @@ public class MainMenu : MonoBehaviour
     {
         StartCoroutine(SwitchMainCameraToMainMenuCamera());
         StartCoroutine(SetPlayerCameraDrawDistance(100f));
+    }
+
+    public void SelectName()
+    {
+        if (playerNameTMP.text.Length < 2) // Empty string
+        {
+            PlayerPrefs.SetString("playerName", "Sartom");
+        }
+        else PlayerPrefs.SetString("playerName", playerNameTMP.text);
+        GameState.Instance.SaveWorld();
     }
 
     public void PlayIntro()
