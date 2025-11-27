@@ -1,12 +1,20 @@
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using System.IO;
 
 public class SaveManagementScreen : MonoBehaviour
 {
     public TMP_Text save1Name;
     public TMP_Text save2Name;
     public TMP_Text save3Name;
+
+    public Image save1Image;
+    public Image save2Image;
+    public Image save3Image;
+
+    public Sprite saveExistsSprite;
+    public Sprite saveDoesNotExistSprite;
 
     public Button loadSaveButton;
     public Button deleteSaveButton;
@@ -18,7 +26,7 @@ public class SaveManagementScreen : MonoBehaviour
         int selectedSave = PlayerPrefs.GetInt("selectedSaveFile", 1);
         SelectThisSave(selectedSave);
         UpdateSelectedCircle(selectedSave);
-        LoadPlayerNames();
+        LoadSaveVisuals();
     }
 
     private void Update()
@@ -26,11 +34,18 @@ public class SaveManagementScreen : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Escape)) { gameObject.SetActive(false); }
     }
 
-    private void LoadPlayerNames()
+    private void LoadSaveVisuals()
     {
         save1Name.text = PlayerPrefs.GetString("playerName1", "");
         save2Name.text = PlayerPrefs.GetString("playerName2", "");
         save3Name.text = PlayerPrefs.GetString("playerName3", "");
+
+        if (File.Exists(Application.persistentDataPath + "/world1Data.imox")) save1Image.sprite = saveExistsSprite;
+        else save1Image.sprite = saveDoesNotExistSprite;
+        if (File.Exists(Application.persistentDataPath + "/world2Data.imox")) save2Image.sprite = saveExistsSprite;
+        else save2Image.sprite = saveDoesNotExistSprite;
+        if (File.Exists(Application.persistentDataPath + "/world3Data.imox")) save3Image.sprite = saveExistsSprite;
+        else save3Image.sprite = saveDoesNotExistSprite;
     }
 
     public void SelectThisSave(int i)
@@ -51,6 +66,7 @@ public class SaveManagementScreen : MonoBehaviour
     public void DeleteThisSave()
     {
         GameState.Instance.DeleteWorld(currentSelectionIndex);
+        LoadSaveVisuals();
     }
 
     void UpdateSelectedCircle(int i)
