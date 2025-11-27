@@ -61,11 +61,50 @@ public class MainMenu : MonoBehaviour
 
     public void SelectName()
     {
+        int saveSlot = PlayerPrefs.GetInt("selectedSaveFile", 1);
+
         if (playerNameTMP.text.Length < 2) // Empty string
         {
-            PlayerPrefs.SetString("playerName", "Sartom");
+            switch(saveSlot)
+            {
+                case 1:
+                    {
+                        PlayerPrefs.SetString("playerName1", "Sartom");
+                        break;
+                    }
+                case 2:
+                    {
+                        PlayerPrefs.SetString("playerName2", "Sartom");
+                        break;
+                    }
+                case 3:
+                    {
+                        PlayerPrefs.SetString("playerName3", "Sartom");
+                        break;
+                    }
+            }
         }
-        else PlayerPrefs.SetString("playerName", playerNameTMP.text);
+        else
+        {
+            switch (saveSlot)
+            {
+                case 1:
+                    {
+                        PlayerPrefs.SetString("playerName1", playerNameTMP.text);
+                        break;
+                    }
+                case 2:
+                    {
+                        PlayerPrefs.SetString("playerName2", playerNameTMP.text);
+                        break;
+                    }
+                case 3:
+                    {
+                        PlayerPrefs.SetString("playerName3", playerNameTMP.text);
+                        break;
+                    }
+            }
+        }
         GameState.Instance.SaveWorld();
     }
 
