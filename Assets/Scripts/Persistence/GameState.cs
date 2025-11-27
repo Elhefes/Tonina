@@ -41,4 +41,9 @@ public class GameState : MonoBehaviour
         progressionData = world.progression;
         placeablesManager.ApplyPlaceablesData(world.placeables);
     }
+
+    public void DeleteWorld(int fileSlot)
+    {
+        WorldSaveLoad.DeleteSave(fileSlot);
+    }
 }

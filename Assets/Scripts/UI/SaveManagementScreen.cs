@@ -48,6 +48,11 @@ public class SaveManagementScreen : MonoBehaviour
         UpdateSelectedCircle(currentSelectionIndex);
     }
 
+    public void DeleteThisSave()
+    {
+        GameState.Instance.DeleteWorld(currentSelectionIndex);
+    }
+
     void UpdateSelectedCircle(int i)
     {
         foreach (GameObject obj in selectionCircles)
