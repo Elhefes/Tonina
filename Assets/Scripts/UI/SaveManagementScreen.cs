@@ -2,6 +2,8 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 using System.IO;
+using System.Collections;
+using UnityEngine.SceneManagement;
 
 public class SaveManagementScreen : MonoBehaviour
 {
@@ -16,10 +18,17 @@ public class SaveManagementScreen : MonoBehaviour
     public Sprite saveExistsSprite;
     public Sprite saveDoesNotExistSprite;
 
+    public GameObject loadingTextObject;
+
+    public Button closeMenuButton;
+    public Button[] saveFileButtons;
+
     public Button loadSaveButton;
     public Button deleteSaveButton;
     public GameObject[] selectionCircles;
     private int currentSelectionIndex;
+
+    private bool loadingSaveFile;
 
     private void OnEnable()
     {
@@ -31,7 +40,7 @@ public class SaveManagementScreen : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Escape)) { gameObject.SetActive(false); }
+        if (Input.GetKeyDown(KeyCode.Escape) && !loadingSaveFile) { gameObject.SetActive(false); }
     }
 
     private void LoadSaveVisuals()
@@ -61,6 +70,7 @@ public class SaveManagementScreen : MonoBehaviour
         PlayerPrefs.SetInt("selectedSaveFile", currentSelectionIndex);
         loadSaveButton.interactable = false;
         UpdateSelectedCircle(currentSelectionIndex);
+        StartCoroutine(StartLoadingThisSave());
     }
 
     public void DeleteThisSave()
@@ -69,7 +79,21 @@ public class SaveManagementScreen : MonoBehaviour
         LoadSaveVisuals();
     }
 
-    void UpdateSelectedCircle(int i)
+    private IEnumerator StartLoadingThisSave()
+    {
+        loadingSaveFile = true;
+        loadingTextObject.SetActive(true);
+
+        closeMenuButton.interactable = false;
+        deleteSaveButton.interactable = false;
+        foreach (Button button in saveFileButtons) button.interactable = false;
+        saveFileButtons[currentSelectionIndex - 1].interactable = true;
+
+        yield return new WaitForSeconds(0.75f);
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+    }
+
+    private void UpdateSelectedCircle(int i)
     {
         foreach (GameObject obj in selectionCircles)
         {
@@ -78,7 +102,7 @@ public class SaveManagementScreen : MonoBehaviour
         selectionCircles[i - 1].SetActive(true);
     }
 
-    void UpdateButtonPositions(int i)
+    private void UpdateButtonPositions(int i)
     {
         if (i == 3)
         {
