@@ -23,7 +23,7 @@ public class PlaceablesManager : MonoBehaviour
                 continue;
             }
 
-            GameObject obj = Instantiate(prefab, p.position, p.rotation);
+            GameObject obj = Instantiate(prefab, p.GetPosition(), p.GetRotation());
             activePlaceables.Add(obj);
         }
     }

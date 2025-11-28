@@ -17,6 +17,7 @@ public class ProgressionData
     public int maizeProductionLevel { get; set; } // How many maize pieces can player start a battle with, maybe also makes Maize Places cheaper?
 
     // Unlocks
+    public bool introPlayed { get; set; }
     public bool fenceUnlocked { get; set; }
     public bool maizePlaceUnlocked { get; set; }
     public bool spearRackUnlocked { get; set; }

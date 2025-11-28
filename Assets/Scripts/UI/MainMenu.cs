@@ -49,7 +49,7 @@ public class MainMenu : MonoBehaviour
         secondsPlayed = PlayerPrefs.GetInt("secondsPlayed", 0);
         StartCoroutine(SecondCounter());
 
-        if (PlayerPrefs.GetInt("introPlayed", 0) == 1) continueHereLock.SetActive(false);
+        CheckContinueHereLock();
         if (pyramid4thFloor.activeSelf) playAsAttackersLock.SetActive(false);
     }
 
@@ -57,6 +57,11 @@ public class MainMenu : MonoBehaviour
     {
         StartCoroutine(SwitchMainCameraToMainMenuCamera());
         StartCoroutine(SetPlayerCameraDrawDistance(100f));
+    }
+
+    public void CheckContinueHereLock()
+    {
+        if (GameState.Instance.progressionData.introPlayed) continueHereLock.SetActive(false);
     }
 
     public void SelectName()
@@ -110,16 +115,16 @@ public class MainMenu : MonoBehaviour
 
     public void PlayIntro()
     {
-        if (PlayerPrefs.GetInt("introPlayed", 0) == 0)
-        {
-            movingElements.SetActive(false);
-            nameSelection.SetActive(true);
-        }
-        else
+        if (GameState.Instance.progressionData.introPlayed)
         {
             introObject.SetActive(true);
             Invoke("StopCameraMovement", 1f);
             Invoke("SetLowRenderDistance", 1f);
+        }
+        else
+        {
+            movingElements.SetActive(false);
+            nameSelection.SetActive(true);
         }
     }
 
