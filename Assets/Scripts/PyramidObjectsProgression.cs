@@ -4,6 +4,7 @@ public class PyramidObjectsProgression : MonoBehaviour
 {
     public GameObject kingHouse;
     public int extraFloorsBuilt;
+    public int specialBuildingsBuilt; // Weather Temple, Maize Farmers House... etc.
 
     public PlaceablesManager placeablesManager;
     public AttackerSpawnPointController attackerSpawnPointController;
@@ -11,57 +12,40 @@ public class PyramidObjectsProgression : MonoBehaviour
     public Vector3[] kingHousePositionsFrom4thTo14th;
 
     [Header("Pyramid Levels")]
-    public GameObject lvl4Floor;
-    public GameObject lvl4Walls;
-
-    public GameObject lvl5Floor;
-    public GameObject lvl5Walls;
+    public GameObject[] pyramidExtraFloors;
+    public GameObject[] pyramidExtraFloorWalls;
 
     [Header("Terrains")]
-    public Terrain lvl3Terrain;
-    public Terrain lvl4Terrain;
-    public Terrain lvl5Terrain;
+    public Terrain[] terrains;
 
     [Header("NavMesh surfaces")]
-    public GameObject lvl3NavMeshSurface;
-    public GameObject lvl3WeatherTempleNavMeshSurface;
-    public GameObject lvl4NavMeshSurface;
-    public GameObject lvl4MaizeFarmersHouseNavMeshSurface;
-    public GameObject lvl5NavMeshSurface;
+    public GameObject[] navMeshSurfaces;
 
     [Header("Temporary objects in village")]
     public GameObject lvl3TemporaryVillageObject;
 
     [Header("Villagers")]
-    public GameObject lvl4Villagers;
-    public GameObject lvl5Villagers;
+    public GameObject[] villagers;
 
     [Header("Village houses")]
-    public GameObject lvl4Houses;
-    public GameObject lvl5Houses;
+    public GameObject[] villageHouses;
+
+    [Header("Special buildings")]
+    public GameObject[] specialBuildings;
 
     [Header("Fences")]
-    public GameObject lvl3BattlefieldFence;
-    public GameObject lvl4BattlefieldFence;
-    public GameObject lvl4VillageFence;
-    public GameObject lvl5BattlefieldFence;
-    public GameObject lvl5VillageFence;
+    public GameObject[] villageFences;
+    public GameObject[] battleFieldFences;
 
     [Header("Stairs")]
-    public GameObject lvl4Stairs;
-    public GameObject lvl5Stairs;
+    public GameObject[] stairs;
 
     [Header("Border bumps")]
-    public GameObject lvl4BorderBumps;
-    public GameObject lvl5BorderBumps;
+    public GameObject[] borderBumps;
 
     [Header("Camera map colliders")]
-    public GameObject lvl3BfCollider;
-    public GameObject lvl3VillageCollider;
-    public GameObject lvl4BfCollider;
-    public GameObject lvl4VillageCollider;
-    public GameObject lvl5BfCollider;
-    public GameObject lvl5VillageCollider;
+    public GameObject[] villageCamColliders;
+    public GameObject[] battleFieldCamColliders;
 
     [Header("Weather Temple objects")]
     public GameObject weatherTemple;
@@ -70,96 +54,149 @@ public class PyramidObjectsProgression : MonoBehaviour
 
     private void Start()
     {
-        extraFloorsBuilt = 0; // Change this when save/load works
-        UpdateKingHousePosition();
+        extraFloorsBuilt = GameState.Instance.progressionData.pyramidFloorsBuilt - 3;
+        EnableAllCurrentPyramidObjects();
     }
 
     public void BuildNextPyramidLevel()
     {
-        // very placeholder code
-
-        if (extraFloorsBuilt == 0)
-        {
-            lvl4Floor.SetActive(true);
-            lvl4Walls.SetActive(true);
-
-            lvl3Terrain.gameObject.SetActive(false);
-            lvl4Terrain.gameObject.SetActive(true);
-
-            lvl3NavMeshSurface.SetActive(false);
-            lvl3WeatherTempleNavMeshSurface.SetActive(false);
-            lvl4NavMeshSurface.SetActive(true);
-
-            lvl3TemporaryVillageObject.SetActive(false);
-
-            lvl4Villagers.SetActive(true);
-
-            lvl4Houses.SetActive(true);
-
-            lvl3BattlefieldFence.SetActive(false);
-            lvl4BattlefieldFence.SetActive(true);
-            lvl4VillageFence.SetActive(true);
-
-            lvl4Stairs.SetActive(true);
-
-            lvl4BorderBumps.SetActive(true);
-
-            lvl3BfCollider.SetActive(false);
-            lvl3VillageCollider.SetActive(false);
-            lvl4BfCollider.SetActive(true);
-            lvl4VillageCollider.SetActive(true);
-
-            weatherTempleLvl3Obj.SetActive(false);
-            weatherTemple.SetActive(true);
-            weatherTempleLvl4Obj.SetActive(true);
-
-            extraFloorsBuilt++;
-
-            attackerSpawnPointController.UpdateBattleAreaWidth(45f);
-            attackerSpawnPointController.UpdateSpawnPositions(extraFloorsBuilt);
-        }
-
-        else if (extraFloorsBuilt == 1)
-        {
-            lvl5Floor.SetActive(true);
-            lvl5Walls.SetActive(true);
-
-            lvl4Terrain.gameObject.SetActive(false);
-            lvl5Terrain.gameObject.SetActive(true);
-
-            lvl4NavMeshSurface.SetActive(false);
-            lvl4MaizeFarmersHouseNavMeshSurface.SetActive(false);
-            lvl5NavMeshSurface.SetActive(true);
-
-            lvl5Villagers.SetActive(true);
-
-            lvl5Houses.SetActive(true);
-
-            lvl4BattlefieldFence.SetActive(false);
-            lvl5BattlefieldFence.SetActive(true);
-            lvl4VillageFence.SetActive(false);
-            lvl5VillageFence.SetActive(true);
-
-            lvl5Stairs.SetActive(true);
-
-            lvl5BorderBumps.SetActive(true);
-
-            lvl4BfCollider.SetActive(false);
-            lvl4VillageCollider.SetActive(false);
-            lvl5BfCollider.SetActive(true);
-            lvl5VillageCollider.SetActive(true);
-
-            extraFloorsBuilt++;
-
-            attackerSpawnPointController.UpdateBattleAreaWidth(65f);
-            attackerSpawnPointController.UpdateSpawnPositions(extraFloorsBuilt);
-        }
-
+        extraFloorsBuilt++;
+        EnableAllCurrentPyramidObjects();
         //buildingsManager.maxBuildingAmount += 2;
-        UpdateKingHousePosition();
     }
 
-    void UpdateKingHousePosition()
+    public void BuildNextSpecialBuilding()
+    {
+        specialBuildingsBuilt++;
+        specialBuildings[specialBuildingsBuilt - 1].SetActive(true);
+        EnableCurrentNavMesh();
+    }
+
+    private void EnableAllCurrentPyramidObjects()
+    {
+        // Manual check for how many special buildings there should be
+        if (extraFloorsBuilt > 1) specialBuildingsBuilt = 2;
+        else if (extraFloorsBuilt > 0) specialBuildingsBuilt = 1;
+
+        EnablePyramidLevels();
+        EnableCurrentTerrain();
+        EnableCurrentNavMesh();
+        EnableVillagers();
+        EnableVillageHouses();
+        EnableSpecialBuildings();
+        EnableCurrentFences();
+        EnableStairs();
+        EnableBorderBumps();
+        EnableCurrentCamColliders();
+        UpdateKingHousePosition();
+
+        if (extraFloorsBuilt > 0)
+        {
+            lvl3TemporaryVillageObject.SetActive(false);
+            // Change Weather Temple accessibility points when there's 4 or more floors
+            weatherTempleLvl3Obj.SetActive(false);
+            weatherTempleLvl4Obj.SetActive(true);
+        }
+    }
+
+    private void EnablePyramidLevels()
+    {
+        if (extraFloorsBuilt > 0)
+        {
+            for (int i = 0; i < extraFloorsBuilt; ++i)
+            {
+                pyramidExtraFloors[i].SetActive(true);
+                pyramidExtraFloorWalls[i].SetActive(true);
+            }
+        }
+    }
+
+    private void EnableCurrentTerrain()
+    {
+        foreach (Terrain terrain in terrains) terrain.gameObject.SetActive(false);
+        terrains[extraFloorsBuilt].gameObject.SetActive(true);
+    }
+
+    private void EnableCurrentNavMesh()
+    {
+        foreach (GameObject surface in navMeshSurfaces) surface.SetActive(false);
+        navMeshSurfaces[extraFloorsBuilt + specialBuildingsBuilt].SetActive(true);
+    }
+
+    private void EnableVillagers()
+    {
+        if (extraFloorsBuilt > 0)
+        {
+            for (int i = 0; i < extraFloorsBuilt; ++i)
+            {
+                villagers[i].SetActive(true);
+            }
+        }
+    }
+
+    private void EnableVillageHouses()
+    {
+        if (extraFloorsBuilt > 0)
+        {
+            for (int i = 0; i < extraFloorsBuilt; ++i)
+            {
+                villageHouses[i].SetActive(true);
+            }
+        }
+    }
+
+    private void EnableSpecialBuildings()
+    {
+        if (specialBuildingsBuilt > 0)
+        {
+            for (int i = 0; i < specialBuildingsBuilt; ++i)
+            {
+                specialBuildings[i].SetActive(true);
+            }
+        }
+    }
+
+    private void EnableCurrentFences()
+    {
+        foreach (GameObject fence in villageFences) fence.SetActive(false);
+        if (extraFloorsBuilt > 0) villageFences[extraFloorsBuilt - 1].gameObject.SetActive(true); // Lvl3 village fences are permanent
+
+        foreach (GameObject fence in battleFieldFences) fence.SetActive(false);
+        battleFieldFences[extraFloorsBuilt].gameObject.SetActive(true);
+    }
+
+    private void EnableStairs()
+    {
+        if (extraFloorsBuilt > 0)
+        {
+            for (int i = 0; i < extraFloorsBuilt; ++i)
+            {
+                stairs[i].SetActive(true);
+            }
+        }
+    }
+
+    private void EnableBorderBumps()
+    {
+        if (extraFloorsBuilt > 0)
+        {
+            for (int i = 0; i < extraFloorsBuilt; ++i)
+            {
+                borderBumps[i].SetActive(true);
+            }
+        }
+    }
+
+    private void EnableCurrentCamColliders()
+    {
+        foreach (GameObject camCollider in villageCamColliders) camCollider.SetActive(false);
+        villageCamColliders[extraFloorsBuilt].gameObject.SetActive(true);
+
+        foreach (GameObject camCollider in battleFieldCamColliders) camCollider.SetActive(false);
+        battleFieldCamColliders[extraFloorsBuilt].gameObject.SetActive(true);
+    }
+
+    private void UpdateKingHousePosition()
     {
         if (extraFloorsBuilt > 0)
         {

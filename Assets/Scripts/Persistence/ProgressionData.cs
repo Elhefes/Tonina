@@ -3,6 +3,8 @@ using System;
 [Serializable]
 public class ProgressionData
 {
+    public float battleAreaWidth { get; set; } // Battlefield width increases as more floors are built
+
     // There are 25 threat levels, threat progression value that starts from 0 and goes up to 2500 and unlock next level every 100
     // After a battle finishes, there's a float scoreFactor between 0 and 1 based on how well battle went
     // Threat progression formula: (100 - threatLevel * 2) * scoreFactor, when threat level is highest
