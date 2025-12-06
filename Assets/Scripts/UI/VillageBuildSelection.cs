@@ -70,6 +70,8 @@ public class VillageBuildSelection : MonoBehaviour, IPointerEnterHandler, IPoint
 
     public void BuyThisSelection()
     {
+        int extraFloorsBuilt = GameState.Instance.progressionData.extraPyramidFloorsBuilt;
+
         if (boughtObjectsToEnable != null)
         {
             if (boughtObjectsToEnable.Length > 0)
@@ -97,12 +99,12 @@ public class VillageBuildSelection : MonoBehaviour, IPointerEnterHandler, IPoint
             if (buildsNextFloor)
             {
                 pyramidObjectsProgression.BuildNextPyramidLevel();
-                villageBuildMenu.toninaCutSceneCamera.MoveCameraToTemporaryPosition(false, villageTPMenu.extraFloorsBuilt, 
+                villageBuildMenu.toninaCutSceneCamera.MoveCameraToTemporaryPosition(false, extraFloorsBuilt, 
                     Camera.main.transform, Camera.main.transform.rotation, Camera.main.farClipPlane);
             }
             else
             {
-                villageBuildMenu.toninaCutSceneCamera.MoveCameraToTemporaryPosition(true, villageTPMenu.extraFloorsBuilt, 
+                villageBuildMenu.toninaCutSceneCamera.MoveCameraToTemporaryPosition(true, extraFloorsBuilt, 
                     Camera.main.transform, Camera.main.transform.rotation, Camera.main.farClipPlane);
             }
             villageBuildMenu.gameObject.SetActive(false);
@@ -112,7 +114,7 @@ public class VillageBuildSelection : MonoBehaviour, IPointerEnterHandler, IPoint
         {
             if (buildsNextFloor)
             {
-                villageTPMenu.IncrementExtraFloorsBuilt();
+                villageTPMenu.UpdateExtraFloorsInt();
                 villageTPMenu.UpdateMiddleGatePosition();
             }
         }

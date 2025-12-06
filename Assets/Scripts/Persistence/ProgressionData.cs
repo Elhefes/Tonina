@@ -27,7 +27,7 @@ public class ProgressionData
     public bool towerUnlocked { get; set; }
 
     // Pyramid floors
-    public int pyramidFloorsBuilt { get; set; } = 3;
+    public int extraPyramidFloorsBuilt { get; set; }
 
     // // Weather Temple, Maize Farmers House... etc.
     public int specialBuildingsBuilt { get; set; }

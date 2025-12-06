@@ -8,6 +8,7 @@ public class PyramidObjectsProgression : MonoBehaviour
 
     public PlaceablesManager placeablesManager;
     public AttackerSpawnPointController attackerSpawnPointController;
+    public VillageTeleportMenu villageTeleportMenu;
 
     public Vector3[] kingHousePositionsFrom4thTo14th;
 
@@ -54,7 +55,7 @@ public class PyramidObjectsProgression : MonoBehaviour
 
     private void Start()
     {
-        extraFloorsBuilt = GameState.Instance.progressionData.pyramidFloorsBuilt - 3;
+        extraFloorsBuilt = GameState.Instance.progressionData.extraPyramidFloorsBuilt;
         specialBuildingsBuilt = GameState.Instance.progressionData.specialBuildingsBuilt;
         EnableAllCurrentPyramidObjects();
     }
@@ -64,7 +65,7 @@ public class PyramidObjectsProgression : MonoBehaviour
         extraFloorsBuilt++;
         EnableAllCurrentPyramidObjects();
         //buildingsManager.maxBuildingAmount += 2;
-        GameState.Instance.progressionData.pyramidFloorsBuilt = 3 + extraFloorsBuilt;
+        GameState.Instance.progressionData.extraPyramidFloorsBuilt = extraFloorsBuilt;
         GameState.Instance.SaveWorld();
     }
 
@@ -94,6 +95,9 @@ public class PyramidObjectsProgression : MonoBehaviour
         EnableBorderBumps();
         EnableCurrentCamColliders();
         UpdateKingHousePosition();
+
+        villageTeleportMenu.UpdateExtraFloorsInt();
+        villageTeleportMenu.UpdateMiddleGatePosition();
 
         if (extraFloorsBuilt > 0)
         {

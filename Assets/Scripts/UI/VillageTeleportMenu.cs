@@ -8,14 +8,10 @@ public class VillageTeleportMenu : MonoBehaviour
     public Vector3[] middleGateTransformPositionsFrom4rdTo14th;
     public GameObject[] blueBacks;
     public Player player;
-    public int extraFloorsBuilt;
+    private int extraFloorsBuilt;
     private int gateIndex;
 
-    private void Start()
-    {
-        // TODO: get extraFloorsBuilt when save/load works
-        if (extraFloorsBuilt > 0) UpdateMiddleGatePosition();
-    }
+    public void UpdateExtraFloorsInt() { extraFloorsBuilt = GameState.Instance.progressionData.extraPyramidFloorsBuilt; }
 
     private void OnEnable()
     {
@@ -40,12 +36,13 @@ public class VillageTeleportMenu : MonoBehaviour
         else if (Vector3.Distance(player.transform.position, gateTransforms[2].position) < 5f) gateIndex = 3;
     }
 
-    public void IncrementExtraFloorsBuilt() { extraFloorsBuilt++; } // Temporary
-
     public void UpdateMiddleGatePosition()
     {
-        middleGate.transform.position = middleGatePositionsFrom4rdTo14th[extraFloorsBuilt - 1];
-        gateTransforms[1].position = middleGateTransformPositionsFrom4rdTo14th[extraFloorsBuilt - 1];
+        if (extraFloorsBuilt > 0)
+        {
+            middleGate.transform.position = middleGatePositionsFrom4rdTo14th[extraFloorsBuilt - 1];
+            gateTransforms[1].position = middleGateTransformPositionsFrom4rdTo14th[extraFloorsBuilt - 1];
+        }
     }
 
     void UpdateBlueBacks()
