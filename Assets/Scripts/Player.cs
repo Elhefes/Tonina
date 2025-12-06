@@ -102,6 +102,13 @@ public class Player : Creature
 
     private void Start()
     {
+        if (kingHouse != null && !godMode) // Set correct starting position in Tonina scene only
+        {
+            gameObject.SetActive(false);
+            transform.position = kingHouse.transform.position + kingHouse.playerSpawnPosition;
+            gameObject.SetActive(true);
+        }
+
         health = startingHealth;
         stamina = maxStamina;
         originalMovementSpeed = creatureMovement.agent.speed;
