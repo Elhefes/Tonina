@@ -55,6 +55,7 @@ public class PyramidObjectsProgression : MonoBehaviour
     private void Start()
     {
         extraFloorsBuilt = GameState.Instance.progressionData.pyramidFloorsBuilt - 3;
+        specialBuildingsBuilt = GameState.Instance.progressionData.specialBuildingsBuilt;
         EnableAllCurrentPyramidObjects();
     }
 
@@ -63,6 +64,8 @@ public class PyramidObjectsProgression : MonoBehaviour
         extraFloorsBuilt++;
         EnableAllCurrentPyramidObjects();
         //buildingsManager.maxBuildingAmount += 2;
+        GameState.Instance.progressionData.pyramidFloorsBuilt = 3 + extraFloorsBuilt;
+        GameState.Instance.SaveWorld();
     }
 
     public void BuildNextSpecialBuilding()
@@ -70,6 +73,8 @@ public class PyramidObjectsProgression : MonoBehaviour
         specialBuildingsBuilt++;
         specialBuildings[specialBuildingsBuilt - 1].SetActive(true);
         EnableCurrentNavMesh();
+        GameState.Instance.progressionData.specialBuildingsBuilt = specialBuildingsBuilt;
+        GameState.Instance.SaveWorld();
     }
 
     private void EnableAllCurrentPyramidObjects()

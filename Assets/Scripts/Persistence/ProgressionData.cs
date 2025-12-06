@@ -28,4 +28,7 @@ public class ProgressionData
 
     // Pyramid floors
     public int pyramidFloorsBuilt { get; set; } = 3;
+
+    // // Weather Temple, Maize Farmers House... etc.
+    public int specialBuildingsBuilt { get; set; }
 }
