@@ -9,9 +9,12 @@ public class VillageBuildMenu : MonoBehaviour, IPointerDownHandler
 
     public PyramidObjectsProgression pyramidObjectsProgression;
 
-    public VillageBuildSelection[] villageBuildSelections;
+    public VillageBuildSelection[] villageBuildSelections; // All possible selections
     public VillageBuildSelection currentBuildSelection;
 
+    // Bought selections, i.e selectables -> non-interactable sprites
+    public GameObject[] boughtFloorSelections; // Only floor selections
+    public GameObject[] boughtSelectionsWithSpecials; // Special buildings + floors with special buildings
     public GameObject[] boughtFloorSprites;
     public GameObject[] boughtSpecialBuildingSprites;
 
@@ -68,6 +71,7 @@ public class VillageBuildMenu : MonoBehaviour, IPointerDownHandler
             for (int i = 0; i < extraFloorsBuilt; ++i)
             {
                 boughtFloorSprites[i].SetActive(true);
+                boughtFloorSelections[i].SetActive(false);
             }
         }
         if (specialsBuildingsBuilt > 0)
@@ -75,6 +79,8 @@ public class VillageBuildMenu : MonoBehaviour, IPointerDownHandler
             for (int i = 0; i < specialsBuildingsBuilt; ++i)
             {
                 boughtSpecialBuildingSprites[i].SetActive(true);
+                boughtSelectionsWithSpecials[i * 2].SetActive(false); // Special selection
+                boughtSelectionsWithSpecials[i * 2 + 1].SetActive(false); // Special + floor selection
             }
         }
     }
