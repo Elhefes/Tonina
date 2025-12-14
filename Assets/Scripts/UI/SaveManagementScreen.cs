@@ -30,12 +30,18 @@ public class SaveManagementScreen : MonoBehaviour
 
     private bool loadingSaveFile;
 
+    public GameObject skipIntroButton;
+
     private void OnEnable()
     {
         int selectedSave = PlayerPrefs.GetInt("selectedSaveFile", 1);
         SelectThisSave(selectedSave);
         UpdateSelectedCircle(selectedSave);
         LoadSaveVisuals();
+
+#if UNITY_EDITOR
+        skipIntroButton.SetActive(true);
+#endif
     }
 
     private void Update()
@@ -122,5 +128,12 @@ public class SaveManagementScreen : MonoBehaviour
             loadSaveButton.transform.localPosition = new Vector3(-580, -296, 0);
             deleteSaveButton.transform.localPosition = new Vector3(-580, -380, 0);
         }
+    }
+
+    public void SkipIntroRequirements()
+    {
+        GameState.Instance.progressionData.introPlayed = true;
+        GameState.Instance.SaveWorld();
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 }
