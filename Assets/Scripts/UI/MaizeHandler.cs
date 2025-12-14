@@ -9,7 +9,6 @@ public class MaizeHandler : MonoBehaviour
 
     public Player player;
 
-    public int startingMaize;
     public int maxMaize;
     public int maizeHealAmount;
 
@@ -24,9 +23,10 @@ public class MaizeHandler : MonoBehaviour
 
     private void OnEnable()
     {
-        maizeAmount = startingMaize;
-        maizeAmountTMP.text = startingMaize.ToString();
-        if (startingMaize > 0) maizeInventory.SetActive(true);
+        int startingMaizeAmount = GameState.Instance.progressionData.maizeProductionLevel;
+        maizeAmount = startingMaizeAmount;
+        maizeAmountTMP.text = startingMaizeAmount.ToString();
+        if (startingMaizeAmount > 0) maizeInventory.SetActive(true);
     }
 
     public void EnterMaizePlace()

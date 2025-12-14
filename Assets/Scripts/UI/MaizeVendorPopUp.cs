@@ -4,17 +4,31 @@ public class MaizeVendorPopUp : MonoBehaviour
 {
     public GameObject[] textObjects;
     public MaizeHandler maizeHandler;
-    private int startingMaizeAmount;
 
     public void BuyMoreStartingMaize()
     {
-        if (startingMaizeAmount >= textObjects.Length) return;
+        if (GameState.Instance.progressionData.maizeProductionLevel >= textObjects.Length) return;
 
-            textObjects[startingMaizeAmount].SetActive(false);
+        GameState.Instance.progressionData.maizeProductionLevel++;
+        int startingMaizeAmount = GameState.Instance.progressionData.maizeProductionLevel;
 
-        startingMaizeAmount++;
-        maizeHandler.startingMaize = startingMaizeAmount;
-
+        foreach (GameObject obj in textObjects) obj.SetActive(false);
         if (startingMaizeAmount < textObjects.Length) textObjects[startingMaizeAmount].SetActive(true);
+
+        SetMaizeProductionLevel(startingMaizeAmount);
+        GameState.Instance.SaveWorld();
+    }
+
+    private void SetMaizeProductionLevel(int startingMaizeAmount)
+    {
+        // TODO: Make Maize Place incrementally cheaper also
+        if (startingMaizeAmount == 3)
+        {
+            // MP Price = 120
+        }
+        else if (startingMaizeAmount == 3)
+        {
+            // MP Price = 100
+        }
     }
 }
