@@ -18,7 +18,7 @@ public class SaveManagementScreen : MonoBehaviour
     public Sprite saveExistsSprite;
     public Sprite saveDoesNotExistSprite;
 
-    public GameObject loadingTextObject;
+    public TMP_Text loadingTextObject;
 
     public Button closeMenuButton;
     public Button[] saveFileButtons;
@@ -70,26 +70,29 @@ public class SaveManagementScreen : MonoBehaviour
         PlayerPrefs.SetInt("selectedSaveFile", currentSelectionIndex);
         loadSaveButton.interactable = false;
         UpdateSelectedCircle(currentSelectionIndex);
-        StartCoroutine(StartLoadingThisSave());
+        StartCoroutine(RestartThisScene(true));
     }
 
     public void DeleteThisSave()
     {
         GameState.Instance.DeleteWorld(currentSelectionIndex);
         LoadSaveVisuals();
+        // Lock and restart scene when current save is deleted
+        if (currentSelectionIndex == PlayerPrefs.GetInt("selectedSaveFile", 1)) StartCoroutine(RestartThisScene(false));
     }
 
-    private IEnumerator StartLoadingThisSave()
+    private IEnumerator RestartThisScene(bool isOtherSave)
     {
         loadingSaveFile = true;
-        loadingTextObject.SetActive(true);
+        if (!isOtherSave) loadingTextObject.text = "Deleting...";
+        loadingTextObject.gameObject.SetActive(true);
 
         closeMenuButton.interactable = false;
         deleteSaveButton.interactable = false;
         foreach (Button button in saveFileButtons) button.interactable = false;
         saveFileButtons[currentSelectionIndex - 1].interactable = true;
 
-        yield return new WaitForSeconds(0.75f);
+        yield return new WaitForSeconds(0.5f);
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 
