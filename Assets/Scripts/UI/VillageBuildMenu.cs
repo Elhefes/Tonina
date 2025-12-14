@@ -65,13 +65,14 @@ public class VillageBuildMenu : MonoBehaviour, IPointerDownHandler
 
         foreach (GameObject obj in boughtFloorSprites) obj.SetActive(false);
         foreach (GameObject obj in boughtSpecialBuildingSprites) obj.SetActive(false);
+        foreach (GameObject obj in boughtFloorSelections) obj.SetActive(false);
+        foreach (GameObject obj in boughtSelectionsWithSpecials) obj.SetActive(false);
 
         if (extraFloorsBuilt > 0)
         {
             for (int i = 0; i < extraFloorsBuilt; ++i)
             {
                 boughtFloorSprites[i].SetActive(true);
-                boughtFloorSelections[i].SetActive(false);
             }
         }
         if (specialsBuildingsBuilt > 0)
@@ -79,9 +80,32 @@ public class VillageBuildMenu : MonoBehaviour, IPointerDownHandler
             for (int i = 0; i < specialsBuildingsBuilt; ++i)
             {
                 boughtSpecialBuildingSprites[i].SetActive(true);
-                boughtSelectionsWithSpecials[i * 2].SetActive(false); // Special selection
-                boughtSelectionsWithSpecials[i * 2 + 1].SetActive(false); // Special + floor selection
             }
+        }
+
+        // Switch case is used because not all floors will have a special building
+        switch (extraFloorsBuilt)
+        {
+            case 0:
+                {
+                    if (specialsBuildingsBuilt == 1) villageBuildSelections[2].gameObject.SetActive(true);
+                    else
+                    {
+                        villageBuildSelections[1].gameObject.SetActive(true);
+                        villageBuildSelections[0].gameObject.SetActive(true);
+                    }
+                    break;
+                }
+            case 1:
+                {
+                    if (specialsBuildingsBuilt == 2) villageBuildSelections[5].gameObject.SetActive(true);
+                    else
+                    {
+                        villageBuildSelections[4].gameObject.SetActive(true);
+                        villageBuildSelections[3].gameObject.SetActive(true);
+                    }
+                    break;
+                }
         }
     }
 }
