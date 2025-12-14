@@ -69,6 +69,11 @@ public class SaveManagementScreen : MonoBehaviour
         if (i == PlayerPrefs.GetInt("selectedSaveFile", 1)) loadSaveButton.interactable = false;
         else loadSaveButton.interactable = true;
         UpdateButtonPositions(i);
+
+        if ((i == 1 && File.Exists(Application.persistentDataPath + "/world1Data.imox")) ||
+            (i == 2 && File.Exists(Application.persistentDataPath + "/world2Data.imox")) ||
+            (i == 3 && File.Exists(Application.persistentDataPath + "/world3Data.imox"))) deleteSaveButton.interactable = true;
+        else deleteSaveButton.interactable = false;
     }
 
     public void LoadSaveFile()
