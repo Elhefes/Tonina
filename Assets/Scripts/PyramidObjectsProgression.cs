@@ -80,10 +80,6 @@ public class PyramidObjectsProgression : MonoBehaviour
 
     private void EnableAllCurrentPyramidObjects()
     {
-        // Manual check for how many special buildings there should be
-        if (extraFloorsBuilt > 1) specialBuildingsBuilt = 2;
-        else if (extraFloorsBuilt > 0) specialBuildingsBuilt = 1;
-
         EnablePyramidLevels();
         EnableCurrentTerrain();
         EnableCurrentNavMesh();
