@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class KingHouse : MonoBehaviour
 {
-    public Vector3 playerSpawnPosition;
+    public Transform playerSpawnPosition;
     public Vector3 battleFieldStartingPosition;
     public GameObject namePlate;
 

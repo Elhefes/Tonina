@@ -105,7 +105,7 @@ public class Player : Creature
         if (kingHouse != null && !godMode) // Set correct starting position in Tonina scene only
         {
             gameObject.SetActive(false);
-            transform.position = kingHouse.transform.position + kingHouse.playerSpawnPosition;
+            transform.position = kingHouse.playerSpawnPosition.position;
             gameObject.SetActive(true);
         }
 
@@ -806,7 +806,7 @@ public class Player : Creature
 
     public void StartTeleportToHome()
     {
-        teleportCoroutine = StartCoroutine(TeleportPlayerToSpot(kingHouse.transform.position + kingHouse.playerSpawnPosition));
+        teleportCoroutine = StartCoroutine(TeleportPlayerToSpot(kingHouse.playerSpawnPosition.position));
     }
 
     public void StartTeleportToBattleField()

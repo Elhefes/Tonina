@@ -7,6 +7,9 @@ public class PlaceablesManager : MonoBehaviour
 
     private List<GameObject> activePlaceables = new List<GameObject>();
 
+    public int GetMaxPlaceablesAmount() { return GameState.Instance.progressionData.extraPyramidFloorsBuilt * 2 + 3; }
+    public int existingPlaceablesAmount;
+
     // ------------------------------
     // LOAD
     // ------------------------------
@@ -61,6 +64,12 @@ public class PlaceablesManager : MonoBehaviour
             Destroy(obj);
 
         activePlaceables.Clear();
+    }
+
+    public void UpdateExistingPlaceablesAmount()
+    {
+        FindAllActivePlaceables();
+        existingPlaceablesAmount = activePlaceables.Count;
     }
 
     private void FindAllActivePlaceables()
