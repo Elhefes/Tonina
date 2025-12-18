@@ -339,7 +339,7 @@ public class Player : Creature
 
                 if (readyToRemove)
                 {
-                    if (target.CompareTag("PlaceableBuilding"))
+                    if (target.CompareTag("Placeable"))
                     {
                         if (selectedPlaceableBuilding == null)
                         {
