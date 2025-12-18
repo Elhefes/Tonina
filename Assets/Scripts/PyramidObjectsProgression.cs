@@ -64,7 +64,6 @@ public class PyramidObjectsProgression : MonoBehaviour
     {
         extraFloorsBuilt++;
         EnableAllCurrentPyramidObjects();
-        //buildingsManager.maxBuildingAmount += 2;
         GameState.Instance.progressionData.extraPyramidFloorsBuilt = extraFloorsBuilt;
         GameState.Instance.SaveWorld();
     }
@@ -130,6 +129,8 @@ public class PyramidObjectsProgression : MonoBehaviour
 
     private void EnableVillagers()
     {
+        foreach (GameObject villager in villagers) villager.SetActive(false);
+
         if (extraFloorsBuilt > 0)
         {
             for (int i = 0; i < extraFloorsBuilt; ++i)
