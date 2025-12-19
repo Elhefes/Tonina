@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class MaizePlace : PlaceableBuilding
+public class MaizePlace : Placeable
 {
     public int maizeInPlace;
     public GameObject maizeInBarrel;

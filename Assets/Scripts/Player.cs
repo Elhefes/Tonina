@@ -60,7 +60,7 @@ public class Player : Creature
 
     public GameObject buildModeUI;
     public BuildingRemover buildingRemover;
-    private PlaceableBuilding selectedPlaceableBuilding;
+    private Placeable selectedPlaceableBuilding;
     public GameObject placeableBuildings; // Use this only for hiding e.g. when removing in build mode
     private bool readyToRemove;
 
@@ -102,6 +102,13 @@ public class Player : Creature
 
     private void Start()
     {
+        if (kingHouse != null && !godMode) // Set correct starting position in Tonina scene only
+        {
+            gameObject.SetActive(false);
+            transform.position = kingHouse.playerSpawnPosition.position;
+            gameObject.SetActive(true);
+        }
+
         health = startingHealth;
         stamina = maxStamina;
         originalMovementSpeed = creatureMovement.agent.speed;
@@ -332,11 +339,11 @@ public class Player : Creature
 
                 if (readyToRemove)
                 {
-                    if (target.CompareTag("PlaceableBuilding"))
+                    if (target.CompareTag("Placeable"))
                     {
                         if (selectedPlaceableBuilding == null)
                         {
-                            selectedPlaceableBuilding = target.GetComponentInParent<PlaceableBuilding>();
+                            selectedPlaceableBuilding = target.GetComponentInParent<Placeable>();
                             buildingRemover.SelectBuilding(selectedPlaceableBuilding);
                         }
                         else if (target.gameObject == selectedPlaceableBuilding.gameObject)
@@ -345,7 +352,7 @@ public class Player : Creature
                         }
                         else
                         {
-                            selectedPlaceableBuilding = target.GetComponentInParent<PlaceableBuilding>();
+                            selectedPlaceableBuilding = target.GetComponentInParent<Placeable>();
                             buildingRemover.SelectBuilding(selectedPlaceableBuilding);
                         }
                         return;
@@ -799,7 +806,7 @@ public class Player : Creature
 
     public void StartTeleportToHome()
     {
-        teleportCoroutine = StartCoroutine(TeleportPlayerToSpot(kingHouse.transform.position + kingHouse.playerSpawnPosition));
+        teleportCoroutine = StartCoroutine(TeleportPlayerToSpot(kingHouse.playerSpawnPosition.position));
     }
 
     public void StartTeleportToBattleField()

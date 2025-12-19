@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class SpearRack : PlaceableBuilding
+public class SpearRack : Placeable
 {
     public GameObject[] spears;
     public int numOfSpearsInRack;

@@ -13,6 +13,8 @@ public class MainMenu : MonoBehaviour
     public GameObject nameSelection;
     public GameObject introObject;
 
+    public TMP_Text playerNameTMP;
+
     public GameObject continueHereLock;
     public GameObject playAsAttackersLock;
     public GameObject attackMapScrollView;
@@ -47,7 +49,7 @@ public class MainMenu : MonoBehaviour
         secondsPlayed = PlayerPrefs.GetInt("secondsPlayed", 0);
         StartCoroutine(SecondCounter());
 
-        if (PlayerPrefs.GetInt("introPlayed", 0) == 1) continueHereLock.SetActive(false);
+        CheckContinueHereLock();
         if (pyramid4thFloor.activeSelf) playAsAttackersLock.SetActive(false);
     }
 
@@ -57,18 +59,72 @@ public class MainMenu : MonoBehaviour
         StartCoroutine(SetPlayerCameraDrawDistance(100f));
     }
 
-    public void PlayIntro()
+    public void CheckContinueHereLock()
     {
-        if (PlayerPrefs.GetInt("introPlayed", 0) == 0)
+        if (GameState.Instance.progressionData.introPlayed) continueHereLock.SetActive(false);
+    }
+
+    public void SelectName()
+    {
+        int saveSlot = PlayerPrefs.GetInt("selectedSaveFile", 1);
+
+        if (playerNameTMP.text.Length < 2) // Empty string
         {
-            movingElements.SetActive(false);
-            nameSelection.SetActive(true);
+            switch(saveSlot)
+            {
+                case 1:
+                    {
+                        PlayerPrefs.SetString("playerName1", "Sartom");
+                        break;
+                    }
+                case 2:
+                    {
+                        PlayerPrefs.SetString("playerName2", "Sartom");
+                        break;
+                    }
+                case 3:
+                    {
+                        PlayerPrefs.SetString("playerName3", "Sartom");
+                        break;
+                    }
+            }
         }
         else
+        {
+            switch (saveSlot)
+            {
+                case 1:
+                    {
+                        PlayerPrefs.SetString("playerName1", playerNameTMP.text);
+                        break;
+                    }
+                case 2:
+                    {
+                        PlayerPrefs.SetString("playerName2", playerNameTMP.text);
+                        break;
+                    }
+                case 3:
+                    {
+                        PlayerPrefs.SetString("playerName3", playerNameTMP.text);
+                        break;
+                    }
+            }
+        }
+        GameState.Instance.SaveWorld();
+    }
+
+    public void PlayIntro()
+    {
+        if (GameState.Instance.progressionData.introPlayed)
         {
             introObject.SetActive(true);
             Invoke("StopCameraMovement", 1f);
             Invoke("SetLowRenderDistance", 1f);
+        }
+        else
+        {
+            movingElements.SetActive(false);
+            nameSelection.SetActive(true);
         }
     }
 

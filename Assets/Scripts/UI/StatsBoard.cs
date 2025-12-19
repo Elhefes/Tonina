@@ -17,7 +17,7 @@ public class StatsBoard : MonoBehaviour
 
     private void OnEnable()
     {
-        stats = SaveLoad.LoadStats();
+        stats = StatsSaveLoad.Load();
         UpdateStatsMenuTexts();
     }
 

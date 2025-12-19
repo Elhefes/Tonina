@@ -20,12 +20,12 @@ public class StatsController : MonoBehaviour
     public void SaveStats()
     {
         Stats stats = new Stats(this);
-        SaveLoad.SaveStats(stats);
+        StatsSaveLoad.Save(stats);
     }
 
     public void LoadStats()
     {
-        Stats stats = SaveLoad.LoadStats();
+        Stats stats = StatsSaveLoad.Load();
         if (stats == null) return;
         this.pyramidLevelsBuilt = stats.pyramidLevelsBuilt;
         this.availableMoney = stats.availableMoney;

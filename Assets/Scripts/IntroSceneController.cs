@@ -144,6 +144,9 @@ public class IntroSceneController : MonoBehaviour
 
     void FinishGameplaySection()
     {
+        GameState.Instance.progressionData.introPlayed = true;
+        GameState.Instance.SaveWorld();
+
         spearPickUpPointerObject.SetActive(false);
 
         // Don't stay in an aiming animation

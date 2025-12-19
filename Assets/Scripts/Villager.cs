@@ -54,7 +54,7 @@ public class Villager : CreatureMovement
 
     private IEnumerator MoveRandomly()
     {
-        while (true)
+        while (gameObject.activeInHierarchy)
         {
             yield return new WaitForSeconds(Random.Range(minWaitTime, maxWaitTime));
             if (!textSubject.textIsActive) agent.destination = new Vector3(startingPosition.x + Random.Range(-freeSpaceX, freeSpaceX), startingPosition.y, startingPosition.z + Random.Range(-freeSpaceZ, freeSpaceZ));

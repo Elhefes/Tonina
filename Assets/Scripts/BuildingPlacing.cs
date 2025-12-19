@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class BuildingPlacing : MonoBehaviour
 {
-    public PlaceableBuilding placeableBuildingPrefab;
+    public Placeable placeableBuildingPrefab;
     public Material placingMat;
     public bool canPlace;
     public bool canPlaceOnGrass;

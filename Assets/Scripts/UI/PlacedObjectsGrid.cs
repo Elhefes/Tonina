@@ -4,7 +4,7 @@ using TMPro;
 public class PlacedObjectsGrid : MonoBehaviour
 {
     public GameObject[] placedObjectIndicators;
-    public int[] placedObjectAmounts = new int[] { 0, 0, 0, 0, 0, 0 };
+    public int[] placedObjectAmounts;
     public TMP_Text[] placedObjectIndicatorsTexts;
 
     public void UpdatePlacedBuildingIndicator(int placedObjectId)
@@ -32,7 +32,7 @@ public class PlacedObjectsGrid : MonoBehaviour
         }
     }
 
-    public bool anyElementIsActive()
+    public bool AnyElementIsActive()
     {
         foreach (int i in placedObjectAmounts)
         {

@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class Kancho : PlaceableBuilding
+public class Kancho : Placeable
 {
     public int snakeDamage;
     private bool snakeOnCooldown;

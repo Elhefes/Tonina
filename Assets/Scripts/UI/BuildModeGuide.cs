@@ -26,7 +26,7 @@ public class BuildModeGuide : MonoBehaviour
 
     public void StartGuide()
     {
-        if (placedObjectsGrid.anyElementIsActive()) slide1.SetActive(true);
+        if (placedObjectsGrid.AnyElementIsActive()) slide1.SetActive(true);
         else slide2.SetActive(true);
         darkener.SetActive(true);
     }

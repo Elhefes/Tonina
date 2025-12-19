@@ -13,7 +13,7 @@ public class VillageBuildSelection : MonoBehaviour, IPointerEnterHandler, IPoint
     public GameObject[] boughtObjectsToDisable;
 
     public bool buildsNextFloor;
-    public PyramidObjectsProgression pyramidObjectsProgression;
+    public bool buildsNextFloorAndSpecial;
 
     public VillageTeleportMenu villageTPMenu;
 
@@ -70,6 +70,8 @@ public class VillageBuildSelection : MonoBehaviour, IPointerEnterHandler, IPoint
 
     public void BuyThisSelection()
     {
+        int extraFloorsBuilt = GameState.Instance.progressionData.extraPyramidFloorsBuilt;
+
         if (boughtObjectsToEnable != null)
         {
             if (boughtObjectsToEnable.Length > 0)
@@ -92,17 +94,26 @@ public class VillageBuildSelection : MonoBehaviour, IPointerEnterHandler, IPoint
             }
         }
 
-        if (pyramidObjectsProgression != null)
+        if (villageBuildMenu.pyramidObjectsProgression != null)
         {
-            if (buildsNextFloor)
+            // Build pyramid objects
+            if (buildsNextFloor) villageBuildMenu.pyramidObjectsProgression.BuildNextPyramidLevel();
+            else if (buildsNextFloorAndSpecial)
             {
-                pyramidObjectsProgression.BuildNextPyramidLevel();
-                villageBuildMenu.toninaCutSceneCamera.MoveCameraToTemporaryPosition(false, villageTPMenu.extraFloorsBuilt, 
+                villageBuildMenu.pyramidObjectsProgression.BuildNextPyramidLevel();
+                villageBuildMenu.pyramidObjectsProgression.BuildNextSpecialBuilding();
+            }
+            else villageBuildMenu.pyramidObjectsProgression.BuildNextSpecialBuilding();
+
+            // Move camera to cutscene
+            if (buildsNextFloor || buildsNextFloorAndSpecial)
+            {
+                villageBuildMenu.toninaCutSceneCamera.MoveCameraToTemporaryPosition(false, extraFloorsBuilt, 
                     Camera.main.transform, Camera.main.transform.rotation, Camera.main.farClipPlane);
             }
             else
             {
-                villageBuildMenu.toninaCutSceneCamera.MoveCameraToTemporaryPosition(true, villageTPMenu.extraFloorsBuilt, 
+                villageBuildMenu.toninaCutSceneCamera.MoveCameraToTemporaryPosition(true, extraFloorsBuilt, 
                     Camera.main.transform, Camera.main.transform.rotation, Camera.main.farClipPlane);
             }
             villageBuildMenu.gameObject.SetActive(false);
@@ -110,9 +121,9 @@ public class VillageBuildSelection : MonoBehaviour, IPointerEnterHandler, IPoint
 
         if (villageTPMenu != null)
         {
-            if (buildsNextFloor)
+            if (buildsNextFloor || buildsNextFloorAndSpecial)
             {
-                villageTPMenu.IncrementExtraFloorsBuilt();
+                villageTPMenu.UpdateExtraFloorsInt();
                 villageTPMenu.UpdateMiddleGatePosition();
             }
         }
