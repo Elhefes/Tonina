@@ -51,8 +51,8 @@ public class BuildingWheel : MonoBehaviour
         buildingCountAtModeStart = placeablesManager.existingPlaceablesAmount;
 
         // Keep original array for exiting without saving
-        originalPlacedObjectAmounts = new int[placedObjectsGrid.placedObjectAmounts.Length];
-        System.Array.Copy(placedObjectsGrid.placedObjectAmounts, originalPlacedObjectAmounts, placedObjectsGrid.placedObjectAmounts.Length);
+        originalPlacedObjectAmounts = placeablesManager.GetPlaceablesIndices();
+        System.Array.Copy(originalPlacedObjectAmounts, placedObjectsGrid.placedObjectAmounts, originalPlacedObjectAmounts.Length);
         placedObjectsGrid.UpdateIndicatorsByArray(originalPlacedObjectAmounts);
 
         UpdateIncomingCostText();
@@ -81,10 +81,8 @@ public class BuildingWheel : MonoBehaviour
             originalPlacedObjectAmounts = placedObjectsGrid.placedObjectAmounts;
             if (buildingsToBePlaced != null) statsController.changesToBattlefield += buildingsToBePlaced.Count;
         }
-        statsController.SaveStats();
-        // TODO: Save buildingsToBePlaced as data in SaveLoad
-
         buildingsToBePlaced.Clear();
+        statsController.SaveStats();
         player.StartTeleportToHome();
     }
 

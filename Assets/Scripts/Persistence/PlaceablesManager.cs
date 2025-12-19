@@ -72,6 +72,22 @@ public class PlaceablesManager : MonoBehaviour
         existingPlaceablesAmount = activePlaceables.Count;
     }
 
+    public int[] GetPlaceablesIndices()
+    {
+        int [] placeablesIndices = new int[] { 0, 0, 0, 0, 0, 0 };
+
+        Vector3 posCheck = new Vector3(0f, 0f, 0f); // This is for preventing duplicates; some placeables have multiple objects with Placeable tag
+
+        GameObject[] objects = GameObject.FindGameObjectsWithTag("Placeable");
+        foreach (GameObject obj in objects)
+        {
+            Placeable placeable = obj.GetComponentInParent<Placeable>();
+            if (placeable != null && placeable.transform.position != posCheck) placeablesIndices[placeable.buildingIndex]++;
+            posCheck = placeable.transform.position;      
+        }
+        return placeablesIndices;
+    }
+
     private void FindAllActivePlaceables()
     {
         activePlaceables.Clear();
