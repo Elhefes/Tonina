@@ -35,6 +35,18 @@ public class MouseLook : MonoBehaviour
     private Vector3 specificPosition;
     private bool movingToSpecificPosition;
 
+    private void Start()
+    {
+        if (player != null)
+        {
+            if (player.kingHouse != null && !player.godMode) // Set correct starting position in Tonina scene only
+            {
+                transform.position = player.kingHouse.transform.position + new Vector3(0f, 12f, 0f);
+                mainCameraObject.transform.position = gameObject.transform.position;
+            }
+        }
+    }
+
     public void EnableBuildMode()
     {
         player.inBuildMode = true;
