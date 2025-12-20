@@ -38,4 +38,24 @@ public static class StatsSaveLoad
         stream.Close();
         return s;
     }
+
+    public static void DeleteStats(int saveSlot)
+    {
+        string path;
+        if (saveSlot == 3) path = path3;
+        else if (saveSlot == 2) path = path2;
+        else path = path1;
+
+        if (File.Exists(path))
+        {
+            File.Delete(path);
+            Debug.Log("Stats deleted.");
+        }
+        else
+        {
+            Debug.Log("No stats found to delete.");
+        }
+
+        Debug.Log("All stats cleared from" + path);
+    }
 }

@@ -40,6 +40,7 @@ public class GameState : MonoBehaviour
 
     public void DeleteWorld(int fileSlot)
     {
+        StatsSaveLoad.DeleteStats(fileSlot);
         WorldSaveLoad.DeleteSave(fileSlot);
     }
 }

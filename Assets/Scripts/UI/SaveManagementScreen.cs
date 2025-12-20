@@ -78,7 +78,6 @@ public class SaveManagementScreen : MonoBehaviour
 
     public void LoadSaveFile()
     {
-        PlayerPrefs.SetInt("selectedSaveFile", currentSelectionIndex);
         loadSaveButton.interactable = false;
         UpdateSelectedCircle(currentSelectionIndex);
         StartCoroutine(RestartThisScene(true));
@@ -104,6 +103,7 @@ public class SaveManagementScreen : MonoBehaviour
         saveFileButtons[currentSelectionIndex - 1].interactable = true;
 
         yield return new WaitForSeconds(0.5f);
+        PlayerPrefs.SetInt("selectedSaveFile", currentSelectionIndex);
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 
