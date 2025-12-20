@@ -1,6 +1,7 @@
 [System.Serializable]
 public class Stats
 {
+    public int secondsPlayed { get; set; }
     public int pyramidLevelsBuilt { get; set; }
     public int availableMoney { get; set; }
     public int totalMoneyEarned { get; set; }
@@ -12,6 +13,7 @@ public class Stats
 
     public Stats(StatsController statsController)
     {
+        secondsPlayed = statsController.secondsPlayed;
         pyramidLevelsBuilt = statsController.pyramidLevelsBuilt;
         availableMoney = statsController.availableMoney;
         totalMoneyEarned = statsController.totalMoneyEarned;

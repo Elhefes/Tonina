@@ -37,7 +37,6 @@ public class MainMenu : MonoBehaviour
     private float acceleration;
 
     public TMP_Text playTimeAmountTMP;
-    private int secondsPlayed;
 
     private void Start()
     {
@@ -45,9 +44,6 @@ public class MainMenu : MonoBehaviour
         playerCamera = Camera.main;
         mainMenuCamera = GameObject.Find("MainMenuCamera").GetComponent<Camera>();
         mainMenuCameraAnimator = mainMenuCamera.GetComponent<Animator>();
-
-        secondsPlayed = PlayerPrefs.GetInt("secondsPlayed", 0);
-        StartCoroutine(SecondCounter());
 
         CheckContinueHereLock();
         if (pyramid4thFloor.activeSelf) playAsAttackersLock.SetActive(false);
@@ -227,19 +223,5 @@ public class MainMenu : MonoBehaviour
     {
         yield return new WaitForEndOfFrame();
         playerCamera.farClipPlane = maxDistance;
-    }
-
-    IEnumerator SecondCounter()
-    {
-        while (true)
-        {
-            yield return new WaitForSecondsRealtime(1f);
-            secondsPlayed++;
-            PlayerPrefs.SetInt("secondsPlayed", secondsPlayed);
-            TimeSpan time = TimeSpan.FromSeconds(secondsPlayed);
-
-            string timePlayed = time.TotalHours.ToString("00") + ":" + time.Minutes.ToString("00") + ":" + time.Seconds.ToString("00");
-            playTimeAmountTMP.text = timePlayed;
-        }
     }
 }
