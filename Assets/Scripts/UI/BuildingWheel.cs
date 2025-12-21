@@ -20,6 +20,7 @@ public class BuildingWheel : MonoBehaviour
     public TMP_Text buildingsPlacedText;
     public TMP_Text buildingCostText;
     public TMP_Text incomingCostText;
+    public GameObject lockedIcon;
     public GameObject noMoreRoomForBuildingsIndicator;
 
     public Image currentBuildingImage;
@@ -46,6 +47,7 @@ public class BuildingWheel : MonoBehaviour
     private void OnEnable()
     {
         incomingCost = 0;
+        lockedIcon.SetActive(false);
         maxPlaceablesAmount = placeablesManager.GetMaxPlaceablesAmount();
         placeablesManager.UpdateExistingPlaceablesAmount();
         buildingCountAtModeStart = placeablesManager.existingPlaceablesAmount;
@@ -178,9 +180,30 @@ public class BuildingWheel : MonoBehaviour
         {
             building.gameObject.SetActive(false);
         }
+
+        if (!BuildingIsAvailable(buildingIndex))
+        {
+            buildingCostText.text = "Locked";
+            lockedIcon.SetActive(true);
+            return;
+        }
+
+        lockedIcon.SetActive(false);
         placeablesOnCamera[buildingIndex].gameObject.transform.eulerAngles = new Vector3(0f, 180f, 0f); // Reset rotation
         placeablesOnCamera[buildingIndex].gameObject.SetActive(true);
         UpdateBuildingCostText();
+    }
+
+    private bool BuildingIsAvailable(int buildingIndex)
+    {
+        // Incomplete: add progression checks for 1, 3, 5
+        if (buildingIndex == 0) return true; // Kancho
+        else if (buildingIndex == 1) return true; // Fence
+        else if (buildingIndex == 2 && GameState.Instance.progressionData.maizePlaceUnlocked) return true;
+        else if (buildingIndex == 3) return true; // Spear Rack
+        else if (buildingIndex == 4 && GameState.Instance.progressionData.fillOkillUnlocked) return true;
+        else if (buildingIndex == 5) return true; // Tower
+        return false;
     }
 
     public void TryToPlaceBuilding()
