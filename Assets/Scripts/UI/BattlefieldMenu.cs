@@ -18,6 +18,7 @@ public class BattlefieldMenu : MonoBehaviour
     private int battleSongID;
     public TMP_Text threatLevelText;
     public TMP_Text chosenSong;
+    public TMP_Text maizeAmount;
 
     public Button startBattleButton;
 
@@ -25,10 +26,11 @@ public class BattlefieldMenu : MonoBehaviour
 
     public WaveController waveController;
 
-    private void Start()
+    private void OnEnable()
     {
         threatLevel = PlayerPrefs.GetInt("currentThreatLevel", 1);
         battleSongID = PlayerPrefs.GetInt("battleSongID", 0);
+        maizeAmount.text = GameState.Instance.progressionData.maizeProductionLevel.ToString();
         UpdateThreatLevel();
         UpdateBattleSong();
     }
