@@ -26,6 +26,10 @@ public class ProgressionData
     public bool fillOkillUnlocked { get; set; }
     public bool towerUnlocked { get; set; }
 
+    public bool spearUnlocked { get; set; }
+    public bool axeUnlocked { get; set; }
+    public bool bowUnlocked { get; set; }
+
     // Pyramid floors
     public int extraPyramidFloorsBuilt { get; set; }
 

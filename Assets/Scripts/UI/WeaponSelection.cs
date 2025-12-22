@@ -30,7 +30,7 @@ public class WeaponSelection : MonoBehaviour
     private void OnEnable()
     {
         meleeTextAnimator.SetTrigger("Reset");
-        maxWeaponAmount = 3;
+        maxWeaponAmount = FindMaxWeaponsAmount();
         customWeaponOrder = PlayerPrefs.GetString("CustomWeaponOrder", "01234");
         selectedWeaponOrder = PlayerPrefs.GetString("SelectedWeaponOrder", "04");
 
@@ -38,6 +38,15 @@ public class WeaponSelection : MonoBehaviour
         selectedWeaponsAmount = selectedWeaponOrder.Length;
         UpdateSelectionText();
         UpdateSlotPositions();
+    }
+
+    private int FindMaxWeaponsAmount()
+    {
+        // TODO: return 1 more if extra weapon amulet is used
+        if (GameState.Instance.progressionData.spearUnlocked ||
+            GameState.Instance.progressionData.axeUnlocked ||
+            GameState.Instance.progressionData.bowUnlocked) return 3;
+        else return 2;
     }
 
     public void SelectWeaponIfPossible(int weaponIndex)
