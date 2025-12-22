@@ -30,7 +30,9 @@ public class SaveManagementScreen : MonoBehaviour
 
     private bool loadingSaveFile;
 
+    // Debug tools in editor
     public GameObject skipIntroButton;
+    public GameObject unlockEverythingButton;
 
     private void OnEnable()
     {
@@ -41,6 +43,7 @@ public class SaveManagementScreen : MonoBehaviour
 
 #if UNITY_EDITOR
         skipIntroButton.SetActive(true);
+        unlockEverythingButton.SetActive(true);
 #endif
     }
 
@@ -138,6 +141,23 @@ public class SaveManagementScreen : MonoBehaviour
     public void SkipIntroRequirements()
     {
         GameState.Instance.progressionData.introPlayed = true;
+        GameState.Instance.SaveWorld();
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+    }
+
+    public void UnlockEverything()
+    {
+        GameState.Instance.progressionData.introPlayed = true;
+        GameState.Instance.progressionData.attackModeUnlocked = true;
+        GameState.Instance.progressionData.fenceUnlocked = true;
+        GameState.Instance.progressionData.maizePlaceUnlocked = true;
+        GameState.Instance.progressionData.spearRackUnlocked = true;
+        GameState.Instance.progressionData.fillOkillUnlocked = true;
+        GameState.Instance.progressionData.towerUnlocked = true;
+        GameState.Instance.progressionData.spearUnlocked = true;
+        GameState.Instance.progressionData.axeUnlocked = true;
+        GameState.Instance.progressionData.bowUnlocked = true;
+
         GameState.Instance.SaveWorld();
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }

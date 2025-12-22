@@ -46,7 +46,7 @@ public class MainMenu : MonoBehaviour
         mainMenuCameraAnimator = mainMenuCamera.GetComponent<Animator>();
 
         CheckContinueHereLock();
-        if (pyramid4thFloor.activeSelf) playAsAttackersLock.SetActive(false);
+        if (GameState.Instance.progressionData.attackModeUnlocked) playAsAttackersLock.SetActive(false);
     }
 
     private void Awake()
