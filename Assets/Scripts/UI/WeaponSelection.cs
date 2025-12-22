@@ -51,6 +51,8 @@ public class WeaponSelection : MonoBehaviour
 
     public void SelectWeaponIfPossible(int weaponIndex)
     {
+        if (!WeaponIsUnlocked(weaponIndex)) return;
+
         if (spriteArray[weaponIndex].sprite == weaponNotSelectedSprite)
         {
             if (selectedWeaponsAmount < maxWeaponAmount)
@@ -73,6 +75,14 @@ public class WeaponSelection : MonoBehaviour
             UpdateSelectionText();
             UpdateSelectedWeaponOrder();
         }
+    }
+
+    private bool WeaponIsUnlocked(int weaponIndex)
+    {
+        if (weaponIndex == 1 && !GameState.Instance.progressionData.spearUnlocked) return false;
+        else if (weaponIndex == 2 && !GameState.Instance.progressionData.axeUnlocked) return false;
+        else if (weaponIndex == 3 && !GameState.Instance.progressionData.bowUnlocked) return false;
+        return true;
     }
 
     void SelectWeapon(int weaponIndex)
