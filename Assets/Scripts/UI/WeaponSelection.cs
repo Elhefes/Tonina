@@ -80,7 +80,7 @@ public class WeaponSelection : MonoBehaviour
     private bool WeaponIsUnlocked(int weaponIndex)
     {
         if (weaponIndex == 1 && !GameState.Instance.progressionData.spearUnlocked) return false;
-        else if (weaponIndex == 2 && !GameState.Instance.progressionData.axeUnlocked) return false;
+        //else if (weaponIndex == 2 && !GameState.Instance.progressionData.axeUnlocked) return false; // PLACEHOLDER: ADD AXE UNLOCK LATER
         else if (weaponIndex == 3 && !GameState.Instance.progressionData.bowUnlocked) return false;
         return true;
     }
