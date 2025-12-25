@@ -1,3 +1,4 @@
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -16,6 +17,12 @@ public class OkillBuyMenu : MonoBehaviour
     public Button fillOkillBuyButton;
     public Button bowBuyButton;
 
+    // Shop progression: "player can buy more stuff as the game progresses"
+    public Button bowBuyPageButton;
+    public TMP_Text bowBuyPageText;
+    public Image bowBuyPageImage;
+    public Sprite bowSprite;
+
     private void OnEnable()
     {
         ReturnToButtons();
@@ -26,10 +33,10 @@ public class OkillBuyMenu : MonoBehaviour
         closeButtonObject.SetActive(true);
         buttonsParent.SetActive(true);
         foreach (GameObject obj in buyPageObjects) obj.SetActive(false);
-        FindWhichAreBought();
+        FindWhatIsBought();
     }
 
-    private void FindWhichAreBought()
+    private void FindWhatIsBought()
     {
         if (GameState.Instance.progressionData.spearUnlocked)
         {
@@ -45,6 +52,14 @@ public class OkillBuyMenu : MonoBehaviour
         {
             bowButtonImage.sprite = isBoughtSprite;
             bowBuyButton.interactable = false;
+        }
+
+        // Shop progression
+        if (GameState.Instance.progressionData.extraPyramidFloorsBuilt >= 2)
+        {
+            bowBuyPageImage.sprite = bowSprite;
+            bowBuyPageText.text = "Bow";
+            bowBuyPageButton.interactable = true;
         }
     }
 
