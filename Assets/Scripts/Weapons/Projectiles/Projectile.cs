@@ -29,19 +29,20 @@ public class Projectile : Weapon
         {
             spawnedProjectile = Instantiate(this, shootingPoint.position, shootingPoint.rotation);
         }
+
+        if (!infinite) quantity--;
+        if (quantity < 1) notAvailable = true;
+        spawnedProjectile.quantity = quantity;
+        if (weaponWheelQuantityTMP != null) weaponWheelQuantityTMP.text = quantity.ToString();
+
         spawnedProjectile.shootingPoint = shootingPoint;
         spawnedProjectile.transform.position = shootingPoint.position;
         spawnedProjectile.directorComponent.creatureMovement = directorComponent.creatureMovement;
         spawnedProjectile.directorComponent.pointA = shootingPoint;
         spawnedProjectile.isFriendly = isFriendly;
         spawnedProjectile.directorComponent.rb.constraints = RigidbodyConstraints.None;
-
         spawnedProjectile.canHit = true;
         spawnedProjectile.directorComponent.gameObject.SetActive(true);
-
-        if (!infinite) quantity--;
-        if (quantity < 1) notAvailable = true;
-        if (weaponWheelQuantityTMP != null) weaponWheelQuantityTMP.text = quantity.ToString();
 
         gameObject.SetActive(false);
     }
