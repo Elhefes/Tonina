@@ -28,8 +28,8 @@ public class LosingScreen : MonoBehaviour
 
     void SetReasonText()
     {
-        if (playerDied) reasonText.text = "King Sartom has died.";
-        else reasonText.text = "The enemy reached\nKing Sartom's house.";
+        if (playerDied) reasonText.text = "King " + GameState.Instance.GetPlayerName() + " has died.";
+        else reasonText.text = "The enemy reached\nKing " + GameState.Instance.GetPlayerName() + "'s house.";
     }
 
     private IEnumerator TypeTexts()
