@@ -27,6 +27,8 @@ public class MaizeHandler : MonoBehaviour
         maizeAmount = startingMaizeAmount;
         maizeAmountTMP.text = startingMaizeAmount.ToString();
         if (startingMaizeAmount > 0) maizeInventory.SetActive(true);
+        else maizeInventory.SetActive(false);
+        maizePickUp.SetActive(false);
     }
 
     public void EnterMaizePlace()

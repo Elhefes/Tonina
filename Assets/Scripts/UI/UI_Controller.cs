@@ -14,6 +14,12 @@ public class UI_Controller : MonoBehaviour
             if (player.blackFader.activeSelf || player.mouseLook.inCutScene) return;
             if (mainMenuScreen != null && mainMenuScreen.activeSelf) return;
 
+            if (optionsMenu != null && optionsMenu.activeSelf)
+            {
+                optionsMenu.SetActive(false);
+                return;
+            }
+
             if (OverlappingElementActive())
             {
                 DisableOverlappingElements();
@@ -24,7 +30,7 @@ public class UI_Controller : MonoBehaviour
                 player.FreeTextSubject();
                 return;
             }
-            optionsMenu.SetActive(true);
+            if (optionsMenu != null) optionsMenu.SetActive(true);
         }
     }
 
