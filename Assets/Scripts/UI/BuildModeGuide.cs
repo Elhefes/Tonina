@@ -11,7 +11,7 @@ public class BuildModeGuide : MonoBehaviour
 
     public void AutoStart()
     {
-        if (PlayerPrefs.GetInt("BuildModeGuided", 0) != 1)
+        if (!GameState.Instance.progressionData.buildModeGuided)
         {
             StartGuide();
         }
@@ -33,11 +33,12 @@ public class BuildModeGuide : MonoBehaviour
 
     private void OnDisable()
     {
-        if (PlayerPrefs.GetInt("BuildModeGuided", 0) == 0) postText.SetActive(true);
+        if (!GameState.Instance.progressionData.buildModeGuided) postText.SetActive(true);
     }
 
     public void SetBuildModeGuided()
     {
-        PlayerPrefs.SetInt("BuildModeGuided", 1);
+        GameState.Instance.progressionData.buildModeGuided = true;
+        GameState.Instance.SaveWorld();
     }
 }
