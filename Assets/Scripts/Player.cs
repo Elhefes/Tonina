@@ -13,6 +13,7 @@ public class Player : Creature
     public Slider healthBar;
     public bool godMode;
 
+    public UI_Controller uiController;
     public DoubleClickDetector doubleClickDetector;
     private Coroutine recoveryCoroutine;
     public float maxStamina = 1f;
@@ -826,6 +827,7 @@ public class Player : Creature
 
     IEnumerator TeleportPlayerToSpot(Vector3 newPosition)
     {
+        if (uiController != null) uiController.DisableOverlappingElements();
         blackFader.SetActive(true);
         creatureMovement.agent.SetDestination(transform.position);
         yield return new WaitForSeconds(0.33f);
