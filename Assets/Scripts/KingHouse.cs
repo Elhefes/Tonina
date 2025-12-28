@@ -13,9 +13,9 @@ public class KingHouse : MonoBehaviour
 
     public void UpdateNamePlate()
     {
-        if (namePlate != null && GameState.Instance != null)
+        if (namePlate != null)
         {
-            namePlate.name = "King " + GameState.Instance.GetPlayerName();
+            namePlate.name = "King " + PlayerProfile.playerName;
         }
     }
 }

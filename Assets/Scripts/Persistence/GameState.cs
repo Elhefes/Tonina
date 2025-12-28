@@ -14,16 +14,6 @@ public class GameState : MonoBehaviour
         LoadWorld();
     }
 
-    public string GetPlayerName()
-    {
-        string name = "";
-        if (PlayerPrefs.GetInt("selectedSaveFile", 1) == 1) name = PlayerPrefs.GetString("playerName1", "");
-        else if (PlayerPrefs.GetInt("selectedSaveFile", 1) == 2) name = PlayerPrefs.GetString("playerName2", "");
-        else if (PlayerPrefs.GetInt("selectedSaveFile", 1) == 3) name = PlayerPrefs.GetString("playerName3", "");
-        if (name == "") name = "Sartom";
-        return name;
-    }
-
     public void SaveWorld()
     {
         if (progressionData == null) progressionData = new ProgressionData();
