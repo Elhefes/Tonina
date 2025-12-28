@@ -5,7 +5,6 @@ public class StatsController : MonoBehaviour
 {
     // Stats
     public int secondsPlayed { get; set; }
-    public int pyramidLevelsBuilt { get; set; }
     public int availableMoney { get; set; }
     public int totalMoneyEarned { get; set; }
     public int enemiesKilled { get; set; }
@@ -31,7 +30,6 @@ public class StatsController : MonoBehaviour
         Stats stats = StatsSaveLoad.Load();
         if (stats == null) return;
         this.secondsPlayed = stats.secondsPlayed;
-        this.pyramidLevelsBuilt = stats.pyramidLevelsBuilt;
         this.availableMoney = stats.availableMoney;
         this.totalMoneyEarned = stats.totalMoneyEarned;
         this.enemiesKilled = stats.enemiesKilled;

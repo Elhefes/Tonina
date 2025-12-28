@@ -36,7 +36,7 @@ public class StatsBoard : MonoBehaviour
     {
         if (stats == null) return;
         
-        pyramidLevelsBuiltAmountTMP.text = "" + stats.pyramidLevelsBuilt + "/14";
+        pyramidLevelsBuiltAmountTMP.text = "" + (3 + GameState.Instance.progressionData.extraPyramidFloorsBuilt) + "/14";
         availableMoneyAmountTMP.text = "" + stats.availableMoney + " gold";
         enemiesKilledAmountTMP.text = "" + stats.enemiesKilled;
         changesToBattlefieldAmountTMP.text = "" + stats.changesToBattlefield;
