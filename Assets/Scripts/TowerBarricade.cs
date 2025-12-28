@@ -6,7 +6,7 @@ public class TowerBarricade : Barricade
     {
         health = startingHealth;
         tower.health = tower.startingHealth;
-        if (!layerToDisappear.activeSelf) layerToDisappear.SetActive(true);
+        if (layerToDisappear != null && !layerToDisappear.activeSelf) layerToDisappear.SetActive(true);
     }
 
     public override void TakeDamage(int damage)

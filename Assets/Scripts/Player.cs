@@ -741,6 +741,7 @@ public class Player : Creature
     {
         if (battlefieldMenu != null) battlefieldMenu.waveController.pooler.ResetPools();
         DisableBattleMode();
+        barricadeController.FindBarricades();
         barricadeController.RestoreBarricades();
 
         if (optionsMenu.attackModeSpawnController != null)
