@@ -43,8 +43,15 @@ public class StatsBoard : MonoBehaviour
         battlesWonAmountTMP.text = "" + stats.battlesWon;
         battlesLostAmountTMP.text = "" + stats.battlesLost;
         int percentage;
-        if (stats.battlesLost == 0 && stats.battlesWon != 0) percentage = 100;
-        else percentage = Mathf.RoundToInt((float)stats.battlesWon / (stats.battlesWon + stats.battlesLost) * 100);
+        if (stats.battlesWon > 0)
+        {
+            if (stats.battlesLost == 0)
+            {
+                percentage = 100;
+            }
+            else percentage = Mathf.RoundToInt((float)stats.battlesWon / (stats.battlesWon + stats.battlesLost) * 100);
+        }
+        else percentage = 0;
         battleWinPercentageAmountTMP.text = "" + percentage + "%";
         battlesForfeitedAmountTMP.text = "" + stats.battlesForfeited;
     }
