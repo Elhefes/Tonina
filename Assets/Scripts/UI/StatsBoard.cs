@@ -37,6 +37,7 @@ public class StatsBoard : MonoBehaviour
         if (stats == null) return;
         
         pyramidLevelsBuiltAmountTMP.text = "" + (3 + GameState.Instance.progressionData.extraPyramidFloorsBuilt) + "/14";
+        pyramidHeightAmountTMP.text = GetPyramidHeight();
         availableMoneyAmountTMP.text = "" + stats.availableMoney + " gold";
         enemiesKilledAmountTMP.text = "" + stats.enemiesKilled;
         changesToBattlefieldAmountTMP.text = "" + stats.changesToBattlefield;
@@ -55,6 +56,30 @@ public class StatsBoard : MonoBehaviour
         battleWinPercentageAmountTMP.text = "" + percentage + "%";
         battlesForfeitedAmountTMP.text = "" + stats.battlesForfeited;
     }
+
+    private static readonly string[] pyramidHeights =
+{
+    "15 meters | 49.2 ft",
+    "20 meters | 65.6 ft",
+    "27.5 meters | 90.2 ft",
+    "32.5 meters | 106.6 ft",
+    "37.5 meters | 123.0 ft",
+    "42.5 meters | 139.4 ft",
+    "47.5 meters | 155.8 ft",
+    "55 meters | 180.4 ft",
+    "60 meters | 196.9 ft",
+    "65 meters | 213.2 ft",
+    "70 meters | 229.7 ft",
+    "75 meters | 246.1 ft"
+};
+
+    private string GetPyramidHeight()
+    {
+        int extraFloors = GameState.Instance.progressionData.extraPyramidFloorsBuilt;
+        extraFloors = Mathf.Clamp(extraFloors, 0, pyramidHeights.Length - 1);
+        return pyramidHeights[extraFloors];
+    }
+
 
     IEnumerator TimedSecondsUpdate()
     {
