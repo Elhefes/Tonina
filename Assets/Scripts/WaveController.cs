@@ -168,6 +168,7 @@ public class WaveController : MonoBehaviour
         StopCoroutine(SecondCounter());
         StartCoroutine(PlayRewardsRisingAnimation());
         DisableBattleUI();
+        statsController.totalRewardPercentages += (float) 100 * GetTotalRewards() / threatLevel.maxReward;
         statsController.battlesWon++;
         statsController.SaveStats();
     }

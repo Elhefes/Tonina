@@ -4,6 +4,7 @@ public class Stats
     public int secondsPlayed { get; set; }
     public int availableMoney { get; set; }
     public int totalMoneyEarned { get; set; }
+    public float totalRewardPercentages { get; set; }
     public int enemiesKilled { get; set; }
     public int changesToBattlefield { get; set; }
     public int battlesWon { get; set; }
@@ -15,6 +16,7 @@ public class Stats
         secondsPlayed = statsController.secondsPlayed;
         availableMoney = statsController.availableMoney;
         totalMoneyEarned = statsController.totalMoneyEarned;
+        totalRewardPercentages = statsController.totalRewardPercentages;
         enemiesKilled = statsController.enemiesKilled;
         changesToBattlefield = statsController.changesToBattlefield;
         battlesWon = statsController.battlesWon;

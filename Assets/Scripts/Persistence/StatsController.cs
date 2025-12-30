@@ -7,6 +7,7 @@ public class StatsController : MonoBehaviour
     public int secondsPlayed { get; set; }
     public int availableMoney { get; set; }
     public int totalMoneyEarned { get; set; }
+    public float totalRewardPercentages { get; set; }
     public int enemiesKilled { get; set; }
     public int changesToBattlefield { get; set; }
     public int battlesWon { get; set; }
@@ -32,6 +33,7 @@ public class StatsController : MonoBehaviour
         this.secondsPlayed = stats.secondsPlayed;
         this.availableMoney = stats.availableMoney;
         this.totalMoneyEarned = stats.totalMoneyEarned;
+        this.totalRewardPercentages = stats.totalRewardPercentages;
         this.enemiesKilled = stats.enemiesKilled;
         this.changesToBattlefield = stats.changesToBattlefield;
         this.battlesWon = stats.battlesWon;

@@ -13,6 +13,7 @@ public class StatsBoard : MonoBehaviour
     public TMP_Text pyramidLevelsBuiltAmountTMP;
     public TMP_Text pyramidHeightAmountTMP; // Each level adds 5m or 7.5m of height. Also needs m to ft conversion?
     public TMP_Text availableMoneyAmountTMP;
+    public TMP_Text averageRewardPercentagesTMP;
     public TMP_Text enemiesKilledAmountTMP;
     public TMP_Text changesToBattlefieldAmountTMP;
     public TMP_Text battlesWonAmountTMP;
@@ -39,6 +40,7 @@ public class StatsBoard : MonoBehaviour
         pyramidLevelsBuiltAmountTMP.text = "" + (3 + GameState.Instance.progressionData.extraPyramidFloorsBuilt) + "/14";
         pyramidHeightAmountTMP.text = GetPyramidHeight();
         availableMoneyAmountTMP.text = "" + stats.availableMoney + " gold";
+        averageRewardPercentagesTMP.text = GetTotalRewardPercentages();
         enemiesKilledAmountTMP.text = "" + stats.enemiesKilled;
         changesToBattlefieldAmountTMP.text = "" + stats.changesToBattlefield;
         battlesWonAmountTMP.text = "" + stats.battlesWon;
@@ -80,6 +82,12 @@ public class StatsBoard : MonoBehaviour
         return pyramidHeights[extraFloors];
     }
 
+    private string GetTotalRewardPercentages()
+    {
+        if (stats.totalRewardPercentages == 0 || stats.battlesWon == 0) return "0.0%";
+        float avg = stats.totalRewardPercentages / stats.battlesWon;
+        return avg.ToString("F1") + "%";
+    }
 
     IEnumerator TimedSecondsUpdate()
     {
