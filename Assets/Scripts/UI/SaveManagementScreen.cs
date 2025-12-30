@@ -88,10 +88,14 @@ public class SaveManagementScreen : MonoBehaviour
 
     public void DeleteThisSave()
     {
-        GameState.Instance.DeleteWorld(currentSelectionIndex);
-        LoadSaveVisuals();
         // Lock and restart scene when current save is deleted
-        if (currentSelectionIndex == PlayerPrefs.GetInt("selectedSaveFile", 1)) StartCoroutine(RestartThisScene(false));
+        if (currentSelectionIndex == PlayerPrefs.GetInt("selectedSaveFile", 1))
+        {
+            StartCoroutine(RestartThisScene(false));
+        }
+        else GameState.Instance.DeleteWorld(currentSelectionIndex);
+        deleteSaveButton.interactable = false;
+        LoadSaveVisuals();
     }
 
     private IEnumerator RestartThisScene(bool isOtherSave)
@@ -107,6 +111,7 @@ public class SaveManagementScreen : MonoBehaviour
 
         yield return new WaitForSeconds(0.5f);
         PlayerPrefs.SetInt("selectedSaveFile", currentSelectionIndex);
+        if (!isOtherSave) GameState.Instance.DeleteWorld(currentSelectionIndex);
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 
