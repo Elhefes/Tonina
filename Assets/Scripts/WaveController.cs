@@ -6,6 +6,7 @@ using TMPro;
 
 public class WaveController : MonoBehaviour
 {
+    public ThreatLevelController threatLevelController;
     public ThreatLevels threatLevels;
     private ThreatLevels.ThreatLevel threatLevel;
     private int currentRoundNumber;
@@ -156,7 +157,11 @@ public class WaveController : MonoBehaviour
         StopAllCoroutines();
         DisableBattleUI();
         if (secondsInBattle < 16) statsController.battlesForfeited++;
-        else statsController.battlesLost++;
+        else
+        {
+            statsController.battlesLost++;
+            threatLevelController.SetThreatProgressionValue(false, currentRoundNumber, 0, 0);
+        }
         statsController.SaveStats();
     }
 
@@ -168,6 +173,7 @@ public class WaveController : MonoBehaviour
         StopCoroutine(SecondCounter());
         StartCoroutine(PlayRewardsRisingAnimation());
         DisableBattleUI();
+        threatLevelController.SetThreatProgressionValue(true, currentRoundNumber, GetTotalRewards(), threatLevel.maxReward);
         statsController.totalRewardPercentages += (float) 100 * GetTotalRewards() / threatLevel.maxReward;
         statsController.battlesWon++;
         statsController.SaveStats();

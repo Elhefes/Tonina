@@ -6,7 +6,6 @@ public class GameState : MonoBehaviour
 
     public ProgressionData progressionData;
     public PlaceablesManager placeablesManager;
-    public StatsController statsController;
 
     private void Awake()
     {
