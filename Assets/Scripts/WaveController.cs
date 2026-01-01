@@ -16,6 +16,8 @@ public class WaveController : MonoBehaviour
 
     public Transform[] spawnPoints;
 
+    public UI_Controller UIController;
+
     public StatsController statsController;
 
     private List<Coroutine> coroutines;
@@ -156,6 +158,14 @@ public class WaveController : MonoBehaviour
         CancelInvoke("CheckForEnemies");
         StopAllCoroutines();
         DisableBattleUI();
+
+        if (UIController != null)
+        {
+            // Disable battle popups
+            foreach (GameObject obj in UIController.battleUIPopUps) obj.SetActive(false);
+            UIController.optionsMenu.gameObject.SetActive(false);
+        }
+
         if (secondsInBattle < 16) statsController.battlesForfeited++;
         else
         {
@@ -167,6 +177,13 @@ public class WaveController : MonoBehaviour
 
     void WinBattle()
     {
+        if (UIController != null)
+        {
+            // Disable battle popups
+            foreach (GameObject obj in UIController.battleUIPopUps) obj.SetActive(false);
+            UIController.optionsMenu.gameObject.SetActive(false);
+        }
+
         battleWinningScreen.SetActive(true);
         threatLevelText.text = currentRoundNumber.ToString();
         battleTimeText.text = GetBattleTimerString(secondsInBattle);

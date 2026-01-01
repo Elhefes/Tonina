@@ -3,6 +3,7 @@ using UnityEngine;
 public class UI_Controller : MonoBehaviour
 {
     public GameObject[] overlappingElements;
+    public GameObject[] battleUIPopUps;
     public GameObject optionsMenu;
     public GameObject mainMenuScreen;
     public Player player;
@@ -11,7 +12,8 @@ public class UI_Controller : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Escape))
             {
-            if (player.blackFader.activeSelf || player.mouseLook.inCutScene) return;
+            if (player.blackFader.activeSelf || player.mouseLook.inCutScene || 
+                (player.battlefieldMenu != null && player.battlefieldMenu.waveController.battleWinningScreen.activeInHierarchy)) return;
             if (mainMenuScreen != null && mainMenuScreen.activeSelf) return;
 
             if (optionsMenu != null && optionsMenu.activeSelf)
