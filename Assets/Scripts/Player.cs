@@ -149,6 +149,7 @@ public class Player : Creature
         if (health < startingHealth) RestoreHealth(startingHealth - health);
         healthBar.gameObject.SetActive(false);
         SetStaminaBarAlpha(0f);
+        clickerTargetObject.transform.position = new Vector3(0f, 0f, 0f); // Default "invisible" position
         creatureMovement.animator.SetInteger("WeaponIndex", 0);
         if (battlefieldMenu != null) battlefieldMenu.waveController.musicPlayer.PlayPeacefulSongs(false);
     }
@@ -221,7 +222,7 @@ public class Player : Creature
 
                 if (target.CompareTag("TalkPrompt") && Vector3.Distance(transform.position, target.transform.position) < 2.7f)
                 {
-                    if (notInBattlefield())
+                    if (NotInBattlefield())
                     {
                         if (target == currentTextSubject)
                         {
@@ -312,7 +313,7 @@ public class Player : Creature
                 // Click 1st object to enable the 2nd. Click 1st again to disable 2nd.
                 if (target.CompareTag("ClickToEnableObject") && Vector3.Distance(target.transform.position, transform.position) < 4f)
                 {
-                    if (notInBattlefield())
+                    if (NotInBattlefield())
                     {
                         if (clickToEnableObject != null && clickToEnableObject.objectToEnable.activeSelf)
                         {
@@ -374,7 +375,7 @@ public class Player : Creature
                 creatureMovement.agent.SetDestination(hit.point);
                 destination = hit.point;
 
-                if (notInBattlefield()) // If not in battle or builder mode
+                if (NotInBattlefield()) // If not in battle or builder mode
                 {
                     float scaleValue = Mathf.Lerp(0.36f, 0.6f, (mouseLook.distanceFromObject - 5f) / (30f - 5f));
                     clickerDestinationObject.transform.localScale = new Vector3(scaleValue, scaleValue, scaleValue);
@@ -436,7 +437,7 @@ public class Player : Creature
         }
     }
 
-    private bool notInBattlefield() { return !healthBar.gameObject.activeInHierarchy && !optionsMenu.returnFromBuilder; }
+    private bool NotInBattlefield() { return !healthBar.gameObject.activeInHierarchy && !optionsMenu.returnFromBuilder; }
 
     void SetTextLines(string[] textLines)
     {
@@ -849,12 +850,5 @@ public class Player : Creature
 
         // Equip default weapon when starting battle
         if (battlefieldMenu.waveController.battleUI.activeSelf) EquipDefaultWeapon();
-    }
-
-    public void FindMiniPyramid()
-    {
-        // Delete if king house never gets destroyed
-        // and replace with public GameObject
-        miniPyramid = GameObject.Find("tonina_pyramid_mini");
     }
 }
