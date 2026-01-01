@@ -94,8 +94,6 @@ public class Player : Creature
     public GameObject blackFader;
     private Coroutine teleportCoroutine;
 
-    private GameObject miniPyramid; // Used in main menu teleport
-
     public ClickerMaterial clickerDestinationObject;
     public ClickerMaterial clickerTargetObject;
 
@@ -812,6 +810,24 @@ public class Player : Creature
         teleportCoroutine = StartCoroutine(TeleportPlayerToSpot(kingHouse.playerSpawnPosition.position));
     }
 
+    public void StartTeleportToMainMenu()
+    {
+        if (insideKingHouse)
+        {
+            if (kingHouse != null)
+            {
+                if (Vector3.Distance(gameObject.transform.position, kingHouse.miniPyramid.transform.position) < 5f)
+                {
+                    teleportCoroutine = StartCoroutine(TeleportPlayerToSpot(kingHouse.playerSpawnPosition.position));
+                }
+                else
+                {
+                    teleportCoroutine = StartCoroutine(TeleportPlayerToSpot(transform.position));
+                }
+            }
+        }
+    }
+
     public void StartTeleportToBattleField()
     {
         if (buildingRoof != null) buildingRoof.MakeRoofVisible();
@@ -833,18 +849,11 @@ public class Player : Creature
         blackFader.SetActive(true);
         creatureMovement.agent.SetDestination(transform.position);
         yield return new WaitForSeconds(0.33f);
-        if (miniPyramid != null)
-        {
-            if (Vector3.Distance(gameObject.transform.position, miniPyramid.transform.position) > 5f)
-            {
-                miniPyramid = null;
-                yield break;
-            }
-        }
-        miniPyramid = null;
+
         gameObject.SetActive(false);
         transform.position = newPosition;
         gameObject.SetActive(true);
+
         if (!recoveringStamina) StopRunning();
         mouseLook.TeleportCameras();
 

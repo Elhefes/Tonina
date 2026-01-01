@@ -4,6 +4,7 @@ public class KingHouse : MonoBehaviour
 {
     public Transform playerSpawnPosition;
     public Vector3 battleFieldStartingPosition;
+    public GameObject miniPyramid;
     public GameObject namePlate;
 
     private void OnEnable()
