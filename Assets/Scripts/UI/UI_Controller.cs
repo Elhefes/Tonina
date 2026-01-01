@@ -13,7 +13,8 @@ public class UI_Controller : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Escape))
             {
             if (player.blackFader.activeSelf || player.mouseLook.inCutScene || 
-                (player.battlefieldMenu != null && player.battlefieldMenu.waveController.battleWinningScreen.activeInHierarchy)) return;
+                (player.battlefieldMenu != null && player.battlefieldMenu.waveController.battleWinningScreen.activeInHierarchy) ||
+                (player.losingScreen != null && player.losingScreen.gameObject.activeInHierarchy)) return;
             if (mainMenuScreen != null && mainMenuScreen.activeSelf) return;
 
             if (optionsMenu != null && optionsMenu.activeSelf)
