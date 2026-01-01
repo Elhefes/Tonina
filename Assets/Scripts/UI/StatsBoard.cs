@@ -2,6 +2,7 @@ using System;
 using UnityEngine;
 using TMPro;
 using System.Collections;
+using System.Globalization;
 
 public class StatsBoard : MonoBehaviour
 {
@@ -86,7 +87,7 @@ public class StatsBoard : MonoBehaviour
     {
         if (stats.totalRewardPercentages == 0 || stats.battlesWon == 0) return "0.0%";
         float avg = stats.totalRewardPercentages / stats.battlesWon;
-        return avg.ToString("F1") + "%";
+        return avg.ToString("F1", CultureInfo.InvariantCulture) + "%";
     }
 
     IEnumerator TimedSecondsUpdate()
