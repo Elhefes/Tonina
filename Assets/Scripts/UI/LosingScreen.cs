@@ -34,8 +34,13 @@ public class LosingScreen : MonoBehaviour
 
     private IEnumerator TypeTexts()
     {
+        player.LoseBattle();
         fullText = youLoseText.text;
         youLoseText.text = "";
+
+        // Potential idea (old):
+        //buildingsManager.DestroyPlacedBuildings(); // Destroy all placed buildings in battlefield
+        //buildingsManager.buildingsPlaced = 0;
 
         yield return new WaitForSeconds(1f);
 
@@ -45,9 +50,6 @@ public class LosingScreen : MonoBehaviour
             yield return new WaitForSeconds(0.15f);
             youLoseText.text = currentText;
         }
-
-        //buildingsManager.DestroyPlacedBuildings(); // Destroy all placed buildings in battlefield
-        //buildingsManager.buildingsPlaced = 0;
 
         SetReasonText();
         yield return new WaitForSeconds(1.5f);
@@ -78,7 +80,6 @@ public class LosingScreen : MonoBehaviour
 
         audioPassController.muffleEffect = false;
         player.gameObject.SetActive(true);
-        player.LoseBattle();
         player.EndBattle();
         player.ReturnHome(null);
         if (kingBarricade != null)
