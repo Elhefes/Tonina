@@ -163,6 +163,9 @@ public class SaveManagementScreen : MonoBehaviour
         GameState.Instance.progressionData.axeUnlocked = true;
         GameState.Instance.progressionData.bowUnlocked = true;
 
+        GameState.Instance.progressionData.threatProgressionValue = 25f;
+        GameState.Instance.progressionData.highestThreatValue = 25f;
+
         GameState.Instance.SaveWorld();
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
