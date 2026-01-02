@@ -34,10 +34,22 @@ public class WeaponSelection : MonoBehaviour
         customWeaponOrder = PlayerPrefs.GetString("CustomWeaponOrder", "01234");
         selectedWeaponOrder = PlayerPrefs.GetString("SelectedWeaponOrder", "04");
 
+        selectedWeaponOrder = UnlockedWeapons(selectedWeaponOrder);
+
         SelectWeaponsFromString();
         selectedWeaponsAmount = selectedWeaponOrder.Length;
         UpdateSelectionText();
         UpdateSlotPositions();
+    }
+
+    private string UnlockedWeapons(string selectedWeaponOrder)
+    {
+        if (string.IsNullOrEmpty(selectedWeaponOrder))
+            return selectedWeaponOrder;
+        // Removes locked weapons
+        if (!GameState.Instance.progressionData.spearUnlocked) selectedWeaponOrder = selectedWeaponOrder.Replace("1", "");
+        if (!GameState.Instance.progressionData.bowUnlocked) selectedWeaponOrder = selectedWeaponOrder.Replace("3", "");
+        return selectedWeaponOrder;
     }
 
     private int FindMaxWeaponsAmount()
