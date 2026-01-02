@@ -29790,6 +29790,7 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
+  battleUIPopUps: []
   optionsMenu: {fileID: 597620246}
   mainMenuScreen: {fileID: 0}
   player: {fileID: 1904667352}
@@ -42067,6 +42068,7 @@ GameObject:
   - component: {fileID: 1393370857}
   - component: {fileID: 1393370858}
   - component: {fileID: 1393370859}
+  - component: {fileID: 1393370860}
   m_Layer: 0
   m_Name: GameController
   m_TagString: Untagged
@@ -42086,6 +42088,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 727737f9db0818e41ae08173c74679a4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  threatLevelController: {fileID: 0}
   threatLevels: {fileID: 8105978138795894195}
   battleIsLost: 0
   spawnPoints:
@@ -42098,6 +42101,7 @@ MonoBehaviour:
   - {fileID: 786422358}
   - {fileID: 880426761}
   - {fileID: 1612620595}
+  UIController: {fileID: 0}
   statsController: {fileID: 801632221}
   overworldOptionsButton: {fileID: 0}
   battleUI: {fileID: 2093563464}
@@ -42192,9 +42196,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e196d6486c45c1142a3fe6db37cdf0f5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  buildingsPlaced: 0
-  maxBuildingAmount: 0
-  buildingPrefabs: []
+  placeablePrefabs: []
+  existingPlaceablesAmount: 0
+--- !u!114 &1393370860
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1393370853}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a051dad073da71242a44c36066895b5e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  placeablesManager: {fileID: 1393370859}
 --- !u!1 &1396039129
 GameObject:
   m_ObjectHideFlags: 0
