@@ -42069,6 +42069,7 @@ GameObject:
   - component: {fileID: 1393370858}
   - component: {fileID: 1393370859}
   - component: {fileID: 1393370860}
+  - component: {fileID: 1393370861}
   m_Layer: 0
   m_Name: GameController
   m_TagString: Untagged
@@ -42211,6 +42212,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   placeablesManager: {fileID: 1393370859}
+--- !u!114 &1393370861
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1393370853}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b23e276810f174748bcfa98a25d890aa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1396039129
 GameObject:
   m_ObjectHideFlags: 0
