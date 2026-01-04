@@ -13,6 +13,7 @@ public class Enemy : Creature
     public GameObject deathSoundObject;
     public bool moveTowardsTarget;
     private Coroutine slowDownCoroutine;
+    public float movementSpeed;
     private bool slowedDown;
     public float slowDownTimeFromStone;
     public float speedDropFromStone;
@@ -43,6 +44,7 @@ public class Enemy : Creature
         healthBar.value = health;
         slowedDown = false;
         StopAllCoroutines();
+        agent.speed = movementSpeed;
     }
 
     public void TakeDamage(int damage)
@@ -81,13 +83,12 @@ public class Enemy : Creature
 
     private IEnumerator SlowDownCoroutine()
     {
-        float originalSpeed = agent.speed;
         slowedDown = true;
         agent.speed -= speedDropFromStone;
         yield return new WaitForSeconds(slowDownTimeFromStone / 2);
         agent.speed += speedDropFromStone / 2;
         yield return new WaitForSeconds(slowDownTimeFromStone / 2);
-        agent.speed = originalSpeed;
+        agent.speed = movementSpeed;
         slowedDown = false;
     }
 }
