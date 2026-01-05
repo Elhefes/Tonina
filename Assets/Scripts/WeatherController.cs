@@ -147,7 +147,7 @@ public class WeatherController : MonoBehaviour
 
     private IEnumerator StartNaturalWeather()
     {
-        yield return new WaitForSeconds(30);
+        yield return new WaitForSeconds(150);
 
         // Stop artificial rain
         if (raining)
@@ -166,8 +166,8 @@ public class WeatherController : MonoBehaviour
                 int rainLength = Random.Range(240, 721);
                 yield return new WaitForSeconds(rainLength);
                 StopRain();
-                // Guarantee 4 minutes of clear weather after a long rain
-                if (rainLength > 480) yield return new WaitForSeconds(240);
+                // Guarantee 5 minutes of clear weather after a long rain
+                if (rainLength > 480) yield return new WaitForSeconds(300);
             }
             else yield return new WaitForSeconds(60);
         }
