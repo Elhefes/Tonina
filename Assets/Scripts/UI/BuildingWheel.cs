@@ -202,7 +202,7 @@ public class BuildingWheel : MonoBehaviour
         else if (buildingIndex == 2 && GameState.Instance.progressionData.maizePlaceUnlocked) return true;
         else if (buildingIndex == 3) return true; // Spear Rack
         else if (buildingIndex == 4 && GameState.Instance.progressionData.fillOkillUnlocked) return true;
-        else if (buildingIndex == 5) return true; // Tower
+        else if (buildingIndex == 5 && GameState.Instance.progressionData.towerUnlocked) return true;
         return false;
     }
 
