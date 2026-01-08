@@ -11,6 +11,12 @@ public class WeatherGameButton : MonoBehaviour, IPointerDownHandler
     public Animator lineMatcherAnimator;
     public WeatherGame weatherGame;
 
+    private void OnEnable()
+    {
+        lineMatcherAnimator.SetInteger("RandomInt", Random.Range(0, 4));
+        lineMatcherAnimator.SetTrigger("MoveAgain");
+    }
+
     public void RegisterClick()
     {
         clicks++;
@@ -22,6 +28,7 @@ public class WeatherGameButton : MonoBehaviour, IPointerDownHandler
             finalScore = Mathf.RoundToInt(scoreCounter / clicks);
             weatherGame.EndGame(finalScore);
         }
+        lineMatcherAnimator.SetInteger("RandomInt", Random.Range(0, 4));
         lineMatcherAnimator.SetTrigger("MoveAgain");
     }
 
