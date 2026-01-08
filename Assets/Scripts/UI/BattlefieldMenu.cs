@@ -15,7 +15,14 @@ public class BattlefieldMenu : MonoBehaviour
     public TMP_Text TTWarriorsText;
     public TMP_Text rewardsText;
 
+    public GameObject musicSelectionObject;
+    public GameObject randomMusicSelectionObject;
+
+    private bool battleSongRandomized;
     private int battleSongID;
+    public Image randomMusicToggleImage;
+    public Sprite checkMarkOn;
+    public Sprite checkMarkOff;
     public TMP_Text threatLevelText;
     public TMP_Text chosenSong;
     public TMP_Text maizeAmount;
@@ -30,9 +37,10 @@ public class BattlefieldMenu : MonoBehaviour
     {
         threatLevel = PlayerPrefs.GetInt("currentThreatLevel", 1);
         battleSongID = PlayerPrefs.GetInt("battleSongID", 0);
+        battleSongRandomized = PlayerPrefs.GetInt("battleSongRandomized", 1) == 1 ? true : false;
+        SetMusicSelectionVisuals(battleSongRandomized);
         maizeAmount.text = GameState.Instance.progressionData.maizeProductionLevel.ToString();
         UpdateThreatLevel();
-        UpdateBattleSong();
     }
 
     public void SelectBattle()
@@ -56,7 +64,14 @@ public class BattlefieldMenu : MonoBehaviour
 
     public void StartBattle()
     {
-        waveController.StartRound(threatLevel, battleSongID);
+        if (PlayerPrefs.GetInt("battleSongRandomized", 1) == 1)
+        {
+            waveController.StartRound(threatLevel, Random.Range(0, waveController.musicPlayer.battleSongs.Count));
+        }
+        else
+        {
+            waveController.StartRound(threatLevel, battleSongID);
+        }
         gameObject.SetActive(false);
     }
 
@@ -75,6 +90,36 @@ public class BattlefieldMenu : MonoBehaviour
             TTWarriorsText.text = "-";
             rewardsText.text = "-";
             startBattleButton.interactable = false;
+        }
+    }
+
+    public void ToggleRandomBattleMusic()
+    {
+        if (PlayerPrefs.GetInt("battleSongRandomized", 1) == 1)
+        {
+            PlayerPrefs.SetInt("battleSongRandomized", 0);
+        }
+        else
+        {
+            PlayerPrefs.SetInt("battleSongRandomized", 1);
+        }
+        SetMusicSelectionVisuals(PlayerPrefs.GetInt("battleSongRandomized", 1) == 1);
+    }
+
+    private void SetMusicSelectionVisuals(bool musicIsRandomized)
+    {
+        if (musicIsRandomized)
+        {
+            musicSelectionObject.SetActive(false);
+            randomMusicSelectionObject.transform.localPosition = new Vector3(0f, 0f, 0f);
+            randomMusicToggleImage.sprite = checkMarkOn;
+        }
+        else
+        {
+            musicSelectionObject.SetActive(true);
+            randomMusicSelectionObject.transform.localPosition = new Vector3(0f, -70f, 0f);
+            randomMusicToggleImage.sprite = checkMarkOff;
+            UpdateBattleSong();
         }
     }
 
