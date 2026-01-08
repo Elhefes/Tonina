@@ -9,10 +9,12 @@ public class WeatherGameButton : MonoBehaviour, IPointerDownHandler
     private int finalScore;
     public GameObject lineMatcher;
     public Animator lineMatcherAnimator;
+    public Animator feedbackAnimator;
     public WeatherGame weatherGame;
 
     private void OnEnable()
     {
+        feedbackAnimator.gameObject.transform.localScale = new Vector3(1f, 1f, 1f);
         lineMatcherAnimator.SetInteger("RandomInt", Random.Range(0, 4));
         lineMatcherAnimator.SetTrigger("MoveAgain");
     }
@@ -30,6 +32,11 @@ public class WeatherGameButton : MonoBehaviour, IPointerDownHandler
         }
         lineMatcherAnimator.SetInteger("RandomInt", Random.Range(0, 4));
         lineMatcherAnimator.SetTrigger("MoveAgain");
+
+        // Feedback
+        if (score >= 92.5f) feedbackAnimator.SetTrigger("Green");
+        else if (score >= 75f) feedbackAnimator.SetTrigger("Yellow");
+        else feedbackAnimator.SetTrigger("Red");
     }
 
     public void OnPointerDown(PointerEventData eventData)
