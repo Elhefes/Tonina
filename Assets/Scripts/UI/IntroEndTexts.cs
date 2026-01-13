@@ -26,7 +26,7 @@ public class IntroEndTexts : MonoBehaviour
             welcomeTMP.text = currentText;
         }
 
-        yield return new WaitForSeconds(0.5f);
+        yield return new WaitForSeconds(0.2f);
 
         fullText = jadeTMP.text;
         jadeTMP.text = "";
