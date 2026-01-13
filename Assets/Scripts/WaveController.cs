@@ -249,17 +249,17 @@ public class WaveController : MonoBehaviour
         {
             // Spawn a single friendly warrior to the negative x side
             Vector3 spawn = new Vector3(kingHouse.transform.position.x + xOffset, kingHouse.transform.position.y, kingHouse.transform.position.z + zOffset);
-            ToninaWarrior friendly = ObjectPooler.Instance.SpawnFriendlyFromPool("ToninaWarrior", spawn, kingHouse.transform.rotation);
+            JadeaWarrior friendly = ObjectPooler.Instance.SpawnFriendlyFromPool("JadeaWarrior", spawn, kingHouse.transform.rotation);
             friendly.ResetFriendlyAttributes();
         }
     }
 
     void SpawnFriendlyPair(Vector3 spawnPosition)
     {
-        ToninaWarrior friendly1 = ObjectPooler.Instance.SpawnFriendlyFromPool("ToninaWarrior", spawnPosition, kingHouse.transform.rotation);
+        JadeaWarrior friendly1 = ObjectPooler.Instance.SpawnFriendlyFromPool("JadeaWarrior", spawnPosition, kingHouse.transform.rotation);
         friendly1.ResetFriendlyAttributes();
         Vector3 spawn2 = new Vector3((spawnPosition.x * -1f) - 2f, spawnPosition.y, spawnPosition.z);
-        ToninaWarrior friendly2 = ObjectPooler.Instance.SpawnFriendlyFromPool("ToninaWarrior", spawn2, kingHouse.transform.rotation);
+        JadeaWarrior friendly2 = ObjectPooler.Instance.SpawnFriendlyFromPool("JadeaWarrior", spawn2, kingHouse.transform.rotation);
         friendly2.ResetFriendlyAttributes();
     }
 

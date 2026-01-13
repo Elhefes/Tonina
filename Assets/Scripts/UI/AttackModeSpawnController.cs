@@ -207,7 +207,7 @@ public class AttackModeSpawnController : MonoBehaviour
 
     public void ReturnToMainMenu()
     {
-        SceneChangingManager.Instance.LoadScene("Tonina");
+        SceneChangingManager.Instance.LoadScene("Jadea");
     }
 
     void UpdateSpawnArray()
@@ -228,7 +228,7 @@ public class AttackModeSpawnController : MonoBehaviour
         }
         else
         {
-            addText.text = "TT Warrior spawns:\nAdd " + (maxFriendliesAmount - currentFriendliesAmount) + " more!";
+            addText.text = "Jadea Warrior spawns:\nAdd " + (maxFriendliesAmount - currentFriendliesAmount) + " more!";
         }
     }
 }

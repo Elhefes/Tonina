@@ -7,7 +7,7 @@ public class AttackModeCreatureSpawner : MonoBehaviour
     [SerializeField] private GameObject enemiesParentObject;
 
     public Transform[] spawns;
-    private ToninaWarrior[] friendlies;
+    private JadeaWarrior[] friendlies;
     private Enemy[] enemies;
     private Vector3[] originalEnemyPositions;
 
@@ -25,7 +25,7 @@ public class AttackModeCreatureSpawner : MonoBehaviour
         }
 
         // Get creatures from parent objects
-        friendlies = friendliesParentObject.GetComponentsInChildren<ToninaWarrior>(true);
+        friendlies = friendliesParentObject.GetComponentsInChildren<JadeaWarrior>(true);
         enemies = enemiesParentObject.GetComponentsInChildren<Enemy>(true);
 
         // Get enemy positions at start
@@ -38,7 +38,7 @@ public class AttackModeCreatureSpawner : MonoBehaviour
 
     public void SetFriendliesActive(bool value)
     {
-        foreach (ToninaWarrior warrior in friendlies)
+        foreach (JadeaWarrior warrior in friendlies)
         {
             warrior.gameObject.SetActive(value);
             if (value) warrior.ResetFriendlyAttributes();

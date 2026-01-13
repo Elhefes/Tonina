@@ -21,14 +21,14 @@ public class SpearWarriorAI : EnemyAI
             {
                 if (spear.activeSelf)
                 {
-                    if (NearestTarget("ToninaTribe", 30f) != null) break;
+                    if (NearestTarget("Jadea", 30f) != null) break;
                     else if (NearestTarget("Barricade", 8f) != null) break;
                 }
                 else
                 {
-                    if (NearestTarget("ToninaTribe", 10f) != null) break;
+                    if (NearestTarget("Jadea", 10f) != null) break;
                     else if (NearestTarget("Barricade", 8f) != null) break;
-                    else if (NearestTarget("ToninaTribe", 20f) != null) break;
+                    else if (NearestTarget("Jadea", 20f) != null) break;
                 }
                 creatureMovement.target = GameObject.FindGameObjectsWithTag("Target")[0].transform;
                 break;

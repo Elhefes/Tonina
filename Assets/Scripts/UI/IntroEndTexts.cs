@@ -35,12 +35,12 @@ public class IntroEndTexts : MonoBehaviour
         for (int i = 0; i < fullText.Length + 1; i++)
         {
             currentText = fullText.Substring(0, i);
-            yield return new WaitForSeconds(0.18f);
+            yield return new WaitForSeconds(0.15f);
             revolutionTMP.text = currentText;
         }
 
         yield return new WaitForSeconds(3f);
 
-        SceneChangingManager.Instance.LoadScene("Tonina");
+        SceneChangingManager.Instance.LoadScene("Jadea");
     }
 }

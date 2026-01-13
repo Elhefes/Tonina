@@ -91,7 +91,7 @@ public class IntroSceneController : MonoBehaviour
         }
         else if (eventIndex == 1)
         {
-            if (usableWeaponsAmount() > 1) // Start weapon switching presentation
+            if (UsableWeaponsAmount() > 1) // Start weapon switching presentation
             {
                 introHUD_Controller.optionsMenu.gameObject.SetActive(false);
                 introHUD_Controller.presentationStartObjects[2].SetActive(true);
@@ -267,7 +267,7 @@ public class IntroSceneController : MonoBehaviour
         else introHUD_Controller.equipSpearTextBoxNotSwitchedVersion.SetActive(true);
     }
 
-    private int usableWeaponsAmount()
+    private int UsableWeaponsAmount()
     {
         int i = 0;
         foreach (Weapon wep in playerPivot.weapons)

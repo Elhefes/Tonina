@@ -39,7 +39,7 @@ public class MouseLook : MonoBehaviour
     {
         if (player != null)
         {
-            if (player.kingHouse != null && !player.godMode) // Set correct starting position in Tonina scene only
+            if (player.kingHouse != null && !player.godMode) // Set correct starting position in Jadea scene only
             {
                 transform.position = player.kingHouse.transform.position + new Vector3(0f, 12f, 0f);
                 mainCameraObject.transform.position = gameObject.transform.position;

@@ -101,7 +101,7 @@ public class Player : Creature
 
     private void Start()
     {
-        if (kingHouse != null && !godMode) // Set correct starting position in Tonina scene only
+        if (kingHouse != null && !godMode) // Set correct starting position in Jadea scene only
         {
             gameObject.SetActive(false);
             transform.position = kingHouse.playerSpawnPosition.position;
@@ -560,9 +560,9 @@ public class Player : Creature
     public void TakeDamage(int damage)
     {
         health -= damage;
-        if (godMode && health <= 8)
+        if (godMode && health <= 20)
         {
-            health = 8;
+            health = 20;
         }
         if (health <= startingHealth)
         {

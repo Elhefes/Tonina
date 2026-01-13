@@ -25,7 +25,7 @@ public class IntroHUD_Controller : MonoBehaviour
 
     public void ReturnToMainMenu()
     {
-        SceneChangingManager.Instance.LoadScene("Tonina");
+        SceneChangingManager.Instance.LoadScene("Jadea");
     }
 
     public void SetPresenting(bool value) { presenting = value; }

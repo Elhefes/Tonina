@@ -64,11 +64,11 @@ public class Weapon : MonoBehaviour
             obj.GetComponent<Enemy>()?.TakeDamage(damage);
             if (hitSound != null) soundPlayer.PlayOneShot(hitSound, PlayerPrefs.GetFloat("soundVolume", 0.5f));
         }
-        if (!isFriendly && (obj.CompareTag("Player") || obj.CompareTag("ToninaTribe") || obj.CompareTag("Barricade")) && !hitEnemies.Contains(obj))
+        if (!isFriendly && (obj.CompareTag("Player") || obj.CompareTag("Jadea") || obj.CompareTag("Barricade")) && !hitEnemies.Contains(obj))
         {
             hitEnemies.Add(obj);
             obj.GetComponent<Player>()?.TakeDamage(damage);
-            obj.GetComponent<ToninaWarrior>()?.TakeDamage(damage);
+            obj.GetComponent<JadeaWarrior>()?.TakeDamage(damage);
             obj.GetComponent<Barricade>()?.TakeDamage(damage);
             if (hitSound != null) soundPlayer.PlayOneShot(hitSound, PlayerPrefs.GetFloat("soundVolume", 0.5f));
         }

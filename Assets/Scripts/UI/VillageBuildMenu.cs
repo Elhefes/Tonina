@@ -18,7 +18,7 @@ public class VillageBuildMenu : MonoBehaviour, IPointerDownHandler
     public GameObject[] boughtFloorSprites;
     public GameObject[] boughtSpecialBuildingSprites;
 
-    public ToninaCutSceneCamera toninaCutSceneCamera;
+    public JadeaCutSceneCamera jadeaCutSceneCamera;
 
     private void OnEnable()
     {

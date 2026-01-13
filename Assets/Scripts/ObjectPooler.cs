@@ -75,7 +75,7 @@ public class ObjectPooler : MonoBehaviour
         }
     }
 
-    public ToninaWarrior SpawnFriendlyFromPool(string tag, Vector3 position, Quaternion rotation)
+    public JadeaWarrior SpawnFriendlyFromPool(string tag, Vector3 position, Quaternion rotation)
     {
         if (!poolDictionary.ContainsKey(tag))
         {
@@ -91,20 +91,20 @@ public class ObjectPooler : MonoBehaviour
         objectToSpawn.transform.position = position;
         objectToSpawn.transform.rotation = rotation;
         objectToSpawn.SetActive(true);
-        return objectToSpawn.GetComponent<ToninaWarrior>();
+        return objectToSpawn.GetComponent<JadeaWarrior>();
     }
 
-    public void AddFriendlyToPool(ToninaWarrior friendly, string tag)
+    public void AddFriendlyToPool(JadeaWarrior friendly, string tag)
     {
         poolDictionary[tag].Enqueue(friendly.gameObject);
         friendly.gameObject.SetActive(false);
         friendly.ResetFriendlyAttributes();
     }
 
-    ToninaWarrior SpawnNewFriendly(Vector3 position, Quaternion rotation)
+    JadeaWarrior SpawnNewFriendly(Vector3 position, Quaternion rotation)
     {
         GameObject prefab = friendlyWarrior;
-        ToninaWarrior newFriendly = Instantiate(prefab, position, rotation).GetComponent<ToninaWarrior>();
+        JadeaWarrior newFriendly = Instantiate(prefab, position, rotation).GetComponent<JadeaWarrior>();
         newFriendly.SetFriendlyInPool(false);
         newFriendly.transform.parent = transform;
         return newFriendly;
