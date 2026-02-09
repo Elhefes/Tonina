@@ -23,7 +23,7 @@ public class PyramidObjectsProgression : MonoBehaviour
     public GameObject[] navMeshSurfaces;
 
     [Header("Temporary objects in village")]
-    public GameObject lvl3TemporaryVillageObject;
+    public GameObject[] temporaryVillageObjects;
 
     [Header("Villagers")]
     public GameObject[] villagers;
@@ -97,7 +97,10 @@ public class PyramidObjectsProgression : MonoBehaviour
 
         if (extraFloorsBuilt > 0)
         {
-            lvl3TemporaryVillageObject.SetActive(false);
+            for (int i = 0; i < extraFloorsBuilt; ++i)
+            {
+                temporaryVillageObjects[i].SetActive(false);
+            }
             // Change Weather Temple accessibility points when there's 4 or more floors
             weatherTempleLvl3Obj.SetActive(false);
             weatherTempleLvl4Obj.SetActive(true);
