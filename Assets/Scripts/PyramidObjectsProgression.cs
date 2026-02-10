@@ -28,6 +28,9 @@ public class PyramidObjectsProgression : MonoBehaviour
     [Header("Villagers")]
     public GameObject[] villagers;
 
+    [Header("Special villagers")]
+    public GameObject[] specialVillagers;
+
     [Header("Village houses")]
     public GameObject[] villageHouses;
 
@@ -83,11 +86,12 @@ public class PyramidObjectsProgression : MonoBehaviour
         EnablePyramidLevels();
         EnableCurrentTerrain();
         EnableCurrentNavMesh();
-        EnableVillagers();
         EnableVillageHouses();
         EnableSpecialBuildings();
         EnableCurrentFences();
         EnableStairs();
+        EnableVillagers();
+        EnableSpecialVillagers();
         EnableBorderBumps();
         EnableCurrentCamColliders();
         UpdateKingHousePosition();
@@ -101,6 +105,8 @@ public class PyramidObjectsProgression : MonoBehaviour
             {
                 temporaryVillageObjects[i].SetActive(false);
             }
+            if (temporaryVillageObjects[extraFloorsBuilt] != null) temporaryVillageObjects[extraFloorsBuilt].SetActive(true);
+
             // Change Weather Temple accessibility points when there's 4 or more floors
             weatherTempleLvl3Obj.SetActive(false);
             weatherTempleLvl4Obj.SetActive(true);
@@ -131,19 +137,6 @@ public class PyramidObjectsProgression : MonoBehaviour
         navMeshSurfaces[extraFloorsBuilt + specialBuildingsBuilt].SetActive(true);
     }
 
-    private void EnableVillagers()
-    {
-        foreach (GameObject villager in villagers) villager.SetActive(false);
-
-        if (extraFloorsBuilt > 0)
-        {
-            for (int i = 0; i < extraFloorsBuilt; ++i)
-            {
-                villagers[i].SetActive(true);
-            }
-        }
-    }
-
     private void EnableVillageHouses()
     {
         if (extraFloorsBuilt > 0)
@@ -168,8 +161,13 @@ public class PyramidObjectsProgression : MonoBehaviour
 
     private void EnableCurrentFences()
     {
-        foreach (GameObject fence in villageFences) fence.SetActive(false);
-        if (extraFloorsBuilt > 0) villageFences[extraFloorsBuilt - 1].gameObject.SetActive(true); // Lvl3 village fences are permanent
+        if (extraFloorsBuilt > 0)
+        {
+            for (int i = 0; i < extraFloorsBuilt; ++i)
+            {
+                villageFences[i].SetActive(true);
+            }
+        }
 
         foreach (GameObject fence in battleFieldFences) fence.SetActive(false);
         battleFieldFences[extraFloorsBuilt].gameObject.SetActive(true);
@@ -182,6 +180,30 @@ public class PyramidObjectsProgression : MonoBehaviour
             for (int i = 0; i < extraFloorsBuilt; ++i)
             {
                 stairs[i].SetActive(true);
+            }
+        }
+    }
+
+    private void EnableVillagers()
+    {
+        foreach (GameObject villager in villagers) villager.SetActive(false);
+
+        if (extraFloorsBuilt > 0)
+        {
+            for (int i = 0; i < extraFloorsBuilt; ++i)
+            {
+                villagers[i].SetActive(true);
+            }
+        }
+    }
+
+    private void EnableSpecialVillagers()
+    {
+        if (specialBuildingsBuilt > 0)
+        {
+            for (int i = 0; i < specialBuildingsBuilt; ++i)
+            {
+                specialVillagers[i].SetActive(true);
             }
         }
     }
