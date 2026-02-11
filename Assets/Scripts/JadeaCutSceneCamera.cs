@@ -61,7 +61,7 @@ public class JadeaCutSceneCamera : MonoBehaviour
         }
         
         previousRenderDistance = renderDistance;
-        Camera.main.farClipPlane = 130; // Set render distance
+        Camera.main.farClipPlane = 140; // Set render distance
 
         if (extraFloorInt == 0 && !singleBuilding) attackModeUnlockUIObject.SetActive(true);
         else generalReturnButtonObject.SetActive(true);
