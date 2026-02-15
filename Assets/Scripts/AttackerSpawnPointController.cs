@@ -2,59 +2,48 @@ using UnityEngine;
 
 public class AttackerSpawnPointController : MonoBehaviour
 {
-    public float battleAreaWidth;
-
-    public Transform leftestSpawnPointTransform;
-    public Transform rightestSpawnPointTransform;
-    public Transform[] spawnPointTransformsInBetween;
-
-    public Vector3[] leftestSpawnPoints;
-    public Vector3[] rightestSpawnPoints;
-    public Vector3 centerSpawnPoint; // = Spawn4
-
+    public GameObject[] spawnPointParents;
+    public Transform[] spawnPoints;
     public GameObject clubber;
 
     private void Start()
     {
-        // Change this when save/load is implemented
-        UpdateSpawnPositions(0);
+        UpdateSpawnPositions(GameState.Instance.progressionData.extraPyramidFloorsBuilt);
 
         //TestSpawns(); // Uncomment this to test if enemies (agents) spawn correctly on their positions
     }
 
-    public void UpdateBattleAreaWidth(float newWidth) { battleAreaWidth = newWidth; }
-
     public void UpdateSpawnPositions(int extraFloorsBuilt)
     {
-        leftestSpawnPointTransform.position = leftestSpawnPoints[extraFloorsBuilt];
-        rightestSpawnPointTransform.transform.position = rightestSpawnPoints[extraFloorsBuilt];
+        foreach (GameObject obj in spawnPointParents) obj.SetActive(false);
+        spawnPointParents[extraFloorsBuilt].SetActive(true);
 
-        float equalDivision = 2 * battleAreaWidth / spawnPointTransformsInBetween.Length;
+        // Set spawn point transforms to the ones that are of the active parent
+        Transform activeParent = GetActiveParent();
+        if (activeParent == null) return;
 
-        for (int i = 0; i < spawnPointTransformsInBetween.Length; i++)
+        for (int i = 0; i < spawnPoints.Length; i++)
         {
-            if (i < spawnPointTransformsInBetween.Length / 2)
-            {
-                spawnPointTransformsInBetween[i].position = new Vector3(-battleAreaWidth + i * equalDivision, 
-                    centerSpawnPoint.y, centerSpawnPoint.z);
-            }
-            else
-            {
-                spawnPointTransformsInBetween[i].position = new Vector3(centerSpawnPoint.x + equalDivision * 
-                    (i + 1 - spawnPointTransformsInBetween.Length / 2), centerSpawnPoint.y, centerSpawnPoint.z);
-            }
+            spawnPoints[i].position = activeParent.GetChild(i).position;
+            spawnPoints[i].rotation = activeParent.GetChild(i).rotation;
         }
+    }
+
+    private Transform GetActiveParent()
+    {
+        foreach (GameObject p in spawnPointParents)
+        {
+            if (p.activeInHierarchy)
+                return p.transform;
+        }
+        return null;
     }
 
     private void TestSpawns()
     {
-        Instantiate(clubber, leftestSpawnPointTransform.position, leftestSpawnPointTransform.rotation);
-        Instantiate(clubber, centerSpawnPoint, leftestSpawnPointTransform.rotation);
-        Instantiate(clubber, rightestSpawnPointTransform.position, rightestSpawnPointTransform.rotation);
-
-        foreach (Transform t in spawnPointTransformsInBetween)
+        for (int i = 0; i < spawnPoints.Length; ++i)
         {
-            Instantiate(clubber, t.position, t.rotation);
+            Instantiate(clubber, spawnPoints[i].position, spawnPoints[i].rotation);
         }
     }
 }

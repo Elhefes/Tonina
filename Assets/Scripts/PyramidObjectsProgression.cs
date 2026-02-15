@@ -99,6 +99,8 @@ public class PyramidObjectsProgression : MonoBehaviour
         villageTeleportMenu.UpdateExtraFloorsInt();
         villageTeleportMenu.UpdateMiddleGatePosition();
 
+        attackerSpawnPointController.UpdateSpawnPositions(extraFloorsBuilt);
+
         if (extraFloorsBuilt > 0)
         {
             for (int i = 0; i < extraFloorsBuilt; ++i)
