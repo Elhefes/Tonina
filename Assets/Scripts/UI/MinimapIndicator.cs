@@ -41,7 +41,7 @@ public class MinimapIndicator : MonoBehaviour
                     minimapCamera.RecieveIndicator(uniqueID, viewPos, isBlue, isRed);
                 }
             }
-            yield return new WaitForSeconds(0.5f);
+            yield return new WaitForSeconds(1.5f);
         }
     }
 }
