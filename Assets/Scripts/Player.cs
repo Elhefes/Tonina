@@ -838,6 +838,7 @@ public class Player : Creature
     public void TeleportToVillageGate(Transform gatePosition)
     {
         if (villageTPMenu != null) villageTPMenu.SetActive(false);
+        if (buildingRoof != null) buildingRoof.MakeRoofVisible();
         teleportCoroutine = StartCoroutine(TeleportPlayerToSpot(gatePosition.position));
         insideKingHouse = false;
         inVillage = true;
