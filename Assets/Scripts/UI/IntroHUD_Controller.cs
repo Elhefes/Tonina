@@ -1,8 +1,10 @@
 using UnityEngine;
+using TMPro;
 
 public class IntroHUD_Controller : MonoBehaviour
 {
     public GameObject battleUI;
+    public TMP_Text firstText;
     public GameObject[] presentationStartObjects;
     public GameObject pickUpSpearTextBox;
     public GameObject equipSpearTextBoxSwitchedVersion;
@@ -15,6 +17,7 @@ public class IntroHUD_Controller : MonoBehaviour
     private void Start()
     {
         optionsMenu.LoadAudioSettings();
+        firstText.text = "Welcome, King " + PlayerProfile.playerName + "!";
     }
 
     public void EnableBattleModeHUD(bool value)
