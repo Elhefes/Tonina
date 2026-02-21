@@ -1,7 +1,6 @@
 [System.Serializable]
 public class Stats
 {
-    public int secondsPlayed { get; set; }
     public int availableMoney { get; set; }
     public int totalMoneyEarned { get; set; }
     public float totalRewardPercentages { get; set; }
@@ -13,7 +12,6 @@ public class Stats
 
     public Stats(StatsController statsController)
     {
-        secondsPlayed = statsController.secondsPlayed;
         availableMoney = statsController.availableMoney;
         totalMoneyEarned = statsController.totalMoneyEarned;
         totalRewardPercentages = statsController.totalRewardPercentages;

@@ -94,13 +94,12 @@ public class StatsBoard : MonoBehaviour
     {
         while (gameObject.activeInHierarchy)
         {
-            stats = StatsSaveLoad.Load();
-            TimeSpan time = TimeSpan.FromSeconds(stats.secondsPlayed);
+            TimeSpan time = TimeSpan.FromSeconds(PlayerPrefs.GetInt("secondsPlayed", 0));
 
             string timePlayed = time.TotalHours.ToString("00") + ":" + time.Minutes.ToString("00") + ":" + time.Seconds.ToString("00");
             totalPlayTimeTMP.text = timePlayed;
 
-            yield return new WaitForSecondsRealtime(0.25f);
+            yield return new WaitForSecondsRealtime(1f);
         }
     }
 }

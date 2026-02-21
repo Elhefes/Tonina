@@ -4,7 +4,6 @@ using UnityEngine;
 public class StatsController : MonoBehaviour
 {
     // Stats
-    public int secondsPlayed { get; set; }
     public int availableMoney { get; set; }
     public int totalMoneyEarned { get; set; }
     public float totalRewardPercentages { get; set; }
@@ -17,7 +16,6 @@ public class StatsController : MonoBehaviour
     private void Start()
     {
         LoadStats();
-        StartCoroutine(SecondCounter());
     }
 
     public void SaveStats()
@@ -30,7 +28,6 @@ public class StatsController : MonoBehaviour
     {
         Stats stats = StatsSaveLoad.Load();
         if (stats == null) return;
-        this.secondsPlayed = stats.secondsPlayed;
         this.availableMoney = stats.availableMoney;
         this.totalMoneyEarned = stats.totalMoneyEarned;
         this.totalRewardPercentages = stats.totalRewardPercentages;
@@ -39,15 +36,5 @@ public class StatsController : MonoBehaviour
         this.battlesWon = stats.battlesWon;
         this.battlesLost = stats.battlesLost;
         this.battlesForfeited = stats.battlesForfeited;
-    }
-
-    IEnumerator SecondCounter()
-    {
-        while (true)
-        {
-            yield return new WaitForSecondsRealtime(1f);
-            secondsPlayed++;
-            SaveStats();
-        }
     }
 }
