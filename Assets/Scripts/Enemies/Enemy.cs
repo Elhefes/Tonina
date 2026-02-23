@@ -41,7 +41,7 @@ public class Enemy : Creature
     public void ResetEnemyAttributes()
     {
         health = startingHealth;
-        healthBar.value = health;
+        if (healthBar != null) healthBar.value = health;
         slowedDown = false;
         StopAllCoroutines();
         agent.speed = movementSpeed;
