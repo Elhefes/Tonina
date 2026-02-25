@@ -2,7 +2,7 @@ using System.Collections;
 using UnityEngine;
 using UnityEngine.AI;
 
-public class FirstBattleCutScene : MonoBehaviour
+public class FirstBattleCutscene : MonoBehaviour
 {
     public Animator cameraAnimator;
     public MouseLook mouseLook;
@@ -20,7 +20,7 @@ public class FirstBattleCutScene : MonoBehaviour
     IEnumerator BattleCutScene()
     {
         mouseLook.CameraOnPlayerOff();
-        mouseLook.inCutScene = true;
+        mouseLook.inCutscene = true;
         overworldUI.SetActive(false);
         blackFader.SetActive(true);
         clickBlocker.SetActive(true);
@@ -40,7 +40,7 @@ public class FirstBattleCutScene : MonoBehaviour
         foreach (NavMeshAgent agent in cutSceneEnemies) agent.gameObject.SetActive(false);
 
         mouseLook.ToggleCameraOnPlayer();
-        mouseLook.inCutScene = false;
+        mouseLook.inCutscene = false;
         overworldUI.SetActive(true);
         clickBlocker.SetActive(false);
         mouseLook.notCastingRays = false;

@@ -17,7 +17,7 @@ public class MouseLook : MonoBehaviour
     public float minCameraZoom;
     public float maxCameraZoom;
     public Player player;
-    public bool inCutScene;
+    public bool inCutscene;
     public bool cameraOnPlayer;
     public bool notCastingRays; // Don't cast rays in Attack Mode Minimap view
     public Camera minimapCamera;
@@ -118,7 +118,7 @@ public class MouseLook : MonoBehaviour
     {
         mainCameraObject.transform.position = Vector3.Lerp(mainCameraObject.transform.position, transform.position, smoothSpeed);
 
-        if (!inCutScene)
+        if (!inCutscene)
         {
             if (!player.inBuildMode && !notCastingRays)
             {
@@ -259,7 +259,7 @@ public class MouseLook : MonoBehaviour
     // Limit camera's movement smoothly in x-axis
     private void FixedUpdate()
     {
-        if (player.inVillage && inCutScene) return;
+        if (player.inVillage && inCutscene) return;
 
         if (player.inBuildMode)
         {
@@ -299,5 +299,5 @@ public class MouseLook : MonoBehaviour
         if (!minimapIndicators.activeSelf && !minimapInput.buttonPressed) minimapIndicators.SetActive(true);
     }
 
-    public void SetInCutScene(bool value) { inCutScene = value; }
+    public void SetInCutscene(bool value) { inCutscene = value; }
 }

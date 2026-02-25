@@ -108,12 +108,12 @@ public class VillageBuildSelection : MonoBehaviour, IPointerEnterHandler, IPoint
             // Move camera to cutscene
             if (buildsNextFloor || buildsNextFloorAndSpecial)
             {
-                villageBuildMenu.jadeaCutSceneCamera.MoveCameraToTemporaryPosition(false, extraFloorsBuilt, 
+                villageBuildMenu.jadeaCutsceneCamera.MoveCameraToTemporaryPosition(false, extraFloorsBuilt, 
                     Camera.main.transform, Camera.main.transform.rotation, Camera.main.farClipPlane);
             }
             else
             {
-                villageBuildMenu.jadeaCutSceneCamera.MoveCameraToTemporaryPosition(true, extraFloorsBuilt, 
+                villageBuildMenu.jadeaCutsceneCamera.MoveCameraToTemporaryPosition(true, extraFloorsBuilt, 
                     Camera.main.transform, Camera.main.transform.rotation, Camera.main.farClipPlane);
             }
             villageBuildMenu.gameObject.SetActive(false);

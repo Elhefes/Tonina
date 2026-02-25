@@ -1,7 +1,7 @@
 using System.Collections;
 using UnityEngine;
 
-public class JadeaCutSceneCamera : MonoBehaviour
+public class JadeaCutsceneCamera : MonoBehaviour
 {
     public MouseLook mouseLook;
     public GameObject blackFader;
@@ -33,7 +33,7 @@ public class JadeaCutSceneCamera : MonoBehaviour
     IEnumerator StartMovingCameraToAngle(bool singleBuilding, int extraFloorInt, Transform camTransform, Quaternion currentRotation, float renderDistance)
     {
         mouseLook.CameraOnPlayerOff();
-        mouseLook.inCutScene = true;
+        mouseLook.inCutscene = true;
         overworldUI.SetActive(false);
         blackFader.SetActive(true);
         clickBlocker.SetActive(true);
@@ -73,7 +73,7 @@ public class JadeaCutSceneCamera : MonoBehaviour
         yield return new WaitForSeconds(0.33f);
 
         mouseLook.ToggleCameraOnPlayer();
-        mouseLook.inCutScene = false;
+        mouseLook.inCutscene = false;
         overworldUI.SetActive(true);
         clickBlocker.SetActive(false);
 
