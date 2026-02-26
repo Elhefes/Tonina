@@ -96,7 +96,7 @@ public class StatsBoard : MonoBehaviour
         {
             TimeSpan time = TimeSpan.FromSeconds(PlayerPrefs.GetInt("secondsPlayed", 0));
 
-            string timePlayed = time.TotalHours.ToString("00") + ":" + time.Minutes.ToString("00") + ":" + time.Seconds.ToString("00");
+            string timePlayed = time.Hours.ToString("00") + ":" + time.Minutes.ToString("00") + ":" + time.Seconds.ToString("00");
             totalPlayTimeTMP.text = timePlayed;
 
             yield return new WaitForSecondsRealtime(1f);
