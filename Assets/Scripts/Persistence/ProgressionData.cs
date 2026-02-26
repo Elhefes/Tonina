@@ -5,7 +5,6 @@ public class ProgressionData
 {
     public float threatProgressionValue { get; set; }
     public float highestThreatValue { get; set; } // Highest progression value that has been achieved
-    public bool firstBattleWon { get; set; } // For first battle cutscene
     public int maizeProductionLevel { get; set; } // How many maize pieces can player start a battle with, maybe also makes Maize Places cheaper?
 
     // Unlocks

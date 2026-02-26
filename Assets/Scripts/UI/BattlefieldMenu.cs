@@ -74,7 +74,7 @@ public class BattlefieldMenu : MonoBehaviour
             waveController.StartRound(threatLevel, battleSongID);
         }
 
-        if (!GameState.Instance.progressionData.firstBattleWon)
+        if (waveController.statsController.battlesWon < 1)
         {
             cutsceneCamera.StartAnimation("FirstBattle");
             cutsceneCamera.mouseLook.distanceFromObject = 15f;
