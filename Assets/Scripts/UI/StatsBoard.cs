@@ -66,14 +66,8 @@ public class StatsBoard : MonoBehaviour
     "20 meters | 65.6 ft",
     "27.5 meters | 90.2 ft",
     "32.5 meters | 106.6 ft",
-    "37.5 meters | 123.0 ft",
-    "42.5 meters | 139.4 ft",
-    "47.5 meters | 155.8 ft",
-    "55 meters | 180.4 ft",
-    "60 meters | 196.9 ft",
-    "65 meters | 213.2 ft",
-    "70 meters | 229.7 ft",
-    "75 meters | 246.1 ft"
+    "40 meters | 131.2 ft",
+    "45 meters | 147.6 ft"
 };
 
     private string GetPyramidHeight()
