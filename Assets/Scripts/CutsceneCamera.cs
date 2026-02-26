@@ -13,10 +13,14 @@ public class CutsceneCamera : MonoBehaviour
     public GameObject clickBlocker;
     public GameObject overworldUI;
 
-    [Header("Cutscene UI Elements")]
+    [Header("Animation: First Battle")]
+    public GameObject firstBattleObject;
+
+    [Header("Static Cutscene UI Elements")]
     public GameObject generalReturnButtonObject;
     public GameObject attackModeUnlockUIObject;
 
+    [Header("Static Cam Positions")]
     public Transform[] pyramidFloorCameraPositions;
     public Transform[] pyramidBuildingCameraPositions;
 
@@ -27,6 +31,8 @@ public class CutsceneCamera : MonoBehaviour
 
     public void StartAnimation(string triggerName)
     {
+        if (triggerName == "FirstBattle") firstBattleObject.SetActive(true);
+
         animatedCameraAnimator.SetTrigger(triggerName);
         StartCoroutine(SwitchToAnimatedCamera());
 

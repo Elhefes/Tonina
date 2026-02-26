@@ -4,45 +4,70 @@ using UnityEngine.AI;
 
 public class FirstBattleCutscene : MonoBehaviour
 {
-    public Animator cameraAnimator;
-    public MouseLook mouseLook;
-    public GameObject blackFader;
-    public GameObject overworldUI;
-    public GameObject clickBlocker;
     public GameObject textBox;
-    public NavMeshAgent[] cutSceneEnemies;
+    public NavMeshAgent[] cutsceneEnemies;
+    public AudioSource hawkAudioSource;
 
-    public void StartFirstBattleCutScene()
+    private Vector3[] savedPositions;
+    private Quaternion[] savedRotations;
+
+    private void OnEnable()
     {
-        StartCoroutine(BattleCutScene());
+        if (cutsceneEnemies == null || cutsceneEnemies.Length == 0) return;
+
+        savedPositions = new Vector3[cutsceneEnemies.Length];
+        savedRotations = new Quaternion[cutsceneEnemies.Length];
+
+        for (int i = 0; i < cutsceneEnemies.Length; i++)
+        {
+            if (cutsceneEnemies[i] == null) continue;
+
+            savedPositions[i] = cutsceneEnemies[i].transform.position;
+            savedRotations[i] = cutsceneEnemies[i].transform.rotation;
+        }
+
+        StartCoroutine(BattleCutscene());
     }
 
-    IEnumerator BattleCutScene()
+    private void OnDisable()
     {
-        mouseLook.CameraOnPlayerOff();
-        mouseLook.inCutscene = true;
-        overworldUI.SetActive(false);
-        blackFader.SetActive(true);
-        clickBlocker.SetActive(true);
+        foreach (NavMeshAgent agent in cutsceneEnemies) agent.speed = 0f;
 
+        if (cutsceneEnemies == null || savedPositions == null) return;
+
+        for (int i = 0; i < cutsceneEnemies.Length; i++)
+        {
+            if (cutsceneEnemies[i] == null) continue;
+
+            cutsceneEnemies[i].transform.position = savedPositions[i];
+            cutsceneEnemies[i].transform.rotation = savedRotations[i];
+        }
+    }
+
+    IEnumerator BattleCutscene()
+    {
         yield return new WaitForSeconds(0.33f);
 
-        foreach (NavMeshAgent agent in cutSceneEnemies) agent.gameObject.SetActive(true);
-        mouseLook.notCastingRays = true;
-        cameraAnimator.SetTrigger("FirstBattle");
+        foreach (NavMeshAgent agent in cutsceneEnemies) agent.gameObject.SetActive(true);
 
-        yield return new WaitForSeconds(5f);
+        yield return new WaitForSeconds(1f);
 
-        foreach (NavMeshAgent agent in cutSceneEnemies) agent.speed = 3.5f;
+        textBox.SetActive(true);
 
-        yield return new WaitForSeconds(10f);
+        yield return new WaitForSeconds(3.3f);
 
-        foreach (NavMeshAgent agent in cutSceneEnemies) agent.gameObject.SetActive(false);
+        hawkAudioSource.PlayOneShot(hawkAudioSource.clip, PlayerPrefs.GetFloat("soundVolume", 0.5f));
 
-        mouseLook.ToggleCameraOnPlayer();
-        mouseLook.inCutscene = false;
-        overworldUI.SetActive(true);
-        clickBlocker.SetActive(false);
-        mouseLook.notCastingRays = false;
+        yield return new WaitForSeconds(0.5f);
+        foreach (NavMeshAgent agent in cutsceneEnemies) agent.speed = 3.5f;
+
+
+        yield return new WaitForSeconds(1.2f);
+
+        textBox.SetActive(false);
+
+        yield return new WaitForSeconds(4f);
+
+        gameObject.SetActive(false);
     }
 }
