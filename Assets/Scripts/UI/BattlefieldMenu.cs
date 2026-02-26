@@ -29,9 +29,10 @@ public class BattlefieldMenu : MonoBehaviour
 
     public Button startBattleButton;
 
-    int maxThreatLevel = 25;
+    int maxThreatLevel = 24;
 
     public WaveController waveController;
+    public CutsceneCamera cutsceneCamera;
 
     private void OnEnable()
     {
@@ -72,6 +73,13 @@ public class BattlefieldMenu : MonoBehaviour
         {
             waveController.StartRound(threatLevel, battleSongID);
         }
+
+        if (!GameState.Instance.progressionData.firstBattleWon)
+        {
+            cutsceneCamera.StartAnimation("FirstBattle");
+            cutsceneCamera.mouseLook.distanceFromObject = 15f;
+        }
+
         gameObject.SetActive(false);
     }
 
