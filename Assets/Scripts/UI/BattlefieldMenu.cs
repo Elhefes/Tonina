@@ -27,6 +27,9 @@ public class BattlefieldMenu : MonoBehaviour
     public TMP_Text chosenSong;
     public TMP_Text maizeAmount;
 
+    public TMP_Text placeablesMaxText;
+    public TMP_Text placeablesUnlockText;
+
     public Button startBattleButton;
 
     int maxThreatLevel = 24;
@@ -42,6 +45,7 @@ public class BattlefieldMenu : MonoBehaviour
         SetMusicSelectionVisuals(battleSongRandomized);
         maizeAmount.text = GameState.Instance.progressionData.maizeProductionLevel.ToString();
         UpdateThreatLevel();
+        UpdatePlaceablesInfoTexts();
     }
 
     public void SelectBattle()
@@ -83,7 +87,7 @@ public class BattlefieldMenu : MonoBehaviour
         gameObject.SetActive(false);
     }
 
-    void UpdateThreatLevel()
+    private void UpdateThreatLevel()
     {
         threatLevelText.text = threatLevel.ToString();
         PlayerPrefs.SetInt("currentThreatLevel", threatLevel);
@@ -99,6 +103,13 @@ public class BattlefieldMenu : MonoBehaviour
             rewardsText.text = "-";
             startBattleButton.interactable = false;
         }
+    }
+
+    private void UpdatePlaceablesInfoTexts()
+    {
+        placeablesMaxText.text = "You can place " + (3 + GameState.Instance.progressionData.extraPyramidFloorsBuilt * 2) + " in total!";
+        if (GameState.Instance.progressionData.extraPyramidFloorsBuilt > 4) placeablesUnlockText.gameObject.SetActive(false);
+        else placeablesUnlockText.gameObject.SetActive(true);
     }
 
     public void ToggleRandomBattleMusic()
@@ -131,7 +142,7 @@ public class BattlefieldMenu : MonoBehaviour
         }
     }
 
-    void UpdateBattleSong()
+    private void UpdateBattleSong()
     {
         chosenSong.text = waveController.musicPlayer.battleSongs[battleSongID].name;
         PlayerPrefs.SetInt("battleSongID", battleSongID);
@@ -169,7 +180,7 @@ public class BattlefieldMenu : MonoBehaviour
         UpdateBattleSong();
     }
 
-    void OnDisable()
+    private void OnDisable()
     {
         battleSelectedUI.SetActive(false);
         buildSelectedUI.SetActive(false);
