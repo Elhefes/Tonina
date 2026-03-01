@@ -136,7 +136,7 @@ public class IntroSceneController : MonoBehaviour
     void StartSpearPickUpPresentation()
     {
         if (introHUD_Controller.presentationStartObjects[3] != null) introHUD_Controller.presentationStartObjects[3].SetActive(true);
-        spearPickUpPointerObject.SetActive(true);
+        if (spearPickUpPointerObject != null) spearPickUpPointerObject.SetActive(true);
         playerPivot.spear.notAvailable = true;
         playerPivot.spear.quantity = 0;
         weaponWheel.AddWeaponToSelectedWeapons(1); // 1 = Spear's weapon ID

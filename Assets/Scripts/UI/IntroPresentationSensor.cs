@@ -6,6 +6,7 @@ public class IntroPresentationSensor : MonoBehaviour
     public GameObject minimapPresentation;
     public GameObject zoomPresentation;
     public GameObject viewTogglePresentation;
+    public GameObject optionsPresentation;
 
     private Vector3 staticRay;
     private bool minimapping;
@@ -34,7 +35,7 @@ public class IntroPresentationSensor : MonoBehaviour
             }
         }
         
-        else if (zoomPresentation.activeSelf)
+        else if (zoomPresentation.activeInHierarchy)
         {
             if (mouseLook.distanceFromObject > 19f) minZoomed = true;
             else if (mouseLook.distanceFromObject < 11f) maxZoomed = true;
@@ -42,9 +43,26 @@ public class IntroPresentationSensor : MonoBehaviour
             if (minZoomed && maxZoomed)
             {
                 zoomPresentation.SetActive(false);
-                viewTogglePresentation.SetActive(true);
                 minZoomed = false;
                 maxZoomed = false;
+
+                if (!mouseLook.cameraOnPlayer)
+                {
+                    viewTogglePresentation.SetActive(true);
+                }
+                else
+                {
+                    optionsPresentation.SetActive(true);
+                }
+            }
+        }
+
+        else if (viewTogglePresentation.activeInHierarchy)
+        {
+            if (mouseLook.cameraOnPlayer)
+            {
+                viewTogglePresentation.SetActive(false);
+                optionsPresentation.SetActive(true);
             }
         }
     }
