@@ -9,6 +9,8 @@ public class IntroPresentationSensor : MonoBehaviour
 
     private Vector3 staticRay;
     private bool minimapping;
+    private bool minZoomed;
+    private bool maxZoomed;
 
     private void Update()
     {
@@ -32,5 +34,18 @@ public class IntroPresentationSensor : MonoBehaviour
             }
         }
         
+        else if (zoomPresentation.activeSelf)
+        {
+            if (mouseLook.distanceFromObject > 19f) minZoomed = true;
+            else if (mouseLook.distanceFromObject < 11f) maxZoomed = true;
+
+            if (minZoomed && maxZoomed)
+            {
+                zoomPresentation.SetActive(false);
+                viewTogglePresentation.SetActive(true);
+                minZoomed = false;
+                maxZoomed = false;
+            }
+        }
     }
 }
