@@ -230,6 +230,7 @@ public class IntroSceneController : MonoBehaviour
                     minimapCamera.SetActive(true);
                     clickBlocker.SetActive(false);
                     introHUD_Controller.EnableBattleModeHUD(true);
+                    playerPivot.mouseLook.inCutscene = false;
                 }
                 acceleration += 0.0008f;
             }
