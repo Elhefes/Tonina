@@ -213,10 +213,41 @@ public class Player : Creature
                 }
             }
             creatureMovement.target = null;
+
+            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
             RaycastHit hit;
-            if (Physics.Raycast(Camera.main.ScreenPointToRay(Input.mousePosition), out hit, Mathf.Infinity, clickLayerMask))
+
+            bool hitSomething;
+            GameObject target;
+
+            if (!NotInBattlefield())
             {
-                GameObject target = hit.collider.gameObject;
+                // BATTLEFIELD forgiving click
+                float radius;
+                if (mouseLook.distanceFromObject <= 10f) radius = 0.8f;
+                else radius = 1.2f;
+                hitSomething = Physics.SphereCast(ray, radius, out hit, Mathf.Infinity, clickLayerMask);
+
+                if (hitSomething)
+                {
+                    target = hit.collider.gameObject;
+                    if (target.CompareTag("Enemy"))
+                    {
+                        creatureMovement.agent.stoppingDistance = defaultAttackStoppingDistance;
+                        creatureMovement.target = target.transform;
+                        clickerTargetObject.alpha = 1f;
+                        return;
+                    }
+                }
+            }
+            // NON-BATTLEFIELD precise click
+            hitSomething = Physics.Raycast(ray, out hit, Mathf.Infinity, clickLayerMask);
+
+            creatureMovement.agent.stoppingDistance = 0.1f;
+
+            if (hitSomething)
+            {
+                target = hit.collider.gameObject;
 
                 if (target.CompareTag("TalkPrompt") && Vector3.Distance(transform.position, target.transform.position) < 2.7f)
                 {
@@ -276,14 +307,6 @@ public class Player : Creature
                 {
                     FreeTextSubject();
                 }
-
-                if (target.CompareTag("Enemy"))
-                {
-                    creatureMovement.agent.stoppingDistance = defaultAttackStoppingDistance;
-                    //creatureMovement.enemy = target.GetComponent<Enemy>();
-                    creatureMovement.target = target.transform;
-                }
-                else creatureMovement.agent.stoppingDistance = 0.1f;
 
                 // Check if player clicks the god pillar inside the weather temple
                 if (target.name == "chaac_stone" && Vector3.Distance(target.transform.position, transform.position) < 2.85f)
