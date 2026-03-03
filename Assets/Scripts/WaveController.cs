@@ -18,12 +18,13 @@ public class WaveController : MonoBehaviour
 
     public UI_Controller UIController;
 
+    public WinningScreen battleWinningScreen;
+
     public StatsController statsController;
 
     private List<Coroutine> coroutines;
     public GameObject overworldOptionsButton;
     public GameObject battleUI;
-    public GameObject battleWinningScreen;
     public TMP_Text threatLevelText;
     public TMP_Text battleTimeText;
     public TMP_Text rewardsText;
@@ -184,7 +185,11 @@ public class WaveController : MonoBehaviour
             UIController.optionsMenu.gameObject.SetActive(false);
         }
 
-        battleWinningScreen.SetActive(true);
+        if (battleWinningScreen != null)
+        {
+            battleWinningScreen.previousProgressionValue = GameState.Instance.progressionData.threatProgressionValue;
+        }
+        
         threatLevelText.text = currentRoundNumber.ToString();
         battleTimeText.text = GetBattleTimerString(secondsInBattle);
         StopCoroutine(SecondCounter());
@@ -192,6 +197,13 @@ public class WaveController : MonoBehaviour
         DisableBattleUI();
         threatLevelController.SetThreatProgressionValue(true, currentRoundNumber, GetTotalRewards(), threatLevel.maxReward);
         statsController.totalRewardPercentages += (float) 100 * GetTotalRewards() / threatLevel.maxReward;
+
+        if (battleWinningScreen != null)
+        {
+            battleWinningScreen.currentProgressionValue = GameState.Instance.progressionData.threatProgressionValue;
+            battleWinningScreen.gameObject.SetActive(true);
+        }
+
         statsController.battlesWon++;
         statsController.SaveStats();
     }
@@ -266,7 +278,7 @@ public class WaveController : MonoBehaviour
     IEnumerator SecondCounter()
     {
         secondsInBattle = 0;
-        while (!battleWinningScreen.activeSelf)
+        while (!battleWinningScreen.gameObject.activeSelf)
         {
             yield return new WaitForSecondsRealtime(1f);
             secondsInBattle++;

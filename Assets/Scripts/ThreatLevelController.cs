@@ -58,8 +58,8 @@ public class ThreatLevelController : MonoBehaviour
 
     private void UnlockNextThreatLevel()
     {
-        newThreatLevelElement.SetActive(true);
-        newThreatLevelUnlockTMP.text = "Threat Level " + Mathf.FloorToInt(threatProgressionValue) + " unlocked!";
+        //newThreatLevelElement.SetActive(true);
+        //newThreatLevelUnlockTMP.text = "Threat Level " + Mathf.FloorToInt(threatProgressionValue) + " unlocked!";
     }
 
     private float GetThreatFactor(int threatLevel)
