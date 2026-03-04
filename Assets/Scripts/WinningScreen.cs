@@ -7,6 +7,7 @@ public class WinningScreen : MonoBehaviour
 {
     public GameObject returnHomeButton;
     public Image progressionBarImage;
+    public Image blackProgTextImage;
     public float previousProgressionValue;
     public float currentProgressionValue;
 
@@ -23,6 +24,7 @@ public class WinningScreen : MonoBehaviour
         bottomTMP.text = progressionFloorInt.ToString();
         ceilingTMP.text = (progressionFloorInt + 1).ToString();
         progressionBarImage.fillAmount = previousProgressionValue - progressionFloorInt;
+        blackProgTextImage.fillAmount = previousProgressionValue - progressionFloorInt;
         StartCoroutine(WinningAnimation());
     }
 
@@ -47,6 +49,7 @@ public class WinningScreen : MonoBehaviour
             bottomTMP.text = floor.ToString();
             ceilingTMP.text = (floor + 1).ToString();
             progressionBarImage.fillAmount = currentValue - floor;
+            blackProgTextImage.fillAmount = currentValue - floor;
 
             yield return null;
         }
@@ -55,6 +58,7 @@ public class WinningScreen : MonoBehaviour
         bottomTMP.text = finalFloor.ToString();
         ceilingTMP.text = (finalFloor + 1).ToString();
         progressionBarImage.fillAmount = endValue - finalFloor;
+        blackProgTextImage.fillAmount = endValue - finalFloor;
 
         returnHomeButton.SetActive(true);
     }

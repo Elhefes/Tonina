@@ -4,8 +4,6 @@ using TMPro;
 public class ThreatLevelController : MonoBehaviour
 {
     public float threatProgressionValue;
-
-    public GameObject newThreatLevelElement;
     public TMP_Text newThreatLevelUnlockTMP;
 
     void Start()
@@ -24,8 +22,6 @@ public class ThreatLevelController : MonoBehaviour
 
     public void SetThreatProgressionValue(bool wonBattle, int threatLevel, int totalRewards, int maxRewards)
     {
-        float initialProgressionValue = threatProgressionValue;
-
         if (wonBattle)
         {
             float successFactor = ((float)totalRewards / maxRewards >= 0.87f) ? 0.65f : 0.42f;
@@ -43,9 +39,6 @@ public class ThreatLevelController : MonoBehaviour
             threatProgressionValue = Mathf.Clamp(threatProgressionValue, Mathf.FloorToInt(highestAchievedValue) - 2f, highestAchievedValue);
         }
 
-        if (Mathf.FloorToInt(threatProgressionValue) > Mathf.FloorToInt(initialProgressionValue)) UnlockNextThreatLevel();
-        else newThreatLevelElement.SetActive(false);
-
         GameState.Instance.progressionData.threatProgressionValue = threatProgressionValue;
 
         if (threatProgressionValue >= GameState.Instance.progressionData.highestThreatValue)
@@ -54,12 +47,6 @@ public class ThreatLevelController : MonoBehaviour
         }
 
         GameState.Instance.SaveWorld();
-    }
-
-    private void UnlockNextThreatLevel()
-    {
-        //newThreatLevelElement.SetActive(true);
-        //newThreatLevelUnlockTMP.text = "Threat Level " + Mathf.FloorToInt(threatProgressionValue) + " unlocked!";
     }
 
     private float GetThreatFactor(int threatLevel)
