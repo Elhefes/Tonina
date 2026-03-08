@@ -114,7 +114,7 @@ public class BuildingWheel : MonoBehaviour
 
     public void UpdateIncomingCostText()
     {
-        incomingCostText.text = incomingCost + " / 9999999";
+        incomingCostText.text = "Money | Changes cost:\n5 000 000 | " + incomingCost;
     }
 
     public void ShowBuildingInHandIfPossible()
