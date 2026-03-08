@@ -189,6 +189,7 @@ public class BuildingWheel : MonoBehaviour
         {
             buildingCostText.text = "Locked";
             lockedIcon.SetActive(true);
+            infoPage.EnablePlaceableDescription(buildingIndex);
             return;
         }
 
