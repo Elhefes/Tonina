@@ -382,7 +382,7 @@ public class Player : Creature
                     }
                 }
 
-                if (healthBar.gameObject.activeInHierarchy && (target.name == "spear_rack_small(Clone)") && Vector3.Distance(target.transform.position, transform.position) < 2.25f)
+                if (healthBar.gameObject.activeInHierarchy && (target.name == "Spear Rack(Clone)") && Vector3.Distance(target.transform.position, transform.position) < 2.25f)
                 {
                     if (target != null)
                     {

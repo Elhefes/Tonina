@@ -38,6 +38,8 @@ public class BuildingWheel : MonoBehaviour
     private int maxPlaceablesAmount;
     private int buildingCountAtModeStart;
 
+    public BuildModeInfoPage infoPage;
+
     public AudioSource soundEffectPlayer;
 
     public Player player;
@@ -61,6 +63,7 @@ public class BuildingWheel : MonoBehaviour
         UpdateBuildingsPlacedText();
         ResetToDefaultBuilding();
         ShowBuildingInHandIfPossible();
+        infoPage.infoButton.interactable = true;
     }
 
     public void ExitBuildMode(bool saving)
@@ -109,12 +112,13 @@ public class BuildingWheel : MonoBehaviour
 
     void UpdateBuildingCostText()
     {
-        buildingCostText.text = placeablesOnCamera[buildingIndex].placeableBuildingPrefab.cost.ToString();
+        buildingCostText.text = placeablesOnCamera[buildingIndex].placeableBuildingPrefab.name.ToString() + "\nCost: " +
+            placeablesOnCamera[buildingIndex].placeableBuildingPrefab.cost.ToString();
     }
 
     public void UpdateIncomingCostText()
     {
-        incomingCostText.text = incomingCost + " / 9999999";
+        incomingCostText.text = "Money | Changes cost:\n5 000 000 | " + incomingCost;
     }
 
     public void ShowBuildingInHandIfPossible()
@@ -185,6 +189,7 @@ public class BuildingWheel : MonoBehaviour
         {
             buildingCostText.text = "Locked";
             lockedIcon.SetActive(true);
+            infoPage.EnablePlaceableDescription(buildingIndex);
             return;
         }
 
@@ -192,6 +197,8 @@ public class BuildingWheel : MonoBehaviour
         placeablesOnCamera[buildingIndex].gameObject.transform.eulerAngles = new Vector3(0f, 180f, 0f); // Reset rotation
         placeablesOnCamera[buildingIndex].gameObject.SetActive(true);
         UpdateBuildingCostText();
+
+        infoPage.EnablePlaceableDescription(buildingIndex);
     }
 
     private bool BuildingIsAvailable(int buildingIndex)
@@ -241,6 +248,12 @@ public class BuildingWheel : MonoBehaviour
     public void RotatePlaceableBuilding(int degrees)
     {
         placeablesOnCamera[buildingIndex].gameObject.transform.eulerAngles += new Vector3(0f, degrees, 0f);
+    }
+
+    public void OpenInfoPage()
+    {
+        infoPage.gameObject.SetActive(true);
+        infoPage.EnablePlaceableDescription(buildingIndex);
     }
 
     void StartBuildingWheelCooldown()
