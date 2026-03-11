@@ -36,7 +36,7 @@ public class MainMenu : MonoBehaviour
 
     private float acceleration;
 
-    public TMP_Text playTimeAmountTMP;
+    public StatsController statsController;
 
     private void Start()
     {
@@ -106,6 +106,10 @@ public class MainMenu : MonoBehaviour
                     }
             }
         }
+
+        statsController.availableMoney = 200;
+        statsController.SaveStats();
+
         GameState.Instance.SaveWorld();
     }
 
