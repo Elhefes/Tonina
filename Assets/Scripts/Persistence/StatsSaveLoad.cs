@@ -4,9 +4,9 @@ using System.Runtime.Serialization.Formatters.Binary;
 
 public static class StatsSaveLoad
 {
-    private static string path1 = Application.persistentDataPath + "/stats1.imox";
-    private static string path2 = Application.persistentDataPath + "/stats2.imox";
-    private static string path3 = Application.persistentDataPath + "/stats3.imox";
+    private static readonly string path1 = Application.persistentDataPath + "/stats1.imox";
+    private static readonly string path2 = Application.persistentDataPath + "/stats2.imox";
+    private static readonly string path3 = Application.persistentDataPath + "/stats3.imox";
 
     public static void Save(Stats stats)
     {
