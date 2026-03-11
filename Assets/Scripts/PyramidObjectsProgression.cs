@@ -67,8 +67,8 @@ public class PyramidObjectsProgression : MonoBehaviour
     {
         extraFloorsBuilt++;
         if (extraFloorsBuilt == 1) GameState.Instance.progressionData.attackModeUnlocked = true; // 1 is temporary value, used for testing
-        EnableAllCurrentPyramidObjects();
         GameState.Instance.progressionData.extraPyramidFloorsBuilt = extraFloorsBuilt;
+        EnableAllCurrentPyramidObjects();
         GameState.Instance.SaveWorld();
     }
 
@@ -76,8 +76,8 @@ public class PyramidObjectsProgression : MonoBehaviour
     {
         specialBuildingsBuilt++;
         specialBuildings[specialBuildingsBuilt - 1].SetActive(true);
-        EnableCurrentNavMesh();
         GameState.Instance.progressionData.specialBuildingsBuilt = specialBuildingsBuilt;
+        EnableCurrentNavMesh();
         GameState.Instance.SaveWorld();
     }
 

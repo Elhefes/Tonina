@@ -100,8 +100,8 @@ public class VillageBuildSelection : MonoBehaviour, IPointerEnterHandler, IPoint
             if (buildsNextFloor) villageBuildMenu.pyramidObjectsProgression.BuildNextPyramidLevel();
             else if (buildsNextFloorAndSpecial)
             {
-                villageBuildMenu.pyramidObjectsProgression.BuildNextPyramidLevel();
                 villageBuildMenu.pyramidObjectsProgression.BuildNextSpecialBuilding();
+                villageBuildMenu.pyramidObjectsProgression.BuildNextPyramidLevel();
             }
             else villageBuildMenu.pyramidObjectsProgression.BuildNextSpecialBuilding();
 
