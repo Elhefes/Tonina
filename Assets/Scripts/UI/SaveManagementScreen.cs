@@ -34,6 +34,8 @@ public class SaveManagementScreen : MonoBehaviour
     public GameObject skipIntroButton;
     public GameObject unlockEverythingButton;
 
+    public StatsController statsController;
+
     private void OnEnable()
     {
         int selectedSave = PlayerPrefs.GetInt("selectedSaveFile", 1);
@@ -168,5 +170,11 @@ public class SaveManagementScreen : MonoBehaviour
 
         GameState.Instance.SaveWorld();
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+    }
+
+    public void AddMoney()
+    {
+        statsController.availableMoney += 50;
+        statsController.SaveStats();
     }
 }

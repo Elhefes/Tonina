@@ -4,10 +4,10 @@ using UnityEngine.EventSystems;
 public class VillageBuildMenu : MonoBehaviour, IPointerDownHandler
 {
     public GameObject defaultTexts;
-    public GameObject buyButtonObject;
     public bool buildingSelected;
 
     public PyramidObjectsProgression pyramidObjectsProgression;
+    public MoneyCounter moneyCounter;
 
     public VillageBuildSelection[] villageBuildSelections; // All possible selections
     public VillageBuildSelection currentBuildSelection;
@@ -38,7 +38,7 @@ public class VillageBuildMenu : MonoBehaviour, IPointerDownHandler
                 }
             }
         }
-        buyButtonObject.SetActive(false);
+        moneyCounter.buyButton.gameObject.SetActive(false);
         currentBuildSelection = null;
         defaultTexts.SetActive(true);
         buildingSelected = false;

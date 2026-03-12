@@ -3,7 +3,7 @@ using TMPro;
 
 public class SelectedVillageBuildingInfo : MonoBehaviour
 {
-    public string villageBuildingCost;
+    public int villageBuildingCost;
     public TMP_Text selectedNameTMP;
 
     private void OnEnable()

@@ -51,7 +51,10 @@ public class VillageBuildSelection : MonoBehaviour, IPointerEnterHandler, IPoint
                 villageBuildMenu.buildingSelected = true;
             }
             villageBuildMenu.currentBuildSelection = this;
-            villageBuildMenu.buyButtonObject.SetActive(true);
+
+            villageBuildMenu.moneyCounter.UpdateBuyAvailability(selectedVillageBuildingInfo.villageBuildingCost);
+
+            villageBuildMenu.moneyCounter.buyButton.gameObject.SetActive(true);
         }
     }
 
@@ -81,6 +84,7 @@ public class VillageBuildSelection : MonoBehaviour, IPointerEnterHandler, IPoint
                     obj.SetActive(true);
                 }
             }
+            villageBuildMenu.moneyCounter.ReduceMoney(selectedVillageBuildingInfo.villageBuildingCost);
         }
 
         if (boughtObjectsToDisable != null)
