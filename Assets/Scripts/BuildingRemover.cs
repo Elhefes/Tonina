@@ -48,6 +48,7 @@ public class BuildingRemover : MonoBehaviour
                 }
             }
             buildingWheel.RemoveBuildingsByAmount(i);
+            buildingWheel.moneyCounter.UpdateBuyAvailability(buildingWheel.incomingCost);
         }
     }
 
@@ -58,7 +59,7 @@ public class BuildingRemover : MonoBehaviour
             foreach (GameObject building in hiddenBuildings)
             {
                 Destroy(building);
-                buildingWheel.statsController.changesToBattlefield++;
+                buildingWheel.moneyCounter.statsController.changesToBattlefield++;
             }
             removableBuildings.Clear();
             hiddenBuildings.Clear();

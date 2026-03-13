@@ -32,6 +32,6 @@ public class MoneyCounter : MonoBehaviour
 
     public void UpdateMoneyCounter()
     {
-        moneyTMP.text = "Money: " + statsController.availableMoney.ToString();
+        if (moneyTMP != null) moneyTMP.text = "Money: " + statsController.availableMoney.ToString();
     }
 }

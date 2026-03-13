@@ -44,7 +44,7 @@ public class BuildingWheel : MonoBehaviour
 
     public Player player;
 
-    public StatsController statsController;
+    public MoneyCounter moneyCounter;
 
     private void OnEnable()
     {
@@ -84,10 +84,14 @@ public class BuildingWheel : MonoBehaviour
         else
         {
             originalPlacedObjectAmounts = placedObjectsGrid.placedObjectAmounts;
-            if (buildingsToBePlaced != null) statsController.changesToBattlefield += buildingsToBePlaced.Count;
+            if (buildingsToBePlaced != null)
+            {
+                moneyCounter.statsController.changesToBattlefield += buildingsToBePlaced.Count;
+                moneyCounter.ReduceMoney(incomingCost);
+            }
         }
         buildingsToBePlaced.Clear();
-        statsController.SaveStats();
+        moneyCounter.statsController.SaveStats();
         player.StartTeleportToHome();
     }
 
@@ -118,7 +122,7 @@ public class BuildingWheel : MonoBehaviour
 
     public void UpdateIncomingCostText()
     {
-        incomingCostText.text = "Money | Changes cost:\n" + statsController.availableMoney + " | " + incomingCost;
+        incomingCostText.text = "Money | Changes cost:\n" + moneyCounter.statsController.availableMoney + " | " + incomingCost;
     }
 
     public void ShowBuildingInHandIfPossible()
@@ -234,6 +238,7 @@ public class BuildingWheel : MonoBehaviour
                     UpdateBuildingsPlacedText();
                     UpdateIncomingCostText();
                     ShowBuildingInHandIfPossible();
+                    moneyCounter.UpdateBuyAvailability(incomingCost);
                 }
             }
         }
