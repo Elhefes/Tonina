@@ -4,18 +4,24 @@ using UnityEngine.UI;
 
 public class OkillBuyMenu : MonoBehaviour
 {
+    public MoneyCounter moneyCounter;
+
+    public int spearCost;
+    public int fillOkillCost;
+    public int bowCost;
+
+    public GameObject menuButtonsParent;
+
+    public GameObject spearBuyMenu;
+    public GameObject fillOkillBuyMenu;
+    public GameObject bowBuyMenu;
+
     public GameObject closeButtonObject;
-    public GameObject buttonsParent;
-    public GameObject[] buyPageObjects;
 
     public Image spearButtonImage;
     public Image fillOkillButtonImage;
     public Image bowButtonImage;
     public Sprite isBoughtSprite;
-
-    public Button spearBuyButton;
-    public Button fillOkillBuyButton;
-    public Button bowBuyButton;
 
     // Shop progression: "player can buy more stuff as the game progresses"
     public Button bowBuyPageButton;
@@ -30,10 +36,15 @@ public class OkillBuyMenu : MonoBehaviour
 
     public void ReturnToButtons()
     {
+        menuButtonsParent.SetActive(true);
         closeButtonObject.SetActive(true);
-        buttonsParent.SetActive(true);
-        foreach (GameObject obj in buyPageObjects) obj.SetActive(false);
+        moneyCounter.UpdateMoneyCounter();
+        moneyCounter.buyButton.gameObject.SetActive(false);
         FindWhatIsBought();
+
+        spearBuyMenu.SetActive(false);
+        fillOkillBuyMenu.SetActive(false);
+        bowBuyMenu.SetActive(false);
     }
 
     private void FindWhatIsBought()
@@ -41,17 +52,14 @@ public class OkillBuyMenu : MonoBehaviour
         if (GameState.Instance.progressionData.spearUnlocked)
         {
             spearButtonImage.sprite = isBoughtSprite;
-            spearBuyButton.interactable = false;
         }
         if (GameState.Instance.progressionData.fillOkillUnlocked)
         {
             fillOkillButtonImage.sprite = isBoughtSprite;
-            fillOkillBuyButton.interactable = false;
         }
         if (GameState.Instance.progressionData.bowUnlocked)
         {
             bowButtonImage.sprite = isBoughtSprite;
-            bowBuyButton.interactable = false;
         }
 
         // Shop progression
@@ -63,24 +71,61 @@ public class OkillBuyMenu : MonoBehaviour
         }
     }
 
-    public void BuySpear()
+    public void OpenSpearBuyMenu()
     {
-        GameState.Instance.progressionData.spearUnlocked = true;
-        GameState.Instance.SaveWorld();
-        ReturnToButtons();
+        spearBuyMenu.SetActive(true);
+        if (GameState.Instance.progressionData.spearUnlocked || moneyCounter.statsController.availableMoney < spearCost)
+        {
+            moneyCounter.buyButton.interactable = false;
+        }
+        else moneyCounter.buyButton.interactable = true;
+        moneyCounter.buyButton.gameObject.SetActive(true);
     }
 
-    public void BuyFillOkill()
+    public void OpenFillOkillBuyMenu()
     {
-        GameState.Instance.progressionData.fillOkillUnlocked = true;
-        GameState.Instance.SaveWorld();
-        ReturnToButtons();
+        fillOkillBuyMenu.SetActive(true);
+        if (GameState.Instance.progressionData.fillOkillUnlocked || moneyCounter.statsController.availableMoney < fillOkillCost)
+        {
+            moneyCounter.buyButton.interactable = false;
+        }
+        else moneyCounter.buyButton.interactable = true;
+        moneyCounter.buyButton.gameObject.SetActive(true);
     }
 
-    public void BuyBow()
+    public void OpenBowBuyMenu()
     {
-        GameState.Instance.progressionData.bowUnlocked = true;
-        GameState.Instance.SaveWorld();
-        ReturnToButtons();
+        bowBuyMenu.SetActive(true);
+        if (GameState.Instance.progressionData.bowUnlocked || moneyCounter.statsController.availableMoney < bowCost)
+        {
+            moneyCounter.buyButton.interactable = false;
+        }
+        else moneyCounter.buyButton.interactable = true;
+        moneyCounter.buyButton.gameObject.SetActive(true);
+    }
+
+    public void BuyThis()
+    {
+        if (spearBuyMenu.activeSelf)
+        {
+            GameState.Instance.progressionData.spearUnlocked = true;
+            moneyCounter.ReduceMoney(spearCost);
+            GameState.Instance.SaveWorld();
+            ReturnToButtons();
+        }
+        else if (fillOkillBuyMenu.activeSelf)
+        {
+            GameState.Instance.progressionData.fillOkillUnlocked = true;
+            moneyCounter.ReduceMoney(fillOkillCost);
+            GameState.Instance.SaveWorld();
+            ReturnToButtons();
+        }
+        else if (bowBuyMenu.activeSelf)
+        {
+            GameState.Instance.progressionData.bowUnlocked = true;
+            moneyCounter.ReduceMoney(bowCost);
+            GameState.Instance.SaveWorld();
+            ReturnToButtons();
+        }
     }
 }
