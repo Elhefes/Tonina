@@ -147,6 +147,14 @@ public class AttackModeSpawnController : MonoBehaviour
 
     public void StartAttack()
     {
+        if (PlayerPrefs.GetInt("battleSongRandomized", 1) == 1)
+        {
+            musicPlayer.PlayBattleSong(Random.Range(0, musicPlayer.battleSongs.Count));
+        }
+        else
+        {
+            musicPlayer.PlayBattleSong(PlayerPrefs.GetInt("battleSongID", 0));
+        }
         mouseLook.player.healthBar.gameObject.SetActive(true);
         mouseLook.SetMovingToSpecificPosition(false);
         mainCamera.gameObject.tag = "MainCamera";
