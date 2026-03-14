@@ -12,7 +12,7 @@ public class BattlefieldMenu : MonoBehaviour
 
     private int threatLevel;
     public ThreatLevels threatLevels;
-    public TMP_Text TTWarriorsText;
+    public TMP_Text jadeaWarriorsText;
     public TMP_Text rewardsText;
 
     public GameObject musicSelectionObject;
@@ -93,13 +93,13 @@ public class BattlefieldMenu : MonoBehaviour
         PlayerPrefs.SetInt("currentThreatLevel", threatLevel);
         if (threatLevel <= threatLevels.threatLevels.Length && threatLevel <= Mathf.FloorToInt(waveController.threatLevelController.threatProgressionValue))
         {
-            TTWarriorsText.text = threatLevels.threatLevels[threatLevel - 1].friendlyWarriorsAmount.ToString();
+            jadeaWarriorsText.text = threatLevels.threatLevels[threatLevel - 1].friendlyWarriorsAmount.ToString();
             rewardsText.text = threatLevels.threatLevels[threatLevel - 1].minReward.ToString() + " - " + threatLevels.threatLevels[threatLevel - 1].maxReward.ToString();
             startBattleButton.interactable = true;
         }
         else
         {
-            TTWarriorsText.text = "-";
+            jadeaWarriorsText.text = "-";
             rewardsText.text = "-";
             startBattleButton.interactable = false;
         }

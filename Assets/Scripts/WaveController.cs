@@ -42,7 +42,7 @@ public class WaveController : MonoBehaviour
 
     public ObjectPooler pooler;
 
-    void Start()
+    private void Start()
     {
         kingHouse = GameObject.Find("king_house");
         coroutines = new List<Coroutine>();
@@ -61,13 +61,13 @@ public class WaveController : MonoBehaviour
         StartCoroutine(SecondCounter());
     }
 
-    void EnableBattleUI()
+    private void EnableBattleUI()
     {
         overworldOptionsButton.SetActive(false);
         battleUI.SetActive(true);
     }
 
-    void DisableBattleUI()
+    private void DisableBattleUI()
     {
         battleUI.SetActive(false);
         overworldOptionsButton.SetActive(true);
@@ -132,7 +132,7 @@ public class WaveController : MonoBehaviour
         InvokeRepeating("CheckForEnemies", 1f, 1f);
     }
 
-    void SpawnEnemyOfType(char c, int i)
+    private void SpawnEnemyOfType(char c, int i)
     {
         string enemyType = "Clubber";
         if (c.Equals('B')) enemyType = "Runner";
@@ -144,7 +144,7 @@ public class WaveController : MonoBehaviour
         enemy.ResetEnemyAttributes();
     }
 
-    void CheckForEnemies()
+    private void CheckForEnemies()
     {
         if (battleIsLost) return;
         if (GameObject.FindGameObjectsWithTag("Enemy").Length == 0)
@@ -176,7 +176,7 @@ public class WaveController : MonoBehaviour
         statsController.SaveStats();
     }
 
-    void WinBattle()
+    private void WinBattle()
     {
         if (UIController != null)
         {
@@ -208,7 +208,7 @@ public class WaveController : MonoBehaviour
         statsController.SaveStats();
     }
 
-    int GetTotalRewards()
+    private int GetTotalRewards()
     {
         if (secondsInBattle <= threatLevel.rewardTimerMin) return threatLevel.maxReward;
         else if (secondsInBattle >= threatLevel.rewardTimerMax) return threatLevel.minReward;
@@ -234,7 +234,7 @@ public class WaveController : MonoBehaviour
         }
     }
 
-    void SpawnFriendlies(int friendlyWarriorsAmount)
+    private void SpawnFriendlies(int friendlyWarriorsAmount)
     {
         float xOffset = -11f;
         float zOffset = -11f;
@@ -266,7 +266,7 @@ public class WaveController : MonoBehaviour
         }
     }
 
-    void SpawnFriendlyPair(Vector3 spawnPosition)
+    private void SpawnFriendlyPair(Vector3 spawnPosition)
     {
         JadeaWarrior friendly1 = ObjectPooler.Instance.SpawnFriendlyFromPool("JadeaWarrior", spawnPosition, kingHouse.transform.rotation);
         friendly1.ResetFriendlyAttributes();
@@ -275,7 +275,7 @@ public class WaveController : MonoBehaviour
         friendly2.ResetFriendlyAttributes();
     }
 
-    IEnumerator SecondCounter()
+    private IEnumerator SecondCounter()
     {
         secondsInBattle = 0;
         while (!battleWinningScreen.gameObject.activeSelf)
