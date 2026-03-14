@@ -34,11 +34,11 @@ public class StatsBoard : MonoBehaviour
         StopAllCoroutines();
     }
 
-    void UpdateStatsMenuTexts()
+    private void UpdateStatsMenuTexts()
     {
         if (stats == null) return;
         
-        pyramidLevelsBuiltAmountTMP.text = "" + (3 + GameState.Instance.progressionData.extraPyramidFloorsBuilt) + "/14";
+        pyramidLevelsBuiltAmountTMP.text = "" + (3 + GameState.Instance.progressionData.extraPyramidFloorsBuilt) + "/8";
         pyramidHeightAmountTMP.text = GetPyramidHeight();
         availableMoneyAmountTMP.text = "" + stats.availableMoney + " gold";
         averageRewardPercentagesTMP.text = GetTotalRewardPercentages();
@@ -84,7 +84,7 @@ public class StatsBoard : MonoBehaviour
         return avg.ToString("F1", CultureInfo.InvariantCulture) + "%";
     }
 
-    IEnumerator TimedSecondsUpdate()
+    private IEnumerator TimedSecondsUpdate()
     {
         while (gameObject.activeInHierarchy)
         {
