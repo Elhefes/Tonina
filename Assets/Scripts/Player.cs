@@ -329,7 +329,7 @@ public class Player : Creature
                     if (villageTPMenu != null) villageTPMenu.SetActive(true);
                     return;
                 }
-                else if (villageTPMenu != null) villageTPMenu.SetActive(false);
+                else if (villageTPMenu != null && !insideKingHouse) villageTPMenu.SetActive(false);
 
                 // Click 1st object to enable the 2nd. Click 1st again to disable 2nd.
                 if (target.CompareTag("ClickToEnableObject") && Vector3.Distance(target.transform.position, transform.position) < 4f)
