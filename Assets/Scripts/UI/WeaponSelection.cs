@@ -12,11 +12,15 @@ public class WeaponSelection : MonoBehaviour
     private string customWeaponOrder;
     private string selectedWeaponOrder;
     private int[] slotXValues = { -500, -250, 0, 250, 500 };
-    public Transform clubSlot;
-    public Transform spearSlot;
-    public Transform axeSlot;
-    public Transform bowSlot;
-    public Transform smallStoneSlot;
+    public Button clubButton;
+    public Button spearButton;
+    public Button axeButton;
+    public Button bowButton;
+    public Button smallStoneButton;
+
+    public GameObject spearLock;
+    public GameObject axeLock;
+    public GameObject bowLock;
 
     public TMP_Text selectMoreTMP;
 
@@ -40,6 +44,7 @@ public class WeaponSelection : MonoBehaviour
         selectedWeaponsAmount = selectedWeaponOrder.Length;
         UpdateSelectionText();
         UpdateSlotPositions();
+        UpdateWeaponLocks();
     }
 
     private string UnlockedWeapons(string selectedWeaponOrder)
@@ -59,6 +64,44 @@ public class WeaponSelection : MonoBehaviour
             GameState.Instance.progressionData.axeUnlocked ||
             GameState.Instance.progressionData.bowUnlocked) return 3;
         else return 2;
+    }
+
+    private void UpdateWeaponLocks()
+    {
+        if (!GameState.Instance.progressionData.spearUnlocked)
+        {
+            spearButton.interactable = false;
+            spearLock.SetActive(true);
+        }
+        else
+        {
+            spearButton.interactable = true;
+            spearLock.SetActive(false);
+        }
+
+        // TODO: Axe is unlocked in demo
+
+        //if (!GameState.Instance.progressionData.axeUnlocked)
+        //{
+        //    axeButton.interactable = false;
+        //    axeLock.SetActive(true);
+        //}
+        //else
+        //{
+        //    axeButton.interactable = true;
+        //    axeLock.SetActive(false);
+        //}
+
+        if (!GameState.Instance.progressionData.bowUnlocked)
+        {
+            bowButton.interactable = false;
+            bowLock.SetActive(true);
+        }
+        else
+        {
+            bowButton.interactable = true;
+            bowLock.SetActive(false);
+        }
     }
 
     public void SelectWeaponIfPossible(int weaponIndex)
@@ -169,23 +212,23 @@ public class WeaponSelection : MonoBehaviour
         {
             if (customWeaponOrder[i].ToString() == "0")
             {
-                clubSlot.localPosition = new Vector3(slotXValues[i], 0, 0);
+                clubButton.transform.localPosition = new Vector3(slotXValues[i], 0, 0);
             }
             else if (customWeaponOrder[i].ToString() == "1")
             {
-                spearSlot.localPosition = new Vector3(slotXValues[i], 0, 0);
+                spearButton.transform.localPosition = new Vector3(slotXValues[i], 0, 0);
             }
             else if (customWeaponOrder[i].ToString() == "2")
             {
-                axeSlot.localPosition = new Vector3(slotXValues[i], 0, 0);
+                axeButton.transform.localPosition = new Vector3(slotXValues[i], 0, 0);
             }
             else if (customWeaponOrder[i].ToString() == "3")
             {
-                bowSlot.localPosition = new Vector3(slotXValues[i], 0, 0);
+                bowButton.transform.localPosition = new Vector3(slotXValues[i], 0, 0);
             }
             else if (customWeaponOrder[i].ToString() == "4")
             {
-                smallStoneSlot.localPosition = new Vector3(slotXValues[i], 0, 0);
+                smallStoneButton.transform.localPosition = new Vector3(slotXValues[i], 0, 0);
             }
         }
     }

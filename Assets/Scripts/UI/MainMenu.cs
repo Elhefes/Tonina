@@ -64,6 +64,10 @@ public class MainMenu : MonoBehaviour
     {
         int saveSlot = PlayerPrefs.GetInt("selectedSaveFile", 1);
 
+        // TODO: these should be reset for each save, not playerprefs, fix the whole weapon order system
+        PlayerPrefs.SetString("CustomWeaponOrder", "01234");
+        PlayerPrefs.SetString("SelectedWeaponOrder", "04");
+
         if (playerNameTMP.text.Length < 2) // Empty string
         {
             switch(saveSlot)
