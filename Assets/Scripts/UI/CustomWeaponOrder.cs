@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.UI;
 
 public class CustomWeaponOrder : MonoBehaviour
 {
@@ -6,16 +7,21 @@ public class CustomWeaponOrder : MonoBehaviour
     private int[] slotXValues = { -500, -250, 0, 250, 500 };
     private int chosenWepIndex = 2;
     public Transform moveButtons;
-    public Transform clubSlot;
-    public Transform spearSlot;
-    public Transform axeSlot;
-    public Transform bowSlot;
-    public Transform smallStoneSlot;
+    public Button clubButton;
+    public Button spearButton;
+    public Button axeButton;
+    public Button bowButton;
+    public Button smallStoneButton;
 
     private void Start()
     {
         customWeaponOrder = PlayerPrefs.GetString("CustomWeaponOrder", "01234");
         UpdateSlotPositions();
+    }
+
+    private void OnEnable()
+    {
+        UpdateWeaponLocks();
     }
 
     public void UpdateChosenWepIndex(Transform slot)
@@ -40,28 +46,42 @@ public class CustomWeaponOrder : MonoBehaviour
         UpdateSlotPositions();
     }
 
+    private void UpdateWeaponLocks()
+    {
+        if (!GameState.Instance.progressionData.spearUnlocked) spearButton.interactable = false;
+        else spearButton.interactable = true;
+
+        // TODO: Axe is unlocked in demo
+
+        //if (!GameState.Instance.progressionData.axeUnlocked) axeButton.interactable = false;
+        //else axeButton.interactable = true;
+
+        if (!GameState.Instance.progressionData.bowUnlocked) bowButton.interactable = false;
+        else bowButton.interactable = true;
+    }
+
     private void UpdateSlotPositions()
     {
         for (int i = 0; i < customWeaponOrder.Length; i++)
         {
             if (customWeaponOrder[i].ToString() == "0") {
-                clubSlot.localPosition = new Vector3(slotXValues[i], 0, 0);
+                clubButton.transform.localPosition = new Vector3(slotXValues[i], 0, 0);
             }
             else if (customWeaponOrder[i].ToString() == "1")
             {
-                spearSlot.localPosition = new Vector3(slotXValues[i], 0, 0);
+                spearButton.transform.localPosition = new Vector3(slotXValues[i], 0, 0);
             }
             else if (customWeaponOrder[i].ToString() == "2")
             {
-                axeSlot.localPosition = new Vector3(slotXValues[i], 0, 0);
+                axeButton.transform.localPosition = new Vector3(slotXValues[i], 0, 0);
             }
             else if (customWeaponOrder[i].ToString() == "3")
             {
-                bowSlot.localPosition = new Vector3(slotXValues[i], 0, 0);
+                bowButton.transform.localPosition = new Vector3(slotXValues[i], 0, 0);
             }
             else if (customWeaponOrder[i].ToString() == "4")
             {
-                smallStoneSlot.localPosition = new Vector3(slotXValues[i], 0, 0);
+                smallStoneButton.transform.localPosition = new Vector3(slotXValues[i], 0, 0);
             }
         }
     }
