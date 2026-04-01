@@ -488,6 +488,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1ada15a912c6e4a408bdf1486e2b5d53, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isBlue: 0
+  isRed: 0
+  minimapCamera: {fileID: 0}
 --- !u!1 &5021349066847927866
 GameObject:
   m_ObjectHideFlags: 0
@@ -566,7 +569,7 @@ NavMeshAgent:
   m_GameObject: {fileID: 5021349066847927866}
   m_Enabled: 1
   m_AgentTypeID: 0
-  m_Radius: 0.6
+  m_Radius: 0.42
   m_Speed: 3.75
   m_Acceleration: 20
   avoidancePriority: 50
