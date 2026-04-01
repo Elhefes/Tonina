@@ -126,6 +126,7 @@ public class Player : Creature
         EquipDefaultWeapon();
         health = startingHealth;
         playerHealthIndicator.UpdateHealthIndicator(health, startingHealth);
+        overHealBar.UpdateOverHealBar(health, startingHealth);
         overHealDecay = false;
         healthBar.value = health;
         healthBar.gameObject.SetActive(true);
