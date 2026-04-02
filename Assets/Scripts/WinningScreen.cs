@@ -15,6 +15,8 @@ public class WinningScreen : MonoBehaviour
     public TMP_Text ceilingTMP;
     private int progressionFloorInt;
 
+    public AudioSource audioSource;
+
     private void OnEnable()
     {
         // Give this object the correct values before enabling
@@ -38,18 +40,27 @@ public class WinningScreen : MonoBehaviour
         float startValue = previousProgressionValue;
         float endValue = currentProgressionValue;
 
+        int previousFloor = Mathf.FloorToInt(startValue);
+
         while (time < duration)
         {
             time += Time.deltaTime;
 
             float currentValue = Mathf.Lerp(startValue, endValue, time / duration);
 
-            int floor = Mathf.FloorToInt(currentValue);
+            int currentFloor = Mathf.FloorToInt(currentValue);
 
-            bottomTMP.text = floor.ToString();
-            ceilingTMP.text = (floor + 1).ToString();
-            progressionBarImage.fillAmount = currentValue - floor;
-            blackProgTextImage.fillAmount = currentValue - floor;
+            // Detect level-up
+            if (currentFloor > previousFloor)
+            {
+                audioSource.PlayOneShot(audioSource.clip, PlayerPrefs.GetFloat("soundVolume", 0.5f));
+                previousFloor = currentFloor;
+            }
+
+            bottomTMP.text = currentFloor.ToString();
+            ceilingTMP.text = (currentFloor + 1).ToString();
+            progressionBarImage.fillAmount = currentValue - currentFloor;
+            blackProgTextImage.fillAmount = currentValue - currentFloor;
 
             yield return null;
         }
