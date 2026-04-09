@@ -26,6 +26,16 @@ public class WeatherController : MonoBehaviour
     private float clearSkyExposure = 1f;
     private float rainSkyExposure = 0.13f;
 
+    // --- Wind / gust system ---
+    private Vector2 currentWindX; // (start, end)
+    private Vector2 currentWindZ;
+
+    private Vector2 targetWindX;
+    private Vector2 targetWindZ;
+
+    private float windLerpSpeed = 1.5f;
+    private Coroutine windCoroutine;
+
     private void Start()
     {
         naturalWeatherCoroutine = StartCoroutine(StartNaturalWeather());
@@ -74,6 +84,27 @@ public class WeatherController : MonoBehaviour
             Mathf.Lerp(skyboxMat.GetFloat("_AtmosphereThickness"), targetAtmosphereThickness, 0.33f * Time.fixedDeltaTime));
         skyboxMat.SetFloat("_Exposure",
             Mathf.Lerp(skyboxMat.GetFloat("_Exposure"), targetExposure, 0.2f * Time.fixedDeltaTime));
+
+        // --- Wind smoothing ---
+        currentWindX = Vector2.Lerp(currentWindX, targetWindX, windLerpSpeed * Time.fixedDeltaTime);
+        currentWindZ = Vector2.Lerp(currentWindZ, targetWindZ, windLerpSpeed * Time.fixedDeltaTime);
+
+        // Apply to particle system
+        var vel = rainParticleSystem.velocityOverLifetime;
+
+        // X axis
+        var x = vel.x;
+        x.mode = ParticleSystemCurveMode.TwoConstants;
+        x.constantMin = currentWindX.x;
+        x.constantMax = currentWindX.y;
+        vel.x = x;
+
+        // Z axis
+        var z = vel.z;
+        z.mode = ParticleSystemCurveMode.TwoConstants;
+        z.constantMin = currentWindZ.x;
+        z.constantMax = currentWindZ.y;
+        vel.z = z;
     }
 
     void SetSunnySkybox()
@@ -89,9 +120,15 @@ public class WeatherController : MonoBehaviour
         raining = true;
         StopCoroutine(FadeRainAway());
         rainParticleSystem.Play();
+
         randomRainEmissionAmount = Random.Range(randomMin, randomMax);
         rainTransitionCoroutine = StartCoroutine(RainBuildUp());
+
         rainSoundSource.Play();
+
+        // START WIND
+        if (windCoroutine != null) StopCoroutine(windCoroutine);
+        windCoroutine = StartCoroutine(WindGustRoutine());
     }
 
     void StopRain()
@@ -99,6 +136,13 @@ public class WeatherController : MonoBehaviour
         raining = false;
         StopCoroutine(RainBuildUp());
         rainTransitionCoroutine = StartCoroutine(FadeRainAway());
+
+        // STOP WIND
+        if (windCoroutine != null) StopCoroutine(windCoroutine);
+
+        // Reset wind smoothly back to zero
+        targetWindX = Vector2.zero;
+        targetWindZ = Vector2.zero;
     }
 
     private IEnumerator RainBuildUp()
@@ -142,6 +186,32 @@ public class WeatherController : MonoBehaviour
             rainSoundSource.Stop();
             rainSoundSource.volume = 0f;
             rainSoundFaderValue = 0f;
+        }
+    }
+
+    private IEnumerator WindGustRoutine()
+    {
+        while (raining)
+        {
+            // --- Bias toward 0 using squared distribution ---
+            float xStart = Random.Range(-1f, 1f);
+            float zStart = Random.Range(-1f, 1f);
+
+            // Square to bias toward 0, then scale to [-10, 10]
+            xStart = Mathf.Sign(xStart) * xStart * xStart * 10f;
+            zStart = Mathf.Sign(zStart) * zStart * zStart * 10f;
+
+            // End values are half
+            targetWindX = new Vector2(xStart * 0.5f, xStart);
+            targetWindZ = new Vector2(zStart * 0.5f, zStart);
+
+            // --- Intensity affects duration ---
+            float intensity = Mathf.Max(Mathf.Abs(xStart), Mathf.Abs(zStart));
+
+            // Map intensity wait time (strong wind = shorter duration)
+            float waitTime = Mathf.Lerp(18f, 2f, intensity / 10f);
+
+            yield return new WaitForSeconds(waitTime);
         }
     }
 
