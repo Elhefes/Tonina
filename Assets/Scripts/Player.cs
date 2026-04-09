@@ -21,6 +21,7 @@ public class Player : Creature
     private float originalMovementSpeed;
     private float runningSpeed = 5.25f;
     public Image staminaBarImage;
+    public ParticleSystem runningParticleSystem;
     public bool running;
     public bool recoveringStamina;
 
@@ -785,6 +786,7 @@ public class Player : Creature
         {
             running = true;
             creatureMovement.agent.speed = runningSpeed;
+            runningParticleSystem.Play();
         }
         else StopRunning();
     }
@@ -805,6 +807,7 @@ public class Player : Creature
     {
         running = false;
         creatureMovement.agent.speed = originalMovementSpeed;
+        runningParticleSystem.Stop();
 
         if (recoveryCoroutine != null)
         {
