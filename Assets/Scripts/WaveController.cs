@@ -18,7 +18,7 @@ public class WaveController : MonoBehaviour
 
     public UI_Controller UIController;
 
-    public WinningScreen battleWinningScreen;
+    public JadeaWinningScreen battleWinningScreen;
 
     public StatsController statsController;
 

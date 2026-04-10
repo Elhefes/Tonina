@@ -3,7 +3,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 
-public class WinningScreen : MonoBehaviour
+public class JadeaWinningScreen : MonoBehaviour
 {
     public GameObject returnHomeButton;
     public Image progressionBarImage;
