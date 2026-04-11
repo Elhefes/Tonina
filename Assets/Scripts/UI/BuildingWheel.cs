@@ -126,13 +126,17 @@ public class BuildingWheel : MonoBehaviour
 
     public void UpdateIncomingCostText()
     {
-        incomingCostText.text = "Money | Changes cost:\n" + moneyCounter.statsController.availableMoney + " | " + incomingCost;
-        UpdateTopBackgroundColor();
+        bool tooExpensive = incomingCost > moneyCounter.statsController.availableMoney;
+        string sym = tooExpensive ? "<"
+           : incomingCost < moneyCounter.statsController.availableMoney ? ">"
+           : "=";
+        incomingCostText.text = "Money | Changes cost:\n" + moneyCounter.statsController.availableMoney + " " + sym + " " + incomingCost;
+        UpdateTopBackgroundColor(tooExpensive);
     }
 
-    private void UpdateTopBackgroundColor()
+    private void UpdateTopBackgroundColor(bool tooExpensive)
     {
-        if (incomingCost > moneyCounter.statsController.availableMoney) topBackgroundImage.sprite = topBackgroundRed;
+        if (tooExpensive) topBackgroundImage.sprite = topBackgroundRed;
         else topBackgroundImage.sprite = topBackgroundBlue;
     }
 
