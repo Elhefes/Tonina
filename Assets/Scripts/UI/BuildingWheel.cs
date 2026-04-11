@@ -22,6 +22,9 @@ public class BuildingWheel : MonoBehaviour
     public TMP_Text incomingCostText;
     public GameObject lockedIcon;
     public GameObject noMoreRoomForBuildingsIndicator;
+    public Image topBackgroundImage;
+    public Sprite topBackgroundBlue;
+    public Sprite topBackgroundRed;
 
     public Image currentBuildingImage;
     public Image nextBuildingImage;
@@ -49,6 +52,7 @@ public class BuildingWheel : MonoBehaviour
     private void OnEnable()
     {
         incomingCost = 0;
+        moneyCounter.UpdateBuyAvailability(incomingCost);
         lockedIcon.SetActive(false);
         maxPlaceablesAmount = placeablesManager.GetMaxPlaceablesAmount();
         placeablesManager.UpdateExistingPlaceablesAmount();
@@ -101,7 +105,7 @@ public class BuildingWheel : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Q)) PreviousBuilding();
     }
 
-    void UpdateBuildingsPlacedText()
+    private void UpdateBuildingsPlacedText()
     {
         buildingsPlacedText.text = "Buildings placed:\n" + placeablesManager.existingPlaceablesAmount + " / " + maxPlaceablesAmount;
         if (placeablesManager.existingPlaceablesAmount < maxPlaceablesAmount)
@@ -114,7 +118,7 @@ public class BuildingWheel : MonoBehaviour
         }
     }
 
-    void UpdateBuildingCostText()
+    private void UpdateBuildingCostText()
     {
         buildingCostText.text = placeablesOnCamera[buildingIndex].placeableBuildingPrefab.name.ToString() + "\nCost: " +
             placeablesOnCamera[buildingIndex].placeableBuildingPrefab.cost.ToString();
@@ -123,6 +127,13 @@ public class BuildingWheel : MonoBehaviour
     public void UpdateIncomingCostText()
     {
         incomingCostText.text = "Money | Changes cost:\n" + moneyCounter.statsController.availableMoney + " | " + incomingCost;
+        UpdateTopBackgroundColor();
+    }
+
+    private void UpdateTopBackgroundColor()
+    {
+        if (incomingCost > moneyCounter.statsController.availableMoney) topBackgroundImage.sprite = topBackgroundRed;
+        else topBackgroundImage.sprite = topBackgroundBlue;
     }
 
     public void ShowBuildingInHandIfPossible()
@@ -181,7 +192,7 @@ public class BuildingWheel : MonoBehaviour
         //if (wep.switchSound != null) soundEffectPlayer.PlayOneShot(wep.switchSound, PlayerPrefs.GetFloat("soundVolume", 0.5f));
     }
 
-    void SwitchToBuilding(int buildingIndex)
+    private void SwitchToBuilding(int buildingIndex)
     {
         if (this == null) return;
         foreach (BuildingPlacing building in placeablesOnCamera)
@@ -261,13 +272,13 @@ public class BuildingWheel : MonoBehaviour
         infoPage.EnablePlaceableDescription(buildingIndex);
     }
 
-    void StartBuildingWheelCooldown()
+    private void StartBuildingWheelCooldown()
     {
         Invoke("ResetBuildingWheelCooldown", coolDownTime);
         buildingWheelCooldown = true;
     }
 
-    void ResetBuildingWheelCooldown()
+    private void ResetBuildingWheelCooldown()
     {
         buildingWheelCooldown = false;
     }
