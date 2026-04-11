@@ -6,7 +6,7 @@ public class AttackModeController : MonoBehaviour
 {
     public UI_Controller UIController;
     public GameObject battleUI;
-    public JadeaWinningScreen battleWinningScreen;
+    public AttackWinScreen attackWinScreen;
     public StatsController statsController;
     public bool battleIsLost;
     public TMP_Text battleTimeText;
@@ -16,6 +16,7 @@ public class AttackModeController : MonoBehaviour
     public void StartAttack()
     {
         InvokeRepeating("CheckForEnemies", 1f, 1f);
+        StartCoroutine(SecondCounter());
     }
 
     private void CheckForEnemies()
@@ -60,9 +61,8 @@ public class AttackModeController : MonoBehaviour
         StopCoroutine(SecondCounter());
         StartCoroutine(PlayRewardsRisingAnimation());
         battleUI.SetActive(false);
-        statsController.totalRewardPercentages += (float)100 * GetTotalRewards() / 1; // change 1 to maxReward
 
-        if (battleWinningScreen != null) battleWinningScreen.gameObject.SetActive(true);
+        if (attackWinScreen != null) attackWinScreen.gameObject.SetActive(true);
 
         statsController.battlesWon++;
         statsController.SaveStats();
@@ -70,11 +70,7 @@ public class AttackModeController : MonoBehaviour
 
     private int GetTotalRewards()
     {
-        /*if (secondsInBattle <= threatLevel.rewardTimerMin) return threatLevel.maxReward;
-        else if (secondsInBattle >= threatLevel.rewardTimerMax) return threatLevel.minReward;
-        return Mathf.RoundToInt(threatLevel.maxReward - (threatLevel.maxReward - threatLevel.minReward) *
-            ((float)secondsInBattle - threatLevel.rewardTimerMin) / (threatLevel.rewardTimerMax - threatLevel.rewardTimerMin));*/
-        return 0;
+        return attackWinScreen.winReward;
     }
 
     private IEnumerator PlayRewardsRisingAnimation()
@@ -98,7 +94,7 @@ public class AttackModeController : MonoBehaviour
     private IEnumerator SecondCounter()
     {
         secondsInBattle = 0;
-        while (!battleWinningScreen.gameObject.activeSelf)
+        while (!attackWinScreen.gameObject.activeSelf)
         {
             yield return new WaitForSecondsRealtime(1f);
             secondsInBattle++;
