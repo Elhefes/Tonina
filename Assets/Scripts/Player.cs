@@ -85,6 +85,7 @@ public class Player : Creature
     public Button textBox;
     public TMP_Text speakerNameText;
     public TMP_Text textBoxText;
+    public GameObject textBoxDots;
     private string[] linesToRead;
     public int textLineIndex;
 
@@ -470,6 +471,14 @@ public class Player : Creature
     void UpdateTextBox()
     {
         speakerNameText.text = currentTextSubject.gameObject.name;
+        if (textLineIndex + 1 < linesToRead.Length)
+        {
+            if (textBoxDots != null) textBoxDots.SetActive(true);
+        }
+        else
+        {
+            if (textBoxDots != null) textBoxDots.SetActive(false);
+        }
         if (textLineIndex < linesToRead.Length)
         {
             textBoxText.text = linesToRead[textLineIndex];
