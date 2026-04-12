@@ -39,7 +39,7 @@ public class BattlefieldMenu : MonoBehaviour
 
     private void OnEnable()
     {
-        threatLevel = PlayerPrefs.GetInt("currentThreatLevel", 1);
+        threatLevel = Mathf.FloorToInt(waveController.threatLevelController.threatProgressionValue);
         battleSongID = PlayerPrefs.GetInt("battleSongID", 0);
         battleSongRandomized = PlayerPrefs.GetInt("battleSongRandomized", 1) == 1 ? true : false;
         SetMusicSelectionVisuals(battleSongRandomized);
