@@ -34,7 +34,7 @@ public class IntroMovingCamera : MonoBehaviour
 
     public void FinalFade() { introSceneController.StartFinalFade(); }
     public void EndTexts() { introSceneController.StartEndTexts(); }
-    public void FinalMusicFade() { introSceneController.StartFadingMusicDown(250f); }
+    public void FinalMusicFade() { introSceneController.StartFadingMusicDown(500f); }
 
     public void SwitchToTerrainLayerMask() { cam.cullingMask = terrainLayerMask; }
     public void SwitchToNormalLayerMask() { cam.cullingMask = normalLayerMask; }
