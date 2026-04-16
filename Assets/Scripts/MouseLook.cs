@@ -241,7 +241,15 @@ public class MouseLook : MonoBehaviour
         else
         {
             playerToFollowAngledDirection = new Vector3(player.transform.position.x + (distanceFromObject / Mathf.Tan(60 * Mathf.PI / 180)) - 0.66f, player.transform.position.y + distanceFromObject, player.transform.position.z);
-            transform.position = Vector3.Lerp(transform.position, playerToFollowAngledDirection, smoothSpeed);
+            Vector3 newPos = Vector3.Lerp(transform.position, playerToFollowAngledDirection, smoothSpeed);
+
+            // Camera movement is limited inside king house to x < 7.5f where the backwall is
+            if (player.insideKingHouse && !player.inBuildMode)
+            {
+                newPos.x = Mathf.Min(newPos.x, 7.5f);
+            }
+            transform.position = newPos;
+
             playerToFollowDirection = new Vector3(player.transform.position.x, player.transform.position.y + 100f, player.transform.position.z);
             minimapCamera.transform.position = Vector3.Lerp(minimapCamera.transform.position, playerToFollowDirection, smoothSpeed);
         }
@@ -284,7 +292,6 @@ public class MouseLook : MonoBehaviour
             minimapCamera.transform.rotation = Quaternion.RotateTowards(minimapCamera.transform.rotation, Quaternion.Euler(90f, 180f, 0f), 1.5f);
             if (!minimapIndicators.activeSelf && !minimapInput.buttonPressed) minimapIndicators.SetActive(true);
         }
-
         else RotateCameraToBattlefieldAngle();
     }
 
