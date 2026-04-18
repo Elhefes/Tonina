@@ -196,20 +196,19 @@ public class AttackModeSpawnController : MonoBehaviour
         battleUI.SetActive(false);
         attackModeCreatureSpawner.SetEnemiesActive(false);
         attackModeCreatureSpawner.SetFriendliesActive(false);
+
+        mouseLook.player.optionsMenu.gameObject.SetActive(false);
+        mouseLook.player.optionsMenu.returnToAttackPlannerButton.SetActive(false);
+        mouseLook.player.optionsMenu.returnHomeButton.gameObject.SetActive(true);
+
         gameObject.SetActive(true); // This gameObject is the SelectAttackPoints UI object
     }
 
     public void TryToReturnToSpawnSelection()
     {
-        if (battleUI.activeSelf && !gameObject.activeSelf)
+        if (battleUI.activeSelf && !gameObject.activeSelf && mouseLook.player != null)
         {
             ReturnToSpawnSelection();
-            if (mouseLook.player != null)
-            {
-                mouseLook.player.optionsMenu.gameObject.SetActive(false);
-                mouseLook.player.optionsMenu.returnToAttackPlannerButton.SetActive(false);
-                mouseLook.player.optionsMenu.returnHomeButton.gameObject.SetActive(true);
-            }
         }
     }
 
