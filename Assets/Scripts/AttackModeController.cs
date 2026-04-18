@@ -5,10 +5,10 @@ using UnityEngine;
 public class AttackModeController : MonoBehaviour
 {
     public UI_Controller UIController;
+    public GameObject playerObject;
     public GameObject battleUI;
     public AttackWinScreen attackWinScreen;
     public StatsController statsController;
-    public bool battleIsLost;
     public TMP_Text battleTimeText;
     public TMP_Text rewardsText;
     private int secondsInBattle;
@@ -21,7 +21,7 @@ public class AttackModeController : MonoBehaviour
 
     private void CheckForEnemies()
     {
-        if (battleIsLost) return;
+        if (!playerObject.activeSelf) return;
         if (GameObject.FindGameObjectsWithTag("Enemy").Length == 0)
         {
             CancelInvoke("CheckForEnemies");

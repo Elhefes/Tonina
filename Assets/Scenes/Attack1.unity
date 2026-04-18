@@ -4138,7 +4138,7 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: 2e82734736fa0c14a9f5a2fb800596ed, type: 3}
+  m_audioClip: {fileID: 0}
   m_Resource: {fileID: 8300000, guid: 2e82734736fa0c14a9f5a2fb800596ed, type: 3}
   m_PlayOnAwake: 0
   m_Volume: 1
@@ -12873,7 +12873,7 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: c42c711fcc120684883c086802b6388e, type: 3}
+  m_audioClip: {fileID: 0}
   m_Resource: {fileID: 8300000, guid: c42c711fcc120684883c086802b6388e, type: 3}
   m_PlayOnAwake: 1
   m_Volume: 0.5
@@ -24105,6 +24105,11 @@ PrefabInstance:
 --- !u!4 &910515678 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8382097095948948389, guid: f1110e22860f9844396abf95985246eb, type: 3}
+  m_PrefabInstance: {fileID: 910515677}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &910515679 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5021349066847927866, guid: f1110e22860f9844396abf95985246eb, type: 3}
   m_PrefabInstance: {fileID: 910515677}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &910932361
@@ -42086,10 +42091,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   UIController: {fileID: 1098428929}
+  playerObject: {fileID: 910515679}
   battleUI: {fileID: 2093563464}
   attackWinScreen: {fileID: 1347786846}
   statsController: {fileID: 1788166372}
-  battleIsLost: 0
   battleTimeText: {fileID: 338683751}
   rewardsText: {fileID: 449537778}
 --- !u!1 &1396039129
@@ -45035,7 +45040,7 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: 4cf1965621c05ae45ae00b6d4f8d6c80, type: 3}
+  m_audioClip: {fileID: 0}
   m_Resource: {fileID: 8300000, guid: 4cf1965621c05ae45ae00b6d4f8d6c80, type: 3}
   m_PlayOnAwake: 0
   m_Volume: 0.5
@@ -55958,7 +55963,7 @@ MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 5412454603876469069, guid: f1110e22860f9844396abf95985246eb, type: 3}
   m_PrefabInstance: {fileID: 910515677}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
+  m_GameObject: {fileID: 910515679}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f790da50e6ef0d4469092112e7f8e618, type: 3}
@@ -55969,7 +55974,7 @@ MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 385070561597705185, guid: f1110e22860f9844396abf95985246eb, type: 3}
   m_PrefabInstance: {fileID: 910515677}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
+  m_GameObject: {fileID: 910515679}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c63bfe995a1c2934684c848a64f4d756, type: 3}
