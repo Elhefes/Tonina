@@ -19,7 +19,7 @@ public class Creature : MonoBehaviour
     // Update is called once per frame
     public void Update()
     {
-        if (creatureMovement.target && creatureMovement.target.gameObject.activeSelf)
+        if (creatureMovement.target && creatureMovement.target.gameObject.activeInHierarchy)
         {
             creatureMovement.agent.destination = creatureMovement.target.position;
 
