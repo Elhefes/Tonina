@@ -7,11 +7,17 @@ public class AudioController : MonoBehaviour
     public Button musicToggleButton;
     public Sprite musicIcon;
     public Sprite muteMusicIcon;
-    private bool musicOn = true;
+    private bool musicOn;
     public Button soundToggleButton;
     public Sprite soundIcon;
     public Sprite muteSoundIcon;
-    private bool soundsOn = true;
+    private bool soundsOn;
+
+    private void Start()
+    {
+        musicOn = true;
+        soundsOn = true;
+    }
 
     public void SetMusic(bool value)
     {

@@ -2,15 +2,18 @@ using UnityEngine;
 
 public class AudioPassController : MonoBehaviour
 {
-    private int minFilterValue = 666;
-    private int maxFilterValue = 14000;
-    private float faderTime = 2.5f;
+    private int minFilterValue;
+    private int maxFilterValue;
+    private float faderTime;
     private float increment;
     public AudioLowPassFilter lowPassFilter;
     public bool muffleEffect;
 
     private void Start()
     {
+        minFilterValue = 666;
+        maxFilterValue = 14000;
+        faderTime = 2.5f;
         increment = (maxFilterValue - minFilterValue) / (faderTime * 100f);
     }
 

@@ -470,7 +470,7 @@ public class Player : Creature
 
     void UpdateTextBox()
     {
-        speakerNameText.text = currentTextSubject.gameObject.name;
+        if (speakerNameText != null) speakerNameText.text = currentTextSubject.gameObject.name;
         if (textLineIndex + 1 < linesToRead.Length)
         {
             if (textBoxDots != null) textBoxDots.SetActive(true);
@@ -481,7 +481,7 @@ public class Player : Creature
         }
         if (textLineIndex < linesToRead.Length)
         {
-            textBoxText.text = linesToRead[textLineIndex];
+            if (speakerNameText != null) textBoxText.text = linesToRead[textLineIndex];
         }
         else
         {
@@ -567,22 +567,25 @@ public class Player : Creature
 
     private void UpdateProjectileQuantityText()
     {
-        if (spear.gameObject.activeSelf)
+        if (projectileQuantityTMP != null)
         {
-            projectileQuantityTMP.text = spear.quantity.ToString();
-            projectileQuantityTMP.gameObject.SetActive(true);
+            if (spear.gameObject.activeSelf)
+            {
+                projectileQuantityTMP.text = spear.quantity.ToString();
+                projectileQuantityTMP.gameObject.SetActive(true);
+            }
+            else if (smallStone.gameObject.activeSelf)
+            {
+                projectileQuantityTMP.text = smallStone.quantity.ToString();
+                projectileQuantityTMP.gameObject.SetActive(true);
+            }
+            else if (bow.gameObject.activeSelf)
+            {
+                projectileQuantityTMP.text = bow.quantity.ToString();
+                projectileQuantityTMP.gameObject.SetActive(true);
+            }
+            else projectileQuantityTMP.gameObject.SetActive(false);
         }
-        else if (smallStone.gameObject.activeSelf)
-        {
-            projectileQuantityTMP.text = smallStone.quantity.ToString();
-            projectileQuantityTMP.gameObject.SetActive(true);
-        }
-        else if (bow.gameObject.activeSelf)
-        {
-            projectileQuantityTMP.text = bow.quantity.ToString();
-            projectileQuantityTMP.gameObject.SetActive(true);
-        }
-        else projectileQuantityTMP.gameObject.SetActive(false);
     }
 
     private void UpdateWeaponRangeIndicator()
@@ -704,9 +707,12 @@ public class Player : Creature
     {
         fillOkillPickUp.SetActive(true);
         fillOkillButtonFill.fillAmount = 0f;
-        stonesInFillTMP.text = fillOkill.stoneAmount.ToString();
-        spearsInFillTMP.text = fillOkill.spearAmount.ToString();
-        arrowsInFillTMP.text = fillOkill.arrowAmount.ToString();
+        if (stonesInFillTMP != null)
+            stonesInFillTMP.text = fillOkill.stoneAmount.ToString();
+        if (spearsInFillTMP != null)
+            spearsInFillTMP.text = fillOkill.spearAmount.ToString();
+        if (arrowsInFillTMP != null)
+            arrowsInFillTMP.text = fillOkill.arrowAmount.ToString();
     }
 
     public void TakeAllFromFillOkill()
@@ -718,7 +724,8 @@ public class Player : Creature
                 spear.quantity++;
                 spear.notAvailable = false;
                 fillOkill.spearAmount--;
-                spearsInFillTMP.text = fillOkill.spearAmount.ToString();
+                if (spearsInFillTMP != null)
+                    spearsInFillTMP.text = fillOkill.spearAmount.ToString();
             }
         }
         if (fillOkill.stoneAmount > 0)
@@ -732,8 +739,9 @@ public class Player : Creature
                 smallStone.quantity += stonesToTake;
                 smallStone.notAvailable = false;
                 fillOkill.stoneAmount -= stonesToTake;
-                stonesInFillTMP.text = fillOkill.stoneAmount.ToString();
-                if (smallStone.gameObject.activeSelf) projectileQuantityTMP.text = smallStone.quantity.ToString();
+                if (stonesInFillTMP != null)
+                    stonesInFillTMP.text = fillOkill.stoneAmount.ToString();
+                if (smallStone.gameObject.activeSelf && projectileQuantityTMP != null) projectileQuantityTMP.text = smallStone.quantity.ToString();
             }
         }
         if (fillOkill.arrowAmount > 0)
@@ -744,7 +752,7 @@ public class Player : Creature
                 bow.notAvailable = false;
                 fillOkill.arrowAmount--;
                 arrowsInFillTMP.text = fillOkill.arrowAmount.ToString();
-                if (bow.gameObject.activeSelf) projectileQuantityTMP.text = bow.quantity.ToString();
+                if (bow.gameObject.activeSelf && projectileQuantityTMP != null) projectileQuantityTMP.text = bow.quantity.ToString();
             }
         }
     }

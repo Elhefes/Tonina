@@ -8,23 +8,23 @@ public class WeatherController : MonoBehaviour
     public AudioLooper audioLooper;
     private float rainSoundFaderValue;
     private bool raining;
-    private float rainFogDensity = 0.025f;
+    private float rainFogDensity;
     private int currentRainEmissionAmount;
     private int randomRainEmissionAmount;
     private Coroutine rainTransitionCoroutine;
     private Coroutine naturalWeatherCoroutine;
-    private Color clearAmbientColor = new Color(0.5411765f, 0.5764706f, 0.5058824f);
-    private Color rainAmbientColor = new Color(0.2745098f, 0.3411765f, 0.2745098f);
+    private Color clearAmbientColor;
+    private Color rainAmbientColor;
 
     private Material skyboxMat;
-    private Color clearSkyColor = new Color(0.401f, 0.639f, 1f);
-    private Color rainSkyColor = new Color(0.451f, 0.31765f, 0f);
-    private Color clearSkyGroundColor = new Color(0.49475f, 0.962f, 0.71f);
-    private Color rainSkyGroundColor = new Color(0.388f, 0.388f, 0.388f);
-    private float clearAtmosphereThickness = 0.85f;
-    private float rainAtmosphereThickness = 1.08f;
-    private float clearSkyExposure = 1f;
-    private float rainSkyExposure = 0.13f;
+    private Color clearSkyColor;
+    private Color rainSkyColor;
+    private Color clearSkyGroundColor;
+    private Color rainSkyGroundColor;
+    private float clearAtmosphereThickness;
+    private float rainAtmosphereThickness;
+    private float clearSkyExposure;
+    private float rainSkyExposure;
 
     // --- Wind / gust system ---
     private Vector2 currentWindX; // (start, end)
@@ -33,11 +33,25 @@ public class WeatherController : MonoBehaviour
     private Vector2 targetWindX;
     private Vector2 targetWindZ;
 
-    private float windLerpSpeed = 1.5f;
+    private float windLerpSpeed;
     private Coroutine windCoroutine;
 
     private void Start()
     {
+        rainFogDensity = 0.025f;
+        clearAmbientColor = new Color(0.5411765f, 0.5764706f, 0.5058824f);
+        rainAmbientColor = new Color(0.2745098f, 0.3411765f, 0.2745098f);
+
+        clearSkyColor = new Color(0.401f, 0.639f, 1f);
+        rainSkyColor = new Color(0.451f, 0.31765f, 0f);
+        clearSkyGroundColor = new Color(0.49475f, 0.962f, 0.71f);
+        rainSkyGroundColor = new Color(0.388f, 0.388f, 0.388f);
+        clearAtmosphereThickness = 0.85f;
+        rainAtmosphereThickness = 1.08f;
+        clearSkyExposure = 1f;
+        rainSkyExposure = 0.13f;
+        windLerpSpeed = 1.5f;
+
         naturalWeatherCoroutine = StartCoroutine(StartNaturalWeather());
         rainSoundSource.volume = 0f;
         rainSoundSource.clip = audioLooper.trimSilence(rainSoundSource.clip);

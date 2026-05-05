@@ -3,7 +3,7 @@ using UnityEngine;
 public class ClickerMaterial : MonoBehaviour
 {
     public Material clickerMat;
-    public float alpha = 1f;
+    public float alpha;
 
     Color matColor;
 

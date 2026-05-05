@@ -15,10 +15,11 @@ public class LosingScreen : MonoBehaviour
     public bool playerDied;
     public GameObject kingBarricade;
     private string fullText;
-    private string currentText = "";
+    private string currentText;
 
     private void OnEnable()
     {
+        currentText = "";
         if (player.battlefieldMenu != null) player.battlefieldMenu.waveController.battleIsLost = true;
         StartCoroutine(TypeTexts());
         audioPassController.muffleEffect = true;

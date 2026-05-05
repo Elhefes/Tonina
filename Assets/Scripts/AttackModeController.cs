@@ -57,7 +57,7 @@ public class AttackModeController : MonoBehaviour
             UIController.optionsMenu.gameObject.SetActive(false);
         }
 
-        battleTimeText.text = GetBattleTimerString(secondsInBattle);
+        if (battleTimeText != null) battleTimeText.text = GetBattleTimerString(secondsInBattle);
         StopCoroutine(SecondCounter());
         StartCoroutine(PlayRewardsRisingAnimation());
         battleUI.SetActive(false);
@@ -81,13 +81,13 @@ public class AttackModeController : MonoBehaviour
         statsController.availableMoney += totalRewardsNumber;
         while (tempRewards < totalRewardsNumber)
         {
-            rewardsText.text = tempRewards.ToString();
+            if (rewardsText != null) rewardsText.text = tempRewards.ToString();
             tempRewards += 1;
             yield return new WaitForSeconds(2.5f / totalRewardsNumber);
         }
         if (tempRewards <= totalRewardsNumber)
         {
-            rewardsText.text = totalRewardsNumber.ToString();
+            if (rewardsText != null) rewardsText.text = totalRewardsNumber.ToString();
         }
     }
 
