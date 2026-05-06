@@ -672,7 +672,14 @@ public class Player : Creature
         }
 
         // Prevent UI overlapping
-        if (optionsMenu.gameObject.activeSelf || (uiController != null && uiController.mainMenuScreen.activeSelf)) return;
+        if (optionsMenu.gameObject.activeSelf) return;
+        if (uiController != null)
+        {
+            if (uiController.mainMenuScreen != null)
+            {
+                if (uiController.mainMenuScreen.activeSelf) return;
+            }
+        }
 
         else if (other.CompareTag("BattlefieldPrompt"))
         {
