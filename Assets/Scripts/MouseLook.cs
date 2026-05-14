@@ -109,7 +109,7 @@ public class MouseLook : MonoBehaviour
     public void TeleportCameras()
     {
         // Teleports cameras to where the cameras should be after teleport
-        CalculatePlayerToFollowAngledDirection();
+        CalculateAngledCameraPosition();
         mainCameraObject.transform.position = playerToFollowAngledDirection;
         gameObject.transform.position = playerToFollowAngledDirection;
         minimapCamera.transform.position = playerToFollowDirection;
@@ -161,7 +161,7 @@ public class MouseLook : MonoBehaviour
 
         if (cameraOnPlayer || transitioningToBuildModeAngle)
         {
-            CalculatePlayerToFollowAngledDirection();
+            CalculateAngledCameraPosition();
         }
         else
         {
@@ -209,51 +209,66 @@ public class MouseLook : MonoBehaviour
         }
     }
 
-    void CalculatePlayerToFollowAngledDirection()
+    void CalculateAngledCameraPosition()
     {
-        if (player.inBuildMode)
+        float xRotation = 60f;
+
+        // Horizontal ground distance caused by 60 degree tilt
+        float horizontalDistance =
+            distanceFromObject / Mathf.Tan(xRotation * Mathf.Deg2Rad);
+
+        // Current camera Y rotation
+        float yRotation = transform.rotation.eulerAngles.y;
+
+        // Direction the camera moves backwards on the ground plane
+        Quaternion rotation = Quaternion.Euler(0f, yRotation, 0f);
+
+        Vector3 backwardOffset = rotation * Vector3.back * horizontalDistance;
+
+        // Small positional offset you previously had (+0.66f / -0.66f)
+        Vector3 extraOffset = rotation * Vector3.back * -0.66f;
+
+        // Final camera target position
+        playerToFollowAngledDirection =
+            player.transform.position
+            + Vector3.up * distanceFromObject
+            + backwardOffset
+            + extraOffset;
+
+        // Smooth movement
+        Vector3 newPos = Vector3.Lerp(
+            transform.position,
+            playerToFollowAngledDirection,
+            smoothSpeed
+        );
+
+        // King house X clamp
+        if (player.insideKingHouse)
         {
-            // This assumes that King House's x = 0 always, it makes sense design-wise
-
-            Vector3 kingHouseEntrancePosition = new Vector3(0f, player.kingHouse.transform.position.y, player.kingHouse.transform.position.z - 11.8f);
-
-            playerToFollowAngledDirection = new Vector3(0f, kingHouseEntrancePosition.y + distanceFromObject, kingHouseEntrancePosition.z - (distanceFromObject / Mathf.Tan(60 * Mathf.PI / 180)));
-            transform.position = Vector3.Lerp(transform.position, playerToFollowAngledDirection, smoothSpeed * distanceFromObject / 10f);
-            playerToFollowDirection = new Vector3(0f, kingHouseEntrancePosition.y + 100f, kingHouseEntrancePosition.z);
-            minimapCamera.transform.position = Vector3.Lerp(minimapCamera.transform.position, playerToFollowDirection, smoothSpeed);
-
-            // The camera doesn't have time to get to x = 0 before rotation y = 0, so the x is a little bit off 0
-            if (transform.rotation.eulerAngles.y == 0f && (Mathf.Abs(transform.position.x) <= 0.08f)) transitioningToBuildModeAngle = false;
+            newPos.x = Mathf.Min(newPos.x, 7.5f);
         }
-        else if (!player.inVillage && !player.insideKingHouse) // In battle mode
-        {
-            playerToFollowAngledDirection = new Vector3(player.transform.position.x, player.transform.position.y + distanceFromObject, player.transform.position.z - (distanceFromObject / Mathf.Tan(60 * Mathf.PI / 180)) + 0.66f);
-            transform.position = Vector3.Lerp(transform.position, playerToFollowAngledDirection, smoothSpeed);
-            playerToFollowDirection = new Vector3(player.transform.position.x, player.transform.position.y + 100f, player.transform.position.z);
-            minimapCamera.transform.position = Vector3.Lerp(minimapCamera.transform.position, playerToFollowDirection, smoothSpeed);
-        }
-        else if (player.inVillage)
-        {
-            playerToFollowAngledDirection = new Vector3(player.transform.position.x, player.transform.position.y + distanceFromObject, player.transform.position.z + (distanceFromObject / Mathf.Tan(60 * Mathf.PI / 180)) - 0.66f);
-            transform.position = Vector3.Lerp(transform.position, playerToFollowAngledDirection, smoothSpeed);
-            playerToFollowDirection = new Vector3(player.transform.position.x, player.transform.position.y + 100f, player.transform.position.z);
-            minimapCamera.transform.position = Vector3.Lerp(minimapCamera.transform.position, playerToFollowDirection, smoothSpeed);
-        }
-        else
-        {
-            playerToFollowAngledDirection = new Vector3(player.transform.position.x + (distanceFromObject / Mathf.Tan(60 * Mathf.PI / 180)) - 0.66f, player.transform.position.y + distanceFromObject, player.transform.position.z);
-            Vector3 newPos = Vector3.Lerp(transform.position, playerToFollowAngledDirection, smoothSpeed);
 
-            // Camera movement is limited inside king house to x < 7.5f where the backwall is
-            if (player.insideKingHouse && !player.inBuildMode)
-            {
-                newPos.x = Mathf.Min(newPos.x, 7.5f);
-            }
-            transform.position = newPos;
+        transform.position = newPos;
 
-            playerToFollowDirection = new Vector3(player.transform.position.x, player.transform.position.y + 100f, player.transform.position.z);
-            minimapCamera.transform.position = Vector3.Lerp(minimapCamera.transform.position, playerToFollowDirection, smoothSpeed);
-        }
+        // Keep camera looking downward with rotatable Y angle
+        transform.rotation = Quaternion.Euler(
+            xRotation,
+            yRotation,
+            0f
+        );
+
+        // Minimap follow
+        playerToFollowDirection = new Vector3(
+            player.transform.position.x,
+            player.transform.position.y + 100f,
+            player.transform.position.z
+        );
+
+        minimapCamera.transform.position = Vector3.Lerp(
+            minimapCamera.transform.position,
+            playerToFollowDirection,
+            smoothSpeed
+        );
     }
 
     private void MoveToSpecificPosition()
