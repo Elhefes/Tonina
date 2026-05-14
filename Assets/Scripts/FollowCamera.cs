@@ -14,7 +14,7 @@ public class FollowCamera : MonoBehaviour
         if (playerCamera != null)
         {
             var rotation = Quaternion.LookRotation(transform.position - playerCamera.transform.position);
-            transform.rotation = new Quaternion(rotation.x, 0f, 0f, rotation.w);
+            transform.rotation = new Quaternion(rotation.x, rotation.y, rotation.z, rotation.w);
         }
     }
 }
