@@ -128,21 +128,37 @@ public class MouseLook : MonoBehaviour
 
             if (!player.insideKingHouse || (player.inBuildMode && !transitioningToBuildModeAngle))
             {
-                if (Input.GetAxis("Horizontal") != 0 || Input.GetAxis("Vertical") != 0 || minimapInput.GetMinimapInput().x != 0 || minimapInput.GetMinimapInput().y != 0)
-                {
-                    CameraOnPlayerOff();
-                    // Invert minimap controls when player is in village
-                    if (player.inVillage) moveDirection = new Vector3(-Input.GetAxis("Horizontal") + minimapInput.GetMinimapInput().x * -minimapInputSensitivity, 0f, -Input.GetAxis("Vertical") + minimapInput.GetMinimapInput().y * -minimapInputSensitivity);
-                    else moveDirection = new Vector3(Input.GetAxis("Horizontal") + minimapInput.GetMinimapInput().x * minimapInputSensitivity, 0f, Input.GetAxis("Vertical") + minimapInput.GetMinimapInput().y * minimapInputSensitivity);
+                float horizontal = Input.GetAxis("Horizontal") + minimapInput.GetMinimapInput().x * minimapInputSensitivity;
+                float vertical = Input.GetAxis("Vertical") + minimapInput.GetMinimapInput().y * minimapInputSensitivity;
 
-                    if (player.inBuildMode)
-                    {
-                        rb.AddForce(moveDirection * 10200f * distanceFromObject * Time.deltaTime, ForceMode.Force);
-                    }
-                    else
-                    {
-                        rb.AddForce(moveDirection * 320000f * Time.deltaTime, ForceMode.Force);
-                    }
+                if (horizontal != 0f || vertical != 0f) CameraOnPlayerOff();
+
+                // Camera-relative directions
+                Vector3 forward = transform.forward;
+                Vector3 right = transform.right;
+
+                // Ignore vertical tilt
+                forward.y = 0f;
+                right.y = 0f;
+
+                forward.Normalize();
+                right.Normalize();
+
+                moveDirection = right * horizontal + forward * vertical;
+
+                if (player.inBuildMode)
+                {
+                    rb.AddForce(
+                        moveDirection * 10200f * distanceFromObject * Time.deltaTime,
+                        ForceMode.Force
+                    );
+                }
+                else
+                {
+                    rb.AddForce(
+                        moveDirection * 320000f * Time.deltaTime,
+                        ForceMode.Force
+                    );
                 }
             }
 
