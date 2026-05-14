@@ -71,13 +71,6 @@ public class MouseLook : MonoBehaviour
         transitioningToBuildModeAngle = false;
     }
 
-    public void CameraOnPlayerButton()
-    {
-        // This check can be buggy, but it likely won't matter with button calls
-        if (transform.rotation.y != 0 && transform.rotation.eulerAngles.y != 180) return;
-        ToggleCameraOnPlayer();
-    }
-
     public void ToggleCameraOnPlayer()
     {
         cameraOnPlayer = !cameraOnPlayer;
@@ -130,7 +123,7 @@ public class MouseLook : MonoBehaviour
         {
             if (!player.inBuildMode && !notCastingRays)
             {
-                if (Input.GetKeyDown("c")) CameraOnPlayerButton();
+                if (Input.GetKeyDown("c")) ToggleCameraOnPlayer();
             }
 
             if (!player.insideKingHouse || (player.inBuildMode && !transitioningToBuildModeAngle))
