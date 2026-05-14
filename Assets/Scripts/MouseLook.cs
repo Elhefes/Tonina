@@ -8,6 +8,9 @@ public class MouseLook : MonoBehaviour
     public float sensitivity;
     public LayerMask layerMask;
     private Vector3 moveDirection;
+
+    public Vector3 presetCameraAngle; // Preset in scene
+
     private Vector3 playerToFollowAngledDirection;
     private Vector3 playerToFollowDirection;
     private Vector3 freeMinimapCameraDirection;
@@ -45,6 +48,11 @@ public class MouseLook : MonoBehaviour
                 mainCameraObject.transform.position = gameObject.transform.position;
             }
         }
+    }
+
+    public void SetCameraAngle(Vector3 angle)
+    {
+        presetCameraAngle = angle;
     }
 
     public void EnableBuildMode()
@@ -269,41 +277,14 @@ public class MouseLook : MonoBehaviour
     {
         if (player.inVillage && inCutscene) return;
 
-        if (player.inBuildMode)
-        {
-            RotateCameraToBattlefieldAngle();
-        }
+        // Rotate camera to camera angle which is preset in scene
+        transform.rotation = Quaternion.RotateTowards(transform.rotation, Quaternion.Euler(presetCameraAngle), 1.25f);
+        mainCameraObject.transform.rotation = Quaternion.RotateTowards(transform.rotation, Quaternion.Euler(presetCameraAngle), 1.25f);
+        minimapCamera.transform.rotation = Quaternion.RotateTowards(minimapCamera.transform.rotation, 
+            Quaternion.Euler(new Vector3(90f, presetCameraAngle.y, 0f)), 1.25f);
 
-        // Rotate camera when entering and exiting king house
-        else if (player.insideKingHouse)
-        {
-            transform.rotation = Quaternion.RotateTowards(transform.rotation, Quaternion.Euler(60f, -90f, 0f), 1.25f);
-            mainCameraObject.transform.rotation = Quaternion.RotateTowards(transform.rotation, Quaternion.Euler(60f, -90f, 0f), 1.25f);
-            minimapCamera.transform.rotation = Quaternion.RotateTowards(minimapCamera.transform.rotation, Quaternion.Euler(90f, -90f, 0f), 1.25f);
-            if (minimapIndicators.activeSelf) minimapIndicators.SetActive(false);
-        }
-        else if (player.inVillage)
-        {
-            if (transform.rotation.y != 0)
-            {
-                transform.rotation = Quaternion.RotateTowards(transform.rotation, Quaternion.Euler(60f, 180f, 0f), 1.5f);
-                mainCameraObject.transform.rotation = Quaternion.RotateTowards(transform.rotation, Quaternion.Euler(60f, 180f, 0f), 1.5f);
-            }
-            minimapCamera.transform.rotation = Quaternion.RotateTowards(minimapCamera.transform.rotation, Quaternion.Euler(90f, 180f, 0f), 1.5f);
-            if (!minimapIndicators.activeSelf && !minimapInput.buttonPressed) minimapIndicators.SetActive(true);
-        }
-        else RotateCameraToBattlefieldAngle();
-    }
-
-    void RotateCameraToBattlefieldAngle()
-    {
-        if (transform.rotation.y != 0)
-        {
-            transform.rotation = Quaternion.RotateTowards(transform.rotation, Quaternion.Euler(60f, 0f, 0f), 1.5f);
-            mainCameraObject.transform.rotation = Quaternion.RotateTowards(transform.rotation, Quaternion.Euler(60f, 0f, 0f), 1.5f);
-        }
-        minimapCamera.transform.rotation = Quaternion.RotateTowards(minimapCamera.transform.rotation, Quaternion.Euler(90f, 0f, 0f), 1.5f);
-        if (!minimapIndicators.activeSelf && !minimapInput.buttonPressed) minimapIndicators.SetActive(true);
+        if (player.insideKingHouse && minimapIndicators.activeSelf) minimapIndicators.SetActive(false);
+        else if (!minimapIndicators.activeSelf && !minimapInput.buttonPressed) minimapIndicators.SetActive(true);
     }
 
     public void SetInCutscene(bool value) { inCutscene = value; }

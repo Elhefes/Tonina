@@ -11,6 +11,9 @@ public class VillageTeleportMenu : MonoBehaviour
     private int extraFloorsBuilt;
     private int gateIndex;
 
+    public GameplayCameraAngles camAngles;
+    public int villageCamAngleInt;
+
     public void UpdateExtraFloorsInt() { extraFloorsBuilt = GameState.Instance.progressionData.extraPyramidFloorsBuilt; }
 
     private void OnEnable()
@@ -58,6 +61,7 @@ public class VillageTeleportMenu : MonoBehaviour
     {
         if (Vector3.Distance(player.transform.position, gateTransforms[gateNumber].position) < 5f) return;
         player.TeleportToVillageGate(gateTransforms[gateNumber]);
+        camAngles.SetCameraAngle(villageCamAngleInt);
     }
 
     public void ReturnHome() { player.ReturnHome(gameObject); }

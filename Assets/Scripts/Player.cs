@@ -681,7 +681,7 @@ public class Player : Creature
             }
         }
 
-        else if (other.CompareTag("BattlefieldPrompt"))
+        if (other.CompareTag("BattlefieldPrompt"))
         {
             if (battlefieldMenu != null) battlefieldMenu.gameObject.SetActive(true);
         }
