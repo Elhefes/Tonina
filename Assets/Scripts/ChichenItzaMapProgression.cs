@@ -19,12 +19,14 @@ public class ChichenItzaMapProgression : MonoBehaviour
 
     // Enemy clusters
     public GameObject firstEnemyCluster;
+    public GameObject secondEnemyCluster;
 
     // Infinite enemy spawn points
     public Transform[] forestSpawns;
     public Transform[] elCastilloSpawns;
 
     private bool firstEnemyAttackStarted;
+    private bool secondEnemyAttackStarted;
     private bool firstSectionComplete;
     private bool secondSectionComplete;
 
@@ -44,6 +46,15 @@ public class ChichenItzaMapProgression : MonoBehaviour
             else if (camazoEastWall.activeInHierarchy)
             {
                 if (Vector3.Distance(player.transform.position, camazoEastWall.transform.position) < 2f) camazoEastWall.SetActive(false);
+            }
+        }
+
+        if (!secondEnemyAttackStarted)
+        {
+            if (player.transform.position.x < -72f)
+            {
+                StartCoroutine(SecondEnemyAttack());
+                secondEnemyAttackStarted = true;
             }
         }
 
@@ -82,6 +93,12 @@ public class ChichenItzaMapProgression : MonoBehaviour
     {
         yield return new WaitForSeconds(5.5f);
         firstEnemyCluster.SetActive(true);
+    }
+
+    private IEnumerator SecondEnemyAttack()
+    {
+        yield return new WaitForSeconds(2f);
+        secondEnemyCluster.SetActive(true);
     }
 
     private IEnumerator SpawnEnemiesInfinitely()
