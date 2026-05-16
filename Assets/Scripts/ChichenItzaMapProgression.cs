@@ -105,7 +105,7 @@ public class ChichenItzaMapProgression : MonoBehaviour
     {
         while (true)
         {
-            yield return new WaitForSeconds(Random.Range(4f, 8f));
+            yield return new WaitForSeconds(Random.Range(5f, 10f));
 
             Vector3 spawnPoint;
 
