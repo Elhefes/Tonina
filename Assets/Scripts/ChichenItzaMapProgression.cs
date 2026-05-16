@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class ChichenItzaMapProgression : MonoBehaviour
 {
-    public GameObject player;
+    public Player player;
     public GameplayCameraAngles camAngles;
 
     // Pickables
@@ -18,6 +18,11 @@ public class ChichenItzaMapProgression : MonoBehaviour
 
     private bool firstSectionComplete;
     private bool secondSectionComplete;
+
+    private void Start()
+    {
+        player.EnableBattleMode();
+    }
 
     private void Update()
     {

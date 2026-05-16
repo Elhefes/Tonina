@@ -12,6 +12,7 @@ public class Player : Creature
     public int startingHealth;
     public Slider healthBar;
     public bool godMode;
+    public bool hasAllWeapons;
 
     public UI_Controller uiController;
     public DoubleClickDetector doubleClickDetector;
@@ -157,6 +158,15 @@ public class Player : Creature
 
     void EquipOnlySelectedWeapons()
     {
+        if (hasAllWeapons)
+        {
+            foreach (char c in weaponOrder)
+            {
+                weapons[(int)Char.GetNumericValue(c)].selected = true;
+            }
+            return;
+        }
+
         foreach (char c in weaponOrder)
         {
             if (selectedWeaponOrder.Contains(c.ToString()))

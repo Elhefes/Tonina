@@ -20,7 +20,7 @@ public class WeaponWheel : MonoBehaviour
     public Image nextWeaponImage;
     public Image previousWeaponImage;
     public Image[] weaponSprites;
-    private string selectedWeaponOrder;
+    private string availableWeaponOrder;
     private int currentIndex;
     private int weaponIndex;
     private int slices = 5;
@@ -37,12 +37,20 @@ public class WeaponWheel : MonoBehaviour
 
     private void Start()
     {
+        // Possibly not needed
         if (player == null) player = GameObject.FindGameObjectsWithTag("Player")[0].GetComponent<Player>();
     }
 
     private void OnEnable()
     {
-        selectedWeaponOrder = PlayerPrefs.GetString("SelectedWeaponOrder", "04");
+        availableWeaponOrder = PlayerPrefs.GetString("SelectedWeaponOrder", "04");
+
+        // Set all weapons as available if player has all weapons
+        if (player != null)
+        {
+            if (player.hasAllWeapons) availableWeaponOrder = PlayerPrefs.GetString("CustomWeaponOrder", "01234");
+        }
+
         ResetToDefaultWeapon();
 
         // Auto switch is to next weapon by default
@@ -88,8 +96,8 @@ public class WeaponWheel : MonoBehaviour
                 fillingArrows = true;
 
                 // Add normal fill at the rate of cooldown time of the weapon in hand
-                previousWeaponArrowImage.fillAmount += 1f / (weapons[selectedWeaponOrder[weaponIndex] - '0'].attackCooldown / Time.deltaTime);
-                nextWeaponArrowImage.fillAmount += 1f / (weapons[selectedWeaponOrder[weaponIndex] - '0'].attackCooldown / Time.deltaTime);
+                previousWeaponArrowImage.fillAmount += 1f / (weapons[availableWeaponOrder[weaponIndex] - '0'].attackCooldown / Time.deltaTime);
+                nextWeaponArrowImage.fillAmount += 1f / (weapons[availableWeaponOrder[weaponIndex] - '0'].attackCooldown / Time.deltaTime);
             }
         }
     }
@@ -98,21 +106,21 @@ public class WeaponWheel : MonoBehaviour
     {
         if (player.onCooldown) return;
         if (weaponWheelCooldown) return;
-        if (selectedWeaponOrder.Length < 2) return;
+        if (availableWeaponOrder.Length < 2) return;
 
         int initialWeaponIndexValue = weaponIndex;
 
         weaponIndex++;
-        if (weaponIndex > selectedWeaponOrder.Length - 1)
+        if (weaponIndex > availableWeaponOrder.Length - 1)
         {
             weaponIndex = 0;
         }
 
-        while (player.weapons[selectedWeaponOrder[weaponIndex] - '0'].notAvailable 
-            || !player.weapons[selectedWeaponOrder[weaponIndex] - '0'].selected)
+        while (player.weapons[availableWeaponOrder[weaponIndex] - '0'].notAvailable 
+            || !player.weapons[availableWeaponOrder[weaponIndex] - '0'].selected)
         {
             weaponIndex++;
-            if (weaponIndex > selectedWeaponOrder.Length - 1)
+            if (weaponIndex > availableWeaponOrder.Length - 1)
             {
                 weaponIndex = 0;
             }
@@ -127,7 +135,7 @@ public class WeaponWheel : MonoBehaviour
         }
         StartWeaponWheelCooldown();
         nextWeaponArrowImage.fillAmount = 0f;
-        var wep = weapons[selectedWeaponOrder[weaponIndex] - '0'];
+        var wep = weapons[availableWeaponOrder[weaponIndex] - '0'];
         weaponSprites[currentIndex].sprite = wep.uiSprite;
         player.SwitchWeapon(wep.type);
         weaponWheelAnimator.SetTrigger("NextInWheel");
@@ -141,23 +149,23 @@ public class WeaponWheel : MonoBehaviour
     {
         if (player.onCooldown) return;
         if (weaponWheelCooldown) return;
-        if (selectedWeaponOrder.Length < 2) return;
+        if (availableWeaponOrder.Length < 2) return;
 
         int initialWeaponIndexValue = weaponIndex;
 
         weaponIndex--;
         if (weaponIndex < 0)
         {
-            weaponIndex = selectedWeaponOrder.Length - 1;
+            weaponIndex = availableWeaponOrder.Length - 1;
         }
 
-        while (player.weapons[selectedWeaponOrder[weaponIndex] - '0'].notAvailable 
-            || !player.weapons[selectedWeaponOrder[weaponIndex] - '0'].selected)
+        while (player.weapons[availableWeaponOrder[weaponIndex] - '0'].notAvailable 
+            || !player.weapons[availableWeaponOrder[weaponIndex] - '0'].selected)
         {
             weaponIndex--;
             if (weaponIndex < 0)
             {
-                weaponIndex = selectedWeaponOrder.Length - 1;
+                weaponIndex = availableWeaponOrder.Length - 1;
             }
         }
 
@@ -170,7 +178,7 @@ public class WeaponWheel : MonoBehaviour
         }
         StartWeaponWheelCooldown();
         previousWeaponArrowImage.fillAmount = 0f;
-        var wep = weapons[selectedWeaponOrder[weaponIndex] - '0'];
+        var wep = weapons[availableWeaponOrder[weaponIndex] - '0'];
         weaponSprites[currentIndex].sprite = wep.uiSprite;
         player.SwitchWeapon(wep.type);
         weaponWheelAnimator.SetTrigger("PreviousInWheel");
@@ -195,7 +203,7 @@ public class WeaponWheel : MonoBehaviour
 
     public void ResetToDefaultWeapon()
     {
-        var wep = weapons[selectedWeaponOrder[0] - '0'];
+        var wep = weapons[availableWeaponOrder[0] - '0'];
         currentIndex = 0;
         weaponIndex = 0;
         weaponSprites[currentIndex].sprite = wep.uiSprite;
@@ -207,6 +215,6 @@ public class WeaponWheel : MonoBehaviour
     public void AddWeaponToSelectedWeapons(int weaponIndex)
     {
         player.weapons[weaponIndex].selected = true;
-        selectedWeaponOrder += weaponIndex.ToString();
+        availableWeaponOrder += weaponIndex.ToString();
     }
 }
