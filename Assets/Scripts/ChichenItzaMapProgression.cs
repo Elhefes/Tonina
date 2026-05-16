@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 
 public class ChichenItzaMapProgression : MonoBehaviour
@@ -16,6 +17,10 @@ public class ChichenItzaMapProgression : MonoBehaviour
     public GameObject camazoEastWall;
     public GameObject kukulkansInElCastillo;
 
+    // Enemy clusters
+    public GameObject firstEnemyCluster;
+
+    private bool firstEnemyAttackStarted;
     private bool firstSectionComplete;
     private bool secondSectionComplete;
 
@@ -38,8 +43,17 @@ public class ChichenItzaMapProgression : MonoBehaviour
             }
         }
 
+        if (!firstEnemyAttackStarted)
+        {
+            if (player.transform.position.z > -50f)
+            {
+                StartCoroutine(FirstEnemyAttack());
+                firstEnemyAttackStarted = true;
+            }
+        }
+
         // Placeholder for testing gameplay loop
-        if (!firstSectionComplete)
+        else if (!firstSectionComplete)
         {
             if (player.transform.position.x < 123f && player.transform.position.z > 0f)
             {
@@ -57,5 +71,11 @@ public class ChichenItzaMapProgression : MonoBehaviour
                 secondSectionComplete = true;
             }
         }
+    }
+
+    private IEnumerator FirstEnemyAttack()
+    {
+        yield return new WaitForSeconds(5.5f);
+        firstEnemyCluster.SetActive(true);
     }
 }
