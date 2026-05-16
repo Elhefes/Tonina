@@ -4856,7 +4856,7 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: 9e9b21e2f1f25d747afeba021f83b4b7, type: 3}
+  m_audioClip: {fileID: 0}
   m_Resource: {fileID: 8300000, guid: 9e9b21e2f1f25d747afeba021f83b4b7, type: 3}
   m_PlayOnAwake: 0
   m_Volume: 1
@@ -6420,9 +6420,25 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2688567360211053169, guid: 06836e3db510699498b45430912508d7, type: 3}
+      propertyPath: shootingPoint
+      value: 
+      objectReference: {fileID: 6089855124262478547}
+    - target: {fileID: 2688567360211053169, guid: 06836e3db510699498b45430912508d7, type: 3}
+      propertyPath: attackCooldown
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 2688567360211053169, guid: 06836e3db510699498b45430912508d7, type: 3}
       propertyPath: attackDistance
       value: 20
       objectReference: {fileID: 0}
+    - target: {fileID: 7279585706344844989, guid: 06836e3db510699498b45430912508d7, type: 3}
+      propertyPath: pointA
+      value: 
+      objectReference: {fileID: 6089855124262478547}
+    - target: {fileID: 7279585706344844989, guid: 06836e3db510699498b45430912508d7, type: 3}
+      propertyPath: creatureMovement
+      value: 
+      objectReference: {fileID: 9167552780147776406}
     - target: {fileID: 7771295462530290268, guid: 06836e3db510699498b45430912508d7, type: 3}
       propertyPath: m_Layer
       value: 8
