@@ -16,6 +16,7 @@ public class ChichenItzaMapProgression : MonoBehaviour
     public GameObject camazoSouthWall;
     public GameObject camazoEastWall;
     public GameObject kukulkansInElCastillo;
+    public GameObject elCastilloBlocker;
 
     // Enemy clusters
     public GameObject firstEnemyCluster;
@@ -85,6 +86,7 @@ public class ChichenItzaMapProgression : MonoBehaviour
                 camAngles.SetCameraAngle(2);
                 kukulkansInElCastillo.SetActive(true);
                 secondSectionComplete = true;
+                elCastilloBlocker.SetActive(false);
             }
         }
     }
