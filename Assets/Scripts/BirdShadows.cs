@@ -5,12 +5,11 @@ public class BirdShadows : MonoBehaviour
 {
     public BirdShadowSpawner[] birdShadowSpawners;
     private float range = 72f;
-    private Coroutine sectorEnablerCoroutine;
 
     void Start()
     {
         EnableIfWithinRange(Camera.main.gameObject.transform.position.z);
-        sectorEnablerCoroutine = StartCoroutine(UpdateSectors());
+        StartCoroutine(UpdateSectors());
     }
 
     private IEnumerator UpdateSectors()
