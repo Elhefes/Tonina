@@ -36,6 +36,23 @@ public class ChichenItzaMapProgression : MonoBehaviour
         player.EnableBattleMode();
     }
 
+    public void ResetChichenItza()
+    {
+        StopAllCoroutines();
+        camAngles.SetCameraAngle(0);
+        pyramidKey.SetActive(true);
+        pickableMask.SetActive(true);
+        pickableKukulkans.SetActive(true);
+        camazoSouthWall.SetActive(true);
+        camazoEastWall.SetActive(true);
+        kukulkansInElCastillo.SetActive(false);
+        elCastilloBlocker.SetActive(true);
+        firstEnemyAttackStarted = false;
+        secondEnemyAttackStarted = false;
+        firstSectionComplete = false;
+        secondSectionComplete = false;
+    }
+
     private void Update()
     {
         if (!pyramidKey.activeInHierarchy)

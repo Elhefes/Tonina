@@ -12,6 +12,7 @@ public class LosingScreen : MonoBehaviour
     public PlaceablesManager buildingsManager;
     public MouseLook mouseLook;
     public AudioPassController audioPassController;
+    public ChichenItzaMapProgression chichenItzaMapProgression;
     public bool playerDied;
     public GameObject kingBarricade;
     private string fullText;
@@ -83,6 +84,10 @@ public class LosingScreen : MonoBehaviour
         player.gameObject.SetActive(true);
         player.EndBattle();
         player.ReturnHome(null);
+        if (chichenItzaMapProgression != null)
+        {
+            chichenItzaMapProgression.ResetChichenItza();
+        }
         if (kingBarricade != null)
         {
             kingBarricade.SetActive(true);

@@ -4781,6 +4781,11 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1498565851}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &243890891 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6680202691179762319, guid: 75acef20d182a544088fba08b2cbd0fd, type: 3}
+  m_PrefabInstance: {fileID: 6626113846225934106}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &248415058
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -4936,11 +4941,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1498565851}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &262624390 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: f5e53852d4e056f408536333c0ae9191, type: 3}
-  m_PrefabInstance: {fileID: 1103317953}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &265746939
 GameObject:
   m_ObjectHideFlags: 0
@@ -31155,9 +31155,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   player: {fileID: 1904667352}
   camAngles: {fileID: 1566228640}
-  pyramidKey: {fileID: 1665997454}
+  pyramidKey: {fileID: 243890891}
   pickableCamazoIcon: {fileID: 0}
-  pickableMask: {fileID: 262624390}
+  pickableMask: {fileID: 1813798892}
   pickableKukulkans: {fileID: 891359557}
   camazoSouthWall: {fileID: 1706597431}
   camazoEastWall: {fileID: 955690364}
@@ -34205,6 +34205,7 @@ MonoBehaviour:
   buildingsManager: {fileID: 1393370859}
   mouseLook: {fileID: 1626136263}
   audioPassController: {fileID: 1905289339}
+  chichenItzaMapProgression: {fileID: 1393370863}
   playerDied: 0
   kingBarricade: {fileID: 0}
 --- !u!95 &1558889267
@@ -36938,11 +36939,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1662249247}
   m_CullTransparentMesh: 1
---- !u!1 &1665997454 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 2b6bc81246661dd48a7041d7957e02ae, type: 3}
-  m_PrefabInstance: {fileID: 722078712}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1666145091
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -39872,6 +39868,11 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1813396660}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!1 &1813798892 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6680202691179762319, guid: 75acef20d182a544088fba08b2cbd0fd, type: 3}
+  m_PrefabInstance: {fileID: 362798227}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1814549759
 PrefabInstance:
   m_ObjectHideFlags: 0

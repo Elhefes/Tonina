@@ -411,10 +411,13 @@ public class Player : Creature
 
                 if (NotInBattlefield()) // If not in battle or builder mode
                 {
-                    float scaleValue = Mathf.Lerp(0.36f, 0.6f, (mouseLook.distanceFromObject - 5f) / (30f - 5f));
-                    clickerDestinationObject.transform.localScale = new Vector3(scaleValue, scaleValue, scaleValue);
-                    clickerDestinationObject.gameObject.transform.position = creatureMovement.agent.destination;
-                    clickerDestinationObject.alpha = 1f;
+                    if (clickerDestinationObject != null)
+                    {
+                        float scaleValue = Mathf.Lerp(0.36f, 0.6f, (mouseLook.distanceFromObject - 5f) / (30f - 5f));
+                        clickerDestinationObject.transform.localScale = new Vector3(scaleValue, scaleValue, scaleValue);
+                        clickerDestinationObject.gameObject.transform.position = creatureMovement.agent.destination;
+                        clickerDestinationObject.alpha = 1f;
+                    }
                 }
                 if (creatureMovement.target != null) clickerTargetObject.alpha = 1f;
             }
