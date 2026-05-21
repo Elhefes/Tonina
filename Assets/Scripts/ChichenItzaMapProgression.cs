@@ -5,6 +5,7 @@ public class ChichenItzaMapProgression : MonoBehaviour
 {
     public Player player;
     public GameplayCameraAngles camAngles;
+    public GameObject objectPooler;
 
     // Pickables
     public GameObject pyramidKey;
@@ -19,8 +20,8 @@ public class ChichenItzaMapProgression : MonoBehaviour
     public GameObject elCastilloBlocker;
 
     // Enemy clusters
-    public GameObject firstEnemyCluster;
-    public GameObject secondEnemyCluster;
+    public EnemyCluster firstEnemyCluster;
+    public EnemyCluster secondEnemyCluster;
 
     // Infinite enemy spawn points
     public Transform[] forestSpawns;
@@ -51,6 +52,15 @@ public class ChichenItzaMapProgression : MonoBehaviour
         secondEnemyAttackStarted = false;
         firstSectionComplete = false;
         secondSectionComplete = false;
+        DisableEverythingInObjectPooler();
+    }
+
+    private void DisableEverythingInObjectPooler()
+    {
+        foreach (Transform child in objectPooler.transform)
+        {
+            child.gameObject.SetActive(false);
+        }
     }
 
     private void Update()
@@ -111,13 +121,13 @@ public class ChichenItzaMapProgression : MonoBehaviour
     private IEnumerator FirstEnemyAttack()
     {
         yield return new WaitForSeconds(5.5f);
-        firstEnemyCluster.SetActive(true);
+        firstEnemyCluster.SpawnClusterFromPool();
     }
 
     private IEnumerator SecondEnemyAttack()
     {
         yield return new WaitForSeconds(2f);
-        secondEnemyCluster.SetActive(true);
+        secondEnemyCluster.SpawnClusterFromPool();
     }
 
     private IEnumerator SpawnEnemiesInfinitely()

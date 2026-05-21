@@ -11,12 +11,8 @@ public class AttackModeCreatureSpawner : MonoBehaviour
     private Enemy[] enemies;
     private Vector3[] originalEnemyPositions;
 
-    public ObjectPooler pooler;
-
     void Start()
     {
-        pooler = ObjectPooler.Instance;
-
         // Store all spawns in an array
         spawns = new Transform[spawnsParentObject.transform.childCount];
         for (int i = 0; i < spawnsParentObject.transform.childCount; i++)
