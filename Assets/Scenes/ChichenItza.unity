@@ -3751,6 +3751,7 @@ MonoBehaviour:
   mouseLook: {fileID: 1626136263}
   cutsceneCamera: {fileID: 169392284}
   gameplayCamera: {fileID: 1905289334}
+  friendlyCluster: {fileID: 832138585}
   battleUI: {fileID: 597258064}
   clickBlocker: {fileID: 147749572}
 --- !u!1001 &173528153
@@ -15261,6 +15262,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 832138584}
+  - component: {fileID: 832138585}
   m_Layer: 0
   m_Name: Friendlies
   m_TagString: Untagged
@@ -15319,6 +15321,18 @@ Transform:
   - {fileID: 157623304}
   m_Father: {fileID: 156857673}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &832138585
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 832138583}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3a26a421d7d499f4d8ca2fcf903be321, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &834923515
 GameObject:
   m_ObjectHideFlags: 0
@@ -31427,6 +31441,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   player: {fileID: 1904667352}
   camAngles: {fileID: 1566228640}
+  friendlyCluster: {fileID: 832138585}
   objectPooler: {fileID: 909930663}
   pyramidKey: {fileID: 243890891}
   pickableCamazoIcon: {fileID: 0}

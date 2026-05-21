@@ -6,12 +6,16 @@ public class ChichenItzaCutsceneCamera : MonoBehaviour
     public MouseLook mouseLook;
     public Camera cutsceneCamera;
     public Camera gameplayCamera;
+    public FriendlyCluster friendlyCluster;
+    private float originalFriendliesSpeed;
     public GameObject battleUI;
     public GameObject clickBlocker;
 
-    private void Awake()
+    private void Start()
     {
         StartCoroutine(SwitchMainCameraToCutsceneCamera());
+        originalFriendliesSpeed = friendlyCluster.GetFriendlySpeed();
+        friendlyCluster.SetFriendlySpeeds(0f);
     }
 
     IEnumerator SwitchMainCameraToCutsceneCamera()
@@ -40,5 +44,6 @@ public class ChichenItzaCutsceneCamera : MonoBehaviour
         SwitchCutsceneCameraToMainCamera();
         clickBlocker.SetActive(false);
         gameObject.SetActive(false);
+        friendlyCluster.SetFriendlySpeeds(originalFriendliesSpeed);
     }
 }

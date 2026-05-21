@@ -81,13 +81,22 @@ public class LosingScreen : MonoBehaviour
         }
 
         audioPassController.muffleEffect = false;
-        player.gameObject.SetActive(true);
-        player.EndBattle();
-        player.ReturnHome(null);
+
         if (chichenItzaMapProgression != null)
         {
             chichenItzaMapProgression.ResetChichenItza();
         }
+
+        player.gameObject.SetActive(true);
+
+        if (chichenItzaMapProgression != null)
+        {
+            if (!mouseLook.cameraOnPlayer) mouseLook.ToggleCameraOnPlayer();
+        }
+
+        player.EndBattle();
+        player.ReturnHome(null);
+        
         if (kingBarricade != null)
         {
             kingBarricade.SetActive(true);

@@ -5,6 +5,7 @@ public class ChichenItzaMapProgression : MonoBehaviour
 {
     public Player player;
     public GameplayCameraAngles camAngles;
+    public FriendlyCluster friendlyCluster;
     public GameObject objectPooler;
 
     // Pickables
@@ -32,9 +33,12 @@ public class ChichenItzaMapProgression : MonoBehaviour
     private bool firstSectionComplete;
     private bool secondSectionComplete;
 
+    private Vector3 playerSpawnPosition;
+
     private void Start()
     {
         player.EnableBattleMode();
+        playerSpawnPosition = player.transform.position;
     }
 
     public void ResetChichenItza()
@@ -53,6 +57,9 @@ public class ChichenItzaMapProgression : MonoBehaviour
         firstSectionComplete = false;
         secondSectionComplete = false;
         DisableEverythingInObjectPooler();
+        player.transform.position = playerSpawnPosition;
+        player.transform.rotation = Quaternion.Euler(camAngles.presetCameraAngles[0].rotation.eulerAngles);
+        friendlyCluster.ResetAllFriendlies();
     }
 
     private void DisableEverythingInObjectPooler()
@@ -69,11 +76,11 @@ public class ChichenItzaMapProgression : MonoBehaviour
         {
             if (camazoSouthWall.activeInHierarchy)
             {
-                if (Vector3.Distance(player.transform.position, camazoSouthWall.transform.position) < 2f) camazoSouthWall.SetActive(false);
+                if (Vector3.Distance(player.transform.position, camazoSouthWall.transform.position) < 2.8f) camazoSouthWall.SetActive(false);
             }
             else if (camazoEastWall.activeInHierarchy)
             {
-                if (Vector3.Distance(player.transform.position, camazoEastWall.transform.position) < 2f) camazoEastWall.SetActive(false);
+                if (Vector3.Distance(player.transform.position, camazoEastWall.transform.position) < 2.8f) camazoEastWall.SetActive(false);
             }
         }
 
@@ -120,7 +127,7 @@ public class ChichenItzaMapProgression : MonoBehaviour
 
     private IEnumerator FirstEnemyAttack()
     {
-        yield return new WaitForSeconds(5.5f);
+        yield return new WaitForSeconds(4.5f);
         firstEnemyCluster.SpawnClusterFromPool();
     }
 
