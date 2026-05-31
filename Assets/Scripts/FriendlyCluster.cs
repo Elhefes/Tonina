@@ -6,7 +6,7 @@ public class FriendlyCluster : MonoBehaviour
     private List<JadeaWarrior> friendlies = new List<JadeaWarrior>();
     private List<Vector3> friendlySpawns = new List<Vector3>();
 
-    private void Start()
+    private void Awake()
     {
         friendlies.Clear();
         friendlySpawns.Clear();
@@ -23,7 +23,7 @@ public class FriendlyCluster : MonoBehaviour
 
     public void ResetAllFriendlies()
     {
-        foreach (JadeaWarrior friendly in friendlies) friendly.gameObject.SetActive(false);
+        foreach (JadeaWarrior friendly in friendlies) if (friendly != null) friendly.gameObject.SetActive(false);
         SpawnClusterFromPool();
     }
 
@@ -31,9 +31,12 @@ public class FriendlyCluster : MonoBehaviour
     {
         for (int i = 0; i < friendlies.Count; i++)
         {
-            friendlies[i].transform.position = friendlySpawns[i];
-            friendlies[i].gameObject.SetActive(true);
-            friendlies[i].ResetFriendlyAttributes();
+            if (friendlies[i] != null)
+            {
+                friendlies[i].transform.position = friendlySpawns[i];
+                friendlies[i].gameObject.SetActive(true);
+                friendlies[i].ResetFriendlyAttributes();
+            }
         }
     }
 

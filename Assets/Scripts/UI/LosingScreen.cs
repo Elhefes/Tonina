@@ -93,9 +93,11 @@ public class LosingScreen : MonoBehaviour
         {
             if (!mouseLook.cameraOnPlayer) mouseLook.ToggleCameraOnPlayer();
         }
-
-        player.EndBattle();
-        player.ReturnHome(null);
+        else
+        {
+            player.EndBattle();
+            player.ReturnHome(null);
+        }
         
         if (kingBarricade != null)
         {

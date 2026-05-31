@@ -448,15 +448,13 @@ public class Player : Creature
         if (running)
         {
             stamina = Mathf.Clamp(stamina - 0.00133f, 0f, 1f);
-            staminaBarImage.fillAmount = stamina;
-
             if (stamina == 0f) StopRunning();
         }
         else if (recoveringStamina)
         {
             stamina = Mathf.Clamp(stamina + 0.001f, 0f, 1f);
-            staminaBarImage.fillAmount = stamina;
         }
+        if (staminaBarImage.gameObject.activeInHierarchy) staminaBarImage.fillAmount = stamina;
 
         if (fillOkillHoldButton.buttonPressed)
         {

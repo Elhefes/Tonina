@@ -14,7 +14,7 @@ public class ChichenItzaCutsceneCamera : MonoBehaviour
     private void Start()
     {
         StartCoroutine(SwitchMainCameraToCutsceneCamera());
-        originalFriendliesSpeed = friendlyCluster.GetFriendlySpeed();
+        if (friendlyCluster != null) originalFriendliesSpeed = friendlyCluster.GetFriendlySpeed();
         friendlyCluster.SetFriendlySpeeds(0f);
     }
 
