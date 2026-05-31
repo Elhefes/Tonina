@@ -212,11 +212,6 @@ public class AttackModeSpawnController : MonoBehaviour
         }
     }
 
-    public void ReturnToMainMenu()
-    {
-        SceneChangingManager.Instance.LoadScene("Jadea");
-    }
-
     void UpdateSpawnArray()
     {
         if (isDown) return;

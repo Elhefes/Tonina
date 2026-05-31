@@ -104,6 +104,11 @@ public class OptionsMenu : MonoBehaviour
         attackModeSpawnController.ReturnToSpawnSelection();
     }
 
+    public void ReturnToJadea()
+    {
+        SceneChangingManager.Instance.LoadScene("Jadea");
+    }
+
     public void QuitGame()
     {
         Application.Quit();

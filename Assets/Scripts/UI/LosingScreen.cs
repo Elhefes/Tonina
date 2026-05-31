@@ -96,6 +96,7 @@ public class LosingScreen : MonoBehaviour
             player.ResetValues();
             player.SetProjectilesToMax();
             player.EquipDefaultWeapon();
+            player.creatureMovement.target = null;
             chichenItzaMapProgression.battleUI.SetActive(true);
         }
         else
