@@ -92,6 +92,7 @@ public class LosingScreen : MonoBehaviour
         if (chichenItzaMapProgression != null)
         {
             if (!mouseLook.cameraOnPlayer) mouseLook.ToggleCameraOnPlayer();
+            player.ResetValues();
         }
         else
         {

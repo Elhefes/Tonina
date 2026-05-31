@@ -120,18 +120,11 @@ public class Player : Creature
 
     public void EnableBattleMode()
     {
-        onCooldown = false;
-        stamina = maxStamina;
-        staminaBarImage.fillAmount = stamina;
         weaponOrder = PlayerPrefs.GetString("CustomWeaponOrder", "01234");
         selectedWeaponOrder = PlayerPrefs.GetString("SelectedWeaponOrder", "04");
+        ResetValues();
         EquipOnlySelectedWeapons();
         EquipDefaultWeapon();
-        health = startingHealth;
-        playerHealthIndicator.UpdateHealthIndicator(health, startingHealth);
-        overHealBar.UpdateOverHealBar(health, startingHealth);
-        overHealDecay = false;
-        healthBar.value = health;
         healthBar.gameObject.SetActive(true);
         SetStaminaBarAlpha(1f);
         SetProjectilesToMax();
@@ -140,20 +133,30 @@ public class Player : Creature
 
     public void DisableBattleMode()
     {
-        onCooldown = false;
-        stamina = maxStamina;
-        staminaBarImage.fillAmount = stamina;
         creatureMovement.target = null;
         foreach (Weapon obj in weapons)
         {
             obj.gameObject.SetActive(false);
         }
-        if (health < startingHealth) RestoreHealth(startingHealth - health);
+        ResetValues();
         healthBar.gameObject.SetActive(false);
         SetStaminaBarAlpha(0f);
         clickerTargetObject.transform.position = new Vector3(0f, 0f, 0f); // Default "invisible" position
         creatureMovement.animator.SetInteger("WeaponIndex", 0);
         if (battlefieldMenu != null) battlefieldMenu.waveController.musicPlayer.PlayPeacefulSongs(false);
+    }
+
+    public void ResetValues()
+    {
+        health = startingHealth;
+        playerHealthIndicator.UpdateHealthIndicator(health, startingHealth);
+        overHealBar.UpdateOverHealBar(health, startingHealth);
+        overHealDecay = false;
+        healthBar.value = health;
+
+        onCooldown = false;
+        stamina = maxStamina;
+        staminaBarImage.fillAmount = stamina;
     }
 
     void EquipOnlySelectedWeapons()
