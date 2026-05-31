@@ -37,6 +37,7 @@ public class LosingScreen : MonoBehaviour
     private IEnumerator TypeTexts()
     {
         player.LoseBattle();
+        if (chichenItzaMapProgression != null) chichenItzaMapProgression.battleUI.SetActive(false);
         fullText = youLoseText.text;
         youLoseText.text = "";
 
@@ -93,6 +94,9 @@ public class LosingScreen : MonoBehaviour
         {
             if (!mouseLook.cameraOnPlayer) mouseLook.ToggleCameraOnPlayer();
             player.ResetValues();
+            player.SetProjectilesToMax();
+            player.EquipDefaultWeapon();
+            chichenItzaMapProgression.battleUI.SetActive(true);
         }
         else
         {

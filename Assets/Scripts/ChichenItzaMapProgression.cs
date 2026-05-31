@@ -6,6 +6,7 @@ public class ChichenItzaMapProgression : MonoBehaviour
     public Player player;
     public GameplayCameraAngles camAngles;
     public FriendlyCluster friendlyCluster;
+    public GameObject battleUI;
     public GameObject objectPooler;
 
     // Pickables

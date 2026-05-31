@@ -183,13 +183,14 @@ public class Player : Creature
         }
     }
 
-    void EquipDefaultWeapon()
+    public void EquipDefaultWeapon()
     {
+        foreach (Weapon wep in weapons) wep.gameObject.SetActive(false);
         weapons[selectedWeaponOrder[0] - '0'].gameObject.SetActive(true);
         creatureMovement.animator.SetInteger("WeaponIndex", selectedWeaponOrder[0] - '0');
     }
 
-    void SetProjectilesToMax()
+    public void SetProjectilesToMax()
     {
         // Idea: projectile quantities could be persistent and have to be refilled somewhere before a battle
         spear.quantity = spearStartingQuantity;
