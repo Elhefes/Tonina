@@ -79,7 +79,7 @@ public class ChichenItzaMapProgression : MonoBehaviour
             {
                 if (Vector3.Distance(player.transform.position, camazoSouthWall.transform.position) < 2.8f) camazoSouthWall.SetActive(false);
             }
-            else if (camazoEastWall.activeInHierarchy)
+            if (camazoEastWall.activeInHierarchy)
             {
                 if (Vector3.Distance(player.transform.position, camazoEastWall.transform.position) < 2.8f) camazoEastWall.SetActive(false);
             }

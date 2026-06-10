@@ -9179,7 +9179,6 @@ GameObject:
   m_Component:
   - component: {fileID: 535815517}
   - component: {fileID: 535815516}
-  - component: {fileID: 535815518}
   - component: {fileID: 535815519}
   m_Layer: 0
   m_Name: MusicObject
@@ -9199,11 +9198,11 @@ AudioSource:
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 0}
-  m_Resource: {fileID: 8300000, guid: c42c711fcc120684883c086802b6388e, type: 3}
+  m_Resource: {fileID: 8300000, guid: 94c8d38c4de5e5b45a765a3d17e193a9, type: 3}
   m_PlayOnAwake: 1
   m_Volume: 0.5
   m_Pitch: 1
-  Loop: 0
+  Loop: 1
   Mute: 0
   Spatialize: 0
   SpatializePostEffects: 0
@@ -9300,36 +9299,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1626136261}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &535815518
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 535815515}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 20b89101630c6a442ae8a2f396f5860d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  playingWaitingMusic: 1
-  audioLooper: {fileID: 535815519}
-  audioSource: {fileID: 535815516}
-  firstSong: {fileID: 8300000, guid: c42c711fcc120684883c086802b6388e, type: 3}
-  introMusic: {fileID: 0}
-  waitingMusic: {fileID: 8300000, guid: c42c711fcc120684883c086802b6388e, type: 3}
-  peacefulSongs: []
-  battleSongs:
-  - {fileID: 8300000, guid: 906b0b34c288c6a47aef9ba975419327, type: 3}
-  - {fileID: 8300000, guid: 0e914ce027971014e8a03c25cbd39760, type: 3}
-  - {fileID: 8300000, guid: 31d0c6fb759dc8a429e9dcb5dc0f58ae, type: 3}
-  - {fileID: 8300000, guid: e7706b7a220ef3f459142946fd73913a, type: 3}
-  - {fileID: 8300000, guid: 97c0efefe36a41c46a276bd59ec0e0cf, type: 3}
-  - {fileID: 8300000, guid: 983a9849907804549b4c604294585023, type: 3}
-  - {fileID: 8300000, guid: 61c7c1f9c3e34a94ea74d93e66e74ec2, type: 3}
-  - {fileID: 8300000, guid: e3cadf61576e44e4b90d71b1738256cb, type: 3}
-  - {fileID: 8300000, guid: e44518d15baddb840951a1207be4fe0b, type: 3}
-  - {fileID: 8300000, guid: b7b308f0369ea8c4e906c8627db8d349, type: 3}
 --- !u!114 &535815519
 MonoBehaviour:
   m_ObjectHideFlags: 0
