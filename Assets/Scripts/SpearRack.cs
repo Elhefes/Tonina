@@ -3,16 +3,24 @@ using UnityEngine;
 public class SpearRack : Placeable
 {
     public GameObject[] spears;
-    public int numOfSpearsInRack;
+    public int currentAmountOfSpears;
+    private int originalAmountOfSpears;
 
     private void Start()
     {
-        numOfSpearsInRack = spears.Length;
+        currentAmountOfSpears = spears.Length;
+        originalAmountOfSpears = currentAmountOfSpears;
     }
 
     public void TakeSpear()
     {
-        spears[numOfSpearsInRack - 1].SetActive(false);
-        numOfSpearsInRack--;
+        spears[currentAmountOfSpears - 1].SetActive(false);
+        currentAmountOfSpears--;
+    }
+
+    public void ResetSpears()
+    {
+        foreach (GameObject obj in spears) obj.SetActive(true);
+        currentAmountOfSpears = originalAmountOfSpears;
     }
 }

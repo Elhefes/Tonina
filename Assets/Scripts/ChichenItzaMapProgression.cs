@@ -14,6 +14,7 @@ public class ChichenItzaMapProgression : MonoBehaviour
     public GameObject pickableCamazoIcon;
     public GameObject pickableMask;
     public GameObject pickableKukulkans;
+    public SpearRack[] spearRacks;
 
     // Moving elements
     public GameObject camazoSouthWall;
@@ -61,6 +62,7 @@ public class ChichenItzaMapProgression : MonoBehaviour
         player.transform.position = playerSpawnPosition;
         player.transform.rotation = Quaternion.Euler(camAngles.presetCameraAngles[0].rotation.eulerAngles);
         friendlyCluster.ResetAllFriendlies();
+        foreach (SpearRack spearRack in spearRacks) spearRack.ResetSpears();
     }
 
     private void DisableEverythingInObjectPooler()

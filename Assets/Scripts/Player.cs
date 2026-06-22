@@ -787,7 +787,7 @@ public class Player : Creature
             {
                 spearRack = rackObj.GetComponent<SpearRack>();
             }
-            if (spearRack != null && spear.quantity < spearStartingQuantity && spearRack.numOfSpearsInRack > 0)
+            if (spearRack != null && spear.quantity < spearStartingQuantity && spearRack.currentAmountOfSpears > 0)
             {
                 spear.quantity++;
                 spear.notAvailable = false;
