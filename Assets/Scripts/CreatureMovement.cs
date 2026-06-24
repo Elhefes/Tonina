@@ -1,8 +1,5 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
-using UnityEngine.EventSystems;
 
 public class CreatureMovement : MonoBehaviour
 {
@@ -15,8 +12,14 @@ public class CreatureMovement : MonoBehaviour
     public LayerMask groundMask;
 
     public NavMeshAgent agent;
+    private NavMeshPath path;
     public Animator animator;
     public Transform target;
+
+    private void Start()
+    {
+        path = new NavMeshPath();
+    }
 
     public void Update()
     {
@@ -33,6 +36,19 @@ public class CreatureMovement : MonoBehaviour
         {
             animator.SetBool("IsMoving", false);
         }
+    }
+
+    public void MoveToDestination(Vector3 destination)
+    {
+        NavMesh.CalculatePath(agent.transform.position, destination, groundMask, path);
+
+        if (path.status == NavMeshPathStatus.PathComplete ||
+            path.status == NavMeshPathStatus.PathPartial)
+        {
+            agent.SetPath(path);
+        }
+        else agent.SetDestination(destination);
+        agent.destination = destination;
     }
 
     void LegsTimingTrigger()

@@ -5374,6 +5374,7 @@ MonoBehaviour:
   startingHealth: 200
   healthBar: {fileID: 3872663564488066035}
   godMode: 0
+  hasAllWeapons: 0
   uiController: {fileID: 0}
   doubleClickDetector: {fileID: 2119072032070549423}
   maxStamina: 1
@@ -5427,6 +5428,7 @@ MonoBehaviour:
   textBox: {fileID: 0}
   speakerNameText: {fileID: 0}
   textBoxText: {fileID: 0}
+  textBoxDots: {fileID: 0}
   textLineIndex: 0
   destination: {x: 0, y: 0, z: 0}
   kingHouse: {fileID: 0}
@@ -6205,7 +6207,7 @@ MonoBehaviour:
   groundDistance: 0.4
   groundMask:
     serializedVersion: 2
-    m_Bits: 64
+    m_Bits: 577
   agent: {fileID: 5021349066847927871}
   animator: {fileID: 7165749098888084238}
   target: {fileID: 0}

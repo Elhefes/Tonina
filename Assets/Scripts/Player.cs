@@ -315,7 +315,7 @@ public class Player : Creature
                         textLineIndex = 0;
                         textBox.gameObject.SetActive(true);
                         UpdateTextBox();
-                        creatureMovement.agent.SetDestination(target.transform.position);
+                        creatureMovement.MoveToDestination(target.transform.position);
                         creatureMovement.agent.stoppingDistance = 1.7f;
                         return;
                     }
@@ -329,7 +329,7 @@ public class Player : Creature
                 if (target.name == "chaac_stone" && Vector3.Distance(target.transform.position, transform.position) < 2.85f)
                 {
                     weatherStone = target;
-                    creatureMovement.agent.SetDestination(weatherStone.transform.position);
+                    creatureMovement.MoveToDestination(weatherStone.transform.position);
                     creatureMovement.agent.stoppingDistance = 2.85f;
                     if (!weatherGameResults.activeSelf) weatherGame.SetActive(true);
                     return;
@@ -342,7 +342,7 @@ public class Player : Creature
 
                 if (target.CompareTag("VillageTPSpot") && Vector3.Distance(target.transform.position, transform.position) < 4f)
                 {
-                    creatureMovement.agent.SetDestination(Vector3.Lerp(transform.position, target.transform.position, 0.5f));
+                    creatureMovement.MoveToDestination(Vector3.Lerp(transform.position, target.transform.position, 0.5f));
                     if (villageTPMenu != null) villageTPMenu.SetActive(true);
                     return;
                 }
@@ -357,7 +357,7 @@ public class Player : Creature
                         {
                             clickToEnableObject.objectToEnable.SetActive(false);
                             clickToEnableObject = null;
-                            creatureMovement.agent.SetDestination(gameObject.transform.position);
+                            creatureMovement.MoveToDestination(gameObject.transform.position);
                             return;
                         }
                         else
@@ -410,7 +410,7 @@ public class Player : Creature
 
                 if (inBuildMode) return;
 
-                creatureMovement.agent.SetDestination(hit.point);
+                creatureMovement.MoveToDestination(hit.point);
                 destination = hit.point;
 
                 if (NotInBattlefield()) // If not in battle or builder mode
@@ -620,7 +620,7 @@ public class Player : Creature
         {
             healthBar.value = (float)health / startingHealth;
         }
-        
+
         if (health <= 0)
         {
             onCooldown = false;
@@ -914,7 +914,7 @@ public class Player : Creature
     {
         if (uiController != null) uiController.DisableOverlappingElements();
         blackFader.SetActive(true);
-        creatureMovement.agent.SetDestination(transform.position);
+        creatureMovement.MoveToDestination(transform.position);
         yield return new WaitForSeconds(0.33f);
 
         gameObject.SetActive(false);

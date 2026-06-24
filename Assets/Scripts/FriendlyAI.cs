@@ -87,8 +87,8 @@ public class FriendlyAI : MonoBehaviour
         creatureMovement.target = null;
         if (player == null) return;
 
-        if (player.destination == Vector3.zero) creatureMovement.agent.destination = player.transform.position;
-        else creatureMovement.agent.destination = player.destination;
+        if (player.destination == Vector3.zero) creatureMovement.MoveToDestination(player.transform.position);
+        else creatureMovement.MoveToDestination(player.destination);
         creatureMovement.agent.stoppingDistance = 2.8f;
         //guarding = false;
     }
