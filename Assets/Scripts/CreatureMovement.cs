@@ -25,7 +25,7 @@ public class CreatureMovement : MonoBehaviour
     {
         if (target)
         {
-            agent.destination = target.position;
+            MoveToDestination(target.position);
         }
         if (agent.velocity != Vector3.zero)
         {
@@ -40,7 +40,7 @@ public class CreatureMovement : MonoBehaviour
 
     public void MoveToDestination(Vector3 destination)
     {
-        NavMesh.CalculatePath(agent.transform.position, destination, groundMask, path);
+        NavMesh.CalculatePath(agent.transform.position, destination, agent.areaMask, path);
 
         if (path.status == NavMeshPathStatus.PathComplete ||
             path.status == NavMeshPathStatus.PathPartial)
