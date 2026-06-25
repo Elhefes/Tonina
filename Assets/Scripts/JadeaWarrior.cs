@@ -15,7 +15,7 @@ public class JadeaWarrior : Creature
 
     protected bool friendlyInPool = true;
 
-    void Awake()
+    void Start()
     {
         health = startingHealth;
         pooler = ObjectPooler.Instance;

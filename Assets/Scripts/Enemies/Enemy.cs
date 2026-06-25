@@ -20,7 +20,7 @@ public class Enemy : Creature
 
     protected bool enemyInPool = true;
 
-    void Awake()
+    void Start()
     {
         pooler = ObjectPooler.Instance;
         attackerSideSetting = AttackerSideSetting.Instance;
