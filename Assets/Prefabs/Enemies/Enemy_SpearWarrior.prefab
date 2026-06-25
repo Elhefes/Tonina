@@ -1831,6 +1831,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   weaponOnHand: {fileID: 2043073690288066542}
   creatureMovement: {fileID: 9167552780147776406}
+  isAttacker: 1
   onCooldown: 0
   attackExtraCooldownTime: 0.25
   shouldAttack: 0
@@ -1894,7 +1895,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6de743d2e22607e40871194abed2c014, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  creatureMovement: {fileID: 9167552780147776406}
+  enemyCreature: {fileID: 7225059921769293169}
 --- !u!143 &6409614840456362030
 CharacterController:
   m_ObjectHideFlags: 0

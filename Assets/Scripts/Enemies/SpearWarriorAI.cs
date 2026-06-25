@@ -5,11 +5,9 @@ public class SpearWarriorAI : EnemyAI
 {
     public GameObject spear;
 
-    private Coroutine AI_ControllerCoroutine;
-
     void Awake()
     {
-        AI_ControllerCoroutine = StartCoroutine(PeriodicalTargetChecking());
+        StartCoroutine(PeriodicalTargetChecking());
     }
 
     protected override IEnumerator PeriodicalTargetChecking()
@@ -22,15 +20,15 @@ public class SpearWarriorAI : EnemyAI
                 if (spear.activeSelf)
                 {
                     if (NearestTarget("Jadea", 30f) != null) break;
-                    else if (NearestTarget("Barricade", 8f) != null) break;
+                    else if (enemyCreature.isAttacker && NearestTarget("Barricade", 8f) != null) break;
                 }
                 else
                 {
                     if (NearestTarget("Jadea", 10f) != null) break;
-                    else if (NearestTarget("Barricade", 8f) != null) break;
+                    else if (enemyCreature.isAttacker && NearestTarget("Barricade", 8f) != null) break;
                     else if (NearestTarget("Jadea", 20f) != null) break;
                 }
-                creatureMovement.target = GameObject.FindGameObjectsWithTag("Target")[0].transform;
+                enemyCreature.creatureMovement.target = GameObject.FindGameObjectsWithTag("Target")[0].transform;
                 break;
             }
         }

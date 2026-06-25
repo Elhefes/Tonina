@@ -3,8 +3,7 @@ using UnityEngine;
 
 public class FriendlyAI : MonoBehaviour
 {
-    public CreatureMovement creatureMovement;
-    private Coroutine AI_ControllerCoroutine;
+    public Creature friendlyCreature;
     private Player player;
     private float normalStoppingDistance;
     //public Vector3 guardingSpot;
@@ -18,8 +17,8 @@ public class FriendlyAI : MonoBehaviour
     private void OnEnable()
     {
         if (player == null) player = FindFirstObjectByType<Player>(); // In attack mode
-        normalStoppingDistance = creatureMovement.agent.stoppingDistance;
-        AI_ControllerCoroutine = StartCoroutine(PeriodicalTargetChecking());
+        normalStoppingDistance = friendlyCreature.creatureMovement.agent.stoppingDistance;
+        StartCoroutine(PeriodicalTargetChecking());
     }
 
     private IEnumerator PeriodicalTargetChecking()
@@ -29,16 +28,18 @@ public class FriendlyAI : MonoBehaviour
             yield return new WaitForSeconds(Random.Range(2f, 3f));
             while (true)
             {
-                if (NearestTarget("Enemy", 30f) != null)
-                {
-                    creatureMovement.agent.stoppingDistance = normalStoppingDistance;
-                    break;
-                }
+                friendlyCreature.creatureMovement.agent.stoppingDistance = normalStoppingDistance;
+
+                if (NearestTarget("Enemy", 8f) != null) break;
+                else if (friendlyCreature.isAttacker && NearestTarget("Barricade", 10f) != null) break;
+                else if (NearestTarget("Enemy", 30f) != null) break;
+
                 //else if (Vector3.Distance(transform.position, player.transform.position) < 33f)
                 //{
                 //    FollowPlayerDirections();
                 //    break;
                 //}
+
                 FollowPlayerDirections();
 
                 // If player is too far away, it should guard the position realistically
@@ -76,7 +77,7 @@ public class FriendlyAI : MonoBehaviour
 
         if (nearestObject != null)
         {
-            creatureMovement.target = nearestObject.transform;
+            friendlyCreature.creatureMovement.target = nearestObject.transform;
             //guarding = false;
         }
         return nearestObject;
@@ -84,12 +85,12 @@ public class FriendlyAI : MonoBehaviour
 
     void FollowPlayerDirections()
     {
-        creatureMovement.target = null;
+        friendlyCreature.creatureMovement.target = null;
         if (player == null) return;
 
-        if (player.destination == Vector3.zero) creatureMovement.MoveToDestination(player.transform.position);
-        else creatureMovement.MoveToDestination(player.destination);
-        creatureMovement.agent.stoppingDistance = 2.8f;
+        if (player.destination == Vector3.zero) friendlyCreature.creatureMovement.MoveToDestination(player.transform.position);
+        else friendlyCreature.creatureMovement.MoveToDestination(player.destination);
+        friendlyCreature.creatureMovement.agent.stoppingDistance = 2.8f;
         //guarding = false;
     }
 

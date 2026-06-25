@@ -31284,6 +31284,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1393370855}
+  - component: {fileID: 1393370864}
   - component: {fileID: 1393370856}
   - component: {fileID: 1393370857}
   - component: {fileID: 1393370858}
@@ -31447,6 +31448,19 @@ MonoBehaviour:
   elCastilloSpawns:
   - {fileID: 1972696596}
   - {fileID: 826425538}
+--- !u!114 &1393370864
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1393370853}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 62f08e693c026ce41a8dca92e80a890b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  enemyIsDefender: 1
 --- !u!1001 &1393484807
 PrefabInstance:
   m_ObjectHideFlags: 0

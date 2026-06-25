@@ -5,6 +5,9 @@ public class Creature : MonoBehaviour
 {
     public Weapon weaponOnHand;
     public CreatureMovement creatureMovement;
+    public AttackerSideSetting attackerSideSetting;
+    public ObjectPooler pooler;
+    public bool isAttacker;
     public bool onCooldown;
     public float attackExtraCooldownTime;
     public bool shouldAttack;

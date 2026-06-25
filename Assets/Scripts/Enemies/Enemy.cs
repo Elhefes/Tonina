@@ -18,12 +18,13 @@ public class Enemy : Creature
     public float slowDownTimeFromStone;
     public float speedDropFromStone;
 
-    public ObjectPooler pooler;
     protected bool enemyInPool = true;
 
     void Awake()
     {
         pooler = ObjectPooler.Instance;
+        attackerSideSetting = AttackerSideSetting.Instance;
+        if (attackerSideSetting != null) isAttacker = !attackerSideSetting.enemyIsDefender;
         ResetEnemyAttributes();
         FindFirstTarget();
     }

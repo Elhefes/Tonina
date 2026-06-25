@@ -3,12 +3,11 @@ using UnityEngine;
 
 public class EnemyAI : MonoBehaviour
 {
-    public CreatureMovement creatureMovement;
-    private Coroutine AI_ControllerCoroutine;
+    public Creature enemyCreature;
 
     void OnEnable()
     {
-        AI_ControllerCoroutine = StartCoroutine(PeriodicalTargetChecking());
+        StartCoroutine(PeriodicalTargetChecking());
     }
 
     protected virtual IEnumerator PeriodicalTargetChecking()
@@ -19,12 +18,12 @@ public class EnemyAI : MonoBehaviour
             while (true)
             {
                 if (NearestTarget("Jadea", 8f) != null) break;
-                else if (NearestTarget("Barricade", 10f) != null) break;
+                else if (enemyCreature.isAttacker && NearestTarget("Barricade", 10f) != null) break;
                 else if (NearestTarget("Jadea", 20f) != null) break;
                 else
                 {
                     GameObject[] g = GameObject.FindGameObjectsWithTag("Target");
-                    if (g.Length > 0) creatureMovement.target = g[0].transform;
+                    if (g.Length > 0) enemyCreature.creatureMovement.target = g[0].transform;
                 }
                 break;
             }
@@ -50,7 +49,7 @@ public class EnemyAI : MonoBehaviour
             }
         }
 
-        if (nearestObject != null) creatureMovement.target = nearestObject.transform;
+        if (nearestObject != null) enemyCreature.creatureMovement.target = nearestObject.transform;
         return nearestObject;
     }
 }

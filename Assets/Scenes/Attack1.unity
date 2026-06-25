@@ -41955,6 +41955,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1393370855}
+  - component: {fileID: 1393370863}
   - component: {fileID: 1393370862}
   - component: {fileID: 1393370856}
   - component: {fileID: 1393370857}
@@ -42096,6 +42097,19 @@ MonoBehaviour:
   statsController: {fileID: 1788166372}
   battleTimeText: {fileID: 338683751}
   rewardsText: {fileID: 449537778}
+--- !u!114 &1393370863
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1393370853}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 62f08e693c026ce41a8dca92e80a890b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  enemyIsDefender: 1
 --- !u!1 &1396039129
 GameObject:
   m_ObjectHideFlags: 0

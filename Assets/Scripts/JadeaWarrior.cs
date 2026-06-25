@@ -13,13 +13,14 @@ public class JadeaWarrior : Creature
     public bool moveTowardsTarget;
     public float attackExtraCooldown;
 
-    public ObjectPooler pooler;
     protected bool friendlyInPool = true;
 
     void Awake()
     {
         health = startingHealth;
         pooler = ObjectPooler.Instance;
+        attackerSideSetting = AttackerSideSetting.Instance;
+        if (attackerSideSetting != null) isAttacker = attackerSideSetting.enemyIsDefender;
     }
 
     public void ResetFriendlyAttributes()
