@@ -19,6 +19,7 @@ public class FriendlyAI : MonoBehaviour
         if (player == null) player = FindFirstObjectByType<Player>(); // In attack mode
         normalStoppingDistance = friendlyCreature.creatureMovement.agent.stoppingDistance;
         StartCoroutine(PeriodicalTargetChecking());
+        friendlyCreature.SetWeaponBarricadeCollisionHandling();
     }
 
     private IEnumerator PeriodicalTargetChecking()

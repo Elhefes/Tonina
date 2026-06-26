@@ -104,6 +104,8 @@ public class Player : Creature
 
     private void Start()
     {
+        attackerSideSetting = AttackerSideSetting.Instance;
+
         if (kingHouse != null && !godMode) // Set correct starting position in Jadea scene only
         {
             gameObject.SetActive(false);
@@ -188,6 +190,7 @@ public class Player : Creature
         foreach (Weapon wep in weapons) wep.gameObject.SetActive(false);
         weapons[selectedWeaponOrder[0] - '0'].gameObject.SetActive(true);
         creatureMovement.animator.SetInteger("WeaponIndex", selectedWeaponOrder[0] - '0');
+        SetWeaponBarricadeCollisionHandling();
     }
 
     public void SetProjectilesToMax()
@@ -248,12 +251,25 @@ public class Player : Creature
                 if (hitSomething)
                 {
                     target = hit.collider.gameObject;
+
+                    // Target enemies
                     if (target.CompareTag("Enemy"))
                     {
                         creatureMovement.agent.stoppingDistance = defaultAttackStoppingDistance;
                         creatureMovement.target = target.transform;
                         clickerTargetObject.alpha = 1f;
                         return;
+                    }
+                    // Target barricades when attacking
+                    else if (attackerSideSetting != null)
+                    {
+                        if (attackerSideSetting.enemyIsDefender && target.CompareTag("Barricade"))
+                        {
+                            creatureMovement.agent.stoppingDistance = defaultAttackStoppingDistance;
+                            creatureMovement.target = target.transform;
+                            clickerTargetObject.alpha = 1f;
+                            return;
+                        }
                     }
                 }
             }
@@ -578,6 +594,7 @@ public class Player : Creature
         creatureMovement.animator.SetInteger("WeaponIndex", weaponTypeIndex);
         UpdateWeaponRangeIndicator();
         UpdateProjectileQuantityText();
+        SetWeaponBarricadeCollisionHandling();
     }
 
     private void UpdateProjectileQuantityText()

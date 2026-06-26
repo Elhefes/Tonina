@@ -18,6 +18,11 @@ public class Creature : MonoBehaviour
         onCooldown = false;
     }
 
+    public void SetWeaponBarricadeCollisionHandling()
+    {
+        if (attackerSideSetting != null) weaponOnHand.canHitBarricades = attackerSideSetting.enemyIsDefender;
+    }
+
     // Update is called once per frame
     public void Update()
     {

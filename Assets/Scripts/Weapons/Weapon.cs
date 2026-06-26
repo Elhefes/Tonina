@@ -5,6 +5,7 @@ public class Weapon : MonoBehaviour
 {
     public string weaponName;
     public bool isFriendly;
+    public bool canHitBarricades;
     public bool selected;
     public bool notAvailable;
     public WeaponType type;
@@ -18,11 +19,11 @@ public class Weapon : MonoBehaviour
     public AudioClip hitSound;
     public AudioSource soundPlayer;
 
-    private List<GameObject> hitEnemies = new List<GameObject>();
+    private List<GameObject> hitObjects = new List<GameObject>();
 
     private void OnEnable()
     {
-        hitEnemies.Clear();
+        hitObjects.Clear();
     }
 
     public virtual void Attack(Animator animator)
@@ -44,9 +45,9 @@ public class Weapon : MonoBehaviour
     private void OnCollisionExit(Collision collision)
     {
         var obj = collision.gameObject;
-        if (hitEnemies.Contains(obj))
+        if (hitObjects.Contains(obj))
         {
-            hitEnemies.Remove(obj);
+            hitObjects.Remove(obj);
         }
     }
 
@@ -58,18 +59,26 @@ public class Weapon : MonoBehaviour
     public void HandleCollision(GameObject obj)
     {
         if (!canHit) return;
-        if (isFriendly && obj.CompareTag("Enemy") && !hitEnemies.Contains(obj))
+        if (isFriendly && obj.CompareTag("Enemy") && !hitObjects.Contains(obj))
         {
-            hitEnemies.Add(obj);
+            hitObjects.Add(obj);
             obj.GetComponent<Enemy>()?.TakeDamage(damage);
+
             if (hitSound != null) soundPlayer.PlayOneShot(hitSound, PlayerPrefs.GetFloat("soundVolume", 0.5f));
         }
-        if (!isFriendly && (obj.CompareTag("Player") || obj.CompareTag("Jadea") || obj.CompareTag("Barricade")) && !hitEnemies.Contains(obj))
+        if (!isFriendly && (obj.CompareTag("Player") || obj.CompareTag("Jadea")) && !hitObjects.Contains(obj))
         {
-            hitEnemies.Add(obj);
+            hitObjects.Add(obj);
             obj.GetComponent<Player>()?.TakeDamage(damage);
             obj.GetComponent<JadeaWarrior>()?.TakeDamage(damage);
+            
+            if (hitSound != null) soundPlayer.PlayOneShot(hitSound, PlayerPrefs.GetFloat("soundVolume", 0.5f));
+        }
+        if (obj.CompareTag("Barricade") && !hitObjects.Contains(obj))
+        {
+            hitObjects.Add(obj);
             obj.GetComponent<Barricade>()?.TakeDamage(damage);
+
             if (hitSound != null) soundPlayer.PlayOneShot(hitSound, PlayerPrefs.GetFloat("soundVolume", 0.5f));
         }
     }

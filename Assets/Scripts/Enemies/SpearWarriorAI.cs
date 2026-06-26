@@ -5,11 +5,6 @@ public class SpearWarriorAI : EnemyAI
 {
     public GameObject spear;
 
-    void Awake()
-    {
-        StartCoroutine(PeriodicalTargetChecking());
-    }
-
     protected override IEnumerator PeriodicalTargetChecking()
     {
         while (true)

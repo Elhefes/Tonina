@@ -8,6 +8,7 @@ public class EnemyAI : MonoBehaviour
     void OnEnable()
     {
         StartCoroutine(PeriodicalTargetChecking());
+        enemyCreature.SetWeaponBarricadeCollisionHandling();
     }
 
     protected virtual IEnumerator PeriodicalTargetChecking()
