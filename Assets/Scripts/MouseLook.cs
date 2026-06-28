@@ -27,7 +27,7 @@ public class MouseLook : MonoBehaviour
     public GameObject minimapIndicators;
 
     public GameObject placeablesParent;
-    private bool transitioningToBuildModeAngle;
+    private bool transitioningToBattlefieldRotation;
 
     public CameraOnPlayerButton cameraOnPlayerButton;
     public GameObject optionsMenu;
@@ -35,9 +35,9 @@ public class MouseLook : MonoBehaviour
     public MinimapInput minimapInput;
     public float minimapInputSensitivity;
 
-    private Vector3 specificPosition;
+    private Vector3 targetPosition;
     private Vector3 battlefieldRotation;
-    private bool movingToSpecificPosition;
+    private bool movingToTargetPosition;
 
     private void Start()
     {
@@ -66,7 +66,7 @@ public class MouseLook : MonoBehaviour
         player.inBuildMode = true;
         cameraOnPlayer = false;
         cameraOnPlayerButton.gameObject.SetActive(false);
-        transitioningToBuildModeAngle = true;
+        transitioningToBattlefieldRotation = true;
     }
 
     public void DisableBuildMode()
@@ -74,7 +74,7 @@ public class MouseLook : MonoBehaviour
         player.inBuildMode = false;
         cameraOnPlayer = true;
         cameraOnPlayerButton.gameObject.SetActive(true);
-        transitioningToBuildModeAngle = false;
+        transitioningToBattlefieldRotation = false;
     }
 
     public void ToggleCameraOnPlayer()
@@ -89,15 +89,15 @@ public class MouseLook : MonoBehaviour
         cameraOnPlayer = false;
         cameraOnPlayerButton.ChangeIconSprite(cameraOnPlayer);
 
-        movingToSpecificPosition = false;
+        movingToTargetPosition = false;
     }
 
-    public void SetMovingToSpecificPosition(bool value) { movingToSpecificPosition = value; }
+    public void SetMovingToSpecificPosition(bool value) { movingToTargetPosition = value; }
 
     public void StartMovingToPosition(Vector3 pos)
     {
-        specificPosition = pos;
-        movingToSpecificPosition = true;
+        targetPosition = pos;
+        movingToTargetPosition = true;
     }
 
     public void ZoomCameraInOrOut(bool zoom_in)
@@ -133,9 +133,9 @@ public class MouseLook : MonoBehaviour
             }
 
             // The camera doesn't have time to get to x = 0 before rotation y = 0, so the x is a little bit off 0
-            if (transform.rotation.eulerAngles.y == 0f && (Mathf.Abs(transform.position.x) <= 0.08f)) transitioningToBuildModeAngle = false;
+            if (transform.rotation.eulerAngles.y == 0f && (Mathf.Abs(transform.position.x) <= 0.08f)) transitioningToBattlefieldRotation = false;
 
-            if (!player.insideKingHouse || (player.inBuildMode && !transitioningToBuildModeAngle))
+            if (!player.insideKingHouse || (player.inBuildMode && !transitioningToBattlefieldRotation))
             {
                 float horizontal = Input.GetAxis("Horizontal") + minimapInput.GetMinimapInput().x * minimapInputSensitivity;
                 float vertical = Input.GetAxis("Vertical") + minimapInput.GetMinimapInput().y * minimapInputSensitivity;
@@ -177,9 +177,9 @@ public class MouseLook : MonoBehaviour
             minimapCamera.orthographicSize = distanceFromObject / 2 + 20f;
         }
 
-        if (movingToSpecificPosition)
+        if (movingToTargetPosition)
         {
-            MoveToSpecificPosition();
+            MoveToTargetPosition();
         }
 
         if (player == null) return;
@@ -188,7 +188,7 @@ public class MouseLook : MonoBehaviour
         {
             FollowPlayerInAngledPosition();
         }
-        else if (transitioningToBuildModeAngle)
+        else if (transitioningToBattlefieldRotation)
         {
             MoveSmoothly(AngledPosition(player.kingHouse.transform.position + player.kingHouse.battlefieldStartingPosition, 
                 battlefieldRotation, distanceFromObject));
@@ -313,12 +313,12 @@ public class MouseLook : MonoBehaviour
         );
     }
 
-    private void MoveToSpecificPosition()
+    private void MoveToTargetPosition()
     {
-        if (specificPosition != null)
+        if (targetPosition != null)
         {
-            transform.position = Vector3.Lerp(transform.position, specificPosition, smoothSpeed * 0.5f);
-            minimapCamera.transform.position = Vector3.Lerp(minimapCamera.transform.position, specificPosition, smoothSpeed * 0.5f);
+            transform.position = Vector3.Lerp(transform.position, targetPosition, smoothSpeed * 0.5f);
+            minimapCamera.transform.position = Vector3.Lerp(minimapCamera.transform.position, targetPosition, smoothSpeed * 0.5f);
         }
     }
 
@@ -329,7 +329,7 @@ public class MouseLook : MonoBehaviour
 
         // Rotate camera to camera angle which is preset in scene
         Quaternion targetRotation =
-        transitioningToBuildModeAngle
+        transitioningToBattlefieldRotation
             ? Quaternion.Euler(battlefieldRotation)
             : Quaternion.Euler(presetCameraAngle);
 
