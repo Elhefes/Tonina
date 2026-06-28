@@ -13312,7 +13312,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerSpawnPosition: {fileID: 6673057616121462622}
-  battleFieldStartingPosition: {x: 0, y: 0, z: -12}
+  battlefieldStartingPosition: {x: 0, y: 0, z: -12}
+  battlefieldAngle: {x: 60, y: 0, z: 0}
   miniPyramid: {fileID: 5553093380316021763}
   namePlate: {fileID: 8040391778464466782}
 --- !u!1 &7471331876075990883
@@ -20359,6 +20360,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4b163dfbe4482534282da3e09e881e14, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  camAngles: {fileID: 0}
+  kingHouseCamAngleInt: 0
 --- !u!4 &5460764262364366676 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: f2c1fd3e97cef2a498cc0470fa1f7b86, type: 3}

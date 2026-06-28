@@ -36,16 +36,22 @@ public class MouseLook : MonoBehaviour
     public float minimapInputSensitivity;
 
     private Vector3 specificPosition;
+    private Vector3 battlefieldRotation;
     private bool movingToSpecificPosition;
 
     private void Start()
     {
         if (player != null)
         {
-            if (player.kingHouse != null && !player.godMode) // Set correct starting position in Jadea scene only
+            if (player.kingHouse != null)
             {
-                transform.position = player.kingHouse.transform.position + new Vector3(0f, 12f, 0f);
-                mainCameraObject.transform.position = gameObject.transform.position;
+                battlefieldRotation = player.kingHouse.battlefieldAngle;
+
+                if (!player.godMode) // Set correct starting position in Jadea scene only
+                {
+                    transform.position = player.kingHouse.transform.position + new Vector3(0f, 12f, 0f);
+                    mainCameraObject.transform.position = gameObject.transform.position;
+                }
             }
         }
     }
@@ -109,7 +115,7 @@ public class MouseLook : MonoBehaviour
     public void TeleportCameras()
     {
         // Teleports cameras to where the cameras should be after teleport
-        CalculateAngledCameraPosition();
+        FollowPlayerInAngledPosition();
         mainCameraObject.transform.position = playerToFollowAngledDirection;
         gameObject.transform.position = playerToFollowAngledDirection;
         minimapCamera.transform.position = playerToFollowDirection;
@@ -125,6 +131,9 @@ public class MouseLook : MonoBehaviour
             {
                 if (Input.GetKeyDown("c")) ToggleCameraOnPlayer();
             }
+
+            // The camera doesn't have time to get to x = 0 before rotation y = 0, so the x is a little bit off 0
+            if (transform.rotation.eulerAngles.y == 0f && (Mathf.Abs(transform.position.x) <= 0.08f)) transitioningToBuildModeAngle = false;
 
             if (!player.insideKingHouse || (player.inBuildMode && !transitioningToBuildModeAngle))
             {
@@ -175,9 +184,15 @@ public class MouseLook : MonoBehaviour
 
         if (player == null) return;
 
-        if (cameraOnPlayer || transitioningToBuildModeAngle)
+        if (cameraOnPlayer)
         {
-            CalculateAngledCameraPosition();
+            FollowPlayerInAngledPosition();
+        }
+        else if (transitioningToBuildModeAngle)
+        {
+            MoveSmoothly(AngledPosition(player.kingHouse.transform.position + player.kingHouse.battlefieldStartingPosition, 
+                battlefieldRotation, distanceFromObject));
+            RotateSmoothly(battlefieldRotation);
         }
         else
         {
@@ -225,7 +240,18 @@ public class MouseLook : MonoBehaviour
         }
     }
 
-    void CalculateAngledCameraPosition()
+    private Vector3 AngledPosition(Vector3 targetPosition, Vector3 targetAngle, float distanceFromObject)
+    {
+        Quaternion rotation = Quaternion.Euler(targetAngle);
+
+        // Direction the camera is looking.
+        Vector3 forward = rotation * Vector3.forward;
+
+        // Camera sits behind the target along its viewing direction.
+        return targetPosition - forward * distanceFromObject;
+    }
+
+    void FollowPlayerInAngledPosition()
     {
         float xRotation = 60f;
 
@@ -241,7 +267,7 @@ public class MouseLook : MonoBehaviour
 
         Vector3 backwardOffset = rotation * Vector3.back * horizontalDistance;
 
-        // Small positional offset you previously had (+0.66f / -0.66f)
+        // Small positional offset (+0.66f / -0.66f)
         Vector3 extraOffset = rotation * Vector3.back * -0.66f;
 
         // Final camera target position
@@ -302,7 +328,18 @@ public class MouseLook : MonoBehaviour
         if (player.inVillage && inCutscene) return;
 
         // Rotate camera to camera angle which is preset in scene
-        transform.rotation = Quaternion.RotateTowards(transform.rotation, Quaternion.Euler(presetCameraAngle), 1.25f);
+        Quaternion targetRotation =
+        transitioningToBuildModeAngle
+            ? Quaternion.Euler(battlefieldRotation)
+            : Quaternion.Euler(presetCameraAngle);
+
+        transform.rotation = Quaternion.RotateTowards(
+            transform.rotation,
+            targetRotation,
+            1.25f
+        );
+
+        mainCameraObject.transform.rotation = transform.rotation;
         mainCameraObject.transform.rotation = Quaternion.RotateTowards(transform.rotation, Quaternion.Euler(presetCameraAngle), 1.25f);
         minimapCamera.transform.rotation = Quaternion.RotateTowards(minimapCamera.transform.rotation, 
             Quaternion.Euler(new Vector3(90f, presetCameraAngle.y, 0f)), 1.25f);
@@ -312,4 +349,30 @@ public class MouseLook : MonoBehaviour
     }
 
     public void SetInCutscene(bool value) { inCutscene = value; }
+
+    private void MoveSmoothly(Vector3 presetPosition)
+    {
+        transform.position = Vector3.Lerp(
+            transform.position,
+            presetPosition,
+            smoothSpeed
+        );
+
+        minimapCamera.transform.position = Vector3.Lerp(
+            minimapCamera.transform.position,
+            presetPosition + Vector3.up * 100f,
+            smoothSpeed
+        );
+    }
+
+    private void RotateSmoothly(Vector3 presetRotation)
+    {
+        transform.rotation = Quaternion.Lerp(
+            transform.rotation,
+            Quaternion.Euler(presetRotation),
+            smoothSpeed
+        );
+
+        mainCameraObject.transform.rotation = transform.rotation;
+    }
 }

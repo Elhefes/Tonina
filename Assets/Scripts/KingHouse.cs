@@ -3,7 +3,8 @@ using UnityEngine;
 public class KingHouse : MonoBehaviour
 {
     public Transform playerSpawnPosition;
-    public Vector3 battleFieldStartingPosition;
+    public Vector3 battlefieldStartingPosition;
+    public Vector3 battlefieldAngle;
     public GameObject miniPyramid;
     public GameObject namePlate;
 

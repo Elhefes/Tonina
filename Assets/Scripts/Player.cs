@@ -915,7 +915,7 @@ public class Player : Creature
     {
         if (buildingRoof != null) buildingRoof.MakeRoofVisible();
         insideKingHouse = false;
-        teleportCoroutine = StartCoroutine(TeleportPlayerToSpot(kingHouse.transform.position + kingHouse.battleFieldStartingPosition));
+        teleportCoroutine = StartCoroutine(TeleportPlayerToSpot(kingHouse.transform.position + kingHouse.battlefieldStartingPosition));
     }
 
     public void TeleportToVillageGate(Transform gatePosition)
