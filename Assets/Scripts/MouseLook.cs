@@ -98,7 +98,7 @@ public class MouseLook : MonoBehaviour
         movingToTargetPosition = true;
     }
 
-    private void SaveTargetPosition(Vector3 targetPosition, Vector3 targetAngle)
+    public void SaveTargetPosition(Vector3 targetPosition, Vector3 targetAngle)
     {
         savedTargetPosition = targetPosition;
         savedTargetAngle = targetAngle;

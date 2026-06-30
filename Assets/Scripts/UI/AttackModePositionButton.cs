@@ -64,6 +64,7 @@ public class AttackModePositionButton : MonoBehaviour, IPointerClickHandler, IPo
 
     public void StartMovingToPosition()
     {
+        mouseLook.SaveTargetPosition(positionToMoveTo, new Vector3(0f, 0f, 0f));
         mouseLook.StartMovingToPosition(positionToMoveTo);
     }
 
