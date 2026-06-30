@@ -251,7 +251,6 @@ public class Player : Creature
                 if (hitSomething)
                 {
                     target = hit.collider.gameObject;
-
                     // Target enemies
                     if (target.CompareTag("Enemy"))
                     {
@@ -263,7 +262,8 @@ public class Player : Creature
                     // Target barricades when attacking
                     else if (attackerSideSetting != null)
                     {
-                        if (attackerSideSetting.enemyIsDefender && target.CompareTag("Barricade"))
+                        // The Fence's Barricade tag object is in layer Ignore Raycast -> invisible to player clicks -> not targetable that way
+                        if (attackerSideSetting.enemyIsDefender && target.name == "Fence(Clone)")
                         {
                             creatureMovement.agent.stoppingDistance = defaultAttackStoppingDistance;
                             creatureMovement.target = target.transform;
