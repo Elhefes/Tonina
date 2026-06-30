@@ -265,7 +265,7 @@ public class Player : Creature
                         // The Fence's Barricade tag object is in layer Ignore Raycast -> invisible to player clicks -> not targetable that way
                         if (attackerSideSetting.enemyIsDefender && target.name == "Fence(Clone)")
                         {
-                            creatureMovement.agent.stoppingDistance = defaultAttackStoppingDistance;
+                            creatureMovement.agent.stoppingDistance = defaultAttackStoppingDistance * 0.75f;
                             creatureMovement.target = target.transform;
                             clickerTargetObject.alpha = 1f;
                             return;
