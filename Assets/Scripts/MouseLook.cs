@@ -30,7 +30,6 @@ public class MouseLook : MonoBehaviour
 
     public CameraOnPlayerButton cameraOnPlayerButton;
     public GameObject optionsMenu;
-    public GameObject battleFieldMenu;
     public MinimapInput minimapInput;
     public float minimapInputSensitivity;
 
