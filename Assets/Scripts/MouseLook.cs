@@ -27,7 +27,6 @@ public class MouseLook : MonoBehaviour
     public GameObject minimapIndicators;
 
     public GameObject placeablesParent;
-    private bool transitioningToBattlefieldRotation;
 
     public CameraOnPlayerButton cameraOnPlayerButton;
     public GameObject optionsMenu;
@@ -36,7 +35,8 @@ public class MouseLook : MonoBehaviour
     public float minimapInputSensitivity;
 
     private Vector3 targetPosition;
-    private Vector3 battlefieldRotation;
+    private Vector3 savedTargetPosition; // Reusable after targetPosition has been set
+    private Vector3 savedTargetAngle; // Reusable after targetPosition has been set
     private bool movingToTargetPosition;
 
     private void Start()
@@ -45,8 +45,6 @@ public class MouseLook : MonoBehaviour
         {
             if (player.kingHouse != null)
             {
-                battlefieldRotation = player.kingHouse.battlefieldAngle;
-
                 if (!player.godMode) // Set correct starting position in Jadea scene only
                 {
                     transform.position = player.kingHouse.transform.position + new Vector3(0f, 12f, 0f);
@@ -66,7 +64,9 @@ public class MouseLook : MonoBehaviour
         player.inBuildMode = true;
         cameraOnPlayer = false;
         cameraOnPlayerButton.gameObject.SetActive(false);
-        transitioningToBattlefieldRotation = true;
+        SaveTargetPosition(player.kingHouse.transform.position + player.kingHouse.battlefieldStartingPosition, new Vector3(60f, 0f, 0f));
+        StartMovingToPosition(AngledPosition(player.kingHouse.transform.position + player.kingHouse.battlefieldStartingPosition,
+                new Vector3(60f, 0f, 0f), distanceFromObject));
     }
 
     public void DisableBuildMode()
@@ -74,7 +74,6 @@ public class MouseLook : MonoBehaviour
         player.inBuildMode = false;
         cameraOnPlayer = true;
         cameraOnPlayerButton.gameObject.SetActive(true);
-        transitioningToBattlefieldRotation = false;
     }
 
     public void ToggleCameraOnPlayer()
@@ -98,6 +97,12 @@ public class MouseLook : MonoBehaviour
     {
         targetPosition = pos;
         movingToTargetPosition = true;
+    }
+
+    private void SaveTargetPosition(Vector3 targetPosition, Vector3 targetAngle)
+    {
+        savedTargetPosition = targetPosition;
+        savedTargetAngle = targetAngle;
     }
 
     public void ZoomCameraInOrOut(bool zoom_in)
@@ -132,10 +137,7 @@ public class MouseLook : MonoBehaviour
                 if (Input.GetKeyDown("c")) ToggleCameraOnPlayer();
             }
 
-            // The camera doesn't have time to get to x = 0 before rotation y = 0, so the x is a little bit off 0
-            if (transform.rotation.eulerAngles.y == 0f && (Mathf.Abs(transform.position.x) <= 0.08f)) transitioningToBattlefieldRotation = false;
-
-            if (!player.insideKingHouse || (player.inBuildMode && !transitioningToBattlefieldRotation))
+            if (!player.insideKingHouse || (player.inBuildMode && !movingToTargetPosition))
             {
                 float horizontal = Input.GetAxis("Horizontal") + minimapInput.GetMinimapInput().x * minimapInputSensitivity;
                 float vertical = Input.GetAxis("Vertical") + minimapInput.GetMinimapInput().y * minimapInputSensitivity;
@@ -187,12 +189,6 @@ public class MouseLook : MonoBehaviour
         if (cameraOnPlayer)
         {
             FollowPlayerInAngledPosition();
-        }
-        else if (transitioningToBattlefieldRotation)
-        {
-            MoveSmoothly(AngledPosition(player.kingHouse.transform.position + player.kingHouse.battlefieldStartingPosition, 
-                battlefieldRotation, distanceFromObject));
-            RotateSmoothly(battlefieldRotation);
         }
         else
         {
@@ -315,11 +311,15 @@ public class MouseLook : MonoBehaviour
 
     private void MoveToTargetPosition()
     {
-        if (targetPosition != null)
-        {
-            transform.position = Vector3.Lerp(transform.position, targetPosition, smoothSpeed * 0.5f);
-            minimapCamera.transform.position = Vector3.Lerp(minimapCamera.transform.position, targetPosition, smoothSpeed * 0.5f);
-        }
+        transform.position = Vector3.Lerp(transform.position, targetPosition, smoothSpeed * 0.5f);
+        minimapCamera.transform.position = Vector3.Lerp(minimapCamera.transform.position, targetPosition, smoothSpeed * 0.5f);
+        UpdateTargetPosition(); // Updates target position with distanceFromObject
+        if (Vector3.Distance(transform.position, targetPosition) <= 0.5f) movingToTargetPosition = false;
+    }
+
+    private void UpdateTargetPosition()
+    {
+        targetPosition = AngledPosition(savedTargetPosition, savedTargetAngle, distanceFromObject);
     }
 
     // Limit camera's movement smoothly in x-axis
@@ -327,22 +327,7 @@ public class MouseLook : MonoBehaviour
     {
         if (player.inVillage && inCutscene) return;
 
-        // Rotate camera to camera angle which is preset in scene
-        Quaternion targetRotation =
-        transitioningToBattlefieldRotation
-            ? Quaternion.Euler(battlefieldRotation)
-            : Quaternion.Euler(presetCameraAngle);
-
-        transform.rotation = Quaternion.RotateTowards(
-            transform.rotation,
-            targetRotation,
-            1.25f
-        );
-
-        mainCameraObject.transform.rotation = transform.rotation;
-        mainCameraObject.transform.rotation = Quaternion.RotateTowards(transform.rotation, Quaternion.Euler(presetCameraAngle), 1.25f);
-        minimapCamera.transform.rotation = Quaternion.RotateTowards(minimapCamera.transform.rotation, 
-            Quaternion.Euler(new Vector3(90f, presetCameraAngle.y, 0f)), 1.25f);
+        RotateSmoothly(presetCameraAngle);
 
         if (player.insideKingHouse && minimapIndicators.activeSelf) minimapIndicators.SetActive(false);
         else if (!minimapIndicators.activeSelf && !minimapInput.buttonPressed) minimapIndicators.SetActive(true);
@@ -350,29 +335,11 @@ public class MouseLook : MonoBehaviour
 
     public void SetInCutscene(bool value) { inCutscene = value; }
 
-    private void MoveSmoothly(Vector3 presetPosition)
+    private void RotateSmoothly(Vector3 presetPosition)
     {
-        transform.position = Vector3.Lerp(
-            transform.position,
-            presetPosition,
-            smoothSpeed
-        );
-
-        minimapCamera.transform.position = Vector3.Lerp(
-            minimapCamera.transform.position,
-            presetPosition + Vector3.up * 100f,
-            smoothSpeed
-        );
-    }
-
-    private void RotateSmoothly(Vector3 presetRotation)
-    {
-        transform.rotation = Quaternion.Lerp(
-            transform.rotation,
-            Quaternion.Euler(presetRotation),
-            smoothSpeed
-        );
-
-        mainCameraObject.transform.rotation = transform.rotation;
+        transform.rotation = Quaternion.RotateTowards(transform.rotation, Quaternion.Euler(presetPosition), 1.25f);
+        mainCameraObject.transform.rotation = Quaternion.RotateTowards(transform.rotation, Quaternion.Euler(presetPosition), 1.25f);
+        minimapCamera.transform.rotation = Quaternion.RotateTowards(minimapCamera.transform.rotation,
+            Quaternion.Euler(new Vector3(90f, presetPosition.y, 0f)), 1.25f);
     }
 }
