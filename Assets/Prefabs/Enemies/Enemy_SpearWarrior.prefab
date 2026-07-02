@@ -1762,7 +1762,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3737828781504774685}
-  - component: {fileID: 7225059921769293169}
+  - component: {fileID: 7358245550968356637}
   - component: {fileID: 9167552780147776406}
   - component: {fileID: 4580356099104312206}
   - component: {fileID: 1289460837597283035}
@@ -1817,7 +1817,7 @@ Transform:
   - {fileID: 3305899619436765145}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &7225059921769293169
+--- !u!114 &7358245550968356637
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1826,11 +1826,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 4077094486547798183}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0e2fbc748a22ecc42808af8bdd958c9d, type: 3}
+  m_Script: {fileID: 11500000, guid: bc25a71eb00288247aaaf0c20c17f942, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   weaponOnHand: {fileID: 2043073690288066542}
   creatureMovement: {fileID: 9167552780147776406}
+  attackerSideSetting: {fileID: 0}
+  pooler: {fileID: 0}
   isAttacker: 1
   onCooldown: 0
   attackExtraCooldownTime: 0.25
@@ -1841,12 +1843,9 @@ MonoBehaviour:
   startingHealth: 80
   deathSoundObject: {fileID: 6006720043111203718}
   moveTowardsTarget: 1
-  movementSpeed: 3.5
+  movementSpeed: 3.3
   slowDownTimeFromStone: 6
   speedDropFromStone: 1
-  pooler: {fileID: 0}
-  spear: {fileID: 5579262335658251513}
-  club: {fileID: 5271360773342437029}
 --- !u!114 &9167552780147776406
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1882,7 +1881,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 19359612f56d1b04981f48a945fcde25, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  creature: {fileID: 7225059921769293169}
+  creature: {fileID: 7358245550968356637}
 --- !u!114 &1289460837597283035
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1895,7 +1894,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6de743d2e22607e40871194abed2c014, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyCreature: {fileID: 7225059921769293169}
+  enemyCreature: {fileID: 7358245550968356637}
+  meleeWeapon: {fileID: 0}
+  rangedWeapon: {fileID: 0}
+  rangedWeaponRangeLimit: 0
 --- !u!143 &6409614840456362030
 CharacterController:
   m_ObjectHideFlags: 0
@@ -6534,7 +6536,7 @@ MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 2688567360211053169, guid: 06836e3db510699498b45430912508d7, type: 3}
   m_PrefabInstance: {fileID: 4113406550100927903}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5579262335658251513}
+  m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: a52e28a3c67676a4c882d5c9ebf644ba, type: 3}
@@ -6543,11 +6545,6 @@ MonoBehaviour:
 --- !u!4 &5054821245465398851 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 9165832748828978140, guid: 06836e3db510699498b45430912508d7, type: 3}
-  m_PrefabInstance: {fileID: 4113406550100927903}
-  m_PrefabAsset: {fileID: 0}
---- !u!1 &5579262335658251513 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 8392533763621892454, guid: 06836e3db510699498b45430912508d7, type: 3}
   m_PrefabInstance: {fileID: 4113406550100927903}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &8349811394533861030
@@ -6678,10 +6675,5 @@ PrefabInstance:
 --- !u!4 &4786325974221407263 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 3570245252696662713, guid: 9c4259bcd553ee04db631027467ae960, type: 3}
-  m_PrefabInstance: {fileID: 8349811394533861030}
-  m_PrefabAsset: {fileID: 0}
---- !u!1 &5271360773342437029 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 4235599752637593603, guid: 9c4259bcd553ee04db631027467ae960, type: 3}
   m_PrefabInstance: {fileID: 8349811394533861030}
   m_PrefabAsset: {fileID: 0}
