@@ -5,13 +5,50 @@ public class EnemyAI : MonoBehaviour
 {
     public Creature enemyCreature;
     public Weapon meleeWeapon;
-    public Weapon rangedWeapon;
+    public Projectile rangedWeapon;
+    public int rangedWeaponQuantity;
     public float rangedWeaponRangeLimit;
+
+    public float weaponSwitchCoolDownTime;
+    private bool weaponSwitchCooldown;
+
+    // Alternates which spawned/enabled friendly is allowed to carry a ranged
+    // weapon. Odd/even spawn order, shared across all FriendlyAI instances.
+    public bool everyOtherHasRangedWeapon;
+    private static int spawnCount;
+    private bool hasRangedWeapon;
+
+    [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.SubsystemRegistration)]
+    private static void ResetSpawnSequence()
+    {
+        spawnCount = 0;
+    }
 
     void OnEnable()
     {
         StartCoroutine(PeriodicalTargetChecking());
         enemyCreature.SetWeaponBarricadeCollisionHandling();
+
+        if (rangedWeapon != null)
+        {
+            // Melee is default weapon
+            enemyCreature.creatureMovement.animator.SetBool("RangedEquipped", false);
+            enemyCreature.creatureMovement.animator.SetBool("MeleeEquipped", true);
+            rangedWeapon.gameObject.SetActive(false);
+            rangedWeapon.quantity = rangedWeaponQuantity;
+            rangedWeapon.notAvailable = false;
+
+            if (everyOtherHasRangedWeapon)
+            {
+                hasRangedWeapon = spawnCount % 2 == 0;
+                spawnCount++;
+            }
+        }
+        else if (meleeWeapon != null)
+        {
+            meleeWeapon.gameObject.SetActive(true);
+            enemyCreature.weaponOnHand = meleeWeapon;
+        }
     }
 
     void Update()
@@ -87,34 +124,59 @@ public class EnemyAI : MonoBehaviour
 
     private void UpdateWeaponSelection()
     {
+        if (enemyCreature.onCooldown || weaponSwitchCooldown || !hasRangedWeapon) return;
         if (meleeWeapon == null || rangedWeapon == null) return;
         Transform target = enemyCreature.creatureMovement.target;
         if (target == null) return;
 
         float distance = Vector3.Distance(transform.position, target.position);
-        if (distance > rangedWeaponRangeLimit)
-        {
-            if (!rangedWeapon.gameObject.activeSelf) SwitchToRangedWeapon();
-        }
-        else if (distance < rangedWeaponRangeLimit)
+
+        if (distance < rangedWeaponRangeLimit)
         {
             if (!meleeWeapon.gameObject.activeSelf) SwitchToMeleeWeapon();
+        }
+        else
+        {
+            if (!rangedWeapon.notAvailable && !rangedWeapon.gameObject.activeSelf) SwitchToRangedWeapon();
         }
     }
 
     public void SwitchToRangedWeapon()
     {
+        enemyCreature.weaponOnHand = rangedWeapon;
+        enemyCreature.weaponOnHand.canHit = false;
         meleeWeapon.gameObject.SetActive(false);
         rangedWeapon.gameObject.SetActive(true);
-        enemyCreature.weaponOnHand = rangedWeapon;
         enemyCreature.SetWeaponBarricadeCollisionHandling();
+
+        enemyCreature.creatureMovement.animator.SetBool("MeleeEquipped", false);
+        enemyCreature.creatureMovement.animator.SetBool("RangedEquipped", true);
+
+        StartWeaponSwitchCooldown();
     }
 
     public void SwitchToMeleeWeapon()
     {
+        enemyCreature.weaponOnHand = meleeWeapon;
+        enemyCreature.weaponOnHand.canHit = false;
         rangedWeapon.gameObject.SetActive(false);
         meleeWeapon.gameObject.SetActive(true);
-        enemyCreature.weaponOnHand = meleeWeapon;
         enemyCreature.SetWeaponBarricadeCollisionHandling();
+
+        enemyCreature.creatureMovement.animator.SetBool("RangedEquipped", false);
+        enemyCreature.creatureMovement.animator.SetBool("MeleeEquipped", true);
+
+        StartWeaponSwitchCooldown();
+    }
+
+    void StartWeaponSwitchCooldown()
+    {
+        Invoke("ResetWeaponWheelCooldown", weaponSwitchCoolDownTime);
+        weaponSwitchCooldown = true;
+    }
+
+    void ResetWeaponWheelCooldown()
+    {
+        weaponSwitchCooldown = false;
     }
 }

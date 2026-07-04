@@ -48,11 +48,12 @@ public class FriendlyAI : MonoBehaviour
     void Awake()
     {
         player = FindFirstObjectByType<Player>();
+        normalStoppingDistance = friendlyCreature.creatureMovement.agent.stoppingDistance;
     }
     private void OnEnable()
     {
         if (player == null) player = FindFirstObjectByType<Player>(); // In attack mode
-        normalStoppingDistance = friendlyCreature.creatureMovement.agent.stoppingDistance;
+        
         isGuarding = false;
         isSteppingAside = false;
 
@@ -264,7 +265,6 @@ public class FriendlyAI : MonoBehaviour
         {
             if (!rangedWeapon.notAvailable && !rangedWeapon.gameObject.activeSelf) SwitchToRangedWeapon();
         }
-        
     }
 
     public void SwitchToRangedWeapon()
