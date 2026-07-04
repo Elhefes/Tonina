@@ -5,8 +5,12 @@ public class FriendlyAI : MonoBehaviour
 {
     public Creature friendlyCreature;
     public Weapon meleeWeapon;
-    public Weapon rangedWeapon;
+    public Projectile rangedWeapon;
+    public int rangedWeaponQuantity;
     public float rangedWeaponRangeLimit;
+
+    public float weaponSwitchCoolDownTime;
+    private bool weaponSwitchCooldown;
 
     private Player player;
     private float normalStoppingDistance;
@@ -40,6 +44,21 @@ public class FriendlyAI : MonoBehaviour
         normalStoppingDistance = friendlyCreature.creatureMovement.agent.stoppingDistance;
         isGuarding = false;
         isSteppingAside = false;
+
+        friendlyCreature.creatureMovement.animator.SetBool("MeleeEquipped", true);
+
+        if (rangedWeapon != null)
+        {
+            rangedWeapon.quantity = rangedWeaponQuantity;
+            rangedWeapon.notAvailable = false;
+
+            if (rangedWeapon.gameObject.activeInHierarchy)
+            {
+                friendlyCreature.creatureMovement.animator.SetBool("MeleeEquipped", false);
+                friendlyCreature.creatureMovement.animator.SetBool("RangedEquipped", true);
+            }
+        }
+
         StartCoroutine(PeriodicalTargetChecking());
         friendlyCreature.SetWeaponBarricadeCollisionHandling();
     }
@@ -214,6 +233,7 @@ public class FriendlyAI : MonoBehaviour
 
     private void UpdateWeaponSelection()
     {
+        if (friendlyCreature.onCooldown || weaponSwitchCooldown) return;
         if (meleeWeapon == null || rangedWeapon == null) return;
         Transform target = friendlyCreature.creatureMovement.target;
         if (target == null) return;
@@ -231,17 +251,40 @@ public class FriendlyAI : MonoBehaviour
 
     public void SwitchToRangedWeapon()
     {
+        friendlyCreature.weaponOnHand = rangedWeapon;
+        friendlyCreature.weaponOnHand.canHit = false;
         meleeWeapon.gameObject.SetActive(false);
         rangedWeapon.gameObject.SetActive(true);
-        friendlyCreature.weaponOnHand = rangedWeapon;
         friendlyCreature.SetWeaponBarricadeCollisionHandling();
+
+        friendlyCreature.creatureMovement.animator.SetBool("MeleeEquipped", false);
+        friendlyCreature.creatureMovement.animator.SetBool("RangedEquipped", true);
+
+        StartWeaponSwitchCooldown();
     }
 
     public void SwitchToMeleeWeapon()
     {
+        friendlyCreature.weaponOnHand = meleeWeapon;
+        friendlyCreature.weaponOnHand.canHit = false;
         rangedWeapon.gameObject.SetActive(false);
         meleeWeapon.gameObject.SetActive(true);
-        friendlyCreature.weaponOnHand = meleeWeapon;
         friendlyCreature.SetWeaponBarricadeCollisionHandling();
+
+        friendlyCreature.creatureMovement.animator.SetBool("RangedEquipped", false);
+        friendlyCreature.creatureMovement.animator.SetBool("MeleeEquipped", true);
+
+        StartWeaponSwitchCooldown();
+    }
+
+    void StartWeaponSwitchCooldown()
+    {
+        Invoke("ResetWeaponWheelCooldown", weaponSwitchCoolDownTime);
+        weaponSwitchCooldown = true;
+    }
+
+    void ResetWeaponWheelCooldown()
+    {
+        weaponSwitchCooldown = false;
     }
 }
