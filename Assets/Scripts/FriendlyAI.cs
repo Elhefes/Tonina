@@ -15,6 +15,17 @@ public class FriendlyAI : MonoBehaviour
     private Player player;
     private float normalStoppingDistance;
 
+    // Alternates which spawned/enabled friendly is allowed to carry a ranged
+    // weapon. Odd/even spawn order, shared across all FriendlyAI instances.
+    private static int spawnCount;
+    private bool hasRangedWeapon;
+
+    [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.SubsystemRegistration)]
+    private static void ResetSpawnSequence()
+    {
+        spawnCount = 0;
+    }
+
     private bool isGuarding;
     private Vector3 guardAnchor;
     private float guardStepIssuedTime;
@@ -45,19 +56,24 @@ public class FriendlyAI : MonoBehaviour
         isGuarding = false;
         isSteppingAside = false;
 
+        // Melee is default weapon
+        friendlyCreature.creatureMovement.animator.SetBool("RangedEquipped", false);
         friendlyCreature.creatureMovement.animator.SetBool("MeleeEquipped", true);
 
         if (rangedWeapon != null)
         {
+            rangedWeapon.gameObject.SetActive(false);
             rangedWeapon.quantity = rangedWeaponQuantity;
             rangedWeapon.notAvailable = false;
-
-            if (rangedWeapon.gameObject.activeInHierarchy)
-            {
-                friendlyCreature.creatureMovement.animator.SetBool("MeleeEquipped", false);
-                friendlyCreature.creatureMovement.animator.SetBool("RangedEquipped", true);
-            }
         }
+        else if (meleeWeapon != null)
+        {
+            meleeWeapon.gameObject.SetActive(true);
+            friendlyCreature.weaponOnHand = meleeWeapon;
+        }
+
+        hasRangedWeapon = spawnCount % 2 == 0;
+        spawnCount++;
 
         StartCoroutine(PeriodicalTargetChecking());
         friendlyCreature.SetWeaponBarricadeCollisionHandling();
@@ -233,7 +249,7 @@ public class FriendlyAI : MonoBehaviour
 
     private void UpdateWeaponSelection()
     {
-        if (friendlyCreature.onCooldown || weaponSwitchCooldown) return;
+        if (friendlyCreature.onCooldown || weaponSwitchCooldown || !hasRangedWeapon) return;
         if (meleeWeapon == null || rangedWeapon == null) return;
         Transform target = friendlyCreature.creatureMovement.target;
         if (target == null) return;
