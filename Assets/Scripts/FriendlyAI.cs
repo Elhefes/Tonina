@@ -239,14 +239,16 @@ public class FriendlyAI : MonoBehaviour
         if (target == null) return;
 
         float distance = Vector3.Distance(transform.position, target.position);
-        if (distance > rangedWeaponRangeLimit)
-        {
-            if (!rangedWeapon.gameObject.activeSelf) SwitchToRangedWeapon();
-        }
-        else if (distance < rangedWeaponRangeLimit)
+
+        if (distance < rangedWeaponRangeLimit)
         {
             if (!meleeWeapon.gameObject.activeSelf) SwitchToMeleeWeapon();
         }
+        else
+        {
+            if (!rangedWeapon.notAvailable && !rangedWeapon.gameObject.activeSelf) SwitchToRangedWeapon();
+        }
+        
     }
 
     public void SwitchToRangedWeapon()
