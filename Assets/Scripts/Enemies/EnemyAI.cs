@@ -26,9 +26,6 @@ public class EnemyAI : MonoBehaviour
 
     void OnEnable()
     {
-        StartCoroutine(PeriodicalTargetChecking());
-        enemyCreature.SetWeaponBarricadeCollisionHandling();
-
         if (rangedWeapon != null)
         {
             // Melee is default weapon
@@ -43,12 +40,16 @@ public class EnemyAI : MonoBehaviour
                 hasRangedWeapon = spawnCount % 2 == 0;
                 spawnCount++;
             }
+            else hasRangedWeapon = true;
         }
-        else if (meleeWeapon != null)
+        if (meleeWeapon != null)
         {
             meleeWeapon.gameObject.SetActive(true);
             enemyCreature.weaponOnHand = meleeWeapon;
         }
+
+        StartCoroutine(PeriodicalTargetChecking());
+        enemyCreature.SetWeaponBarricadeCollisionHandling();
     }
 
     void Update()
@@ -124,6 +125,10 @@ public class EnemyAI : MonoBehaviour
 
     private void UpdateWeaponSelection()
     {
+        if (hasRangedWeapon)
+        {
+            if (rangedWeapon.notAvailable && !meleeWeapon.gameObject.activeSelf) SwitchToMeleeWeapon();
+        }
         if (enemyCreature.onCooldown || weaponSwitchCooldown || !hasRangedWeapon) return;
         if (meleeWeapon == null || rangedWeapon == null) return;
         Transform target = enemyCreature.creatureMovement.target;
@@ -133,7 +138,8 @@ public class EnemyAI : MonoBehaviour
 
         if (distance < rangedWeaponRangeLimit)
         {
-            if (!meleeWeapon.gameObject.activeSelf) SwitchToMeleeWeapon();
+            // Always throw the last ranged weapon, especially good for SpearWarrior
+            if (!meleeWeapon.gameObject.activeSelf && rangedWeapon.quantity > 1) SwitchToMeleeWeapon();
         }
         else
         {
@@ -171,11 +177,11 @@ public class EnemyAI : MonoBehaviour
 
     void StartWeaponSwitchCooldown()
     {
-        Invoke("ResetWeaponWheelCooldown", weaponSwitchCoolDownTime);
+        Invoke("ResetWeaponSwitchCooldown", weaponSwitchCoolDownTime);
         weaponSwitchCooldown = true;
     }
 
-    void ResetWeaponWheelCooldown()
+    void ResetWeaponSwitchCooldown()
     {
         weaponSwitchCooldown = false;
     }

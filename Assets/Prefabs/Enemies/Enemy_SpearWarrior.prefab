@@ -1895,9 +1895,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enemyCreature: {fileID: 7358245550968356637}
-  meleeWeapon: {fileID: 0}
-  rangedWeapon: {fileID: 0}
-  rangedWeaponRangeLimit: 0
+  meleeWeapon: {fileID: 2859402910397154460}
+  rangedWeapon: {fileID: 2043073690288066542}
+  rangedWeaponQuantity: 1
+  rangedWeaponRangeLimit: 5
+  weaponSwitchCoolDownTime: 0.333
+  everyOtherHasRangedWeapon: 0
 --- !u!143 &6409614840456362030
 CharacterController:
   m_ObjectHideFlags: 0
@@ -6428,7 +6431,7 @@ PrefabInstance:
       objectReference: {fileID: 6089855124262478547}
     - target: {fileID: 2688567360211053169, guid: 06836e3db510699498b45430912508d7, type: 3}
       propertyPath: attackCooldown
-      value: 10
+      value: 0.666
       objectReference: {fileID: 0}
     - target: {fileID: 2688567360211053169, guid: 06836e3db510699498b45430912508d7, type: 3}
       propertyPath: attackDistance
@@ -6672,6 +6675,17 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9c4259bcd553ee04db631027467ae960, type: 3}
+--- !u!114 &2859402910397154460 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 6075038093218669114, guid: 9c4259bcd553ee04db631027467ae960, type: 3}
+  m_PrefabInstance: {fileID: 8349811394533861030}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5cfcb8c4f43aa13409a4693a914d0ecd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!4 &4786325974221407263 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 3570245252696662713, guid: 9c4259bcd553ee04db631027467ae960, type: 3}
