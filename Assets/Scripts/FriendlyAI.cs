@@ -238,7 +238,7 @@ public class FriendlyAI : MonoBehaviour
         var agent = friendlyCreature.creatureMovement.agent;
         bool arrived = !agent.hasPath || agent.remainingDistance <= agent.stoppingDistance;
         bool stuck = Time.time - guardStepIssuedTime > stepTimeout;
-        if (arrived || stuck)
+        if ((arrived || stuck) && Random.value < 0.366f) // Chance that it moves
         {
             Vector2 randomOffset = Random.insideUnitCircle * guardRadius;
             Vector3 guardPoint = guardAnchor + new Vector3(randomOffset.x, 0f, randomOffset.y);
