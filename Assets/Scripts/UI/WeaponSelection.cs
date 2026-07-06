@@ -79,18 +79,16 @@ public class WeaponSelection : MonoBehaviour
             spearLock.SetActive(false);
         }
 
-        // TODO: Axe is unlocked in demo
-
-        //if (!GameState.Instance.progressionData.axeUnlocked)
-        //{
-        //    axeButton.interactable = false;
-        //    axeLock.SetActive(true);
-        //}
-        //else
-        //{
-        //    axeButton.interactable = true;
-        //    axeLock.SetActive(false);
-        //}
+        if (!GameState.Instance.progressionData.axeUnlocked)
+        {
+            axeButton.interactable = false;
+            axeLock.SetActive(true);
+        }
+        else
+        {
+            axeButton.interactable = true;
+            axeLock.SetActive(false);
+        }
 
         if (!GameState.Instance.progressionData.bowUnlocked)
         {
@@ -135,7 +133,7 @@ public class WeaponSelection : MonoBehaviour
     private bool WeaponIsUnlocked(int weaponIndex)
     {
         if (weaponIndex == 1 && !GameState.Instance.progressionData.spearUnlocked) return false;
-        //else if (weaponIndex == 2 && !GameState.Instance.progressionData.axeUnlocked) return false; // PLACEHOLDER: ADD AXE UNLOCK LATER
+        else if (weaponIndex == 2 && !GameState.Instance.progressionData.axeUnlocked) return false;
         else if (weaponIndex == 3 && !GameState.Instance.progressionData.bowUnlocked) return false;
         return true;
     }

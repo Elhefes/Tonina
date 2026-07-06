@@ -51,10 +51,8 @@ public class CustomWeaponOrder : MonoBehaviour
         if (!GameState.Instance.progressionData.spearUnlocked) spearButton.interactable = false;
         else spearButton.interactable = true;
 
-        // TODO: Axe is unlocked in demo
-
-        //if (!GameState.Instance.progressionData.axeUnlocked) axeButton.interactable = false;
-        //else axeButton.interactable = true;
+        if (!GameState.Instance.progressionData.axeUnlocked) axeButton.interactable = false;
+        else axeButton.interactable = true;
 
         if (!GameState.Instance.progressionData.bowUnlocked) bowButton.interactable = false;
         else bowButton.interactable = true;
