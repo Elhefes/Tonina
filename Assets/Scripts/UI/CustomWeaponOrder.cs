@@ -5,7 +5,7 @@ public class CustomWeaponOrder : MonoBehaviour
 {
     private string customWeaponOrder;
     private int[] slotXValues = { -500, -250, 0, 250, 500 };
-    private int chosenWepIndex = 2;
+    private int chosenWepIndex = 0;
     public Transform moveButtons;
     public Button clubButton;
     public Button spearButton;
