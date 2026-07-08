@@ -286,59 +286,44 @@ public class Player : Creature
                 {
                     if (NotInBattlefield())
                     {
-                        if (target == currentTextSubject)
-                        {
-                            ReadNextLine();
-                            return;
-                        }
-                        else
-                        {
-                            FreeTextSubject();
+                        TextSubject textSubject = target.GetComponent<TextSubject>();
 
-                            TextSubject textSubject = target.GetComponent<TextSubject>();
-
-                            if (textSubject != null)
+                        if (textSubject != null)
+                        {
+                            // Already talking to this subject? Continue dialogue.
+                            if (textSubject == currentTextSubject)
                             {
-                                FreeTextSubject();
-
-                                if (textSubject.periko != null)
-                                {
-                                    if (textSubject.periko.inFlight)
-                                        return;
-                                }
-
-                                textSubject.textIsActive = true;
-                                textSubject.currentIndex = 0;
-
-                                currentTextSubject = textSubject;
-
-                                SetTextLines(textSubject.textLines);
-
-                                if (textSubject.villager != null)
-                                {
-                                    textSubject.villager.TalkToPlayer(gameObject);
-                                }
-
-                                textSubject.ProcessNextLine();
-
-                                textLineIndex = 0;
-
-                                textBox.gameObject.SetActive(true);
-                                UpdateTextBox();
-
-                                creatureMovement.MoveToDestination(target.transform.position);
-                                creatureMovement.agent.stoppingDistance = 1.7f;
-
+                                ReadNextLine();
                                 return;
                             }
-                        }
 
-                        textLineIndex = 0;
-                        textBox.gameObject.SetActive(true);
-                        UpdateTextBox();
-                        creatureMovement.MoveToDestination(target.transform.position);
-                        creatureMovement.agent.stoppingDistance = 1.7f;
-                        return;
+                            // Starting a new conversation.
+                            FreeTextSubject();
+
+                            if (textSubject.periko != null && textSubject.periko.inFlight)
+                                return;
+
+                            textSubject.textIsActive = true;
+                            textSubject.currentIndex = 0;
+
+                            currentTextSubject = textSubject;
+                            textLineIndex = 0;
+
+                            SetTextLines(textSubject.textLines);
+
+                            if (textSubject.villager != null)
+                                textSubject.villager.TalkToPlayer(gameObject);
+
+                            textSubject.ProcessNextLine();
+
+                            textBox.gameObject.SetActive(true);
+                            UpdateTextBox();
+
+                            creatureMovement.MoveToDestination(target.transform.position);
+                            creatureMovement.agent.stoppingDistance = 1.7f;
+
+                            return;
+                        }
                     }
                 }
                 else
@@ -531,7 +516,7 @@ public class Player : Creature
         }
         else
         {
-            FreeTextSubject();
+            FreeTextSubject(true);
         }
     }
 
@@ -546,7 +531,7 @@ public class Player : Creature
         UpdateTextBox();
     }
 
-    public void FreeTextSubject()
+    public void FreeTextSubject(bool dialogueCompleted = false)
     {
         if (currentTextSubject != null)
         {
@@ -557,7 +542,7 @@ public class Player : Creature
 
             currentTextSubject.StopSpeaking();
 
-            if (finishedReading)
+            if (dialogueCompleted && finishedReading)
             {
                 currentTextSubject.ShowPopup();
             }
