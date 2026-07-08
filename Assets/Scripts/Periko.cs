@@ -20,10 +20,10 @@ public class Periko : MonoBehaviour
         inFlight = false;
         animator.SetTrigger("Idle");
 
-        StartCoroutine(randomAnimTimer());
+        StartCoroutine(RandomAnimTimer());
     }
 
-    private IEnumerator randomAnimTimer()
+    private IEnumerator RandomAnimTimer()
     {
         while (true)
         {
@@ -57,7 +57,7 @@ public class Periko : MonoBehaviour
         if (textSubject.currentIndex == 0)
         {
             // Pick 1 to 4 random lines
-            randomVoiceLinesLength = Random.Range(1, 5);
+            randomVoiceLinesLength = Random.Range(1, 4);
             ReshuffleArray(textSubject.textLines);
         }
 
@@ -70,7 +70,6 @@ public class Periko : MonoBehaviour
             string str = textSubject.textLines[textSubject.currentIndex];
             int wordCount = CountWords(str);
             voiceCoroutine = StartCoroutine(PlayRandomVoiceLines(wordCount));
-            textSubject.currentIndex++;
         }
     }
 

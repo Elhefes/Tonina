@@ -1,11 +1,9 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class Villager : CreatureMovement
 {
     private Vector3 startingPosition;
-    private Coroutine freeMovementCoroutine;
     public float freeSpaceX;
     public float freeSpaceZ;
     public float minWaitTime;
@@ -23,7 +21,7 @@ public class Villager : CreatureMovement
     void Awake()
     {
         startingPosition = transform.position;
-        freeMovementCoroutine = StartCoroutine(MoveRandomly());
+        StartCoroutine(MoveRandomly());
     }
 
     private void Update()
@@ -72,7 +70,6 @@ public class Villager : CreatureMovement
             string str = textSubject.textLines[textSubject.currentIndex];
             int wordCount = CountWords(str);
             voiceCoroutine = StartCoroutine(PlayRandomVoiceLines(wordCount));
-            textSubject.currentIndex++;
         }
     }
 

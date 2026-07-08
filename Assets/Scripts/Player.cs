@@ -70,12 +70,12 @@ public class Player : Creature
     public FillOkill fillOkill;
     private SpearRack spearRack;
     private BuildingRoof buildingRoof;
-    private Villager villager;
-    private Periko periko;
-    private GameObject currentTextSubject;
+    private TextSubject currentTextSubject;
+
     private GameObject weatherStone;
     public GameObject weatherGame;
     public GameObject weatherGameResults;
+
     public GameObject fillOkillPickUp;
     public Image fillOkillButtonFill;
     public FillOkillHoldButton fillOkillHoldButton;
@@ -286,54 +286,22 @@ public class Player : Creature
                 {
                     if (NotInBattlefield())
                     {
-                        if (target == currentTextSubject)
+                        TextSubject textSubject = target.GetComponent<TextSubject>();
+
+                        if (textSubject != null)
                         {
-                            ReadNextLine();
+                            if (textSubject == currentTextSubject)
+                            {
+                                ReadNextLine();
+                            }
+                            else
+                            {
+                                FreeTextSubject();
+                                StartConversation(textSubject);
+                            }
+
                             return;
                         }
-                        else
-                        {
-                            FreeTextSubject();
-
-                            if (target.name == "Periko") periko = target.GetComponent<Periko>();
-                            if (periko != null)
-                            {
-                                if (periko.inFlight) return;
-                                SetTextLines(periko.textSubject.textLines);
-                                periko.textSubject.textIsActive = true;
-                                currentTextSubject = periko.gameObject;
-                                periko.textSubject.currentIndex = 0;
-                                periko.ProcessNextLines();
-                            }
-
-                            villager = target.GetComponent<Villager>();
-                            if (villager != null)
-                            {
-                                SetTextLines(villager.textSubject.textLines);
-                                villager.textSubject.textIsActive = true;
-                                villager.TalkToPlayer(gameObject);
-                                currentTextSubject = villager.gameObject;
-                                villager.textSubject.currentIndex = 0;
-                                villager.ProcessNextLines();
-                            }
-                            else if (villager == null && periko == null)
-                            {
-                                TextSubject textSubject = target.GetComponent<TextSubject>();
-                                if (textSubject != null)
-                                {
-                                    SetTextLines(textSubject.textLines);
-                                    currentTextSubject = textSubject.gameObject;
-                                    textSubject.currentIndex = 0;
-                                }
-                            }
-                        }
-
-                        textLineIndex = 0;
-                        textBox.gameObject.SetActive(true);
-                        UpdateTextBox();
-                        creatureMovement.MoveToDestination(target.transform.position);
-                        creatureMovement.agent.stoppingDistance = 1.7f;
-                        return;
                     }
                 }
                 else
@@ -447,7 +415,7 @@ public class Player : Creature
         }
 
         // Rotate towards text subject when it exists
-        if (currentTextSubject != null) LookAt(currentTextSubject.gameObject.transform, true);
+        if (currentTextSubject != null) LookAt(currentTextSubject.transform, true);
 
         // Rotate towards weather stone when it's clicked up close
         else if (weatherStone != null) LookAt(weatherStone.transform, true);
@@ -494,84 +462,93 @@ public class Player : Creature
 
     private bool NotInBattlefield() { return !healthBar.gameObject.activeInHierarchy && !optionsMenu.returnFromBuilder; }
 
-    void SetTextLines(string[] textLines)
+    private void StartConversation(TextSubject textSubject)
     {
-        linesToRead = textLines;
+        if (textSubject.periko != null && textSubject.periko.inFlight)
+            return;
+
+        textSubject.textIsActive = true;
+        textSubject.currentIndex = 0;
+
+        currentTextSubject = textSubject;
+        textLineIndex = 0;
+
+        linesToRead = textSubject.textLines;
+
+        if (textSubject.villager != null) textSubject.villager.TalkToPlayer(gameObject);
+
+        textSubject.ProcessNextLine();
+
+        textBox.gameObject.SetActive(true);
+        UpdateTextBox();
+
+        creatureMovement.MoveToDestination(textSubject.transform.position);
+        creatureMovement.agent.stoppingDistance = 1.7f;
     }
 
     void UpdateTextBox()
     {
-        if (speakerNameText != null) speakerNameText.text = currentTextSubject.gameObject.name;
-        if (textLineIndex + 1 < linesToRead.Length)
+        if (speakerNameText != null)
+            speakerNameText.text = currentTextSubject.name;
+
+        int lineCount = linesToRead.Length;
+
+        if (currentTextSubject.periko != null)
+            lineCount = currentTextSubject.periko.randomVoiceLinesLength;
+
+        if (textLineIndex + 1 < lineCount)
         {
-            if (textBoxDots != null) textBoxDots.SetActive(true);
+            if (textBoxDots != null)
+                textBoxDots.SetActive(true);
         }
         else
         {
-            if (textBoxDots != null) textBoxDots.SetActive(false);
+            if (textBoxDots != null)
+                textBoxDots.SetActive(false);
         }
-        if (textLineIndex < linesToRead.Length)
+
+        if (textLineIndex < lineCount)
         {
-            if (speakerNameText != null) textBoxText.text = linesToRead[textLineIndex];
+            textBoxText.text = linesToRead[textLineIndex];
         }
         else
         {
-            FreeTextSubject();
+            FreeTextSubject(true);
         }
     }
 
     public void ReadNextLine()
     {
+        if (currentTextSubject == null)
+            return;
+
         textLineIndex++;
-        if (villager != null) villager.ProcessNextLines();
-        else if (periko != null)
-        {
-            if (periko.textSubject.currentIndex < periko.randomVoiceLinesLength) periko.ProcessNextLines();
-            else
-            {
-                FreeTextSubject();
-                return;
-            }
-        }
+        currentTextSubject.ProcessNextLine();
+
         UpdateTextBox();
     }
 
-    public void FreeTextSubject()
+    public void FreeTextSubject(bool dialogueCompleted = false)
     {
-        if (villager != null)
+        if (currentTextSubject != null)
         {
-            if (villager.textSubject.UI_popUpAfterLastLine && textLineIndex == villager.textSubject.textLines.Length)
+            bool finishedReading = currentTextSubject.DialogueCompleted();
+
+            currentTextSubject.textIsActive = false;
+            currentTextSubject.currentIndex = 0;
+
+            currentTextSubject.StopSpeaking();
+
+            if (dialogueCompleted && finishedReading)
             {
-                if (villager.textSubject.popUpElements != null)
-                {
-                    foreach (GameObject element in villager.textSubject.popUpElements) element.SetActive(true);
-                }
+                currentTextSubject.ShowPopup();
             }
-
-            villager.textSubject.textIsActive = false;
-            villager.playingVoiceLines = false;
-            villager.textSubject.currentIndex = 0;
-            villager = null;
-        }
-
-        if (periko != null)
-        {
-            if (periko.textSubject.UI_popUpAfterLastLine && textLineIndex == periko.textSubject.textLines.Length)
-            {
-                if (periko.textSubject.popUpElements != null)
-                {
-                    foreach (GameObject element in periko.textSubject.popUpElements) element.SetActive(true);
-                }
-            }
-
-            periko.textSubject.textIsActive = false;
-            periko.playingVoiceLines = false;
-            periko.textSubject.currentIndex = 0;
-            periko = null;
         }
 
         currentTextSubject = null;
-        if (textBox != null) textBox.gameObject.SetActive(false);
+
+        if (textBox != null)
+            textBox.gameObject.SetActive(false);
     }
 
     public void SwitchWeapon(WeaponType weaponType)
