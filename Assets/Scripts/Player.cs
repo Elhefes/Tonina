@@ -290,37 +290,15 @@ public class Player : Creature
 
                         if (textSubject != null)
                         {
-                            // Already talking to this subject? Continue dialogue.
                             if (textSubject == currentTextSubject)
                             {
                                 ReadNextLine();
-                                return;
                             }
-
-                            // Starting a new conversation.
-                            FreeTextSubject();
-
-                            if (textSubject.periko != null && textSubject.periko.inFlight)
-                                return;
-
-                            textSubject.textIsActive = true;
-                            textSubject.currentIndex = 0;
-
-                            currentTextSubject = textSubject;
-                            textLineIndex = 0;
-
-                            SetTextLines(textSubject.textLines);
-
-                            if (textSubject.villager != null)
-                                textSubject.villager.TalkToPlayer(gameObject);
-
-                            textSubject.ProcessNextLine();
-
-                            textBox.gameObject.SetActive(true);
-                            UpdateTextBox();
-
-                            creatureMovement.MoveToDestination(target.transform.position);
-                            creatureMovement.agent.stoppingDistance = 1.7f;
+                            else
+                            {
+                                FreeTextSubject();
+                                StartConversation(textSubject);
+                            }
 
                             return;
                         }
@@ -484,9 +462,28 @@ public class Player : Creature
 
     private bool NotInBattlefield() { return !healthBar.gameObject.activeInHierarchy && !optionsMenu.returnFromBuilder; }
 
-    void SetTextLines(string[] textLines)
+    private void StartConversation(TextSubject textSubject)
     {
-        linesToRead = textLines;
+        if (textSubject.periko != null && textSubject.periko.inFlight)
+            return;
+
+        textSubject.textIsActive = true;
+        textSubject.currentIndex = 0;
+
+        currentTextSubject = textSubject;
+        textLineIndex = 0;
+
+        linesToRead = textSubject.textLines;
+
+        if (textSubject.villager != null) textSubject.villager.TalkToPlayer(gameObject);
+
+        textSubject.ProcessNextLine();
+
+        textBox.gameObject.SetActive(true);
+        UpdateTextBox();
+
+        creatureMovement.MoveToDestination(textSubject.transform.position);
+        creatureMovement.agent.stoppingDistance = 1.7f;
     }
 
     void UpdateTextBox()
