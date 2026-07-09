@@ -38,7 +38,7 @@ public class PlayerAttributeMenu : MonoBehaviour
 
     private void UpdateAqcuireButton()
     {
-        if (selectedAttribute == "") acquireButton.interactable = false;
+        if (selectedAttribute == "" || availablePoints < 1) acquireButton.interactable = false;
         else if (availablePoints > 0) acquireButton.interactable = true;
     }
 
@@ -64,87 +64,94 @@ public class PlayerAttributeMenu : MonoBehaviour
     {
         if (selectedAttribute == "V1") // Vitality
         {
-
+            vitalityImages[0].sprite = acquiredSprite;
         }
         else if (selectedAttribute == "V2")
         {
-
+            vitalityImages[1].sprite = acquiredSprite;
         }
         else if (selectedAttribute == "V3")
         {
-
+            vitalityImages[2].sprite = acquiredSprite;
         }
         else if (selectedAttribute == "V4")
         {
-
+            vitalityImages[3].sprite = acquiredSprite;
         }
         else if (selectedAttribute == "V5")
         {
-
+            vitalityImages[4].sprite = acquiredSprite;
         }
         else if (selectedAttribute == "A1") // Agility
         {
-
+            agilityImages[0].sprite = acquiredSprite;
         }
         else if (selectedAttribute == "A2")
         {
-
+            agilityImages[1].sprite = acquiredSprite;
         }
         else if (selectedAttribute == "A3")
         {
-
+            agilityImages[2].sprite = acquiredSprite;
         }
         else if (selectedAttribute == "A4")
         {
-
+            agilityImages[3].sprite = acquiredSprite;
         }
         else if (selectedAttribute == "A5")
         {
-
+            agilityImages[4].sprite = acquiredSprite;
         }
         else if (selectedAttribute == "W1") // Weapons
         {
-
+            weaponsImages[0].sprite = acquiredSprite;
         }
         else if (selectedAttribute == "W2")
         {
-
+            weaponsImages[1].sprite = acquiredSprite;
         }
         else if (selectedAttribute == "W3")
         {
-
+            weaponsImages[2].sprite = acquiredSprite;
         }
         else if (selectedAttribute == "W4")
         {
-
+            weaponsImages[3].sprite = acquiredSprite;
         }
         else if (selectedAttribute == "E1") // Efficiency
         {
-
+            efficiencyImages[0].sprite = acquiredSprite;
         }
         else if (selectedAttribute == "E2")
         {
-
+            efficiencyImages[1].sprite = acquiredSprite;
         }
         else if (selectedAttribute == "E3")
         {
-
+            efficiencyImages[2].sprite = acquiredSprite;
         }
         else if (selectedAttribute == "L1") // Leadership
         {
-
+            leadershipImages[0].sprite = acquiredSprite;
         }
         else if (selectedAttribute == "L2")
         {
-
+            leadershipImages[1].sprite = acquiredSprite;
         }
         else if (selectedAttribute == "L3")
         {
-
+            leadershipImages[2].sprite = acquiredSprite;
         }
 
+        if (availablePoints > 0) availablePoints--;
         selectedAttribute = "";
+        availablePointsText.text = "Available Points: " + availablePoints.ToString();
         UpdateAqcuireButton();
         DisableAllInfoBubbles();
+    }
+
+    private void UpdateAttributeImages()
+    {
+        // TODO: sets all images to acquired or not acquired based on saved data
     }
 }
