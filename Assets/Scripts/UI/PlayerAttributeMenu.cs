@@ -34,6 +34,7 @@ public class PlayerAttributeMenu : MonoBehaviour
         availablePoints = 12;
         availablePointsText.text = "Available Points: " + availablePoints.ToString();
         selectedAttribute = "";
+        UpdateAttributeImages();
         UpdateAqcuireButton();
     }
 
@@ -97,12 +98,16 @@ public class PlayerAttributeMenu : MonoBehaviour
         availablePointsText.text = "Available Points: " + availablePoints.ToString();
         UpdateAqcuireButton();
         DisableAllInfoBubbles();
-        //GameState.Instance.SaveWorld();
+        GameState.Instance.SaveWorld();
     }
 
     private void UpdateAttributeImages()
     {
-        // TODO: sets all images to acquired or not acquired based on saved data
+        for (int i = 1; i <= GameState.Instance.progressionData.vitalityLevel; i++) { vitalityImages[i - 1].sprite = acquiredSprite; }
+        for (int i = 1; i <= GameState.Instance.progressionData.agilityLevel; i++) { agilityImages[i - 1].sprite = acquiredSprite; }
+        for (int i = 1; i <= GameState.Instance.progressionData.weaponsLevel; i++) { weaponsImages[i - 1].sprite = acquiredSprite; }
+        for (int i = 1; i <= GameState.Instance.progressionData.efficiencyLevel; i++) { efficiencyImages[i - 1].sprite = acquiredSprite; }
+        for (int i = 1; i <= GameState.Instance.progressionData.leadershipLevel; i++) { leadershipImages[i - 1].sprite = acquiredSprite; }
     }
 
     private bool AttributeIsAvailable(string attribute)
