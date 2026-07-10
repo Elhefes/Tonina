@@ -21,6 +21,13 @@ public class ProgressionData
     public bool axeUnlocked { get; set; }
     public bool bowUnlocked { get; set; }
 
+    // Player attributes
+    public int vitalityLevel { get; set; }
+    public int agilityLevel { get; set; }
+    public int weaponsLevel { get; set; }
+    public int efficiencyLevel { get; set; }
+    public int leadershipLevel { get; set; }
+
     // Pyramid floors
     public int extraPyramidFloorsBuilt { get; set; }
 

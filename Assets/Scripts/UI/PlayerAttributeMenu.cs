@@ -31,6 +31,7 @@ public class PlayerAttributeMenu : MonoBehaviour
     private void OnEnable()
     {
         DisableAllInfoBubbles();
+        availablePoints = 12;
         availablePointsText.text = "Available Points: " + availablePoints.ToString();
         selectedAttribute = "";
         UpdateAqcuireButton();
@@ -56,91 +57,39 @@ public class PlayerAttributeMenu : MonoBehaviour
 
     public void SelectThisAttribute(string attribute)
     {
-        selectedAttribute = attribute;
+        if (AttributeIsAvailable(attribute)) selectedAttribute = attribute;
+        else selectedAttribute = "";
         UpdateAqcuireButton();
     }
 
     public void AquireThisAttribute()
     {
-        if (selectedAttribute == "V1") // Vitality
+        int attributeNumber = int.Parse(selectedAttribute[1].ToString());
+
+        if (selectedAttribute[0] == 'V') // Vitality
         {
-            vitalityImages[0].sprite = acquiredSprite;
+            vitalityImages[attributeNumber - 1].sprite = acquiredSprite;
+            GameState.Instance.progressionData.vitalityLevel++;
         }
-        else if (selectedAttribute == "V2")
+        else if (selectedAttribute[0] == 'A') // Agility
         {
-            vitalityImages[1].sprite = acquiredSprite;
+            agilityImages[attributeNumber - 1].sprite = acquiredSprite;
+            GameState.Instance.progressionData.agilityLevel++;
         }
-        else if (selectedAttribute == "V3")
+        else if (selectedAttribute[0] == 'W') // Weapons
         {
-            vitalityImages[2].sprite = acquiredSprite;
+            weaponsImages[attributeNumber - 1].sprite = acquiredSprite;
+            GameState.Instance.progressionData.weaponsLevel++;
         }
-        else if (selectedAttribute == "V4")
+        else if (selectedAttribute[0] == 'E') // Efficiency
         {
-            vitalityImages[3].sprite = acquiredSprite;
+            efficiencyImages[attributeNumber - 1].sprite = acquiredSprite;
+            GameState.Instance.progressionData.efficiencyLevel++;
         }
-        else if (selectedAttribute == "V5")
+        else if (selectedAttribute[0] == 'L') // Leadership
         {
-            vitalityImages[4].sprite = acquiredSprite;
-        }
-        else if (selectedAttribute == "A1") // Agility
-        {
-            agilityImages[0].sprite = acquiredSprite;
-        }
-        else if (selectedAttribute == "A2")
-        {
-            agilityImages[1].sprite = acquiredSprite;
-        }
-        else if (selectedAttribute == "A3")
-        {
-            agilityImages[2].sprite = acquiredSprite;
-        }
-        else if (selectedAttribute == "A4")
-        {
-            agilityImages[3].sprite = acquiredSprite;
-        }
-        else if (selectedAttribute == "A5")
-        {
-            agilityImages[4].sprite = acquiredSprite;
-        }
-        else if (selectedAttribute == "W1") // Weapons
-        {
-            weaponsImages[0].sprite = acquiredSprite;
-        }
-        else if (selectedAttribute == "W2")
-        {
-            weaponsImages[1].sprite = acquiredSprite;
-        }
-        else if (selectedAttribute == "W3")
-        {
-            weaponsImages[2].sprite = acquiredSprite;
-        }
-        else if (selectedAttribute == "W4")
-        {
-            weaponsImages[3].sprite = acquiredSprite;
-        }
-        else if (selectedAttribute == "E1") // Efficiency
-        {
-            efficiencyImages[0].sprite = acquiredSprite;
-        }
-        else if (selectedAttribute == "E2")
-        {
-            efficiencyImages[1].sprite = acquiredSprite;
-        }
-        else if (selectedAttribute == "E3")
-        {
-            efficiencyImages[2].sprite = acquiredSprite;
-        }
-        else if (selectedAttribute == "L1") // Leadership
-        {
-            leadershipImages[0].sprite = acquiredSprite;
-        }
-        else if (selectedAttribute == "L2")
-        {
-            leadershipImages[1].sprite = acquiredSprite;
-        }
-        else if (selectedAttribute == "L3")
-        {
-            leadershipImages[2].sprite = acquiredSprite;
+            leadershipImages[attributeNumber - 1].sprite = acquiredSprite;
+            GameState.Instance.progressionData.leadershipLevel++;
         }
 
         if (availablePoints > 0) availablePoints--;
@@ -148,10 +97,39 @@ public class PlayerAttributeMenu : MonoBehaviour
         availablePointsText.text = "Available Points: " + availablePoints.ToString();
         UpdateAqcuireButton();
         DisableAllInfoBubbles();
+        //GameState.Instance.SaveWorld();
     }
 
     private void UpdateAttributeImages()
     {
         // TODO: sets all images to acquired or not acquired based on saved data
+    }
+
+    private bool AttributeIsAvailable(string attribute)
+    {
+        int attributeNumber = int.Parse(attribute[1].ToString());
+
+        if (attribute[0] == 'V')
+        {
+            if (attributeNumber - 1 == GameState.Instance.progressionData.vitalityLevel) return true;
+        }
+        else if (attribute[0] == 'A')
+        {
+            if (attributeNumber - 1 == GameState.Instance.progressionData.agilityLevel) return true;
+        }
+        else if (attribute[0] == 'W')
+        {
+            if (attributeNumber - 1 == GameState.Instance.progressionData.weaponsLevel) return true;
+        }
+        else if (attribute[0] == 'E')
+        {
+            if (attributeNumber - 1 == GameState.Instance.progressionData.efficiencyLevel) return true;
+        }
+        else if (attribute[0] == 'L')
+        {
+            if (attributeNumber - 1 == GameState.Instance.progressionData.leadershipLevel) return true;
+        }
+
+        return false;
     }
 }
