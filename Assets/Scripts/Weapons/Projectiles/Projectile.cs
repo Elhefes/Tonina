@@ -18,6 +18,13 @@ public class Projectile : Weapon
         if (weaponWheelQuantityTMP != null) weaponWheelQuantityTMP.text = quantity.ToString();
     }
 
+    private void OnDisable()
+    {
+        // Reset buffs when entering object pooler
+        damage = defaultDamage;
+        attackCooldown = defaultAttackCooldown;
+    }
+
     public void SpawnProjectile()
     {
         Projectile spawnedProjectile;
@@ -35,6 +42,7 @@ public class Projectile : Weapon
         spawnedProjectile.quantity = quantity;
         if (weaponWheelQuantityTMP != null) weaponWheelQuantityTMP.text = quantity.ToString();
 
+        spawnedProjectile.damage = damage;
         spawnedProjectile.shootingPoint = shootingPoint;
         spawnedProjectile.transform.position = shootingPoint.position;
         spawnedProjectile.directorComponent.creatureMovement = directorComponent.creatureMovement;
