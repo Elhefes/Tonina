@@ -21,6 +21,17 @@ public class Bow : Projectile
         arrow.gameObject.SetActive(true);
     }
 
+    public override void UpdateWeaponValues()
+    {
+        if (recievesWeaponsBuffs)
+        {
+            damage = defaultDamage +
+                PlayerAttributes.BowDamageBuff(GameState.Instance.progressionData.weaponsLevel);
+            attackCooldown = defaultAttackCooldown /
+                PlayerAttributes.BowAttackSpeedDenominator(GameState.Instance.progressionData.weaponsLevel);
+        }
+    }
+
     public override void Attack(Animator animator)
     {
         if (!primingArrow)

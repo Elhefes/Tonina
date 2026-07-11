@@ -94,7 +94,7 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: 585972107439df94fa54ad82f02f09c0, type: 3}
+  m_audioClip: {fileID: 0}
   m_Resource: {fileID: 8300000, guid: 585972107439df94fa54ad82f02f09c0, type: 3}
   m_PlayOnAwake: 0
   m_Volume: 1
@@ -255,11 +255,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   weaponName: SmallStone
   isFriendly: 0
+  canHitBarricades: 0
   selected: 1
   notAvailable: 0
   type: 2
+  defaultDamage: 12
   damage: 12
+  recievesWeaponsBuffs: 0
+  recievesLeadershipBuffs: 0
   uiSprite: {fileID: 21300000, guid: 07c704b29e8def74aa2d3f874a535444, type: 3}
+  defaultAttackCooldown: 1
   attackCooldown: 1
   attackDistance: 8
   attackAngleThreshold: 2
@@ -377,7 +382,7 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: 585972107439df94fa54ad82f02f09c0, type: 3}
+  m_audioClip: {fileID: 0}
   m_Resource: {fileID: 8300000, guid: 585972107439df94fa54ad82f02f09c0, type: 3}
   m_PlayOnAwake: 0
   m_Volume: 1

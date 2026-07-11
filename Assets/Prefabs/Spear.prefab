@@ -191,12 +191,17 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   weaponName: Spear
   isFriendly: 0
+  canHitBarricades: 0
   selected: 1
   notAvailable: 0
   type: 3
+  defaultDamage: 110
   damage: 110
+  recievesWeaponsBuffs: 0
+  recievesLeadershipBuffs: 0
   uiSprite: {fileID: 21300000, guid: 9f03a6d9ead109d499a705e995930b80, type: 3}
-  attackCooldown: 1
+  defaultAttackCooldown: 2
+  attackCooldown: 2
   attackDistance: 13.75
   attackAngleThreshold: 2
   canHit: 0
@@ -267,7 +272,7 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: bfcb519266dfda94eb906c2f5e9689d3, type: 3}
+  m_audioClip: {fileID: 0}
   m_Resource: {fileID: 8300000, guid: bfcb519266dfda94eb906c2f5e9689d3, type: 3}
   m_PlayOnAwake: 0
   m_Volume: 1

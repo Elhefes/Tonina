@@ -103,7 +103,7 @@ public static class PlayerAttributes
     }
     public static int LeadershipHealthBuff(int leadershipLevel)
     {
-        if (leadershipLevel > 2) return 20;
+        if (leadershipLevel > 2) return 30;
         else if (leadershipLevel > 0) return 10;
         return 0;
     }

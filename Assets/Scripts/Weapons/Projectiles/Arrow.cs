@@ -4,6 +4,15 @@ public class Arrow : Projectile
 {
     public GameObject hitSoundObject;
 
+    public override void UpdateWeaponValues()
+    {
+        if (recievesWeaponsBuffs)
+        {
+            damage = defaultDamage +
+                PlayerAttributes.BowDamageBuff(GameState.Instance.progressionData.weaponsLevel);
+        }
+    }
+
     private void OnTriggerEnter(Collider other)
     {
         if (!canHit || !directorComponent.gameObject.activeSelf) return;

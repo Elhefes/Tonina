@@ -4,6 +4,20 @@ public class SmallStone : Projectile
 {
     public GameObject hitSoundObject;
 
+    public override void UpdateWeaponValues()
+    {
+        if (recievesWeaponsBuffs)
+        {
+            damage = defaultDamage +
+                PlayerAttributes.SmallStoneDamageBuff(GameState.Instance.progressionData.weaponsLevel);
+        }
+        if (recievesLeadershipBuffs)
+        {
+            attackCooldown = defaultAttackCooldown /
+                PlayerAttributes.LeadershipAttackSpeedDenominator(GameState.Instance.progressionData.leadershipLevel);
+        }
+    }
+
     public override void Attack(Animator animator)
     {
         animator.SetTrigger("StoneAttack");

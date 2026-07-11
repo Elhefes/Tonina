@@ -9,9 +9,13 @@ public class Weapon : MonoBehaviour
     public bool selected;
     public bool notAvailable;
     public WeaponType type;
+    public int defaultDamage;
     public int damage;
+    public bool recievesWeaponsBuffs;
+    public bool recievesLeadershipBuffs;
     public Sprite uiSprite;
-    public float attackCooldown = 1.0f; // Time between attacks
+    public float defaultAttackCooldown; // Time between attacks
+    public float attackCooldown;
     public float attackDistance;
     public float attackAngleThreshold;
     public bool canHit;
@@ -23,12 +27,18 @@ public class Weapon : MonoBehaviour
 
     private void OnEnable()
     {
+        UpdateWeaponValues();
         hitObjects.Clear();
     }
 
     public virtual void Attack(Animator animator)
     {
             
+    }
+
+    public virtual void UpdateWeaponValues()
+    {
+
     }
 
     public bool ShouldAttack(float distanceToTarget, float angle)
