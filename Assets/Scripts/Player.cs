@@ -9,7 +9,8 @@ public class Player : Creature
 {
     public int health;
     public int maxHealth;
-    public int startingHealth;
+    public int defaultStartingHealth;
+    private int startingHealth;
     public Slider healthBar;
     public bool godMode;
     public bool hasAllWeapons;
@@ -113,6 +114,8 @@ public class Player : Creature
             gameObject.SetActive(true);
         }
 
+        startingHealth = defaultStartingHealth + 
+            PlayerAttributes.VitalityHealthBuff(GameState.Instance.progressionData.vitalityLevel);
         health = startingHealth;
         stamina = maxStamina;
         originalMovementSpeed = creatureMovement.agent.speed;
@@ -150,6 +153,8 @@ public class Player : Creature
 
     public void ResetValues()
     {
+        startingHealth = defaultStartingHealth + 
+            PlayerAttributes.VitalityHealthBuff(GameState.Instance.progressionData.vitalityLevel);
         health = startingHealth;
         playerHealthIndicator.UpdateHealthIndicator(health, startingHealth);
         overHealBar.UpdateOverHealBar(health, startingHealth);
@@ -605,6 +610,8 @@ public class Player : Creature
 
     public void TakeDamage(int damage)
     {
+        startingHealth = defaultStartingHealth + 
+            PlayerAttributes.VitalityHealthBuff(GameState.Instance.progressionData.vitalityLevel);
         health -= damage;
         if (godMode && health <= 20)
         {
@@ -632,6 +639,9 @@ public class Player : Creature
 
     public void RestoreHealth(int amount)
     {
+        startingHealth = defaultStartingHealth + 
+            PlayerAttributes.VitalityHealthBuff(GameState.Instance.progressionData.vitalityLevel);
+        maxHealth = startingHealth + 100;
         healthBar.value += (float)amount / startingHealth;
         if (health + amount > maxHealth)
         {
@@ -652,6 +662,8 @@ public class Player : Creature
         overHealDecay = true;
         yield return new WaitForSeconds(secondsBeforeOverHealDecay);
 
+        startingHealth = defaultStartingHealth + 
+            PlayerAttributes.VitalityHealthBuff(GameState.Instance.progressionData.vitalityLevel);
         while (health > startingHealth)
         {
             TakeDamage(1);

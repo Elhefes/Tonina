@@ -10,7 +10,7 @@ public class MaizeHandler : MonoBehaviour
     public Player player;
 
     public int maxMaize;
-    public int maizeHealAmount;
+    public int defaultMaizeHealAmount;
 
     public GameObject maizeInventory;
     public GameObject maizeInventoryIcon;
@@ -88,7 +88,8 @@ public class MaizeHandler : MonoBehaviour
     {
         // Eat 1 maize and remove it from maizeInventory
         if (player.health == player.maxHealth || maizeAmount < 1) return;
-        player.RestoreHealth(maizeHealAmount);
+        player.RestoreHealth(defaultMaizeHealAmount + 
+            PlayerAttributes.VitalityMaizeHealBuff(GameState.Instance.progressionData.vitalityLevel));
         maizeAmount--;
         maizeAmountTMP.text = maizeAmount.ToString();
         if (maizeAmount < 1 && !maizePickUp.activeSelf) maizeInventory.SetActive(false);
