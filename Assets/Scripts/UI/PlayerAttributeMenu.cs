@@ -4,6 +4,7 @@ using UnityEngine.UI;
 
 public class PlayerAttributeMenu : MonoBehaviour
 {
+    public Player player;
     public Button acquireButton;
     public GameObject[] infoBubbles;
     public TMP_Text availablePointsText;
@@ -76,6 +77,7 @@ public class PlayerAttributeMenu : MonoBehaviour
         {
             agilityImages[attributeNumber - 1].sprite = acquiredSprite;
             GameState.Instance.progressionData.agilityLevel++;
+            if (player != null) player.UpdateAgilityValues();
         }
         else if (selectedAttribute[0] == 'W') // Weapons
         {

@@ -21,8 +21,9 @@ public class Player : Creature
     public float defaultMaxStamina;
     private float maxStamina;
     private float stamina;
-    private float originalMovementSpeed;
-    private float runningSpeed = 5.25f;
+    public float defaultMovementSpeed;
+    private float movementSpeed;
+    private float runningSpeed;
     public Image staminaBarImage;
     public ParticleSystem runningParticleSystem;
     public bool running;
@@ -118,10 +119,8 @@ public class Player : Creature
         startingHealth = defaultStartingHealth + 
             PlayerAttributes.VitalityHealthBuff(GameState.Instance.progressionData.vitalityLevel);
         health = startingHealth;
-        maxStamina = defaultMaxStamina +
-            PlayerAttributes.AgilityStaminaBuff(GameState.Instance.progressionData.agilityLevel);
-        stamina = maxStamina;
-        originalMovementSpeed = creatureMovement.agent.speed;
+        UpdateAgilityValues();
+
         playerHealthIndicator.UpdateHealthIndicator(health, startingHealth);
         SetProjectilesToMax();
     }
@@ -170,13 +169,22 @@ public class Player : Creature
             PlayerAttributes.StonesAndArrowsCapacityBuff(GameState.Instance.progressionData.efficiencyLevel);
         spearStartingQuantity = spear.defaultStartingQuantity +
             PlayerAttributes.SpearCapacityBuff(GameState.Instance.progressionData.efficiencyLevel);
-
-        maxStamina = defaultMaxStamina +
-            PlayerAttributes.AgilityStaminaBuff(GameState.Instance.progressionData.agilityLevel);
+        UpdateAgilityValues();
 
         onCooldown = false;
         stamina = maxStamina;
         staminaBarImage.fillAmount = stamina;
+    }
+
+    public void UpdateAgilityValues()
+    {
+        maxStamina = defaultMaxStamina +
+            PlayerAttributes.AgilityStaminaBuff(GameState.Instance.progressionData.agilityLevel);
+        stamina = maxStamina;
+        movementSpeed = defaultMovementSpeed +
+            PlayerAttributes.AgilitySpeedBuff(GameState.Instance.progressionData.agilityLevel);
+        creatureMovement.agent.speed = movementSpeed;
+        runningSpeed = movementSpeed + 1.5f;
     }
 
     void EquipOnlySelectedWeapons()
@@ -864,7 +872,7 @@ public class Player : Creature
     void StopRunning()
     {
         running = false;
-        creatureMovement.agent.speed = originalMovementSpeed;
+        creatureMovement.agent.speed = movementSpeed;
         runningParticleSystem.Stop();
 
         if (recoveryCoroutine != null)
