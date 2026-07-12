@@ -161,6 +161,13 @@ public class Player : Creature
         overHealDecay = false;
         healthBar.value = health;
 
+        smallStoneStartingQuantity = smallStone.defaultStartingQuantity +
+            PlayerAttributes.StonesAndArrowsCapacityBuff(GameState.Instance.progressionData.efficiencyLevel);
+        arrowStartingQuantity = bow.defaultStartingQuantity +
+            PlayerAttributes.StonesAndArrowsCapacityBuff(GameState.Instance.progressionData.efficiencyLevel);
+        spearStartingQuantity = spear.defaultStartingQuantity +
+            PlayerAttributes.SpearCapacityBuff(GameState.Instance.progressionData.efficiencyLevel);
+
         onCooldown = false;
         stamina = maxStamina;
         staminaBarImage.fillAmount = stamina;

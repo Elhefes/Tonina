@@ -5,6 +5,7 @@ public class Projectile : Weapon
 {
     public Transform shootingPoint;
     public ProjectileDirectorComponent directorComponent;
+    public int defaultStartingQuantity;
     public int quantity;
     public bool infinite;
     public TMP_Text weaponWheelQuantityTMP;
@@ -15,6 +16,13 @@ public class Projectile : Weapon
     private void Start()
     {
         pooler = ObjectPooler.Instance;
+
+        if (recievesLeadershipBuffs) // For Jadea warriors
+        {
+            quantity = defaultStartingQuantity +
+                PlayerAttributes.LeadershipStoneCapacityBuff(GameState.Instance.progressionData.leadershipLevel);
+        }
+
         if (weaponWheelQuantityTMP != null) weaponWheelQuantityTMP.text = quantity.ToString();
     }
 

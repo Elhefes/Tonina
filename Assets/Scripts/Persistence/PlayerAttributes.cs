@@ -87,8 +87,8 @@ public static class PlayerAttributes
     }
     public static int StonesAndArrowsCapacityBuff(int efficiencyLevel)
     {
-        if (efficiencyLevel > 0) return 2;
-        else if (efficiencyLevel > 1) return 4;
+        if (efficiencyLevel > 1) return 4;
+        else if (efficiencyLevel > 0) return 2;
         return 0;
     }
     public static int RewardBuff(int efficiencyLevel, int reward)

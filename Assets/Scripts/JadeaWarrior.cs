@@ -7,6 +7,7 @@ public class JadeaWarrior : Creature
     public string friendlyType;
     public NavMeshAgent agent;
     public Slider healthBar;
+    public int defaultStartingHealth;
     public int startingHealth;
     private int health;
     public GameObject deathSoundObject;
@@ -17,6 +18,8 @@ public class JadeaWarrior : Creature
 
     void Start()
     {
+        startingHealth = defaultStartingHealth +
+            PlayerAttributes.LeadershipHealthBuff(GameState.Instance.progressionData.leadershipLevel);
         health = startingHealth;
         pooler = ObjectPooler.Instance;
         attackerSideSetting = AttackerSideSetting.Instance;
@@ -25,6 +28,8 @@ public class JadeaWarrior : Creature
 
     public void ResetFriendlyAttributes()
     {
+        startingHealth = defaultStartingHealth +
+            PlayerAttributes.LeadershipHealthBuff(GameState.Instance.progressionData.leadershipLevel);
         health = startingHealth;
         healthBar.value = health;
         creatureMovement.target = null;

@@ -2761,6 +2761,7 @@ MonoBehaviour:
   friendlyType: JadeaWarrior
   agent: {fileID: 7033625827880630577}
   healthBar: {fileID: 3091264148329709579}
+  defaultStartingHealth: 80
   startingHealth: 80
   deathSoundObject: {fileID: 9186930848978287222}
   moveTowardsTarget: 1
@@ -6761,6 +6762,10 @@ PrefabInstance:
       propertyPath: shootingPoint
       value: 
       objectReference: {fileID: 7658485002800573652}
+    - target: {fileID: -3091167720287405587, guid: ce38a49735e12024a9912149bd0dab7e, type: 3}
+      propertyPath: defaultStartingQuantity
+      value: 4
+      objectReference: {fileID: 0}
     - target: {fileID: -3091167720287405587, guid: ce38a49735e12024a9912149bd0dab7e, type: 3}
       propertyPath: recievesLeadershipBuffs
       value: 1
