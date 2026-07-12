@@ -18,7 +18,8 @@ public class Player : Creature
     public UI_Controller uiController;
     public DoubleClickDetector doubleClickDetector;
     private Coroutine recoveryCoroutine;
-    public float maxStamina = 1f;
+    public float defaultMaxStamina;
+    private float maxStamina;
     private float stamina;
     private float originalMovementSpeed;
     private float runningSpeed = 5.25f;
@@ -117,6 +118,8 @@ public class Player : Creature
         startingHealth = defaultStartingHealth + 
             PlayerAttributes.VitalityHealthBuff(GameState.Instance.progressionData.vitalityLevel);
         health = startingHealth;
+        maxStamina = defaultMaxStamina +
+            PlayerAttributes.AgilityStaminaBuff(GameState.Instance.progressionData.agilityLevel);
         stamina = maxStamina;
         originalMovementSpeed = creatureMovement.agent.speed;
         playerHealthIndicator.UpdateHealthIndicator(health, startingHealth);
@@ -167,6 +170,9 @@ public class Player : Creature
             PlayerAttributes.StonesAndArrowsCapacityBuff(GameState.Instance.progressionData.efficiencyLevel);
         spearStartingQuantity = spear.defaultStartingQuantity +
             PlayerAttributes.SpearCapacityBuff(GameState.Instance.progressionData.efficiencyLevel);
+
+        maxStamina = defaultMaxStamina +
+            PlayerAttributes.AgilityStaminaBuff(GameState.Instance.progressionData.agilityLevel);
 
         onCooldown = false;
         stamina = maxStamina;
@@ -447,14 +453,14 @@ public class Player : Creature
     {
         if (running)
         {
-            stamina = Mathf.Clamp(stamina - 0.00133f, 0f, 1f);
+            stamina = Mathf.Clamp(stamina - 0.01f, 0f, maxStamina);
             if (stamina == 0f) StopRunning();
         }
         else if (recoveringStamina)
         {
-            stamina = Mathf.Clamp(stamina + 0.001f, 0f, 1f);
+            stamina = Mathf.Clamp(stamina + 0.01f, 0f, maxStamina);
         }
-        if (staminaBarImage.gameObject.activeInHierarchy) staminaBarImage.fillAmount = stamina;
+        if (staminaBarImage.gameObject.activeInHierarchy) staminaBarImage.fillAmount = stamina / maxStamina;
 
         if (fillOkillHoldButton.buttonPressed)
         {
@@ -832,7 +838,7 @@ public class Player : Creature
 
     void StartRunningIfPossible()
     {
-        if (stamina < 0.33f) return;
+        if (stamina < maxStamina / 3f) return;
         if ((creatureMovement.agent.destination != null && Vector3.Distance(transform.position, creatureMovement.agent.destination) > 3.5f)
             || (creatureMovement.target != null && Vector3.Distance(transform.position, creatureMovement.target.position) > 3.5f))
         {
@@ -849,8 +855,8 @@ public class Player : Creature
 
         // Cooldowns based on how much stamina is left
         yield return new WaitForSeconds(2.5f);
-        if (stamina < 0.33f) yield return new WaitForSeconds(5f);
-        else if (stamina < 0.67f) yield return new WaitForSeconds(2.5f);
+        if (stamina < maxStamina / 3f) yield return new WaitForSeconds(5f);
+        else if (stamina < maxStamina * 2 / 3f) yield return new WaitForSeconds(2.5f);
 
         if (!running) recoveringStamina = true;
     }
