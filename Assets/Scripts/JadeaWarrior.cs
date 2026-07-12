@@ -8,8 +8,9 @@ public class JadeaWarrior : Creature
     public NavMeshAgent agent;
     public Slider healthBar;
     public int defaultStartingHealth;
-    public int startingHealth;
+    private int startingHealth;
     private int health;
+    public float defaultSpeed;
     public GameObject deathSoundObject;
     public bool moveTowardsTarget;
     public float attackExtraCooldown;
@@ -21,6 +22,8 @@ public class JadeaWarrior : Creature
         startingHealth = defaultStartingHealth +
             PlayerAttributes.LeadershipHealthBuff(GameState.Instance.progressionData.leadershipLevel);
         health = startingHealth;
+        agent.speed = defaultSpeed +
+            PlayerAttributes.LeadershipSpeedBuff(GameState.Instance.progressionData.leadershipLevel);
         pooler = ObjectPooler.Instance;
         attackerSideSetting = AttackerSideSetting.Instance;
         if (attackerSideSetting != null) isAttacker = attackerSideSetting.enemyIsDefender;
@@ -32,6 +35,8 @@ public class JadeaWarrior : Creature
             PlayerAttributes.LeadershipHealthBuff(GameState.Instance.progressionData.leadershipLevel);
         health = startingHealth;
         healthBar.value = health;
+        agent.speed = defaultSpeed +
+            PlayerAttributes.LeadershipSpeedBuff(GameState.Instance.progressionData.leadershipLevel);
         creatureMovement.target = null;
     }
 
