@@ -27,8 +27,13 @@ public class Weapon : MonoBehaviour
 
     private void OnEnable()
     {
-        UpdateWeaponValues();
+        if (GameState.Instance != null) UpdateWeaponValues();
         hitObjects.Clear();
+    }
+
+    private void Start()
+    {
+        UpdateWeaponValues();
     }
 
     public virtual void Attack(Animator animator)
