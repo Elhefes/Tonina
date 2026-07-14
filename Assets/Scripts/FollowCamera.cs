@@ -6,7 +6,10 @@ public class FollowCamera : MonoBehaviour
 
     private void Awake()
     {
-        if (Camera.main != null) playerCamera = Camera.main.transform;
+        if (playerCamera == null)
+        {
+            if (Camera.main != null) playerCamera = Camera.main.transform;
+        }
     }
 
     private void LateUpdate()
