@@ -5,6 +5,7 @@ public class ThreatLevelController : MonoBehaviour
 {
     public float threatProgressionValue;
     public TMP_Text newThreatLevelUnlockTMP;
+    public int[] attributePointIncrementThresholds;
 
     void Start()
     {
@@ -46,6 +47,8 @@ public class ThreatLevelController : MonoBehaviour
             GameState.Instance.progressionData.highestThreatValue = threatProgressionValue; // Set new highest
         }
 
+        UpdatePlayerAttributeAvailability();
+
         GameState.Instance.SaveWorld();
     }
 
@@ -57,5 +60,29 @@ public class ThreatLevelController : MonoBehaviour
         else if (diff == 2) return 0.21f;
         else if (diff == 3) return 0.125f;
         return 0.05f;
+    }
+
+    private void UpdatePlayerAttributeAvailability()
+    {
+        int maxFloor = Mathf.FloorToInt(GameState.Instance.progressionData.highestThreatValue);
+
+        int reached = 0;
+
+        for (int i = 0; i < attributePointIncrementThresholds.Length; i++)
+        {
+            if (maxFloor >= attributePointIncrementThresholds[i])
+                reached++;
+            else
+                break;
+        }
+
+        // Number of newly reached thresholds
+        int gained = Mathf.Max(0, reached - GameState.Instance.progressionData.attributesGainedFromThreatIncreases);
+        GameState.Instance.progressionData.availableAttributePoints += gained;
+
+        if (reached > GameState.Instance.progressionData.attributesGainedFromThreatIncreases)
+        {
+            GameState.Instance.progressionData.attributesGainedFromThreatIncreases = reached;
+        }
     }
 }

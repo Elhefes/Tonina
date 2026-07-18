@@ -23,6 +23,7 @@ public class ProgressionData
 
     // Player attributes
     public int availableAttributePoints { get; set; }
+    public int attributesGainedFromThreatIncreases { get; set; }
     public int vitalityLevel { get; set; }
     public int agilityLevel { get; set; }
     public int weaponsLevel { get; set; }
