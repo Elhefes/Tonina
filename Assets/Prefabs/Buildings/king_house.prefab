@@ -13316,6 +13316,8 @@ MonoBehaviour:
   battlefieldAngle: {x: 60, y: 0, z: 0}
   miniPyramid: {fileID: 5553093380316021763}
   namePlate: {fileID: 8040391778464466782}
+  namePlateTorchFlame1: {fileID: 8581383560964227315}
+  namePlateTorchFlame2: {fileID: 9200894714743211898}
 --- !u!1 &7471331876075990883
 GameObject:
   m_ObjectHideFlags: 0
@@ -15020,7 +15022,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   textIsActive: 0
-  UI_popUpAfterLastLine: 1
+  uiPopUpAfterLastLine: 0
   popUpElements: []
   textLines:
   - The King of Jadea
@@ -15030,6 +15032,8 @@ MonoBehaviour:
     skies roared.
   - 'The King is revered for their strengths in:'
   currentIndex: 0
+  villager: {fileID: 0}
+  periko: {fileID: 0}
 --- !u!33 &6024250919342735121
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -18877,6 +18881,10 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6377170531014425580, guid: ac2c64ceb8d42d04783f7787fd72b1ce, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6377170531014425580, guid: ac2c64ceb8d42d04783f7787fd72b1ce, type: 3}
       propertyPath: m_StaticEditorFlags
       value: 0
       objectReference: {fileID: 0}
@@ -18900,6 +18908,11 @@ PrefabInstance:
 --- !u!4 &8336391069433132484 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6089053285681006930, guid: ac2c64ceb8d42d04783f7787fd72b1ce, type: 3}
+  m_PrefabInstance: {fileID: 2823869330444123286}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &9200894714743211898 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6377170531014425580, guid: ac2c64ceb8d42d04783f7787fd72b1ce, type: 3}
   m_PrefabInstance: {fileID: 2823869330444123286}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &2887576693085566763
@@ -19378,6 +19391,10 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6377170531014425580, guid: ac2c64ceb8d42d04783f7787fd72b1ce, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6377170531014425580, guid: ac2c64ceb8d42d04783f7787fd72b1ce, type: 3}
       propertyPath: m_StaticEditorFlags
       value: 0
       objectReference: {fileID: 0}
@@ -19398,6 +19415,11 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ac2c64ceb8d42d04783f7787fd72b1ce, type: 3}
+--- !u!1 &8581383560964227315 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6377170531014425580, guid: ac2c64ceb8d42d04783f7787fd72b1ce, type: 3}
+  m_PrefabInstance: {fileID: 3429332986780351263}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &8869797260047905357 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6089053285681006930, guid: ac2c64ceb8d42d04783f7787fd72b1ce, type: 3}

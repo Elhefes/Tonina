@@ -8,7 +8,6 @@ public class PlayerAttributeMenu : MonoBehaviour
     public Button acquireButton;
     public GameObject[] infoBubbles;
     public TMP_Text availablePointsText;
-    private int availablePoints;
     private string selectedAttribute;
 
     public Sprite acquiredSprite;
@@ -32,8 +31,7 @@ public class PlayerAttributeMenu : MonoBehaviour
     private void OnEnable()
     {
         DisableAllInfoBubbles();
-        availablePoints = 12;
-        availablePointsText.text = "Available Points: " + availablePoints.ToString();
+        availablePointsText.text = "Available Points: " + GameState.Instance.progressionData.availableAttributePoints.ToString();
         selectedAttribute = "";
         UpdateAttributeImages();
         UpdateAqcuireButton();
@@ -41,8 +39,8 @@ public class PlayerAttributeMenu : MonoBehaviour
 
     private void UpdateAqcuireButton()
     {
-        if (selectedAttribute == "" || availablePoints < 1) acquireButton.interactable = false;
-        else if (availablePoints > 0) acquireButton.interactable = true;
+        if (selectedAttribute == "" || GameState.Instance.progressionData.availableAttributePoints < 1) acquireButton.interactable = false;
+        else if (GameState.Instance.progressionData.availableAttributePoints > 0) acquireButton.interactable = true;
     }
 
     public void DisableAllInfoBubbles()
@@ -95,11 +93,17 @@ public class PlayerAttributeMenu : MonoBehaviour
             GameState.Instance.progressionData.leadershipLevel++;
         }
 
-        if (availablePoints > 0) availablePoints--;
+        if (GameState.Instance.progressionData.availableAttributePoints > 0) GameState.Instance.progressionData.availableAttributePoints--;
         selectedAttribute = "";
-        availablePointsText.text = "Available Points: " + availablePoints.ToString();
+        availablePointsText.text = "Available Points: " + GameState.Instance.progressionData.availableAttributePoints.ToString();
         UpdateAqcuireButton();
         DisableAllInfoBubbles();
+
+        if (player != null) // Update torches
+        {
+            if (player.kingHouse != null) player.kingHouse.UpdateNamePlateTorchFlames();
+        }
+
         GameState.Instance.SaveWorld();
     }
 

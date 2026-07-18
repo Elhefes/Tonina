@@ -67,6 +67,7 @@ public class PyramidObjectsProgression : MonoBehaviour
     {
         extraFloorsBuilt++;
         if (extraFloorsBuilt == 1) GameState.Instance.progressionData.attackModeUnlocked = true; // 1 is temporary value, used for testing
+        if (extraFloorsBuilt == 1 || extraFloorsBuilt == 3 || extraFloorsBuilt == 5) GameState.Instance.progressionData.availableAttributePoints++;
         GameState.Instance.progressionData.extraPyramidFloorsBuilt = extraFloorsBuilt;
         EnableAllCurrentPyramidObjects();
         GameState.Instance.SaveWorld();

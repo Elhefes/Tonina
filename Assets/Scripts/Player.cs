@@ -710,6 +710,9 @@ public class Player : Creature
             {
                 inVillage = false;
                 insideKingHouse = true;
+
+                // Update nameplate torches if player has available attribute points
+                if (kingHouse != null) kingHouse.UpdateNamePlateTorchFlames();
             }
         }
 
