@@ -69,6 +69,14 @@ public class BattlefieldMenu : MonoBehaviour
 
     public void StartBattle()
     {
+        if (waveController.statsController.battlesWon < 1)
+        {
+            waveController.battleStartDelay = 13.5f;
+            cutsceneCamera.StartAnimation("FirstBattle");
+            cutsceneCamera.mouseLook.distanceFromObject = 15f;
+        }
+        else waveController.battleStartDelay = 0f;
+
         if (PlayerPrefs.GetInt("battleSongRandomized", 1) == 1)
         {
             waveController.StartRound(threatLevel, Random.Range(0, waveController.musicPlayer.battleSongs.Count));
@@ -76,12 +84,6 @@ public class BattlefieldMenu : MonoBehaviour
         else
         {
             waveController.StartRound(threatLevel, battleSongID);
-        }
-
-        if (waveController.statsController.battlesWon < 1)
-        {
-            cutsceneCamera.StartAnimation("FirstBattle");
-            cutsceneCamera.mouseLook.distanceFromObject = 15f;
         }
 
         gameObject.SetActive(false);

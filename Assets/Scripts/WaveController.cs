@@ -12,6 +12,7 @@ public class WaveController : MonoBehaviour
     private int currentRoundNumber;
     private int friendlyWarriorsAmount;
     private int secondsInBattle;
+    public float battleStartDelay = 0f;
     public bool battleIsLost;
 
     public Transform[] spawnPoints;
@@ -79,6 +80,8 @@ public class WaveController : MonoBehaviour
         int index;
 
         if (friendlyWarriorsAmount > 0) SpawnFriendlies(friendlyWarriorsAmount);
+
+        yield return new WaitForSeconds(battleStartDelay); // for battle start cutscene
 
         foreach (string bit in bits)
         {
