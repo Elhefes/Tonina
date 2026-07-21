@@ -10,6 +10,7 @@ public class ProgressionData
     // Unlocks
     public bool introPlayed { get; set; }
     public bool buildModeGuided { get; set; }
+    public bool attributeScenePlayed { get; set; }
     public bool attackModeUnlocked { get; set; }
     public bool fenceUnlocked { get; set; }
     public bool maizePlaceUnlocked { get; set; }
