@@ -729,8 +729,12 @@ public class Player : Creature
                 // Go to attribute scene when 1st attribute is unlocked
                 if (!MainMenuIsActive() && !GameState.Instance.progressionData.attributeScenePlayed)
                 {
-                    if (battlefieldMenu != null) battlefieldMenu.cutsceneCamera.MoveCameraToAttributeUnlockPosition(transform, transform.rotation);
-                    if (kingHouse != null) kingHouse.UpdateNamePlateTorchFlames();
+                    if (battlefieldMenu != null && kingHouse != null)
+                    {
+                        battlefieldMenu.cutsceneCamera.MoveCameraToAttributeUnlockPosition(transform, transform.rotation);
+                        kingHouse.attributeUnlockScene.SetActive(true);
+                        kingHouse.UpdateNamePlateTorchFlames();
+                    }  
                 }
             }
         }

@@ -7,6 +7,7 @@ public class KingHouse : MonoBehaviour
     public Vector3 battlefieldAngle;
     public GameObject miniPyramid;
     public GameObject namePlate;
+    public GameObject attributeUnlockScene;
     public GameObject namePlateTorchFlame1;
     public GameObject namePlateTorchFlame2;
 
