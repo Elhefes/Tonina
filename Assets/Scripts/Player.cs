@@ -731,7 +731,6 @@ public class Player : Creature
                 {
                     if (battlefieldMenu != null && kingHouse != null)
                     {
-                        battlefieldMenu.cutsceneCamera.MoveCameraToAttributeUnlockPosition(transform, transform.rotation);
                         kingHouse.attributeUnlockScene.SetActive(true);
                         kingHouse.UpdateNamePlateTorchFlames();
                     }  

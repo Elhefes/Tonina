@@ -75,11 +75,6 @@ public class CutsceneCamera : MonoBehaviour
         clickBlocker.SetActive(value);
     }
 
-    public void MoveCameraToAttributeUnlockPosition(Transform currentPosition, Quaternion currentRotation)
-    {
-        StartCoroutine(StartMovingToAttributeUnlockPosition(currentPosition, currentRotation));
-    }
-
     public void MoveCameraToTemporaryPyramidPosition(bool singleBuilding, int extraFloorInt, Transform currentPosition, Quaternion currentRotation, float renderDistance)
     {
         StartCoroutine(StartMovingCameraToPyramidAngle(singleBuilding, extraFloorInt, currentPosition, currentRotation, renderDistance));
@@ -88,24 +83,6 @@ public class CutsceneCamera : MonoBehaviour
     public void MoveCameraBack()
     {
         StartCoroutine(StartMovingCameraBack());
-    }
-
-    IEnumerator StartMovingToAttributeUnlockPosition(Transform camTransform, Quaternion currentRotation)
-    {
-        SetToCutsceneMode(true);
-        blackFader.SetActive(true);
-
-        previousCameraPosition = camTransform;
-        previousCameraRotation = currentRotation;
-
-        yield return new WaitForSeconds(0.33f);
-
-        mouseLook.notCastingRays = true;
-
-        mouseLook.mainCameraObject.transform.position = attributeUnlockCameraPosition.position;
-        mouseLook.mainCameraObject.transform.rotation = Quaternion.Euler(attributeUnlockCameraPosition.rotation.eulerAngles);
-        mouseLook.transform.position = attributeUnlockCameraPosition.position;
-        mouseLook.transform.rotation = Quaternion.Euler(attributeUnlockCameraPosition.rotation.eulerAngles);
     }
 
     IEnumerator StartMovingCameraToPyramidAngle(bool singleBuilding, int extraFloorInt, Transform camTransform, Quaternion currentRotation, float renderDistance)
