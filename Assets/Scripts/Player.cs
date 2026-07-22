@@ -724,16 +724,15 @@ public class Player : Creature
                 insideKingHouse = true;
 
                 // Update nameplate torches if player has available attribute points
-                if (kingHouse != null) kingHouse.UpdateNamePlateTorchFlames();
-
-                // Go to attribute scene when 1st attribute is unlocked
-                if (!MainMenuIsActive() && !GameState.Instance.progressionData.attributeScenePlayed)
+                if (kingHouse != null)
                 {
-                    if (battlefieldMenu != null && kingHouse != null)
+                    kingHouse.UpdateNamePlateTorchFlames();
+
+                    // Go to attribute scene when 1st attribute is unlocked
+                    if (!MainMenuIsActive() && !GameState.Instance.progressionData.attributeScenePlayed)
                     {
                         kingHouse.attributeUnlockScene.SetActive(true);
-                        kingHouse.UpdateNamePlateTorchFlames();
-                    }  
+                    }
                 }
             }
         }
