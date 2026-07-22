@@ -2,6 +2,7 @@ using UnityEngine;
 
 public class AttributeUnlockScene : MonoBehaviour
 {
+    public Transform attributeSceneCamePosition;
     public GameObject overworldUI;
     public GameObject clickBlocker;
     public GameObject firstSlide;
@@ -17,6 +18,9 @@ public class AttributeUnlockScene : MonoBehaviour
 
     private void OnEnable()
     {
+        attributeSceneCamera.transform.position = attributeSceneCamePosition.position;
+        attributeSceneCamera.transform.rotation = Quaternion.Euler(attributeSceneCamePosition.rotation.eulerAngles);
+
         movingToPlayerCamera = false;
         onPlayerCamera = false;
         playerCamera.enabled = false;
