@@ -21,6 +21,7 @@ public class CutsceneCamera : MonoBehaviour
     public GameObject attackModeUnlockUIObject;
 
     [Header("Static Cam Positions")]
+    public Transform attributeUnlockCameraPosition;
     public Transform[] pyramidFloorCameraPositions;
     public Transform[] pyramidBuildingCameraPositions;
 
@@ -65,23 +66,29 @@ public class CutsceneCamera : MonoBehaviour
         mainCamera.enabled = false;
     }
 
-    public void MoveCameraToTemporaryPosition(bool singleBuilding, int extraFloorInt, Transform currentPosition, Quaternion currentRotation, float renderDistance)
+    private void SetToCutsceneMode(bool value)
     {
-        StartCoroutine(StartMovingCameraToAngle(singleBuilding, extraFloorInt, currentPosition, currentRotation, renderDistance));
+        mouseLook.inCutscene = value;
+        if (value) mouseLook.CameraOnPlayerOff();
+        else mouseLook.ToggleCameraOnPlayer();
+        overworldUI.SetActive(!value);
+        clickBlocker.SetActive(value);
     }
 
-    public void MoveCameraToBack()
+    public void MoveCameraToTemporaryPyramidPosition(bool singleBuilding, int extraFloorInt, Transform currentPosition, Quaternion currentRotation, float renderDistance)
+    {
+        StartCoroutine(StartMovingCameraToPyramidAngle(singleBuilding, extraFloorInt, currentPosition, currentRotation, renderDistance));
+    }
+
+    public void MoveCameraBack()
     {
         StartCoroutine(StartMovingCameraBack());
     }
 
-    IEnumerator StartMovingCameraToAngle(bool singleBuilding, int extraFloorInt, Transform camTransform, Quaternion currentRotation, float renderDistance)
+    IEnumerator StartMovingCameraToPyramidAngle(bool singleBuilding, int extraFloorInt, Transform camTransform, Quaternion currentRotation, float renderDistance)
     {
-        mouseLook.CameraOnPlayerOff();
-        mouseLook.inCutscene = true;
-        overworldUI.SetActive(false);
+        SetToCutsceneMode(true);
         blackFader.SetActive(true);
-        clickBlocker.SetActive(true);
 
         previousCameraPosition = camTransform;
         previousCameraRotation = currentRotation;
@@ -117,10 +124,7 @@ public class CutsceneCamera : MonoBehaviour
         blackFader.SetActive(true);
         yield return new WaitForSeconds(0.33f);
 
-        mouseLook.ToggleCameraOnPlayer();
-        mouseLook.inCutscene = false;
-        overworldUI.SetActive(true);
-        clickBlocker.SetActive(false);
+        SetToCutsceneMode(false);
 
         mouseLook.notCastingRays = false;
 

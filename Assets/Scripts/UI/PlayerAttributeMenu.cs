@@ -5,6 +5,7 @@ using UnityEngine.UI;
 public class PlayerAttributeMenu : MonoBehaviour
 {
     public Player player;
+    public AttributeUnlockScene attributeUnlockScene;
     public Button acquireButton;
     public GameObject[] infoBubbles;
     public TMP_Text availablePointsText;
@@ -35,6 +36,14 @@ public class PlayerAttributeMenu : MonoBehaviour
         selectedAttribute = "";
         UpdateAttributeImages();
         UpdateAqcuireButton();
+    }
+
+    private void OnDisable()
+    {
+        if (attributeUnlockScene.gameObject.activeSelf)
+        {
+            attributeUnlockScene.ExitScene();
+        }
     }
 
     private void UpdateAqcuireButton()
@@ -104,6 +113,7 @@ public class PlayerAttributeMenu : MonoBehaviour
             if (player.kingHouse != null) player.kingHouse.UpdateNamePlateTorchFlames();
         }
 
+        GameState.Instance.progressionData.attributeScenePlayed = true; // To prevent possible glitches
         GameState.Instance.SaveWorld();
     }
 

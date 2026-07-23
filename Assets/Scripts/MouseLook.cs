@@ -83,7 +83,8 @@ public class MouseLook : MonoBehaviour
 
     public void CameraOnPlayerOff()
     {
-        if (player.insideKingHouse && (transform.rotation.y != 0 || transform.rotation.eulerAngles.y != 180)) return;
+        if (player.insideKingHouse && !inCutscene && (transform.rotation.y != 0 
+            || transform.rotation.eulerAngles.y != 180)) return;
         cameraOnPlayer = false;
         cameraOnPlayerButton.ChangeIconSprite(cameraOnPlayer);
 
@@ -178,7 +179,7 @@ public class MouseLook : MonoBehaviour
             minimapCamera.orthographicSize = distanceFromObject / 2 + 20f;
         }
 
-        if (movingToTargetPosition)
+        if (movingToTargetPosition && !inCutscene)
         {
             MoveToTargetPosition();
         }
@@ -191,7 +192,7 @@ public class MouseLook : MonoBehaviour
         }
         else
         {
-            if (player.insideKingHouse && !player.inBuildMode)
+            if (player.insideKingHouse && !player.inBuildMode && !inCutscene)
             {
                 ToggleCameraOnPlayer();
                 return;
@@ -321,10 +322,9 @@ public class MouseLook : MonoBehaviour
         targetPosition = AngledPosition(savedTargetPosition, savedTargetAngle, distanceFromObject);
     }
 
-    // Limit camera's movement smoothly in x-axis
     private void FixedUpdate()
     {
-        if (player.inVillage && inCutscene) return;
+        if (player.inVillage && inCutscene) return; // In village = not in battlefield = not during 1st attack
 
         RotateSmoothly(presetCameraAngle);
 

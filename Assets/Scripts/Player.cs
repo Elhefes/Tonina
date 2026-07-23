@@ -577,6 +577,18 @@ public class Player : Creature
             textBox.gameObject.SetActive(false);
     }
 
+    private bool MainMenuIsActive()
+    {
+        if (uiController != null)
+        {
+            if (uiController.mainMenuScreen != null)
+            {
+                if (uiController.mainMenuScreen.activeSelf) return true;
+            }
+        }
+        return false;
+    }
+
     public void SwitchWeapon(WeaponType weaponType)
     {
         if (this == null) return;
@@ -712,19 +724,22 @@ public class Player : Creature
                 insideKingHouse = true;
 
                 // Update nameplate torches if player has available attribute points
-                if (kingHouse != null) kingHouse.UpdateNamePlateTorchFlames();
+                if (kingHouse != null)
+                {
+                    kingHouse.UpdateNamePlateTorchFlames();
+
+                    // Go to attribute scene when 1st attribute is unlocked
+                    if (!MainMenuIsActive() && !GameState.Instance.progressionData.attributeScenePlayed)
+                    {
+                        kingHouse.attributeUnlockScene.SetActive(true);
+                    }
+                }
             }
         }
 
         // Prevent UI overlapping
         if (optionsMenu.gameObject.activeSelf) return;
-        if (uiController != null)
-        {
-            if (uiController.mainMenuScreen != null)
-            {
-                if (uiController.mainMenuScreen.activeSelf) return;
-            }
-        }
+        if (MainMenuIsActive()) return;
 
         if (other.CompareTag("BattlefieldPrompt"))
         {

@@ -6,6 +6,7 @@ public class UI_Controller : MonoBehaviour
     public GameObject[] battleUIPopUps;
     public GameObject optionsMenu;
     public GameObject mainMenuScreen;
+    public GameObject attributeUnlockScene;
     public Player player;
 
     private void Update()
@@ -16,6 +17,7 @@ public class UI_Controller : MonoBehaviour
                 (player.battlefieldMenu != null && player.battlefieldMenu.waveController.battleWinningScreen.gameObject.activeInHierarchy) ||
                 (player.losingScreen != null && player.losingScreen.gameObject.activeInHierarchy)) return;
             if (mainMenuScreen != null && mainMenuScreen.activeSelf) return;
+            if (attributeUnlockScene != null && attributeUnlockScene.activeSelf) return;
 
             if (optionsMenu != null && optionsMenu.activeSelf)
             {
