@@ -113,6 +113,7 @@ public class PlayerAttributeMenu : MonoBehaviour
             if (player.kingHouse != null) player.kingHouse.UpdateNamePlateTorchFlames();
         }
 
+        GameState.Instance.progressionData.attributeScenePlayed = true; // To prevent possible glitches
         GameState.Instance.SaveWorld();
     }
 

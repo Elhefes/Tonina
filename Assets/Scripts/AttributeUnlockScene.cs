@@ -41,6 +41,12 @@ public class AttributeUnlockScene : MonoBehaviour
 
         playerCamera.gameObject.tag = "MainCamera";
         attributeSceneCamera.gameObject.tag = "Untagged";
+
+        if (!GameState.Instance.progressionData.attributeScenePlayed)
+        {
+            GameState.Instance.progressionData.attributeScenePlayed = true;
+            GameState.Instance.SaveWorld();
+        }
     }
 
     private void SwitchToAttributeSceneCamera()
