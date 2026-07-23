@@ -324,7 +324,7 @@ public class MouseLook : MonoBehaviour
 
     private void FixedUpdate()
     {
-        if (inCutscene) return;
+        if (player.inVillage && inCutscene) return; // In village = not in battlefield = not during 1st attack
 
         RotateSmoothly(presetCameraAngle);
 
