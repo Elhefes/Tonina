@@ -24,6 +24,7 @@ public class AttributeUnlockScene : MonoBehaviour
         movingToPlayerCamera = false;
         onPlayerCamera = false;
         playerCamera.enabled = false;
+        attributeSceneCamera.farClipPlane = 25f;
         attributeSceneCamera.enabled = true;
         attributeSceneCamera.gameObject.SetActive(true);
         minimapCamera.SetActive(false);
@@ -38,6 +39,8 @@ public class AttributeUnlockScene : MonoBehaviour
         movingToPlayerCamera = true;
         minimapCamera.SetActive(true);
         overworldUI.SetActive(true);
+
+        attributeSceneCamera.farClipPlane = 60f;
 
         playerCamera.gameObject.tag = "MainCamera";
         attributeSceneCamera.gameObject.tag = "Untagged";
