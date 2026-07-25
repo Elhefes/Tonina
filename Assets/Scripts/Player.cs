@@ -10,7 +10,7 @@ public class Player : Creature
     public int health;
     public int maxHealth;
     public int defaultStartingHealth;
-    private int startingHealth;
+    public int startingHealth;
     public Slider healthBar;
     public bool godMode;
     public bool hasAllWeapons;

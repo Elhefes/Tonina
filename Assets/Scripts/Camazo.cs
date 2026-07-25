@@ -3,6 +3,9 @@ using UnityEngine;
 
 public class Camazo : MonoBehaviour
 {
+    public bool activeInBattle;
+    public Player player;
+
     [Header("Waypoints")]
     public Transform pointA;
     public Transform pointB;
@@ -13,10 +16,6 @@ public class Camazo : MonoBehaviour
     public float rotationSpeed;
     public float waypointReachedDistance = 0.1f;
 
-    [Header("Waiting")]
-    public float waitAtA = 2f;
-    public float waitAtC = 2f;
-
     private void Start()
     {
         if (pointA != null) transform.position = pointA.position;
@@ -26,18 +25,26 @@ public class Camazo : MonoBehaviour
 
     IEnumerator FlyLoop()
     {
-        while (true)
+        while (activeInBattle)
         {
+            yield return new WaitForSeconds(DynamicWaitTime());
+
             yield return MoveTo(pointB);
             yield return MoveTo(pointC);
 
-            yield return new WaitForSeconds(waitAtC);
+            yield return new WaitForSeconds(DynamicWaitTime());
 
             yield return MoveTo(pointB);
             yield return MoveTo(pointA);
-
-            yield return new WaitForSeconds(waitAtA);
         }
+    }
+
+    private float DynamicWaitTime()
+    {
+        float waitTime = 6.666f;
+        if (player.health > player.startingHealth * 0.5f) waitTime += 6f;
+        if (player.health >= player.startingHealth) waitTime += 10f;
+        return waitTime;
     }
 
     IEnumerator MoveTo(Transform target)
