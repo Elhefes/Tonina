@@ -16,11 +16,11 @@ public class Camazo : MonoBehaviour
     public float rotationSpeed;
     public float waypointReachedDistance = 0.1f;
 
-    private void Start()
+    private void OnEnable()
     {
         if (pointA != null) transform.position = pointA.position;
         if (pointA == null || pointB == null || pointC == null) return;
-        StartCoroutine(FlyLoop());
+        if (activeInBattle) StartCoroutine(FlyLoop());
     }
 
     IEnumerator FlyLoop()

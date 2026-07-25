@@ -41,6 +41,8 @@ public class Player : Creature
     public TMP_Text projectileQuantityTMP;
     public float defaultAttackStoppingDistance;
 
+    public Camazo camazo;
+
     public LayerMask clickLayerMask;
 
     public MouseLook mouseLook;
@@ -136,6 +138,12 @@ public class Player : Creature
         SetStaminaBarAlpha(1f);
         SetProjectilesToMax();
         UpdateProjectileQuantityText();
+
+        if (camazo != null)
+        {
+            camazo.activeInBattle = true;
+            camazo.gameObject.SetActive(true);
+        }
     }
 
     public void DisableBattleMode()
@@ -151,6 +159,12 @@ public class Player : Creature
         clickerTargetObject.transform.position = new Vector3(0f, 0f, 0f); // Default "invisible" position
         creatureMovement.animator.SetInteger("WeaponIndex", 0);
         if (battlefieldMenu != null) battlefieldMenu.waveController.musicPlayer.PlayPeacefulSongs(false);
+
+        if (camazo != null)
+        {
+            camazo.activeInBattle = false;
+            camazo.gameObject.SetActive(false);
+        }
     }
 
     public void ResetValues()

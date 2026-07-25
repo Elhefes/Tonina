@@ -34,6 +34,7 @@ public class WaveController : MonoBehaviour
     public MusicPlayer musicPlayer;
 
     public GameObject friendlyWarriorPrefab;
+    public Camazo camazo;
 
     [Header("Enemies")]
     public GameObject clubber;
@@ -163,6 +164,11 @@ public class WaveController : MonoBehaviour
         StopAllCoroutines();
         DisableBattleUI();
 
+        if (camazo != null)
+        {
+            camazo.activeInBattle = false;
+        }
+
         if (UIController != null)
         {
             // Disable battle popups
@@ -181,6 +187,11 @@ public class WaveController : MonoBehaviour
 
     private void WinBattle()
     {
+        if (camazo != null)
+        {
+            camazo.activeInBattle = false;
+        }
+
         if (UIController != null)
         {
             // Disable battle popups
