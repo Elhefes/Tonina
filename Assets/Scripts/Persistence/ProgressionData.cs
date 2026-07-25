@@ -12,6 +12,7 @@ public class ProgressionData
     public bool buildModeGuided { get; set; }
     public bool attributeScenePlayed { get; set; }
     public bool attackModeUnlocked { get; set; }
+    public bool camazoIsActive { get; set; }
     public bool fenceUnlocked { get; set; }
     public bool maizePlaceUnlocked { get; set; }
     public bool spearRackUnlocked { get; set; }

@@ -139,7 +139,7 @@ public class Player : Creature
         SetProjectilesToMax();
         UpdateProjectileQuantityText();
 
-        if (camazo != null)
+        if (camazo != null && GameState.Instance.progressionData.camazoIsActive)
         {
             camazo.activeInBattle = true;
             camazo.gameObject.SetActive(true);
