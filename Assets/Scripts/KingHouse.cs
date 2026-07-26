@@ -10,6 +10,8 @@ public class KingHouse : MonoBehaviour
     public GameObject attributeUnlockScene;
     public GameObject namePlateTorchFlame1;
     public GameObject namePlateTorchFlame2;
+    public GameObject[] plaques;
+    private float[] plaqueXValues = { 8.75f, 7.75f, 6.75f, 5.75f, 4.75f };
 
     private void OnEnable()
     {
@@ -19,6 +21,7 @@ public class KingHouse : MonoBehaviour
     private void Start()
     {
         UpdateNamePlateTorchFlames();
+        UpdatePlaquePositions();
     }
 
     public void UpdateNamePlate()
@@ -41,6 +44,22 @@ public class KingHouse : MonoBehaviour
         {
             namePlateTorchFlame1.SetActive(false);
             namePlateTorchFlame2.SetActive(false);
+        }
+    }
+
+    public void UpdatePlaquePositions()
+    {
+        string customWeaponOrder = PlayerPrefs.GetString("CustomWeaponOrder", "01234");
+
+        for (int i = 0; i < customWeaponOrder.Length; i++)
+        {
+            int plaqueIndex = customWeaponOrder[i] - '0'; // Convert string to int
+
+            Transform plaque = plaques[plaqueIndex].transform;
+            plaque.localPosition = new Vector3(
+                plaqueXValues[i],
+                plaque.localPosition.y,
+                plaque.localPosition.z);
         }
     }
 }

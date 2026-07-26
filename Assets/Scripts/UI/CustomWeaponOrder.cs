@@ -3,6 +3,7 @@ using UnityEngine.UI;
 
 public class CustomWeaponOrder : MonoBehaviour
 {
+    public KingHouse kingHouse;
     private string customWeaponOrder;
     private int[] slotXValues = { -500, -250, 0, 250, 500 };
     private int chosenWepIndex = 0;
@@ -82,6 +83,8 @@ public class CustomWeaponOrder : MonoBehaviour
                 smallStoneButton.transform.localPosition = new Vector3(slotXValues[i], 0, 0);
             }
         }
+
+        if (kingHouse != null) kingHouse.UpdatePlaquePositions();
     }
 
     public void MoveDigitToRight()
