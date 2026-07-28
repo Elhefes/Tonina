@@ -8,47 +8,69 @@ public class Camazo : MonoBehaviour
 
     [Header("Waypoints")]
     public Transform pointA;
-    public Transform pointB;
+    public Transform pointB; // "Default target point"
+    public Transform targetPoint;
     public Transform pointC;
 
     [Header("Movement")]
     public float moveSpeed;
     public float rotationSpeed;
-    public float waypointReachedDistance = 0.1f;
+    public float waypointReachedDistance;
+    public float finalApproachDistance;
+
+    private Vector3 targetVerticalOffset = new(0f, 2.75f, 0f);
+    private bool movingTowardsPosition;
 
     private void OnEnable()
     {
         if (pointA != null) transform.position = pointA.position;
         if (pointA == null || pointB == null || pointC == null) return;
-        if (activeInBattle) StartCoroutine(FlyLoop());
+        targetPoint = pointB;
+        if (activeInBattle)
+        {
+            StartCoroutine(FlyLoop());
+            StartCoroutine(SearchForTargetLoop());
+        }
     }
 
-    IEnumerator FlyLoop()
+    private IEnumerator FlyLoop()
     {
         while (activeInBattle)
         {
             yield return new WaitForSeconds(DynamicWaitTime());
 
-            yield return MoveTo(pointB);
+            yield return MoveToTargetPoint();
             yield return MoveTo(pointC);
 
             yield return new WaitForSeconds(DynamicWaitTime());
 
-            yield return MoveTo(pointB);
+            yield return MoveToTargetPoint();
             yield return MoveTo(pointA);
+        }
+    }
+
+    private IEnumerator SearchForTargetLoop()
+    {
+        while(activeInBattle)
+        {
+            yield return new WaitForSeconds(1.5f);
+            if (Vector3.Distance(transform.position, targetPoint.position) > finalApproachDistance
+                && movingTowardsPosition) TargetNearestEnemyToPlayer();
         }
     }
 
     private float DynamicWaitTime()
     {
         float waitTime = 6.666f;
-        if (player.health > player.startingHealth * 0.5f) waitTime += 6f;
-        if (player.health >= player.startingHealth) waitTime += 10f;
+        if (player.health > player.startingHealth * 0.5f) waitTime += 6.666f;
+        if (player.health >= player.startingHealth) waitTime += 8f;
         return waitTime;
     }
 
-    IEnumerator MoveTo(Transform target)
+    private IEnumerator MoveTo(Transform target)
     {
+        movingTowardsPosition = true;
+
         while (Vector3.Distance(transform.position, target.position) > waypointReachedDistance)
         {
             // Direction to destination
@@ -72,5 +94,59 @@ public class Camazo : MonoBehaviour
 
         // Snap exactly to the waypoint
         transform.position = target.position;
+
+        movingTowardsPosition = false;
+    }
+
+    private IEnumerator MoveToTargetPoint() // This exists because targetPoint changes constantly; single call is no problem
+    {
+        movingTowardsPosition = true;
+
+        while (Vector3.Distance(transform.position, targetPoint.position + targetVerticalOffset) > waypointReachedDistance)
+        {
+            // Direction to destination
+            Vector3 direction = (targetPoint.position + targetVerticalOffset - transform.position).normalized;
+
+            // Smoothly turn toward it
+            if (direction != Vector3.zero)
+            {
+                Quaternion targetRotation = Quaternion.LookRotation(direction);
+                transform.rotation = Quaternion.RotateTowards(
+                    transform.rotation,
+                    targetRotation,
+                    rotationSpeed * Time.deltaTime);
+            }
+
+            // Fly forward instead of directly toward the target
+            transform.position += transform.forward * moveSpeed * Time.deltaTime;
+
+            yield return null;
+        }
+
+        // Snap exactly to the waypoint
+        transform.position = targetPoint.position + targetVerticalOffset;
+
+        movingTowardsPosition = false;
+    }
+
+    private void TargetNearestEnemyToPlayer()
+    {
+        GameObject[] objectsWithTag = GameObject.FindGameObjectsWithTag("Enemy");
+        GameObject nearestObject = null;
+        float nearestDistance = Mathf.Infinity;
+        foreach (GameObject obj in objectsWithTag)
+        {
+            if (!obj.activeInHierarchy) continue; // Ignore disabled objects
+            float distance = Vector3.Distance(transform.position, player.transform.position);
+            if (distance < nearestDistance)
+            {
+                nearestObject = obj;
+                nearestDistance = distance;
+            }
+        }
+        if (nearestObject != null)
+        {
+            targetPoint = nearestObject.transform;
+        }
     }
 }
