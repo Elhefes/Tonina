@@ -4,6 +4,7 @@ using UnityEngine;
 public class Camazo : MonoBehaviour
 {
     public bool activeInBattle;
+    public ParticleSystem attackParticleSystem;
     public Player player;
 
     [Header("Waypoints")]
@@ -125,6 +126,8 @@ public class Camazo : MonoBehaviour
 
         // Snap exactly to the waypoint
         transform.position = targetPoint.position + targetVerticalOffset;
+
+        attackParticleSystem.Play();
 
         movingTowardsPosition = false;
     }
