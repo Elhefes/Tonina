@@ -19,6 +19,10 @@ public class Camazo : MonoBehaviour
     public float waypointReachedDistance;
     public float finalApproachDistance;
 
+    [Header("Sphere Attack")]
+    public float sphereAttackRadius;
+    public float sphereAttackMaxDamage;
+
     private Vector3 targetVerticalOffset = new(0f, 2.75f, 0f);
     private bool movingTowardsPosition;
 
@@ -64,7 +68,7 @@ public class Camazo : MonoBehaviour
     {
         float waitTime = 6.666f;
         if (player.health > player.startingHealth * 0.5f) waitTime += 6.666f;
-        if (player.health >= player.startingHealth) waitTime += 8f;
+        if (player.health >= player.startingHealth) waitTime += 9f;
         return waitTime;
     }
 
@@ -127,9 +131,37 @@ public class Camazo : MonoBehaviour
         // Snap exactly to the waypoint
         transform.position = targetPoint.position + targetVerticalOffset;
 
-        attackParticleSystem.Play();
+        SphereAttack();
 
         movingTowardsPosition = false;
+    }
+
+    private void SphereAttack()
+    {
+        attackParticleSystem.Play();
+
+        Collider[] hitColliders = Physics.OverlapSphere(transform.position, sphereAttackRadius);
+
+        foreach (Collider hit in hitColliders)
+        {
+            Enemy enemy = hit.GetComponent<Enemy>();
+            if (enemy == null)
+                continue;
+
+            float distance = Vector3.Distance(transform.position, enemy.transform.position);
+
+            // 1 at the center, 0 at the edge
+            float t = Mathf.Clamp01(1f - (distance / sphereAttackRadius));
+
+            // Damage falls off linearly
+            int damage = Mathf.RoundToInt(sphereAttackMaxDamage * t);
+
+            if (damage > 0)
+            {
+                enemy.SlowDownEnemy();
+                enemy.TakeDamage(damage);
+            }
+        }
     }
 
     private void TargetNearestEnemyToPlayer()
