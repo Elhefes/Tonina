@@ -5,6 +5,8 @@ public class Camazo : MonoBehaviour
 {
     public bool activeInBattle;
     public ParticleSystem attackParticleSystem;
+    public AudioSource audioSource;
+    public AudioClip attackSound;
     public Player player;
 
     [Header("Waypoints")]
@@ -139,6 +141,9 @@ public class Camazo : MonoBehaviour
     private void SphereAttack()
     {
         attackParticleSystem.Play();
+
+        audioSource.volume = PlayerPrefs.GetFloat("soundVolume", 0.5f);
+        audioSource.PlayOneShot(attackSound);
 
         Collider[] hitColliders = Physics.OverlapSphere(transform.position, sphereAttackRadius);
 
