@@ -61,6 +61,7 @@ public class Camazo : MonoBehaviour
         while(activeInBattle)
         {
             yield return new WaitForSeconds(1.5f);
+            if (targetPoint == null) targetPoint = pointB;
             if (Vector3.Distance(transform.position, targetPoint.position) > finalApproachDistance
                 && movingTowardsPosition) TargetNearestEnemyToPlayer();
         }
@@ -108,6 +109,8 @@ public class Camazo : MonoBehaviour
     private IEnumerator MoveToTargetPoint() // This exists because targetPoint changes constantly; single call is no problem
     {
         movingTowardsPosition = true;
+
+        if (targetPoint == null) targetPoint = pointB;
 
         while (Vector3.Distance(transform.position, targetPoint.position + targetVerticalOffset) > waypointReachedDistance)
         {
