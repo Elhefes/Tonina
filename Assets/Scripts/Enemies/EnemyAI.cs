@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 public class EnemyAI : MonoBehaviour
 {
-    public Creature enemyCreature;
+    public Enemy enemyCreature;
     public Weapon meleeWeapon;
     public Projectile rangedWeapon;
     public int rangedWeaponQuantity;
@@ -11,6 +11,8 @@ public class EnemyAI : MonoBehaviour
 
     public float weaponSwitchCoolDownTime;
     private bool weaponSwitchCooldown;
+
+    private List<Kancho> kanchos = new List<Kancho>();
 
     // Alternates which spawned/enabled friendly is allowed to carry a ranged
     // weapon. Odd/even spawn order, shared across all FriendlyAI instances.
@@ -48,6 +50,9 @@ public class EnemyAI : MonoBehaviour
             enemyCreature.weaponOnHand = meleeWeapon;
         }
 
+        enemyCreature.scaredOfKancho = false;
+        UpdateKanchoList();
+
         StartCoroutine(PeriodicalTargetChecking());
         enemyCreature.SetWeaponBarricadeCollisionHandling();
     }
@@ -73,7 +78,11 @@ public class EnemyAI : MonoBehaviour
             }
             else if (NearestTarget(CreatureTargets.jadeaWarriors, 20f) != null)
             {
-                waitTime = 4f;
+                waitTime = 3f;
+            }
+            else if (!enemyCreature.scaredOfKancho && NearestAvailableKancho(40f) != null)
+            {
+                waitTime = 1f;
             }
             else
             {
@@ -121,6 +130,61 @@ public class EnemyAI : MonoBehaviour
         }
         if (nearestObject != null) enemyCreature.creatureMovement.target = nearestObject.transform;
         return nearestObject;
+    }
+
+    private void UpdateKanchoList()
+    {
+        kanchos.Clear();
+
+        GameObject[] placeables = GameObject.FindGameObjectsWithTag("Placeable");
+
+        foreach (GameObject obj in placeables)
+        {
+            if (!obj.activeInHierarchy)
+                continue;
+
+            if (obj.name == "Kancho(Clone)")
+            {
+                Kancho kancho = obj.GetComponent<Kancho>();
+                if (kancho != null)
+                    kanchos.Add(kancho);
+            }
+        }
+    }
+
+    private Kancho NearestAvailableKancho(float maxRange)
+    {
+        Kancho nearestKancho = null;
+        float nearestDistance = Mathf.Infinity;
+
+        foreach (Kancho kancho in kanchos)
+        {
+            if (kancho == null) continue;
+            if (kancho.snakeOnCooldown)
+            {
+                if (Vector3.Distance(transform.position, kancho.transform.position) < 12.5f)
+                {
+                    enemyCreature.scaredOfKancho = true; // Become scared if close enough
+                    return null;
+                }
+                continue;
+            }
+
+            float distance = Vector3.Distance(transform.position, kancho.transform.position);
+
+            if (distance < nearestDistance && distance <= maxRange)
+            {
+                nearestKancho = kancho;
+                nearestDistance = distance;
+            }
+        }
+
+        if (nearestKancho != null)
+        {
+            enemyCreature.creatureMovement.target = null;
+            enemyCreature.creatureMovement.MoveToDestination(nearestKancho.transform.position);
+        }
+        return nearestKancho;
     }
 
     private void UpdateWeaponSelection()

@@ -3,7 +3,7 @@ using UnityEngine;
 public class Kancho : Placeable
 {
     public int snakeDamage;
-    private bool snakeOnCooldown;
+    public bool snakeOnCooldown;
     public GameObject snakeRotator;
     public GameObject target;
     public Animator snakeAnimator;
@@ -36,7 +36,12 @@ public class Kancho : Placeable
     {
         snakeAnimator.SetTrigger("SnakeAttack");
         soundPlayer.PlayOneShot(soundPlayer.clip, PlayerPrefs.GetFloat("soundVolume", 0.5f));
-        obj.GetComponent<Enemy>()?.TakeDamage(snakeDamage);
+        Enemy enemy = obj.GetComponent<Enemy>();
+        if (enemy != null)
+        {
+            enemy.scaredOfKancho = true;
+            enemy.TakeDamage(snakeDamage);
+        }
         snakeOnCooldown = true;
         target = null;
     }

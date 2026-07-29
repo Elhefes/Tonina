@@ -15,6 +15,7 @@ public class Enemy : Creature
     private Coroutine slowDownCoroutine;
     public float movementSpeed;
     private bool slowedDown;
+    public bool scaredOfKancho;
     public float slowDownTimeFromStone;
     public float speedDropFromStone;
 
