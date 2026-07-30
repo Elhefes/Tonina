@@ -6,7 +6,10 @@ public class Camazo : MonoBehaviour
     public bool activeInBattle;
     public ParticleSystem attackParticleSystem;
     public AudioSource audioSource;
+    public AudioClip incomingSound;
     public AudioClip attackSound;
+    public float incomingSoundMaxRange;
+    public float attackSoundMaxRange;
     public Player player;
 
     [Header("Waypoints")]
@@ -110,6 +113,10 @@ public class Camazo : MonoBehaviour
     {
         movingTowardsPosition = true;
 
+        audioSource.maxDistance = incomingSoundMaxRange;
+        audioSource.volume = PlayerPrefs.GetFloat("soundVolume", 0.5f);
+        audioSource.PlayOneShot(incomingSound);
+
         if (targetPoint == null) targetPoint = pointB;
 
         while (Vector3.Distance(transform.position, targetPoint.position + targetVerticalOffset) > waypointReachedDistance)
@@ -145,6 +152,7 @@ public class Camazo : MonoBehaviour
     {
         attackParticleSystem.Play();
 
+        audioSource.maxDistance = attackSoundMaxRange;
         audioSource.volume = PlayerPrefs.GetFloat("soundVolume", 0.5f);
         audioSource.PlayOneShot(attackSound);
 
