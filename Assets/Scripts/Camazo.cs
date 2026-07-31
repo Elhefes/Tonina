@@ -34,13 +34,16 @@ public class Camazo : MonoBehaviour
     private void OnEnable()
     {
         if (pointA != null) transform.position = pointA.position;
+        if (activeInBattle) SetActiveInBattle();
+    }
+
+    public void SetActiveInBattle()
+    {
         if (pointA == null || pointB == null || pointC == null) return;
+        activeInBattle = true;
         targetPoint = pointB;
-        if (activeInBattle)
-        {
-            StartCoroutine(FlyLoop());
-            StartCoroutine(SearchForTargetLoop());
-        }
+        StartCoroutine(FlyLoop());
+        StartCoroutine(SearchForTargetLoop());
     }
 
     private IEnumerator FlyLoop()

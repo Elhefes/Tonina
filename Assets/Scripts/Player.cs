@@ -141,7 +141,6 @@ public class Player : Creature
 
         if (camazo != null && GameState.Instance.progressionData.camazoIsActive)
         {
-            camazo.activeInBattle = true;
             camazo.gameObject.SetActive(true);
         }
     }
@@ -297,6 +296,15 @@ public class Player : Creature
                         creatureMovement.agent.stoppingDistance = defaultAttackStoppingDistance;
                         creatureMovement.target = target.transform;
                         clickerTargetObject.alpha = 1f;
+
+                        if (camazo != null)
+                        {
+                            if (!camazo.gameObject.activeSelf) return;
+                            if (GameState.Instance.progressionData.camazoIsActive 
+                                && !camazo.activeInBattle && healthBar.gameObject.activeInHierarchy)
+                                camazo.SetActiveInBattle();
+                        }
+
                         return;
                     }
                     // Target barricades when attacking
@@ -681,6 +689,15 @@ public class Player : Creature
         }
         if (health + damage >= startingHealth) overHealBar.UpdateOverHealBar(health, startingHealth);
         playerHealthIndicator.UpdateHealthIndicator(health, startingHealth);
+
+        if (camazo != null)
+        {
+            if (!camazo.gameObject.activeSelf) return;
+            if (GameState.Instance.progressionData.camazoIsActive
+                && !camazo.activeInBattle && healthBar.gameObject.activeInHierarchy)
+                camazo.SetActiveInBattle();
+        }
+
         print(health);
     }
 
