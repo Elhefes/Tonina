@@ -5,6 +5,7 @@ public class Camazo : MonoBehaviour
 {
     public bool activeInBattle;
     public ParticleSystem attackParticleSystem;
+    public Animator animator;
     public AudioSource audioSource;
     public AudioClip incomingSound;
     public AudioClip attackSound;
@@ -33,8 +34,27 @@ public class Camazo : MonoBehaviour
 
     private void OnEnable()
     {
+        ResetAnimatorStates();
         if (pointA != null) transform.position = pointA.position;
         if (activeInBattle) SetActiveInBattle();
+    }
+
+    private void ResetAnimatorStates()
+    {
+        animator.SetBool("Flapping", false);
+        animator.SetBool("Hanging", false);
+    }
+
+    public void SetFlapping()
+    {
+        ResetAnimatorStates();
+        animator.SetBool("Flapping", true);
+    }
+
+    public void SetHanging()
+    {
+        ResetAnimatorStates();
+        animator.SetBool("Hanging", true);
     }
 
     public void SetActiveInBattle()
@@ -42,6 +62,7 @@ public class Camazo : MonoBehaviour
         if (pointA == null || pointB == null || pointC == null) return;
         activeInBattle = true;
         targetPoint = pointB;
+        SetFlapping();
         StartCoroutine(FlyLoop());
         StartCoroutine(SearchForTargetLoop());
     }
