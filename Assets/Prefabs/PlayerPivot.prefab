@@ -5263,6 +5263,7 @@ GameObject:
   - component: {fileID: 2119072032070549423}
   - component: {fileID: 385070561597705185}
   - component: {fileID: 3536230150113977096}
+  - component: {fileID: 8771814348314840566}
   - component: {fileID: 8457402616446038429}
   - component: {fileID: 3989676228140028571}
   m_Layer: 2
@@ -5362,6 +5363,7 @@ MonoBehaviour:
   health: 0
   maxHealth: 300
   defaultStartingHealth: 200
+  startingHealth: 0
   healthBar: {fileID: 3872663564488066035}
   godMode: 0
   hasAllWeapons: 0
@@ -5387,6 +5389,7 @@ MonoBehaviour:
   smallStoneStartingQuantity: 8
   projectileQuantityTMP: {fileID: 0}
   defaultAttackStoppingDistance: 1.5
+  camazo: {fileID: 0}
   clickLayerMask:
     serializedVersion: 2
     m_Bits: 857
@@ -5476,6 +5479,22 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   buildingWheel: {fileID: 0}
+--- !u!114 &8771814348314840566
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5021349066847927866}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fb70788c127bec14ba7c89d533df0715, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  player: {fileID: 5412454603876469069}
+  toCamazoCaveTPPos: {fileID: 0}
+  headingTMP: {fileID: 0}
+  requiredTime: 5
 --- !u!54 &8457402616446038429
 Rigidbody:
   m_ObjectHideFlags: 0

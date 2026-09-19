@@ -1003,4 +1003,9 @@ public class Player : Creature
         // Equip default weapon when starting battle
         if (battlefieldMenu.waveController.battleUI.activeSelf) EquipDefaultWeapon();
     }
+
+    public void TeleportToCamazoCave(Vector3 caveSpawnPoint)
+    {
+        teleportCoroutine = StartCoroutine(TeleportPlayerToSpot(caveSpawnPoint));
+    }
 }
