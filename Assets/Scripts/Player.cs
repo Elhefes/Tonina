@@ -760,7 +760,8 @@ public class Player : Creature
                     kingHouse.UpdateNamePlateTorchFlames();
 
                     // Go to attribute scene when 1st attribute is unlocked
-                    if (!MainMenuIsActive() && !GameState.Instance.progressionData.attributeScenePlayed)
+                    if (!MainMenuIsActive() && !GameState.Instance.progressionData.attributeScenePlayed 
+                        && GameState.Instance.progressionData.availableAttributePoints > 0)
                     {
                         kingHouse.attributeUnlockScene.SetActive(true);
                     }
