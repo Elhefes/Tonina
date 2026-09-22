@@ -4573,7 +4573,7 @@ GameObject:
   - component: {fileID: 40247040}
   - component: {fileID: 40247039}
   m_Layer: 5
-  m_Name: BorderLeft
+  m_Name: MinimapBorderLeft
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4586,16 +4586,16 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 40247037}
-  m_LocalRotation: {x: 0, y: 0, z: 0.7071068, w: 0.7071068}
+  m_LocalRotation: {x: -0, y: -0, z: 0.7071068, w: 0.7071068}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 1858823427}
+  m_Father: {fileID: 597258065}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 90}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 3.5, y: -125}
+  m_AnchoredPosition: {x: -794.5, y: 293.5}
   m_SizeDelta: {x: 7, y: 331}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &40247039
@@ -17610,8 +17610,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_SerializedVersion: 0
   m_AgentTypeID: 0
-  m_CollectObjects: 0
-  m_Size: {x: 10, y: 10, z: 10}
+  m_CollectObjects: 1
+  m_Size: {x: 300, y: 100, z: 300}
   m_Center: {x: 0, y: 2, z: 0}
   m_LayerMask:
     serializedVersion: 2
@@ -64344,6 +64344,8 @@ RectTransform:
   - {fileID: 286331722}
   - {fileID: 930940442}
   - {fileID: 1858823427}
+  - {fileID: 1145656363}
+  - {fileID: 40247038}
   - {fileID: 972533328}
   - {fileID: 1683883542}
   - {fileID: 115598662}
@@ -106384,6 +106386,10 @@ PrefabInstance:
       propertyPath: camazoCaveSpawnPos
       value: 
       objectReference: {fileID: 293424515}
+    - target: {fileID: 8771814348314840566, guid: f1110e22860f9844396abf95985246eb, type: 3}
+      propertyPath: minimapRenderTextureObject
+      value: 
+      objectReference: {fileID: 1858823426}
     - target: {fileID: 8828437210349209437, guid: f1110e22860f9844396abf95985246eb, type: 3}
       propertyPath: player
       value: 
@@ -133991,6 +133997,7 @@ Transform:
   - {fileID: 1477513034}
   - {fileID: 2084162406}
   - {fileID: 1612289194}
+  - {fileID: 1994011323}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1089294098
@@ -140970,7 +140977,7 @@ GameObject:
   - component: {fileID: 1145656365}
   - component: {fileID: 1145656364}
   m_Layer: 5
-  m_Name: BorderRight
+  m_Name: MinimapBorderRight
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -140983,16 +140990,16 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1145656362}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 1858823427}
+  m_Father: {fileID: 597258065}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 165.5, y: 0}
+  m_AnchoredPosition: {x: -632.5, y: 418.5}
   m_SizeDelta: {x: 7, y: 243}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1145656364
@@ -159363,8 +159370,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_SerializedVersion: 0
   m_AgentTypeID: 0
-  m_CollectObjects: 0
-  m_Size: {x: 10, y: 10, z: 10}
+  m_CollectObjects: 1
+  m_Size: {x: 300, y: 100, z: 300}
   m_Center: {x: 0, y: 2, z: 0}
   m_LayerMask:
     serializedVersion: 2
@@ -199632,8 +199639,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_SerializedVersion: 0
   m_AgentTypeID: 0
-  m_CollectObjects: 0
-  m_Size: {x: 10, y: 10, z: 10}
+  m_CollectObjects: 1
+  m_Size: {x: 300, y: 100, z: 300}
   m_Center: {x: 0, y: 2, z: 0}
   m_LayerMask:
     serializedVersion: 2
@@ -216495,8 +216502,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_SerializedVersion: 0
   m_AgentTypeID: 0
-  m_CollectObjects: 0
-  m_Size: {x: 10, y: 10, z: 10}
+  m_CollectObjects: 1
+  m_Size: {x: 300, y: 100, z: 300}
   m_Center: {x: 0, y: 2, z: 0}
   m_LayerMask:
     serializedVersion: 2
@@ -244458,8 +244465,6 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 1145656363}
-  - {fileID: 40247038}
   - {fileID: 1028765780}
   m_Father: {fileID: 597258065}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -258485,6 +258490,70 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 6425566311055760599, guid: 4bacab6a15b23324191952d2db50a998, type: 3}
   m_PrefabInstance: {fileID: 1959200933}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1994011322
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1994011323}
+  - component: {fileID: 1994011324}
+  m_Layer: 0
+  m_Name: CamazoCaveNavMeshSurface
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1994011323
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1994011322}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0.13052616, z: 0, w: 0.9914449}
+  m_LocalPosition: {x: -741.86, y: 0, z: 47.67}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1087667611}
+  m_LocalEulerAnglesHint: {x: 0, y: 15, z: 0}
+--- !u!114 &1994011324
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1994011322}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7a5ac11cc976e418e8d13136b07e1f52, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_SerializedVersion: 0
+  m_AgentTypeID: 0
+  m_CollectObjects: 1
+  m_Size: {x: 30, y: 10, z: 40}
+  m_Center: {x: 0, y: 2, z: 0}
+  m_LayerMask:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_UseGeometry: 1
+  m_DefaultArea: 0
+  m_GenerateLinks: 0
+  m_IgnoreNavMeshAgent: 1
+  m_IgnoreNavMeshObstacle: 1
+  m_OverrideTileSize: 0
+  m_TileSize: 256
+  m_OverrideVoxelSize: 0
+  m_VoxelSize: 0.1
+  m_MinRegionArea: 2
+  m_NavMeshData: {fileID: 23800000, guid: 3c8482bec89ac404e8f1684ffff83f68, type: 2}
+  m_BuildHeightMesh: 0
 --- !u!1 &1994828528
 GameObject:
   m_ObjectHideFlags: 0
@@ -269133,8 +269202,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_SerializedVersion: 0
   m_AgentTypeID: 0
-  m_CollectObjects: 0
-  m_Size: {x: 10, y: 10, z: 10}
+  m_CollectObjects: 1
+  m_Size: {x: 300, y: 100, z: 300}
   m_Center: {x: 0, y: 2, z: 0}
   m_LayerMask:
     serializedVersion: 2

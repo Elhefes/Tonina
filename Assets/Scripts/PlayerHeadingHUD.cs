@@ -4,6 +4,7 @@ using UnityEngine;
 public class PlayerHeadingHUD : MonoBehaviour
 {
     public Player player;
+    public GameObject minimapRenderTextureObject;
     public Transform toCamazoCaveTPPos;
     public Transform camazoCaveSpawnPos;
     public TMP_Text headingTMP;
@@ -27,6 +28,7 @@ public class PlayerHeadingHUD : MonoBehaviour
             {
                 headingTMP.gameObject.SetActive(false);
                 player.TeleportToCamazoCave(camazoCaveSpawnPos.position);
+                minimapRenderTextureObject.SetActive(false);
             }
         }
         else
