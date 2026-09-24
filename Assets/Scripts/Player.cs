@@ -990,7 +990,11 @@ public class Player : Creature
 
     public IEnumerator TeleportPlayerToSpot(Vector3 newPosition)
     {
-        if (uiController != null) uiController.DisableOverlappingElements();
+        if (uiController != null)
+        {
+            uiController.DisableOverlappingElements();
+            if (uiController.optionsMenu != null) uiController.optionsMenu.SetActive(false);
+        }
         blackFader.SetActive(true);
         creatureMovement.MoveToDestination(transform.position);
         yield return new WaitForSeconds(0.33f);

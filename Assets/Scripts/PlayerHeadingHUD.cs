@@ -13,9 +13,16 @@ public class PlayerHeadingHUD : MonoBehaviour
 
     void Update()
     {
+        if (player.blackFader.activeSelf) return;
+
         if (Vector3.Distance(player.transform.position, toCamazoCaveTPPos.position) < 2.5f)
         {
             ContinueHeadingTo(camazoCaveSpawnPos.position, "Camazo Cave", false);
+        }
+        else if (camazoCaveSpawnPos != null && player.transform.position.x < -700 
+            && player.transform.position.z > 62)
+        {
+            ContinueHeadingTo(toCamazoCaveTPPos.position + new Vector3(3f, 0f, 3f), "Jadea", true);
         }
         else
         {
@@ -41,6 +48,7 @@ public class PlayerHeadingHUD : MonoBehaviour
         if (standingTime >= requiredTime)
         {
             headingTMP.gameObject.SetActive(false);
+            standingTime = 0f;
             StartCoroutine(player.TeleportPlayerToSpot(destination));
             if (!enableMinimap) player.mouseLook.minimapInput.gameObject.SetActive(false);
             else Invoke("ReEnableMinimap", 0.33f);
