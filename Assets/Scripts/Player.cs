@@ -951,6 +951,7 @@ public class Player : Creature
     public void StartTeleportToHome()
     {
         teleportCoroutine = StartCoroutine(TeleportPlayerToSpot(kingHouse.playerSpawnPosition.position));
+        Invoke("ReEnableMinimap", 0.33f);
     }
 
     public void StartTeleportToMainMenu()
@@ -987,7 +988,7 @@ public class Player : Creature
         inVillage = true;
     }
 
-    IEnumerator TeleportPlayerToSpot(Vector3 newPosition)
+    public IEnumerator TeleportPlayerToSpot(Vector3 newPosition)
     {
         if (uiController != null) uiController.DisableOverlappingElements();
         blackFader.SetActive(true);
@@ -1005,8 +1006,14 @@ public class Player : Creature
         if (battlefieldMenu.waveController.battleUI.activeSelf) EquipDefaultWeapon();
     }
 
-    public void TeleportToCamazoCave(Vector3 caveSpawnPoint)
+    public void ReEnableMinimap()
     {
-        teleportCoroutine = StartCoroutine(TeleportPlayerToSpot(caveSpawnPoint));
+        if (mouseLook != null)
+        {
+            if (!mouseLook.minimapInput.gameObject.activeInHierarchy)
+            {
+                mouseLook.minimapInput.gameObject.SetActive(true);
+            }
+        }
     }
 }
