@@ -19,6 +19,7 @@ public class MouseLook : MonoBehaviour
     public float smoothSpeed;
     public float minCameraZoom;
     public float maxCameraZoom;
+    private float defaultMaxCameraZoom = 30f;
     public Player player;
     public bool inCutscene;
     public bool cameraOnPlayer;
@@ -52,6 +53,8 @@ public class MouseLook : MonoBehaviour
             }
         }
     }
+
+    public void ResetMaxCameraZoom() { maxCameraZoom = defaultMaxCameraZoom; }
 
     public void SetCameraAngle(Vector3 angle)
     {

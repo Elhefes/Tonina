@@ -962,6 +962,7 @@ public class Player : Creature
     {
         teleportCoroutine = StartCoroutine(TeleportPlayerToSpot(kingHouse.playerSpawnPosition.position));
         Invoke("ReEnableMinimap", 0.33f);
+        if (mouseLook != null) mouseLook.ResetMaxCameraZoom();
     }
 
     public void StartTeleportToMainMenu()

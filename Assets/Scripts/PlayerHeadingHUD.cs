@@ -17,12 +17,12 @@ public class PlayerHeadingHUD : MonoBehaviour
 
         if (Vector3.Distance(player.transform.position, toCamazoCaveTPPos.position) < 2.5f)
         {
-            ContinueHeadingTo(camazoCaveSpawnPos.position, "Camazo Cave", false);
+            ContinueHeadingTo(camazoCaveSpawnPos.position, "Camazo Cave", false, 12f);
         }
         else if (camazoCaveSpawnPos != null && player.transform.position.x < -700 
             && player.transform.position.z > 62)
         {
-            ContinueHeadingTo(toCamazoCaveTPPos.position + new Vector3(3f, 0f, 3f), "Jadea", true);
+            ContinueHeadingTo(toCamazoCaveTPPos.position + new Vector3(3f, 0f, 3f), "Jadea", true, 0f);
         }
         else
         {
@@ -36,7 +36,7 @@ public class PlayerHeadingHUD : MonoBehaviour
         player.ReEnableMinimap();
     }
 
-    private void ContinueHeadingTo(Vector3 destination, string locationText, bool enableMinimap)
+    private void ContinueHeadingTo(Vector3 destination, string locationText, bool enableMinimap, float maxCameraZoom)
     {
         headingTMP.gameObject.SetActive(true);
 
@@ -52,6 +52,8 @@ public class PlayerHeadingHUD : MonoBehaviour
             StartCoroutine(player.TeleportPlayerToSpot(destination));
             if (!enableMinimap) player.mouseLook.minimapInput.gameObject.SetActive(false);
             else Invoke("ReEnableMinimap", 0.33f);
+            if (maxCameraZoom > 0f) player.mouseLook.maxCameraZoom = maxCameraZoom;
+            else player.mouseLook.ResetMaxCameraZoom();
         }
     }
 }
