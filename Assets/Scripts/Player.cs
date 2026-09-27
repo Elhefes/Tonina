@@ -64,7 +64,9 @@ public class Player : Creature
     public BattlefieldMenu battlefieldMenu;
     public LosingScreen losingScreen;
     public BarricadesController barricadeController;
+
     public GameObject villageTPMenu;
+    public GameObject camazoSummoning;
 
     public GameObject buildModeUI;
     public BuildingRemover buildingRemover;
@@ -781,6 +783,10 @@ public class Player : Creature
         {
             if (villageTPMenu != null) villageTPMenu.SetActive(true);
         }
+        else if (other.gameObject.name == "CamazoSummoningCollider")
+        {
+            if (camazoSummoning != null) camazoSummoning.SetActive(true);
+        }
     }
 
     private void OnTriggerExit(Collider other)
@@ -794,11 +800,15 @@ public class Player : Creature
         }
         if (other.gameObject.name == "BattlefieldPromptCollider")
         {
-            battlefieldMenu.gameObject.SetActive(false);
+            if (battlefieldMenu != null) battlefieldMenu.gameObject.SetActive(false);
         }
         if (other.gameObject.name == "VillageTPCollider")
         {
-            villageTPMenu.SetActive(false);
+            if (villageTPMenu != null) villageTPMenu.SetActive(false);
+        }
+        if (other.gameObject.name == "CamazoSummoningCollider")
+        {
+            if (camazoSummoning != null) camazoSummoning.SetActive(false);
         }
     }
 

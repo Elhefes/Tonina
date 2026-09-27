@@ -102822,6 +102822,7 @@ Transform:
   m_Children:
   - {fileID: 486461432}
   - {fileID: 293424515}
+  - {fileID: 876130402}
   - {fileID: 1317212110}
   - {fileID: 1882769785}
   - {fileID: 1525856330}
@@ -102854,6 +102855,68 @@ MonoBehaviour:
   coinStack1: {fileID: 0}
   coinStack2: {fileID: 0}
   coinStack3: {fileID: 0}
+--- !u!1 &876130401
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 876130402}
+  - component: {fileID: 876130404}
+  - component: {fileID: 876130403}
+  m_Layer: 2
+  m_Name: CamazoSummoningCollider
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &876130402
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 876130401}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: 0.7071068, z: -0, w: 0.7071068}
+  m_LocalPosition: {x: -740, y: 2.8, z: 46}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 875484146}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!65 &876130403
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 876130401}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 3, y: 2, z: 5}
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!33 &876130404
+MeshFilter:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 876130401}
+  m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
 --- !u!1001 &876422440
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -106900,6 +106963,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1654341382}
     - target: {fileID: 5412454603876469069, guid: f1110e22860f9844396abf95985246eb, type: 3}
+      propertyPath: camazoSummon
+      value: 
+      objectReference: {fileID: 1282649297}
+    - target: {fileID: 5412454603876469069, guid: f1110e22860f9844396abf95985246eb, type: 3}
       propertyPath: losingScreen
       value: 
       objectReference: {fileID: 1558889266}
@@ -106939,6 +107006,10 @@ PrefabInstance:
       propertyPath: battlefieldMenu
       value: 
       objectReference: {fileID: 1768781724}
+    - target: {fileID: 5412454603876469069, guid: f1110e22860f9844396abf95985246eb, type: 3}
+      propertyPath: camazoSummoning
+      value: 
+      objectReference: {fileID: 1282649297}
     - target: {fileID: 5412454603876469069, guid: f1110e22860f9844396abf95985246eb, type: 3}
       propertyPath: fillOkillPickUp
       value: 
@@ -136095,6 +136166,7 @@ MonoBehaviour:
   - {fileID: 1059587373}
   - {fileID: 101051013}
   - {fileID: 381063189}
+  - {fileID: 1282649297}
   - {fileID: 1872295541}
   - {fileID: 118730417}
   - {fileID: 2130682610}
