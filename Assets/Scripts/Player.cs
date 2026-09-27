@@ -372,7 +372,7 @@ public class Player : Creature
                     weatherStone = null;
                 }
 
-                if (target.CompareTag("VillageTPSpot") && Vector3.Distance(target.transform.position, transform.position) < 4f)
+                if (target.gameObject.name == "VillageTPCollider" && Vector3.Distance(target.transform.position, transform.position) < 4f)
                 {
                     creatureMovement.MoveToDestination(Vector3.Lerp(transform.position, target.transform.position, 0.5f));
                     if (villageTPMenu != null) villageTPMenu.SetActive(true);
@@ -773,11 +773,11 @@ public class Player : Creature
         if (optionsMenu.gameObject.activeSelf) return;
         if (MainMenuIsActive()) return;
 
-        if (other.CompareTag("BattlefieldPrompt"))
+        if (other.gameObject.name == "BattlefieldPromptCollider")
         {
             if (battlefieldMenu != null) battlefieldMenu.gameObject.SetActive(true);
         }
-        else if (other.CompareTag("VillageTPSpot"))
+        else if (other.gameObject.name == "VillageTPCollider")
         {
             if (villageTPMenu != null) villageTPMenu.SetActive(true);
         }
@@ -792,11 +792,11 @@ public class Player : Creature
             buildingRoof.MakeRoofVisible();
             if (other.ToString().Equals("kinghouse_floor_mesh (UnityEngine.MeshCollider)")) insideKingHouse = false;
         }
-        if (other.CompareTag("BattlefieldPrompt"))
+        if (other.gameObject.name == "BattlefieldPromptCollider")
         {
             battlefieldMenu.gameObject.SetActive(false);
         }
-        if (other.CompareTag("VillageTPSpot"))
+        if (other.gameObject.name == "VillageTPCollider")
         {
             villageTPMenu.SetActive(false);
         }
