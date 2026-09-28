@@ -755,6 +755,7 @@ public class Player : Creature
             {
                 inVillage = false;
                 insideKingHouse = true;
+                mouseLook.cameraForcedOnPlayer = true;
 
                 // Update nameplate torches if player has available attribute points
                 if (kingHouse != null)
@@ -796,7 +797,11 @@ public class Player : Creature
         {
             buildingRoof = other.GetComponentInParent<BuildingRoof>();
             buildingRoof.MakeRoofVisible();
-            if (other.ToString().Equals("kinghouse_floor_mesh (UnityEngine.MeshCollider)")) insideKingHouse = false;
+            if (other.ToString().Equals("kinghouse_floor_mesh (UnityEngine.MeshCollider)"))
+            {
+                insideKingHouse = false;
+                mouseLook.cameraForcedOnPlayer = false;
+            }
         }
         if (other.gameObject.name == "BattlefieldPromptCollider")
         {
@@ -987,6 +992,7 @@ public class Player : Creature
     {
         if (buildingRoof != null) buildingRoof.MakeRoofVisible();
         insideKingHouse = false;
+        mouseLook.cameraForcedOnPlayer = false;
         teleportCoroutine = StartCoroutine(TeleportPlayerToSpot(kingHouse.transform.position + kingHouse.battlefieldStartingPosition));
     }
 
@@ -996,6 +1002,7 @@ public class Player : Creature
         if (buildingRoof != null) buildingRoof.MakeRoofVisible();
         teleportCoroutine = StartCoroutine(TeleportPlayerToSpot(gatePosition.position));
         insideKingHouse = false;
+        mouseLook.cameraForcedOnPlayer = false;
         inVillage = true;
     }
 

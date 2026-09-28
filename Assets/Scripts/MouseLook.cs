@@ -23,6 +23,7 @@ public class MouseLook : MonoBehaviour
     public Player player;
     public bool inCutscene;
     public bool cameraOnPlayer;
+    public bool cameraForcedOnPlayer;
     public bool notCastingRays; // Don't cast rays in Attack Mode Minimap view
     public Camera minimapCamera;
     public GameObject minimapIndicators;
@@ -86,7 +87,7 @@ public class MouseLook : MonoBehaviour
 
     public void CameraOnPlayerOff()
     {
-        if (player.insideKingHouse && !inCutscene && (transform.rotation.y != 0 
+        if (cameraForcedOnPlayer && !inCutscene && (transform.rotation.y != 0 
             || transform.rotation.eulerAngles.y != 180)) return;
         cameraOnPlayer = false;
         cameraOnPlayerButton.ChangeIconSprite(cameraOnPlayer);
@@ -140,7 +141,7 @@ public class MouseLook : MonoBehaviour
                 if (Input.GetKeyDown("c")) ToggleCameraOnPlayer();
             }
 
-            if (!player.insideKingHouse || (player.inBuildMode && !movingToTargetPosition))
+            if (!cameraForcedOnPlayer || (player.inBuildMode && !movingToTargetPosition))
             {
                 float horizontal = Input.GetAxis("Horizontal") + minimapInput.GetMinimapInput().x * minimapInputSensitivity;
                 float vertical = Input.GetAxis("Vertical") + minimapInput.GetMinimapInput().y * minimapInputSensitivity;
@@ -195,7 +196,7 @@ public class MouseLook : MonoBehaviour
         }
         else
         {
-            if (player.insideKingHouse && !player.inBuildMode && !inCutscene)
+            if (cameraForcedOnPlayer && !player.inBuildMode && !inCutscene)
             {
                 ToggleCameraOnPlayer();
                 return;
@@ -331,7 +332,7 @@ public class MouseLook : MonoBehaviour
 
         RotateSmoothly(presetCameraAngle);
 
-        if (player.insideKingHouse && minimapIndicators.activeSelf) minimapIndicators.SetActive(false);
+        if (cameraForcedOnPlayer && minimapIndicators.activeSelf) minimapIndicators.SetActive(false);
         else if (!minimapIndicators.activeSelf && !minimapInput.buttonPressed) minimapIndicators.SetActive(true);
     }
 

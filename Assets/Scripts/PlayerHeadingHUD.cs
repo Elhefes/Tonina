@@ -50,8 +50,16 @@ public class PlayerHeadingHUD : MonoBehaviour
             headingTMP.gameObject.SetActive(false);
             standingTime = 0f;
             StartCoroutine(player.TeleportPlayerToSpot(destination));
-            if (!enableMinimap) player.mouseLook.minimapInput.gameObject.SetActive(false);
-            else Invoke("ReEnableMinimap", 0.33f);
+            if (!enableMinimap)
+            {
+                player.mouseLook.minimapInput.gameObject.SetActive(false);
+                player.mouseLook.cameraForcedOnPlayer = true;
+            }
+            else
+            {
+                Invoke("ReEnableMinimap", 0.33f);
+                player.mouseLook.cameraForcedOnPlayer = false;
+            }
             if (maxCameraZoom > 0f) player.mouseLook.maxCameraZoom = maxCameraZoom;
             else player.mouseLook.ResetMaxCameraZoom();
         }
