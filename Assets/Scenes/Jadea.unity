@@ -1696,6 +1696,59 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 11021137}
   m_CullTransparentMesh: 1
+--- !u!1 &11174458
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 11174459}
+  - component: {fileID: 11174460}
+  m_Layer: 2
+  m_Name: RainBlocker
+  m_TagString: RainBlocker
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &11174459
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 11174458}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0.10452846, z: 0, w: 0.9945219}
+  m_LocalPosition: {x: -740, y: 8.5, z: 47}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 875484146}
+  m_LocalEulerAnglesHint: {x: 0, y: 12, z: 0}
+--- !u!65 &11174460
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 11174458}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 30, y: 20, z: 36}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &12068437
 GameObject:
   m_ObjectHideFlags: 0
@@ -102823,6 +102876,7 @@ Transform:
   - {fileID: 486461432}
   - {fileID: 293424515}
   - {fileID: 876130402}
+  - {fileID: 11174459}
   - {fileID: 1317212110}
   - {fileID: 1882769785}
   - {fileID: 1525856330}
@@ -219514,6 +219568,7 @@ MonoBehaviour:
   player: {fileID: 1904667352}
   inCutscene: 0
   cameraOnPlayer: 1
+  cameraForcedOnPlayer: 0
   notCastingRays: 0
   minimapCamera: {fileID: 1569821203}
   minimapIndicators: {fileID: 1028765779}
