@@ -51285,6 +51285,17 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 3088834806589209103, guid: 8f9c6b59bdb47a94da3c8faf7d786fa5, type: 3}
   m_PrefabInstance: {fileID: 486461431}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &486461435 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1158538013970931070, guid: 8f9c6b59bdb47a94da3c8faf7d786fa5, type: 3}
+  m_PrefabInstance: {fileID: 486461431}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e8212197249ab174d959d5c5c43e016a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &486933206
 GameObject:
   m_ObjectHideFlags: 0
@@ -102903,9 +102914,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 618ff60cb3814fc4186cf56c19879138, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  camazoInCave: {fileID: 0}
+  camazoInCave: {fileID: 486461435}
+  camazoSpawnPosition: {fileID: 0}
+  camazoSpawnRotation: {x: 0, y: 0, z: 0}
+  camazoIsSummoned: 0
   bonesOnTables: []
-  giveGoldPopup: {fileID: 0}
   coinStack1: {fileID: 0}
   coinStack2: {fileID: 0}
   coinStack3: {fileID: 0}
@@ -171024,6 +171037,7 @@ GameObject:
   - component: {fileID: 1282649298}
   - component: {fileID: 1282649300}
   - component: {fileID: 1282649299}
+  - component: {fileID: 1282649301}
   m_Layer: 5
   m_Name: CamazoSummoning
   m_TagString: Untagged
@@ -171093,6 +171107,24 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1282649297}
   m_CullTransparentMesh: 1
+--- !u!114 &1282649301
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1282649297}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1199abf7b07ac6944bf74bcc2d59e9a4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  moneyCounter: {fileID: 526326469}
+  summoningText: {fileID: 623108824}
+  summoningFirstCost: 30
+  summoningSecondCost: 0
+  summoningThirdCost: 0
+  camazoCave: {fileID: 875484147}
 --- !u!1 &1283605135
 GameObject:
   m_ObjectHideFlags: 0
@@ -255456,9 +255488,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: MaizeVendorMenu, Assembly-CSharp
-        m_MethodName: BuyThis
+      - m_Target: {fileID: 1282649301}
+        m_TargetAssemblyTypeName: CamazoSummoning, Assembly-CSharp
+        m_MethodName: SummonCamazo
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
