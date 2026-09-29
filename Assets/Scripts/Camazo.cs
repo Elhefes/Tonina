@@ -39,7 +39,7 @@ public class Camazo : MonoBehaviour
         if (activeInBattle) SetActiveInBattle();
     }
 
-    private void ResetAnimatorStates()
+    public void ResetAnimatorStates()
     {
         animator.SetBool("Flapping", false);
         animator.SetBool("Hanging", false);

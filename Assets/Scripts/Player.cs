@@ -66,7 +66,7 @@ public class Player : Creature
     public BarricadesController barricadeController;
 
     public GameObject villageTPMenu;
-    public GameObject camazoSummoning;
+    public CamazoSummoning camazoSummoning;
 
     public GameObject buildModeUI;
     public BuildingRemover buildingRemover;
@@ -786,7 +786,7 @@ public class Player : Creature
         }
         else if (other.gameObject.name == "CamazoSummoningCollider")
         {
-            if (camazoSummoning != null) camazoSummoning.SetActive(true);
+            if (camazoSummoning != null) camazoSummoning.gameObject.SetActive(true);
         }
     }
 
@@ -813,7 +813,7 @@ public class Player : Creature
         }
         if (other.gameObject.name == "CamazoSummoningCollider")
         {
-            if (camazoSummoning != null) camazoSummoning.SetActive(false);
+            if (camazoSummoning != null) camazoSummoning.gameObject.SetActive(false);
         }
     }
 
@@ -1026,6 +1026,11 @@ public class Player : Creature
 
         // Equip default weapon when starting battle
         if (battlefieldMenu.waveController.battleUI.activeSelf) EquipDefaultWeapon();
+
+        if (camazoSummoning != null)
+        {
+            camazoSummoning.DisappearCamazo();
+        }
     }
 
     public void ReEnableMinimap()

@@ -102885,6 +102885,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 486461432}
+  - {fileID: 1003893421}
   - {fileID: 293424515}
   - {fileID: 876130402}
   - {fileID: 11174459}
@@ -102915,7 +102916,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   camazoInCave: {fileID: 486461435}
-  camazoSpawnPosition: {fileID: 0}
+  camazoSpawnPosition: {fileID: 1003893421}
   camazoSpawnRotation: {x: 0, y: 0, z: 0}
   camazoIsSummoned: 0
   bonesOnTables: []
@@ -107076,7 +107077,7 @@ PrefabInstance:
     - target: {fileID: 5412454603876469069, guid: f1110e22860f9844396abf95985246eb, type: 3}
       propertyPath: camazoSummoning
       value: 
-      objectReference: {fileID: 1282649297}
+      objectReference: {fileID: 1282649301}
     - target: {fileID: 5412454603876469069, guid: f1110e22860f9844396abf95985246eb, type: 3}
       propertyPath: fillOkillPickUp
       value: 
@@ -122726,6 +122727,37 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1002942118}
   m_CullTransparentMesh: 1
+--- !u!1 &1003893420
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1003893421}
+  m_Layer: 0
+  m_Name: CamazoSpawnPos
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 2147483647
+  m_IsActive: 1
+--- !u!4 &1003893421
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1003893420}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -750.03265, y: 16.43, z: 94.62492}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 875484146}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1004780844
 GameObject:
   m_ObjectHideFlags: 0

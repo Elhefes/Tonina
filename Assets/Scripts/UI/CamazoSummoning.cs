@@ -32,4 +32,9 @@ public class CamazoSummoning : MonoBehaviour
         if (!camazoCave.camazoIsSummoned) camazoCave.SummonCamazo();
         gameObject.SetActive(false);
     }
+
+    public void DisappearCamazo()
+    {
+        if (camazoCave.camazoIsSummoned) camazoCave.DisappearCamazo();
+    }
 }

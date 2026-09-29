@@ -15,14 +15,14 @@ public class CamazoCave : MonoBehaviour
     public GameObject coinStack2;
     public GameObject coinStack3;
 
-    private void OnEnable()
+    public void DisappearCamazo()
     {
-        HideCamazo();
-    }
-
-    public void HideCamazo()
-    {
-
+        camazoInCave.ResetAnimatorStates();
+        camazoInCave.animator.SetTrigger("Empty");
+        camazoInCave.gameObject.SetActive(false);
+        camazoInCave.transform.position = camazoSpawnPosition.position;
+        camazoInCave.gameObject.SetActive(true);
+        camazoIsSummoned = false;
     }
 
     public void SummonCamazo()
