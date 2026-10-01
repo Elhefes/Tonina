@@ -35,6 +35,11 @@ public class ProgressionData
     // Pyramid floors
     public int extraPyramidFloorsBuilt { get; set; }
 
-    // // Weather Temple, Maize Farmers House... etc.
+    // Weather Temple, Maize Farmers House... etc.
     public int specialBuildingsBuilt { get; set; }
+
+    // Camazo Cave Progression
+    public int bonesInCamazoCave; // 0 to 16
+    public int coinsPlacedInCamazoCave; // 0 to 3
+    public int camazoEvolutionStage; // 0 to 3
 }

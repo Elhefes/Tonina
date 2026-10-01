@@ -102917,12 +102917,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   camazoInCave: {fileID: 486461435}
   camazoSpawnPosition: {fileID: 1003893421}
-  camazoSpawnRotation: {x: 0, y: 0, z: 0}
   camazoIsSummoned: 0
   bonesOnTables: []
-  coinStack1: {fileID: 0}
-  coinStack2: {fileID: 0}
-  coinStack3: {fileID: 0}
+  coinStack1: {fileID: 1328138296}
+  coinStack2: {fileID: 584627042}
+  coinStack3: {fileID: 781268492}
 --- !u!1 &876130401
 GameObject:
   m_ObjectHideFlags: 0
@@ -171154,8 +171153,8 @@ MonoBehaviour:
   moneyCounter: {fileID: 526326469}
   summoningText: {fileID: 623108824}
   summoningFirstCost: 30
-  summoningSecondCost: 0
-  summoningThirdCost: 0
+  summoningSecondCost: 40
+  summoningThirdCost: 50
   camazoCave: {fileID: 875484147}
 --- !u!1 &1283605135
 GameObject:
@@ -188215,6 +188214,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a051dad073da71242a44c36066895b5e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  progressionData:
+    bonesInCamazoCave: 0
+    coinsPlacedInCamazoCave: 0
+    camazoEvolutionStage: 0
   placeablesManager: {fileID: 1393370859}
 --- !u!114 &1393370864
 MonoBehaviour:

@@ -21,6 +21,9 @@ public class CamazoSummoning : MonoBehaviour
         }
 
         currentCost = summoningFirstCost;
+        if (GameState.Instance.progressionData.camazoEvolutionStage > 0) currentCost = summoningSecondCost;
+        if (GameState.Instance.progressionData.camazoEvolutionStage > 1) currentCost = summoningThirdCost;
+
         summoningText.text = "Give " + currentCost + " gold to summon Camazo?";
 
         moneyCounter.UpdateMoneyCounter();
@@ -29,7 +32,11 @@ public class CamazoSummoning : MonoBehaviour
 
     public void SummonCamazo()
     {
-        if (!camazoCave.camazoIsSummoned) camazoCave.SummonCamazo();
+        if (!camazoCave.camazoIsSummoned)
+        {
+            moneyCounter.ReduceMoney(currentCost);
+            camazoCave.SummonCamazo();
+        }
         gameObject.SetActive(false);
     }
 
