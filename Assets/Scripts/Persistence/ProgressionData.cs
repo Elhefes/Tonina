@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 
 [Serializable]
 public class ProgressionData
@@ -39,7 +40,7 @@ public class ProgressionData
     public int specialBuildingsBuilt { get; set; }
 
     // Camazo Cave Progression
-    public int bonesInCamazoCave; // 0 to 16
+    public List<int> camazoCaveBoneIndices = new List<int>();
     public int coinsPlacedInCamazoCave; // 0 to 3
     public int camazoEvolutionStage; // 0 to 3
 }

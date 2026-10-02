@@ -1030,6 +1030,7 @@ public class Player : Creature
         if (camazoSummoning != null)
         {
             camazoSummoning.DisappearCamazo();
+            camazoSummoning.camazoCave.LoadBones();
         }
     }
 

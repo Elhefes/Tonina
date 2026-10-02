@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 public class CamazoCave : MonoBehaviour
@@ -56,5 +57,68 @@ public class CamazoCave : MonoBehaviour
         if (coinsPlaced > 0) coinStack1.SetActive(true);
         if (coinsPlaced > 1) coinStack2.SetActive(true);
         if (coinsPlaced > 2) coinStack3.SetActive(true);
+    }
+
+    public void LoadBones()
+    {
+        List<int> savedIndices =
+            GameState.Instance.progressionData.camazoCaveBoneIndices;
+
+        // Disable everything first
+        foreach (GameObject bone in bonesOnTables)
+        {
+            bone.SetActive(false);
+        }
+
+        // Enable saved bones
+        foreach (int index in savedIndices)
+        {
+            if (index >= 0 && index < bonesOnTables.Length)
+            {
+                bonesOnTables[index].SetActive(true);
+            }
+        }
+
+        //Debug.Log("Loaded bones: " + string.Join(", ", savedIndices));
+    }
+
+
+    public void AddRandomBone(int amount)
+    {
+        List<int> savedIndices =
+            GameState.Instance.progressionData.camazoCaveBoneIndices;
+
+        List<int> availableIndices = new List<int>();
+
+        for (int i = 0; i < bonesOnTables.Length; i++)
+        {
+            if (!savedIndices.Contains(i))
+            {
+                availableIndices.Add(i);
+            }
+        }
+
+        amount = Mathf.Min(amount, availableIndices.Count);
+
+        for (int i = 0; i < amount; i++)
+        {
+            int randomIndex = Random.Range(0, availableIndices.Count);
+            int selectedBone = availableIndices[randomIndex];
+
+            availableIndices.RemoveAt(randomIndex);
+
+            savedIndices.Add(selectedBone);
+            bonesOnTables[selectedBone].SetActive(true);
+
+            //Debug.Log("New bone selected: " + selectedBone);
+        }
+
+        GameState.Instance.SaveWorld();
+    }
+
+
+    public int GetActiveBoneCount()
+    {
+        return GameState.Instance.progressionData.camazoCaveBoneIndices.Count;
     }
 }
