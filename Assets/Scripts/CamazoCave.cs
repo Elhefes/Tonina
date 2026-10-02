@@ -78,8 +78,6 @@ public class CamazoCave : MonoBehaviour
                 bonesOnTables[index].SetActive(true);
             }
         }
-
-        //Debug.Log("Loaded bones: " + string.Join(", ", savedIndices));
     }
 
 
@@ -109,13 +107,32 @@ public class CamazoCave : MonoBehaviour
 
             savedIndices.Add(selectedBone);
             bonesOnTables[selectedBone].SetActive(true);
-
-            //Debug.Log("New bone selected: " + selectedBone);
         }
-
         GameState.Instance.SaveWorld();
     }
 
+    public void RemoveRandomBone(int amount)
+    {
+        List<int> savedIndices =
+            GameState.Instance.progressionData.camazoCaveBoneIndices;
+
+        // Don't try to remove more bones than currently exist
+        amount = Mathf.Min(amount, savedIndices.Count);
+
+        // Remove random bones
+        for (int i = 0; i < amount; i++)
+        {
+            int randomIndex = Random.Range(0, savedIndices.Count);
+            int selectedBone = savedIndices[randomIndex];
+
+            // Remove it from the saved list
+            savedIndices.RemoveAt(randomIndex);
+
+            // Disable the bone
+            bonesOnTables[selectedBone].SetActive(false);
+        }
+        GameState.Instance.SaveWorld();
+    }
 
     public int GetActiveBoneCount()
     {
