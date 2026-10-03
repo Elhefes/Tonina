@@ -109211,7 +109211,7 @@ GameObject:
   m_Component:
   - component: {fileID: 928294298}
   m_Layer: 0
-  m_Name: BonesInTables
+  m_Name: BonesOnTables
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -188125,6 +188125,7 @@ MonoBehaviour:
   musicPlayer: {fileID: 535815518}
   friendlyWarriorPrefab: {fileID: 3985435863824497963, guid: cd242938179e1e548ae8071a51ce911a, type: 3}
   camazo: {fileID: 2089898060}
+  camazoCave: {fileID: 875484147}
   clubber: {fileID: 7187010017827347340, guid: 9461b381c953c4541b1daf9f8f496ec2, type: 3}
   runner: {fileID: 8995902372229116945, guid: 9d03222d890a1e3439c76f47e640a8d5, type: 3}
   spearWarrior: {fileID: 4077094486547798183, guid: c4903b18e4761ad47b5fa67b08359b32, type: 3}
@@ -188322,7 +188323,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   progressionData:
     camazoCaveBoneIndices: 
-    bonesInCamazoCave: 0
     coinsPlacedInCamazoCave: 0
     camazoEvolutionStage: 0
   placeablesManager: {fileID: 1393370859}

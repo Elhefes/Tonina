@@ -35,6 +35,7 @@ public class WaveController : MonoBehaviour
 
     public GameObject friendlyWarriorPrefab;
     public Camazo camazo;
+    public CamazoCave camazoCave;
 
     [Header("Enemies")]
     public GameObject clubber;
@@ -209,6 +210,14 @@ public class WaveController : MonoBehaviour
         StopCoroutine(SecondCounter());
         StartCoroutine(PlayRewardsRisingAnimation());
         DisableBattleUI();
+
+        if (camazoCave != null)
+        {
+            int diff = Mathf.FloorToInt(GameState.Instance.progressionData.threatProgressionValue) - currentRoundNumber;
+            if (diff == 0) camazoCave.AddRandomBone(2);
+            else if (diff == 1) camazoCave.AddRandomBone(1);
+        }
+
         threatLevelController.SetThreatProgressionValue(true, currentRoundNumber, GetTotalRewards(), threatLevel.maxReward);
         statsController.totalRewardPercentages += (float) 100 * GetTotalRewards() / threatLevel.maxReward;
 
