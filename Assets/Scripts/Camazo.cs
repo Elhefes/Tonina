@@ -13,6 +13,11 @@ public class Camazo : MonoBehaviour
     public float attackSoundMaxRange;
     public Player player;
 
+    public Vector3 evolutionScale1 = new(0.08f, 0.08f, 0.08f);
+    public Vector3 evolutionScale2 = new(0.11f, 0.11f, 0.11f);
+    public Vector3 evolutionScale3 = new(0.14f, 0.14f, 0.14f);
+    public Vector3 evolutionScale4 = new(0.18f, 0.18f, 0.18f);
+
     [Header("Waypoints")]
     public Transform pointA;
     public Transform pointB; // "Default target point"

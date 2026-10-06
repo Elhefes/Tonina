@@ -19,6 +19,15 @@ public class CamazoCave : MonoBehaviour
         LoadCoins(GameState.Instance.progressionData.coinsPlacedInCamazoCave);
     }
 
+    public void LoadCamazoScale()
+    {
+        int evolutionStage = GameState.Instance.progressionData.camazoEvolutionStage;
+        if (evolutionStage == 0) camazoInCave.transform.localScale = camazoInCave.evolutionScale1;
+        else if (evolutionStage == 1) camazoInCave.transform.localScale = camazoInCave.evolutionScale2;
+        else if (evolutionStage == 2) camazoInCave.transform.localScale = camazoInCave.evolutionScale3;
+        else camazoInCave.transform.localScale = camazoInCave.evolutionScale4;
+    }
+
     public void DisappearCamazo()
     {
         camazoInCave.ResetAnimatorStates();
