@@ -5407,6 +5407,7 @@ MonoBehaviour:
   losingScreen: {fileID: 0}
   barricadeController: {fileID: 0}
   villageTPMenu: {fileID: 0}
+  camazoSummoning: {fileID: 0}
   buildModeUI: {fileID: 0}
   buildingRemover: {fileID: 3536230150113977096}
   placeableBuildings: {fileID: 0}
@@ -5493,8 +5494,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   player: {fileID: 5412454603876469069}
   toCamazoCaveTPPos: {fileID: 0}
+  camazoCaveSpawnPos: {fileID: 0}
   headingTMP: {fileID: 0}
-  requiredTime: 5
+  requiredTime: 4
 --- !u!54 &8457402616446038429
 Rigidbody:
   m_ObjectHideFlags: 0

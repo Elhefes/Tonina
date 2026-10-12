@@ -7,7 +7,7 @@ public class PlayerHeadingHUD : MonoBehaviour
     public Transform toCamazoCaveTPPos;
     public Transform camazoCaveSpawnPos;
     public TMP_Text headingTMP;
-    public float requiredTime = 5f;
+    public float requiredTime = 4f;
 
     private float standingTime = 0f;
 
