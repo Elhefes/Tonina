@@ -14,6 +14,9 @@ public class CamazoCave : MonoBehaviour
     public GameObject coinStack2;
     public GameObject coinStack3;
 
+    public ParticleSystem[] tableParticleSystems;
+    public AudioSource[] tableAudioSources;
+
     private void Start()
     {
         LoadCoins(GameState.Instance.progressionData.coinsPlacedInCamazoCave);
@@ -128,6 +131,11 @@ public class CamazoCave : MonoBehaviour
         // Don't try to remove more bones than currently exist
         amount = Mathf.Min(amount, savedIndices.Count);
 
+        bool table1Boomed = false;
+        bool table2Boomed = false;
+        bool table3Boomed = false;
+        bool table4Boomed = false;
+
         // Remove random bones
         for (int i = 0; i < amount; i++)
         {
@@ -139,12 +147,44 @@ public class CamazoCave : MonoBehaviour
 
             // Disable the bone
             bonesOnTables[selectedBone].SetActive(false);
+
+            if (!table1Boomed && selectedBone < 4) table1Boomed = true;
+            if (!table2Boomed && selectedBone < 8 && selectedBone > 3) table2Boomed = true;
+            if (!table3Boomed && selectedBone < 12 && selectedBone > 7) table3Boomed = true;
+            if (!table4Boomed && selectedBone < 16 && selectedBone > 11) table4Boomed = true;
         }
+        
+        if (table1Boomed) Invoke("Table1Boom", 0.72f);
+        if (table2Boomed) Invoke("Table2Boom", 0.48f);
+        if (table3Boomed) Invoke("Table3Boom", 0.24f);
+        if (table4Boomed) Table4Boom();
+
         GameState.Instance.SaveWorld();
     }
 
     public int GetActiveBoneCount()
     {
         return GameState.Instance.progressionData.camazoCaveBoneIndices.Count;
+    }
+
+    private void Table1Boom()
+    {
+        tableParticleSystems[0].Play();
+        tableAudioSources[0].PlayOneShot(tableAudioSources[0].clip, PlayerPrefs.GetFloat("soundVolume", 0.5f));
+    }
+    private void Table2Boom()
+    {
+        tableParticleSystems[1].Play();
+        tableAudioSources[1].PlayOneShot(tableAudioSources[1].clip, PlayerPrefs.GetFloat("soundVolume", 0.5f));
+    }
+    private void Table3Boom()
+    {
+        tableParticleSystems[2].Play();
+        tableAudioSources[2].PlayOneShot(tableAudioSources[2].clip, PlayerPrefs.GetFloat("soundVolume", 0.5f));
+    }
+    private void Table4Boom()
+    {
+        tableParticleSystems[3].Play();
+        tableAudioSources[3].PlayOneShot(tableAudioSources[3].clip, PlayerPrefs.GetFloat("soundVolume", 0.5f));
     }
 }
