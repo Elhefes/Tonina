@@ -41,6 +41,7 @@ public class ProgressionData
 
     // Camazo Cave Progression
     public List<int> camazoCaveBoneIndices = new List<int>();
-    public int coinsPlacedInCamazoCave; // 0 to 3
-    public int camazoEvolutionStage; // 0 to 3
+    public int coinsPlacedInCamazoCave { get; set; } // 0 to 3
+    public int camazoEvolutionStage { get; set; } // 0 to 3
+    public int bonesCamazoHasEaten { get; set; }
 }

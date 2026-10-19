@@ -22,15 +22,6 @@ public class CamazoCave : MonoBehaviour
         LoadCoins(GameState.Instance.progressionData.coinsPlacedInCamazoCave);
     }
 
-    public void LoadCamazoScale()
-    {
-        int evolutionStage = GameState.Instance.progressionData.camazoEvolutionStage;
-        if (evolutionStage == 0) camazoInCave.transform.localScale = camazoInCave.evolutionScale1;
-        else if (evolutionStage == 1) camazoInCave.transform.localScale = camazoInCave.evolutionScale2;
-        else if (evolutionStage == 2) camazoInCave.transform.localScale = camazoInCave.evolutionScale3;
-        else camazoInCave.transform.localScale = camazoInCave.evolutionScale4;
-    }
-
     public void DisappearCamazo()
     {
         camazoInCave.ResetAnimatorStates();
@@ -45,10 +36,13 @@ public class CamazoCave : MonoBehaviour
     {
         if (!camazoIsSummoned)
         {
-            camazoInCave.animator.SetTrigger("FlyToCaveBridge");
             camazoIsSummoned = true;
             AddCoinsIfPossible();
+            RemoveRandomBone(10);
+            camazoInCave.SetEvolutionStage();
+            camazoInCave.LoadEvolutionScale();
             GameState.Instance.SaveWorld();
+            camazoInCave.animator.SetTrigger("FlyToCaveBridge");
         }
     }
 
@@ -73,6 +67,31 @@ public class CamazoCave : MonoBehaviour
 
     public void LoadBones()
     {
+        if (GameState.Instance == null)
+        {
+            Debug.LogError("LoadBones: GameState.Instance is null!");
+            return;
+        }
+
+        if (GameState.Instance.progressionData == null)
+        {
+            Debug.LogError("LoadBones: progressionData is null!");
+            return;
+        }
+
+        // Initialize the list if it doesn't exist in this save
+        if (GameState.Instance.progressionData.camazoCaveBoneIndices == null)
+        {
+            GameState.Instance.progressionData.camazoCaveBoneIndices =
+                new List<int>();
+        }
+
+        if (bonesOnTables == null)
+        {
+            Debug.LogError("LoadBones: bonesOnTables array is null!");
+            return;
+        }
+
         List<int> savedIndices =
             GameState.Instance.progressionData.camazoCaveBoneIndices;
 
@@ -91,7 +110,6 @@ public class CamazoCave : MonoBehaviour
             }
         }
     }
-
 
     public void AddRandomBone(int amount)
     {
@@ -131,6 +149,8 @@ public class CamazoCave : MonoBehaviour
         // Don't try to remove more bones than currently exist
         amount = Mathf.Min(amount, savedIndices.Count);
 
+        GameState.Instance.progressionData.bonesCamazoHasEaten += amount;
+
         bool table1Boomed = false;
         bool table2Boomed = false;
         bool table3Boomed = false;
@@ -158,8 +178,6 @@ public class CamazoCave : MonoBehaviour
         if (table2Boomed) Invoke("Table2Boom", 0.48f);
         if (table3Boomed) Invoke("Table3Boom", 0.24f);
         if (table4Boomed) Table4Boom();
-
-        GameState.Instance.SaveWorld();
     }
 
     public int GetActiveBoneCount()

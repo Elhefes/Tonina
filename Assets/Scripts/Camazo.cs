@@ -44,6 +44,44 @@ public class Camazo : MonoBehaviour
         if (activeInBattle) SetActiveInBattle();
     }
 
+    public void SetEvolutionStage()
+    {
+        int bonesEaten = GameState.Instance.progressionData.bonesCamazoHasEaten;
+        if (bonesEaten > 67)
+        {
+            GameState.Instance.progressionData.camazoEvolutionStage = 3;
+            GameState.Instance.progressionData.camazoIsActive = true;
+        }
+        else if (bonesEaten > 37) GameState.Instance.progressionData.camazoEvolutionStage = 2;
+        else if (bonesEaten > 15) GameState.Instance.progressionData.camazoEvolutionStage = 1;
+        else GameState.Instance.progressionData.camazoEvolutionStage = 0;
+    }
+
+    public void LoadEvolutionScale()
+    {
+        int evolutionStage = GameState.Instance.progressionData.camazoEvolutionStage;
+        if (evolutionStage == 0)
+        {
+            transform.localScale = evolutionScale1;
+            animator.SetInteger("EvolutionStage", 1);
+        }
+        else if (evolutionStage == 1)
+        {
+            transform.localScale = evolutionScale2;
+            animator.SetInteger("EvolutionStage", 2);
+        }
+        else if (evolutionStage == 2)
+        {
+            transform.localScale = evolutionScale3;
+            animator.SetInteger("EvolutionStage", 3);
+        }
+        else
+        {
+            transform.localScale = evolutionScale4;
+            animator.SetInteger("EvolutionStage", 4);
+        }
+    }
+
     public void ResetAnimatorStates()
     {
         animator.SetBool("Flapping", false);
@@ -82,6 +120,8 @@ public class Camazo : MonoBehaviour
             yield return MoveTo(pointC);
 
             yield return new WaitForSeconds(DynamicWaitTime());
+
+            if (!activeInBattle) break;
 
             yield return MoveToTargetPoint();
             yield return MoveTo(pointA);

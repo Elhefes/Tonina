@@ -21,6 +21,7 @@ public class BattlefieldMenu : MonoBehaviour
     private bool battleSongRandomized;
     private int battleSongID;
     public Image randomMusicToggleImage;
+    public Image camazoActiveImage;
     public Sprite checkMarkOn;
     public Sprite checkMarkOff;
     public TMP_Text threatLevelText;
@@ -43,6 +44,8 @@ public class BattlefieldMenu : MonoBehaviour
         battleSongID = PlayerPrefs.GetInt("battleSongID", 0);
         battleSongRandomized = PlayerPrefs.GetInt("battleSongRandomized", 1) == 1 ? true : false;
         SetMusicSelectionVisuals(battleSongRandomized);
+        if (GameState.Instance.progressionData.camazoIsActive) camazoActiveImage.sprite = checkMarkOn;
+        else camazoActiveImage.sprite = checkMarkOff;
         maizeAmount.text = GameState.Instance.progressionData.maizeProductionLevel.ToString();
         UpdateThreatLevel();
         UpdatePlaceablesInfoTexts();
