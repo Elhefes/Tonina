@@ -130,12 +130,23 @@ public class Camazo : MonoBehaviour
 
     private IEnumerator SearchForTargetLoop()
     {
-        while(activeInBattle)
+        while (activeInBattle)
         {
             yield return new WaitForSeconds(1.5f);
-            if (targetPoint == null) targetPoint = pointB;
-            if (Vector3.Distance(transform.position, targetPoint.position) > finalApproachDistance
-                && movingTowardsPosition) TargetNearestEnemyToPlayer();
+
+            if (targetPoint == null)
+            {
+                targetPoint = pointB;
+                continue;
+            }
+
+            if (Vector3.Distance(
+                    transform.position,
+                    targetPoint.position) > finalApproachDistance
+                && movingTowardsPosition)
+            {
+                TargetNearestEnemyToPlayer();
+            }
         }
     }
 
@@ -188,19 +199,48 @@ public class Camazo : MonoBehaviour
 
         if (targetPoint == null) targetPoint = pointB;
 
-        while (Vector3.Distance(transform.position, targetPoint.position + targetVerticalOffset) > waypointReachedDistance)
+        if (targetPoint == null)
         {
+            movingTowardsPosition = false;
+            yield break;
+        }
+
+        while (true)
+        {
+            // If the enemy was destroyed, return to pointB
+            if (targetPoint == null)
+            {
+                targetPoint = pointB;
+
+                if (targetPoint == null)
+                {
+                    movingTowardsPosition = false;
+                    yield break;
+                }
+            }
+
+            Vector3 destination = targetPoint.position + targetVerticalOffset;
+
+            // Check whether we have reached the target
+            if (Vector3.Distance(transform.position, destination)
+                <= waypointReachedDistance)
+            {
+                break;
+            }
+
             // Direction to destination
-            Vector3 direction = (targetPoint.position + targetVerticalOffset - transform.position).normalized;
+            Vector3 direction = (destination - transform.position).normalized;
 
             // Smoothly turn toward it
             if (direction != Vector3.zero)
             {
                 Quaternion targetRotation = Quaternion.LookRotation(direction);
+
                 transform.rotation = Quaternion.RotateTowards(
                     transform.rotation,
                     targetRotation,
-                    rotationSpeed * Time.deltaTime);
+                    rotationSpeed * Time.deltaTime
+                );
             }
 
             // Fly forward instead of directly toward the target
@@ -209,7 +249,7 @@ public class Camazo : MonoBehaviour
             yield return null;
         }
 
-        // Snap exactly to the waypoint
+        // Snap to the final destination
         transform.position = targetPoint.position + targetVerticalOffset;
 
         SphereAttack();
@@ -230,8 +270,7 @@ public class Camazo : MonoBehaviour
         foreach (Collider hit in hitColliders)
         {
             Enemy enemy = hit.GetComponent<Enemy>();
-            if (enemy == null)
-                continue;
+            if (enemy == null) continue;
 
             float distance = Vector3.Distance(transform.position, enemy.transform.position);
 
@@ -251,19 +290,25 @@ public class Camazo : MonoBehaviour
 
     private void TargetNearestEnemyToPlayer()
     {
+        if (player == null) return;
+
         GameObject[] objectsWithTag = GameObject.FindGameObjectsWithTag("Enemy");
+
         GameObject nearestObject = null;
         float nearestDistance = Mathf.Infinity;
+
         foreach (GameObject obj in objectsWithTag)
         {
             if (!obj.activeInHierarchy) continue; // Ignore disabled objects
             float distance = Vector3.Distance(transform.position, player.transform.position);
+
             if (distance < nearestDistance)
             {
                 nearestObject = obj;
                 nearestDistance = distance;
             }
         }
+
         if (nearestObject != null)
         {
             targetPoint = nearestObject.transform;
