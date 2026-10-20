@@ -13,6 +13,10 @@ public class Camazo : MonoBehaviour
     public float attackSoundMaxRange;
     public Player player;
 
+    public int bonesNeededFor1stEvo;
+    public int bonesNeededFor2ndEvo;
+    public int bonesNeededFor3rdEvo;
+
     public Vector3 evolutionScale1 = new(0.08f, 0.08f, 0.08f);
     public Vector3 evolutionScale2 = new(0.11f, 0.11f, 0.11f);
     public Vector3 evolutionScale3 = new(0.14f, 0.14f, 0.14f);
@@ -47,13 +51,13 @@ public class Camazo : MonoBehaviour
     public void SetEvolutionStage()
     {
         int bonesEaten = GameState.Instance.progressionData.bonesCamazoHasEaten;
-        if (bonesEaten > 67)
+        if (bonesEaten >= bonesNeededFor3rdEvo)
         {
             GameState.Instance.progressionData.camazoEvolutionStage = 3;
             GameState.Instance.progressionData.camazoIsActive = true;
         }
-        else if (bonesEaten > 37) GameState.Instance.progressionData.camazoEvolutionStage = 2;
-        else if (bonesEaten > 15) GameState.Instance.progressionData.camazoEvolutionStage = 1;
+        else if (bonesEaten >= bonesNeededFor2ndEvo) GameState.Instance.progressionData.camazoEvolutionStage = 2;
+        else if (bonesEaten >= bonesNeededFor1stEvo) GameState.Instance.progressionData.camazoEvolutionStage = 1;
         else GameState.Instance.progressionData.camazoEvolutionStage = 0;
     }
 

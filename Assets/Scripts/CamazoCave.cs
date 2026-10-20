@@ -4,6 +4,7 @@ using UnityEngine;
 public class CamazoCave : MonoBehaviour
 {
     public Camazo camazoInCave;
+    public CamazoTextLines camazoTextLines;
     public Transform camazoSpawnPosition;
 
     public bool camazoIsSummoned;
@@ -41,6 +42,7 @@ public class CamazoCave : MonoBehaviour
             RemoveRandomBone(10);
             camazoInCave.SetEvolutionStage();
             camazoInCave.LoadEvolutionScale();
+            camazoTextLines.UpdateCamazoLines();
             GameState.Instance.SaveWorld();
             camazoInCave.animator.SetTrigger("FlyToCaveBridge");
         }

@@ -56177,6 +56177,9 @@ PrefabInstance:
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 2420243108264206517, guid: 8f9c6b59bdb47a94da3c8faf7d786fa5, type: 3}
       insertIndex: 2
+      addedObject: {fileID: 486461442}
+    - targetCorrespondingSourceObject: {fileID: 2420243108264206517, guid: 8f9c6b59bdb47a94da3c8faf7d786fa5, type: 3}
+      insertIndex: 3
       addedObject: {fileID: 486461438}
     - targetCorrespondingSourceObject: {fileID: 2420243108264206517, guid: 8f9c6b59bdb47a94da3c8faf7d786fa5, type: 3}
       insertIndex: -1
@@ -56240,6 +56243,42 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 10, y: 6, z: 23}
   m_Center: {x: 0, y: 0.5, z: 0}
+--- !u!114 &486461442
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 100440465}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 45e60c4e32b88004fa1cb2647ebfe5ad, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  camazoTextSubject: {fileID: 486461438}
+  camazo: {fileID: 486461435}
+  evo1Lines:
+  - 
+  - I eat bones to grow.
+  - Bones from the battlefield...
+  - ...after ten I am full for a while.
+  evo2Lines:
+  - 
+  - I serve he who brings gold and bones.
+  - Make me whole, I promise victory in battle.
+  - Jade and obsidian revolve forever...
+  evo3Lines:
+  - 
+  - The bringer of night is close.
+  - Obsidian sky to serve right or wrong...
+  - Remember my promise.
+  evo4Lines:
+  - I am strong again.
+  - Thank you master.
+  - I will assist you in battle.
+  - Do not waste gold on summoning...
+  - ...for I cannot grow anymore.
+  - Thank you master.
 --- !u!1 &486933206
 GameObject:
   m_ObjectHideFlags: 0
@@ -112814,6 +112853,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   camazoInCave: {fileID: 486461435}
+  camazoTextLines: {fileID: 486461442}
   camazoSpawnPosition: {fileID: 1003893421}
   camazoIsSummoned: 0
   bonesOnTables:
@@ -112898,7 +112938,7 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 3, y: 2, z: 5}
+  m_Size: {x: 3.5, y: 2, z: 5.5}
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!33 &876130404
 MeshFilter:
