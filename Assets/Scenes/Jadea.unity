@@ -11383,6 +11383,11 @@ Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 30c98cc9c7734264689a0a760d6caca7, type: 3}
   m_PrefabInstance: {fileID: 100432316}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &100440465 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2420243108264206517, guid: 8f9c6b59bdb47a94da3c8faf7d786fa5, type: 3}
+  m_PrefabInstance: {fileID: 486461431}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &101051013
 GameObject:
   m_ObjectHideFlags: 0
@@ -56106,6 +56111,10 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 2420243108264206517, guid: 8f9c6b59bdb47a94da3c8faf7d786fa5, type: 3}
+      propertyPath: m_TagString
+      value: TalkPrompt
+      objectReference: {fileID: 0}
     - target: {fileID: 3088834806589209103, guid: 8f9c6b59bdb47a94da3c8faf7d786fa5, type: 3}
       propertyPath: m_LocalScale.x
       value: 0.18
@@ -56165,7 +56174,13 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 2420243108264206517, guid: 8f9c6b59bdb47a94da3c8faf7d786fa5, type: 3}
+      insertIndex: 2
+      addedObject: {fileID: 486461438}
+    - targetCorrespondingSourceObject: {fileID: 2420243108264206517, guid: 8f9c6b59bdb47a94da3c8faf7d786fa5, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 486461439}
   m_SourcePrefab: {fileID: 100100000, guid: 8f9c6b59bdb47a94da3c8faf7d786fa5, type: 3}
 --- !u!4 &486461432 stripped
 Transform:
@@ -56177,12 +56192,54 @@ MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 1158538013970931070, guid: 8f9c6b59bdb47a94da3c8faf7d786fa5, type: 3}
   m_PrefabInstance: {fileID: 486461431}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
+  m_GameObject: {fileID: 100440465}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e8212197249ab174d959d5c5c43e016a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &486461438
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 100440465}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 531e5b15f0f04cb48aa84b927c27d19a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  interactionDistance: 7
+  textIsActive: 0
+  uiPopUpAfterLastLine: 0
+  popUpElements: []
+  textLines:
+  - lolz
+  currentIndex: 0
+  villager: {fileID: 0}
+  periko: {fileID: 0}
+--- !u!65 &486461439
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 100440465}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 10, y: 6, z: 23}
+  m_Center: {x: 0, y: 0.5, z: 0}
 --- !u!1 &486933206
 GameObject:
   m_ObjectHideFlags: 0

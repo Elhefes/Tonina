@@ -332,13 +332,13 @@ public class Player : Creature
             {
                 target = hit.collider.gameObject;
 
-                if (target.CompareTag("TalkPrompt") && Vector3.Distance(transform.position, target.transform.position) < 2.7f)
+                if (target.CompareTag("TalkPrompt"))
                 {
                     if (NotInBattlefield())
                     {
                         TextSubject textSubject = target.GetComponent<TextSubject>();
 
-                        if (textSubject != null)
+                        if (textSubject != null && Vector3.Distance(transform.position, target.transform.position) < textSubject.interactionDistance)
                         {
                             if (textSubject == currentTextSubject)
                             {
@@ -349,6 +349,7 @@ public class Player : Creature
                                 FreeTextSubject();
                                 StartConversation(textSubject);
                             }
+                            creatureMovement.agent.stoppingDistance = 2.3f;
 
                             return;
                         }
@@ -533,7 +534,6 @@ public class Player : Creature
         UpdateTextBox();
 
         creatureMovement.MoveToDestination(textSubject.transform.position);
-        creatureMovement.agent.stoppingDistance = 1.7f;
     }
 
     void UpdateTextBox()
@@ -569,8 +569,7 @@ public class Player : Creature
 
     public void ReadNextLine()
     {
-        if (currentTextSubject == null)
-            return;
+        if (currentTextSubject == null) return;
 
         textLineIndex++;
         currentTextSubject.ProcessNextLine();
@@ -1013,6 +1012,7 @@ public class Player : Creature
             uiController.DisableOverlappingElements();
             if (uiController.optionsMenu != null) uiController.optionsMenu.SetActive(false);
         }
+        FreeTextSubject();
         blackFader.SetActive(true);
         creatureMovement.MoveToDestination(transform.position);
         yield return new WaitForSeconds(0.33f);

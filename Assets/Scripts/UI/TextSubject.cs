@@ -2,6 +2,7 @@ using UnityEngine;
 
 public class TextSubject : MonoBehaviour
 {
+    public float interactionDistance;
     public bool textIsActive;
 
     public bool uiPopUpAfterLastLine;

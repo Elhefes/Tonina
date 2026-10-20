@@ -1973,13 +1973,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 531e5b15f0f04cb48aa84b927c27d19a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  interactionDistance: 3.3
   textIsActive: 0
-  UI_popUpAfterLastLine: 0
+  uiPopUpAfterLastLine: 0
   popUpElements: []
   textLines:
   - This is my first line.
   - My 2nd line is much cooler than the 1st one!
   currentIndex: 0
+  villager: {fileID: 0}
+  periko: {fileID: 0}
 --- !u!143 &5446998419158490782
 CharacterController:
   m_ObjectHideFlags: 0
