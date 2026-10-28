@@ -159,7 +159,7 @@ public class Player : Creature
         SetStaminaBarAlpha(0f);
         clickerTargetObject.transform.position = new Vector3(0f, 0f, 0f); // Default "invisible" position
         creatureMovement.animator.SetInteger("WeaponIndex", 0);
-        if (battlefieldMenu != null) battlefieldMenu.waveController.musicPlayer.PlayPeacefulSongs(false);
+        if (battlefieldMenu != null) battlefieldMenu.musicPlayer.PlayPeacefulSongs(false);
 
         if (camazo != null)
         {

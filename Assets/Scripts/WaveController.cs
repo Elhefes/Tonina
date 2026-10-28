@@ -31,8 +31,6 @@ public class WaveController : MonoBehaviour
     public TMP_Text rewardsText;
     private GameObject kingHouse;
 
-    public MusicPlayer musicPlayer;
-
     public GameObject friendlyWarriorPrefab;
     public Camazo camazo;
     public CamazoCave camazoCave;
@@ -52,14 +50,13 @@ public class WaveController : MonoBehaviour
         pooler = ObjectPooler.Instance;
     }
 
-    public void StartRound(int roundNumber, int battleSongID)
+    public void StartRound(int roundNumber)
     {
         battleIsLost = false;
         currentRoundNumber = roundNumber;
         threatLevel = threatLevels.GetThreatLevel(roundNumber - 1);
         friendlyWarriorsAmount = threatLevel.friendlyWarriorsAmount;
         coroutines.Add(StartCoroutine(ParseRound(threatLevel.wave)));
-        musicPlayer.PlayBattleSong(battleSongID);
         EnableBattleUI();
         StartCoroutine(SecondCounter());
     }

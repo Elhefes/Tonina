@@ -20,6 +20,7 @@ public class BattlefieldMenu : MonoBehaviour
 
     private bool battleSongRandomized;
     private int battleSongID;
+    public MusicPlayer musicPlayer;
     public Image randomMusicToggleImage;
     public Image camazoActiveImage;
     public Sprite checkMarkOn;
@@ -82,11 +83,13 @@ public class BattlefieldMenu : MonoBehaviour
 
         if (PlayerPrefs.GetInt("battleSongRandomized", 1) == 1)
         {
-            waveController.StartRound(threatLevel, Random.Range(0, waveController.musicPlayer.battleSongs.Count));
+            waveController.StartRound(threatLevel);
+            musicPlayer.PlayBattleSong(Random.Range(0, musicPlayer.battleSongs.Count));
         }
         else
         {
-            waveController.StartRound(threatLevel, battleSongID);
+            waveController.StartRound(threatLevel);
+            musicPlayer.PlayBattleSong(battleSongID);
         }
 
         gameObject.SetActive(false);
@@ -149,7 +152,7 @@ public class BattlefieldMenu : MonoBehaviour
 
     private void UpdateBattleSong()
     {
-        chosenSong.text = waveController.musicPlayer.battleSongs[battleSongID].name;
+        chosenSong.text = musicPlayer.battleSongs[battleSongID].name;
         PlayerPrefs.SetInt("battleSongID", battleSongID);
     }
 
@@ -173,7 +176,7 @@ public class BattlefieldMenu : MonoBehaviour
 
     public void NextBattleSong()
     {
-        if (battleSongID < waveController.musicPlayer.battleSongs.Count - 1) battleSongID++;
+        if (battleSongID < musicPlayer.battleSongs.Count - 1) battleSongID++;
         else battleSongID = 0;
         UpdateBattleSong();
     }
@@ -181,7 +184,7 @@ public class BattlefieldMenu : MonoBehaviour
     public void PreviousBattleSong()
     {
         if (battleSongID > 0) battleSongID--;
-        else battleSongID = waveController.musicPlayer.battleSongs.Count - 1;
+        else battleSongID = musicPlayer.battleSongs.Count - 1;
         UpdateBattleSong();
     }
 
