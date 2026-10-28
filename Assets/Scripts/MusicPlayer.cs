@@ -7,13 +7,14 @@ public class MusicPlayer : MonoBehaviour
     private bool playingPeacefulSongs;
     private bool playingBattleSongs;
 
-    public bool playingWaitingMusic;
+    public bool startWithWaitingMusic;
 
     public AudioLooper audioLooper;
     public AudioSource audioSource;
     public AudioClip firstSong;
     public AudioClip introMusic;
     public AudioClip waitingMusic;
+    public AudioClip camazoCaveMusic;
     public List<AudioClip> peacefulSongs;
     public List<AudioClip> battleSongs;
     private List<AudioClip> shuffledPlaylist;
@@ -21,8 +22,14 @@ public class MusicPlayer : MonoBehaviour
 
     private void Start()
     {
-        if (playingWaitingMusic) PlayWaitingMusic();
+        if (startWithWaitingMusic) PlayWaitingMusic();
         else PlayPeacefulSongs(true);
+    }
+
+    private void ResetBools()
+    {
+        playingPeacefulSongs = false;
+        playingBattleSongs = false;
     }
 
     private void Update()
@@ -35,10 +42,13 @@ public class MusicPlayer : MonoBehaviour
 
     public void PlayPeacefulSongs(bool firstPlay)
     {
+        if (playingPeacefulSongs) return;
         if (playingBattleSongs)
         {
             audioSource.Stop();
         }
+
+        ResetBools();
 
         audioSource.loop = false;
         playingPeacefulSongs = true;
@@ -48,6 +58,7 @@ public class MusicPlayer : MonoBehaviour
 
     public void PlayBattleSong(int songNumber)
     {
+        ResetBools();
         audioSource.Stop();
         playingBattleSongs = true;
         audioSource.loop = true;
@@ -115,6 +126,7 @@ public class MusicPlayer : MonoBehaviour
 
     public void PlayIntroMusic()
     {
+        ResetBools();
         audioSource.Stop();
         audioSource.loop = true;
         audioSource.clip = audioLooper.trimSilence(introMusic);
@@ -123,9 +135,23 @@ public class MusicPlayer : MonoBehaviour
 
     public void PlayWaitingMusic()
     {
+        ResetBools();
         audioSource.Stop();
         audioSource.loop = true;
         audioSource.clip = audioLooper.trimSilence(waitingMusic);
         audioSource.Play();
+    }
+
+    public void ToggleCamazoCaveMusic(bool value)
+    {
+        if (value)
+        {
+            ResetBools();
+            audioSource.Stop();
+            audioSource.loop = true;
+            audioSource.clip = audioLooper.trimSilence(camazoCaveMusic);
+            audioSource.Play();
+        }
+        else if (!playingPeacefulSongs && !playingBattleSongs) PlayPeacefulSongs(false);
     }
 }

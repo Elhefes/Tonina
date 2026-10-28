@@ -6,6 +6,7 @@ public class CamazoCave : MonoBehaviour
     public Camazo camazoInCave;
     public CamazoTextLines camazoTextLines;
     public Transform camazoSpawnPosition;
+    public Transform playerSpawnPosition; // Used in Player.cs when changing music
 
     public bool camazoIsSummoned;
 

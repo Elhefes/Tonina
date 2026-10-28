@@ -12987,12 +12987,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 20b89101630c6a442ae8a2f396f5860d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playingWaitingMusic: 1
+  startWithWaitingMusic: 1
+  playingCamazoCaveMusic: 0
   audioLooper: {fileID: 535815519}
   audioSource: {fileID: 535815516}
   firstSong: {fileID: 8300000, guid: c42c711fcc120684883c086802b6388e, type: 3}
   introMusic: {fileID: 0}
   waitingMusic: {fileID: 8300000, guid: c42c711fcc120684883c086802b6388e, type: 3}
+  camazoCaveMusic: {fileID: 0}
   peacefulSongs: []
   battleSongs:
   - {fileID: 8300000, guid: 906b0b34c288c6a47aef9ba975419327, type: 3}
@@ -29699,6 +29701,7 @@ MonoBehaviour:
   battleUIPopUps: []
   optionsMenu: {fileID: 597620246}
   mainMenuScreen: {fileID: 0}
+  attributeUnlockScene: {fileID: 0}
   player: {fileID: 1904667352}
 --- !u!1001 &1099603188
 PrefabInstance:
@@ -42065,6 +42068,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a051dad073da71242a44c36066895b5e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  progressionData:
+    camazoCaveBoneIndices: 
   placeablesManager: {fileID: 1393370859}
 --- !u!114 &1393370861
 MonoBehaviour:
@@ -48387,6 +48392,7 @@ MonoBehaviour:
   player: {fileID: 1904667352}
   inCutscene: 0
   cameraOnPlayer: 0
+  cameraForcedOnPlayer: 0
   notCastingRays: 1
   minimapCamera: {fileID: 1569821203}
   minimapIndicators: {fileID: 1028765779}

@@ -63190,12 +63190,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 20b89101630c6a442ae8a2f396f5860d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playingWaitingMusic: 0
+  startWithWaitingMusic: 0
   audioLooper: {fileID: 535815519}
   audioSource: {fileID: 535815516}
   firstSong: {fileID: 8300000, guid: b7b308f0369ea8c4e906c8627db8d349, type: 3}
   introMusic: {fileID: 8300000, guid: 7ab6008421f3e5446ac7ad42a5dd2670, type: 3}
   waitingMusic: {fileID: 0}
+  camazoCaveMusic: {fileID: 8300000, guid: b56d0228e3025364ca03453c78b8e302, type: 3}
   peacefulSongs:
   - {fileID: 8300000, guid: b7b308f0369ea8c4e906c8627db8d349, type: 3}
   - {fileID: 8300000, guid: e9c72b7453abd014e860327788584b53, type: 3}
@@ -112855,6 +112856,7 @@ MonoBehaviour:
   camazoInCave: {fileID: 486461435}
   camazoTextLines: {fileID: 486461442}
   camazoSpawnPosition: {fileID: 1003893421}
+  playerSpawnPosition: {fileID: 293424515}
   camazoIsSummoned: 0
   bonesOnTables:
   - {fileID: 651487422}

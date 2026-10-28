@@ -14,6 +14,7 @@ public class PlayerHeadingHUD : MonoBehaviour
     void Update()
     {
         if (player.blackFader.activeSelf) return;
+        if (toCamazoCaveTPPos == null || camazoCaveSpawnPos == null) return;
 
         if (Vector3.Distance(player.transform.position, toCamazoCaveTPPos.position) < 2.5f)
         {

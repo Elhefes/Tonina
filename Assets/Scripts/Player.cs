@@ -1031,6 +1031,16 @@ public class Player : Creature
         {
             camazoSummoning.DisappearCamazo();
             camazoSummoning.camazoCave.LoadBones();
+
+            // Toggle Camazo Cave music
+            if (battlefieldMenu != null)
+            {
+                if (Vector3.Distance(transform.position, camazoSummoning.camazoCave.playerSpawnPosition.position) < 10f)
+                {
+                    battlefieldMenu.musicPlayer.ToggleCamazoCaveMusic(true);
+                }
+                else battlefieldMenu.musicPlayer.ToggleCamazoCaveMusic(false);
+            }
         }
     }
 
